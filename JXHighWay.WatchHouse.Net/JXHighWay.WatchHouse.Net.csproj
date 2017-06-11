@@ -42,13 +42,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IWatchHouseDataPack.cs" />
-    <Compile Include="WatchHouse.cs" />
+    <Compile Include="WatchHouseDataPack.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WatchHouseDataPack_Receive_DoorGuard.cs" />
     <Compile Include="WatchHouseDataPack_Receive_IDCard.cs" />
     <Compile Include="WatchHouseDataPack_Receive_Main.cs" />
     <Compile Include="WatchHouseDataPack_SendData_Main.cs" />
     <Compile Include="WatchHouseDataPack_Send_CommandEnmu.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JXHighWay.WatchHouse.Helper\JXHighWay.WatchHouse.Helper.csproj">
+      <Project>{3282a5f3-7d7f-4423-9793-8da25e2ad7ab}</Project>
+      <Name>JXHighWay.WatchHouse.Helper</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

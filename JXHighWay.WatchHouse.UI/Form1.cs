@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using JXHighWay.WatchHouse.Net;
 
 
 namespace JXHighWay.WatchHouse.UI
@@ -20,7 +21,8 @@ namespace JXHighWay.WatchHouse.UI
 
         private void button_OK_Click(object sender, EventArgs e)
         {
-           
+            WatchHouseDataPack vWatchHouse = new WatchHouseDataPack();
+            byte[] vDtaPack = vWatchHouse.Send_KaiMen();
             //WatchHouseDataPack_Send_CommandEnmu aa = Net.WatchHouseDataPack_Send_CommandEnmu.GuanBaoJing;
             //WatchHouseDataPack_SendData_Main vMain = new WatchHouseDataPack_SendData_Main()
             //{

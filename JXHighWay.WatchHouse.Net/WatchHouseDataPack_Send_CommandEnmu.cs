@@ -12,54 +12,54 @@ namespace JXHighWay.WatchHouse.Net
         /// <summary>
         /// 开门
         /// </summary>
-        KaiMen = 0x02020101,
+        KaiMen = 0x02021001,
         /// <summary>
         /// 关门
         /// </summary>
-        GuanMen = 0x02020102,
+        GuanMen = 0x02021002,
         /// <summary>
         /// 上锁
         /// </summary>
-        ShangShuo = 0x02020103,
+        ShangShuo = 0x02021003,
         /// <summary>
         /// 开锁
         /// </summary>
-        KaiShuo = 0x02020104,
+        KaiShuo = 0x02021004,
         /// <summary>
         /// 开报警
         /// </summary>
-        KaiBaoJing = 0x02020105,
+        KaiBaoJing = 0x02021005,
         /// <summary>
         /// 关报警
         /// </summary>
-        GuanBaoJing = 0x02020106,
+        GuanBaoJing = 0x02021006,
         #endregion
 
         #region 窗控(0x0203)
         /// <summary>
         /// 开窗
         /// </summary>
-        KaiChuang = 0x02020101,
+        KaiChuang = 0x02031001,
         /// <summary>
         /// 关窗
         /// </summary>
-        GuanChaugn = 0x02020102,
+        GuanChaugn = 0x02031002,
         /// <summary>
         /// 开风幕
         /// </summary>
-        KaiFengMu = 0x02020103,
+        KaiFengMu = 0x02031003,
         /// <summary>
         /// 关风幕
         /// </summary>
-        GuanFengMu = 0x02020104,
+        GuanFengMu = 0x02031004,
         /// <summary>
         /// 开窗灯
         /// </summary>
-        KaiChuangDeng = 0x02020105,
+        KaiChuangDeng = 0x02031005,
         /// <summary>
         /// 关窗灯
         /// </summary>
-        GuanChuangDeng = 0x02020106,
+        GuanChuangDeng = 0x02031006,
         #endregion
 
         #region 新风(0x0204)
@@ -176,7 +176,7 @@ namespace JXHighWay.WatchHouse.Net
         /// <summary>
         /// 调节室温
         /// </summary>
-        DiaoJieSW = 0x020C100b,
+        TiaoJieSW = 0x020C100b,
         #endregion
 
         #region 电子工作牌
