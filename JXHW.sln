@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{9C54F038-4479-4DE0-9F94-CA227472A5B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JXHighWay.WatchHouse.UI", "JXHighWay.WatchHouse.UI\JXHighWay.WatchHouse.UI.csproj", "{3005D9E3-04FD-4607-9B36-F5C1C561DE7F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Net", "Net", "{9B0AD85B-2938-4B3D-9002-3579A2F32BFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JXHighWay.WatchHouse.Net", "JXHighWay.WatchHouse.Net\JXHighWay.WatchHouse.Net.csproj", "{0A3D0538-3339-4111-A7A4-C9907CB49F26}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Comm", "Comm", "{01E7B7A3-39BF-4EE1-9E23-3AFA94D2CA25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JXHighWay.WatchHouse.Helper", "JXHighWay.WatchHouse.Helper\JXHighWay.WatchHouse.Helper.csproj", "{3282A5F3-7D7F-4423-9793-8DA25E2AD7AB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3005D9E3-04FD-4607-9B36-F5C1C561DE7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3005D9E3-04FD-4607-9B36-F5C1C561DE7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3005D9E3-04FD-4607-9B36-F5C1C561DE7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3005D9E3-04FD-4607-9B36-F5C1C561DE7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A3D0538-3339-4111-A7A4-C9907CB49F26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A3D0538-3339-4111-A7A4-C9907CB49F26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A3D0538-3339-4111-A7A4-C9907CB49F26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A3D0538-3339-4111-A7A4-C9907CB49F26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3282A5F3-7D7F-4423-9793-8DA25E2AD7AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3282A5F3-7D7F-4423-9793-8DA25E2AD7AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3282A5F3-7D7F-4423-9793-8DA25E2AD7AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3282A5F3-7D7F-4423-9793-8DA25E2AD7AB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3005D9E3-04FD-4607-9B36-F5C1C561DE7F} = {9C54F038-4479-4DE0-9F94-CA227472A5B9}
+		{0A3D0538-3339-4111-A7A4-C9907CB49F26} = {9B0AD85B-2938-4B3D-9002-3579A2F32BFF}
+		{3282A5F3-7D7F-4423-9793-8DA25E2AD7AB} = {01E7B7A3-39BF-4EE1-9E23-3AFA94D2CA25}
+	EndGlobalSection
+EndGlobal
