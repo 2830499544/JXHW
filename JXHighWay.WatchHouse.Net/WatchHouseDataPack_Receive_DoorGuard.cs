@@ -11,6 +11,38 @@ namespace JXHighWay.WatchHouse.Net
     /// </summary>
     struct WatchHouseDataPack_Receive_DoorGuard:IWatchHouseDataPack
     {
+        /// <summary>
+        /// 头
+        /// </summary>
+         public byte Head { get; set; }
+        /// <summary>
+        /// 信息长度
+        /// </summary>
+         public short Length { get; set; }
+        /// <summary>
+        /// 协议版本号
+        /// </summary>
+         public short Ver { get; set; }
+        /// <summary>
+        /// 登陆序号
+        /// </summary>
+         public short LoginSN { get; set; }
+        /// <summary>
+        /// 序列号
+        /// </summary>
+         public short SN { get; set; }
+        /// <summary>
+        /// 目标岗亭唯一ID
+        /// </summary>
+         public int WatchHouseID { get; set; }
+        /// <summary>
+        /// 用户唯一ID
+        /// </summary>
+         public int UserID { get; set; }
+        /// <summary>
+        /// 预留字段
+        /// </summary>
+        int Empty { get; set; }
         public byte ID_H { get; set; }
         public byte ID_L { get; set; }
         public byte CMD { get; set; }
