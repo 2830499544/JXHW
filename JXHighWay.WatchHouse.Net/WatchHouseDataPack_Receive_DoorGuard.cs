@@ -9,7 +9,7 @@ namespace JXHighWay.WatchHouse.Net
     /// <summary>
     /// 接收智慧岗亭数据包(门禁)
     /// </summary>
-    struct WatchHouseDataPack_Receive_DoorGuard:IWatchHouseDataPack
+    public struct WatchHouseDataPack_Receive_DoorGuard:IWatchHouseDataPack
     {
         /// <summary>
         /// 头
@@ -38,11 +38,13 @@ namespace JXHighWay.WatchHouse.Net
         /// <summary>
         /// 用户唯一ID
         /// </summary>
-         public int UserID { get; set; }
+        public int UserID { get; set; }
         /// <summary>
         /// 预留字段
         /// </summary>
-        int Empty { get; set; }
+        public int Empty { get; set; }
+
+
         public byte ID_H { get; set; }
         public byte ID_L { get; set; }
         public byte CMD { get; set; }
@@ -152,5 +154,9 @@ namespace JXHighWay.WatchHouse.Net
         /// Data[19]
         /// </summary>
         public byte MenZhuangTai { get; set; }
+        /// <summary>
+        /// 校验
+        /// </summary>
+        public short Check { get; set; }
     }
 }

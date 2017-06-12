@@ -13,10 +13,42 @@ namespace JXHighWay.WatchHouse.Net
     /// </summary>
     public class WatchHouseDataPack
     {
+        /// <summary>
+        /// 帧头
+        /// </summary>
+        const byte DataPack_Head = 0x20;
+        /// <summary>
+        /// 协议版本号
+        /// </summary>
+        const short DataPack_Ver = 0x0001;
+        /// <summary>
+        /// 目标岗亭唯一ID
+        /// </summary>
+        public int DataPack_WatchHouseID { get; set; }
+        /// <summary>
+        /// 用户唯一ID
+        /// </summary>
+        public int DataPack_UserID { get; set; }
+
         public WatchHouseDataPack()
         {
 
         }
+
+        /// <summary>
+        /// 计算校验值
+        /// </summary>
+        /// <returns></returns>
+        short calcCheck(byte[] dataPack)
+        {
+            short vCheck = 0x0000;
+            foreach( byte vTempDataPack in dataPack)
+            {
+                vCheck += vTempDataPack;
+            }
+            return vCheck;
+        }
+
 
         #region 发送
         /// <summary>
@@ -708,5 +740,56 @@ namespace JXHighWay.WatchHouse.Net
         }
 
         #endregion
+
+        #region 接收数据
+        /// <summary>
+        /// 接收岗亭数据(主)
+        /// </summary>
+        /// <param name="dataPack">数据包</param>
+        /// <returns></returns>
+        public WatchHouseDataPack_Receive_Main Receive_Main(byte[] dataPack )
+        {
+            WatchHouseDataPack_Receive_Main vResult = new WatchHouseDataPack_Receive_Main();
+            short vCheck = calcCheck(dataPack);
+            if ( dataPack[dataPack.Length-1]== (byte)vCheck>>8 && dataPack[dataPack.Length - 2] == (byte)vCheck >> 0)
+            {
+                vResult = NetHelper.ByteToStructure<WatchHouseDataPack_Receive_Main>(dataPack);
+            }
+            return vResult;
+        }
+
+        /// <summary>
+        /// 接收岗亭数据(门禁)
+        /// </summary>
+        /// <param name="dataPack">数据包</param>
+        /// <returns></returns>
+        public WatchHouseDataPack_Receive_DoorGuard Receive_DoorGuard(byte[] dataPack)
+        {
+            WatchHouseDataPack_Receive_DoorGuard vResult = new WatchHouseDataPack_Receive_DoorGuard();
+            short vCheck = calcCheck(dataPack);
+            if (dataPack[dataPack.Length - 1] == (byte)vCheck >> 8 && dataPack[dataPack.Length - 2] == (byte)vCheck >> 0)
+            {
+                vResult = NetHelper.ByteToStructure<WatchHouseDataPack_Receive_DoorGuard>(dataPack);
+            }
+            return vResult;
+        }
+
+        /// <summary>
+        /// 接收岗亭数据(电子工牌)
+        /// </summary>
+        /// <param name="dataPack">数据包</param>
+        /// <returns></returns>
+        public WatchHouseDataPack_Receive_IDCard Receive_IDCard(byte[] dataPack)
+        {
+            WatchHouseDataPack_Receive_IDCard vResult = new WatchHouseDataPack_Receive_IDCard();
+            short vCheck = calcCheck(dataPack);
+            if (dataPack[dataPack.Length - 1] == (byte)vCheck >> 8 && dataPack[dataPack.Length - 2] == (byte)vCheck >> 0)
+            {
+                vResult = NetHelper.ByteToStructure<WatchHouseDataPack_Receive_IDCard>(dataPack);
+            }
+            return vResult;
+        }
+        #endregion
+
     }
 }

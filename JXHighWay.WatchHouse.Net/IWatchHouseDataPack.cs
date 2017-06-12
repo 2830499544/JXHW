@@ -40,6 +40,8 @@ namespace JXHighWay.WatchHouse.Net
         /// 预留字段
         /// </summary>
          int Empty { get; set; }
+
+
         /// <summary>
         /// 智慧系列设备
         /// </summary>

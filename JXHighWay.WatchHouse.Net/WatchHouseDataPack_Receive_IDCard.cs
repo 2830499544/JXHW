@@ -9,8 +9,41 @@ namespace JXHighWay.WatchHouse.Net
     /// <summary>
     /// 接收智慧岗亭数据包(人工切换，电子工作牌)
     /// </summary>
-    struct WatchHouseDataPack_Receive_IDCard:IWatchHouseDataPack
+    public struct WatchHouseDataPack_Receive_IDCard:IWatchHouseDataPack
     {
+        /// <summary>
+        /// 头
+        /// </summary>
+        public byte Head { get; set; }
+        /// <summary>
+        /// 信息长度
+        /// </summary>
+        public short Length { get; set; }
+        /// <summary>
+        /// 协议版本号
+        /// </summary>
+        public short Ver { get; set; }
+        /// <summary>
+        /// 登陆序号
+        /// </summary>
+        public short LoginSN { get; set; }
+        /// <summary>
+        /// 序列号
+        /// </summary>
+        public short SN { get; set; }
+        /// <summary>
+        /// 目标岗亭唯一ID
+        /// </summary>
+        public int WatchHouseID { get; set; }
+        /// <summary>
+        /// 用户唯一ID
+        /// </summary>
+        public int UserID { get; set; }
+        /// <summary>
+        /// 预留字段
+        /// </summary>
+        public int Empty { get; set; }
+
         public byte ID_H{ get; set; }
         public byte ID_L{ get; set; }
         public byte CMD{ get; set; }
@@ -115,5 +148,6 @@ namespace JXHighWay.WatchHouse.Net
         /// Data[18]
         /// </summary>
         public byte UniqID4{ get; set; }
+        public short Check { get; set; }
     }
 }
