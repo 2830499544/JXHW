@@ -9,11 +9,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JXHighWay.WatchHouse.UI", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Net", "Net", "{9B0AD85B-2938-4B3D-9002-3579A2F32BFF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JXHighWay.WatchHouse.Net", "JXHighWay.WatchHouse.Net\JXHighWay.WatchHouse.Net.csproj", "{0A3D0538-3339-4111-A7A4-C9907CB49F26}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JXHighWay.WatchHouse.Net.DataPack", "JXHighWay.WatchHouse.Net\JXHighWay.WatchHouse.Net.DataPack.csproj", "{0A3D0538-3339-4111-A7A4-C9907CB49F26}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Comm", "Comm", "{01E7B7A3-39BF-4EE1-9E23-3AFA94D2CA25}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JXHighWay.WatchHouse.Helper", "JXHighWay.WatchHouse.Helper\JXHighWay.WatchHouse.Helper.csproj", "{3282A5F3-7D7F-4423-9793-8DA25E2AD7AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JXHighWay.WatchHouse.Net", "JXHighWay.WatchHouse.Net.Socket\JXHighWay.WatchHouse.Net.csproj", "{D0CF1157-6B33-41A9-8EAE-FAEBA9FBFE48}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{3282A5F3-7D7F-4423-9793-8DA25E2AD7AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3282A5F3-7D7F-4423-9793-8DA25E2AD7AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3282A5F3-7D7F-4423-9793-8DA25E2AD7AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0CF1157-6B33-41A9-8EAE-FAEBA9FBFE48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0CF1157-6B33-41A9-8EAE-FAEBA9FBFE48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0CF1157-6B33-41A9-8EAE-FAEBA9FBFE48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0CF1157-6B33-41A9-8EAE-FAEBA9FBFE48}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -41,5 +47,6 @@ Global
 		{3005D9E3-04FD-4607-9B36-F5C1C561DE7F} = {9C54F038-4479-4DE0-9F94-CA227472A5B9}
 		{0A3D0538-3339-4111-A7A4-C9907CB49F26} = {9B0AD85B-2938-4B3D-9002-3579A2F32BFF}
 		{3282A5F3-7D7F-4423-9793-8DA25E2AD7AB} = {01E7B7A3-39BF-4EE1-9E23-3AFA94D2CA25}
+		{D0CF1157-6B33-41A9-8EAE-FAEBA9FBFE48} = {9B0AD85B-2938-4B3D-9002-3579A2F32BFF}
 	EndGlobalSection
 EndGlobal

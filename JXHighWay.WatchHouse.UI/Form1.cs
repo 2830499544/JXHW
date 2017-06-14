@@ -18,11 +18,15 @@ namespace JXHighWay.WatchHouse.UI
         {
             InitializeComponent();
         }
-
+        SocketServer vSocketServer;
         private void button_OK_Click(object sender, EventArgs e)
         {
             WatchHouseDataPack vWatchHouse = new WatchHouseDataPack();
             byte[] vDtaPack = vWatchHouse.Send_KaiMen();
+            vSocketServer = new SocketServer(1024, 10);
+            vSocketServer.Start();
+           
+
             //WatchHouseDataPack_Send_CommandEnmu aa = Net.WatchHouseDataPack_Send_CommandEnmu.GuanBaoJing;
             //WatchHouseDataPack_SendData_Main vMain = new WatchHouseDataPack_SendData_Main()
             //{
@@ -31,6 +35,11 @@ namespace JXHighWay.WatchHouse.UI
             //    CMD = (byte)((int)aa >> 8),
             //    SUB = (byte)(int)aa
             //};
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            vSocketServer.Send(vSocketServer.SAEADict.First().Value, new byte[] { 0x00,0x00}); 
         }
     }
 }
