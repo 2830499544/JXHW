@@ -47,7 +47,7 @@ namespace JXHighWay.WatchHouse.UI
         private void VSocketManager_ReceiveClientData(AsyncUserToken token, byte[] buff)
         {
             Console.Write(string.Format("接收数据 ：{0}", token.IPAddress), Convert.ToString(buff));
-            vSocketManager.SendMessage(token, System.Text.ASCIIEncoding.Default.GetBytes("ISOK"));
+            //vSocketManager.SendMessage(token, System.Text.ASCIIEncoding.Default.GetBytes("ISOK"));
         }
 
         //private void VSocketManager_ReceiveClientData(AsyncUserToken token, byte[] buff)
