@@ -19,6 +19,7 @@ namespace JXHighWay.WatchHouse.UI
             InitializeComponent();
         }
         SocketServer vSocketServer;
+        SocketManager vSocketManager;
         private void button_OK_Click(object sender, EventArgs e)
         {
             //WatchHouseDataPack vWatchHouse = new WatchHouseDataPack();
@@ -26,11 +27,10 @@ namespace JXHighWay.WatchHouse.UI
             //vSocketServer = new SocketServer(1024, 10);
             //vSocketServer.Start();
 
-            SocketManager vSocketManager = new SocketManager(10,10);
+            vSocketManager = new SocketManager(10,10);
             vSocketManager.ReceiveClientData += VSocketManager_ReceiveClientData;
             vSocketManager.Init();
             vSocketManager.Start(new IPEndPoint(IPAddress.Any, 1024));
-            
 
             //vSocketManager.ReceiveClientData += VSocketManager_ReceiveClientData;
 
@@ -46,7 +46,8 @@ namespace JXHighWay.WatchHouse.UI
 
         private void VSocketManager_ReceiveClientData(AsyncUserToken token, byte[] buff)
         {
-            throw new NotImplementedException();
+            Console.Write(string.Format("接收数据 ：{0}", token.IPAddress), Convert.ToString(buff));
+            vSocketManager.SendMessage(token, System.Text.ASCIIEncoding.Default.GetBytes("ISOK"));
         }
 
         //private void VSocketManager_ReceiveClientData(AsyncUserToken token, byte[] buff)
