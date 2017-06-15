@@ -27,7 +27,7 @@ namespace JXHighWay.WatchHouse.UI
             //vSocketServer = new SocketServer(1024, 10);
             //vSocketServer.Start();
 
-            vSocketManager = new SocketManager(10,10);
+            vSocketManager = new SocketManager(10,1024);
             vSocketManager.ReceiveClientData += VSocketManager_ReceiveClientData;
             vSocketManager.Init();
             vSocketManager.Start(new IPEndPoint(IPAddress.Any, 1024));
@@ -46,8 +46,8 @@ namespace JXHighWay.WatchHouse.UI
 
         private void VSocketManager_ReceiveClientData(AsyncUserToken token, byte[] buff)
         {
-            Console.Write(string.Format("接收数据 ：{0}", token.IPAddress), Convert.ToString(buff));
-            //vSocketManager.SendMessage(token, System.Text.ASCIIEncoding.Default.GetBytes("ISOK"));
+            Console.WriteLine(string.Format("接收数据:IP->{0} 数据->{1}", token.IPAddress, System.Text.Encoding.Default.GetString(buff)));
+            vSocketManager.SendMessage(token, System.Text.Encoding.Default.GetBytes("ISOK"));
         }
 
         //private void VSocketManager_ReceiveClientData(AsyncUserToken token, byte[] buff)
