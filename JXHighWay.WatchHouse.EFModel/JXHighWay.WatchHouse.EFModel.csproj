@@ -40,6 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DoorGuardEFModel.cs" />
+    <Compile Include="IDCardEFModel.cs" />
+    <Compile Include="SendCMDEFModel.cs" />
     <Compile Include="WatchHouseConfigEFModel.cs" />
     <Compile Include="WathHouseDataEFModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

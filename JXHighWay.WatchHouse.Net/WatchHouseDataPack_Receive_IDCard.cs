@@ -119,10 +119,10 @@ namespace JXHighWay.WatchHouse.Net
         /// </summary>
         public byte DateTime13{ get; set; }
         /// <summary>
-        /// 开门模式(0:用户卡号 1:密码开门)
+        /// 换班(1:换班)
         /// Data[14]
         /// </summary>
-        public byte KaiMenMS{ get; set; }
+        public byte HuanBan{ get; set; }
         /// <summary>
         /// 1，换班 
         /// Data[14]
@@ -130,24 +130,9 @@ namespace JXHighWay.WatchHouse.Net
         public byte KaHao0{ get; set; }
         /// <summary>
         /// 唯一ID 
-        /// Data[15]
+        /// Data[15-18]
         /// </summary>
-        public byte UniqID1{ get; set; }
-        /// <summary>
-        /// 唯一ID  
-        /// Data[16]
-        /// </summary>
-        public byte UniqID2{ get; set; }
-        /// <summary>
-        /// 唯一ID 
-        /// Data[17]
-        /// </summary>
-        public byte UniqID3{ get; set; }
-        /// <summary>
-        /// 唯一ID 
-        /// Data[18]
-        /// </summary>
-        public byte UniqID4{ get; set; }
+        public int UniqID {get; set; }
         public short Check { get; set; }
     }
 }
