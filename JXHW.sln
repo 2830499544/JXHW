@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JXHighWay.WatchHouse.EFMode
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JXHighWay.WatchHouse.Manager", "JXHighWay.WatchHouse.Manager\JXHighWay.WatchHouse.Manager.csproj", "{CB42A2D5-B705-47F6-8FC5-CC86AC9B9F8E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JXHighWay.WatchHouse.WFPClient", "JXHighWay.WatchHouse.WFPClient\JXHighWay.WatchHouse.WFPClient.csproj", "{2295C73D-E211-4C9C-86D9-AC9CC824B603}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,10 @@ Global
 		{CB42A2D5-B705-47F6-8FC5-CC86AC9B9F8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CB42A2D5-B705-47F6-8FC5-CC86AC9B9F8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CB42A2D5-B705-47F6-8FC5-CC86AC9B9F8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2295C73D-E211-4C9C-86D9-AC9CC824B603}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2295C73D-E211-4C9C-86D9-AC9CC824B603}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2295C73D-E211-4C9C-86D9-AC9CC824B603}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2295C73D-E211-4C9C-86D9-AC9CC824B603}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,5 +86,6 @@ Global
 		{1E2CBD19-B02C-46BB-947C-F67329D5E6F4} = {EA9D9F79-E592-4958-A2F2-CE196ACE042B}
 		{22461238-D0D1-4DDC-8068-D4AADCAB0297} = {367492C3-8B84-44A5-B483-37D90BC40B80}
 		{CB42A2D5-B705-47F6-8FC5-CC86AC9B9F8E} = {EA9D9F79-E592-4958-A2F2-CE196ACE042B}
+		{2295C73D-E211-4C9C-86D9-AC9CC824B603} = {9C54F038-4479-4DE0-9F94-CA227472A5B9}
 	EndGlobalSection
 EndGlobal
