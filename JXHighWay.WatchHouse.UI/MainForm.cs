@@ -10,11 +10,11 @@ using System.Windows.Forms;
 using JXHighWay.WatchHouse.Net;
 using System.Net;
 
-namespace JXHighWay.WatchHouse.UI
+namespace JXHighWay.WatchHouse.Server
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
         }
@@ -60,6 +60,12 @@ namespace JXHighWay.WatchHouse.UI
         private void button1_Click(object sender, EventArgs e)
         {
             vSocketServer.Send(vSocketServer.SAEADict.First().Value, new byte[] { 0x00,0x00});
+        }
+
+        private void ToolStripMenuItem_Setup_Employee_Click(object sender, EventArgs e)
+        {
+            EmployeeForm vEmployeeForm = new EmployeeForm();
+            vEmployeeForm.ShowDialog();
         }
     }
 }

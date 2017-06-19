@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{22461238-D0D1-4DDC-8068-D4AADCAB0297}</ProjectGuid>
+    <ProjectGuid>{CB42A2D5-B705-47F6-8FC5-CC86AC9B9F8E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>JXHighWay.WatchHouse.EFModel</RootNamespace>
-    <AssemblyName>JXHighWay.WatchHouse.EFModel</AssemblyName>
+    <RootNamespace>JXHighWay.WatchHouse.Manager</RootNamespace>
+    <AssemblyName>JXHighWay.WatchHouse.Manager</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,13 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdministratorEFModel.cs" />
-    <Compile Include="DoorGuardEFModel.cs" />
-    <Compile Include="EmployeeEFModel.cs" />
-    <Compile Include="IDCardEFModel.cs" />
-    <Compile Include="SendCMDEFModel.cs" />
-    <Compile Include="WatchHouseConfigEFModel.cs" />
-    <Compile Include="WathHouseDataEFModel.cs" />
+    <Compile Include="Administrator.cs" />
+    <Compile Include="Employee.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -54,13 +49,10 @@
       <Project>{fad8e9af-e87d-45e3-99b8-cd3e3360b682}</Project>
       <Name>DBMiddleWareLib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\JXHighWay.WatchHouse.EFModel\JXHighWay.WatchHouse.EFModel.csproj">
+      <Project>{22461238-d0d1-4ddc-8068-d4aadcab0297}</Project>
+      <Name>JXHighWay.WatchHouse.EFModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

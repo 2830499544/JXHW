@@ -25,7 +25,6 @@ namespace JXHighWay.WatchHouse.Helper
 
         #endregion
 
-
         #region 构造
         public Config()
         {
