@@ -16,13 +16,20 @@ using System.Windows.Shapes;
 namespace JXHighWay.WatchHouse.WFPClient
 {
     /// <summary>
-    /// Page2.xaml 的交互逻辑
+    /// MainPage.xaml 的交互逻辑
     /// </summary>
-    public partial class Page2 : Page
+    public partial class MainPage : Page
     {
-        public Page2()
+        public MainPage()
         {
             InitializeComponent();
+        }
+
+        private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            NavigationWindow window = new NavigationWindow();
+            window.Source = new Uri("GanTingMingXi.xaml", UriKind.Relative);
+            window.Show();
         }
     }
 }
