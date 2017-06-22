@@ -5,10 +5,125 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:JXHighWay.WatchHouse.WFPClient"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="460" d:DesignWidth="1024"
       Title="GanTingMingXi">
 
-    <Grid>
-        
+    <Grid Background="#245d7c">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="92*"/>
+            <ColumnDefinition Width="200*"/>
+            <ColumnDefinition Width="200*"/>
+            <ColumnDefinition Width="200*"/>
+            <ColumnDefinition Width="200*"/>
+            <ColumnDefinition Width="92*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="201*"  />
+            <RowDefinition Height="202*" />
+        </Grid.RowDefinitions>
+        <Image Grid.Column="1" HorizontalAlignment="Left" Height="166" Margin="26,38,0,0" VerticalAlignment="Top" Width="152" MouseLeftButtonDown="Image_MouseLeftButtonDown" >
+            <Image.Style>
+                <Style TargetType="{x:Type Image}">
+                    <Setter Property="Source" Value="Images/GanTingMingXi/DengGuan.jpg"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver"  Value="True">
+                            <Setter Property="Source" Value="Images/GanTingMingXi/DengGuan_A.jpg"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Image.Style>
+        </Image>
+        <Label x:Name="label" Content="灯　光" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Margin="70,193,0,0" FontSize="18" Foreground="WhiteSmoke"/>
+        <Image x:Name="image_Copy" Grid.Column="2" HorizontalAlignment="Left" Height="166" Margin="26,38,0,0" VerticalAlignment="Top" Width="152" MouseLeftButtonDown="image_Copy_MouseLeftButtonDown" >
+            <Image.Style>
+                <Style TargetType="{x:Type Image}">
+                    <Setter Property="Source" Value="Images/GanTingMingXi/Men.jpg"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver"  Value="True">
+                            <Setter Property="Source" Value="Images/GanTingMingXi/Men_A.jpg"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Image.Style>
+        </Image>
+        <Label x:Name="label_Copy" Content="自动门窗" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="61,193,0,0" FontSize="18" Foreground="WhiteSmoke"/>
+        <Image x:Name="image_Copy1" Grid.Column="3" HorizontalAlignment="Left" Height="166" Margin="26,38,0,0" VerticalAlignment="Top" Width="152" >
+            <Image.Style>
+                <Style TargetType="{x:Type Image}">
+                    <Setter Property="Source" Value="Images/GanTingMingXi/DianYuan.jpg"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver"  Value="True">
+                            <Setter Property="Source" Value="Images/GanTingMingXi/DianYuan_A.jpg"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Image.Style>
+        </Image>
+        <Label x:Name="label_Copy1" Content="电　源" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="70,193,0,0" FontSize="18" Foreground="WhiteSmoke"/>
+        <Image x:Name="image_Copy2" Grid.Column="4" HorizontalAlignment="Left" Height="166" Margin="26,38,0,0" VerticalAlignment="Top" Width="152" >
+            <Image.Style>
+                <Style TargetType="{x:Type Image}">
+                    <Setter Property="Source" Value="Images/GanTingMingXi/LED.jpg"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver"  Value="True">
+                            <Setter Property="Source" Value="Images/GanTingMingXi/LED_A.jpg"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Image.Style>
+        </Image>
+        <Label x:Name="label_Copy2" Content="LED显示屏" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="4" Margin="55,193,0,0" FontSize="18" Foreground="WhiteSmoke"/>
+        <Image x:Name="image_Copy3" Grid.Column="1" HorizontalAlignment="Left" Height="166" Margin="26,31,0,0" VerticalAlignment="Top" Width="152" Grid.Row="1" MouseLeftButtonDown="image_Copy3_MouseLeftButtonDown" >
+            <Image.Style>
+                <Style TargetType="{x:Type Image}">
+                    <Setter Property="Source" Value="Images/GanTingMingXi/XingFeng.jpg"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver"  Value="True">
+                            <Setter Property="Source" Value="Images/GanTingMingXi/XingFeng_A.jpg"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Image.Style>
+        </Image>
+        <Label x:Name="label_Copy3" Content="新　风" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Margin="70,191,0,0" FontSize="18" Foreground="WhiteSmoke" Grid.Row="1"/>
+        <Image x:Name="image_Copy4" Grid.Column="2" HorizontalAlignment="Left" Height="166" Margin="26,31,0,0" VerticalAlignment="Top" Width="152" Grid.Row="1" MouseLeftButtonDown="image_Copy4_MouseLeftButtonDown" >
+            <Image.Style>
+                <Style TargetType="{x:Type Image}">
+                    <Setter Property="Source" Value="Images/GanTingMingXi/KongTiao.jpg"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver"  Value="True">
+                            <Setter Property="Source" Value="Images/GanTingMingXi/KongTiao_A.jpg"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Image.Style>
+        </Image>
+        <Label x:Name="label_Copy4" Content="空　调" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="68,191,0,0" FontSize="18" Foreground="WhiteSmoke" Grid.Row="1"/>
+        <Image x:Name="image_Copy5" Grid.Column="3" HorizontalAlignment="Left" Height="166" Margin="26,32,0,0" VerticalAlignment="Top" Width="152" Grid.Row="1" >
+            <Image.Style>
+                <Style TargetType="{x:Type Image}">
+                    <Setter Property="Source" Value="Images/GanTingMingXi/DiRuan.jpg"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver"  Value="True">
+                            <Setter Property="Source" Value="Images/GanTingMingXi/DiRuan_A.jpg"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Image.Style>
+        </Image>
+        <Label x:Name="label_Copy5" Content="地　暖" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="72,191,0,0" FontSize="18" Foreground="WhiteSmoke" Grid.Row="1"/>
+        <Image x:Name="image_Copy6" Grid.Column="4" HorizontalAlignment="Left" Height="166" Margin="26,32,0,0" VerticalAlignment="Top" Width="152" Grid.Row="1" >
+            <Image.Style>
+                <Style TargetType="{x:Type Image}">
+                    <Setter Property="Source" Value="Images/GanTingMingXi/DianZhiPai.jpg"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver"  Value="True">
+                            <Setter Property="Source" Value="Images/GanTingMingXi/DianZhiPai_A.jpg"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Image.Style>
+        </Image>
+        <Label x:Name="label_Copy6" Content="电子工号牌" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="4" Margin="52,191,0,0" FontSize="18" Foreground="WhiteSmoke" Grid.Row="1"/>
     </Grid>
 </Page>

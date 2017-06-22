@@ -27,9 +27,18 @@ namespace JXHighWay.WatchHouse.WFPClient
 
         private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            NavigationWindow window = new NavigationWindow();
-            window.Source = new Uri("GanTingMingXi.xaml", UriKind.Relative);
-            window.Show();
+            Frame pageFrame = null;
+            DependencyObject currParent = VisualTreeHelper.GetParent(this);
+            while (currParent != null && pageFrame == null)
+            {
+                pageFrame = currParent as Frame;
+                currParent = VisualTreeHelper.GetParent(currParent);
+            }
+            // Change the page of the frame.
+            if (pageFrame != null)
+            {
+                pageFrame.Source = new Uri("GanTingMingXi.xaml", UriKind.Relative);
+            }
         }
     }
 }

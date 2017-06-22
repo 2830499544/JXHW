@@ -24,5 +24,69 @@ namespace JXHighWay.WatchHouse.WFPClient
         {
             InitializeComponent();
         }
+
+        private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Frame pageFrame = null;
+            DependencyObject currParent = VisualTreeHelper.GetParent(this);
+            while (currParent != null && pageFrame == null)
+            {
+                pageFrame = currParent as Frame;
+                currParent = VisualTreeHelper.GetParent(currParent);
+            }
+            // Change the page of the frame.
+            if (pageFrame != null)
+            {
+                pageFrame.Source = new Uri("DengGuang.xaml", UriKind.Relative);
+            }
+        }
+
+        private void image_Copy4_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Frame pageFrame = null;
+            DependencyObject currParent = VisualTreeHelper.GetParent(this);
+            while (currParent != null && pageFrame == null)
+            {
+                pageFrame = currParent as Frame;
+                currParent = VisualTreeHelper.GetParent(currParent);
+            }
+            // Change the page of the frame.
+            if (pageFrame != null)
+            {
+                pageFrame.Source = new Uri("KongTiao.xaml", UriKind.Relative);
+            }
+        }
+
+        private void image_Copy_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Frame pageFrame = null;
+            DependencyObject currParent = VisualTreeHelper.GetParent(this);
+            while (currParent != null && pageFrame == null)
+            {
+                pageFrame = currParent as Frame;
+                currParent = VisualTreeHelper.GetParent(currParent);
+            }
+            // Change the page of the frame.
+            if (pageFrame != null)
+            {
+                pageFrame.Source = new Uri("MenChuang.xaml", UriKind.Relative);
+            }
+        }
+
+        private void image_Copy3_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Frame pageFrame = null;
+            DependencyObject currParent = VisualTreeHelper.GetParent(this);
+            while (currParent != null && pageFrame == null)
+            {
+                pageFrame = currParent as Frame;
+                currParent = VisualTreeHelper.GetParent(currParent);
+            }
+            // Change the page of the frame.
+            if (pageFrame != null)
+            {
+                pageFrame.Source = new Uri("XinFeng.xaml", UriKind.Relative);
+            }
+        }
     }
 }

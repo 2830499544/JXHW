@@ -54,7 +54,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="XinFeng.xaml.cs">
+      <DependentUpon>XinFeng.xaml</DependentUpon>
+    </Compile>
+    <Page Include="DengGuang.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GanTingMingXi.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="KongTiao.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -70,8 +81,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DengGuang.xaml.cs">
+      <DependentUpon>DengGuang.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GanTingMingXi.xaml.cs">
       <DependentUpon>GanTingMingXi.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="KongTiao.xaml.cs">
+      <DependentUpon>KongTiao.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -80,8 +97,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MenChuang.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="XinFeng.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MenChuang.xaml.cs">
+      <DependentUpon>MenChuang.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -184,6 +212,96 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\GanTing_A.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\GanTingMingXi\LED_A.jpg" />
+    <Resource Include="Images\GanTingMingXi\LED.jpg" />
+    <Resource Include="Images\GanTingMingXi\DiRuan_A.jpg" />
+    <Resource Include="Images\GanTingMingXi\DiRuan.jpg" />
+    <Resource Include="Images\GanTingMingXi\XingFeng_A.jpg" />
+    <Resource Include="Images\GanTingMingXi\XingFeng.jpg" />
+    <Resource Include="Images\GanTingMingXi\DengGuan_A.jpg" />
+    <Resource Include="Images\GanTingMingXi\DengGuan.jpg" />
+    <Resource Include="Images\GanTingMingXi\DianZhiPai_A.jpg" />
+    <Resource Include="Images\GanTingMingXi\DianZhiPai.jpg" />
+    <Resource Include="Images\GanTingMingXi\DianYuan_A.jpg" />
+    <Resource Include="Images\GanTingMingXi\DianYuan.jpg" />
+    <Resource Include="Images\GanTingMingXi\KongTiao_A.jpg" />
+    <Resource Include="Images\GanTingMingXi\KongTiao.jpg" />
+    <Resource Include="Images\GanTingMingXi\Men_A.jpg" />
+    <Resource Include="Images\GanTingMingXi\Men.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\DengGuang\DengGuan.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\KongTiao\KongTiao.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\DengGuang\ZuoYuanJiao.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\DengGuang\YouYuanJiao.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\MenChuang\Men.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\XinFeng\XingFeng.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\DengGuang\100.jpg" />
+    <Resource Include="Images\DengGuang\25.jpg" />
+    <Resource Include="Images\DengGuang\50.jpg" />
+    <Resource Include="Images\DengGuang\75.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\DengGuang\Beijin.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\DengGuang\100_A.jpg" />
+    <Resource Include="Images\DengGuang\25_A.jpg" />
+    <Resource Include="Images\DengGuang\50_A.jpg" />
+    <Resource Include="Images\DengGuang\75_A.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\KongTiao\cs.jpg" />
+    <Resource Include="Images\KongTiao\df.jpg" />
+    <Resource Include="Images\KongTiao\gf.jpg" />
+    <Resource Include="Images\KongTiao\sf.jpg" />
+    <Resource Include="Images\KongTiao\zd.jpg" />
+    <Resource Include="Images\KongTiao\zf.jpg" />
+    <Resource Include="Images\KongTiao\zl.jpg" />
+    <Resource Include="Images\KongTiao\zr.jpg" />
+    <Resource Include="Images\KongTiao\YouYuanJiao.jpg" />
+    <Resource Include="Images\KongTiao\BeiJin.jpg" />
+    <Resource Include="Images\KongTiao\ZhuoYuanJiao.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\KongTiao\zf_a.jpg" />
+    <Resource Include="Images\KongTiao\df_a.jpg" />
+    <Resource Include="Images\KongTiao\zl_a.jpg" />
+    <Resource Include="Images\KongTiao\zr_a.jpg" />
+    <Resource Include="Images\KongTiao\zd_a.jpg" />
+    <Resource Include="Images\KongTiao\cs_a.jpg" />
+    <Resource Include="Images\KongTiao\gf_a.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\XinFeng\1j.jpg" />
+    <Resource Include="Images\XinFeng\2j.jpg" />
+    <Resource Include="Images\XinFeng\3j.jpg" />
+    <Resource Include="Images\XinFeng\4j.jpg" />
+    <Resource Include="Images\XinFeng\5j.jpg" />
+    <Resource Include="Images\XinFeng\youyuanjiao.jpg" />
+    <Resource Include="Images\XinFeng\beijin.jpg" />
+    <Resource Include="Images\XinFeng\zhuoyuanjiao.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\XinFeng\1j_a.jpg" />
+    <Resource Include="Images\XinFeng\2j_a.jpg" />
+    <Resource Include="Images\XinFeng\3j_a.jpg" />
+    <Resource Include="Images\XinFeng\4j_a.jpg" />
+    <Resource Include="Images\XinFeng\5j_a.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
