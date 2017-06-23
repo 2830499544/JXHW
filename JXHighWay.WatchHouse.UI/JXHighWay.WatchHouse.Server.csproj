@@ -90,6 +90,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\JXHighWay.WatchHouse.Bll.WatchHouse\JXHighWay.WatchHouse.Bll.WatchHouse.csproj">
+      <Project>{1e2cbd19-b02c-46bb-947c-f67329d5e6f4}</Project>
+      <Name>JXHighWay.WatchHouse.Bll.WatchHouse</Name>
+    </ProjectReference>
     <ProjectReference Include="..\JXHighWay.WatchHouse.Net.Socket\JXHighWay.WatchHouse.Net.csproj">
       <Project>{d0cf1157-6b33-41a9-8eae-faeba9fbfe48}</Project>
       <Name>JXHighWay.WatchHouse.Net</Name>

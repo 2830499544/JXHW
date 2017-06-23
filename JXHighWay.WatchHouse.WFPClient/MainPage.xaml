@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:JXHighWay.WatchHouse.WFPClient"
       mc:Ignorable="d" 
       d:DesignHeight="460" d:DesignWidth="1024"
-      Title="MainPage">
+      Title="MainPage" Loaded="Page_Loaded">
 
     <Grid  Background="#245d7c">
         <Grid Height="460" VerticalAlignment="Top" Margin="65,0">
@@ -17,31 +17,58 @@
                 <ColumnDefinition Width="90*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="57.333"   />
-                <RowDefinition Height="201*"  />
-                <RowDefinition Height="202*" />
+                <RowDefinition Height="56"   />
+                <RowDefinition Height="205*"  />
+                <RowDefinition Height="199*" />
 
             </Grid.RowDefinitions>
-            <Label Content="XXXXXX收费站" HorizontalAlignment="Left" Margin="111.667,6,0,4.333" Grid.ColumnSpan="2" Width="239" FontSize="30" Grid.Column="1" Foreground="#FFF9F7F7"/>
-            <Image HorizontalAlignment="Left" Height="148" Margin="36,27.667,0,0" Grid.Row="1" VerticalAlignment="Top" Width="148" Source="Images/GanTing.jpg" MouseLeftButtonDown="Image_MouseLeftButtonDown">
+            <Label Content="XXXXXX收费站" HorizontalAlignment="Center" Margin="112,3,0,7" Grid.ColumnSpan="2" Width="239" FontSize="30" Grid.Column="1" Foreground="#FFF9F7F7"/>
+            <Image x:Name="Image_WH1" HorizontalAlignment="Left" Height="148" Margin="36,4,0,0" Grid.Row="1" VerticalAlignment="Top" Width="148" Cursor="Hand">
                 <Image.Style>
                     <Style TargetType="{x:Type Image}">
-                        <Setter Property="Source" Value="Images/GanTing.jpg"/>
+                        <Setter Property="Source" Value="Images/Main/Chu.jpg"/>
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver"  Value="True">
-                                <Setter Property="Source" Value="Images/GanTing_A.jpg"/>
+                                <Setter Property="Source" Value="Images/Main/Chu_A.jpg"/>
                             </Trigger>
                         </Style.Triggers>
                     </Style>
                 </Image.Style>
             </Image>
-            <Image HorizontalAlignment="Left" Height="148" Margin="36.667,27.667,0,0" Grid.Row="1" VerticalAlignment="Top" Width="148" Source="Images/GanTing.jpg" Grid.Column="1"/>
-            <Image HorizontalAlignment="Left" Height="148" Margin="36.333,27.667,0,0" Grid.Row="1" VerticalAlignment="Top" Width="148" Source="Images/GanTing.jpg" Grid.Column="2"/>
-            <Image HorizontalAlignment="Left" Height="148" Margin="34.333,27.667,0,0" Grid.Row="1" VerticalAlignment="Top" Width="148" Source="Images/GanTing.jpg" Grid.Column="3"/>
-            <Image HorizontalAlignment="Left" Height="148" Margin="36,26,0,0" Grid.Row="2" VerticalAlignment="Top" Width="148" Source="Images/GanTing.jpg"/>
-            <Image HorizontalAlignment="Left" Height="148" Margin="36.667,26,0,0" Grid.Row="2" VerticalAlignment="Top" Width="148" Source="Images/GanTing_Down.jpg" Grid.Column="1"/>
-            <Image HorizontalAlignment="Left" Height="148" Margin="36.333,26,0,0" Grid.Row="2" VerticalAlignment="Top" Width="148" Source="Images/GanTing_Down.jpg" Grid.Column="2"/>
-            <Image HorizontalAlignment="Left" Height="148" Margin="34.333,26,0,0" Grid.Row="2" VerticalAlignment="Top" Width="148" Source="Images/GanTing_Down.jpg" Grid.Column="3"/>
+            <Image x:Name="Image_WH2" HorizontalAlignment="Left" Height="148" Margin="37,4,0,0" Grid.Row="1" VerticalAlignment="Top" Width="148" Grid.Column="1" Cursor="Hand">
+                <Image.Style>
+                    <Style TargetType="{x:Type Image}">
+                        <Setter Property="Source" Value="Images/Main/Ru.jpg"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver"  Value="True">
+                                <Setter Property="Source" Value="Images/Main/Ru_A.jpg"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
+            <Image x:Name="Image_WH3" HorizontalAlignment="Left" Height="148" Margin="36,4,0,0" Grid.Row="1" VerticalAlignment="Top" Width="148" Source="Images/GanTing.jpg" Grid.Column="2"/>
+            <Image x:Name="Image_WH4" HorizontalAlignment="Left" Height="148" Margin="34,4,0,0" Grid.Row="1" VerticalAlignment="Top" Width="148" Source="Images/GanTing.jpg" Grid.Column="3"/>
+            <Image x:Name="Image_WH5" HorizontalAlignment="Left" Height="148" Margin="36,7,0,0" Grid.Row="2" VerticalAlignment="Top" Width="148" Source="Images/GanTing.jpg"/>
+            <Image x:Name="Image_WH6" HorizontalAlignment="Left" Height="148" Margin="37,7,0,0" Grid.Row="2" VerticalAlignment="Top" Width="148" Source="Images/GanTing_Down.jpg" Grid.Column="1"/>
+            <Image x:Name="Image_WH7" HorizontalAlignment="Left" Height="148" Margin="36,7,0,0" Grid.Row="2" VerticalAlignment="Top" Width="148" Source="Images/GanTing_Down.jpg" Grid.Column="2"/>
+            <Image x:Name="Image_WH8" HorizontalAlignment="Left" Height="148" Margin="34,7,0,0" Grid.Row="2" VerticalAlignment="Top" Width="148" Source="Images/GanTing_Down.jpg" Grid.Column="3"/>
+            <Label x:Name="Label_Name_WH1" Content="1号岗亭" HorizontalAlignment="Center" Margin="35,151,39,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16" Foreground="#FFF7EEEE" Height="31" Width="150" HorizontalContentAlignment="Center"/>
+            <Label x:Name="Label_JobNo_1" Content="工号:XXXXXX" HorizontalAlignment="Left" Margin="38,174,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16" Foreground="#FFF7EEEE" Height="31" Width="150" HorizontalContentAlignment="Center"/>
+            <Label x:Name="Label_Name_WH2" Content="2号岗亭" HorizontalAlignment="Center" Margin="36,152,37,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16" Foreground="#FFF7EEEE" Height="31" Width="150" Grid.Column="1" HorizontalContentAlignment="Center"/>
+            <Label x:Name="Label_JobNo_2" Content="工号:XXXXXX" HorizontalAlignment="Left" Margin="41,174,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16" Foreground="#FFF7EEEE" Height="31" Width="150" Grid.Column="1" HorizontalContentAlignment="Center"/>
+            <Label x:Name="Label_Name_WH3" Content="3号岗亭" HorizontalAlignment="Center" Margin="37,152,37,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16" Foreground="#FFF7EEEE" Height="31" Width="150" Grid.Column="2" HorizontalContentAlignment="Center"/>
+            <Label x:Name="Label_JobNo_3" Content="工号:XXXXXX" HorizontalAlignment="Left" Margin="39,174,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16" Foreground="#FFF7EEEE" Height="31" Width="150" Grid.Column="2" HorizontalContentAlignment="Center"/>
+            <Label x:Name="Label_Name_WH4" Content="4号岗亭" HorizontalAlignment="Center" Margin="34,152,39,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16" Foreground="#FFF7EEEE" Height="31" Width="150" Grid.Column="3" HorizontalContentAlignment="Center"/>
+            <Label x:Name="Label_JobNo_4" Content="工号:XXXXXX" HorizontalAlignment="Left" Margin="35,174,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16" Foreground="#FFF7EEEE" Height="31" Width="150" Grid.Column="3" HorizontalContentAlignment="Center"/>
+            <Label x:Name="Label_Name_WH5" Content="5号岗亭" HorizontalAlignment="Center" Margin="35,146,39,0" Grid.Row="2" VerticalAlignment="Top" FontSize="16" Foreground="#FFF7EEEE" Height="31" Width="150" HorizontalContentAlignment="Center"/>
+            <Label x:Name="Label_JobNo_5" Content="工号:XXXXXX" HorizontalAlignment="Left" Margin="34,168,0,0" Grid.Row="2" VerticalAlignment="Top" FontSize="16" Foreground="#FFF7EEEE" Height="31" Width="150" HorizontalContentAlignment="Center"/>
+            <Label x:Name="Label_Name_WH6" Content="6号岗亭" HorizontalAlignment="Center" Margin="39,146,34,0" Grid.Row="2" VerticalAlignment="Top" FontSize="16" Foreground="#FFF7EEEE" Height="31" Width="150" Grid.Column="1" HorizontalContentAlignment="Center"/>
+            <Label x:Name="Label_JobNo_6" Content="工号:XXXXXX" HorizontalAlignment="Left" Margin="38,168,0,0" Grid.Row="2" VerticalAlignment="Top" FontSize="16" Foreground="#FFF7EEEE" Height="31" Width="150" Grid.Column="1" HorizontalContentAlignment="Center"/>
+            <Label x:Name="Label_Name_WH7" Content="7号岗亭" HorizontalAlignment="Center" Margin="36,146,38,0" Grid.Row="2" VerticalAlignment="Top" FontSize="16" Foreground="#FFF7EEEE" Height="31" Width="150" Grid.Column="2" HorizontalContentAlignment="Center"/>
+            <Label x:Name="Label_JobNo_7" Content="工号:XXXXXX" HorizontalAlignment="Left" Margin="37,168,0,0" Grid.Row="2" VerticalAlignment="Top" FontSize="16" Foreground="#FFF7EEEE" Height="31" Width="150" Grid.Column="2" HorizontalContentAlignment="Center"/>
+            <Label x:Name="Label_Name_WH8" Content="8号岗亭" HorizontalAlignment="Center" Margin="33,146,40,0" Grid.Row="2" VerticalAlignment="Top" FontSize="16" Foreground="#FFF7EEEE" Height="31" Width="150" Grid.Column="3" HorizontalContentAlignment="Center"/>
+            <Label x:Name="Label_JobNo_8" Content="工号:XXXXXX" HorizontalAlignment="Left" Margin="35,168,0,0" Grid.Row="2" VerticalAlignment="Top" FontSize="16" Foreground="#FFF7EEEE" Height="31" Width="150" Grid.Column="3" HorizontalContentAlignment="Center"/>
         </Grid>
 
     </Grid>

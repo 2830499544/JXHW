@@ -40,9 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DengGuanStateModel.cs" />
+    <Compile Include="Monitoring.cs" />
     <Compile Include="SendCMDModel.cs" />
     <Compile Include="WatchHouseControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WatchHouseInfoModel.cs" />
     <Compile Include="WHQueueModel.cs" />
   </ItemGroup>
   <ItemGroup>

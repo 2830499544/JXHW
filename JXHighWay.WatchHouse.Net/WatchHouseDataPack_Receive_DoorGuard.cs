@@ -18,31 +18,44 @@ namespace JXHighWay.WatchHouse.Net
         /// <summary>
         /// 信息长度
         /// </summary>
-         public short Length { get; set; }
+         public byte Length1 { get; set; }
+        public byte Length2 { get; set; }
         /// <summary>
         /// 协议版本号
         /// </summary>
-         public short Ver { get; set; }
+        public byte Ver1 { get; set; }
+        public byte Ver2 { get; set; }
         /// <summary>
         /// 登陆序号
         /// </summary>
-         public short LoginSN { get; set; }
+        public byte LoginSN1 { get; set; }
+        public byte LoginSN2 { get; set; }
         /// <summary>
         /// 序列号
         /// </summary>
-         public short SN { get; set; }
+        public byte SN1 { get; set; }
+        public byte SN2 { get; set; }
         /// <summary>
         /// 目标岗亭唯一ID
         /// </summary>
-         public int WatchHouseID { get; set; }
+        public byte WatchHouseID1 { get; set; }
+        public byte WatchHouseID2 { get; set; }
+        public byte WatchHouseID3 { get; set; }
+        public byte WatchHouseID4 { get; set; }
         /// <summary>
         /// 用户唯一ID
         /// </summary>
-        public int UserID { get; set; }
+        public byte UserID1 { get; set; }
+        public byte UserID2 { get; set; }
+        public byte UserID3 { get; set; }
+        public byte UserID4 { get; set; }
         /// <summary>
         /// 预留字段
         /// </summary>
-        public int Empty { get; set; }
+        public byte Empty1 { get; set; }
+        public byte Empty2 { get; set; }
+        public byte Empty3 { get; set; }
+        public byte Empty4 { get; set; }
 
 
         public byte ID_H { get; set; }
@@ -157,6 +170,7 @@ namespace JXHighWay.WatchHouse.Net
         /// <summary>
         /// 校验
         /// </summary>
-        public short Check { get; set; }
+        public byte Check1 { get; set; }
+        public byte Check2 { get; set; }
     }
 }

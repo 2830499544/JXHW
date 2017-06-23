@@ -13,36 +13,60 @@ namespace JXHighWay.WatchHouse.Net
     {
         /// <summary>
         /// 头
+        /// [0]
         /// </summary>
         public byte Head { get; set; }
         /// <summary>
         /// 信息长度
+        /// [1-2]
         /// </summary>
-        public short Length { get; set; }
+        public byte Length1 { get; set; }
+        public byte Length2 { get; set; }
         /// <summary>
         /// 协议版本号
+        /// [3-4]
         /// </summary>
-        public short Ver { get; set; }
+        public byte Ver1 { get; set; }
+        public byte Ver2 { get; set; }
         /// <summary>
         /// 登陆序号
+        /// [5-6]
         /// </summary>
-        public short LoginSN { get; set; }
+        public byte LoginSN1 { get; set; }
+        public byte LoginSN2 { get; set; }
+
         /// <summary>
         /// 序列号
+        /// [7-8]
         /// </summary>
-        public short SN { get; set; }
+        public byte SN1 { get; set; }
+        public byte SN2 { get; set; }
         /// <summary>
         /// 目标岗亭唯一ID
+        /// [9-12]
         /// </summary>
-        public int WatchHouseID { get; set; }
+        public byte WatchHouseID1 { get; set; }
+        public byte WatchHouseID2 { get; set; }
+        public byte WatchHouseID3 { get; set; }
+        public byte WatchHouseID4 { get; set; }
         /// <summary>
         /// 用户唯一ID
+        /// [13-16]
         /// </summary>
-        public int UserID { get; set; }
+        public byte UserID1 { get; set; }
+        public byte UserID2 { get; set; }
+        public byte UserID3 { get; set; }
+        public byte UserID4 { get; set; }
         /// <summary>
         /// 预留字段
+        /// [17-20]
         /// </summary>
-        public int Empty { get; set; }
+        public byte Empty1 { get; set; }
+        public byte Empty2 { get; set; }
+        public byte Empty3 { get; set; }
+
+        public byte Empty4 { get; set; }
+
         public byte ID_H{ get; set; }
         public byte ID_L{ get; set; }
         public byte CMD{ get; set; }
@@ -116,7 +140,8 @@ namespace JXHighWay.WatchHouse.Net
         /// 室内温度(灯板)
         /// Data[13-14]
         /// </summary>
-        public short ShiLeiWD{ get; set; }
+        public byte ShiLeiWD1{ get; set; }
+        public byte ShiLeiWD2 { get; set; }
         /// <summary>
         /// 室内湿度(0->100)
         /// Data[15]
@@ -161,12 +186,14 @@ namespace JXHighWay.WatchHouse.Net
         /// 采暖控制外部传感器温度
         /// Data[23-24]
         /// </summary>
-        public short CaiLuanKZWBWD{ get; set; }
+        public byte CaiLuanKZWBWD1{ get; set; }
+        public byte CaiLuanKZWBWD2 { get; set; }
         /// <summary>
         /// 采暖控制地表传感器温度
         /// Data[25-26]
         /// </summary>
-        public short CaiLuanKZDBWD{ get; set; }
+        public byte CaiLuanKZDBWD1{ get; set; }
+        public byte CaiLuanKZDBWD2{ get; set; }
         ///<summary>
         ///电流监控
         ///Bit.0
@@ -266,6 +293,8 @@ namespace JXHighWay.WatchHouse.Net
         /// Data[39]
         /// </summary>
         public byte Kong7{ get; set; }
-        public short Check { get; set; }
+
+        public byte Check1 { get; set; }
+        public byte Check2 { get; set; }
     }
 }

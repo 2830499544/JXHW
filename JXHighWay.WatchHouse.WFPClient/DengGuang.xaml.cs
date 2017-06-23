@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using JXHighWay.WatchHouse.Bll.WatchHouse;
 
 namespace JXHighWay.WatchHouse.WFPClient
 {
@@ -56,6 +57,19 @@ namespace JXHighWay.WatchHouse.WFPClient
             image_50.Source = new BitmapImage(new Uri(@"Images/DengGuang/50.jpg", UriKind.Relative));
             image_75.Source = new BitmapImage(new Uri(@"Images/DengGuang/75.jpg", UriKind.Relative));
             image_100.Source = new BitmapImage(new Uri(@"Images/DengGuang/100_A.jpg", UriKind.Relative));
+        }
+
+        void init()
+        {
+            Monitoring vMonitoring = new Monitoring();
+            DengGuanStateModel vState = vMonitoring.DuangGuanState(App.WatchHouseID);
+            CheckBox_Switch.IsChecked = vState.IsOpen;
+            Label_LD.Content = string.Format("{0}%",vState.LianDu);
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            init();
         }
     }
 }

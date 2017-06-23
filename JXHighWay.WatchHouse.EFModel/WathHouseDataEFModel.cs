@@ -70,6 +70,8 @@ namespace JXHighWay.WatchHouse.EFModel
         public String GongKongJSR { get; set; }
         [ColumnAttrib("DengGuanLD")]
         public Int16? DengGuanLD { get; set; }
+        [ColumnAttrib("XieRuSJ")]
+        public DateTime? XieRuSJ { get; set; }
     }
 
 

@@ -38,6 +38,9 @@ namespace JXHighWay.WatchHouse.WFPClient
             if (pageFrame != null)
             {
                 pageFrame.Source = new Uri("DengGuang.xaml", UriKind.Relative);
+
+                Window vWin = Window.GetWindow(this);
+                App.ChangeNavigation(3, vWin, "灯光");
             }
         }
 
@@ -54,6 +57,9 @@ namespace JXHighWay.WatchHouse.WFPClient
             if (pageFrame != null)
             {
                 pageFrame.Source = new Uri("KongTiao.xaml", UriKind.Relative);
+
+                Window vWin = Window.GetWindow(this);
+                App.ChangeNavigation(3, vWin, "空调");
             }
         }
 
@@ -70,6 +76,9 @@ namespace JXHighWay.WatchHouse.WFPClient
             if (pageFrame != null)
             {
                 pageFrame.Source = new Uri("MenChuang.xaml", UriKind.Relative);
+
+                Window vWin = Window.GetWindow(this);
+                App.ChangeNavigation(3, vWin, "自动门窗");
             }
         }
 
@@ -86,6 +95,28 @@ namespace JXHighWay.WatchHouse.WFPClient
             if (pageFrame != null)
             {
                 pageFrame.Source = new Uri("XinFeng.xaml", UriKind.Relative);
+
+                Window vWin = Window.GetWindow(this);
+                App.ChangeNavigation(3, vWin, "新风");
+            }
+        }
+
+        private void image_Copy5_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Frame pageFrame = null;
+            DependencyObject currParent = VisualTreeHelper.GetParent(this);
+            while (currParent != null && pageFrame == null)
+            {
+                pageFrame = currParent as Frame;
+                currParent = VisualTreeHelper.GetParent(currParent);
+            }
+            // Change the page of the frame.
+            if (pageFrame != null)
+            {
+                pageFrame.Source = new Uri("DiNuan.xaml", UriKind.Relative);
+
+                Window vWin = Window.GetWindow(this);
+                App.ChangeNavigation(3, vWin, "地暖");
             }
         }
     }

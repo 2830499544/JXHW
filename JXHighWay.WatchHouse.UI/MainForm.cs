@@ -8,10 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using JXHighWay.WatchHouse.Net;
+using JXHighWay.WatchHouse.Bll.WatchHouse;
 using System.Net;
+using System.Runtime.InteropServices;
 
 namespace JXHighWay.WatchHouse.Server
 {
+    
     public partial class MainForm : Form
     {
         public MainForm()
@@ -27,10 +30,10 @@ namespace JXHighWay.WatchHouse.Server
             //vSocketServer = new SocketServer(1024, 10);
             //vSocketServer.Start();
 
-            vSocketManager = new SocketManager(10,1024);
-            vSocketManager.ReceiveClientData += VSocketManager_ReceiveClientData;
-            vSocketManager.Init();
-            vSocketManager.Start(new IPEndPoint(IPAddress.Any, 1024));
+            //vSocketManager = new SocketManager(10,1024);
+            //vSocketManager.ReceiveClientData += VSocketManager_ReceiveClientData;
+            //vSocketManager.Init();
+            //vSocketManager.Start(new IPEndPoint(IPAddress.Any, 10008));
 
             //vSocketManager.ReceiveClientData += VSocketManager_ReceiveClientData;
 
@@ -42,7 +45,23 @@ namespace JXHighWay.WatchHouse.Server
             //    CMD = (byte)((int)aa >> 8),
             //    SUB = (byte)(int)aa
             //};
+
+            //byte a = 1;
+            //int size = Marshal.SizeOf(a);
+            //aa vDataPack = new aa();
+            WatchHouseDataPack_Receive_Main vDataPack = new WatchHouseDataPack_Receive_Main();
+            int size = Marshal.SizeOf(vDataPack);
+            try
+            {
+                vWatchHouseControl.Start();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine( string.Format("错误信息:{0}", ex.Message) );
+            }
+            
         }
+        WatchHouseControl vWatchHouseControl;
 
         private void VSocketManager_ReceiveClientData(AsyncUserToken token, byte[] buff)
         {
@@ -59,13 +78,29 @@ namespace JXHighWay.WatchHouse.Server
 
         private void button1_Click(object sender, EventArgs e)
         {
-            vSocketServer.Send(vSocketServer.SAEADict.First().Value, new byte[] { 0x00,0x00});
+            //vSocketServer.Send(vSocketServer.SAEADict.First().Value, new byte[] { 0x00,0x00});
+            vWatchHouseControl.Stop();
         }
 
         private void ToolStripMenuItem_Setup_Employee_Click(object sender, EventArgs e)
         {
             EmployeeForm vEmployeeForm = new EmployeeForm();
             vEmployeeForm.ShowDialog();
+        }
+
+        private void button_Command_Click(object sender, EventArgs e)
+        {
+
+            Task<bool> vResult  = vWatchHouseControl.AsyncSendCommandToDB(20010101, WatchHouseDataPack_Send_CommandEnmu.ChuShi);
+            if (vResult.Result)
+                MessageBox.Show("命令发送成功");
+            else
+                MessageBox.Show("命令发送失败");
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            vWatchHouseControl = new WatchHouseControl();
         }
     }
 }

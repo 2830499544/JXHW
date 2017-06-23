@@ -33,6 +33,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Highway.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -54,10 +57,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DiNuan.xaml.cs">
+      <DependentUpon>DiNuan.xaml</DependentUpon>
+    </Compile>
     <Compile Include="XinFeng.xaml.cs">
       <DependentUpon>XinFeng.xaml</DependentUpon>
     </Compile>
     <Page Include="DengGuang.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DiNuan.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -302,6 +312,37 @@
     <Resource Include="Images\XinFeng\3j_a.jpg" />
     <Resource Include="Images\XinFeng\4j_a.jpg" />
     <Resource Include="Images\XinFeng\5j_a.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\DiNuan\YouJiao.jpg" />
+    <Resource Include="Images\DiNuan\ZuoJiao.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\DiNuan\DiRuan.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Main\Chu.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Main\Chu_L.jpg" />
+    <Resource Include="Images\Main\Chu_A.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Main\Ru_A.jpg" />
+    <Resource Include="Images\Main\Ru.jpg" />
+    <Resource Include="Images\Main\Ru_L.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Highway.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\KongTiao\sf_a.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JXHighWay.WatchHouse.Bll.WatchHouse\JXHighWay.WatchHouse.Bll.WatchHouse.csproj">
+      <Project>{1e2cbd19-b02c-46bb-947c-f67329d5e6f4}</Project>
+      <Name>JXHighWay.WatchHouse.Bll.WatchHouse</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

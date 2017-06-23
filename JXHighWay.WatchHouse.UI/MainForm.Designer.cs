@@ -34,18 +34,18 @@
             this.ToolStripMenuItem_Setup = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_Setup_Employee = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_Setup_WatchHouse = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItem_Setup_Administrator = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.ToolStripMenuItem_Setup_Administrator = new System.Windows.Forms.ToolStripMenuItem();
+            this.button_Command = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button_Start
             // 
-            this.button_Start.Location = new System.Drawing.Point(177, 257);
-            this.button_Start.Margin = new System.Windows.Forms.Padding(4);
+            this.button_Start.Location = new System.Drawing.Point(52, 159);
             this.button_Start.Name = "button_Start";
-            this.button_Start.Size = new System.Drawing.Size(112, 34);
+            this.button_Start.Size = new System.Drawing.Size(75, 35);
             this.button_Start.TabIndex = 0;
             this.button_Start.Text = "开　始";
             this.button_Start.UseVisualStyleBackColor = true;
@@ -53,10 +53,9 @@
             // 
             // button_Stop
             // 
-            this.button_Stop.Location = new System.Drawing.Point(361, 257);
-            this.button_Stop.Margin = new System.Windows.Forms.Padding(4);
+            this.button_Stop.Location = new System.Drawing.Point(175, 159);
             this.button_Stop.Name = "button_Stop";
-            this.button_Stop.Size = new System.Drawing.Size(112, 34);
+            this.button_Stop.Size = new System.Drawing.Size(75, 35);
             this.button_Stop.TabIndex = 1;
             this.button_Stop.Text = "停　止";
             this.button_Stop.UseVisualStyleBackColor = true;
@@ -69,7 +68,8 @@
             this.ToolStripMenuItem_Setup});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(701, 32);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 1, 0, 1);
+            this.menuStrip1.Size = new System.Drawing.Size(467, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -80,52 +80,65 @@
             this.ToolStripMenuItem_Setup_WatchHouse,
             this.ToolStripMenuItem_Setup_Administrator});
             this.ToolStripMenuItem_Setup.Name = "ToolStripMenuItem_Setup";
-            this.ToolStripMenuItem_Setup.Size = new System.Drawing.Size(58, 28);
+            this.ToolStripMenuItem_Setup.Size = new System.Drawing.Size(44, 22);
             this.ToolStripMenuItem_Setup.Text = "设置";
             // 
             // ToolStripMenuItem_Setup_Employee
             // 
             this.ToolStripMenuItem_Setup_Employee.Name = "ToolStripMenuItem_Setup_Employee";
-            this.ToolStripMenuItem_Setup_Employee.Size = new System.Drawing.Size(211, 30);
+            this.ToolStripMenuItem_Setup_Employee.Size = new System.Drawing.Size(136, 22);
             this.ToolStripMenuItem_Setup_Employee.Text = "人员设置";
             this.ToolStripMenuItem_Setup_Employee.Click += new System.EventHandler(this.ToolStripMenuItem_Setup_Employee_Click);
             // 
             // ToolStripMenuItem_Setup_WatchHouse
             // 
             this.ToolStripMenuItem_Setup_WatchHouse.Name = "ToolStripMenuItem_Setup_WatchHouse";
-            this.ToolStripMenuItem_Setup_WatchHouse.Size = new System.Drawing.Size(211, 30);
+            this.ToolStripMenuItem_Setup_WatchHouse.Size = new System.Drawing.Size(136, 22);
             this.ToolStripMenuItem_Setup_WatchHouse.Text = "岗亭设置";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox1.Location = new System.Drawing.Point(0, 32);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(701, 160);
-            this.groupBox1.TabIndex = 3;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "信息";
             // 
             // ToolStripMenuItem_Setup_Administrator
             // 
             this.ToolStripMenuItem_Setup_Administrator.Name = "ToolStripMenuItem_Setup_Administrator";
-            this.ToolStripMenuItem_Setup_Administrator.Size = new System.Drawing.Size(211, 30);
+            this.ToolStripMenuItem_Setup_Administrator.Size = new System.Drawing.Size(136, 22);
             this.ToolStripMenuItem_Setup_Administrator.Text = "管理员设置";
             // 
-            // Form1
+            // groupBox1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox1.Location = new System.Drawing.Point(0, 24);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Size = new System.Drawing.Size(467, 107);
+            this.groupBox1.TabIndex = 3;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "信息";
+            // 
+            // button_Command
+            // 
+            this.button_Command.Location = new System.Drawing.Point(336, 159);
+            this.button_Command.Name = "button_Command";
+            this.button_Command.Size = new System.Drawing.Size(75, 35);
+            this.button_Command.TabIndex = 4;
+            this.button_Command.Text = "发送命令";
+            this.button_Command.UseVisualStyleBackColor = true;
+            this.button_Command.Click += new System.EventHandler(this.button_Command_Click);
+            // 
+            // MainForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(701, 320);
+            this.ClientSize = new System.Drawing.Size(467, 213);
+            this.Controls.Add(this.button_Command);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button_Stop);
             this.Controls.Add(this.button_Start);
             this.Controls.Add(this.menuStrip1);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "智慧岗亭数据采集";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -144,6 +157,7 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_Setup_Administrator;
+        private System.Windows.Forms.Button button_Command;
     }
 }
 

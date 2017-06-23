@@ -49,5 +49,15 @@ namespace JXHighWay.WatchHouse.WFPClient
         {
             Close();
         }
+
+        private void Label_Navigation1_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            MainFrame.Source = new Uri("MainPage.xaml", UriKind.Relative);
+        }
+
+        private void Label_Navigation2_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            MainFrame.Source = new Uri("GanTingMingXi.xaml", UriKind.Relative);
+        }
     }
 }

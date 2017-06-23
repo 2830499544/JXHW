@@ -3,41 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MXKJ.DBMiddleWareLib;
 
-namespace JXHighWay.WatchHouse.EFModel
+namespace JXHighWay.WatchHouse.Bll.WatchHouse
 {
-    [TableAttrib("岗亭配置", "ID")]
-    public struct WatchHouseConfigEFModel
+    public class WatchHouseInfoModel
     {
-        [ColumnAttrib("ID")]
-        public int? ID { get; set; }
-        [ColumnAttrib("ShouFeiZhangID")]
-        public int? ShouFeiZhangID { get; set; }
-        [ColumnAttrib("GangTingID")]
-        public int? GangTingID { get; set; }
-        [ColumnAttrib("GangTingMC")]
-        public String GangTingMC { get; set; }
-        [ColumnAttrib("GangTingIP")]
-        public String GangTingIP { get; set; }
-        [ColumnAttrib("GangTingDK")]
-        public int? GangTingDK { get; set; }
-        [ColumnAttrib("GuanGaoPingIP")]
-        public String GuanGaoPingIP { get; set; }
-        [ColumnAttrib("GuanGaoPDK")]
-        public int? GuanGaoPDK { get; set; }
-        [ColumnAttrib("DianYuanIP")]
-        public String DianYuanIP { get; set; }
-        [ColumnAttrib("DianYuanDK")]
-        public int? DianYuanDK { get; set; }
-        [ColumnAttrib("DianYuanLS")]
-        public int? DianYuanLS { get; set; }
-        [ColumnAttrib("TongXunSJ")]
-        public DateTime? TongXunSJ { get; set; }
-        [ColumnAttrib("LeiXin")]
-        public string LeiXin { get; set; }
-        [ColumnAttrib("GongHao")]
-        public string GongHao { get; set; }
 
+        public int? ID { get; set; }
+        public int? ShouFeiZhangID { get; set; }
+        public int? GangTingID { get; set; }
+        public String GangTingMC { get; set; }
+        public String GangTingIP { get; set; }
+        public int? GangTingDK { get; set; }
+        public String GuanGaoPingIP { get; set; }
+        public int? GuanGaoPDK { get; set; }
+        public String DianYuanIP { get; set; }
+        public int? DianYuanDK { get; set; }
+        public int? DianYuanLS { get; set; }
+        public DateTime? TongXunSJ { get; set; }
+        public string LeiXin { get; set; }
+        public string GongHao { get; set; }
     }
 }

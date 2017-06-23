@@ -15,37 +15,50 @@ namespace JXHighWay.WatchHouse.Net
         /// <summary>
         /// 信息长度
         /// </summary>
-         short Length { get; set; }
+         byte Length1 { get; set; }
+         byte Length2 { get; set; }
         /// <summary>
         /// 协议版本号
         /// </summary>
-         short Ver { get; set; }
+        byte Ver1 { get; set; }
+        byte Ver2 { get; set; }
         /// <summary>
         /// 登陆序号
         /// </summary>
-         short LoginSN { get; set; }
+        byte LoginSN1 { get; set; }
+        byte LoginSN2 { get; set; }
         /// <summary>
         /// 序列号
         /// </summary>
-         short SN { get; set; }
+        byte SN1 { get; set; }
+        byte SN2 { get; set; }
         /// <summary>
         /// 目标岗亭唯一ID
         /// </summary>
-         int WatchHouseID { get; set; }
+        byte WatchHouseID1 { get; set; }
+        byte WatchHouseID2 { get; set; }
+        byte WatchHouseID3 { get; set; }
+        byte WatchHouseID4 { get; set; }
         /// <summary>
         /// 用户唯一ID
         /// </summary>
-         int UserID { get; set; }
+        byte UserID1 { get; set; }
+        byte UserID2 { get; set; }
+        byte UserID3 { get; set; }
+        byte UserID4 { get; set; }
         /// <summary>
         /// 预留字段
         /// </summary>
-         int Empty { get; set; }
+        byte Empty1 { get; set; }
+        byte Empty2 { get; set; }
+        byte Empty3 { get; set; }
+        byte Empty4 { get; set; }
 
 
         /// <summary>
         /// 智慧系列设备
         /// </summary>
-         byte ID_H { get; set; }
+        byte ID_H { get; set; }
         /// <summary>
         /// ID
         /// </summary>
@@ -61,6 +74,7 @@ namespace JXHighWay.WatchHouse.Net
         /// <summary>
         /// 校验
         /// </summary>
-        short Check { get; set; }
+        byte Check1 { get; set; }
+        byte Check2 { get; set; }
     }
 }
