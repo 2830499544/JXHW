@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JXHighWay.WatchHouse.Bll.Client
+namespace JXHighWay.WatchHouse.Bll.Server
 {
     public class WatchHouseInfoModel
     {
@@ -23,6 +23,5 @@ namespace JXHighWay.WatchHouse.Bll.Client
         public DateTime? TongXunSJ { get; set; }
         public string LeiXin { get; set; }
         public string GongHao { get; set; }
-        public bool IsOnline { get; set; }
     }
 }

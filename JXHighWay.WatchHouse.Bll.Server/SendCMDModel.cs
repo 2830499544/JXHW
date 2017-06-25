@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JXHighWay.WatchHouse.Bll.WatchHouse
+namespace JXHighWay.WatchHouse.Bll.Server
 {
     public class SendCMDModel
     {
@@ -26,5 +26,6 @@ namespace JXHighWay.WatchHouse.Bll.WatchHouse
         /// 是否回复
         /// </summary>
         public bool State { get; set; }
+        public bool IsSend { get; set; }
     }
 }

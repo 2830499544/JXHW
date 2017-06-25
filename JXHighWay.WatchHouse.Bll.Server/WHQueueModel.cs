@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JXHighWay.WatchHouse.Bll.WatchHouse
+namespace JXHighWay.WatchHouse.Bll.Server
 {
     public class WHQueueModel
     {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using JXHighWay.WatchHouse.Bll.Client;
 
 namespace JXHighWay.WatchHouse.WFPClient
 {
@@ -23,6 +25,41 @@ namespace JXHighWay.WatchHouse.WFPClient
         public MenChuang()
         {
             InitializeComponent();
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            m_Monitoring = new Monitoring();
+            RefreshState();
+        }
+
+        async void RefreshState()
+        {
+            await Task.Run(() =>
+            {
+                while (true)
+                {
+
+                    Action action1 = () =>
+                    {
+                        initMenChaung();
+                    };
+                    Dispatcher.BeginInvoke(action1);
+                    Thread.Sleep(App.RefreshTime * 1000);
+                }
+            });
+        }
+
+        Monitoring m_Monitoring = null;
+        void initMenChaung()
+        {
+            MenChuangStateModel vMenChuangStateModel =  m_Monitoring.MenChuangState(App.WatchHouseID);
+            CheckBox_BaoJingQi.IsChecked = vMenChuangStateModel.BaoJinQi;
+            CheckBox_Chuang.IsChecked = vMenChuangStateModel.Chuang;
+            CheckBox_FengMu.IsChecked = vMenChuangStateModel.FengMu;
+            CheckBox_FengMuDeng.IsChecked = vMenChuangStateModel.FengMuDeng;
+            CheckBox_Men.IsChecked = vMenChuangStateModel.Men;
+            CheckBox_ZiDongChuang.IsChecked = vMenChuangStateModel.ZiDonGChuang;
         }
     }
 }

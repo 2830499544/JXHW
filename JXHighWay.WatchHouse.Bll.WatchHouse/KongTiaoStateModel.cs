@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace JXHighWay.WatchHouse.Bll.Client
 {
-    /// <summary>
-    /// 灯光状态
-    /// </summary>
-    public class DengGuanStateModel
+    public class KongTiaoStateModel
     {
         public bool IsOpen { get; set; }
-        public int LianDu { get; set; }
+        public short ShiLeiWD { get; set; }
+
+        public string FengShu { get; set; }
+        public string MoShi { get; set; }
     }
 }

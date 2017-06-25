@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using JXHighWay.WatchHouse.Net;
-using JXHighWay.WatchHouse.Bll.WatchHouse;
+using JXHighWay.WatchHouse.Bll.Server;
 using System.Net;
 using System.Runtime.InteropServices;
 

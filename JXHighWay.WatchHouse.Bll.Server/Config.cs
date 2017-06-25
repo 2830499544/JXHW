@@ -5,7 +5,7 @@ using System.Text;
 using System.Configuration;
 
 
-namespace JXHighWay.WatchHouse.Helper
+namespace JXHighWay.WatchHouse.Bll.Server
 {
     public class Config
     {

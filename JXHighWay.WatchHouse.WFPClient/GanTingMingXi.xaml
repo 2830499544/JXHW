@@ -21,7 +21,7 @@
             <RowDefinition Height="201*"  />
             <RowDefinition Height="202*" />
         </Grid.RowDefinitions>
-        <Image x:Name="Image_DengGuan" Grid.Column="1" HorizontalAlignment="Left" Height="166" Margin="26,38,0,0" VerticalAlignment="Top" Width="152" MouseLeftButtonDown="Image_MouseLeftButtonDown" >
+        <Image x:Name="Image_DengGuan" Grid.Column="1" HorizontalAlignment="Left" Height="166" Margin="26,38,0,0" VerticalAlignment="Top" Width="152" MouseLeftButtonDown="Image_MouseLeftButtonDown" Cursor="Hand" >
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
                     <Setter Property="Source" Value="Images/GanTingMingXi/DengGuan.jpg"/>
@@ -34,7 +34,7 @@
             </Image.Style>
         </Image>
         <Label x:Name="label" Content="灯　光" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Margin="70,193,0,0" FontSize="18" Foreground="WhiteSmoke"/>
-        <Image x:Name="Image_MenChuang" Grid.Column="2" HorizontalAlignment="Left" Height="166" Margin="26,38,0,0" VerticalAlignment="Top" Width="152" MouseLeftButtonDown="image_Copy_MouseLeftButtonDown" >
+        <Image x:Name="Image_MenChuang" Grid.Column="2" HorizontalAlignment="Left" Height="166" Margin="26,38,0,0" VerticalAlignment="Top" Width="152" MouseLeftButtonDown="image_Copy_MouseLeftButtonDown" Cursor="Hand" >
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
                     <Setter Property="Source" Value="Images/GanTingMingXi/Men.jpg"/>
@@ -47,7 +47,7 @@
             </Image.Style>
         </Image>
         <Label x:Name="label_Copy" Content="自动门窗" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="61,193,0,0" FontSize="18" Foreground="WhiteSmoke"/>
-        <Image x:Name="Image_DianYuan" Grid.Column="3" HorizontalAlignment="Left" Height="166" Margin="26,38,0,0" VerticalAlignment="Top" Width="152" >
+        <Image x:Name="Image_DianYuan" Grid.Column="3" HorizontalAlignment="Left" Height="166" Margin="26,38,0,0" VerticalAlignment="Top" Width="152" Cursor="Hand" >
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
                     <Setter Property="Source" Value="Images/GanTingMingXi/DianYuan.jpg"/>
@@ -60,7 +60,7 @@
             </Image.Style>
         </Image>
         <Label x:Name="label_Copy1" Content="电　源" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="70,193,0,0" FontSize="18" Foreground="WhiteSmoke"/>
-        <Image x:Name="Image_LED" Grid.Column="4" HorizontalAlignment="Left" Height="166" Margin="26,38,0,0" VerticalAlignment="Top" Width="152" >
+        <Image x:Name="Image_LED" Grid.Column="4" HorizontalAlignment="Left" Height="166" Margin="26,38,0,0" VerticalAlignment="Top" Width="152" Cursor="Hand" >
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
                     <Setter Property="Source" Value="Images/GanTingMingXi/LED.jpg"/>
@@ -73,7 +73,7 @@
             </Image.Style>
         </Image>
         <Label x:Name="label_Copy2" Content="LED显示屏" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="4" Margin="55,193,0,0" FontSize="18" Foreground="WhiteSmoke"/>
-        <Image x:Name="Image_XinFeng" Grid.Column="1" HorizontalAlignment="Left" Height="166" Margin="26,31,0,0" VerticalAlignment="Top" Width="152" Grid.Row="1" MouseLeftButtonDown="image_Copy3_MouseLeftButtonDown" >
+        <Image x:Name="Image_XinFeng" Grid.Column="1" HorizontalAlignment="Left" Height="166" Margin="26,31,0,0" VerticalAlignment="Top" Width="152" Grid.Row="1" MouseLeftButtonDown="image_Copy3_MouseLeftButtonDown" Cursor="Hand" >
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
                     <Setter Property="Source" Value="Images/GanTingMingXi/XingFeng.jpg"/>
@@ -86,7 +86,7 @@
             </Image.Style>
         </Image>
         <Label x:Name="label_Copy3" Content="新　风" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Margin="70,191,0,0" FontSize="18" Foreground="WhiteSmoke" Grid.Row="1"/>
-        <Image x:Name="Image_KongTiao" Grid.Column="2" HorizontalAlignment="Left" Height="166" Margin="26,31,0,0" VerticalAlignment="Top" Width="152" Grid.Row="1" MouseLeftButtonDown="image_Copy4_MouseLeftButtonDown" >
+        <Image x:Name="Image_KongTiao" Grid.Column="2" HorizontalAlignment="Left" Height="166" Margin="26,31,0,0" VerticalAlignment="Top" Width="152" Grid.Row="1" MouseLeftButtonDown="image_Copy4_MouseLeftButtonDown" Cursor="Hand" >
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
                     <Setter Property="Source" Value="Images/GanTingMingXi/KongTiao.jpg"/>
@@ -99,7 +99,7 @@
             </Image.Style>
         </Image>
         <Label x:Name="label_Copy4" Content="空　调" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="68,191,0,0" FontSize="18" Foreground="WhiteSmoke" Grid.Row="1"/>
-        <Image x:Name="Image_DiNuan" Grid.Column="3" HorizontalAlignment="Left" Height="166" Margin="26,32,0,0" VerticalAlignment="Top" Width="152" Grid.Row="1" MouseLeftButtonDown="image_Copy5_MouseLeftButtonDown" >
+        <Image x:Name="Image_DiNuan" Grid.Column="3" HorizontalAlignment="Left" Height="166" Margin="26,32,0,0" VerticalAlignment="Top" Width="152" Grid.Row="1" MouseLeftButtonDown="image_Copy5_MouseLeftButtonDown" Cursor="Hand" >
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
                     <Setter Property="Source" Value="Images/GanTingMingXi/DiRuan.jpg"/>
@@ -112,7 +112,7 @@
             </Image.Style>
         </Image>
         <Label x:Name="label_Copy5" Content="地　暖" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="72,191,0,0" FontSize="18" Foreground="WhiteSmoke" Grid.Row="1"/>
-        <Image x:Name="Image_GongHao" Grid.Column="4" HorizontalAlignment="Left" Height="166" Margin="26,32,0,0" VerticalAlignment="Top" Width="152" Grid.Row="1" >
+        <Image x:Name="Image_GongHao" Grid.Column="4" HorizontalAlignment="Left" Height="166" Margin="26,32,0,0" VerticalAlignment="Top" Width="152" Grid.Row="1" Cursor="Hand" >
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
                     <Setter Property="Source" Value="Images/GanTingMingXi/DianZhiPai.jpg"/>

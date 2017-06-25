@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:JXHighWay.WatchHouse.WFPClient"
       mc:Ignorable="d" 
       d:DesignHeight="460" d:DesignWidth="1024"
-      Title="MenChuang">
+      Title="MenChuang" Loaded="Page_Loaded">
     <Page.Resources>
         <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>
         <Style x:Key="GroupboxWithoutWhiteBorder" TargetType="{x:Type GroupBox}">
@@ -161,25 +161,25 @@
         </Grid.RowDefinitions>
         <Image HorizontalAlignment="Left" Height="147" VerticalAlignment="Top" Width="147" Grid.Column="1" Margin="39,0,0,0" Source="Images/MenChuang/Men.jpg"  Grid.Row="1"/>
         <GroupBox Style="{StaticResource GroupboxWithoutWhiteBorder}" x:Name="groupBox" Header="自动门" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Margin="24,139,0,0" Grid.Row="1" Height="108" Width="171" FontSize="18" Foreground="#FFF5F1F1" BorderBrush="#d6d9d9"/>
-        <CheckBox  x:Name="checkBox" Style="{StaticResource OrangeSwitchStyle}" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="83,163,0,0" Grid.Row="1" VerticalAlignment="Top" Height="36" Width="91"/>
-        <CheckBox x:Name="checkBox_Copy" Style="{StaticResource OrangeSwitchStyle}" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="83,199,0,0" Grid.Row="1" VerticalAlignment="Top" Height="36" Width="91"/>
+        <CheckBox  x:Name="CheckBox_Men" Style="{StaticResource OrangeSwitchStyle}" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="83,163,0,0" Grid.Row="1" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand"/>
+        <CheckBox x:Name="CheckBox_Chuang" Style="{StaticResource OrangeSwitchStyle}" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="83,199,0,0" Grid.Row="1" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand"/>
         <Label x:Name="label" Content="门" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Margin="41,161,0,0" Grid.Row="1" FontSize="20" Foreground="#FFF9F4F4" Height="36" Width="30"/>
         <Label x:Name="label_Copy" Content="窗" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Margin="40,195,0,0" Grid.Row="1" FontSize="20" Foreground="#FFF9F4F4" Height="36" Width="30"/>
         <GroupBox Style="{StaticResource GroupboxWithoutWhiteBorder}" x:Name="groupBox_Copy" Header="前窗帘" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="15,10,0,0" Grid.Row="1" Height="80" Width="256" FontSize="18" Foreground="#FFF5F1F1" BorderBrush="#d6d9d9">
         </GroupBox>
-        <Button x:Name="button"   Content="升" HorizontalAlignment="Left" Height="38" Margin="37,42,0,0" VerticalAlignment="Top" Width="84" Background="{DynamicResource CheckedOrange}" Grid.Column="2" Grid.Row="1" FontSize="20" Foreground="#FFF7F1F1"/>
-        <Button x:Name="button_Copy"   Content="降" HorizontalAlignment="Left" Height="38" Margin="157,42,0,0" VerticalAlignment="Top" Width="84" Background="{DynamicResource CheckedBlue}" Grid.Column="2" Grid.Row="1" FontSize="20" Foreground="#FFF5F2F2"/>
+        <Button x:Name="Button_Shen"   Content="升" HorizontalAlignment="Left" Height="38" Margin="37,42,0,0" VerticalAlignment="Top" Width="84" Background="{DynamicResource CheckedOrange}" Grid.Column="2" Grid.Row="1" FontSize="20" Foreground="#FFF7F1F1" Cursor="Hand"/>
+        <Button x:Name="Button_Jiang"   Content="降" HorizontalAlignment="Left" Height="38" Margin="157,42,0,0" VerticalAlignment="Top" Width="84" Background="{DynamicResource CheckedBlue}" Grid.Column="2" Grid.Row="1" FontSize="20" Foreground="#FFF5F2F2" Cursor="Hand"/>
         <GroupBox Style="{StaticResource GroupboxWithoutWhiteBorder}" x:Name="groupBox_Copy1" Header="前窗帘" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="335,10,0,0" Grid.Row="1" Height="80" Width="256" FontSize="18" Foreground="#FFF5F1F1" BorderBrush="#d6d9d9"/>
-        <Button x:Name="button_Copy1"   Content="升" HorizontalAlignment="Left" Height="38" Margin="365,42,0,0" VerticalAlignment="Top" Width="84" Background="{DynamicResource CheckedOrange}" Grid.Column="2" Grid.Row="1" FontSize="20" Foreground="#FFF7F1F1"/>
-        <Button x:Name="button_Copy2"   Content="降" HorizontalAlignment="Left" Height="38" Margin="484,42,0,0" VerticalAlignment="Top" Width="84" Background="{DynamicResource CheckedBlue}" Grid.Column="2" Grid.Row="1" FontSize="20" Foreground="#FFF5F2F2"/>
+        <Button x:Name="button_Copy1"   Content="升" HorizontalAlignment="Left" Height="38" Margin="365,42,0,0" VerticalAlignment="Top" Width="84" Background="{DynamicResource CheckedOrange}" Grid.Column="2" Grid.Row="1" FontSize="20" Foreground="#FFF7F1F1" Cursor="Hand"/>
+        <Button x:Name="button_Copy2"   Content="降" HorizontalAlignment="Left" Height="38" Margin="484,42,0,0" VerticalAlignment="Top" Width="84" Background="{DynamicResource CheckedBlue}" Grid.Column="2" Grid.Row="1" FontSize="20" Foreground="#FFF5F2F2" Cursor="Hand"/>
         <GroupBox Style="{StaticResource GroupboxWithoutWhiteBorder}" x:Name="groupBox_Copy2" Header="风幕灯" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="15,95,0,0" Grid.Row="1" Height="80" Width="256" FontSize="18" Foreground="#FFF5F1F1" BorderBrush="#d6d9d9"/>
-        <CheckBox  x:Name="checkBox_Copy1" Style="{StaticResource OrangeSwitchStyle}" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="89,127,0,0" Grid.Row="1" VerticalAlignment="Top" Height="36" Width="91"/>
+        <CheckBox  x:Name="CheckBox_FengMuDeng" Style="{StaticResource OrangeSwitchStyle}" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="89,127,0,0" Grid.Row="1" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand"/>
         <GroupBox Style="{StaticResource GroupboxWithoutWhiteBorder}" x:Name="groupBox_Copy3" Header="风幕" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="335,95,0,0" Grid.Row="1" Height="80" Width="256" FontSize="18" Foreground="#FFF5F1F1" BorderBrush="#d6d9d9"/>
-        <CheckBox  x:Name="checkBox_Copy2" Style="{StaticResource OrangeSwitchStyle}" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="419,127,0,0" Grid.Row="1" VerticalAlignment="Top" Height="36" Width="91"/>
+        <CheckBox  x:Name="CheckBox_FengMu" Style="{StaticResource OrangeSwitchStyle}" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="419,127,0,0" Grid.Row="1" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand"/>
         <GroupBox Style="{StaticResource GroupboxWithoutWhiteBorder}" x:Name="groupBox_Copy4" Header="自动窗" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="15,177,0,0" Grid.Row="1" Height="80" Width="256" FontSize="18" Foreground="#FFF5F1F1" BorderBrush="#d6d9d9"/>
-        <CheckBox  x:Name="checkBox_Copy3" Style="{StaticResource OrangeSwitchStyle}" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="89,206,0,0" Grid.Row="1" VerticalAlignment="Top" Height="36" Width="91"/>
+        <CheckBox  x:Name="CheckBox_ZiDongChuang" Style="{StaticResource OrangeSwitchStyle}" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="89,206,0,0" Grid.Row="1" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand"/>
         <GroupBox Style="{StaticResource GroupboxWithoutWhiteBorder}" x:Name="groupBox_Copy5" Header="报警器" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="335,177,0,0" Grid.Row="1" Height="80" Width="256" FontSize="18" Foreground="#FFF5F1F1" BorderBrush="#d6d9d9"/>
-        <CheckBox  x:Name="checkBox_Copy4" Style="{StaticResource OrangeSwitchStyle}" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="419,206,0,0" Grid.Row="1" VerticalAlignment="Top" Height="36" Width="91"/>
+        <CheckBox  x:Name="CheckBox_BaoJingQi" Style="{StaticResource OrangeSwitchStyle}" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="419,206,0,0" Grid.Row="1" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand"/>
 
     </Grid>
 </Page>

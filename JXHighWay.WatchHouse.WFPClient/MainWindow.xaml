@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JXHighWay.WatchHouse.WFPClient"
         mc:Ignorable="d"
-        Title="MainWindow" Height="768" Width="1024" AllowsTransparency="True" WindowStyle="None" MouseLeftButtonDown="Window_MouseLeftButtonDown" WindowStartupLocation="CenterScreen">
+        Title="MainWindow" Height="768" Width="1024" AllowsTransparency="True" WindowStyle="None" MouseLeftButtonDown="Window_MouseLeftButtonDown" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Grid Margin="0,0,-0.333,-0.333">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="133*"/>
@@ -16,7 +16,7 @@
             <RowDefinition Height="490*" />
             <RowDefinition Height="150*" />
         </Grid.RowDefinitions>
-        <Label Grid.Column="0" Background="#245d7c" Margin="0,69,0,1" Grid.RowSpan="2"/>
+        <Label Grid.Column="0" Background="#245d7c" Margin="0,0,0,1" Grid.Row="1"/>
         <!--<Label Grid.Column="0" Grid.Row="3" Background="#245d7c"></Label>-->
 
         <Grid Grid.Column="0" Grid.Row="0" Background="#32323a" HorizontalAlignment="Left" Height="69" Margin="0,0,0,0"  VerticalAlignment="Top" Width="1024">
@@ -30,7 +30,7 @@
             </Grid.ColumnDefinitions>
             <Image Grid.Column="0" HorizontalAlignment="Left" Height="69" VerticalAlignment="Top" Width="185" Source="Images/Logo.jpg"/>
             <Label Content="智慧型收费岗亭管理系统" Grid.Column="1" HorizontalAlignment="Left" Margin="32,6,0,0" VerticalAlignment="Top" Width="418" FontSize="36" Height="55" FontFamily="Microsoft YaHei" Foreground="#FFF2F6F1"/>
-            <Image Grid.Column="4" Margin="21,11,17,10">
+            <Image Grid.Column="4" Margin="21,11,17,10" MouseLeftButtonDown="Image_MouseLeftButtonDown_1">
                 <Image.Style>
                     <Style TargetType="Image">
                         <Style.Setters>
@@ -59,7 +59,7 @@
                 </Image.Style>
             </Image>
         </Grid>
-        <Grid Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left"  Height="33" Margin="10,6.667,0,0" VerticalAlignment="Top" Width="521">
+        <Grid Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left"  Height="34" Margin="10,6.667,0,0" VerticalAlignment="Top" Width="521">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="141*"/>
                 <ColumnDefinition Width="33*"/>
@@ -68,12 +68,12 @@
                 <ColumnDefinition Width="141*"/>
                 <ColumnDefinition Width="33*"/>
             </Grid.ColumnDefinitions>
-            <Label x:Name="Label_Navigation1" Grid.Column="0" Grid.Row="0" Background="#8cadae"  Margin="0,0,32.333,0" Grid.ColumnSpan="2" Content="主界面" FontSize="18" Cursor="Hand" MouseLeftButtonDown="Label_Navigation1_MouseLeftButtonDown"></Label>
-            <Image x:Name="Image_Navigation1" Grid.Row="0" HorizontalAlignment="Left" Height="33" Margin="140,0,0,0" VerticalAlignment="Top" Width="33" Source="Images/DaoHan1.jpg" Grid.ColumnSpan="2" />
-            <Label x:Name="Label_Navigation2" Height="32" Grid.Column="1" Grid.Row="0" Background="#546d7a"  Margin="31.333,0,1.333,0" Grid.ColumnSpan="3" FontSize="18" Content="导航二" Cursor="Hand" MouseLeftButtonDown="Label_Navigation2_MouseLeftButtonDown"></Label>
-            <Image x:Name="Image_Navigation2" Grid.Column="3" Grid.Row="0" HorizontalAlignment="Left" Height="33" Margin="1,0,0,0" VerticalAlignment="Top" Width="33" Source="Images/DaoHan2.jpg" Grid.ColumnSpan="2" />
-            <Label x:Name="Label_Navigation3" Height="32" Grid.Column="4" Grid.Row="0" Background="#d16349"  Margin="0,0,0,1" FontSize="18" Content="导航三" HorizontalAlignment="Left" Width="139"/>
-            <Image x:Name="Image_Navigation3" Grid.Column="4" Grid.Row="0" HorizontalAlignment="Left" Height="34" Margin="139.667,0,0,-1" VerticalAlignment="Top" Width="33" Source="Images/DaoHan3.jpg" Grid.ColumnSpan="2" />
+            <Label x:Name="Label_Navigation1" Grid.Column="0" Grid.Row="0" Background="#8cadae" Content="主界面" FontSize="18" Cursor="Hand" MouseLeftButtonDown="Label_Navigation1_MouseLeftButtonDown" HorizontalAlignment="Left" Width="141"/>
+            <Image x:Name="Image_Navigation1" Grid.Row="0" HorizontalAlignment="Left" Height="33"  Width="43" Source="Images/DaoHan1.jpg" Grid.ColumnSpan="2" Margin="140,0,0,0"  />
+            <Label x:Name="Label_Navigation2" Height="32" Grid.Column="2" Grid.Row="0" Background="#546d7a"   FontSize="18" Content="导航二" Cursor="Hand" Margin="-2,0,0,0" MouseLeftButtonDown="Label_Navigation2_MouseLeftButtonDown" ></Label>
+            <Image x:Name="Image_Navigation2" Grid.Column="3" Grid.Row="0" HorizontalAlignment="Left" Height="33"   Width="33" Source="Images/DaoHan2.jpg" Grid.ColumnSpan="2" Margin="-2,0,0,0" />
+            <Label x:Name="Label_Navigation3" Height="32" Grid.Column="4" Grid.Row="0" Background="#d16349"   FontSize="18" Content="导航三" Margin="-2,0,0,0" HorizontalAlignment="Left" Width="140"/>
+            <Image x:Name="Image_Navigation3" Grid.Column="5" Grid.Row="0" HorizontalAlignment="Left" Height="33"   Width="33" Source="Images/DaoHan3.jpg" Margin="-4,0,0,0"  />
         </Grid>
         <Image HorizontalAlignment="Left" Height="150" Grid.Row="3" VerticalAlignment="Top" Width="1024" Source="Images/DiBu1.jpg"/>
         <Frame x:Name="MainFrame" Content="Frame" HorizontalAlignment="Left" Height="495" Grid.Row="1" VerticalAlignment="Top" Width="1024" Source="/JXHighWay.WatchHouse.WFPClient;component/MainPage.xaml" NavigationUIVisibility="Hidden" Margin="0,54,0,0" Grid.RowSpan="2"/>

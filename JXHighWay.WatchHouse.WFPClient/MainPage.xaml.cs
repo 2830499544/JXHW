@@ -12,7 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using JXHighWay.WatchHouse.Bll.WatchHouse;
+using JXHighWay.WatchHouse.Bll.Client;
+using System.Threading;
 
 namespace JXHighWay.WatchHouse.WFPClient
 {
@@ -40,10 +41,28 @@ namespace JXHighWay.WatchHouse.WFPClient
             // Change the page of the frame.
             if (pageFrame != null)
             {
-                pageFrame.Source = new Uri("GanTingMingXi.xaml", UriKind.Relative);
                 Image vImage = (Image)sender;
                 Window vWin = Window.GetWindow(this);
-                App.ChangeNavigation(2,vWin, (string)vImage.Tag);
+                string[] vTagInfo = ((string)vImage.Tag).Split('&');
+                if (vTagInfo.Length == 2)
+                {
+                    int vWatchHouseID ;
+                    if (int.TryParse(vTagInfo[0], out vWatchHouseID))
+                    {
+                        App.WatchHouseID = vWatchHouseID;
+                        App.WatchHouseName = vTagInfo[1];
+                        pageFrame.Source = new Uri("GanTingMingXi.xaml", UriKind.Relative);
+                        App.ChangeNavigation(2, vWin, App.WatchHouseName);
+                    }
+                    else
+                    {
+                        MessageBox.Show("岗亭ID转换错误", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("岗亭信息错误", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 
@@ -59,21 +78,58 @@ namespace JXHighWay.WatchHouse.WFPClient
             Image_WH7.MouseLeftButtonDown += Image_MouseLeftButtonDown;
             Image_WH8.MouseLeftButtonDown += Image_MouseLeftButtonDown;
 
+            Label_Title.Content = App.TollStationName;
+
+            m_Monitoring = new Monitoring();
+            RefreshState();
+        }
+        Monitoring m_Monitoring = null;
+        async void RefreshState()
+        {
+            await Task.Run(() =>
+            {
+                while (true)
+                {
+                    
+                    Action action1 = () =>
+                    {
+
+                        initWatchHouse();
+                    };
+                    this.Dispatcher.BeginInvoke(action1);
+                    Thread.Sleep(App.RefreshTime * 1000);
+                }
+            });
+        }
+
+        void initWatchHouse()
+        {
+            //初始化岗亭信息
             Monitoring vMonitoring = new Monitoring();
             List<WatchHouseInfoModel> WatchHouseInfoList = vMonitoring.GetAllWatchHouseInfo();
-            for(int i=0;i<=7;i++)
+            for (int i = 0; i <= 7; i++)
             {
-                if (i<WatchHouseInfoList.Count)
+                if (i < WatchHouseInfoList.Count)
                 {
-                    Image vImage = (Image)FindName(string.Format("Image_WH{0}",i+1));
-                    if (WatchHouseInfoList[i].LeiXin=="入口")
-                        vImage.Source = new BitmapImage(new Uri(@"Images/Main/Ru.jpg", UriKind.Relative));
+                    Image vImage = (Image)FindName(string.Format("Image_WH{0}", i + 1));
+                    if (WatchHouseInfoList[i].IsOnline)
+                    {
+                        
+                        if (WatchHouseInfoList[i].LeiXin == "入口")
+                            vImage.Source = new BitmapImage(new Uri(@"Images/Main/Ru.jpg", UriKind.Relative));
+                        else
+                            vImage.Source = new BitmapImage(new Uri(@"Images/Main/Chu.jpg", UriKind.Relative));
+                    }
                     else
-                        vImage.Source = new BitmapImage(new Uri(@"Images/Main/Chu.jpg", UriKind.Relative));
-                    vImage.Tag = WatchHouseInfoList[i].GangTingMC;
-
+                    {
+                        if (WatchHouseInfoList[i].LeiXin == "入口")
+                            vImage.Source = new BitmapImage(new Uri(@"Images/Main/Ru_L.jpg", UriKind.Relative));
+                        else
+                            vImage.Source = new BitmapImage(new Uri(@"Images/Main/Chu_L.jpg", UriKind.Relative));
+                    }
                     Label vLabelName = (Label)FindName(string.Format("Label_Name_WH{0}", i + 1));
                     vLabelName.Content = WatchHouseInfoList[i].GangTingMC;
+                    vImage.Tag = string.Format("{0}&{1}", WatchHouseInfoList[i].GangTingID, WatchHouseInfoList[i].GangTingMC);
 
                     Label vLabelJob = (Label)FindName(string.Format("Label_JobNo_{0}", i + 1));
                     vLabelJob.Content = WatchHouseInfoList[i].GongHao;
@@ -90,14 +146,6 @@ namespace JXHighWay.WatchHouse.WFPClient
                     vLabelJob.Visibility = Visibility.Hidden;
                 }
             }
-
-           
-
-        }
-
-        private void Image_WH1_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            throw new NotImplementedException();
         }
 
         void setWathHouse( int index ,int watchHouseID,string watchHouseName,string jobNo)

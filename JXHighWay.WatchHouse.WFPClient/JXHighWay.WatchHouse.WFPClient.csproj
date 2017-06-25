@@ -57,12 +57,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ConfigWindow.xaml.cs">
+      <DependentUpon>ConfigWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DiNuan.xaml.cs">
       <DependentUpon>DiNuan.xaml</DependentUpon>
     </Compile>
     <Compile Include="XinFeng.xaml.cs">
       <DependentUpon>XinFeng.xaml</DependentUpon>
     </Compile>
+    <Page Include="ConfigWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DengGuang.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -143,7 +150,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Logo.jpg" />
@@ -339,10 +348,26 @@
     <Resource Include="Images\KongTiao\sf_a.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\JXHighWay.WatchHouse.Bll.WatchHouse\JXHighWay.WatchHouse.Bll.WatchHouse.csproj">
+    <ProjectReference Include="..\JXHighWay.WatchHouse.Bll.WatchHouse\JXHighWay.WatchHouse.Bll.Client.csproj">
       <Project>{1e2cbd19-b02c-46bb-947c-f67329d5e6f4}</Project>
-      <Name>JXHighWay.WatchHouse.Bll.WatchHouse</Name>
+      <Name>JXHighWay.WatchHouse.Bll.Client</Name>
     </ProjectReference>
+    <ProjectReference Include="..\JXHighWay.WatchHouse.Net\JXHighWay.WatchHouse.Net.DataPack.csproj">
+      <Project>{0a3d0538-3339-4111-a7a4-c9907cb49f26}</Project>
+      <Name>JXHighWay.WatchHouse.Net.DataPack</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Config\Top.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Config\DB.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Config\xuxian.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Config\Time.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CB42A2D5-B705-47F6-8FC5-CC86AC9B9F8E}</ProjectGuid>
+    <ProjectGuid>{1E2CBD19-B02C-46BB-947C-F67329D5E6F4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>JXHighWay.WatchHouse.Manager</RootNamespace>
-    <AssemblyName>JXHighWay.WatchHouse.Manager</AssemblyName>
+    <RootNamespace>JXHighWay.WatchHouse.Bll.Client</RootNamespace>
+    <AssemblyName>JXHighWay.WatchHouse.Bll.Client</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,9 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Administrator.cs" />
-    <Compile Include="Employee.cs" />
+    <Compile Include="Config.cs" />
+    <Compile Include="DengGuanStateModel.cs" />
+    <Compile Include="DiNuanStateModel.cs" />
+    <Compile Include="KongTiaoStateModel.cs" />
+    <Compile Include="MenChuangStateModel.cs" />
+    <Compile Include="Monitoring.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WatchHouseInfoModel.cs" />
+    <Compile Include="XinFengStateModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\DBMiddleWare\DBMiddleWareLib\DBMiddleWareLib.csproj">
@@ -53,6 +60,25 @@
       <Project>{22461238-d0d1-4ddc-8068-d4aadcab0297}</Project>
       <Name>JXHighWay.WatchHouse.EFModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\JXHighWay.WatchHouse.Helper\JXHighWay.WatchHouse.Helper.csproj">
+      <Project>{3282a5f3-7d7f-4423-9793-8da25e2ad7ab}</Project>
+      <Name>JXHighWay.WatchHouse.Helper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JXHighWay.WatchHouse.Net.Socket\JXHighWay.WatchHouse.Net.csproj">
+      <Project>{d0cf1157-6b33-41a9-8eae-faeba9fbfe48}</Project>
+      <Name>JXHighWay.WatchHouse.Net</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JXHighWay.WatchHouse.Net\JXHighWay.WatchHouse.Net.DataPack.csproj">
+      <Project>{0a3d0538-3339-4111-a7a4-c9907cb49f26}</Project>
+      <Name>JXHighWay.WatchHouse.Net.DataPack</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
 </Project>

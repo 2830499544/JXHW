@@ -23,6 +23,10 @@ namespace JXHighWay.WatchHouse.EFModel
         [ColumnAttrib("SendTime")]
         public DateTime? SendTime { get; set; }
         [ColumnAttrib("State")]
-        public Int16? State { get; set; }
+        public bool? State { get; set; }
+        [ColumnAttrib("IsSend")]
+        public bool? IsSend { get; set; }
+        [ColumnAttrib("IsReply")]
+        public bool? IsReply { get; set; }
     }
 }

@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using JXHighWay.WatchHouse.Net;
 using System.Net;
-using JXHighWay.WatchHouse.Helper;
 using System.Collections;
 using JXHighWay.WatchHouse.EFModel;
+using JXHighWay.WatchHouse.Helper;
 using MXKJ.DBMiddleWareLib;
 using System.Threading;
 
-namespace JXHighWay.WatchHouse.Bll.WatchHouse
+namespace JXHighWay.WatchHouse.Bll.Server
 {
     public class WatchHouseControl
     {
@@ -25,7 +25,7 @@ namespace JXHighWay.WatchHouse.Bll.WatchHouse
         /// <summary>
         /// 接收已发送命令的返回状态队列
         /// </summary>
-        List<SendCMDModel> m_ReturSendCMDList { get; set; }
+        //List<SendCMDModel> m_ReturSendCMDList { get; set; }
         //List<AsyncUserToken> ClientList { get; set; }
         /// <summary>
         /// 收费站字典表
@@ -45,6 +45,7 @@ namespace JXHighWay.WatchHouse.Bll.WatchHouse
 
         public WatchHouseControl( )
         {
+            
             Config vConfig = new Config();
             Port = vConfig.WatchHousePort;
             BasicDBClass.DataSource = vConfig.DBSource;
@@ -55,7 +56,7 @@ namespace JXHighWay.WatchHouse.Bll.WatchHouse
             m_BasicDBClass_Receive = new BasicDBClass(DataBaseType.MySql);
             m_BasicDBClass_Send = new BasicDBClass(DataBaseType.MySql);
             m_ClientDict = new Dictionary<int, string>();
-            m_ReturSendCMDList = new List<SendCMDModel>();
+            //m_ReturSendCMDList = new List<SendCMDModel>();
         }
 
         public void Start()
@@ -123,7 +124,7 @@ namespace JXHighWay.WatchHouse.Bll.WatchHouse
                 {
                     SendCMDEFModel vModel = new SendCMDEFModel()
                     {
-                        State = 0
+                        IsSend = false
                     };
                     var vSelectResult = m_BasicDBClass_Send.SelectRecordsEx(vModel);
                     foreach (SendCMDEFModel vTempResult in vSelectResult)
@@ -131,7 +132,7 @@ namespace JXHighWay.WatchHouse.Bll.WatchHouse
                         AsyncUserToken vAsyncUserToken = findAsyncUserToken(vTempResult.GangTingID.Value);
                         if (vAsyncUserToken != null)
                         {
-                            byte[] vSN = markSN();
+                            byte[] vSN =  NetHelper.MarkSN();
                             WatchHouseDataPack_SendData_Main vCommandDataPack = new WatchHouseDataPack_SendData_Main()
                             {
                                 Head = 0x02,
@@ -163,19 +164,10 @@ namespace JXHighWay.WatchHouse.Bll.WatchHouse
                             vByteArray = Helper.NetHelper.StructureToByte(vCommandDataPack);
                             m_SocketManager.SendMessage(vAsyncUserToken, vByteArray);
                             Console.WriteLine("发送命令数据包:{0}",BitConverter.ToString(vByteArray));
-                            Thread.Sleep(1000);//睡眼1秒等待岗亭返回数据
-                            var vFindResult = m_ReturSendCMDList.Where(x => x.GangTingID == BitConverter.ToInt32( new byte[] { vCommandDataPack.WatchHouseID4,
-                            vCommandDataPack.WatchHouseID3,vCommandDataPack.WatchHouseID1,vCommandDataPack.WatchHouseID1},0) && x.ID_H == vCommandDataPack.ID_H &&
-                            x.ID_H == vCommandDataPack.ID_L && x.SN == BitConverter.ToInt16( new byte[] { vCommandDataPack.SN2, vCommandDataPack.SN1 },0)).FirstOrDefault();
-                            if (vFindResult != null)
-                            {
-                                vModel = new SendCMDEFModel()
-                                {
-                                    ID = vTempResult.ID,
-                                    State = vFindResult.State==true?(short)1:(short)0
-                                };
-                                m_BasicDBClass_Send.UpdateRecord(vModel);
-                            }
+                            //更新数据库状态
+                            vModel.IsSend = true;
+                            vModel.ID = vTempResult.ID;
+                            m_BasicDBClass_Send.UpdateRecord<SendCMDEFModel>(vModel);
                         }
                     }
                 }
@@ -191,7 +183,7 @@ namespace JXHighWay.WatchHouse.Bll.WatchHouse
                 AsyncUserToken vAsyncUserToken = findAsyncUserToken(WatchHouseID);
                 if (vAsyncUserToken != null)
                 {
-                    byte[] vSN = markSN();
+                    byte[] vSN = NetHelper.MarkSN();
                     WatchHouseDataPack_SendData_Main vCommandDataPack = new WatchHouseDataPack_SendData_Main()
                     {
                         Head = 0x20,
@@ -223,12 +215,7 @@ namespace JXHighWay.WatchHouse.Bll.WatchHouse
                     vByteArray = Helper.NetHelper.StructureToByte(vCommandDataPack);
                     m_SocketManager.SendMessage(vAsyncUserToken, vByteArray);
                     Console.WriteLine(string.Format("发送命令:{0}", BitConverter.ToString(vByteArray)));
-                    Thread.Sleep(1000);//睡眼1秒等待岗亭返回数据
-                    var vFindResult = m_ReturSendCMDList.Where(x => x.GangTingID == BitConverter.ToInt32( new byte[] { vCommandDataPack.WatchHouseID1, vCommandDataPack.WatchHouseID2, vCommandDataPack.WatchHouseID3, vCommandDataPack.WatchHouseID4 },0 )
-                    && x.ID_H == vCommandDataPack.ID_H &&
-                    x.ID_H == vCommandDataPack.ID_L && x.SN == BitConverter.ToInt16( new byte[] { vCommandDataPack.SN1, vCommandDataPack.SN2 },0) ).FirstOrDefault();
-                    if (vFindResult != null)
-                        vResult = vFindResult.State;
+                  
                 }
              
             });
@@ -249,30 +236,30 @@ namespace JXHighWay.WatchHouse.Bll.WatchHouse
                     CMD = (byte)((int)Command >> 8),
                     SUB = (byte)((int)Command >> 0),
                     SendTime = DateTime.Now,
-                    SN = BitConverter.ToInt16( markSN(),0 ),
-                    State = 0
+                    SN = BitConverter.ToInt16( NetHelper.MarkSN(),0 ),
+                    State = false
                 };
                 int vID = m_BasicDBClass_Receive.InsertRecord(vSendCMDEFModel);
                 Thread.Sleep(1000);
                 SendCMDEFModel vSelectResult = m_BasicDBClass_Receive.SelectRecordByPrimaryKeyEx<SendCMDEFModel>(vID);
-                vResult = vSelectResult.State == 1 ? true : false;
+                vResult = vSelectResult.State??false;
                 vSendCMDEFModel = new SendCMDEFModel()
                 {
                     ID = vID,
-                    State = 3
+                    State = false
                 };
                 m_BasicDBClass_Receive.UpdateRecord(vSendCMDEFModel);
             });
             return vResult;
         }
 
-        byte[] markSN()
-        {
-            byte[] vResult = new byte[2];
-            Random vRD = new Random();
-            vRD.NextBytes(vResult);
-            return vResult;
-        }
+        //byte[] markSN()
+        //{
+        //    byte[] vResult = new byte[2];
+        //    Random vRD = new Random();
+        //    vRD.NextBytes(vResult);
+        //    return vResult;
+        //}
 
          byte[] calcCheckCode(byte[] dataPack)
         {
@@ -455,7 +442,7 @@ namespace JXHighWay.WatchHouse.Bll.WatchHouse
                             }
 
                             //处理发送命令的返回
-                            if (vReceiveData.Data[21]==0x20 && vReceiveData.Data[22]==0x02 || vReceiveData.Data[22]==0x03 
+                            if (vReceiveData.Data[21]==0x02 && vReceiveData.Data[22]==0x02 || vReceiveData.Data[22]==0x03 
                             || vReceiveData.Data[22] == 0x04 || vReceiveData.Data[22] == 0x05 || vReceiveData.Data[22] == 0x0c || vReceiveData.Data[22] == 0x10)
                             {
                                 WatchHouseDataPack_SendData_Main vDataPack = Helper.NetHelper.ByteToStructure<WatchHouseDataPack_SendData_Main>(vReceiveData.Data);
@@ -500,18 +487,34 @@ namespace JXHighWay.WatchHouse.Bll.WatchHouse
             m_BasicDBClass_Receive.InsertRecord(vModel);
         }
 
-        void processorData_ReturnCMD(WatchHouseDataPack_SendData_Main vData,string IPAddress)
+        void processorData_ReturnCMD(WatchHouseDataPack_SendData_Main vData, string IPAddress)
         {
-            m_ReturSendCMDList.Add(new SendCMDModel()
+            //m_ReturSendCMDList.Add(new SendCMDModel()
+            //{
+            //    GangTingID = BitConverter.ToInt32( new byte[] { vData.WatchHouseID4, vData.WatchHouseID3, vData.WatchHouseID2, vData.WatchHouseID1 },0 ),
+            //    ID_H = vData.ID_H,
+            //    ID_L = vData.ID_L,
+            //    CMD = vData.CMD,
+            //    SUB = vData.SUB,
+            //    SN = BitConverter.ToInt16( new byte[] { vData.SN2, vData.SN1 },0 ),
+            //    State = vData.Data == 0x5a ? true : false
+            //});
+            //更新数据库
+            //Thread.Sleep(1000);//睡眼1秒等待岗亭返回数据
+            //var vFindResult = m_ReturSendCMDList.Where(x => x.GangTingID == BitConverter.ToInt32(new byte[] { vCommandDataPack.WatchHouseID1, vCommandDataPack.WatchHouseID2, vCommandDataPack.WatchHouseID3, vCommandDataPack.WatchHouseID4 }, 0)
+            //&& x.ID_H == vCommandDataPack.ID_H &&
+            //x.ID_H == vCommandDataPack.ID_L && x.SN == BitConverter.ToInt16(new byte[] { vCommandDataPack.SN1, vCommandDataPack.SN2 }, 0)).FirstOrDefault();
+            //if (vFindResult != null)
+            //vResult = vFindResult.State;
+            int vGangTingID = BitConverter.ToInt32(new byte[] { vData.WatchHouseID4, vData.WatchHouseID3, vData.WatchHouseID2, vData.WatchHouseID1 }, 0);
+            short vSN = BitConverter.ToInt16(new byte[] { vData.SN2, vData.SN1 }, 0);
+            SendCMDEFModel vSendCMDModel = new SendCMDEFModel()
             {
-                GangTingID = BitConverter.ToInt32( new byte[] { vData.WatchHouseID4, vData.WatchHouseID3, vData.WatchHouseID2, vData.WatchHouseID1 },0 ),
-                ID_H = vData.ID_H,
-                ID_L = vData.ID_L,
-                CMD = vData.CMD,
-                SUB = vData.SUB,
-                SN = BitConverter.ToInt16( new byte[] { vData.SN1, vData.SN2 },0 ),
-                State = vData.Data == 0x5a ? true : false
-            });
+                State = vData.Data == 0x5a ? true : false,
+                IsReply = true
+                
+            };
+            m_BasicDBClass_Send.UpdateRecord(vSendCMDModel, string.Format("GangTingID={0} and SN={1} and IsSend=1", vGangTingID, vSN));
         }
 
         void processorData_Receive(WatchHouseDataPack_Receive_Main vData,string IPAddress)
@@ -524,7 +527,7 @@ namespace JXHighWay.WatchHouse.Bll.WatchHouse
                     MenZhuanTai = vData.MenZhuanTai == 0 ? "开" : "关",
                     DianChiSuo = vData.DianChiSuo == 0 ? "开" : "关",
                     JiXieSuo = vData.JiXieSuo == 0 ? "开" : "关",
-                    BaoJingQi = vData.BaoJingQi == 0 ? "关闭" : "开启",
+                    BaoJingQi = vData.BaoJingQi == 0 ? "闭" : "开",
                     Chuang = vData.Chuang == 0 ? "开" : "关",
                     FengMu = vData.FengMu == 0 ? "闭" : "开",
                     ChuangDeng = vData.ChuangDeng == 0 ? "闭" : "开",
@@ -535,7 +538,7 @@ namespace JXHighWay.WatchHouse.Bll.WatchHouse
                     YouNuanJQ = vData.YouNuanJQ == 0 ? "闭" : "开",
                     ShiLeiWD = BitConverter.ToInt16(new byte[] { vData.ShiLeiWD2, vData.ShiLeiWD1 }, 0),
                     ShiLeiSD = vData.ShiLeiSD,
-                    KongTiao = vData.KongTiao == 0 ? "关闭" : "打开",
+                    KongTiao = vData.KongTiao == 0 ? "闭" : "开",
                     KongTiaoGZMS = convertKongTiaoGZMS(vData.KongTiaoGZMS),
                     KongTiaoGZFL = convertKongTiaoGZFL(vData.KongTiaoGZFL),
                     KongQiZL = convertKongQiZL(vData.KongQiZL),

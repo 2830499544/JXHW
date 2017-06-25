@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:JXHighWay.WatchHouse.WFPClient"
       mc:Ignorable="d" 
       d:DesignHeight="460" d:DesignWidth="1024"
-      Title="DiNuan">
+      Title="DiNuan" Loaded="Page_Loaded">
     <Page.Resources>
         <LinearGradientBrush x:Key="CheckedBlue" StartPoint="0,0" EndPoint="0,1">
             <GradientStop Color="#FF285AB3" Offset="0" />
@@ -121,16 +121,16 @@
         </Grid.RowDefinitions>
         <Image x:Name="image" HorizontalAlignment="Left" Height="147" VerticalAlignment="Top" Width="147" Grid.Column="1" Margin="33,39,0,0" Grid.Row="1" Source="Images/DiNuan/DiRuan.jpg"/>
         <Label x:Name="label_Copy4" Content="当前温度" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="24,15,0,0" FontSize="18" Foreground="WhiteSmoke" Grid.Row="1" Height="34" Width="82"/>
-        <Label x:Name="label_Copy" Content="99℃" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="24,49,0,0" FontSize="72" Foreground="WhiteSmoke" Grid.Row="1" Height="105" Width="158"/>
-        <Label x:Name="label_Copy1" Content="亮度调节" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="33,15,0,0" FontSize="18" Foreground="WhiteSmoke" Grid.Row="1" Height="34" Width="82"/>
-        <CheckBox x:Name="checkBox" Style="{StaticResource OrangeSwitchStyle}" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="59,221,0,0" Grid.Row="1" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand"/>
-        <Button x:Name="button" Content="▲" Grid.Column="2" HorizontalAlignment="Left" Margin="37,159,0,0" Grid.Row="1" VerticalAlignment="Top" Width="27" FontSize="18" Height="27" Foreground="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}"/>
-        <Button x:Name="button_Copy" Content="▼" Grid.Column="2" HorizontalAlignment="Left" Margin="138,159,0,0" Grid.Row="1" VerticalAlignment="Top" Width="27" FontSize="18" Height="27" Foreground="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}"/>
-        <Label x:Name="label" Content="88℃" Grid.Column="2" HorizontalAlignment="Left" Margin="76,156,0,0" Grid.Row="1" VerticalAlignment="Top" Foreground="#FFF1EAEA" FontSize="18" Height="34" Width="49"/>
+        <Label x:Name="Label_DanQianWD" Content="99℃" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="24,49,0,0" FontSize="72" Foreground="WhiteSmoke" Grid.Row="1" Height="105" Width="158"/>
+        <Label x:Name="label_Copy1" Content="地暖区域" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="33,15,0,0" FontSize="18" Foreground="WhiteSmoke" Grid.Row="1" Height="34" Width="82"/>
+        <CheckBox x:Name="CheckBox_DiNuan" Style="{StaticResource OrangeSwitchStyle}" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="59,221,0,0" Grid.Row="1" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand"/>
+        <Button x:Name="Button_Shen" Content="▲" Grid.Column="2" HorizontalAlignment="Left" Margin="37,159,0,0" Grid.Row="1" VerticalAlignment="Top" Width="27" FontSize="18" Height="27" Foreground="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" Cursor="Hand"/>
+        <Button x:Name="Button_Jian" Content="▼" Grid.Column="2" HorizontalAlignment="Left" Margin="138,159,0,0" Grid.Row="1" VerticalAlignment="Top" Width="27" FontSize="18" Height="27" Foreground="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" Cursor="Hand"/>
+        <Label x:Name="Label_SheZiWenDu" Content="88℃" Grid.Column="2" HorizontalAlignment="Left" Margin="76,156,0,0" Grid.Row="1" VerticalAlignment="Top" Foreground="#FFF1EAEA" FontSize="18" Height="34" Width="49"/>
         <Image x:Name="image1" Grid.Column="3" HorizontalAlignment="Left" Height="173" Margin="67,45,0,0" Grid.Row="1" VerticalAlignment="Top" Width="83" Source="Images/DiNuan/ZuoJiao.jpg"/>
         <Image x:Name="image1_Copy" Grid.Column="3" HorizontalAlignment="Left" Height="173" Margin="201,45,0,0" Grid.Row="1" VerticalAlignment="Top" Width="83" Source="Images/DiNuan/YouJiao.jpg"/>
-        <CheckBox x:Name="checkBox_Copy" Style="{StaticResource OrangeSwitchStyle}" Content="" Grid.Column="3" HorizontalAlignment="Left" Margin="69,250,0,0" Grid.Row="1" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand"/>
-        <CheckBox x:Name="checkBox_Copy1" Style="{StaticResource OrangeSwitchStyle}" Content="" Grid.Column="3" HorizontalAlignment="Left" Margin="193,250,0,0" Grid.Row="1" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand"/>
+        <CheckBox x:Name="CheckBox_ZuoJiao" Style="{StaticResource OrangeSwitchStyle}" Content="" Grid.Column="3" HorizontalAlignment="Left" Margin="69,250,0,0" Grid.Row="1" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand"/>
+        <CheckBox x:Name="CheckBox_YouJiao" Style="{StaticResource OrangeSwitchStyle}" Content="" Grid.Column="3" HorizontalAlignment="Left" Margin="193,250,0,0" Grid.Row="1" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand"/>
         <Label x:Name="label_Copy2" Content="左脚地暖" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="81,220,0,0" Foreground="WhiteSmoke" Grid.Row="1" Height="29" Width="67" FontSize="14"/>
         <Label x:Name="label_Copy3" Content="右脚地暖" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="205,221,0,0" Foreground="WhiteSmoke" Grid.Row="1" Height="29" Width="67" FontSize="14"/>
     </Grid>

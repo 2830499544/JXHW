@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using MXKJ.DBMiddleWareLib;
 using JXHighWay.WatchHouse.EFModel;
 
-namespace JXHighWay.WatchHouse.Manager
+namespace JXHighWay.WatchHouse.Bll.Server
 {
     public class Administrator
     {

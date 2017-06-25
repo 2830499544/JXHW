@@ -22,7 +22,7 @@
                 <RowDefinition Height="199*" />
 
             </Grid.RowDefinitions>
-            <Label Content="XXXXXX收费站" HorizontalAlignment="Center" Margin="112,3,0,7" Grid.ColumnSpan="2" Width="239" FontSize="30" Grid.Column="1" Foreground="#FFF9F7F7"/>
+            <Label x:Name="Label_Title" Content="XXXXXX收费站" HorizontalAlignment="Center" Margin="106,3,101.5,7" Grid.ColumnSpan="2" Width="240" FontSize="36" Grid.Column="1" Foreground="#FFF9F7F7" HorizontalContentAlignment="Center" FontFamily="STHupo"/>
             <Image x:Name="Image_WH1" HorizontalAlignment="Left" Height="148" Margin="36,4,0,0" Grid.Row="1" VerticalAlignment="Top" Width="148" Cursor="Hand">
                 <Image.Style>
                     <Style TargetType="{x:Type Image}">

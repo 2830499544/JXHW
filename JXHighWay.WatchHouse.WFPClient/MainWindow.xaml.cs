@@ -53,11 +53,27 @@ namespace JXHighWay.WatchHouse.WFPClient
         private void Label_Navigation1_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             MainFrame.Source = new Uri("MainPage.xaml", UriKind.Relative);
+            Window vWin = Window.GetWindow(this);
+            App.ChangeNavigation(1, vWin, "主界面");
         }
 
         private void Label_Navigation2_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             MainFrame.Source = new Uri("GanTingMingXi.xaml", UriKind.Relative);
+            Window vWin = Window.GetWindow(this);
+            App.ChangeNavigation(2, vWin, App.WatchHouseName);
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Window vWin = Window.GetWindow(this);
+            App.ChangeNavigation(1, vWin, "主界面");
+        }
+
+        private void Image_MouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
+        {
+            ConfigWindow vConfigWindow = new ConfigWindow();
+            vConfigWindow.ShowDialog();
         }
     }
 }
