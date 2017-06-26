@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Data;
 using MXKJ.DBMiddleWareLib;
 using JXHighWay.WatchHouse.EFModel;
 
@@ -14,6 +15,12 @@ namespace JXHighWay.WatchHouse.Bll.Server
         BasicDBClass m_BasicDBClass = null;
         public Employee()
         {
+            Config vConfig = new Config();
+            BasicDBClass.DataSource = vConfig.DBSource;
+            BasicDBClass.DBName = vConfig.DBName;
+            BasicDBClass.Port = vConfig.DBPort;
+            BasicDBClass.UserID = vConfig.DBUserName;
+            BasicDBClass.Password = vConfig.DBPassword;
             m_BasicDBClass = new BasicDBClass(DataBaseType.MySql);
         }
 
@@ -21,29 +28,41 @@ namespace JXHighWay.WatchHouse.Bll.Server
         bool findGonHaoKaoHao(string gongHao,string kaHao)
         {
             bool vResult = false;
-            string vSql = string.Format("Select *From [员工信息] Where KaHao='{0}' or GongHao='{1}'",kaHao,gongHao);
+            string vSql = string.Format("Select *From `员工信息` Where KaHao='{0}' or GongHao='{1}'",kaHao,gongHao);
             EmployeeEFModel[] vSelectResult = m_BasicDBClass.SelectCustomEx<EmployeeEFModel>(vSql);
-            if (vSelectResult == null && vSelectResult.Length == 0)
+            if (vSelectResult == null || vSelectResult.Length > 0)
                 vResult = true;
             return vResult;
         }
 
         public bool Add( string XingMing,string XingBie,string GongHao,
-            string KaHao,string ZhaoPian)
+            string KaHao,string ZhaoPian,ref string OutInfo)
         {
-            string vPath = System.Environment.CurrentDirectory;
-            string vNewPhotoName = string.Format("{0:yyyymmddhhMMss}.jpg",DateTime.Now);
-            File.Copy(ZhaoPian, string.Format("{0}{1}",vPath, vNewPhotoName));
-            ZhaoPian = vNewPhotoName;
-            EmployeeEFModel vModel = new EmployeeEFModel()
+            bool vResult = false;
+            if (!findGonHaoKaoHao(GongHao, KaHao))
             {
-                XingMing = XingMing,
-                XingBie = XingBie,
-                GongHao = GongHao,
-                KaHao = KaHao,
-                ZhaoPian = ZhaoPian
-            };
-            return m_BasicDBClass.InsertRecord(vModel) > 1 ? true : false;
+                if (ZhaoPian != "")
+                {
+                    string vPath = System.Environment.CurrentDirectory;
+                    string vNewPhotoName = string.Format("{0:yyyymmddhhMMss}.jpg", DateTime.Now);
+                    File.Copy(ZhaoPian, string.Format(@"{0}\Photo\{1}", vPath, vNewPhotoName));
+                    ZhaoPian = vNewPhotoName;
+                }
+                EmployeeEFModel vModel = new EmployeeEFModel()
+                {
+                    XingMing = XingMing,
+                    XingBie = XingBie,
+                    GongHao = GongHao,
+                    KaHao = KaHao,
+                    ZhaoPian = ZhaoPian
+                };
+                vResult = m_BasicDBClass.InsertRecord(vModel) > 1 ? true : false;
+            }
+            else
+            {
+                OutInfo = "工号或卡号已经系统中存在";
+            }
+            return vResult;
         }
 
         public bool Del(int ID)
@@ -54,6 +73,13 @@ namespace JXHighWay.WatchHouse.Bll.Server
         public bool Update(int ID,string XingMing, string XingBie, string GongHao,
             string KaHao, string ZhaoPian)
         {
+            if (ZhaoPian != null)
+            {
+                string vPath = System.Environment.CurrentDirectory;
+                string vNewPhotoName = string.Format("{0:yyyymmddhhMMss}.jpg", DateTime.Now);
+                File.Copy(ZhaoPian, string.Format(@"{0}\Photo\{1}", vPath, vNewPhotoName));
+                ZhaoPian = vNewPhotoName;
+            }
             EmployeeEFModel vModel = new EmployeeEFModel()
             {
                 ID=ID,
@@ -65,5 +91,11 @@ namespace JXHighWay.WatchHouse.Bll.Server
             };
             return m_BasicDBClass.UpdateRecord(vModel);
         }
+
+        public DataTable GetAllEmplyees()
+        {
+            return m_BasicDBClass.SelectAllRecords<EmployeeEFModel>();
+        }
+
     }
 }

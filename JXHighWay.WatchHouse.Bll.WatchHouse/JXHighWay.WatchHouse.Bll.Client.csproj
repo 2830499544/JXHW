@@ -33,6 +33,7 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,6 +46,7 @@
     <Compile Include="DengGuanStateModel.cs" />
     <Compile Include="DiNuanStateModel.cs" />
     <Compile Include="KongTiaoStateModel.cs" />
+    <Compile Include="LEDControl.cs" />
     <Compile Include="MenChuangStateModel.cs" />
     <Compile Include="Monitoring.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -63,6 +65,10 @@
     <ProjectReference Include="..\JXHighWay.WatchHouse.Helper\JXHighWay.WatchHouse.Helper.csproj">
       <Project>{3282a5f3-7d7f-4423-9793-8da25e2ad7ab}</Project>
       <Name>JXHighWay.WatchHouse.Helper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JXHighWay.WatchHouse.LED\JXHighWay.WatchHouse.LED.csproj">
+      <Project>{245383e0-0f1e-41f8-86a6-293191e88581}</Project>
+      <Name>JXHighWay.WatchHouse.LED</Name>
     </ProjectReference>
     <ProjectReference Include="..\JXHighWay.WatchHouse.Net.Socket\JXHighWay.WatchHouse.Net.csproj">
       <Project>{d0cf1157-6b33-41a9-8eae-faeba9fbfe48}</Project>

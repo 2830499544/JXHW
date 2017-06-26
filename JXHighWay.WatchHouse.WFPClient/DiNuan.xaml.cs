@@ -29,7 +29,7 @@ namespace JXHighWay.WatchHouse.WFPClient
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            m_Monitoring = new Monitoring();
+            m_Monitoring = new WatchHouseMonitoring();
             RefreshState();
         }
 
@@ -50,10 +50,10 @@ namespace JXHighWay.WatchHouse.WFPClient
             });
         }
 
-        Monitoring m_Monitoring = null;
+        WatchHouseMonitoring m_Monitoring = null;
         void initDiNuan()
         {
-            m_Monitoring = new Monitoring();
+            m_Monitoring = new WatchHouseMonitoring();
             DiNuanStateModel vDiNuanStateModel =  m_Monitoring.DiNuan(App.WatchHouseID);
             CheckBox_DiNuan.IsChecked = vDiNuanStateModel.DiNuan;
             CheckBox_YouJiao.IsChecked = vDiNuanStateModel.YouNuanJQ;

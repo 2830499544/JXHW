@@ -88,10 +88,10 @@ namespace JXHighWay.WatchHouse.WFPClient
             image_100.Source = new BitmapImage(new Uri(@"Images/DengGuang/100.jpg", UriKind.Relative));
         }
 
-        Monitoring m_Monitoring = null;
+        WatchHouseMonitoring m_Monitoring = null;
         void init()
         {
-            m_Monitoring = new Monitoring();
+            m_Monitoring = new WatchHouseMonitoring();
             RefreshState();
         }
 
@@ -141,20 +141,21 @@ namespace JXHighWay.WatchHouse.WFPClient
         private void CheckBox_Switch_Checked(object sender, RoutedEventArgs e)
         {
 
-            Action action1 = () =>
+            Action action1 = async () =>
             {
-                Task<bool> vResult;
+                bool vResult;
                 if (CheckBox_Switch.IsChecked.Value)
                 {
-                    m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, WatchHouseDataPack_Send_CommandEnmu.KaiDeng);
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, WatchHouseDataPack_Send_CommandEnmu.KaiDeng);
                 }
                 else
                 {
-                    m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, WatchHouseDataPack_Send_CommandEnmu.GuanDeng);
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, WatchHouseDataPack_Send_CommandEnmu.GuanDeng);
                 }
 
-                //if (vResult.Result)
-                //    CheckBox_Switch.IsChecked = !CheckBox_Switch.IsChecked;
+                if (!vResult)
+                    CheckBox_Switch.IsChecked = !CheckBox_Switch.IsChecked;
+                
             };
             Dispatcher.BeginInvoke(action1);
 

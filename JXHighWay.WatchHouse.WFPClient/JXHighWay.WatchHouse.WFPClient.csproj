@@ -63,6 +63,9 @@
     <Compile Include="DiNuan.xaml.cs">
       <DependentUpon>DiNuan.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LED.xaml.cs">
+      <DependentUpon>LED.xaml</DependentUpon>
+    </Compile>
     <Compile Include="XinFeng.xaml.cs">
       <DependentUpon>XinFeng.xaml</DependentUpon>
     </Compile>
@@ -83,6 +86,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="KongTiao.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LED.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -368,6 +375,14 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Config\Time.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Images\LED\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Transmit.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

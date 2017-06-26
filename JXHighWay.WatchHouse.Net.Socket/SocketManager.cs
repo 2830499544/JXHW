@@ -385,15 +385,15 @@ namespace JXHighWay.WatchHouse.Net
             try
             {
                 //对要发送的消息,制定简单协议,头4字节指定包的大小,方便客户端接收(协议可以自己定)  
-                byte[] buff = new byte[message.Length + 4];
-                byte[] len = BitConverter.GetBytes(message.Length);
-                Array.Copy(len, buff, 4);
-                Array.Copy(message, 0, buff, 4, message.Length);
+                //byte[] buff = new byte[message.Length + 4];
+                //byte[] len = BitConverter.GetBytes(message.Length);
+                //Array.Copy(len, buff, 4);
+                //Array.Copy(message, 0, buff, 4, message.Length);
                 //token.Socket.Send(buff);  //这句也可以发送, 可根据自己的需要来选择  
                 //新建异步发送对象, 发送消息  
                 SocketAsyncEventArgs sendArg = new SocketAsyncEventArgs();
                 sendArg.UserToken = token;
-                sendArg.SetBuffer(buff, 0, buff.Length);  //将数据放置进去.  
+                sendArg.SetBuffer(message, 0, message.Length);  //将数据放置进去.  
                 token.Socket.SendAsync(sendArg);
             }
             catch (Exception e)

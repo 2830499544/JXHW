@@ -60,7 +60,7 @@
             </Image.Style>
         </Image>
         <Label x:Name="label_Copy1" Content="电　源" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="70,193,0,0" FontSize="18" Foreground="WhiteSmoke"/>
-        <Image x:Name="Image_LED" Grid.Column="4" HorizontalAlignment="Left" Height="166" Margin="26,38,0,0" VerticalAlignment="Top" Width="152" Cursor="Hand" >
+        <Image x:Name="Image_LED" Grid.Column="4" HorizontalAlignment="Left" Height="166" Margin="26,38,0,0" VerticalAlignment="Top" Width="152" Cursor="Hand" MouseLeftButtonDown="Image_LED_MouseLeftButtonDown" >
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
                     <Setter Property="Source" Value="Images/GanTingMingXi/LED.jpg"/>

@@ -8,7 +8,7 @@ using MXKJ.DBMiddleWareLib;
 namespace JXHighWay.WatchHouse.EFModel
 {
     [TableAttrib("管理员", "ID")]
-    public struct AdministratorEFModel
+    public struct ManagerEFModel
     {
         [ColumnAttrib("ID")]
         public int? ID { get; set; }

@@ -97,11 +97,11 @@ namespace JXHighWay.WatchHouse.WFPClient
             image_FL_5J.Source = new BitmapImage(new Uri(@"Images/XinFeng/5j_a.jpg", UriKind.Relative));
         }
 
-        Monitoring m_Monitoring = null;
+        WatchHouseMonitoring m_Monitoring = null;
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            m_Monitoring = new Monitoring();
+            m_Monitoring = new WatchHouseMonitoring();
             RefreshState();
         }
 

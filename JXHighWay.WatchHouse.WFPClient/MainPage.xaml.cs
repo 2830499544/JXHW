@@ -80,10 +80,10 @@ namespace JXHighWay.WatchHouse.WFPClient
 
             Label_Title.Content = App.TollStationName;
 
-            m_Monitoring = new Monitoring();
+            m_Monitoring = new WatchHouseMonitoring();
             RefreshState();
         }
-        Monitoring m_Monitoring = null;
+        WatchHouseMonitoring m_Monitoring = null;
         async void RefreshState()
         {
             await Task.Run(() =>
@@ -105,7 +105,7 @@ namespace JXHighWay.WatchHouse.WFPClient
         void initWatchHouse()
         {
             //初始化岗亭信息
-            Monitoring vMonitoring = new Monitoring();
+            WatchHouseMonitoring vMonitoring = new WatchHouseMonitoring();
             List<WatchHouseInfoModel> WatchHouseInfoList = vMonitoring.GetAllWatchHouseInfo();
             for (int i = 0; i <= 7; i++)
             {

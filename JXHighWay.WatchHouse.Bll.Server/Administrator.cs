@@ -19,7 +19,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
         public bool Add(string ZhangHao, string MiMa,
             bool GangTingGZ,bool LEDGongZhi,bool DianYuanGZ)
         {
-            AdministratorEFModel vModel = new AdministratorEFModel()
+            ManagerEFModel vModel = new ManagerEFModel()
             {
                 DianYuanGZ = DianYuanGZ,
                 GangTingGZ = GangTingGZ,
@@ -32,13 +32,13 @@ namespace JXHighWay.WatchHouse.Bll.Server
 
         public bool Del( int ID)
         {
-            return m_BasicDBClass.DeleteRecordByPrimaryKey<AdministratorEFModel>(ID);
+            return m_BasicDBClass.DeleteRecordByPrimaryKey<ManagerEFModel>(ID);
         }
 
         public bool Update( int ID,string ZhangHao, string MiMa,
             bool GangTingGZ, bool LEDGongZhi, bool DianYuanGZ)
         {
-            AdministratorEFModel vModel = new AdministratorEFModel()
+            ManagerEFModel vModel = new ManagerEFModel()
             {
                 ID = ID,
                 DianYuanGZ = DianYuanGZ,

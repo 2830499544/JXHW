@@ -149,10 +149,10 @@ namespace JXHighWay.WatchHouse.WFPClient
 
 
 
-        Monitoring m_Monitoring = null;
+        WatchHouseMonitoring m_Monitoring = null;
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            m_Monitoring = new Monitoring();
+            m_Monitoring = new WatchHouseMonitoring();
             RefreshState();
         }
 

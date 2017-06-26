@@ -18,6 +18,8 @@ namespace JXHighWay.WatchHouse.Bll.Server
         SocketManager m_SocketManager;
         BasicDBClass m_BasicDBClass_Receive;
         BasicDBClass m_BasicDBClass_Send;
+        BasicDBClass m_BasicDBClass_Return;
+
         /// <summary>
         /// 接收岗亭状态数据队列
         /// </summary>
@@ -55,6 +57,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
             BasicDBClass.Password = vConfig.DBPassword;
             m_BasicDBClass_Receive = new BasicDBClass(DataBaseType.MySql);
             m_BasicDBClass_Send = new BasicDBClass(DataBaseType.MySql);
+            m_BasicDBClass_Return = new BasicDBClass(DataBaseType.MySql);
             m_ClientDict = new Dictionary<int, string>();
             //m_ReturSendCMDList = new List<SendCMDModel>();
         }
@@ -103,7 +106,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
             if (buff.Length > 0 && buff[0] == 0x02)
             {
                 ReceiveQueue.Enqueue(new WHQueueModel(buff, token.IPAddress.ToString()));
-                Console.WriteLine(string.Format("收到一组数据:{0}", BitConverter.ToString(buff)));
+                Console.WriteLine(string.Format("收到一组数据,IP地址({0}):{1}", token.IPAddress.ToString(),BitConverter.ToString(buff)));
             }
             //throw new NotImplementedException();
         }
@@ -163,7 +166,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
                             vCommandDataPack.Check2 = vCheckCode[1];
                             vByteArray = Helper.NetHelper.StructureToByte(vCommandDataPack);
                             m_SocketManager.SendMessage(vAsyncUserToken, vByteArray);
-                            Console.WriteLine("发送命令数据包:{0}",BitConverter.ToString(vByteArray));
+                            Console.WriteLine("发送命令数据包,IP地址({0}):{1}", vAsyncUserToken.IPAddress.ToString(), BitConverter.ToString(vByteArray));
                             //更新数据库状态
                             vModel.IsSend = true;
                             vModel.ID = vTempResult.ID;
@@ -514,7 +517,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
                 IsReply = true
                 
             };
-            m_BasicDBClass_Send.UpdateRecord(vSendCMDModel, string.Format("GangTingID={0} and SN={1} and IsSend=1", vGangTingID, vSN));
+            m_BasicDBClass_Return.UpdateRecord(vSendCMDModel, string.Format("GangTingID={0} and SN={1} and IsSend=1", vGangTingID, vSN));
         }
 
         void processorData_Receive(WatchHouseDataPack_Receive_Main vData,string IPAddress)

@@ -11,11 +11,11 @@ using System.Threading;
 
 namespace JXHighWay.WatchHouse.Bll.Client
 {
-    public class Monitoring
+    public class WatchHouseMonitoring
     {
         BasicDBClass m_BasicDBClass = null;
         int m_OfflineTime = 10;
-        public Monitoring()
+        public WatchHouseMonitoring()
         {
             Config vConfig = new Config();
             BasicDBClass.DataSource = vConfig.DBSource;
@@ -26,8 +26,6 @@ namespace JXHighWay.WatchHouse.Bll.Client
             m_OfflineTime = vConfig.OfflineTime;
             m_BasicDBClass = new BasicDBClass( DataBaseType.MySql);
         }
-
-        
 
 
         public async Task<bool> AsyncSendCommandToDB(int WatchHouseID, WatchHouseDataPack_Send_CommandEnmu Command)
