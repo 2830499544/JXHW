@@ -108,5 +108,11 @@ namespace JXHighWay.WatchHouse.Server
             ManagerForm vManagerForm = new ManagerForm();
             vManagerForm.ShowDialog();
         }
+
+        private void ToolStripMenuItem_Setup_WatchHouse_Click(object sender, EventArgs e)
+        {
+            WatchHouseConfigForm vWatchHouseConfigForm = new WatchHouseConfigForm();
+            vWatchHouseConfigForm.ShowDialog();
+        }
     }
 }

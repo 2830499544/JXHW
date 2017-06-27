@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using JXHighWay.WatchHouse.EFModel;
 using MXKJ.DBMiddleWareLib;
-using JXHighWay.WatchHouse.EFModel;
 using System.Data;
 
 namespace JXHighWay.WatchHouse.Bll.Server

@@ -22,10 +22,14 @@ namespace JXHighWay.WatchHouse.EFModel
         public String GangTingIP { get; set; }
         [ColumnAttrib("GangTingDK")]
         public int? GangTingDK { get; set; }
+        [ColumnAttrib("GangTingLX")]
+        public string GangTingLX { get; set; }
         [ColumnAttrib("GuanGaoPingIP")]
         public String GuanGaoPingIP { get; set; }
         [ColumnAttrib("GuanGaoPDK")]
         public int? GuanGaoPDK { get; set; }
+        [ColumnAttrib("DianYuanID")]
+        public int DianYuanID { get; set; }
         [ColumnAttrib("DianYuanIP")]
         public String DianYuanIP { get; set; }
         [ColumnAttrib("DianYuanDK")]

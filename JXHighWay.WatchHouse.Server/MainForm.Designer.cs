@@ -42,9 +42,10 @@
             // 
             // button_Start
             // 
-            this.button_Start.Location = new System.Drawing.Point(73, 157);
+            this.button_Start.Location = new System.Drawing.Point(110, 236);
+            this.button_Start.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button_Start.Name = "button_Start";
-            this.button_Start.Size = new System.Drawing.Size(75, 35);
+            this.button_Start.Size = new System.Drawing.Size(112, 52);
             this.button_Start.TabIndex = 0;
             this.button_Start.Text = "开　始";
             this.button_Start.UseVisualStyleBackColor = true;
@@ -52,9 +53,10 @@
             // 
             // button_Stop
             // 
-            this.button_Stop.Location = new System.Drawing.Point(196, 157);
+            this.button_Stop.Location = new System.Drawing.Point(294, 236);
+            this.button_Stop.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button_Stop.Name = "button_Stop";
-            this.button_Stop.Size = new System.Drawing.Size(75, 35);
+            this.button_Stop.Size = new System.Drawing.Size(112, 52);
             this.button_Stop.TabIndex = 1;
             this.button_Stop.Text = "停　止";
             this.button_Stop.UseVisualStyleBackColor = true;
@@ -67,8 +69,7 @@
             this.ToolStripMenuItem_Setup});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 1, 0, 1);
-            this.menuStrip1.Size = new System.Drawing.Size(345, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(518, 32);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -79,50 +80,50 @@
             this.ToolStripMenuItem_Setup_WatchHouse,
             this.ToolStripMenuItem_Setup_Administrator});
             this.ToolStripMenuItem_Setup.Name = "ToolStripMenuItem_Setup";
-            this.ToolStripMenuItem_Setup.Size = new System.Drawing.Size(44, 22);
+            this.ToolStripMenuItem_Setup.Size = new System.Drawing.Size(58, 28);
             this.ToolStripMenuItem_Setup.Text = "设置";
             // 
             // ToolStripMenuItem_Setup_Employee
             // 
             this.ToolStripMenuItem_Setup_Employee.Name = "ToolStripMenuItem_Setup_Employee";
-            this.ToolStripMenuItem_Setup_Employee.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem_Setup_Employee.Size = new System.Drawing.Size(210, 30);
             this.ToolStripMenuItem_Setup_Employee.Text = "人员设置";
             this.ToolStripMenuItem_Setup_Employee.Click += new System.EventHandler(this.ToolStripMenuItem_Setup_Employee_Click);
             // 
             // ToolStripMenuItem_Setup_WatchHouse
             // 
             this.ToolStripMenuItem_Setup_WatchHouse.Name = "ToolStripMenuItem_Setup_WatchHouse";
-            this.ToolStripMenuItem_Setup_WatchHouse.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem_Setup_WatchHouse.Size = new System.Drawing.Size(210, 30);
             this.ToolStripMenuItem_Setup_WatchHouse.Text = "岗亭设置";
+            this.ToolStripMenuItem_Setup_WatchHouse.Click += new System.EventHandler(this.ToolStripMenuItem_Setup_WatchHouse_Click);
             // 
             // ToolStripMenuItem_Setup_Administrator
             // 
             this.ToolStripMenuItem_Setup_Administrator.Name = "ToolStripMenuItem_Setup_Administrator";
-            this.ToolStripMenuItem_Setup_Administrator.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem_Setup_Administrator.Size = new System.Drawing.Size(210, 30);
             this.ToolStripMenuItem_Setup_Administrator.Text = "管理员设置";
             this.ToolStripMenuItem_Setup_Administrator.Click += new System.EventHandler(this.ToolStripMenuItem_Setup_Administrator_Click);
             // 
             // groupBox1
             // 
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox1.Location = new System.Drawing.Point(0, 24);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox1.Location = new System.Drawing.Point(0, 32);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(345, 107);
+            this.groupBox1.Size = new System.Drawing.Size(518, 160);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "信息";
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(345, 213);
+            this.ClientSize = new System.Drawing.Size(518, 320);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button_Stop);
             this.Controls.Add(this.button_Start);
             this.Controls.Add(this.menuStrip1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
