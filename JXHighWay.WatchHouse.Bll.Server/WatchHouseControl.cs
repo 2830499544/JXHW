@@ -90,7 +90,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
             WatchHouseConfigEFModel[] vWatchHouseConfig= m_BasicDBClass_Receive.SelectAllRecordsEx<WatchHouseConfigEFModel>();
             foreach(WatchHouseConfigEFModel vTempConfig in vWatchHouseConfig)
             {
-                m_ClientDict.Add(vTempConfig.ShouFeiZhangID.Value, "");
+                m_ClientDict.Add(vTempConfig.GangTingID.Value, "");
             }
         }
 
@@ -135,7 +135,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
                         AsyncUserToken vAsyncUserToken = findAsyncUserToken(vTempResult.GangTingID.Value);
                         if (vAsyncUserToken != null)
                         {
-                            byte[] vSN =  NetHelper.MarkSN();
+                            byte[] vSN = BitConverter.GetBytes(vTempResult.SN??0);
                             WatchHouseDataPack_SendData_Main vCommandDataPack = new WatchHouseDataPack_SendData_Main()
                             {
                                 Head = 0x02,
@@ -510,7 +510,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
             //if (vFindResult != null)
             //vResult = vFindResult.State;
             int vGangTingID = BitConverter.ToInt32(new byte[] { vData.WatchHouseID4, vData.WatchHouseID3, vData.WatchHouseID2, vData.WatchHouseID1 }, 0);
-            short vSN = BitConverter.ToInt16(new byte[] { vData.SN2, vData.SN1 }, 0);
+            short vSN = BitConverter.ToInt16(new byte[] { vData.SN1, vData.SN2 }, 0);
             SendCMDEFModel vSendCMDModel = new SendCMDEFModel()
             {
                 State = vData.Data == 0x5a ? true : false,

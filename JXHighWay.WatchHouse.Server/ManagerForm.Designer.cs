@@ -62,10 +62,8 @@
             this.groupBox_LED.Controls.Add(this.label1);
             this.groupBox_LED.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_LED.Location = new System.Drawing.Point(0, 0);
-            this.groupBox_LED.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox_LED.Name = "groupBox_LED";
-            this.groupBox_LED.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox_LED.Size = new System.Drawing.Size(591, 174);
+            this.groupBox_LED.Size = new System.Drawing.Size(394, 116);
             this.groupBox_LED.TabIndex = 0;
             this.groupBox_LED.TabStop = false;
             this.groupBox_LED.Text = "管理员信息";
@@ -73,10 +71,9 @@
             // checkBox_DianYuan
             // 
             this.checkBox_DianYuan.AutoSize = true;
-            this.checkBox_DianYuan.Location = new System.Drawing.Point(358, 130);
-            this.checkBox_DianYuan.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkBox_DianYuan.Location = new System.Drawing.Point(239, 87);
             this.checkBox_DianYuan.Name = "checkBox_DianYuan";
-            this.checkBox_DianYuan.Size = new System.Drawing.Size(70, 22);
+            this.checkBox_DianYuan.Size = new System.Drawing.Size(48, 16);
             this.checkBox_DianYuan.TabIndex = 6;
             this.checkBox_DianYuan.Text = "电源";
             this.checkBox_DianYuan.UseVisualStyleBackColor = true;
@@ -84,10 +81,9 @@
             // checkBox_LED
             // 
             this.checkBox_LED.AutoSize = true;
-            this.checkBox_LED.Location = new System.Drawing.Point(250, 130);
-            this.checkBox_LED.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkBox_LED.Location = new System.Drawing.Point(167, 87);
             this.checkBox_LED.Name = "checkBox_LED";
-            this.checkBox_LED.Size = new System.Drawing.Size(61, 22);
+            this.checkBox_LED.Size = new System.Drawing.Size(42, 16);
             this.checkBox_LED.TabIndex = 5;
             this.checkBox_LED.Text = "LED";
             this.checkBox_LED.UseVisualStyleBackColor = true;
@@ -95,80 +91,81 @@
             // checkBox_GangTin
             // 
             this.checkBox_GangTin.AutoSize = true;
-            this.checkBox_GangTin.Location = new System.Drawing.Point(144, 130);
-            this.checkBox_GangTin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkBox_GangTin.Location = new System.Drawing.Point(96, 87);
             this.checkBox_GangTin.Name = "checkBox_GangTin";
-            this.checkBox_GangTin.Size = new System.Drawing.Size(70, 22);
+            this.checkBox_GangTin.Size = new System.Drawing.Size(48, 16);
             this.checkBox_GangTin.TabIndex = 4;
             this.checkBox_GangTin.Text = "岗亭";
             this.checkBox_GangTin.UseVisualStyleBackColor = true;
             // 
             // textBox_MiMa
             // 
-            this.textBox_MiMa.Location = new System.Drawing.Point(240, 86);
-            this.textBox_MiMa.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox_MiMa.Location = new System.Drawing.Point(160, 57);
             this.textBox_MiMa.Name = "textBox_MiMa";
-            this.textBox_MiMa.Size = new System.Drawing.Size(222, 28);
+            this.textBox_MiMa.Size = new System.Drawing.Size(149, 21);
             this.textBox_MiMa.TabIndex = 3;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(130, 90);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(87, 60);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(107, 18);
+            this.label2.Size = new System.Drawing.Size(71, 12);
             this.label2.TabIndex = 2;
             this.label2.Text = "管理员密码:";
             // 
             // textBox_ZhanHao
             // 
-            this.textBox_ZhanHao.Location = new System.Drawing.Point(240, 32);
-            this.textBox_ZhanHao.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox_ZhanHao.Location = new System.Drawing.Point(160, 21);
             this.textBox_ZhanHao.Name = "textBox_ZhanHao";
-            this.textBox_ZhanHao.Size = new System.Drawing.Size(222, 28);
+            this.textBox_ZhanHao.Size = new System.Drawing.Size(149, 21);
             this.textBox_ZhanHao.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(130, 36);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(87, 24);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(107, 18);
+            this.label1.Size = new System.Drawing.Size(71, 12);
             this.label1.TabIndex = 0;
             this.label1.Text = "管理员帐号:";
             // 
             // button_ZhenJia
             // 
-            this.button_ZhenJia.Location = new System.Drawing.Point(36, 414);
-            this.button_ZhenJia.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button_ZhenJia.Image = global::JXHighWay.WatchHouse.Server.Properties.Resources.Add;
+            this.button_ZhenJia.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button_ZhenJia.Location = new System.Drawing.Point(24, 276);
             this.button_ZhenJia.Name = "button_ZhenJia";
-            this.button_ZhenJia.Size = new System.Drawing.Size(112, 48);
+            this.button_ZhenJia.Size = new System.Drawing.Size(78, 37);
             this.button_ZhenJia.TabIndex = 1;
             this.button_ZhenJia.Text = "增　加";
+            this.button_ZhenJia.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button_ZhenJia.UseVisualStyleBackColor = true;
             this.button_ZhenJia.Click += new System.EventHandler(this.button_ZhenJia_Click);
             // 
             // button_ShangChu
             // 
-            this.button_ShangChu.Location = new System.Drawing.Point(230, 414);
-            this.button_ShangChu.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button_ShangChu.Image = global::JXHighWay.WatchHouse.Server.Properties.Resources.Del;
+            this.button_ShangChu.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button_ShangChu.Location = new System.Drawing.Point(153, 276);
             this.button_ShangChu.Name = "button_ShangChu";
-            this.button_ShangChu.Size = new System.Drawing.Size(112, 48);
+            this.button_ShangChu.Size = new System.Drawing.Size(78, 37);
             this.button_ShangChu.TabIndex = 2;
             this.button_ShangChu.Text = "删　除";
+            this.button_ShangChu.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button_ShangChu.UseVisualStyleBackColor = true;
             this.button_ShangChu.Click += new System.EventHandler(this.button_ShangChu_Click);
             // 
             // button_XiuGai
             // 
-            this.button_XiuGai.Location = new System.Drawing.Point(422, 414);
-            this.button_XiuGai.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button_XiuGai.Image = global::JXHighWay.WatchHouse.Server.Properties.Resources.Update;
+            this.button_XiuGai.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button_XiuGai.Location = new System.Drawing.Point(281, 276);
             this.button_XiuGai.Name = "button_XiuGai";
-            this.button_XiuGai.Size = new System.Drawing.Size(112, 48);
+            this.button_XiuGai.Size = new System.Drawing.Size(78, 37);
             this.button_XiuGai.TabIndex = 3;
-            this.button_XiuGai.Text = "修　改";
+            this.button_XiuGai.Text = "更　新";
+            this.button_XiuGai.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button_XiuGai.UseVisualStyleBackColor = true;
             this.button_XiuGai.Click += new System.EventHandler(this.button_XiuGai_Click);
             // 
@@ -176,11 +173,9 @@
             // 
             this.groupBox2.Controls.Add(this.dataGridView_MangerInfo);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox2.Location = new System.Drawing.Point(0, 174);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Location = new System.Drawing.Point(0, 116);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox2.Size = new System.Drawing.Size(591, 219);
+            this.groupBox2.Size = new System.Drawing.Size(394, 146);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "管理员列表";
@@ -196,12 +191,11 @@
             this.Column_LEDGongZhi,
             this.Column_DianYuanGZ});
             this.dataGridView_MangerInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView_MangerInfo.Location = new System.Drawing.Point(4, 25);
-            this.dataGridView_MangerInfo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridView_MangerInfo.Location = new System.Drawing.Point(3, 17);
             this.dataGridView_MangerInfo.Name = "dataGridView_MangerInfo";
             this.dataGridView_MangerInfo.ReadOnly = true;
             this.dataGridView_MangerInfo.RowTemplate.Height = 23;
-            this.dataGridView_MangerInfo.Size = new System.Drawing.Size(583, 190);
+            this.dataGridView_MangerInfo.Size = new System.Drawing.Size(388, 126);
             this.dataGridView_MangerInfo.TabIndex = 0;
             // 
             // Column_ID
@@ -241,16 +235,15 @@
             // 
             // ManagerForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(591, 484);
+            this.ClientSize = new System.Drawing.Size(394, 323);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.button_XiuGai);
             this.Controls.Add(this.button_ShangChu);
             this.Controls.Add(this.button_ZhenJia);
             this.Controls.Add(this.groupBox_LED);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ManagerForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "管理员设置";

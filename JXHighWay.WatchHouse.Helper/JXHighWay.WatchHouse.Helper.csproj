@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChangeNavigation.cs" />
+    <Compile Include="CommHelper.cs" />
     <Compile Include="NetHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

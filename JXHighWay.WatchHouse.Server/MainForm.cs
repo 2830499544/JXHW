@@ -54,6 +54,8 @@ namespace JXHighWay.WatchHouse.Server
             try
             {
                 vWatchHouseControl.Start();
+                button_Start.Enabled = false;
+                button_Stop.Enabled = true;
             }
             catch(Exception ex)
             {
@@ -80,6 +82,8 @@ namespace JXHighWay.WatchHouse.Server
         {
             //vSocketServer.Send(vSocketServer.SAEADict.First().Value, new byte[] { 0x00,0x00});
             vWatchHouseControl.Stop();
+            button_Start.Enabled = false;
+            button_Stop.Enabled = true;
         }
 
         private void ToolStripMenuItem_Setup_Employee_Click(object sender, EventArgs e)

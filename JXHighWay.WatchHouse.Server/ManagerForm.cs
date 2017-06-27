@@ -26,7 +26,8 @@ namespace JXHighWay.WatchHouse.Server
                 if (m_Manager.Add(textBox_ZhanHao.Text, textBox_MiMa.Text, checkBox_GangTin.Checked,
                     checkBox_LED.Checked, checkBox_DianYuan.Checked, ref vOutInfo))
                 {
-                    MessageBox.Show("增加管理员成功", "信息", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("增加管理员成功", "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    dataGridView_MangerInfo.DataSource = m_Manager.GetAll();
                 }
                 else
                 {
@@ -75,6 +76,7 @@ namespace JXHighWay.WatchHouse.Server
                         checkBox_LED.Checked, checkBox_DianYuan.Checked, ref vOutInfo))
                     {
                         MessageBox.Show("更新管理员成功", "信息", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        dataGridView_MangerInfo.DataSource = m_Manager.GetAll();
                     }
                     else
                     {

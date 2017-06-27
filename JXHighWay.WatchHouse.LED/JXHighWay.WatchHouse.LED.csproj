@@ -48,6 +48,7 @@
     <Compile Include="HdTransmitTool.cs" />
     <Compile Include="HD_Base.cs" />
     <Compile Include="HD_Transmit.cs" />
+    <Compile Include="ConfigbooXml.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -359,6 +359,10 @@
       <Project>{1e2cbd19-b02c-46bb-947c-f67329d5e6f4}</Project>
       <Name>JXHighWay.WatchHouse.Bll.Client</Name>
     </ProjectReference>
+    <ProjectReference Include="..\JXHighWay.WatchHouse.LED\JXHighWay.WatchHouse.LED.csproj">
+      <Project>{245383e0-0f1e-41f8-86a6-293191e88581}</Project>
+      <Name>JXHighWay.WatchHouse.LED</Name>
+    </ProjectReference>
     <ProjectReference Include="..\JXHighWay.WatchHouse.Net\JXHighWay.WatchHouse.Net.DataPack.csproj">
       <Project>{0a3d0538-3339-4111-a7a4-c9907cb49f26}</Project>
       <Name>JXHighWay.WatchHouse.Net.DataPack</Name>
@@ -380,6 +384,8 @@
     <Folder Include="Images\LED\" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Demo.xml" />
+    <Resource Include="Demo1.xml" />
     <Content Include="Transmit.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

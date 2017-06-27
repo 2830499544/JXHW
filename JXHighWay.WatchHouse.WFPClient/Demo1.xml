@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='utf-8' standalone='yes' ?>
+<config.boo> 
+  <content> 
+    <channel setSize="-11111000000"/>  
+    <channel action="add"> 
+      <area action="add"> 
+        <rectangle x="-11111000000" y="-11111000000" width="-11111000000" height="-11111000000"/>  
+        <materials> 
+          <image action="add"> 
+            <effect in="-11111000000" out="-11111000000" inSpeed="-11111000000" outSpeed="-11111000000" holdTime="-11111000000"/>  
+            <file size="-11111000000" path="E:\1.jpg" md5="d1274a5b1d8cbb7e6eea9fe19bfad401"/> 
+          </image> 
+		  <image action="add"> 
+            <effect in="-11111000000" out="-11111000000" inSpeed="-11111000000" outSpeed="-11111000000" holdTime="-11111000000"/>  
+            <file size="-11111000000" path="E:\1.jpg" md5="d1274a5b1d8cbb7e6eea9fe19bfad401"/> 
+          </image> 
+        </materials> 
+      </area>  
+      <area action="add"> 
+        <rectangle x="-11111000000" y="-11111000000" width="-11111000000" height="-11111000000"/>  
+        <materials> 
+          <text action="add" guid="bottom"> 
+            <singleMode>1</singleMode>  
+            <pageCount>1</pageCount>  
+            <continuousMove headCloseToTail="-11111000000" speed="-11111000000" playType="ByCount" byCount="-11111000000"/>  
+            <file size="-11111000000" path="D:\4.png" md5="27B4398D7F2075ED4FF90D2784781D93"/> 
+          </text> 
+        </materials> 
+      </area>  
+      <area action="add"> 
+        <rectangle x="-11111000000" y="-11111000000" width="-11111000000" height="-11111000000"/>  
+        <materials> 
+          <video action="add"> 
+            <file size="-11111000000" path="D:\gg.mp4" md5="27B4398D7F2075ED4FF90D2784781D93"/> 
+          </video>  
+          <video action="add"> 
+            <file size="-11111000000" path="D:\dd.mp4" md5="27B4398D7F2075ED4FF90D2784781D93"/> 
+          </video> 
+        </materials> 
+      </area> 
+    </channel> 
+  </content> 
+</config.boo>

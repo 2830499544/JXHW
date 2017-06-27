@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8' standalone='yes' ?>
+<config.boo> 
+  <content> 
+    <channel setSize="0"/>  
+    <channel action="add"> 
+      <area action="add"> 
+        <rectangle x="0" y="0" width="64" height="64"/>  
+        <materials> 
+          <image action="add"> 
+            <effect in="0" out="20" inSpeed="1" outSpeed="1" holdTime="8"/>  
+            <file size="2278" path="E:\1.jpg" md5="d1274a5b1d8cbb7e6eea9fe19bfad401"/> 
+          </image> 
+        </materials> 
+      </area>  
+      <area action="add"> 
+        <rectangle x="0" y="64" width="128" height="32"/>  
+        <materials> 
+          <text action="add" guid="bottom"> 
+            <singleMode>1</singleMode>  
+            <pageCount>1</pageCount>  
+            <continuousMove headCloseToTail="0" speed="4" playType="ByCount" byCount="2000"/>  
+            <file size="4213" path="D:\4.png" md5="27B4398D7F2075ED4FF90D2784781D93"/> 
+          </text> 
+        </materials> 
+      </area>  
+      <area action="add"> 
+        <rectangle x="0" y="0" width="128" height="64"/>  
+        <materials> 
+          <video action="add"> 
+            <file size="234213" path="D:\gg.mp4" md5="27B4398D7F2075ED4FF90D2784781D93"/> 
+          </video>  
+          <video action="add"> 
+            <file size="234213" path="D:\dd.mp4" md5="27B4398D7F2075ED4FF90D2784781D93"/> 
+          </video> 
+        </materials> 
+      </area> 
+    </channel> 
+  </content> 
+</config.boo>

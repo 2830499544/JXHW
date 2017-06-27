@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using JXHighWay.WatchHouse.LED;
 using System.Threading;
 using System.Drawing;
+using JXHighWay.WatchHouse.Helper;
+using System.IO;
+using System.Xml.Serialization;
 
 namespace JXHighWay.WatchHouse.Bll.Client
 {
@@ -18,6 +21,8 @@ namespace JXHighWay.WatchHouse.Bll.Client
         static System.IntPtr mInstance = System.IntPtr.Zero;
         static DateTime m_Time;
         static Semaphore m_Semaphore = new Semaphore(1, 1);
+
+        ConfigbooXml m_ConfigbooXml = new ConfigbooXml();
 
         public LEDControl(string IPAddress,int Heigth,int Width)
         {
@@ -46,16 +51,153 @@ namespace JXHighWay.WatchHouse.Bll.Client
             }
         }
 
+        public void SendImage(string ImagePath)
+        {
+            string vMD5 = CommHelper.GetMD5HashFromFile(ImagePath);
+            long vFileSize = CommHelper.FileSize(ImagePath);
+
+            
+            //清空原有节目
+            configbooChannel vClearChannel = new configbooChannel()
+            {
+                setSize = 0,
+                setSizeSpecified = true
+            };
+            
+
+            //第一个节目
+            configbooChannel v1Changel = new configbooChannel();
+            v1Changel.action = "add";
+            m_ConfigbooXml.content = new configbooChannel[] { vClearChannel, v1Changel };
+
+            //第一个节目第一区域
+            configbooChannelArea v1Changel_Area = new configbooChannelArea()
+            {
+                action = "add"
+            };
+            v1Changel.area = new configbooChannelArea[] { v1Changel_Area };
+
+            configbooChannelAreaRectangle v1Changel_Area_Rectangle = new configbooChannelAreaRectangle()
+            {
+                x = 0,
+                y = 0,
+                height = m_Heigth,
+                width = m_Width
+            };
+            v1Changel_Area.rectangle = v1Changel_Area_Rectangle;
+            v1Changel_Area.materials = new configbooChannelAreaMaterials();
+            configbooChannelAreaMaterialsImage vImage1 = new configbooChannelAreaMaterialsImage()
+            {
+                action = "add"
+            };
+            v1Changel_Area.materials.image = new configbooChannelAreaMaterialsImage[]{
+                vImage1
+            };
+            vImage1.effect = new configbooChannelAreaMaterialsImageEffect()
+            { 
+                @in = 0,
+                @out = 20,
+                inSpeed =1,
+                outSpeed =1,
+                holdTime = 8
+            };
+
+            vImage1.file = new configbooChannelAreaMaterialsImageFile()
+            {
+                md5 = vMD5,
+                size = vFileSize,
+                path = ImagePath
+            };
+
+            //StringWriter sw = new StringWriter();
+            MemoryStream ms = new MemoryStream();
+            XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
+            XmlSerializer serializer = new XmlSerializer(typeof(ConfigbooXml));
+            serializer.Serialize(ms, m_ConfigbooXml, ns);
+            //sw.Close();
+            ms.Close();
+
+            //Console.WriteLine(sw.ToString());
+            HdTransmitTool t = HdTransmitTool.GetInstance();
+            t.Send("192.168.0.114", ms.ToArray(), true);
+        }
+
+        public void SendVideo( string VideoPath )
+        {
+            string vMD5 = CommHelper.GetMD5HashFromFile(VideoPath);
+            long vFileSize = CommHelper.FileSize(VideoPath);
+
+
+            //清空原有节目
+            configbooChannel vClearChannel = new configbooChannel()
+            {
+                setSize = 0,
+                setSizeSpecified = true
+            };
+
+
+            //第一个节目
+            configbooChannel v1Changel = new configbooChannel();
+            v1Changel.action = "add";
+            m_ConfigbooXml.content = new configbooChannel[] { vClearChannel, v1Changel };
+
+            //第一个节目第一区域
+            configbooChannelArea v1Changel_Area = new configbooChannelArea()
+            {
+                action = "add"
+            };
+            v1Changel.area = new configbooChannelArea[] { v1Changel_Area };
+
+            configbooChannelAreaRectangle v1Changel_Area_Rectangle = new configbooChannelAreaRectangle()
+            {
+                x = 0,
+                y = 0,
+                height = m_Heigth,
+                width = m_Width
+            };
+            v1Changel_Area.rectangle = v1Changel_Area_Rectangle;
+            v1Changel_Area.materials = new configbooChannelAreaMaterials();
+            configbooChannelAreaMaterialsVideo vVideo1 = new configbooChannelAreaMaterialsVideo()
+            {
+                action = "add",
+            };
+
+            v1Changel_Area.materials.video = new configbooChannelAreaMaterialsVideo[]
+            {
+                vVideo1
+            };
+
+
+            vVideo1.file = new configbooChannelAreaMaterialsVideoFile()
+            {
+                md5 = vMD5,
+                size = vFileSize,
+                path = VideoPath
+            };
+
+            StringWriter sw = new StringWriter();
+            MemoryStream ms = new MemoryStream();
+            XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
+            XmlSerializer serializer = new XmlSerializer(typeof(ConfigbooXml));
+            serializer.Serialize(ms, m_ConfigbooXml, ns);
+            sw.Close();
+            ms.Close();
+
+            Console.WriteLine(sw.ToString());
+            HdTransmitTool t = HdTransmitTool.GetInstance();
+            t.Send("192.168.0.114", ms.ToArray(), true);
+        }
+
         public void SendText(string Text)
         {
             HdTransmitTool t = HdTransmitTool.GetInstance();
-            //t.Send(txtIP.Text, "D:\\HDSDK1.1_DEMO\\Temp\\singleline.xml", false);
+            //t.Send("192.168.0.114", "E:\\1.xml", true);
 
             HDFont font = new HDFont();
             font.FontName = "SimSun";
             font.FontSize = 16;
             font.TextColor = new HDColor(255, 255, 255, 128);
-            byte[] data = HD_Base.GenerateSinglelineTextXml(new Size(m_Width,m_Heigth), Text, font);
+            byte[] data = HD_Base.GenerateSinglelineTextXml(new Size(m_Width, m_Heigth), Text, font);
             t.Send(m_IPAddress, data, true);
         }
 

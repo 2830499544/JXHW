@@ -12,6 +12,7 @@
         <Label x:Name="label" Content="显示文本" HorizontalAlignment="Left" Margin="191,198,0,0" VerticalAlignment="Top" Foreground="#FFF9F5F5"/>
         <TextBox x:Name="TextBox_Text" HorizontalAlignment="Left" Height="23" Margin="265,201,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="211"/>
         <Button x:Name="Button_Send" Content="发送" HorizontalAlignment="Left" Margin="495,201,0,0" VerticalAlignment="Top" Width="75" Click="Button_Send_Click"/>
+        <Button x:Name="button_Test" Content="Test" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="590,200,0,0" Click="button_Test_Click"/>
 
     </Grid>
 </Page>

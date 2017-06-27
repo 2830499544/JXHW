@@ -13,6 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using JXHighWay.WatchHouse.Bll.Client;
+using JXHighWay.WatchHouse.LED;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace JXHighWay.WatchHouse.WFPClient
 {
@@ -30,6 +33,12 @@ namespace JXHighWay.WatchHouse.WFPClient
         {
             LEDControl vLEDControl = new LEDControl("192.168.0.113", 64, 64);
             vLEDControl.SendText(TextBox_Text.Text);
+        }
+
+        private void button_Test_Click(object sender, RoutedEventArgs e)
+        {
+            LEDControl vLEDControl = new LEDControl("192.168.0.113", 64, 64);
+            vLEDControl.SendVideo(@"E:\gg.mp4");
         }
     }
 }

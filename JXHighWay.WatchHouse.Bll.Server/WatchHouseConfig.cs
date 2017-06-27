@@ -75,7 +75,8 @@ namespace JXHighWay.WatchHouse.Bll.Server
                     GangTingMC = GanTingMC,
                     GangTingLX = GanTingLX,
                     GuanGaoPingIP = LedIP,
-                    DianYuanID = DianYuanID
+                    DianYuanID = DianYuanID,
+                    ShouFeiZhangID = 1
                 };
                 if ( m_BasicDBClass.InsertRecord(vWatchHouseConfigEFModel) > 0)
                 {

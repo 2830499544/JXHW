@@ -41,7 +41,10 @@ namespace JXHighWay.WatchHouse.Server
             string vOutInfo = "";
             string vPhotoPath = pictureBox_Photo.Tag==null?"":(string)pictureBox_Photo.Tag;
             if (m_Employee.Add(textBox_Name.Text, comboBox_Sex.Text, textBox_JobNo.Text, textBox_CardNo.Text, vPhotoPath, ref vOutInfo))
+            {
                 MessageBox.Show("新增员工信息成功", "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                dataGridView_EmployeeInfo.DataSource = m_Employee.GetAllEmplyees();
+            }
             else
                 MessageBox.Show(vOutInfo, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
@@ -61,8 +64,11 @@ namespace JXHighWay.WatchHouse.Server
             if ( dataGridView_EmployeeInfo.SelectedRows.Count>0 )
             {
                 int vID = (int)dataGridView_EmployeeInfo.SelectedRows[0].Cells["ID"].Value;
-                if ( m_Employee.Del(vID) )
+                if (m_Employee.Del(vID))
+                {
                     MessageBox.Show("删除员工成功", "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    dataGridView_EmployeeInfo.DataSource = m_Employee.GetAllEmplyees();
+                }
                 else
                     MessageBox.Show("删除员工失败", "错误", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -104,8 +110,11 @@ namespace JXHighWay.WatchHouse.Server
             int vID = (int)dataGridView_EmployeeInfo.SelectedRows[0].Cells["Column_ID"].Value;
             string vOutInfo = "";
             string vPhotoPath = pictureBox_Photo.Tag == null ? "" : (string)pictureBox_Photo.Tag;
-            if (m_Employee.Update(vID,textBox_Name.Text, comboBox_Sex.Text, textBox_JobNo.Text, textBox_CardNo.Text, vPhotoPath))
+            if (m_Employee.Update(vID, textBox_Name.Text, comboBox_Sex.Text, textBox_JobNo.Text, textBox_CardNo.Text, vPhotoPath))
+            {
                 MessageBox.Show("更新员工信息成功", "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                dataGridView_EmployeeInfo.DataSource = m_Employee.GetAllEmplyees();
+            }
             else
                 MessageBox.Show(vOutInfo, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
