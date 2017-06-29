@@ -47,7 +47,7 @@
             </Image.Style>
         </Image>
         <Label x:Name="label_Copy" Content="自动门窗" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="61,193,0,0" FontSize="18" Foreground="WhiteSmoke"/>
-        <Image x:Name="Image_DianYuan" Grid.Column="3" HorizontalAlignment="Left" Height="166" Margin="26,38,0,0" VerticalAlignment="Top" Width="152" Cursor="Hand" >
+        <Image x:Name="Image_DianYuan" Grid.Column="3" HorizontalAlignment="Left" Height="166" Margin="26,38,0,0" VerticalAlignment="Top" Width="152" Cursor="Hand" MouseLeftButtonDown="Image_DianYuan_MouseLeftButtonDown" >
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
                     <Setter Property="Source" Value="Images/GanTingMingXi/DianYuan.jpg"/>

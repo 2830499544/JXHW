@@ -138,5 +138,24 @@ namespace JXHighWay.WatchHouse.WFPClient
                 App.ChangeNavigation(3, vWin, "LED显示屏");
             }
         }
+
+        private void Image_DianYuan_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Frame pageFrame = null;
+            DependencyObject currParent = VisualTreeHelper.GetParent(this);
+            while (currParent != null && pageFrame == null)
+            {
+                pageFrame = currParent as Frame;
+                currParent = VisualTreeHelper.GetParent(currParent);
+            }
+            // Change the page of the frame.
+            if (pageFrame != null)
+            {
+                pageFrame.Source = new Uri("DiNuan.xaml", UriKind.Relative);
+
+                Window vWin = Window.GetWindow(this);
+                App.ChangeNavigation(3, vWin, "地暖");
+            }
+        }
     }
 }

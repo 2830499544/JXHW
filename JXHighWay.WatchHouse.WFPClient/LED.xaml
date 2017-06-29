@@ -9,10 +9,18 @@
       Title="LED">
 
     <Grid Background="#245d7c">
-        <Label x:Name="label" Content="显示文本" HorizontalAlignment="Left" Margin="191,198,0,0" VerticalAlignment="Top" Foreground="#FFF9F5F5"/>
-        <TextBox x:Name="TextBox_Text" HorizontalAlignment="Left" Height="23" Margin="265,201,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="211"/>
-        <Button x:Name="Button_Send" Content="发送" HorizontalAlignment="Left" Margin="495,201,0,0" VerticalAlignment="Top" Width="75" Click="Button_Send_Click"/>
-        <Button x:Name="button_Test" Content="Test" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="590,200,0,0" Click="button_Test_Click"/>
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="120*"/>
+            <ColumnDefinition Width="222*"/>
+            <ColumnDefinition Width="215*"/>
+            <ColumnDefinition Width="346*"/>
+            <ColumnDefinition Width="121*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions >
+            <RowDefinition Height="108*"  />
+            <RowDefinition Height="247*" />
+            <RowDefinition Height="105*" />
+        </Grid.RowDefinitions>
+        <Image HorizontalAlignment="Left" Height="82" VerticalAlignment="Top" Width="100" Grid.Column="1" Margin="59,10,0,0" Grid.Row="1" Source="Images/LED/LED.jpg"/>
     </Grid>
 </Page>
