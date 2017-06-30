@@ -63,11 +63,17 @@
     <Compile Include="DiNuan.xaml.cs">
       <DependentUpon>DiNuan.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Images\DianYuan.xaml.cs">
+    <Compile Include="DianYuan.xaml.cs">
       <DependentUpon>DianYuan.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GongHao.xaml.cs">
+      <DependentUpon>GongHao.xaml</DependentUpon>
     </Compile>
     <Compile Include="LED.xaml.cs">
       <DependentUpon>LED.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
     <Compile Include="XinFeng.xaml.cs">
       <DependentUpon>XinFeng.xaml</DependentUpon>
@@ -88,7 +94,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Images\DianYuan.xaml">
+    <Page Include="DianYuan.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GongHao.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -97,6 +107,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="LED.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -391,15 +405,14 @@
   <ItemGroup>
     <Resource Include="Demo.xml" />
     <Resource Include="Demo1.xml" />
-    <Resource Include="Images\LED\LED.jpg" />
-    <Resource Include="Images\LED\2尾.jpg" />
-    <Resource Include="Images\LED\Tou.jpg" />
-    <Resource Include="Images\LED\2绿色花边.jpg" />
-    <Resource Include="Images\LED\2背景色.jpg" />
     <Resource Include="Images\DianYuan\DianLiu.jpg" />
     <Resource Include="Images\DianYuan\XuXian.jpg" />
     <Resource Include="Images\DianYuan\DianYa.jpg" />
     <Resource Include="Images\DianYuan\DianYuan.jpg" />
+    <Resource Include="Images\LED\LED.jpg" />
+    <Resource Include="Images\GongHaoPai\BeiJing.jpg" />
+    <Resource Include="Images\Login\BenJing.jpg" />
+    <Resource Include="Images\LED\AnNiu.jpg" />
     <Content Include="Transmit.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

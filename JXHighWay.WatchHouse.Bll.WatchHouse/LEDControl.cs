@@ -9,6 +9,8 @@ using System.Drawing;
 using JXHighWay.WatchHouse.Helper;
 using System.IO;
 using System.Xml.Serialization;
+using MXKJ.DBMiddleWareLib;
+using JXHighWay.WatchHouse.EFModel;
 
 namespace JXHighWay.WatchHouse.Bll.Client
 {
@@ -17,6 +19,7 @@ namespace JXHighWay.WatchHouse.Bll.Client
         readonly string m_IPAddress;
         readonly int m_Heigth;
         readonly int m_Width;
+        BasicDBClass m_BasicDBClass = null;
 
         static System.IntPtr mInstance = System.IntPtr.Zero;
         static DateTime m_Time;
@@ -24,12 +27,38 @@ namespace JXHighWay.WatchHouse.Bll.Client
 
         ConfigbooXml m_ConfigbooXml = new ConfigbooXml();
 
-        public LEDControl(string IPAddress,int Heigth,int Width)
+        public LEDControl(int WatchHouseID,int Heigth,int Width)
         {
-            m_IPAddress = IPAddress;
+            m_IPAddress = getLEDIPAddress(WatchHouseID);
+            Config vConfig = new Config();
+            BasicDBClass.DataSource = vConfig.DBSource;
+            BasicDBClass.DBName = vConfig.DBName;
+            BasicDBClass.Port = vConfig.DBPort;
+            BasicDBClass.UserID = vConfig.DBUserName;
+            BasicDBClass.Password = vConfig.DBPassword;
+
+           
+
+
             m_Heigth = Heigth;
             m_Width = Width;
             HD_Transmit.InitTransmit();
+        }
+
+        string getLEDIPAddress( int WatchHouseID)
+        {
+            string vResult = "";
+            WatchHouseConfigEFModel vWatchHouseConfigEFModel = new WatchHouseConfigEFModel()
+            {
+                GangTingID = WatchHouseID
+            };
+
+            WatchHouseConfigEFModel[] vSelectResult = m_BasicDBClass.SelectRecordsEx(vWatchHouseConfigEFModel);
+            if (vResult != null && vResult.Length > 0)
+            {
+                vResult = vSelectResult[0].GuanGaoPingIP;
+            }
+            return vResult;
         }
 
         public void Init()

@@ -161,58 +161,56 @@
             <RowDefinition Height="151*" />
             <RowDefinition Height="153*" />
         </Grid.RowDefinitions>
-        <Image x:Name="image" HorizontalAlignment="Left" Height="147" VerticalAlignment="Top" Width="147" Grid.Column="1" Margin="31.667,2,0,0" Grid.Row="1" Source="DianYuan/DianYuan.jpg"/>
+        <Image x:Name="image" HorizontalAlignment="Left" Height="147" VerticalAlignment="Top" Width="147" Grid.Column="1" Margin="31.667,2,0,0" Grid.Row="1" Source="Images/DianYuan/DianYuan.jpg"/>
 
         <GroupBox Style="{StaticResource GroupboxWithoutWhiteBorder}" x:Name="groupBox_Copy4" Header="开关1" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="9.667,0,0,0" Height="146" Width="256" FontSize="18" Foreground="#FFF5F1F1" BorderBrush="#d6d9d9">
         </GroupBox>
 
-        <Image HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="61.667,17,0,0" Source="DianYuan/DianYa.jpg" Grid.Column="2"/>
+        <Image HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="61.667,17,0,0" Source="Images/DianYuan/DianYa.jpg" Grid.Column="2"/>
         <GroupBox Style="{StaticResource GroupboxWithoutWhiteBorder}" x:Name="groupBox_Copy" Header="开关2" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="10.333,0,0,0" Height="146" Width="256" FontSize="18" Foreground="#FFF5F1F1" BorderBrush="#d6d9d9">
             <CheckBox Content="" Style="{StaticResource OrangeSwitchStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="75,82,0,0"/>
         </GroupBox>
         <GroupBox Style="{StaticResource GroupboxWithoutWhiteBorder}" x:Name="groupBox_Copy1" Header="开关3" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="9.667,154,0,0" Height="146" Width="256" FontSize="18" Foreground="#FFF5F1F1" BorderBrush="#d6d9d9" Grid.RowSpan="2"/>
         <GroupBox Style="{StaticResource GroupboxWithoutWhiteBorder}" x:Name="groupBox_Copy2" Header="开关4" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="10.333,155,0,0" Height="146" Width="256" FontSize="18" Foreground="#FFF5F1F1" BorderBrush="#d6d9d9" Grid.RowSpan="2"/>
-        <GroupBox Style="{StaticResource GroupboxWithoutWhiteBorder}" x:Name="groupBox_Copy3" Header="开关5" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="9.667,1.333,0,0" Height="146" Width="256" FontSize="18" Foreground="#FFF5F1F1" BorderBrush="#d6d9d9" Grid.Row="2">
-            <CheckBox Content="" Style="{StaticResource OrangeSwitchStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="440,261,-290.001,-171.667"/>
-        </GroupBox>
+        <GroupBox Style="{StaticResource GroupboxWithoutWhiteBorder}" x:Name="groupBox_Copy3" Header="开关5" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="9.667,1.333,0,0" Height="146" Width="256" FontSize="18" Foreground="#FFF5F1F1" BorderBrush="#d6d9d9" Grid.Row="2"/>
         <GroupBox Style="{StaticResource GroupboxWithoutWhiteBorder}" x:Name="groupBox_Copy5" Header="开关6" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="12.333,1.333,0,0" Height="146" Width="256" FontSize="18" Foreground="#FFF5F1F1" BorderBrush="#d6d9d9" Grid.Row="2"/>
         <Label Content="电压:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="110.667,21,0,0" Foreground="#FFF3EAEA" FontSize="18"/>
         <Label Content="0V" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="160.667,22,0,0" Foreground="#FFF3EAEA" FontSize="18"/>
-        <Image HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="60.667,58,0,0" Source="DianYuan/DianLiu.jpg" Grid.Column="2"/>
+        <Image HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="60.667,58,0,0" Source="Images/DianYuan/DianLiu.jpg" Grid.Column="2"/>
         <Label Content="电流:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="109.667,64,0,0" Foreground="#FFF3EAEA" FontSize="18"/>
         <Label Content="0A" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="159.667,65,0,0" Foreground="#FFF3EAEA" FontSize="18"/>
-        <Image HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="66.333,19,0,0" Source="DianYuan/DianYa.jpg" Grid.Column="3"/>
+        <Image HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="66.333,19,0,0" Source="Images/DianYuan/DianLiu.jpg" Grid.Column="3"/>
         <Label Content="电压:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="115.333,23,0,0" Foreground="#FFF3EAEA" FontSize="18"/>
         <Label Content="0V" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="165.333,24,0,0" Foreground="#FFF3EAEA" FontSize="18"/>
-        <Image HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="66.333,59,0,0" Source="DianYuan/DianLiu.jpg" Grid.Column="3"/>
+        <Image HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="66.333,59,0,0" Source="Images/DianYuan/DianYa.jpg" Grid.Column="3"/>
         <Label Content="电流:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="115.333,65,0,0" Foreground="#FFF3EAEA" FontSize="18"/>
         <Label Content="0A" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="165.333,66,0,0" Foreground="#FFF3EAEA" FontSize="18"/>
-        <Image HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="61.667,17,0,0" Source="DianYuan/DianYa.jpg" Grid.Column="2" Grid.Row="1"/>
+        <Image HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="61.667,17,0,0" Source="Images/DianYuan/DianLiu.jpg" Grid.Column="2" Grid.Row="1"/>
         <Label Content="电压:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="110.667,21,0,0" Foreground="#FFF3EAEA" FontSize="18" Grid.Row="1"/>
         <Label Content="0V" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="160.667,22,0,0" Foreground="#FFF3EAEA" FontSize="18" Grid.Row="1"/>
-        <Image HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="61.667,57,0,0" Source="DianYuan/DianLiu.jpg" Grid.Column="2" Grid.Row="1"/>
+        <Image HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="61.667,57,0,0" Source="Images/DianYuan/DianYa.jpg" Grid.Column="2" Grid.Row="1"/>
         <Label Content="电流:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="110.667,63,0,0" Foreground="#FFF3EAEA" FontSize="18" Grid.Row="1"/>
         <Label Content="0A" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="160.667,64,0,0" Foreground="#FFF3EAEA" FontSize="18" Grid.Row="1"/>
-        <Image HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="66.333,16,0,0" Source="DianYuan/DianYa.jpg" Grid.Column="3" Grid.Row="1"/>
+        <Image HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="66.333,16,0,0" Source="Images/DianYuan/DianLiu.jpg" Grid.Column="3" Grid.Row="1"/>
         <Label Content="电压:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="115.333,20,0,0" Foreground="#FFF3EAEA" FontSize="18" Grid.Row="1"/>
         <Label Content="0V" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="165.333,21,0,0" Foreground="#FFF3EAEA" FontSize="18" Grid.Row="1"/>
-        <Image HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="66.333,58,0,0" Source="DianYuan/DianLiu.jpg" Grid.Column="3" Grid.Row="1"/>
+        <Image HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="66.333,58,0,0" Source="Images/DianYuan/DianYa.jpg" Grid.Column="3" Grid.Row="1"/>
         <Label Content="电流:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="115.333,64,0,0" Foreground="#FFF3EAEA" FontSize="18" Grid.Row="1"/>
         <Label Content="0A" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="165.333,65,0,0" Foreground="#FFF3EAEA" FontSize="18" Grid.Row="1"/>
         <CheckBox Content="" Style="{StaticResource OrangeSwitchStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="98.667,104,0,0"/>
         <CheckBox Content="" Style="{StaticResource OrangeSwitchStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="97.667,105,0,0" Grid.Row="1"/>
         <CheckBox Content="" Style="{StaticResource OrangeSwitchStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="95.333,105,0,0" Grid.Row="1"/>
-        <Image HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="60.667,22.333,0,0" Source="DianYuan/DianYa.jpg" Grid.Column="2" Grid.Row="2"/>
+        <Image HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="60.667,22.333,0,0" Source="Images/DianYuan/DianLiu.jpg" Grid.Column="2" Grid.Row="2"/>
         <Label Content="电压:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="109.667,26.333,0,0" Foreground="#FFF3EAEA" FontSize="18" Grid.Row="2"/>
         <Label Content="0V" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="159.667,27.333,0,0" Foreground="#FFF3EAEA" FontSize="18" Grid.Row="2"/>
-        <Image HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="59.667,63.333,0,0" Source="DianYuan/DianLiu.jpg" Grid.Column="2" Grid.Row="2"/>
+        <Image HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="59.667,63.333,0,0" Source="Images/DianYuan/DianYa.jpg" Grid.Column="2" Grid.Row="2"/>
         <Label Content="电流:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="108.667,69.333,0,0" Foreground="#FFF3EAEA" FontSize="18" Grid.Row="2"/>
         <Label Content="0A" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="158.667,70.333,0,0" Foreground="#FFF3EAEA" FontSize="18" Grid.Row="2"/>
         <CheckBox Content="" Style="{StaticResource OrangeSwitchStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="97.667,108.333,0,0" Grid.Row="2"/>
-        <Image HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="66.333,21.333,0,0" Source="DianYuan/DianYa.jpg" Grid.Column="3" Grid.Row="2"/>
+        <Image HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="66.333,21.333,0,0" Source="Images/DianYuan/DianLiu.jpg" Grid.Column="3" Grid.Row="2"/>
         <Label Content="电压:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="115.333,25.333,0,0" Foreground="#FFF3EAEA" FontSize="18" Grid.Row="2"/>
         <Label Content="0V" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="165.333,26.333,0,0" Foreground="#FFF3EAEA" FontSize="18" Grid.Row="2"/>
-        <Image HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="66.333,63.333,0,0" Source="DianYuan/DianLiu.jpg" Grid.Column="3" Grid.Row="2"/>
+        <Image HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="66.333,63.333,0,0" Source="Images/DianYuan/DianYa.jpg" Grid.Column="3" Grid.Row="2"/>
         <Label Content="电流:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="115.333,69.333,0,0" Foreground="#FFF3EAEA" FontSize="18" Grid.Row="2"/>
         <Label Content="0A" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="165.333,70.333,0,0" Foreground="#FFF3EAEA" FontSize="18" Grid.Row="2"/>
         <CheckBox Content="" Style="{StaticResource OrangeSwitchStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="95.333,110.333,0,0" Grid.Row="2"/>

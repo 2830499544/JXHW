@@ -151,10 +151,29 @@ namespace JXHighWay.WatchHouse.WFPClient
             // Change the page of the frame.
             if (pageFrame != null)
             {
-                pageFrame.Source = new Uri("DiNuan.xaml", UriKind.Relative);
+                pageFrame.Source = new Uri("DianYuan.xaml", UriKind.Relative);
 
                 Window vWin = Window.GetWindow(this);
-                App.ChangeNavigation(3, vWin, "地暖");
+                App.ChangeNavigation(3, vWin, "电源");
+            }
+        }
+
+        private void Image_GongHao_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Frame pageFrame = null;
+            DependencyObject currParent = VisualTreeHelper.GetParent(this);
+            while (currParent != null && pageFrame == null)
+            {
+                pageFrame = currParent as Frame;
+                currParent = VisualTreeHelper.GetParent(currParent);
+            }
+            // Change the page of the frame.
+            if (pageFrame != null)
+            {
+                pageFrame.Source = new Uri("GongHao.xaml", UriKind.Relative);
+
+                Window vWin = Window.GetWindow(this);
+                App.ChangeNavigation(3, vWin, "电子工号牌");
             }
         }
     }

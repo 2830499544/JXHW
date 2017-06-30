@@ -112,7 +112,7 @@
             </Image.Style>
         </Image>
         <Label x:Name="label_Copy5" Content="地　暖" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="72,191,0,0" FontSize="18" Foreground="WhiteSmoke" Grid.Row="1"/>
-        <Image x:Name="Image_GongHao" Grid.Column="4" HorizontalAlignment="Left" Height="166" Margin="26,32,0,0" VerticalAlignment="Top" Width="152" Grid.Row="1" Cursor="Hand" >
+        <Image x:Name="Image_GongHao" Grid.Column="4" HorizontalAlignment="Left" Height="166" Margin="26,32,0,0" VerticalAlignment="Top" Width="152" Grid.Row="1" Cursor="Hand" MouseLeftButtonDown="Image_GongHao_MouseLeftButtonDown" >
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
                     <Setter Property="Source" Value="Images/GanTingMingXi/DianZhiPai.jpg"/>

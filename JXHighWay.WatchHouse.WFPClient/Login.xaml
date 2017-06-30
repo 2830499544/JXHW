@@ -1,0 +1,16 @@
+﻿<Window x:Class="JXHighWay.WatchHouse.WFPClient.Login"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:JXHighWay.WatchHouse.WFPClient"
+        mc:Ignorable="d"
+        Title="Login" Height="546.093" Width="692.299">
+    <Grid>
+        <Image x:Name="image" HorizontalAlignment="Left" Height="514" VerticalAlignment="Top" Width="698" Source="Images/Login/BenJing.jpg"/>
+        <Image x:Name="image1" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="150" Margin="268,290,0,0" Source="Images/LED/AnNiu.jpg"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="135" Margin="286,210,0,0"/>
+        <TextBox x:Name="textBox_Copy" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="135" Margin="287,252,0,0"/>
+
+    </Grid>
+</Window>
