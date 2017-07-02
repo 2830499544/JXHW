@@ -3,8 +3,8 @@ using MXKJ.DBMiddleWareLib;
 
 namespace JXHighWay.WatchHouse.EFModel
 {
-    [TableAttrib("发送命令", "ID")]
-    public struct SendCMDEFModel
+    [TableAttrib("岗亭发送命令", "ID")]
+    public struct WatchHouseSendCMDEFModel
     {
         [ColumnAttrib("ID")]
         public int? ID { get; set; }

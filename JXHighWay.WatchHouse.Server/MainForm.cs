@@ -118,5 +118,18 @@ namespace JXHighWay.WatchHouse.Server
             WatchHouseConfigForm vWatchHouseConfigForm = new WatchHouseConfigForm();
             vWatchHouseConfigForm.ShowDialog();
         }
+
+        PowerControl vPowerControl;
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            vPowerControl = new PowerControl();
+            vPowerControl.Start();
+            
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            vPowerControl.Send();
+        }
     }
 }

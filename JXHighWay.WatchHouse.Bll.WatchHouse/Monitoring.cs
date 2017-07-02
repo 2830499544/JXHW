@@ -33,7 +33,7 @@ namespace JXHighWay.WatchHouse.Bll.Client
             bool vResult = false;
             await Task.Run(() =>
             {
-                SendCMDEFModel vSendCMDEFModel = new SendCMDEFModel()
+                WatchHouseSendCMDEFModel vSendCMDEFModel = new WatchHouseSendCMDEFModel()
                 {
                     GangTingID = WatchHouseID,
                     ID_H = (byte)((int)Command >> 24),
@@ -48,7 +48,7 @@ namespace JXHighWay.WatchHouse.Bll.Client
                 };
                 int vID = m_BasicDBClass.InsertRecord(vSendCMDEFModel);
                 Thread.Sleep(1000);
-                SendCMDEFModel vSelectResult = m_BasicDBClass.SelectRecordByPrimaryKeyEx<SendCMDEFModel>(vID);
+                WatchHouseSendCMDEFModel vSelectResult = m_BasicDBClass.SelectRecordByPrimaryKeyEx<WatchHouseSendCMDEFModel>(vID);
                 vResult = vSelectResult.State??false;
             });
             return vResult;
@@ -77,8 +77,8 @@ namespace JXHighWay.WatchHouse.Bll.Client
                     LeiXin = vTempWatchHouse.LeiXin,
                     ID = vTempWatchHouse.ID,
                     ShouFeiZhangID = vTempWatchHouse.ShouFeiZhangID,
-                    TongXunSJ = vTempWatchHouse.TongXunSJ,
-                    IsOnline = isOnline(vTempWatchHouse.TongXunSJ )
+                    TongXunSJ = vTempWatchHouse.GangTingTXSJ,
+                    IsOnline = isOnline(vTempWatchHouse.GangTingTXSJ )
                 });
             }
             return vResut;

@@ -30,14 +30,17 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.ToolStripMenuItem_Setup = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItem_Setup_Employee = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_Setup_WatchHouse = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_Setup_Administrator = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button_Stop = new System.Windows.Forms.Button();
             this.button_Start = new System.Windows.Forms.Button();
-            this.ToolStripMenuItem_Setup_Employee = new System.Windows.Forms.ToolStripMenuItem();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -62,22 +65,31 @@
             this.ToolStripMenuItem_Setup.Size = new System.Drawing.Size(44, 22);
             this.ToolStripMenuItem_Setup.Text = "设置";
             // 
+            // ToolStripMenuItem_Setup_Employee
+            // 
+            this.ToolStripMenuItem_Setup_Employee.Name = "ToolStripMenuItem_Setup_Employee";
+            this.ToolStripMenuItem_Setup_Employee.Size = new System.Drawing.Size(136, 22);
+            this.ToolStripMenuItem_Setup_Employee.Text = "人员设置";
+            this.ToolStripMenuItem_Setup_Employee.Click += new System.EventHandler(this.ToolStripMenuItem_Setup_Employee_Click);
+            // 
             // ToolStripMenuItem_Setup_WatchHouse
             // 
             this.ToolStripMenuItem_Setup_WatchHouse.Name = "ToolStripMenuItem_Setup_WatchHouse";
-            this.ToolStripMenuItem_Setup_WatchHouse.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem_Setup_WatchHouse.Size = new System.Drawing.Size(136, 22);
             this.ToolStripMenuItem_Setup_WatchHouse.Text = "岗亭设置";
             this.ToolStripMenuItem_Setup_WatchHouse.Click += new System.EventHandler(this.ToolStripMenuItem_Setup_WatchHouse_Click);
             // 
             // ToolStripMenuItem_Setup_Administrator
             // 
             this.ToolStripMenuItem_Setup_Administrator.Name = "ToolStripMenuItem_Setup_Administrator";
-            this.ToolStripMenuItem_Setup_Administrator.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem_Setup_Administrator.Size = new System.Drawing.Size(136, 22);
             this.ToolStripMenuItem_Setup_Administrator.Text = "管理员设置";
             this.ToolStripMenuItem_Setup_Administrator.Click += new System.EventHandler(this.ToolStripMenuItem_Setup_Administrator_Click);
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button2);
+            this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(0, 24);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
@@ -93,7 +105,7 @@
             this.button_Stop.Enabled = false;
             this.button_Stop.Image = global::JXHighWay.WatchHouse.Server.Properties.Resources.Stop;
             this.button_Stop.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button_Stop.Location = new System.Drawing.Point(196, 157);
+            this.button_Stop.Location = new System.Drawing.Point(186, 157);
             this.button_Stop.Name = "button_Stop";
             this.button_Stop.Size = new System.Drawing.Size(82, 44);
             this.button_Stop.TabIndex = 1;
@@ -106,7 +118,7 @@
             // 
             this.button_Start.Image = global::JXHighWay.WatchHouse.Server.Properties.Resources.Start;
             this.button_Start.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button_Start.Location = new System.Drawing.Point(73, 157);
+            this.button_Start.Location = new System.Drawing.Point(52, 157);
             this.button_Start.Name = "button_Start";
             this.button_Start.Size = new System.Drawing.Size(82, 44);
             this.button_Start.TabIndex = 0;
@@ -115,12 +127,25 @@
             this.button_Start.UseVisualStyleBackColor = true;
             this.button_Start.Click += new System.EventHandler(this.button_OK_Click);
             // 
-            // ToolStripMenuItem_Setup_Employee
+            // button1
             // 
-            this.ToolStripMenuItem_Setup_Employee.Name = "ToolStripMenuItem_Setup_Employee";
-            this.ToolStripMenuItem_Setup_Employee.Size = new System.Drawing.Size(152, 22);
-            this.ToolStripMenuItem_Setup_Employee.Text = "人员设置";
-            this.ToolStripMenuItem_Setup_Employee.Click += new System.EventHandler(this.ToolStripMenuItem_Setup_Employee_Click);
+            this.button1.Location = new System.Drawing.Point(239, 19);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(239, 62);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 5;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // MainForm
             // 
@@ -138,6 +163,7 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -154,6 +180,8 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_Setup_Administrator;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
 

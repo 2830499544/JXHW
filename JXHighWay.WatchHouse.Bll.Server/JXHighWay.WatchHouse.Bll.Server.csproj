@@ -42,8 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Administrator.cs" />
+    <Compile Include="BasicControl.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="Manager.cs" />
+    <Compile Include="PowerControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SendCMDModel.cs" />
     <Compile Include="Config.cs" />

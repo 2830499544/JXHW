@@ -44,7 +44,8 @@
     <Compile Include="DoorGuardEFModel.cs" />
     <Compile Include="EmployeeEFModel.cs" />
     <Compile Include="IDCardEFModel.cs" />
-    <Compile Include="SendCMDEFModel.cs" />
+    <Compile Include="PowerDataEFModel.cs" />
+    <Compile Include="WatchHouseSendCMDEFModel.cs" />
     <Compile Include="WatchHouseConfigEFModel.cs" />
     <Compile Include="WathHouseDataEFModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -13,51 +13,20 @@ using System.Threading;
 
 namespace JXHighWay.WatchHouse.Bll.Server
 {
-    public class WatchHouseControl
+    public class WatchHouseControl:BasicControl
     {
-        SocketManager m_SocketManager;
-        BasicDBClass m_BasicDBClass_Receive;
-        BasicDBClass m_BasicDBClass_Send;
-        BasicDBClass m_BasicDBClass_Return;
-
-        /// <summary>
-        /// 接收岗亭状态数据队列
-        /// </summary>
-        public Queue<WHQueueModel> ReceiveQueue { get; set; }
-        /// <summary>
-        /// 接收已发送命令的返回状态队列
-        /// </summary>
-        //List<SendCMDModel> m_ReturSendCMDList { get; set; }
-        //List<AsyncUserToken> ClientList { get; set; }
         /// <summary>
         /// 收费站字典表
         /// </summary>
         Dictionary<int, string> m_ClientDict { get; set; }
-        readonly int Port;
-        /// <summary>
-        /// 缓冲区大小
-        /// </summary>
-        const int BufferSize= 1024;
-        /// <summary>
-        /// 最大连接数
-        /// </summary>
-        const int MaxConnNum = 100;
+
 
         bool m_IsRun = false;
 
         public WatchHouseControl( )
         {
-            
             Config vConfig = new Config();
             Port = vConfig.WatchHousePort;
-            BasicDBClass.DataSource = vConfig.DBSource;
-            BasicDBClass.DBName = vConfig.DBName;
-            BasicDBClass.Port = vConfig.DBPort;
-            BasicDBClass.UserID = vConfig.DBUserName;
-            BasicDBClass.Password = vConfig.DBPassword;
-            m_BasicDBClass_Receive = new BasicDBClass(DataBaseType.MySql);
-            m_BasicDBClass_Send = new BasicDBClass(DataBaseType.MySql);
-            m_BasicDBClass_Return = new BasicDBClass(DataBaseType.MySql);
             m_ClientDict = new Dictionary<int, string>();
             //m_ReturSendCMDList = new List<SendCMDModel>();
         }
@@ -117,6 +86,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
             //throw new NotImplementedException();
         }
 
+
         #region 发送指令
 
         async void asyncProcessorDBSendCMD()
@@ -125,12 +95,12 @@ namespace JXHighWay.WatchHouse.Bll.Server
             {
                 while (m_IsRun)
                 {
-                    SendCMDEFModel vModel = new SendCMDEFModel()
+                    WatchHouseSendCMDEFModel vModel = new WatchHouseSendCMDEFModel()
                     {
                         IsSend = false
                     };
                     var vSelectResult = m_BasicDBClass_Send.SelectRecordsEx(vModel);
-                    foreach (SendCMDEFModel vTempResult in vSelectResult)
+                    foreach (WatchHouseSendCMDEFModel vTempResult in vSelectResult)
                     {
                         AsyncUserToken vAsyncUserToken = findAsyncUserToken(vTempResult.GangTingID.Value);
                         if (vAsyncUserToken != null)
@@ -170,7 +140,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
                             //更新数据库状态
                             vModel.IsSend = true;
                             vModel.ID = vTempResult.ID;
-                            m_BasicDBClass_Send.UpdateRecord<SendCMDEFModel>(vModel);
+                            m_BasicDBClass_Send.UpdateRecord<WatchHouseSendCMDEFModel>(vModel);
                         }
                     }
                 }
@@ -231,7 +201,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
             bool vResult = false;
             await Task.Run(() =>
             {
-                SendCMDEFModel vSendCMDEFModel = new SendCMDEFModel()
+                WatchHouseSendCMDEFModel vSendCMDEFModel = new WatchHouseSendCMDEFModel()
                 {
                     GangTingID = WatchHouseID,
                     ID_H = (byte)((int)Command >> 24),
@@ -244,9 +214,9 @@ namespace JXHighWay.WatchHouse.Bll.Server
                 };
                 int vID = m_BasicDBClass_Receive.InsertRecord(vSendCMDEFModel);
                 Thread.Sleep(1000);
-                SendCMDEFModel vSelectResult = m_BasicDBClass_Receive.SelectRecordByPrimaryKeyEx<SendCMDEFModel>(vID);
+                WatchHouseSendCMDEFModel vSelectResult = m_BasicDBClass_Receive.SelectRecordByPrimaryKeyEx<WatchHouseSendCMDEFModel>(vID);
                 vResult = vSelectResult.State??false;
-                vSendCMDEFModel = new SendCMDEFModel()
+                vSendCMDEFModel = new WatchHouseSendCMDEFModel()
                 {
                     ID = vID,
                     State = false
@@ -511,7 +481,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
             //vResult = vFindResult.State;
             int vGangTingID = BitConverter.ToInt32(new byte[] { vData.WatchHouseID4, vData.WatchHouseID3, vData.WatchHouseID2, vData.WatchHouseID1 }, 0);
             short vSN = BitConverter.ToInt16(new byte[] { vData.SN1, vData.SN2 }, 0);
-            SendCMDEFModel vSendCMDModel = new SendCMDEFModel()
+            WatchHouseSendCMDEFModel vSendCMDModel = new WatchHouseSendCMDEFModel()
             {
                 State = vData.Data == 0x5a ? true : false,
                 IsReply = true
@@ -559,14 +529,16 @@ namespace JXHighWay.WatchHouse.Bll.Server
                 };
                 WatchHouseConfigEFModel vWatchHouseConfigEFModel = new WatchHouseConfigEFModel()
                 {
-                    TongXunSJ = DateTime.Now,
+                    GangTingTXSJ = DateTime.Now,
                     GangTingIP = IPAddress
                 };
                 m_BasicDBClass_Receive.TransactionBegin();
                 m_BasicDBClass_Receive.InsertRecord(vModel);
                 m_BasicDBClass_Receive.UpdateRecord(vWatchHouseConfigEFModel, string.Format("GangTingID={0}", vModel.WatchHouseID));
                 m_BasicDBClass_Receive.TransactionCommit();
-                m_ClientDict[vModel.WatchHouseID.Value] = IPAddress;
+                //更新客户端字典表
+                if (m_ClientDict.ContainsKey(vModel.WatchHouseID.Value) )
+                    m_ClientDict[vModel.WatchHouseID.Value] = IPAddress;
             }
             catch(Exception ex)
             {

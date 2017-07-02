@@ -13,9 +13,13 @@ namespace JXHighWay.WatchHouse.Bll.Server
 
         Configuration m_Configuration = null;
         /// <summary>
-        /// 远程服务器地址
+        /// 岗亭监听端口
         /// </summary>
         public int WatchHousePort { get; set; }
+        /// <summary>
+        /// 电源监听端口
+        /// </summary>
+        public int PowerPort { get; set; }
 
         public string DBSource { get; set; }
         public string DBName { get; set; }
@@ -31,6 +35,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
             m_Configuration = System.Configuration.ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
 
             WatchHousePort = int.Parse( m_Configuration.AppSettings.Settings["WatchHousePort"].Value );
+            PowerPort = int.Parse(m_Configuration.AppSettings.Settings["PowerPort"].Value);
             DBSource = m_Configuration.AppSettings.Settings["DBSource"].Value;
             DBName = m_Configuration.AppSettings.Settings["DBName"].Value;
             DBPort = int.Parse( m_Configuration.AppSettings.Settings["DBPort"].Value );
@@ -43,8 +48,9 @@ namespace JXHighWay.WatchHouse.Bll.Server
         #region 公有方法
         public void Save()
         {
-            //远程服务器
+            //监听端口
             m_Configuration.AppSettings.Settings["WatchHousePort"].Value = WatchHousePort.ToString();
+            m_Configuration.AppSettings.Settings["PowerPort"].Value = PowerPort.ToString();
 
             m_Configuration.AppSettings.Settings["DBSource"].Value = DBSource;
             m_Configuration.AppSettings.Settings["DBName"].Value = DBName;
