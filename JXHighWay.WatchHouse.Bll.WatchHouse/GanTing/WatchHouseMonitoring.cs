@@ -9,24 +9,15 @@ using JXHighWay.WatchHouse.Net;
 using JXHighWay.WatchHouse.Helper;
 using System.Threading;
 
-namespace JXHighWay.WatchHouse.Bll.Client
+namespace JXHighWay.WatchHouse.Bll.Client.GanTing
 {
-    public class WatchHouseMonitoring
+    public class WatchHouseMonitoring:BasicMonitoring
     {
-        BasicDBClass m_BasicDBClass = null;
-        int m_OfflineTime = 10;
+
         public WatchHouseMonitoring()
         {
-            Config vConfig = new Config();
-            BasicDBClass.DataSource = vConfig.DBSource;
-            BasicDBClass.DBName = vConfig.DBName;
-            BasicDBClass.Port = vConfig.DBPort;
-            BasicDBClass.UserID = vConfig.DBUserName;
-            BasicDBClass.Password = vConfig.DBPassword;
-            m_OfflineTime = vConfig.OfflineTime;
-            m_BasicDBClass = new BasicDBClass( DataBaseType.MySql);
+            
         }
-
 
         public async Task<bool> AsyncSendCommandToDB(int WatchHouseID, WatchHouseDataPack_Send_CommandEnmu Command)
         {
@@ -56,13 +47,13 @@ namespace JXHighWay.WatchHouse.Bll.Client
 
 
         
-        public List<WatchHouseInfoModel> GetAllWatchHouseInfo()
+        public List<WatchHouseInfo> GetAllWatchHouseInfo()
         {
             WatchHouseConfigEFModel[] vWatchHouseInfoArray =  m_BasicDBClass.SelectAllRecordsEx<WatchHouseConfigEFModel>();
-            List<WatchHouseInfoModel> vResut = new List<WatchHouseInfoModel>();
+            List<WatchHouseInfo> vResut = new List<WatchHouseInfo>();
             foreach (WatchHouseConfigEFModel vTempWatchHouse in vWatchHouseInfoArray)
             {
-                vResut.Add(new WatchHouseInfoModel()
+                vResut.Add(new WatchHouseInfo()
                 {
                     DianYuanDK = vTempWatchHouse.DianYuanDK,
                     DianYuanIP = vTempWatchHouse.DianYuanIP,
@@ -95,10 +86,10 @@ namespace JXHighWay.WatchHouse.Bll.Client
             return vResult;
         }
 
-        public DiNuanStateModel DiNuan(int WatchHouseID)
+        public DiNuanStateInfo DiNuan(int WatchHouseID)
         {
             WathHouseDataEFModel vNewData = getNewData(WatchHouseID);
-            DiNuanStateModel vResult = new DiNuanStateModel();
+            DiNuanStateInfo vResult = new DiNuanStateInfo();
             if (vNewData.WatchHouseID != null)
             {
                 vResult.DanQianWD = vNewData.CaiLuanKZWBWD??0;
@@ -115,10 +106,10 @@ namespace JXHighWay.WatchHouse.Bll.Client
         /// </summary>
         /// <param name="WatchHouseID">岗亭编号</param>
         /// <returns></returns>
-        public MenChuangStateModel MenChuangState(int WatchHouseID)
+        public MenChuangStateInfo MenChuangState(int WatchHouseID)
         {
             WathHouseDataEFModel vNewData = getNewData(WatchHouseID);
-            MenChuangStateModel vResult = new MenChuangStateModel();
+            MenChuangStateInfo vResult = new MenChuangStateInfo();
             if (vNewData.WatchHouseID != null)
             {
                 vResult.BaoJinQi = vNewData.BaoJingQi=="闭"?false:true;
@@ -136,10 +127,10 @@ namespace JXHighWay.WatchHouse.Bll.Client
         /// </summary>
         /// <param name="WatchHouseID"></param>
         /// <returns></returns>
-        public DengGuanStateModel DuangGuanState(int WatchHouseID)
+        public DengGuanStateInfo DuangGuanState(int WatchHouseID)
         {
             WathHouseDataEFModel vNewData = getNewData(WatchHouseID);
-            DengGuanStateModel vResult = new DengGuanStateModel();
+            DengGuanStateInfo vResult = new DengGuanStateInfo();
             if (vNewData.WatchHouseID != null)
             {
                 vResult.IsOpen = vNewData.Deng == "闭" ? false : true;
@@ -153,10 +144,10 @@ namespace JXHighWay.WatchHouse.Bll.Client
         /// </summary>
         /// <param name="WatchHouseID"></param>
         /// <returns></returns>
-        public KongTiaoStateModel KongTiaoState(int WatchHouseID)
+        public KongTiaoStateInfo KongTiaoState(int WatchHouseID)
         {
             WathHouseDataEFModel vNewData = getNewData(WatchHouseID);
-            KongTiaoStateModel vResult = new KongTiaoStateModel();
+            KongTiaoStateInfo vResult = new KongTiaoStateInfo();
             if (vNewData.WatchHouseID != null)
             {
                 vResult.IsOpen = vNewData.KongTiao == "闭" ? false : true;
@@ -167,10 +158,10 @@ namespace JXHighWay.WatchHouse.Bll.Client
             return vResult;
         }
 
-        public XinFengStateModel XinFengState( int WatchHouseID )
+        public XinFengStateInfo XinFengState( int WatchHouseID )
         {
             WathHouseDataEFModel vNewData = getNewData(WatchHouseID);
-            XinFengStateModel vResutl = new XinFengStateModel();
+            XinFengStateInfo vResutl = new XinFengStateInfo();
             if ( vNewData.WatchHouseID != null )
             {
                 vResutl.IsOpen = vNewData.XinFeng == "闭" ? false : true;

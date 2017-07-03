@@ -15,10 +15,6 @@ namespace JXHighWay.WatchHouse.Bll.Server
 {
     public class WatchHouseControl:BasicControl
     {
-        /// <summary>
-        /// 收费站字典表
-        /// </summary>
-        Dictionary<int, string> m_ClientDict { get; set; }
 
 
         bool m_IsRun = false;
@@ -27,8 +23,6 @@ namespace JXHighWay.WatchHouse.Bll.Server
         {
             Config vConfig = new Config();
             Port = vConfig.WatchHousePort;
-            m_ClientDict = new Dictionary<int, string>();
-            //m_ReturSendCMDList = new List<SendCMDModel>();
         }
 
         public void Start()
@@ -247,17 +241,6 @@ namespace JXHighWay.WatchHouse.Bll.Server
             return vResult;
         }
 
-        AsyncUserToken findAsyncUserToken(int WatchHouseID)
-        {
-            AsyncUserToken vResult = null;
-            if ( m_ClientDict.ContainsKey(WatchHouseID) )
-            {
-                string vIPAddress = m_ClientDict[WatchHouseID];
-                vResult = m_SocketManager.ClientList.Where(m => m.IPAddress.ToString() == vIPAddress).FirstOrDefault();
-            }
-
-            return vResult;
-        }
         #endregion
 
 

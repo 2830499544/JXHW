@@ -53,7 +53,7 @@ namespace JXHighWay.WatchHouse.WFPClient
         WatchHouseMonitoring m_Monitoring = null;
         void initMenChaung()
         {
-            MenChuangStateModel vMenChuangStateModel =  m_Monitoring.MenChuangState(App.WatchHouseID);
+            MenChuangStateInfo vMenChuangStateModel =  m_Monitoring.MenChuangState(App.WatchHouseID);
             CheckBox_BaoJingQi.IsChecked = vMenChuangStateModel.BaoJinQi;
             CheckBox_Chuang.IsChecked = vMenChuangStateModel.Chuang;
             CheckBox_FengMu.IsChecked = vMenChuangStateModel.FengMu;

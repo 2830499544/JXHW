@@ -23,7 +23,7 @@ namespace JXHighWay.WatchHouse.Server
         {
             OpenFileDialog vOpenFileDialog = new OpenFileDialog();
             vOpenFileDialog.Multiselect = false;
-            vOpenFileDialog.Filter = "Jpg files (*.jpg)|*.jpg";
+            vOpenFileDialog.Filter = "Png files (*.png)|*.png";
             if ( vOpenFileDialog.ShowDialog() == DialogResult.OK)
             {
                 pictureBox_Photo.Image = Image.FromFile( vOpenFileDialog.FileName );

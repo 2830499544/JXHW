@@ -105,7 +105,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                     
                     Action action1 = () =>
                     {
-                        DengGuanStateModel vState = m_Monitoring.DuangGuanState(App.WatchHouseID);
+                        DengGuanStateInfo vState = m_Monitoring.DuangGuanState(App.WatchHouseID);
                         CheckBox_Switch.IsChecked = vState.IsOpen;
                         Label_LD.Content = string.Format("{0}%", vState.LianDu);
                         switch( vState.LianDu )

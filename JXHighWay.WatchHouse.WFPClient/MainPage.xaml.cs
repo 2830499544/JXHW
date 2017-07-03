@@ -106,7 +106,7 @@ namespace JXHighWay.WatchHouse.WFPClient
         {
             //初始化岗亭信息
             WatchHouseMonitoring vMonitoring = new WatchHouseMonitoring();
-            List<WatchHouseInfoModel> WatchHouseInfoList = vMonitoring.GetAllWatchHouseInfo();
+            List<WatchHouseInfo> WatchHouseInfoList = vMonitoring.GetAllWatchHouseInfo();
             for (int i = 0; i <= 7; i++)
             {
                 if (i < WatchHouseInfoList.Count)

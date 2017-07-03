@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JXHighWay.WatchHouse.Bll.Client
+namespace JXHighWay.WatchHouse.Bll.Client.GanTing
 {
-    public class KongTiaoStateModel
+    public class KongTiaoStateInfo
     {
         public bool IsOpen { get; set; }
         public short ShiLeiWD { get; set; }

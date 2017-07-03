@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JXHighWay.WatchHouse.Bll.Client
+namespace JXHighWay.WatchHouse.Bll.Client.GanTing
 {
-    public class WatchHouseInfoModel
+    public class WatchHouseInfo
     {
 
         public int? ID { get; set; }

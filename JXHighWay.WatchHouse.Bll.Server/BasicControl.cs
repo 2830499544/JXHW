@@ -49,7 +49,20 @@ namespace JXHighWay.WatchHouse.Bll.Server
             m_BasicDBClass_Receive = new BasicDBClass(DataBaseType.MySql);
             m_BasicDBClass_Send = new BasicDBClass(DataBaseType.MySql);
             m_BasicDBClass_Return = new BasicDBClass(DataBaseType.MySql);
+            m_ClientDict = new Dictionary<int, string>();
 
+        }
+
+        protected AsyncUserToken findAsyncUserToken(int id)
+        {
+            AsyncUserToken vResult = null;
+            if (m_ClientDict.ContainsKey(id))
+            {
+                string vIPAddress = m_ClientDict[id];
+                vResult = m_SocketManager.ClientList.Where(m => m.IPAddress.ToString() == vIPAddress).FirstOrDefault();
+            }
+
+            return vResult;
         }
 
     }

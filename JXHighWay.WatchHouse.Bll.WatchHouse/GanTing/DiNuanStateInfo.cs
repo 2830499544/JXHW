@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JXHighWay.WatchHouse.Bll.Client
+namespace JXHighWay.WatchHouse.Bll.Client.GanTing
 {
-    public class DiNuanStateModel
+    public class DiNuanStateInfo
     {
         public bool DiNuan { get; set; }
 

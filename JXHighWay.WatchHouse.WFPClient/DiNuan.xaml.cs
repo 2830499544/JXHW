@@ -54,7 +54,7 @@ namespace JXHighWay.WatchHouse.WFPClient
         void initDiNuan()
         {
             m_Monitoring = new WatchHouseMonitoring();
-            DiNuanStateModel vDiNuanStateModel =  m_Monitoring.DiNuan(App.WatchHouseID);
+            DiNuanStateInfo vDiNuanStateModel =  m_Monitoring.DiNuan(App.WatchHouseID);
             CheckBox_DiNuan.IsChecked = vDiNuanStateModel.DiNuan;
             CheckBox_YouJiao.IsChecked = vDiNuanStateModel.YouNuanJQ;
             CheckBox_ZuoJiao.IsChecked = vDiNuanStateModel.ZuoNuanJQ;

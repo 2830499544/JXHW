@@ -12,7 +12,7 @@ using System.Xml.Serialization;
 using MXKJ.DBMiddleWareLib;
 using JXHighWay.WatchHouse.EFModel;
 
-namespace JXHighWay.WatchHouse.Bll.Client
+namespace JXHighWay.WatchHouse.Bll.Client.LED
 {
     public class LEDControl
     {

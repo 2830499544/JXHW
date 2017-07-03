@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JXHighWay.WatchHouse.Bll.Client
+namespace JXHighWay.WatchHouse.Bll.Client.GanTing
 {
-    public class XinFengStateModel
+    public class XinFengStateInfo
     {
         public bool IsOpen { get; set; }
         public int DengJi { get; set; }

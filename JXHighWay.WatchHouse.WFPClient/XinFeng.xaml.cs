@@ -107,7 +107,7 @@ namespace JXHighWay.WatchHouse.WFPClient
 
         void initXinFeng()
         {
-            XinFengStateModel vXinFengStateModel =  m_Monitoring.XinFengState(App.WatchHouseID);
+            XinFengStateInfo vXinFengStateModel =  m_Monitoring.XinFengState(App.WatchHouseID);
             CheckBox_XinFeng.IsChecked = vXinFengStateModel.IsOpen;
             Label_DengJi.Content = string.Format("{0}级",vXinFengStateModel.DengJi);
             Label_WenDu.Content = vXinFengStateModel.WenDu.ToString();

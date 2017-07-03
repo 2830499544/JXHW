@@ -19,19 +19,34 @@ namespace JXHighWay.WatchHouse.Bll.Server
         {
             Config vConfig = new Config();
             Port = vConfig.PowerPort;
-            
         }
         
         public void Start()
         {
             ReceiveQueue = new Queue<WHQueueModel>();
             initPower();
+            m_IsRun = true;
 
             m_SocketManager = new SocketManager(MaxConnNum, BufferSize);
             m_SocketManager.ReceiveClientData += M_SocketManager_ReceiveClientData;
             m_SocketManager.Init();
             m_SocketManager.Start(new IPEndPoint(IPAddress.Any, Port));
+
+            //异步处理接收到的数据
+            asyncProcessorRecieveData();
+
+            //处理数据库中的待发送命令
+            asyncProcessorDBSendCMD();
+
         }
+
+        public void Stop()
+        {
+            m_IsRun = false;
+            m_SocketManager.Stop();
+            m_SocketManager = null;
+        }
+
 
         private void M_SocketManager_ReceiveClientData(Net.AsyncUserToken token, byte[] buff)
         {
@@ -85,7 +100,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
         }
 
 
-        #region 
+        #region 处理接收到的数据
         async void asyncProcessorRecieveData()
         {
             await processorReceiveData();
@@ -179,6 +194,57 @@ namespace JXHighWay.WatchHouse.Bll.Server
             {
                 Console.WriteLine( string.Format("插入数据至[岗亭数据表]中发生异常，异常信息为:{0}",ex.Message));
             }
+        }
+        #endregion
+
+        #region 处理需要发送的数据
+        async void asyncProcessorDBSendCMD()
+        {
+            await Task.Run(() =>
+            {
+                while (m_IsRun)
+                {
+                    PowerSendCMDEFModel vModel = new PowerSendCMDEFModel()
+                    {
+                        IsSend = false
+                    };
+                    var vSelectResult = m_BasicDBClass_Send.SelectRecordsEx(vModel);
+                    foreach (PowerSendCMDEFModel vTempResult in vSelectResult)
+                    {
+                        AsyncUserToken vAsyncUserToken = findAsyncUserToken(vTempResult.DianYuanID.Value);
+                        if (vAsyncUserToken != null)
+                        {
+                            PowerDataPack_Main vCommandDataPack = new PowerDataPack_Main()
+                            {
+                                Head = 0x5a,
+                                Tail = 0x5b,
+                                SN = vTempResult.SN ?? 0x00,
+                                CMD = vTempResult.CMD ?? 0x00,
+                                Addition = 0x00
+                            };
+                            byte[] vCMDDataPack = Helper.NetHelper.StructureToByte(vCommandDataPack);
+                            if ( vTempResult.Data != null )
+                            {
+                                byte[] vDataPack = System.Text.Encoding.Default.GetBytes(vTempResult.Data);
+                                Array.Copy(vDataPack, 0, vCMDDataPack, 5, vDataPack.Length);
+                            }
+                            byte[] vLength = BitConverter.GetBytes((short)vCMDDataPack.Length);
+                            //包长度
+                            vCMDDataPack[1] = vLength[0];
+                            vCMDDataPack[2] = vLength[1];
+                            //校验和 
+                            vCMDDataPack[vCMDDataPack.Length-2] = calcCheckCode(vCMDDataPack);
+
+                            m_SocketManager.SendMessage(vAsyncUserToken, vCMDDataPack);
+                            Console.WriteLine("发送命令数据包,IP地址({0}):{1}", vAsyncUserToken.IPAddress.ToString(), BitConverter.ToString(vCMDDataPack));
+                            //更新数据库状态
+                            vModel.IsSend = true;
+                            vModel.ID = vTempResult.ID;
+                            m_BasicDBClass_Send.UpdateRecord<PowerSendCMDEFModel>(vModel);
+                        }
+                    }
+                }
+            });
         }
         #endregion
     }

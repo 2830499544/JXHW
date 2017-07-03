@@ -42,16 +42,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BasicMonitoring.cs" />
     <Compile Include="Config.cs" />
-    <Compile Include="DengGuanStateModel.cs" />
-    <Compile Include="DiNuanStateModel.cs" />
-    <Compile Include="KongTiaoStateModel.cs" />
-    <Compile Include="LEDControl.cs" />
-    <Compile Include="MenChuangStateModel.cs" />
-    <Compile Include="Monitoring.cs" />
+    <Compile Include="DianYuan\DianYuanInfo.cs" />
+    <Compile Include="DianYuan\DianYuanMonitoring.cs" />
+    <Compile Include="GanTing\DengGuanStateInfo.cs" />
+    <Compile Include="GanTing\DiNuanStateInfo.cs" />
+    <Compile Include="GanTing\KongTiaoStateInfo.cs" />
+    <Compile Include="Led\LEDControl.cs" />
+    <Compile Include="GanTing\MenChuangStateInfo.cs" />
+    <Compile Include="GanTing\WatchHouseMonitoring.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WatchHouseInfoModel.cs" />
-    <Compile Include="XinFengStateModel.cs" />
+    <Compile Include="GanTing\WatchHouseInfo.cs" />
+    <Compile Include="GanTing\XinFengStateInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\DBMiddleWare\DBMiddleWareLib\DBMiddleWareLib.csproj">

@@ -158,7 +158,7 @@ namespace JXHighWay.WatchHouse.WFPClient
 
         void initKongTiao()
         {
-            KongTiaoStateModel vState = m_Monitoring.KongTiaoState(App.WatchHouseID);
+            KongTiaoStateInfo vState = m_Monitoring.KongTiaoState(App.WatchHouseID);
             CheckBox_KongTiao.IsChecked = vState.IsOpen;
             Label_ShiLeiWD.Content = string.Format("{0}℃", vState.ShiLeiWD);
             //模式
