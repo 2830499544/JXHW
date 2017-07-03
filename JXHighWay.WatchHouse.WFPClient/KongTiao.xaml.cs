@@ -1,4 +1,5 @@
 ﻿using JXHighWay.WatchHouse.Bll.Client;
+using JXHighWay.WatchHouse.Bll.Client.GanTing;
 using System;
 using System.Collections.Generic;
 using System.Linq;

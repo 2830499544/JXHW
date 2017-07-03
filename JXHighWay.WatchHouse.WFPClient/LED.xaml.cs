@@ -16,6 +16,7 @@ using JXHighWay.WatchHouse.Bll.Client;
 using JXHighWay.WatchHouse.LED;
 using System.Xml.Serialization;
 using System.IO;
+using JXHighWay.WatchHouse.Bll.Client.LED;
 
 namespace JXHighWay.WatchHouse.WFPClient
 {

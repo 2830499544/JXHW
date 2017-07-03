@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
 {
-    public class DianYuanInfo
+    public class PowerInfo
     {
         /// <summary>
         /// 路号

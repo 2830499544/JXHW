@@ -19,6 +19,40 @@ namespace JXHighWay.WatchHouse.Bll.Client.GanTing
             
         }
 
+        public async Task<bool> AsyncSendCommandToDB(int WatchHouseID, WatchHouseDataPack_Send_CommandEnmu Command,byte Data)
+        {
+            bool vResult = false;
+            await Task.Run(() =>
+            {
+                WatchHouseSendCMDEFModel vSendCMDEFModel = new WatchHouseSendCMDEFModel()
+                {
+                    GangTingID = WatchHouseID,
+                    ID_H = (byte)((int)Command >> 24),
+                    ID_L = (byte)((int)Command >> 16),
+                    CMD = (byte)((int)Command >> 8),
+                    SUB = (byte)((int)Command >> 0),
+                    SendTime = DateTime.Now,
+                    SN = BitConverter.ToInt16(NetHelper.MarkSN(), 0),
+                    State = false,
+                    IsSend = false,
+                    IsReply = false,
+                    Data = Data
+                };
+                int vID = m_BasicDBClass.InsertRecord(vSendCMDEFModel);
+                //Thread.Sleep(1000);
+                DateTime vStartTime = DateTime.Now;
+                do
+                {
+                    WatchHouseSendCMDEFModel vSelectResult = m_BasicDBClass.SelectRecordByPrimaryKeyEx<WatchHouseSendCMDEFModel>(vID);
+                    vResult = vSelectResult.State ?? false;
+                    if (!vResult && (DateTime.Now - vStartTime).TotalMilliseconds >= 1000)
+                        break;
+                    Thread.Sleep(200);
+                } while (!vResult);
+            });
+            return vResult;
+        }
+
         public async Task<bool> AsyncSendCommandToDB(int WatchHouseID, WatchHouseDataPack_Send_CommandEnmu Command)
         {
             bool vResult = false;
@@ -38,15 +72,20 @@ namespace JXHighWay.WatchHouse.Bll.Client.GanTing
                     IsReply = false
                 };
                 int vID = m_BasicDBClass.InsertRecord(vSendCMDEFModel);
-                Thread.Sleep(1000);
-                WatchHouseSendCMDEFModel vSelectResult = m_BasicDBClass.SelectRecordByPrimaryKeyEx<WatchHouseSendCMDEFModel>(vID);
-                vResult = vSelectResult.State??false;
+                //Thread.Sleep(1000);
+                DateTime vStartTime = DateTime.Now;
+                do
+                {
+                    WatchHouseSendCMDEFModel vSelectResult = m_BasicDBClass.SelectRecordByPrimaryKeyEx<WatchHouseSendCMDEFModel>(vID);
+                    vResult = vSelectResult.State ?? false;
+                    if (!vResult && (DateTime.Now - vStartTime).TotalMilliseconds >= 1000)
+                        break;
+                    Thread.Sleep(200);
+                } while (!vResult);
             });
             return vResult;
         }
 
-
-        
         public List<WatchHouseInfo> GetAllWatchHouseInfo()
         {
             WatchHouseConfigEFModel[] vWatchHouseInfoArray =  m_BasicDBClass.SelectAllRecordsEx<WatchHouseConfigEFModel>();

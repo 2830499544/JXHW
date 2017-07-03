@@ -222,21 +222,21 @@ namespace JXHighWay.WatchHouse.Bll.Server
                                 CMD = vTempResult.CMD ?? 0x00,
                                 Addition = 0x00
                             };
-                            byte[] vCMDDataPack = Helper.NetHelper.StructureToByte(vCommandDataPack);
+                            List<byte> vCMDDataPack = Helper.NetHelper.StructureToByte(vCommandDataPack).ToList();
                             if ( vTempResult.Data != null )
                             {
-                                byte[] vDataPack = System.Text.Encoding.Default.GetBytes(vTempResult.Data);
-                                Array.Copy(vDataPack, 0, vCMDDataPack, 5, vDataPack.Length);
+                                List<byte> vDataPack = System.Text.Encoding.Default.GetBytes(vTempResult.Data).ToList();
+                                vCMDDataPack.InsertRange(6, vDataPack);
                             }
-                            byte[] vLength = BitConverter.GetBytes((short)vCMDDataPack.Length);
+                            byte[] vLength = BitConverter.GetBytes((short)vCMDDataPack.Count);
                             //包长度
                             vCMDDataPack[1] = vLength[0];
                             vCMDDataPack[2] = vLength[1];
                             //校验和 
-                            vCMDDataPack[vCMDDataPack.Length-2] = calcCheckCode(vCMDDataPack);
+                            vCMDDataPack[vCMDDataPack.Count-2] = calcCheckCode(vCMDDataPack.ToArray());
 
-                            m_SocketManager.SendMessage(vAsyncUserToken, vCMDDataPack);
-                            Console.WriteLine("发送命令数据包,IP地址({0}):{1}", vAsyncUserToken.IPAddress.ToString(), BitConverter.ToString(vCMDDataPack));
+                            m_SocketManager.SendMessage(vAsyncUserToken, vCMDDataPack.ToArray());
+                            Console.WriteLine("发送命令数据包,IP地址({0}):{1}", vAsyncUserToken.IPAddress.ToString(), BitConverter.ToString(vCMDDataPack.ToArray()));
                             //更新数据库状态
                             vModel.IsSend = true;
                             vModel.ID = vTempResult.ID;

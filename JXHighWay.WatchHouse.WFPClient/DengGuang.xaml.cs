@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using JXHighWay.WatchHouse.Bll.Client;
 using JXHighWay.WatchHouse.Net;
 using System.Threading;
+using JXHighWay.WatchHouse.Bll.Client.GanTing;
 
 namespace JXHighWay.WatchHouse.WFPClient
 {
@@ -28,8 +29,9 @@ namespace JXHighWay.WatchHouse.WFPClient
             InitializeComponent();
         }
 
-        private void image_25_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private async void image_25_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, WatchHouseDataPack_Send_CommandEnmu.);
             luminance25();
         }
 
@@ -138,27 +140,43 @@ namespace JXHighWay.WatchHouse.WFPClient
             init();
         }
 
-        private void CheckBox_Switch_Checked(object sender, RoutedEventArgs e)
+        private async void CheckBox_Switch_Checked(object sender, RoutedEventArgs e)
         {
 
-            Action action1 = async () =>
+            //Action action1 = async () =>
+            //{
+            //    bool vResult;
+            //    if (CheckBox_Switch.IsChecked.Value)
+            //    {
+            //        vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, WatchHouseDataPack_Send_CommandEnmu.KaiDeng);
+            //    }
+            //    else
+            //    {
+            //        vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, WatchHouseDataPack_Send_CommandEnmu.GuanDeng);
+            //    }
+
+            //    if (!vResult)
+            //        CheckBox_Switch.IsChecked = !CheckBox_Switch.IsChecked;
+
+            //};
+            //Dispatcher.BeginInvoke(action1);
+
+            bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, WatchHouseDataPack_Send_CommandEnmu.KaiDeng);
+            if (!vResult)
             {
-                bool vResult;
-                if (CheckBox_Switch.IsChecked.Value)
-                {
-                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, WatchHouseDataPack_Send_CommandEnmu.KaiDeng);
-                }
-                else
-                {
-                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, WatchHouseDataPack_Send_CommandEnmu.GuanDeng);
-                }
+                CheckBox_Switch.IsChecked = false;
+                MessageBox.Show("开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
 
-                if (!vResult)
-                    CheckBox_Switch.IsChecked = !CheckBox_Switch.IsChecked;
-                
-            };
-            Dispatcher.BeginInvoke(action1);
-
+        private async void CheckBox_Switch_Unchecked(object sender, RoutedEventArgs e)
+        {
+            bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, WatchHouseDataPack_Send_CommandEnmu.GuanDeng);
+            if (!vResult)
+            {
+                CheckBox_Switch.IsChecked = false;
+                MessageBox.Show("开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

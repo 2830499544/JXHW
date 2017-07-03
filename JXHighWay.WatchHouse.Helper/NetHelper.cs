@@ -56,5 +56,13 @@ namespace JXHighWay.WatchHouse.Helper
             vRD.NextBytes(vResult);
             return vResult;
         }
+
+        public static byte MarkSN_Byte()
+        {
+            byte[] vResult = new byte[2];
+            Random vRD = new Random();
+            vRD.NextBytes(vResult);
+            return vResult[0];
+        }
     }
 }

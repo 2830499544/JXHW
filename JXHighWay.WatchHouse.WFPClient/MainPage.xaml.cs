@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using JXHighWay.WatchHouse.Bll.Client;
 using System.Threading;
+using JXHighWay.WatchHouse.Bll.Client.GanTing;
 
 namespace JXHighWay.WatchHouse.WFPClient
 {

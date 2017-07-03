@@ -21,8 +21,7 @@ namespace JXHighWay.WatchHouse.Server
         {
             InitializeComponent();
         }
-        SocketServer vSocketServer;
-        SocketManager vSocketManager;
+
         private void button_OK_Click(object sender, EventArgs e)
         {
             //WatchHouseDataPack vWatchHouse = new WatchHouseDataPack();
@@ -49,13 +48,17 @@ namespace JXHighWay.WatchHouse.Server
             //byte a = 1;
             //int size = Marshal.SizeOf(a);
             //aa vDataPack = new aa();
-            WatchHouseDataPack_Receive_Main vDataPack = new WatchHouseDataPack_Receive_Main();
-            int size = Marshal.SizeOf(vDataPack);
+            //WatchHouseDataPack_Receive_Main vDataPack = new WatchHouseDataPack_Receive_Main();
+            //int size = Marshal.SizeOf(vDataPack);
             try
             {
-                vWatchHouseControl.Start();
+                m_WatchHouseControl.Start();
+                m_PowerControl.Start();
+
                 button_Start.Enabled = false;
                 button_Stop.Enabled = true;
+
+
             }
             catch(Exception ex)
             {
@@ -63,13 +66,14 @@ namespace JXHighWay.WatchHouse.Server
             }
             
         }
-        WatchHouseControl vWatchHouseControl;
+        WatchHouseControl m_WatchHouseControl;
+        PowerControl m_PowerControl;
 
-        private void VSocketManager_ReceiveClientData(AsyncUserToken token, byte[] buff)
-        {
-            Console.WriteLine(string.Format("接收数据:IP->{0} 数据->{1}", token.IPAddress, System.Text.Encoding.Default.GetString(buff)));
-            vSocketManager.SendMessage(token, System.Text.Encoding.Default.GetBytes("ISOK"));
-        }
+        //private void VSocketManager_ReceiveClientData(AsyncUserToken token, byte[] buff)
+        //{
+        //    Console.WriteLine(string.Format("接收数据:IP->{0} 数据->{1}", token.IPAddress, System.Text.Encoding.Default.GetString(buff)));
+        //    vSocketManager.SendMessage(token, System.Text.Encoding.Default.GetBytes("ISOK"));
+        //}
 
         //private void VSocketManager_ReceiveClientData(AsyncUserToken token, byte[] buff)
         //{
@@ -81,7 +85,7 @@ namespace JXHighWay.WatchHouse.Server
         private void button1_Click(object sender, EventArgs e)
         {
             //vSocketServer.Send(vSocketServer.SAEADict.First().Value, new byte[] { 0x00,0x00});
-            vWatchHouseControl.Stop();
+            m_WatchHouseControl.Stop();
             button_Start.Enabled = false;
             button_Stop.Enabled = true;
         }
@@ -95,7 +99,7 @@ namespace JXHighWay.WatchHouse.Server
         private void button_Command_Click(object sender, EventArgs e)
         {
 
-            Task<bool> vResult  = vWatchHouseControl.AsyncSendCommandToDB(20010101, WatchHouseDataPack_Send_CommandEnmu.ChuShi);
+            Task<bool> vResult  = m_WatchHouseControl.AsyncSendCommandToDB(20010101, WatchHouseDataPack_Send_CommandEnmu.ChuShi);
             if (vResult.Result)
                 MessageBox.Show("命令发送成功");
             else
@@ -104,7 +108,8 @@ namespace JXHighWay.WatchHouse.Server
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            vWatchHouseControl = new WatchHouseControl();
+            m_WatchHouseControl = new WatchHouseControl();
+            m_PowerControl = new PowerControl();
         }
 
         private void ToolStripMenuItem_Setup_Administrator_Click(object sender, EventArgs e)

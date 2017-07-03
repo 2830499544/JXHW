@@ -18,6 +18,8 @@ namespace JXHighWay.WatchHouse.EFModel
         public byte? CMD { get; set; }
         [ColumnAttrib("SUB")]
         public byte? SUB { get; set; }
+        [ColumnAttrib("Data")]
+        public byte? Data { get; set; }
         [ColumnAttrib("SN")]
         public Int16? SN { get; set; }
         [ColumnAttrib("SendTime")]

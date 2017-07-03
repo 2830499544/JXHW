@@ -44,8 +44,8 @@
   <ItemGroup>
     <Compile Include="BasicMonitoring.cs" />
     <Compile Include="Config.cs" />
-    <Compile Include="DianYuan\DianYuanInfo.cs" />
-    <Compile Include="DianYuan\DianYuanMonitoring.cs" />
+    <Compile Include="DianYuan\PowerInfo.cs" />
+    <Compile Include="DianYuan\PowerMonitoring.cs" />
     <Compile Include="GanTing\DengGuanStateInfo.cs" />
     <Compile Include="GanTing\DiNuanStateInfo.cs" />
     <Compile Include="GanTing\KongTiaoStateInfo.cs" />

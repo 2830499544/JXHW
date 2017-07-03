@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using JXHighWay.WatchHouse.Bll.Client.DianYuan;
 
 namespace JXHighWay.WatchHouse.WFPClient.Images
 {
@@ -23,6 +24,20 @@ namespace JXHighWay.WatchHouse.WFPClient.Images
         public DianYuan()
         {
             InitializeComponent();
+        }
+
+        private async void checkBox_Switch1_Checked(object sender, RoutedEventArgs e)
+        {
+            PowerMonitoring vPowerMonitoring = new PowerMonitoring();
+            bool aa = await vPowerMonitoring.SendCMD_Switch(11, 0x01, 0x02, true);
+            MessageBox.Show(aa.ToString());
+        }
+
+        private async void checkBox_Switch1_Unchecked(object sender, RoutedEventArgs e)
+        {
+            PowerMonitoring vPowerMonitoring = new PowerMonitoring();
+            bool aa = await vPowerMonitoring.SendCMD_Switch(11, 0x01, 0x02, false);
+            MessageBox.Show(aa.ToString());
         }
     }
 }

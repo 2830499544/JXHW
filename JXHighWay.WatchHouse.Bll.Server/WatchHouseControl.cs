@@ -122,7 +122,8 @@ namespace JXHighWay.WatchHouse.Bll.Server
                                 ID_H = vTempResult.ID_H.Value,
                                 ID_L = vTempResult.ID_L.Value,
                                 CMD = vTempResult.CMD.Value,
-                                SUB = vTempResult.SUB.Value
+                                SUB = vTempResult.SUB.Value,
+                                Data = vTempResult.Data??0x00
                             };
                             byte[] vByteArray = Helper.NetHelper.StructureToByte(vCommandDataPack);
                             byte[] vCheckCode = calcCheckCode(vByteArray);
