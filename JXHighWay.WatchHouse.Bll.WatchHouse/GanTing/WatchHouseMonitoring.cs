@@ -94,6 +94,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.GanTing
             {
                 vResut.Add(new WatchHouseInfo()
                 {
+                    DianYuanID = vTempWatchHouse.DianYuanID,
                     DianYuanDK = vTempWatchHouse.DianYuanDK,
                     DianYuanIP = vTempWatchHouse.DianYuanIP,
                     DianYuanLS = vTempWatchHouse.DianYuanLS,

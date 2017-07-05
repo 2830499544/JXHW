@@ -95,24 +95,21 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
         /// <param name="DianYuanID"></param>
         /// <param name="LuShu"></param>
         /// <returns></returns>
-        public PowerInfo[] GetNewPowerInfo( int DianYuanID ,int LuHao )
+        public PowerInfo GetNewPowerInfo( int DianYuanID ,int LuHao )
         {
-            PowerInfo[] vResult = null;
+            PowerInfo vResult = null;
             string vSql = string.Format("Select *From `电源数据` Where DianYuanID={0} and LuHao={1} order by id desc LIMIT 1",DianYuanID,LuHao);
             PowerDataEFModel[] vSelectResult = m_BasicDBClass.SelectCustomEx<PowerDataEFModel>(vSql);
-            if (vSelectResult!=null && vSelectResult.Length>0)
+            if (vSelectResult != null && vSelectResult.Length > 0)
             {
-                vResult = new PowerInfo[vSelectResult.Length];
-                for (int i = 0; i < vSelectResult.Length; i++)
+                vResult = new PowerInfo();
+                vResult = new PowerInfo()
                 {
-                    vResult[i] = new PowerInfo()
-                    {
-                        DianLiu = vSelectResult[i].DianLiu ?? 0,
-                        DianYa = vSelectResult[i].DianYa ?? 0,
-                        LuHao = LuHao,
-                        ZhuangTai = (vSelectResult[i].DianYa ?? 0) == 0 ? false : true
-                    };
-                }
+                    DianLiu = vSelectResult[0].DianLiu ?? 0,
+                    DianYa = vSelectResult[0].DianYa ?? 0,
+                    LuHao = LuHao,
+                    ZhuangTai = (vSelectResult[0].DianYa ?? 0) == 0 ? false : true
+                };
             }
             return vResult;
         }

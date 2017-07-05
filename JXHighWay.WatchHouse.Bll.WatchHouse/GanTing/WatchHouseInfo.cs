@@ -17,7 +17,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.GanTing
         public int? GangTingDK { get; set; }
         public String GuanGaoPingIP { get; set; }
         public int? GuanGaoPDK { get; set; }
-        public int DianYuanID { get; set; }
+        public int? DianYuanID { get; set; }
         public String DianYuanIP { get; set; }
         public int? DianYuanDK { get; set; }
         public int? DianYuanLS { get; set; }

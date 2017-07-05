@@ -29,7 +29,7 @@ namespace JXHighWay.WatchHouse.WFPClient
             InitializeComponent();
         }
 
-        private async void image_25_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private  void image_25_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             //bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, WatchHouseDataPack_Send_CommandEnmu);
             //luminance25();
