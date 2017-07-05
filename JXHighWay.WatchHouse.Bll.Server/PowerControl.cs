@@ -71,12 +71,15 @@ namespace JXHighWay.WatchHouse.Bll.Server
 
         byte calcCheckCode(byte[] dataPack)
         {
-            byte vResult = new byte();
-            for (int i = 1; i < dataPack.Length - 1; i++)
+            byte[] vResult = new byte[2];
+            var vCalcResult = 0x0000;
+            for (int i = 1; i < dataPack.Length - 2; i++)
             {
-                vResult += dataPack[i];
+                vCalcResult += dataPack[i];
             }
-            return vResult;
+            vResult[0] = (byte)(vCalcResult >> 8);
+            vResult[1] = (byte)(vCalcResult >> 0);
+            return vResult[1];
         }
 
         public void Send()
@@ -96,7 +99,6 @@ namespace JXHighWay.WatchHouse.Bll.Server
             vDataPackBytes = Helper.NetHelper.StructureToByte(vSendDataPack);
             Console.WriteLine(BitConverter.ToString(vDataPackBytes));
             m_SocketManager.SendMessage(m_SocketManager.ClientList[0], vDataPackBytes);
-
         }
 
 
@@ -117,12 +119,18 @@ namespace JXHighWay.WatchHouse.Bll.Server
                         if (ReceiveQueue.Count > 0)
                         {
                             WHQueueModel vReceiveData = ReceiveQueue.Dequeue();
-
-                            //处理接收到的岗亭状态数据
-                            if (vReceiveData.Data[5] == (byte)PowerDataPack_Receive_CommandEnum.RunningStatus)
+                            switch (vReceiveData.Data[5])
                             {
-                                PowerDataPack_Receive_RunningStatus vDataPack = Helper.NetHelper.ByteToStructure<PowerDataPack_Receive_RunningStatus>(vReceiveData.Data);
-                                processorData_RunningStatus(vDataPack, vReceiveData.IPAddress);
+                                //处理接收到的电源状态数据
+                                case (byte)PowerDataPack_Receive_CommandEnum.RunningStatus:
+                                    PowerDataPack_Receive_RunningStatus vDataPack1 = Helper.NetHelper.ByteToStructure<PowerDataPack_Receive_RunningStatus>(vReceiveData.Data);
+                                    processorData_RunningStatus(vDataPack1, vReceiveData.IPAddress);
+                                    break;
+                                case (byte)PowerDataPack_Receive_CommandEnum.SwitchStatus:
+                                    PowerDataPack_Receive_ReplyCMD vDataPack2 = Helper.NetHelper.ByteToStructure<PowerDataPack_Receive_ReplyCMD>(vReceiveData.Data);
+                                    processorData_ReplyCMD(PowerDataPack_Receive_CommandEnum.SwitchStatus, vDataPack2);
+                                    break;
+
                             }
 
                         }
@@ -159,22 +167,41 @@ namespace JXHighWay.WatchHouse.Bll.Server
             }
             return vResult;
         }
+
+        void processorData_ReplyCMD(PowerDataPack_Receive_CommandEnum comm, PowerDataPack_Receive_ReplyCMD dataPack)
+        {
+            string vSql = "";
+            PowerSendCMDEFModel vPowerSendCMDEFModel = new PowerSendCMDEFModel()
+            {
+                IsReply = true,
+                State = dataPack.State == 0x00 ? true : false
+            };
+            switch ( comm)
+            {
+                case PowerDataPack_Receive_CommandEnum.SwitchStatus:
+                    vSql = string.Format("DianYuanID={0} and CMD={1:D} and SN={2}", 11, 0x41, dataPack.SN);
+                    break;
+            }
+
+            if (vSql != "")
+                m_BasicDBClass_Return.UpdateRecord(vPowerSendCMDEFModel, vSql);
+        }
         void processorData_RunningStatus(PowerDataPack_Receive_RunningStatus vData, string IPAddress)
         {
            try
             {
                 PowerDataEFModel vModel = new PowerDataEFModel()
                 {
-                    DianLiu = Convert.ToInt16(new byte[] { vData.DianLiu2, vData.DianLiu1 }),
-                    DianYa = Convert.ToInt16(new byte[] { vData.DianYa2, vData.DianYa1 }),
-                    DianNeng = Convert.ToInt32(new byte[] { vData.DianNeng4, vData.DianNeng3, vData.DianNeng2, vData.DianNeng1 }),
-                    GongLuYinShu = Convert.ToInt16(new byte[] { vData.GongLuYS2, vData.GongLuYS1 }),
-                    LouDianLiu = Convert.ToInt16(new byte[] { vData.LouDianLiu2, vData.LouDianLiu1 }),
+                    DianLiu = BitConverter.ToInt16(new byte[] { vData.DianLiu2, vData.DianLiu1 },0),
+                    DianYa = BitConverter.ToInt16(new byte[] { vData.DianYa2, vData.DianYa1 },0),
+                    DianNeng = BitConverter.ToInt32(new byte[] { vData.DianNeng4, vData.DianNeng3, vData.DianNeng2, vData.DianNeng1 },0),
+                    GongLuYinShu = BitConverter.ToInt16(new byte[] { vData.GongLuYS2, vData.GongLuYS1 },0),
+                    LouDianLiu = BitConverter.ToInt16(new byte[] { vData.LouDianLiu2, vData.LouDianLiu1 },0),
                     LuHao = vData.LuHao,
-                    PinLu = Convert.ToInt16(new byte[] { vData.PinLu2, vData.PinLu1 }),
-                    WenDu = Convert.ToInt16(new byte[] { vData.WenDu2, vData.WenDu1 }),
-                    WuGongGL = Convert.ToInt16(new byte[] { vData.WuGongGL2, vData.WuGongGL1 }),
-                    YouGongGL = Convert.ToInt16(new byte[] { vData.YouGongGL2, vData.YouGongGL1 }),
+                    PinLu = BitConverter.ToInt16(new byte[] { vData.PinLu2, vData.PinLu1 },0),
+                    WenDu = BitConverter.ToInt16(new byte[] { vData.WenDu2, vData.WenDu1 },0),
+                    WuGongGL = BitConverter.ToInt16(new byte[] { vData.WuGongGL2, vData.WuGongGL1 },0),
+                    YouGongGL = BitConverter.ToInt16(new byte[] { vData.YouGongGL2, vData.YouGongGL1 },0),
                     LeiXing = convertDianYuanLeiXing(vData.LeiXing)
                 };
                 WatchHouseConfigEFModel vWatchHouseConfigEFModel = new WatchHouseConfigEFModel()
@@ -184,7 +211,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
                 };
                 m_BasicDBClass_Receive.TransactionBegin();
                 m_BasicDBClass_Receive.InsertRecord(vModel);
-                m_BasicDBClass_Receive.UpdateRecord(vWatchHouseConfigEFModel, string.Format("DianYuanID={0}", vModel.DianYuanID));
+                m_BasicDBClass_Receive.UpdateRecord(vWatchHouseConfigEFModel, string.Format("DianYuanID={0}", vModel.DianYuanID??0));
                 m_BasicDBClass_Receive.TransactionCommit();
                 //更新客户端字典表
                 if (m_ClientDict.ContainsKey(vModel.DianYuanID.Value) )
@@ -192,7 +219,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
             }
             catch(Exception ex)
             {
-                Console.WriteLine( string.Format("插入数据至[岗亭数据表]中发生异常，异常信息为:{0}",ex.Message));
+                Console.WriteLine( string.Format("插入数据至[电源数据表]中发生异常，异常信息为:{0}",ex.Message));
             }
         }
         #endregion
@@ -211,14 +238,17 @@ namespace JXHighWay.WatchHouse.Bll.Server
                     var vSelectResult = m_BasicDBClass_Send.SelectRecordsEx(vModel);
                     foreach (PowerSendCMDEFModel vTempResult in vSelectResult)
                     {
-                        AsyncUserToken vAsyncUserToken = findAsyncUserToken(vTempResult.DianYuanID.Value);
+                        //AsyncUserToken vAsyncUserToken = findAsyncUserToken(vTempResult.DianYuanID.Value);
+                        AsyncUserToken vAsyncUserToken = null;
+                        if (m_SocketManager.ClientList.Count > 0)
+                            vAsyncUserToken = m_SocketManager.ClientList[0];
                         if (vAsyncUserToken != null)
                         {
                             PowerDataPack_Main vCommandDataPack = new PowerDataPack_Main()
                             {
                                 Head = 0x5a,
                                 Tail = 0x5b,
-                                SN = vTempResult.SN ?? 0x00,
+                                SN = 0x01,//vTempResult.SN ?? 0x00,
                                 CMD = vTempResult.CMD ?? 0x00,
                                 Addition = 0x00
                             };
@@ -230,8 +260,8 @@ namespace JXHighWay.WatchHouse.Bll.Server
                             }
                             byte[] vLength = BitConverter.GetBytes((short)vCMDDataPack.Count);
                             //包长度
-                            vCMDDataPack[1] = vLength[0];
-                            vCMDDataPack[2] = vLength[1];
+                            vCMDDataPack[1] = vLength[1];
+                            vCMDDataPack[2] = vLength[0];
                             //校验和 
                             vCMDDataPack[vCMDDataPack.Count-2] = calcCheckCode(vCMDDataPack.ToArray());
 

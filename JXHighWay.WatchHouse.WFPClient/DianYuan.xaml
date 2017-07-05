@@ -4,9 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:JXHighWay.WatchHouse.WFPClient.Images"
-      mc:Ignorable="d" 
-      d:DesignHeight="460" d:DesignWidth="1024"
-      Title="DianYuan">
+      mc:Ignorable="d" d:DesignWidth="1024"
+      Title="DianYuan" Height="496" Loaded="Page_Loaded">
     <Page.Resources>
         <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>
         <Style x:Key="GroupboxWithoutWhiteBorder" TargetType="{x:Type GroupBox}">
@@ -150,69 +149,117 @@
 
     <Grid Background="#245d7c">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="119*"/>
-            <ColumnDefinition Width="222*"/>
-            <ColumnDefinition Width="281*"/>
-            <ColumnDefinition Width="280*"/>
-            <ColumnDefinition Width="121*"/>
+            <ColumnDefinition Width="62*"/>
+            <ColumnDefinition Width="155*"/>
+            <ColumnDefinition Width="183*"/>
+            <ColumnDefinition Width="184*"/>
+            <ColumnDefinition Width="184*"/>
+            <ColumnDefinition Width="195*"/>
+            <ColumnDefinition Width="61*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="156*"  />
-            <RowDefinition Height="151*" />
-            <RowDefinition Height="153*" />
+            <RowDefinition Height="160*"  />
+            <RowDefinition Height="160*" />
+            <RowDefinition Height="160*" />
         </Grid.RowDefinitions>
-        <Image x:Name="image" HorizontalAlignment="Left" Height="147" VerticalAlignment="Top" Width="147" Grid.Column="1" Margin="31.667,2,0,0" Grid.Row="1" Source="Images/DianYuan/DianYuan.jpg"/>
+        <Image x:Name="image" HorizontalAlignment="Left" Height="147" VerticalAlignment="Top" Width="147" Grid.Column="1" Margin="4,2,0,0" Grid.Row="1" Source="Images/DianYuan/DianYuan.jpg"/>
 
-        <GroupBox Style="{StaticResource GroupboxWithoutWhiteBorder}" x:Name="groupBox_Copy4" Header="开关1" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="9.667,0,0,0" Height="146" Width="256" FontSize="18" Foreground="#FFF5F1F1" BorderBrush="#d6d9d9">
-        </GroupBox>
+        <GroupBox Style="{StaticResource GroupboxWithoutWhiteBorder}" x:Name="groupBox_1" Header="开关1" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="10,0,0,0" Height="146" Width="168" FontSize="18" Foreground="#FFF5F1F1" BorderBrush="#d6d9d9"/>
 
-        <Image HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="61.667,17,0,0" Source="Images/DianYuan/DianYa.jpg" Grid.Column="2"/>
-        <GroupBox Style="{StaticResource GroupboxWithoutWhiteBorder}" x:Name="groupBox_Copy" Header="开关2" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="10.333,0,0,0" Height="146" Width="256" FontSize="18" Foreground="#FFF5F1F1" BorderBrush="#d6d9d9">
-            <CheckBox Content="" Style="{StaticResource OrangeSwitchStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="75,82,0,0"/>
-        </GroupBox>
-        <GroupBox Style="{StaticResource GroupboxWithoutWhiteBorder}" x:Name="groupBox_Copy1" Header="开关3" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="9.667,154,0,0" Height="146" Width="256" FontSize="18" Foreground="#FFF5F1F1" BorderBrush="#d6d9d9" Grid.RowSpan="2"/>
-        <GroupBox Style="{StaticResource GroupboxWithoutWhiteBorder}" x:Name="groupBox_Copy2" Header="开关4" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="10.333,155,0,0" Height="146" Width="256" FontSize="18" Foreground="#FFF5F1F1" BorderBrush="#d6d9d9" Grid.RowSpan="2"/>
-        <GroupBox Style="{StaticResource GroupboxWithoutWhiteBorder}" x:Name="groupBox_Copy3" Header="开关5" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="9.667,1.333,0,0" Height="146" Width="256" FontSize="18" Foreground="#FFF5F1F1" BorderBrush="#d6d9d9" Grid.Row="2"/>
-        <GroupBox Style="{StaticResource GroupboxWithoutWhiteBorder}" x:Name="groupBox_Copy5" Header="开关6" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="12.333,1.333,0,0" Height="146" Width="256" FontSize="18" Foreground="#FFF5F1F1" BorderBrush="#d6d9d9" Grid.Row="2"/>
-        <Label Content="电压:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="110.667,21,0,0" Foreground="#FFF3EAEA" FontSize="18"/>
-        <Label Content="0V" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="160.667,22,0,0" Foreground="#FFF3EAEA" FontSize="18"/>
-        <Image HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="60.667,58,0,0" Source="Images/DianYuan/DianLiu.jpg" Grid.Column="2"/>
-        <Label Content="电流:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="109.667,64,0,0" Foreground="#FFF3EAEA" FontSize="18"/>
-        <Label Content="0A" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="159.667,65,0,0" Foreground="#FFF3EAEA" FontSize="18"/>
-        <Image HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="66.333,19,0,0" Source="Images/DianYuan/DianLiu.jpg" Grid.Column="3"/>
-        <Label Content="电压:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="115.333,23,0,0" Foreground="#FFF3EAEA" FontSize="18"/>
-        <Label Content="0V" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="165.333,24,0,0" Foreground="#FFF3EAEA" FontSize="18"/>
-        <Image HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="66.333,59,0,0" Source="Images/DianYuan/DianYa.jpg" Grid.Column="3"/>
-        <Label Content="电流:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="115.333,65,0,0" Foreground="#FFF3EAEA" FontSize="18"/>
-        <Label Content="0A" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="165.333,66,0,0" Foreground="#FFF3EAEA" FontSize="18"/>
-        <Image HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="61.667,17,0,0" Source="Images/DianYuan/DianLiu.jpg" Grid.Column="2" Grid.Row="1"/>
-        <Label Content="电压:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="110.667,21,0,0" Foreground="#FFF3EAEA" FontSize="18" Grid.Row="1"/>
-        <Label Content="0V" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="160.667,22,0,0" Foreground="#FFF3EAEA" FontSize="18" Grid.Row="1"/>
-        <Image HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="61.667,57,0,0" Source="Images/DianYuan/DianYa.jpg" Grid.Column="2" Grid.Row="1"/>
-        <Label Content="电流:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="110.667,63,0,0" Foreground="#FFF3EAEA" FontSize="18" Grid.Row="1"/>
-        <Label Content="0A" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="160.667,64,0,0" Foreground="#FFF3EAEA" FontSize="18" Grid.Row="1"/>
-        <Image HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="66.333,16,0,0" Source="Images/DianYuan/DianLiu.jpg" Grid.Column="3" Grid.Row="1"/>
-        <Label Content="电压:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="115.333,20,0,0" Foreground="#FFF3EAEA" FontSize="18" Grid.Row="1"/>
-        <Label Content="0V" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="165.333,21,0,0" Foreground="#FFF3EAEA" FontSize="18" Grid.Row="1"/>
-        <Image HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="66.333,58,0,0" Source="Images/DianYuan/DianYa.jpg" Grid.Column="3" Grid.Row="1"/>
-        <Label Content="电流:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="115.333,64,0,0" Foreground="#FFF3EAEA" FontSize="18" Grid.Row="1"/>
-        <Label Content="0A" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="165.333,65,0,0" Foreground="#FFF3EAEA" FontSize="18" Grid.Row="1"/>
-        <CheckBox x:Name="checkBox_Switch1" Content="" Style="{StaticResource OrangeSwitchStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="98.667,104,0,0" Checked="checkBox_Switch1_Checked" Unchecked="checkBox_Switch1_Unchecked"/>
-        <CheckBox Content="" Style="{StaticResource OrangeSwitchStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="97.667,105,0,0" Grid.Row="1"/>
-        <CheckBox Content="" Style="{StaticResource OrangeSwitchStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="95.333,105,0,0" Grid.Row="1"/>
-        <Image HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="60.667,22.333,0,0" Source="Images/DianYuan/DianLiu.jpg" Grid.Column="2" Grid.Row="2"/>
-        <Label Content="电压:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="109.667,26.333,0,0" Foreground="#FFF3EAEA" FontSize="18" Grid.Row="2"/>
-        <Label Content="0V" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="159.667,27.333,0,0" Foreground="#FFF3EAEA" FontSize="18" Grid.Row="2"/>
-        <Image HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="59.667,63.333,0,0" Source="Images/DianYuan/DianYa.jpg" Grid.Column="2" Grid.Row="2"/>
-        <Label Content="电流:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="108.667,69.333,0,0" Foreground="#FFF3EAEA" FontSize="18" Grid.Row="2"/>
-        <Label Content="0A" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="158.667,70.333,0,0" Foreground="#FFF3EAEA" FontSize="18" Grid.Row="2"/>
-        <CheckBox Content="" Style="{StaticResource OrangeSwitchStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="97.667,108.333,0,0" Grid.Row="2"/>
-        <Image HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="66.333,21.333,0,0" Source="Images/DianYuan/DianLiu.jpg" Grid.Column="3" Grid.Row="2"/>
-        <Label Content="电压:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="115.333,25.333,0,0" Foreground="#FFF3EAEA" FontSize="18" Grid.Row="2"/>
-        <Label Content="0V" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="165.333,26.333,0,0" Foreground="#FFF3EAEA" FontSize="18" Grid.Row="2"/>
-        <Image HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="66.333,63.333,0,0" Source="Images/DianYuan/DianYa.jpg" Grid.Column="3" Grid.Row="2"/>
-        <Label Content="电流:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="115.333,69.333,0,0" Foreground="#FFF3EAEA" FontSize="18" Grid.Row="2"/>
-        <Label Content="0A" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="165.333,70.333,0,0" Foreground="#FFF3EAEA" FontSize="18" Grid.Row="2"/>
-        <CheckBox Content="" Style="{StaticResource OrangeSwitchStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="95.333,110.333,0,0" Grid.Row="2"/>
+        <Image x:Name="image_DY1" HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="16,24,0,0" Source="Images/DianYuan/DianYa.jpg" Grid.Column="2"/>
+        <Label x:Name="label_DY1" Content="电压:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="52,28,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="51"/>
+        <Label x:Name="label_DY_1" Content="0V" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="93,29,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="80"/>
+        <Image x:Name="image_DL1" HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="16,65,0,0" Source="Images/DianYuan/DianLiu.jpg" Grid.Column="2"/>
+        <Label x:Name="label_DL1" Content="电流:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="52,71,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="50"/>
+        <Label x:Name="label_DL_1" Content="0A" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="93,72,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="33"/>
+        <CheckBox x:Name="checkBox_Switch1" Content="" Style="{StaticResource OrangeSwitchStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="40,111,0,0" Checked="checkBox_Switch1_Checked" Unchecked="checkBox_Switch1_Unchecked" Height="27" Width="94" Cursor="Hand"/>
+        <GroupBox Style="{StaticResource GroupboxWithoutWhiteBorder}" x:Name="groupBox_2" Header="开关2" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="8,0,0,0" Height="146" Width="168" FontSize="18" Foreground="#FFF5F1F1" BorderBrush="#d6d9d9"/>
+        <Image x:Name="image_DY2" HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="14,24,0,0" Source="Images/DianYuan/DianYa.jpg" Grid.Column="3"/>
+        <Label x:Name="label_DY2" Content="电压:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="50,28,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="51"/>
+        <Label x:Name="label_DY_2" Content="0V" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="91,29,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="80"/>
+        <Image x:Name="image_DL2" HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="14,65,0,0" Source="Images/DianYuan/DianLiu.jpg" Grid.Column="3"/>
+        <Label x:Name="label_DL2" Content="电流:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="50,71,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="50"/>
+        <Label x:Name="label_DL_2" Content="0A" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="91,72,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="33"/>
+        <CheckBox x:Name="checkBox_Switch2" Content="" Style="{StaticResource OrangeSwitchStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="38,111,0,0" Checked="checkBox_Switch1_Checked" Unchecked="checkBox_Switch1_Unchecked" Height="27" Width="94" Cursor="Hand"/>
+        <GroupBox Style="{StaticResource GroupboxWithoutWhiteBorder}" x:Name="groupBox_3" Header="开关3" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="4" Margin="9,0,0,0" Height="146" Width="168" FontSize="18" Foreground="#FFF5F1F1" BorderBrush="#d6d9d9"/>
+        <Image x:Name="image_DY3" HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="15,24,0,0" Source="Images/DianYuan/DianYa.jpg" Grid.Column="4"/>
+        <Label x:Name="label_DY3" Content="电压:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="4" Margin="51,28,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="51"/>
+        <Label x:Name="label_DY_3" Content="0V" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="4" Margin="92,29,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="80"/>
+        <Image x:Name="image_DL3" HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="15,65,0,0" Source="Images/DianYuan/DianLiu.jpg" Grid.Column="4"/>
+        <Label x:Name="label_DL3" Content="电流:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="4" Margin="51,71,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="50"/>
+        <Label x:Name="label_DL_3" Content="0A" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="4" Margin="92,72,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="33"/>
+        <CheckBox x:Name="checkBox_Switch3" Content="" Style="{StaticResource OrangeSwitchStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="4" Margin="39,111,0,0" Checked="checkBox_Switch1_Checked" Unchecked="checkBox_Switch1_Unchecked" Height="27" Width="94" Cursor="Hand"/>
+        <GroupBox Style="{StaticResource GroupboxWithoutWhiteBorder}" x:Name="groupBox_4" Header="开关4" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="5" Margin="11,0,0,0" Height="146" Width="168" FontSize="18" Foreground="#FFF5F1F1" BorderBrush="#d6d9d9"/>
+        <Image x:Name="image_DY4" HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="17,24,0,0" Source="Images/DianYuan/DianYa.jpg" Grid.Column="5"/>
+        <Label x:Name="label_DY4" Content="电压:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="5" Margin="53,28,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="51"/>
+        <Label x:Name="label_DY_4" Content="0V" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="5" Margin="94,29,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="80"/>
+        <Image x:Name="image_DL4" HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="17,65,0,0" Source="Images/DianYuan/DianLiu.jpg" Grid.Column="5"/>
+        <Label x:Name="label_DL4" Content="电流:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="5" Margin="53,71,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="50"/>
+        <Label x:Name="label_DL_4" Content="0A" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="5" Margin="94,72,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="33"/>
+        <CheckBox x:Name="checkBox_Switch4" Content="" Style="{StaticResource OrangeSwitchStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="5" Margin="41,111,0,0" Checked="checkBox_Switch1_Checked" Unchecked="checkBox_Switch1_Unchecked" Height="27" Width="94" Cursor="Hand"/>
+        <GroupBox Style="{StaticResource GroupboxWithoutWhiteBorder}" x:Name="groupBox_5" Header="开关5" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="10,162,0,0" Height="146" Width="168" FontSize="18" Foreground="#FFF5F1F1" BorderBrush="#d6d9d9" Grid.RowSpan="2"/>
+        <Image x:Name="image_DY5" HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="16,21,0,0" Source="Images/DianYuan/DianYa.jpg" Grid.Column="2" Grid.Row="1"/>
+        <Label x:Name="label_DY5" Content="电压:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="52,25,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="51" Grid.Row="1"/>
+        <Label x:Name="label_DY_5" Content="0V" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="93,26,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="80" Grid.Row="1"/>
+        <Image x:Name="image_DL5" HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="16,62,0,0" Source="Images/DianYuan/DianLiu.jpg" Grid.Column="2" Grid.Row="1"/>
+        <Label x:Name="label_DL5" Content="电流:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="52,68,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="50" Grid.Row="1"/>
+        <Label x:Name="label_DL_5" Content="0A" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="93,69,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="33" Grid.Row="1"/>
+        <CheckBox x:Name="checkBox_Switch5" Content="" Style="{StaticResource OrangeSwitchStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="40,108,0,0" Checked="checkBox_Switch1_Checked" Unchecked="checkBox_Switch1_Unchecked" Height="27" Width="94" Grid.Row="1" Cursor="Hand"/>
+        <GroupBox Style="{StaticResource GroupboxWithoutWhiteBorder}" x:Name="groupBox_6" Header="开关6" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="8,162,0,0" Height="146" Width="168" FontSize="18" Foreground="#FFF5F1F1" BorderBrush="#d6d9d9" Grid.RowSpan="2"/>
+        <Image x:Name="image_DY6" HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="14,21,0,0" Source="Images/DianYuan/DianYa.jpg" Grid.Column="3" Grid.Row="1"/>
+        <Label x:Name="label_DY6" Content="电压:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="50,25,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="51" Grid.Row="1"/>
+        <Label x:Name="label_DY_6" Content="0V" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="91,26,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="80" Grid.Row="1"/>
+        <Image x:Name="image_DL6" HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="14,62,0,0" Source="Images/DianYuan/DianLiu.jpg" Grid.Column="3" Grid.Row="1"/>
+        <Label x:Name="label_DL6" Content="电流:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="50,68,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="50" Grid.Row="1"/>
+        <Label x:Name="label_DL_6" Content="0A" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="91,69,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="33" Grid.Row="1"/>
+        <CheckBox x:Name="checkBox_Switch6" Content="" Style="{StaticResource OrangeSwitchStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="38,108,0,0" Checked="checkBox_Switch1_Checked" Unchecked="checkBox_Switch1_Unchecked" Height="27" Width="94" Grid.Row="1" Cursor="Hand"/>
+        <GroupBox Style="{StaticResource GroupboxWithoutWhiteBorder}" x:Name="groupBox_7" Header="开关7" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="4" Margin="9,162,0,0" Height="146" Width="168" FontSize="18" Foreground="#FFF5F1F1" BorderBrush="#d6d9d9" Grid.RowSpan="2"/>
+        <Image x:Name="image_DY7" HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="15,21,0,0" Source="Images/DianYuan/DianYa.jpg" Grid.Column="4" Grid.Row="1"/>
+        <Label x:Name="label_DY7" Content="电压:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="4" Margin="51,25,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="51" Grid.Row="1"/>
+        <Label x:Name="label_DY_7" Content="0V" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="4" Margin="92,26,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="80" Grid.Row="1"/>
+        <Image x:Name="image_DL7" HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="15,62,0,0" Source="Images/DianYuan/DianLiu.jpg" Grid.Column="4" Grid.Row="1"/>
+        <Label x:Name="label_DL7" Content="电流:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="4" Margin="51,68,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="50" Grid.Row="1"/>
+        <Label x:Name="label_DL_7" Content="0A" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="4" Margin="92,69,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="33" Grid.Row="1"/>
+        <CheckBox x:Name="checkBox_Switch7" Content="" Style="{StaticResource OrangeSwitchStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="4" Margin="39,108,0,0" Checked="checkBox_Switch1_Checked" Unchecked="checkBox_Switch1_Unchecked" Height="27" Width="94" Grid.Row="1" Cursor="Hand"/>
+        <GroupBox Style="{StaticResource GroupboxWithoutWhiteBorder}" x:Name="groupBox_8" Header="开关8" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="5" Margin="11,162,0,0" Height="146" Width="168" FontSize="18" Foreground="#FFF5F1F1" BorderBrush="#d6d9d9" Grid.RowSpan="2"/>
+        <Image x:Name="image_DY8" HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="17,21,0,0" Source="Images/DianYuan/DianYa.jpg" Grid.Column="5" Grid.Row="1"/>
+        <Label x:Name="label_DY8" Content="电压:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="5" Margin="53,25,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="51" Grid.Row="1"/>
+        <Label x:Name="label_DY_8" Content="0V" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="5" Margin="94,26,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="80" Grid.Row="1"/>
+        <Image x:Name="image_DL8" HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="17,62,0,0" Source="Images/DianYuan/DianLiu.jpg" Grid.Column="5" Grid.Row="1"/>
+        <Label x:Name="label_DL8" Content="电流:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="5" Margin="53,68,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="50" Grid.Row="1"/>
+        <Label x:Name="label_DL_8" Content="0A" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="5" Margin="94,69,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="33" Grid.Row="1"/>
+        <CheckBox x:Name="checkBox_Switch8" Content="" Style="{StaticResource OrangeSwitchStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="5" Margin="41,108,0,0" Checked="checkBox_Switch1_Checked" Unchecked="checkBox_Switch1_Unchecked" Height="27" Width="94" Grid.Row="1" Cursor="Hand"/>
+        <GroupBox Style="{StaticResource GroupboxWithoutWhiteBorder}" x:Name="groupBox_9" Header="开关9" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="10,163,0,0" Height="146" Width="168" FontSize="18" Foreground="#FFF5F1F1" BorderBrush="#d6d9d9" Grid.RowSpan="2" Grid.Row="1"/>
+        <Image x:Name="image_DY9" HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="16,22,0,0" Source="Images/DianYuan/DianYa.jpg" Grid.Column="2" Grid.Row="2"/>
+        <Label x:Name="label_DY9" Content="电压:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="52,26,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="51" Grid.Row="2"/>
+        <Label x:Name="label_DY_9" Content="0V" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="93,27,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="80" Grid.Row="2"/>
+        <Image x:Name="image_DL9" HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="16,63,0,0" Source="Images/DianYuan/DianLiu.jpg" Grid.Column="2" Grid.Row="2"/>
+        <Label x:Name="label_DL9" Content="电流:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="52,69,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="50" Grid.Row="2"/>
+        <Label x:Name="label_DL_9" Content="0A" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="93,70,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="33" Grid.Row="2"/>
+        <CheckBox x:Name="checkBox_Switch9" Content="" Style="{StaticResource OrangeSwitchStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="40,109,0,0" Checked="checkBox_Switch1_Checked" Unchecked="checkBox_Switch1_Unchecked" Height="27" Width="94" Grid.Row="2" Cursor="Hand"/>
+        <GroupBox Style="{StaticResource GroupboxWithoutWhiteBorder}" x:Name="groupBox_10" Header="开关10" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="8,163,0,0" Height="146" Width="168" FontSize="18" Foreground="#FFF5F1F1" BorderBrush="#d6d9d9" Grid.RowSpan="2" Grid.Row="1"/>
+        <Image x:Name="image_DY10" HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="14,22,0,0" Source="Images/DianYuan/DianYa.jpg" Grid.Column="3" Grid.Row="2"/>
+        <Label x:Name="label_DY10" Content="电压:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="50,26,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="51" Grid.Row="2"/>
+        <Label x:Name="label_DY_10" Content="0V" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="91,27,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="80" Grid.Row="2"/>
+        <Image x:Name="image_DL10" HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="14,63,0,0" Source="Images/DianYuan/DianLiu.jpg" Grid.Column="3" Grid.Row="2"/>
+        <Label x:Name="label_DL10" Content="电流:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="50,69,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="50" Grid.Row="2"/>
+        <Label x:Name="label_DL_10" Content="0A" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="91,70,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="33" Grid.Row="2"/>
+        <CheckBox x:Name="checkBox_Switch10" Content="" Style="{StaticResource OrangeSwitchStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="38,109,0,0" Checked="checkBox_Switch1_Checked" Unchecked="checkBox_Switch1_Unchecked" Height="27" Width="94" Grid.Row="2" Cursor="Hand"/>
+        <GroupBox Style="{StaticResource GroupboxWithoutWhiteBorder}" x:Name="groupBox_11" Header="开关11" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="4" Margin="9,163,0,0" Height="146" Width="168" FontSize="18" Foreground="#FFF5F1F1" BorderBrush="#d6d9d9" Grid.RowSpan="2" Grid.Row="1"/>
+        <Image x:Name="image_DY11" HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="15,22,0,0" Source="Images/DianYuan/DianYa.jpg" Grid.Column="4" Grid.Row="2"/>
+        <Label x:Name="label_DY11" Content="电压:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="4" Margin="51,26,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="51" Grid.Row="2"/>
+        <Label x:Name="label_DY_11" Content="0V" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="4" Margin="92,27,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="80" Grid.Row="2"/>
+        <Image x:Name="image_DL11" HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="15,63,0,0" Source="Images/DianYuan/DianLiu.jpg" Grid.Column="4" Grid.Row="2"/>
+        <Label x:Name="label_DL11" Content="电流:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="4" Margin="51,69,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="50" Grid.Row="2"/>
+        <Label x:Name="label_DL_11" Content="0A" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="4" Margin="92,70,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="33" Grid.Row="2"/>
+        <CheckBox x:Name="checkBox_Switch11" Content="" Style="{StaticResource OrangeSwitchStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="4" Margin="39,109,0,0" Checked="checkBox_Switch1_Checked" Unchecked="checkBox_Switch1_Unchecked" Height="27" Width="94" Grid.Row="2" Cursor="Hand"/>
+        <GroupBox Style="{StaticResource GroupboxWithoutWhiteBorder}" x:Name="groupBox_12" Header="开关12" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="5" Margin="11,163,0,0" Height="146" Width="168" FontSize="18" Foreground="#FFF5F1F1" BorderBrush="#d6d9d9" Grid.RowSpan="2" Grid.Row="1"/>
+        <Image x:Name="image_DY12" HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="17,22,0,0" Source="Images/DianYuan/DianYa.jpg" Grid.Column="5" Grid.Row="2"/>
+        <Label x:Name="label_DY12" Content="电压:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="5" Margin="53,26,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="51" Grid.Row="2"/>
+        <Label x:Name="label_DY_12" Content="0V" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="5" Margin="94,27,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="80" Grid.Row="2"/>
+        <Image x:Name="image_DL12" HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="44" Margin="17,63,0,0" Source="Images/DianYuan/DianLiu.jpg" Grid.Column="5" Grid.Row="2"/>
+        <Label x:Name="label_DL12" Content="电流:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="5" Margin="53,69,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="50" Grid.Row="2"/>
+        <Label x:Name="label_DL_12" Content="0A" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="5" Margin="94,70,0,0" Foreground="#FFF3EAEA" FontSize="18" Height="34" Width="33" Grid.Row="2"/>
+        <CheckBox x:Name="checkBox_Switch12" Content="" Style="{StaticResource OrangeSwitchStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="5" Margin="41,109,0,0" Checked="checkBox_Switch1_Checked" Unchecked="checkBox_Switch1_Unchecked" Height="27" Width="94" Grid.Row="2" Cursor="Hand"/>
     </Grid>
 </Page>

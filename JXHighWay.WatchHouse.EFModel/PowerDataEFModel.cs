@@ -36,6 +36,8 @@ namespace JXHighWay.WatchHouse.EFModel
         public int? LouDianLiu { get; set; }
         [ColumnAttrib("PinLu")]
         public int? PinLu { get; set; }
+        [ColumnAttrib("Time")]
+        public DateTime? Time { get; set; }
     }
 
 }

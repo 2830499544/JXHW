@@ -11,6 +11,13 @@ namespace JXHighWay.WatchHouse.Net.DataPack
         /// <summary>
         /// 电箱运行状态
         /// </summary>
-        RunningStatus = 0xc9
+        RunningStatus = 0xc9,
+        /// <summary>
+        /// 电源开关命令返回
+        /// </summary>
+        SwitchStatus =0x42
+
+
+
     }
 }

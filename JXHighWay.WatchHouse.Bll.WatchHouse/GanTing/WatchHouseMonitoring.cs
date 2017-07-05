@@ -125,6 +125,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.GanTing
             return vResult;
         }
 
+
         public DiNuanStateInfo DiNuan(int WatchHouseID)
         {
             WathHouseDataEFModel vNewData = getNewData(WatchHouseID);

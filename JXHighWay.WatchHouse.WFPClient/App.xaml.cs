@@ -67,7 +67,14 @@ namespace JXHighWay.WatchHouse.WFPClient
         /// 当前岗亭名称
         /// </summary>
         public static string WatchHouseName { get; set; }
-
+        /// <summary>
+        /// 当前电源ID
+        /// </summary>
+        public static int PowerID { get; set; }
+        /// <summary>
+        /// 广告屏IP
+        /// </summary>
+        public static string LEDIP { get; set; }
 
         /// <summary>
         /// 一级导航名称

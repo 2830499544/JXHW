@@ -45,13 +45,15 @@ namespace JXHighWay.WatchHouse.WFPClient
                 Image vImage = (Image)sender;
                 Window vWin = Window.GetWindow(this);
                 string[] vTagInfo = ((string)vImage.Tag).Split('&');
-                if (vTagInfo.Length == 2)
+                if (vTagInfo.Length == 4)
                 {
-                    int vWatchHouseID ;
-                    if (int.TryParse(vTagInfo[0], out vWatchHouseID))
+                    int vWatchHouseID ,vPowerID;
+                    if (int.TryParse(vTagInfo[0], out vWatchHouseID) && int.TryParse(vTagInfo[2],out vPowerID) )
                     {
                         App.WatchHouseID = vWatchHouseID;
                         App.WatchHouseName = vTagInfo[1];
+                        App.PowerID = vPowerID;
+                        App.LEDIP = vTagInfo[3];
                         pageFrame.Source = new Uri("GanTingMingXi.xaml", UriKind.Relative);
                         App.ChangeNavigation(2, vWin, App.WatchHouseName);
                     }
@@ -130,7 +132,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                     }
                     Label vLabelName = (Label)FindName(string.Format("Label_Name_WH{0}", i + 1));
                     vLabelName.Content = WatchHouseInfoList[i].GangTingMC;
-                    vImage.Tag = string.Format("{0}&{1}", WatchHouseInfoList[i].GangTingID, WatchHouseInfoList[i].GangTingMC);
+                    vImage.Tag = string.Format("{0}&{1}&{2}&{3}", WatchHouseInfoList[i].GangTingID, WatchHouseInfoList[i].GangTingMC, WatchHouseInfoList[i].DianYuanID, WatchHouseInfoList[i].GuanGaoPingIP);
 
                     Label vLabelJob = (Label)FindName(string.Format("Label_JobNo_{0}", i + 1));
                     vLabelJob.Content = WatchHouseInfoList[i].GongHao;

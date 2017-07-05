@@ -45,6 +45,7 @@
     <Compile Include="EmployeeEFModel.cs" />
     <Compile Include="IDCardEFModel.cs" />
     <Compile Include="PowerDataEFModel.cs" />
+    <Compile Include="PowerEventEFModel.cs" />
     <Compile Include="PowerSendCMDEFModel.cs" />
     <Compile Include="WatchHouseSendCMDEFModel.cs" />
     <Compile Include="WatchHouseConfigEFModel.cs" />

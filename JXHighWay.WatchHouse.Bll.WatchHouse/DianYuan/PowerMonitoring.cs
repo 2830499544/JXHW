@@ -68,10 +68,53 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
                         break;
                     Thread.Sleep(200);
                 } while (!vResult);
+                //m_BasicDBClass.DeleteRecordByPrimaryKey<PowerSendCMDEFModel>(vID);
                 return vResult;
             });
         }
 
+        
+        public int GetPowerLuSu( int WatchHouseId )
+        {
+            int vResult = 0;
+            WatchHouseConfigEFModel vWatchHouseConfigEFModel = new WatchHouseConfigEFModel()
+            {
+                GangTingID = WatchHouseId
+            };
+            WatchHouseConfigEFModel[] vSelectResult = m_BasicDBClass.SelectRecordsEx(vWatchHouseConfigEFModel);
+            if ( vSelectResult != null && vSelectResult.Length>0)
+            {
+                vResult = vSelectResult[0].DianYuanLS ?? 0;
+            }
+            return vResult;
+        }
 
+        /// <summary>
+        /// 获取指定路号的最新数据
+        /// </summary>
+        /// <param name="DianYuanID"></param>
+        /// <param name="LuShu"></param>
+        /// <returns></returns>
+        public PowerInfo[] GetNewPowerInfo( int DianYuanID ,int LuHao )
+        {
+            PowerInfo[] vResult = null;
+            string vSql = string.Format("Select *From `电源数据` Where DianYuanID={0} and LuHao={1} order by id desc LIMIT 1",DianYuanID,LuHao);
+            PowerDataEFModel[] vSelectResult = m_BasicDBClass.SelectCustomEx<PowerDataEFModel>(vSql);
+            if (vSelectResult!=null && vSelectResult.Length>0)
+            {
+                vResult = new PowerInfo[vSelectResult.Length];
+                for (int i = 0; i < vSelectResult.Length; i++)
+                {
+                    vResult[i] = new PowerInfo()
+                    {
+                        DianLiu = vSelectResult[i].DianLiu ?? 0,
+                        DianYa = vSelectResult[i].DianYa ?? 0,
+                        LuHao = LuHao,
+                        ZhuangTai = (vSelectResult[i].DianYa ?? 0) == 0 ? false : true
+                    };
+                }
+            }
+            return vResult;
+        }
     }
 }

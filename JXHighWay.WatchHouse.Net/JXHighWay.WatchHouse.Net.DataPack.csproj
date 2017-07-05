@@ -44,6 +44,7 @@
     <Compile Include="EmptyData.cs" />
     <Compile Include="IWatchHouseDataPack.cs" />
     <Compile Include="PowerDataPack_Receive_CommandEnum.cs" />
+    <Compile Include="PowerDataPack_Receive_ReplyCMD.cs" />
     <Compile Include="PowerDataPack_Receive_RuningStatues.cs" />
     <Compile Include="PowerDataPack_Main.cs" />
     <Compile Include="PowerDataPack_Send_CommandEnum.cs" />
