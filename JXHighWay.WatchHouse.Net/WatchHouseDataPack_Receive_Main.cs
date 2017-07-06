@@ -259,40 +259,28 @@ namespace JXHighWay.WatchHouse.Net
         /// </summary>
         public byte DengGuanLD{ get; set; }
         /// <summary>
-        /// 空
+        /// 新风等级(1->5)
         /// Data[33]
         /// </summary>
-        public byte Kong1{ get; set; }
+        public byte XinFengDJ{ get; set; }
         /// <summary>
-        /// 空
-        /// Data[34]
+        /// 新风温度
+        /// Data[34-35]
         /// </summary>
-        public byte Kong2{ get; set; }
+        public byte XinFengWD1{ get; set; }
+        public byte XinFengWD2 { get; set; }
         /// <summary>
-        /// 空
-        /// Data[35]
+        /// 入口风APM(千分比)
+        /// Data[36-37]
         /// </summary>
-        public byte Kong3{ get; set; }
+        public byte RuKouFAPM1{ get; set; }
+        public byte RuKouFAPM2{ get; set; }
         /// <summary>
-        /// 空
-        /// Data[36]
+        /// 室内出口风APM(千分比)
+        /// Data[38-39]
         /// </summary>
-        public byte Kong4{ get; set; }
-        /// <summary>
-        /// 空
-        /// Data[37]
-        /// </summary>
-        public byte Kong5{ get; set; }
-        /// <summary>
-        /// 空
-        /// Data[38]
-        /// </summary>
-        public byte Kong6{ get; set; }
-        /// <summary>
-        /// 空
-        /// Data[39]
-        /// </summary>
-        public byte Kong7{ get; set; }
+        public byte ChuKouAPM1{ get; set; }
+        public byte ChuKouAPM2{ get; set; }
 
         public byte Check1 { get; set; }
         public byte Check2 { get; set; }

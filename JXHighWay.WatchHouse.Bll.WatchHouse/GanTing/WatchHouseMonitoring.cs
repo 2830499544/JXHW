@@ -214,6 +214,10 @@ namespace JXHighWay.WatchHouse.Bll.Client.GanTing
             if ( vNewData.WatchHouseID != null )
             {
                 vResutl.IsOpen = vNewData.XinFeng == "闭" ? false : true;
+                vResutl.ChuKouAPM = vNewData.ChuKouAPM??0;
+                vResutl.RuKouAPM = vNewData.RuKouAPM??0;
+                vResutl.WenDu = vNewData.XinFengWD ?? 0;
+                vResutl.ShiDu = vNewData.ShiLeiSD ?? 0;
             }
             return vResutl;
         }

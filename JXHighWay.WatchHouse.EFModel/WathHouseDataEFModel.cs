@@ -52,6 +52,19 @@ namespace JXHighWay.WatchHouse.EFModel
         public String KongQiZL { get; set; }
         [ColumnAttrib("XinFengXTKQZL")]
         public Int16? XinFengXTKQZL { get; set; }
+
+        [ColumnAttrib("XinFengDJ")]
+        public Int16? XinFengDJ { get; set; }
+
+        [ColumnAttrib("XinFengWD")]
+        public Int16? XinFengWD { get; set; }
+
+        [ColumnAttrib("RuKouAPM")]
+        public Int16? RuKouAPM { get; set; }
+
+        [ColumnAttrib("ChuKouAPM")]
+        public Int16? ChuKouAPM { get; set; }
+
         [ColumnAttrib("CaiLuanKZWD")]
         public Int16? CaiLuanKZWD { get; set; }
         [ColumnAttrib("CaiLuanKZWBWD")]

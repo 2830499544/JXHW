@@ -40,6 +40,7 @@ namespace JXHighWay.WatchHouse.WFPClient
             image_FL_3J.Source = new BitmapImage(new Uri(@"Images/XinFeng/3j.jpg", UriKind.Relative));
             image_FL_4J.Source = new BitmapImage(new Uri(@"Images/XinFeng/4j.jpg", UriKind.Relative));
             image_FL_5J.Source = new BitmapImage(new Uri(@"Images/XinFeng/5j.jpg", UriKind.Relative));
+            Label_DengJi.Content = "1级";
         }
 
         private void image_FL_2J_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -54,6 +55,7 @@ namespace JXHighWay.WatchHouse.WFPClient
             image_FL_3J.Source = new BitmapImage(new Uri(@"Images/XinFeng/3j.jpg", UriKind.Relative));
             image_FL_4J.Source = new BitmapImage(new Uri(@"Images/XinFeng/4j.jpg", UriKind.Relative));
             image_FL_5J.Source = new BitmapImage(new Uri(@"Images/XinFeng/5j.jpg", UriKind.Relative));
+            Label_DengJi.Content = "2级";
         }
 
         private void image_FL_3J_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -68,6 +70,7 @@ namespace JXHighWay.WatchHouse.WFPClient
             image_FL_3J.Source = new BitmapImage(new Uri(@"Images/XinFeng/3j_a.jpg", UriKind.Relative));
             image_FL_4J.Source = new BitmapImage(new Uri(@"Images/XinFeng/4j.jpg", UriKind.Relative));
             image_FL_5J.Source = new BitmapImage(new Uri(@"Images/XinFeng/5j.jpg", UriKind.Relative));
+            Label_DengJi.Content = "3级";
         }
 
         private void image_FL_4J_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -82,6 +85,7 @@ namespace JXHighWay.WatchHouse.WFPClient
             image_FL_3J.Source = new BitmapImage(new Uri(@"Images/XinFeng/3j.jpg", UriKind.Relative));
             image_FL_4J.Source = new BitmapImage(new Uri(@"Images/XinFeng/4j_a.jpg", UriKind.Relative));
             image_FL_5J.Source = new BitmapImage(new Uri(@"Images/XinFeng/5j.jpg", UriKind.Relative));
+            Label_DengJi.Content = "4级";
         }
 
         private void image_FL_5J_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -96,6 +100,7 @@ namespace JXHighWay.WatchHouse.WFPClient
             image_FL_3J.Source = new BitmapImage(new Uri(@"Images/XinFeng/3j.jpg", UriKind.Relative));
             image_FL_4J.Source = new BitmapImage(new Uri(@"Images/XinFeng/4j.jpg", UriKind.Relative));
             image_FL_5J.Source = new BitmapImage(new Uri(@"Images/XinFeng/5j_a.jpg", UriKind.Relative));
+            Label_DengJi.Content = "5级";
         }
 
         WatchHouseMonitoring m_Monitoring = null;
@@ -123,7 +128,6 @@ namespace JXHighWay.WatchHouse.WFPClient
             {
                 while (true)
                 {
-
                     Action action1 = () =>
                     {
                         initXinFeng();

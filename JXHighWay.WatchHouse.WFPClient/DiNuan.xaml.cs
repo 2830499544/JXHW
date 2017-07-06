@@ -60,8 +60,91 @@ namespace JXHighWay.WatchHouse.WFPClient
             CheckBox_YouJiao.IsChecked = vDiNuanStateModel.YouNuanJQ;
             CheckBox_ZuoJiao.IsChecked = vDiNuanStateModel.ZuoNuanJQ;
 
-            Label_DanQianWD.Content = vDiNuanStateModel.DanQianWD;
+            Label_DanQianWD.Content = string.Format("{0}℃", vDiNuanStateModel.DanQianWD) ;
+            Label_DanQianWD.Tag = vDiNuanStateModel.DanQianWD;
             Label_SheZiWenDu.Content = vDiNuanStateModel.SheZhiWD;
+        }
+
+        private async void CheckBox_DiNuan_Checked(object sender, RoutedEventArgs e)
+        {
+            bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiDiNuan);
+            if (!vResult)
+                MessageBox.Show("地暖开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        private async void CheckBox_DiNuan_Unchecked(object sender, RoutedEventArgs e)
+        {
+            bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanDiNuan);
+            if (!vResult)
+                MessageBox.Show("地暖开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        private async void CheckBox_ZuoJiao_Checked(object sender, RoutedEventArgs e)
+        {
+            bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiZuoNJ);
+            if (!vResult)
+                MessageBox.Show("左暖脚开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        private async void CheckBox_ZuoJiao_Unchecked(object sender, RoutedEventArgs e)
+        {
+            bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanZuoNJ);
+            if (!vResult)
+                MessageBox.Show("左暖脚开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        private async void CheckBox_YouJiao_Checked(object sender, RoutedEventArgs e)
+        {
+            bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiYouNJ);
+            if (!vResult)
+                MessageBox.Show("右暖脚开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        private async void CheckBox_YouJiao_Unchecked(object sender, RoutedEventArgs e)
+        {
+            bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanYouNJ);
+            if (!vResult)
+                MessageBox.Show("右暖脚开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        private  async void Button_Shen_Click(object sender, RoutedEventArgs e)
+        {
+            int vDanQianWD = (int)Label_DanQianWD.Tag;
+            vDanQianWD++;
+            if (vDanQianWD<15 || vDanQianWD>35 )
+                MessageBox.Show("超出地暖温度区间范围15至35度", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+            else
+            {
+                bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.TiaoJieSW, (byte)(vDanQianWD>>0));
+                if ( !vResult )
+                    MessageBox.Show("地暖温度设置失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                else
+                {
+                    Label_DanQianWD.Tag = vDanQianWD;
+                    Label_DanQianWD.Content = string.Format("{0}℃", vDanQianWD);
+                }
+
+            }
+        }
+
+        private async void Button_Jian_Click(object sender, RoutedEventArgs e)
+        {
+            int vDanQianWD = (int)Label_DanQianWD.Tag;
+            vDanQianWD--;
+            if (vDanQianWD < 15 || vDanQianWD > 35)
+                MessageBox.Show("超出地暖温度区间范围15至35度", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+            else
+            {
+                bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.TiaoJieSW, (byte)(vDanQianWD >> 0));
+                if (!vResult)
+                    MessageBox.Show("地暖温度设置失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                else
+                {
+                    Label_DanQianWD.Tag = vDanQianWD;
+                    Label_DanQianWD.Content = string.Format("{0}℃", vDanQianWD);
+                }
+
+            }
         }
     }
 }
