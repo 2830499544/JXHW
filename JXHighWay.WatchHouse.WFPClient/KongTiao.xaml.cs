@@ -28,57 +28,60 @@ namespace JXHighWay.WatchHouse.WFPClient
             InitializeComponent();
         }
 
-        private void image_FS_DF_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private async void image_FS_DF_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            kongTiaoFS_DF();
-        }
-
-        async void kongTiaoFS_DF()
-        {
-            bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.DiFeng);
-            if (vResult)
+            if (m_IsInit)
             {
-                image_FS_DF.Source = new BitmapImage(new Uri(@"Images/KongTiao/df_a.jpg", UriKind.Relative));
-                image_FS_ZF.Source = new BitmapImage(new Uri(@"Images/KongTiao/zf.jpg", UriKind.Relative));
-                image_FS_GF.Source = new BitmapImage(new Uri(@"Images/KongTiao/gf.jpg", UriKind.Relative));
+                bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.DiFeng);
+                if (vResult)
+                    kongTiaoFS_DF();
+                else
+                    MessageBox.Show("低风速失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            else
-                MessageBox.Show("低风速失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
-        private void image_FS_ZF_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        void kongTiaoFS_DF()
         {
-            kongTiaoFS_ZF();
+            image_FS_DF.Source = new BitmapImage(new Uri(@"Images/KongTiao/df_a.jpg", UriKind.Relative));
+            image_FS_ZF.Source = new BitmapImage(new Uri(@"Images/KongTiao/zf.jpg", UriKind.Relative));
+            image_FS_GF.Source = new BitmapImage(new Uri(@"Images/KongTiao/gf.jpg", UriKind.Relative));
         }
-        async void kongTiaoFS_ZF()
+
+        private async void image_FS_ZF_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.ZhongFeng);
-            if (vResult)
+            if (m_IsInit)
             {
-                image_FS_DF.Source = new BitmapImage(new Uri(@"Images/KongTiao/df.jpg", UriKind.Relative));
-                image_FS_ZF.Source = new BitmapImage(new Uri(@"Images/KongTiao/zf_a.jpg", UriKind.Relative));
-                image_FS_GF.Source = new BitmapImage(new Uri(@"Images/KongTiao/gf.jpg", UriKind.Relative));
+                bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.ZhongFeng);
+                if (vResult)
+                    kongTiaoFS_ZF();
+                else
+                    MessageBox.Show("中风速失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            else
-                MessageBox.Show("中风速失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+        void kongTiaoFS_ZF()
+        {
+            image_FS_DF.Source = new BitmapImage(new Uri(@"Images/KongTiao/df.jpg", UriKind.Relative));
+            image_FS_ZF.Source = new BitmapImage(new Uri(@"Images/KongTiao/zf_a.jpg", UriKind.Relative));
+            image_FS_GF.Source = new BitmapImage(new Uri(@"Images/KongTiao/gf.jpg", UriKind.Relative));
         }
 
-        private void image_FS_GF_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private async void image_FS_GF_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            kongTiaoFS_GF();
-        }
-
-        async void kongTiaoFS_GF()
-        {
-            bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GaoFeng);
-            if (vResult)
+            if (m_IsInit)
             {
-                image_FS_DF.Source = new BitmapImage(new Uri(@"Images/KongTiao/df.jpg", UriKind.Relative));
-                image_FS_ZF.Source = new BitmapImage(new Uri(@"Images/KongTiao/zf.jpg", UriKind.Relative));
-                image_FS_GF.Source = new BitmapImage(new Uri(@"Images/KongTiao/gf_a.jpg", UriKind.Relative));
+                bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GaoFeng);
+                if (vResult)
+                    kongTiaoFS_GF();
+                else
+                    MessageBox.Show("高风速失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            else
-                MessageBox.Show("高风速失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        void kongTiaoFS_GF()
+        {
+            image_FS_DF.Source = new BitmapImage(new Uri(@"Images/KongTiao/df.jpg", UriKind.Relative));
+            image_FS_ZF.Source = new BitmapImage(new Uri(@"Images/KongTiao/zf.jpg", UriKind.Relative));
+            image_FS_GF.Source = new BitmapImage(new Uri(@"Images/KongTiao/gf_a.jpg", UriKind.Relative));
         }
 
         void kongTiaoFS_Kong()
@@ -88,83 +91,89 @@ namespace JXHighWay.WatchHouse.WFPClient
             image_FS_GF.Source = new BitmapImage(new Uri(@"Images/KongTiao/gf.jpg", UriKind.Relative));
         }
 
-        private void image_MS_CS_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private async void image_MS_CS_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            kongTiaoMS_CS();
-        }
-
-        async void kongTiaoMS_CS()
-        {
-            bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.ChuShi);
-            if (vResult)
+            if (m_IsInit)
             {
-                image_MS_CS.Source = new BitmapImage(new Uri(@"Images/KongTiao/cs_a.jpg", UriKind.Relative));
-                image_MS_ZL.Source = new BitmapImage(new Uri(@"Images/KongTiao/zl.jpg", UriKind.Relative));
-                image_MS_ZR.Source = new BitmapImage(new Uri(@"Images/KongTiao/zr.jpg", UriKind.Relative));
-                image_MS_SF.Source = new BitmapImage(new Uri(@"Images/KongTiao/sf.jpg", UriKind.Relative));
-                image_MS_ZD.Source = new BitmapImage(new Uri(@"Images/KongTiao/zd.jpg", UriKind.Relative));
+                bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.ChuShi);
+                if (vResult)
+                    kongTiaoMS_CS();
+                else
+                    MessageBox.Show("除湿模式失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            else
-                MessageBox.Show("除湿模式失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
-        private void image_MS_ZR_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        void kongTiaoMS_CS()
         {
-            kongTiaoMS_ZR();
+            image_MS_CS.Source = new BitmapImage(new Uri(@"Images/KongTiao/cs_a.jpg", UriKind.Relative));
+            image_MS_ZL.Source = new BitmapImage(new Uri(@"Images/KongTiao/zl.jpg", UriKind.Relative));
+            image_MS_ZR.Source = new BitmapImage(new Uri(@"Images/KongTiao/zr.jpg", UriKind.Relative));
+            image_MS_SF.Source = new BitmapImage(new Uri(@"Images/KongTiao/sf.jpg", UriKind.Relative));
+            image_MS_ZD.Source = new BitmapImage(new Uri(@"Images/KongTiao/zd.jpg", UriKind.Relative));
         }
-        async void kongTiaoMS_ZR()
+
+        private async void image_MS_ZR_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.ZhiLe);
-            if (vResult)
+            if (m_IsInit)
             {
-                image_MS_CS.Source = new BitmapImage(new Uri(@"Images/KongTiao/cs.jpg", UriKind.Relative));
-                image_MS_ZL.Source = new BitmapImage(new Uri(@"Images/KongTiao/zl.jpg", UriKind.Relative));
-                image_MS_ZR.Source = new BitmapImage(new Uri(@"Images/KongTiao/zr_a.jpg", UriKind.Relative));
-                image_MS_SF.Source = new BitmapImage(new Uri(@"Images/KongTiao/sf.jpg", UriKind.Relative));
-                image_MS_ZD.Source = new BitmapImage(new Uri(@"Images/KongTiao/zd.jpg", UriKind.Relative));
+                bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.ZhiLe);
+                if (vResult)
+                    kongTiaoMS_ZR();
+                else
+                    MessageBox.Show("制热模式失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            else
-                MessageBox.Show("制热模式失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+        void kongTiaoMS_ZR()
+        {
+
+            image_MS_CS.Source = new BitmapImage(new Uri(@"Images/KongTiao/cs.jpg", UriKind.Relative));
+            image_MS_ZL.Source = new BitmapImage(new Uri(@"Images/KongTiao/zl.jpg", UriKind.Relative));
+            image_MS_ZR.Source = new BitmapImage(new Uri(@"Images/KongTiao/zr_a.jpg", UriKind.Relative));
+            image_MS_SF.Source = new BitmapImage(new Uri(@"Images/KongTiao/sf.jpg", UriKind.Relative));
+            image_MS_ZD.Source = new BitmapImage(new Uri(@"Images/KongTiao/zd.jpg", UriKind.Relative));
         }
 
-        private void image_MS_ZL_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private async void image_MS_ZL_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            kongTiaoMS_ZL();
-        }
-
-        async void kongTiaoMS_ZL()
-        {
-            bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.ZhiLeng);
-            if (vResult)
+            if (m_IsInit)
             {
-                image_MS_CS.Source = new BitmapImage(new Uri(@"Images/KongTiao/cs.jpg", UriKind.Relative));
-                image_MS_ZL.Source = new BitmapImage(new Uri(@"Images/KongTiao/zl_a.jpg", UriKind.Relative));
-                image_MS_ZR.Source = new BitmapImage(new Uri(@"Images/KongTiao/zr.jpg", UriKind.Relative));
-                image_MS_SF.Source = new BitmapImage(new Uri(@"Images/KongTiao/sf.jpg", UriKind.Relative));
-                image_MS_ZD.Source = new BitmapImage(new Uri(@"Images/KongTiao/zd.jpg", UriKind.Relative));
-            }
-            else
+                bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.ZhiLeng);
+                if (vResult)
+                    kongTiaoMS_ZL();
+                else
                 MessageBox.Show("制冷模式失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-        }
-
-        private void image_MS_SF_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            kongTiaoMS_SF();
-        }
-
-        async void kongTiaoMS_SF()
-        {
-            bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.SongFeng);
-            if (vResult)
-            {
-                image_MS_CS.Source = new BitmapImage(new Uri(@"Images/KongTiao/cs.jpg", UriKind.Relative));
-                image_MS_ZL.Source = new BitmapImage(new Uri(@"Images/KongTiao/zl.jpg", UriKind.Relative));
-                image_MS_ZR.Source = new BitmapImage(new Uri(@"Images/KongTiao/zr.jpg", UriKind.Relative));
-                image_MS_SF.Source = new BitmapImage(new Uri(@"Images/KongTiao/sf_a.jpg", UriKind.Relative));
-                image_MS_ZD.Source = new BitmapImage(new Uri(@"Images/KongTiao/zd.jpg", UriKind.Relative));
             }
-            else
-                MessageBox.Show("送风模式失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        void kongTiaoMS_ZL()
+        {
+            image_MS_CS.Source = new BitmapImage(new Uri(@"Images/KongTiao/cs.jpg", UriKind.Relative));
+            image_MS_ZL.Source = new BitmapImage(new Uri(@"Images/KongTiao/zl_a.jpg", UriKind.Relative));
+            image_MS_ZR.Source = new BitmapImage(new Uri(@"Images/KongTiao/zr.jpg", UriKind.Relative));
+            image_MS_SF.Source = new BitmapImage(new Uri(@"Images/KongTiao/sf.jpg", UriKind.Relative));
+            image_MS_ZD.Source = new BitmapImage(new Uri(@"Images/KongTiao/zd.jpg", UriKind.Relative));
+        }
+
+        private async void image_MS_SF_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (m_IsInit)
+            {
+                bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.SongFeng);
+                if (vResult)
+                    kongTiaoMS_SF();
+                else
+                    MessageBox.Show("送风模式失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        void kongTiaoMS_SF()
+        {
+
+            image_MS_CS.Source = new BitmapImage(new Uri(@"Images/KongTiao/cs.jpg", UriKind.Relative));
+            image_MS_ZL.Source = new BitmapImage(new Uri(@"Images/KongTiao/zl.jpg", UriKind.Relative));
+            image_MS_ZR.Source = new BitmapImage(new Uri(@"Images/KongTiao/zr.jpg", UriKind.Relative));
+            image_MS_SF.Source = new BitmapImage(new Uri(@"Images/KongTiao/sf_a.jpg", UriKind.Relative));
+            image_MS_ZD.Source = new BitmapImage(new Uri(@"Images/KongTiao/zd.jpg", UriKind.Relative));
         }
 
         private void image_MS_ZD_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -175,7 +184,6 @@ namespace JXHighWay.WatchHouse.WFPClient
 
         void kongTiaoMS_ZD()
         {
-
             image_MS_CS.Source = new BitmapImage(new Uri(@"Images/KongTiao/cs.jpg", UriKind.Relative));
             image_MS_ZL.Source = new BitmapImage(new Uri(@"Images/KongTiao/zl.jpg", UriKind.Relative));
             image_MS_ZR.Source = new BitmapImage(new Uri(@"Images/KongTiao/zr.jpg", UriKind.Relative));
@@ -195,10 +203,12 @@ namespace JXHighWay.WatchHouse.WFPClient
 
 
         WatchHouseMonitoring m_Monitoring = null;
+        bool m_IsInit = false;
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             m_Monitoring = new WatchHouseMonitoring();
             RefreshState();
+            
         }
 
         void initKongTiao()
@@ -245,6 +255,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                     kongTiaoFS_Kong();
                     break;
             }
+            m_IsInit = true;
         }
 
         async void RefreshState()
@@ -266,16 +277,22 @@ namespace JXHighWay.WatchHouse.WFPClient
 
         private async void CheckBox_KongTiao_Checked(object sender, RoutedEventArgs e)
         {
-            bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiKongTiao);
-            if (vResult)
-                MessageBox.Show("空调开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+            if (m_IsInit)
+            {
+                bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiKongTiao);
+                if (!vResult)
+                    MessageBox.Show("空调开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private  async void CheckBox_KongTiao_Unchecked(object sender, RoutedEventArgs e)
         {
-            bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanKongTiao);
-            if ( vResult )
-                MessageBox.Show("空调开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+            if (m_IsInit)
+            {
+                bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanKongTiao);
+                if (!vResult)
+                    MessageBox.Show("空调开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

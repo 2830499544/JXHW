@@ -150,9 +150,9 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="120*"/>
             <ColumnDefinition Width="222*"/>
-            <ColumnDefinition Width="201*"/>
-            <ColumnDefinition Width="360*"/>
-            <ColumnDefinition Width="121*"/>
+            <ColumnDefinition Width="158*"/>
+            <ColumnDefinition Width="479*"/>
+            <ColumnDefinition Width="45*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="108*"  />
@@ -160,26 +160,27 @@
             <RowDefinition Height="105*" />
         </Grid.RowDefinitions>
         <Image x:Name="image" HorizontalAlignment="Left" Height="147" VerticalAlignment="Top" Width="147" Grid.Column="1" Margin="33,39,0,0" Grid.Row="1" Source="Images/XinFeng/XingFeng.jpg"/>
-        <Label x:Name="label_Copy4" Content="新风等级" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="24,15,0,0" FontSize="18" Foreground="WhiteSmoke" Grid.Row="1" Height="34" Width="82"/>
-        <Label x:Name="Label_DengJi" Content="1级" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="24,49,0,0" FontSize="72" Foreground="WhiteSmoke" Grid.Row="1" Height="105" Width="158"/>
-        <CheckBox x:Name="CheckBox_XinFeng" Style="{StaticResource OrangeSwitchStyle}" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="59,191,0,0" Grid.Row="1" VerticalAlignment="Top" Height="36" Width="91" IsChecked="True" Cursor="Hand"/>
-        <GroupBox Style="{StaticResource GroupboxWithoutWhiteBorder}" x:Name="groupBox" Header="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="25,10,0,0" Grid.Row="1" Height="64" Width="308" FontSize="18" Foreground="#FFF5F1F1" BorderBrush="#d6d9d9" Grid.Column="3">
-
-        </GroupBox>
-        <Label x:Name="Label_WenDu" Content="88" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="20" Foreground="#FFF1EAEA" Grid.Column="3" Margin="142,30,0,0" Grid.Row="1"/>
-        <Label x:Name="label" Content="新风温度:" Grid.Column="3" HorizontalAlignment="Left" Margin="42,30,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="20" Foreground="#FFF1EAEA"/>
-        <Label x:Name="label_Copy2" Content="新风湿度:" Grid.Column="3" HorizontalAlignment="Left" Margin="188,30,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="20" Foreground="#FFF1EAEA"/>
-        <Label x:Name="Label_ShiDu" Content="88" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="20" Foreground="#FFF1EAEA" Grid.Column="3" Margin="283,30,0,0" Grid.Row="1"/>
-        <GroupBox Style="{StaticResource GroupboxWithoutWhiteBorder}" x:Name="groupBox_Copy" Header="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="25,71,0,0" Grid.Row="1" Height="64" Width="308" FontSize="18" Foreground="#FFF5F1F1" BorderBrush="#d6d9d9" Grid.Column="3">
-            <Label x:Name="label_Copy8" Content="88" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="20" Foreground="#FFF1EAEA" Margin="685,200,-422,-202"/>
-
-        </GroupBox>
-        <Label x:Name="label_Copy5" Content="入口APM:" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="20" Foreground="#FFF1EAEA" Grid.Column="3" Margin="36,92,0,0" Grid.Row="1"/>
-        <Label x:Name="Label_APM_RK" Content="88" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="20" Foreground="#FFF1EAEA" Grid.Column="3" Margin="142,92,0,0" Grid.Row="1"/>
-        <Label x:Name="label_Copy7" Content="出口APM:" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="20" Foreground="#FFF1EAEA" Grid.Column="3" Margin="182,92,0,0" Grid.Row="1"/>
-        <Label x:Name="Label_APM_CK" Content="88" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="20" Foreground="#FFF1EAEA" Grid.Column="3" Margin="283,92,0,0" Grid.Row="1"/>
-        <Label x:Name="label_Copy10" Content="风力调节" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="10,152,0,0" FontSize="18" Foreground="WhiteSmoke" Grid.Row="1" Height="34" Width="82"/>
-        <Grid  Grid.Column="3" HorizontalAlignment="Left" Width="315" Margin="30,188,0,100" Grid.Row="1" Grid.RowSpan="2">
+        <Label x:Name="label_Copy4" Content="新风等级" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="24,47,0,0" FontSize="18" Foreground="WhiteSmoke" Grid.Row="1" Height="34" Width="82" RenderTransformOrigin="0.5,1.5"/>
+        <Label x:Name="Label_DengJi" Content="1级" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="24,81,0,0" FontSize="72" Foreground="WhiteSmoke" Grid.Row="1" Height="105" Width="158" Grid.ColumnSpan="2"/>
+        <CheckBox x:Name="CheckBox_XinFeng" Style="{StaticResource OrangeSwitchStyle}" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="59,191,0,0" Grid.Row="1" VerticalAlignment="Top" Height="36" Width="91" IsChecked="True" Cursor="Hand" Checked="CheckBox_XinFeng_Checked" Unchecked="CheckBox_XinFeng_Unchecked"/>
+        <Border Grid.Column="3" Margin="10,30,10,181" Grid.Row="1"  CornerRadius="10" BorderBrush="#FF91ACBD" BorderThickness="1">
+            <Grid Margin="0,1,-1,9">
+                <Label x:Name="Label_WenDu" Content="88" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="20" Foreground="#FFF1EAEA" Margin="109,6,0,-18" Height="36" Width="33"/>
+                <Label x:Name="label" Content="新风温度:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" Foreground="#FFF1EAEA" Height="36" Width="95" Margin="9,6,0,-18"/>
+                <Label x:Name="label_Copy2" Content="新风湿度:" HorizontalAlignment="Left" Margin="233,7,0,-19" VerticalAlignment="Top" FontSize="20" Foreground="#FFF1EAEA" Height="36" Width="95"/>
+                <Label x:Name="Label_ShiDu" Content="88" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="20" Foreground="#FFF1EAEA" Margin="333,7,0,-19" Height="36" Width="33" RenderTransformOrigin="2.788,0.528"/>
+            </Grid>
+        </Border>
+        <Border Grid.Column="3" Margin="10,103,10,110" Grid.Row="1"  CornerRadius="10" BorderBrush="#FF91ACBD" BorderThickness="1">
+            <Grid Margin="2,4,-2,-4">
+                <Label x:Name="label_Copy5" Content="入口APM:" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="20" Foreground="#FFF1EAEA" Height="36" Width="156" Margin="1,4,0,-8"/>
+                <Label x:Name="Label_APM_RK" Content="88" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="20" Foreground="#FFF1EAEA" Margin="107,4,0,-8" Height="36" Width="50"/>
+                <Label x:Name="label_Copy7" Content="出口APM:" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="20" Foreground="#FFF1EAEA" Margin="226,4,0,-8" Height="36" Width="156"/>
+                <Label x:Name="Label_APM_CK" Content="88" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="20" Foreground="#FFF1EAEA" Margin="333,4,0,-8" Height="36" Width="61"/>
+            </Grid>
+        </Border>
+        <Label x:Name="label_Copy10" Content="风力调节" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="10,168,0,0" FontSize="18" Foreground="WhiteSmoke" Grid.Row="1" Height="34" Width="82"/>
+        <Grid  Grid.Column="3" HorizontalAlignment="Left" Width="315" Margin="30,197,0,91" Grid.Row="1" Grid.RowSpan="2" RenderTransformOrigin="0.502,1.203">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="5*"/>
                 <ColumnDefinition Width="48*"/>

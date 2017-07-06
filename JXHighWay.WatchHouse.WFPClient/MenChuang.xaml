@@ -156,35 +156,49 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="63*"  />
-            <RowDefinition Height="348*" />
-            <RowDefinition Height="49*" />
+            <RowDefinition Height="333*" />
+            <RowDefinition Height="64*" />
         </Grid.RowDefinitions>
         <Image HorizontalAlignment="Left" Height="147" VerticalAlignment="Top" Width="147" Grid.Column="1" Margin="39,0,0,0" Source="Images/MenChuang/Men.jpg"  Grid.Row="1"/>
-        <GroupBox Style="{StaticResource GroupboxWithoutWhiteBorder}" x:Name="groupBox" Header="" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Margin="9,191,0,0" Grid.Row="1" Height="108" Width="224" FontSize="18" Foreground="#FFF5F1F1" BorderBrush="#FF91ACBD"/>
-        <CheckBox  x:Name="CheckBox_Men" Style="{StaticResource OrangeSwitchStyle}" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="83,215,0,0" Grid.Row="1" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand" Checked="CheckBox_Men_Checked" Unchecked="CheckBox_Men_Unchecked"/>
-        <CheckBox x:Name="CheckBox_Chuang" Style="{StaticResource OrangeSwitchStyle}" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="83,251,0,0" Grid.Row="1" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand" Checked="CheckBox_Chuang_Checked" Unchecked="CheckBox_Chuang_Unchecked"/>
-        <Label x:Name="label" Content="门" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Margin="41,213,0,0" Grid.Row="1" FontSize="20" Foreground="#FFF9F4F4" Height="36" Width="30"/>
-        <Label x:Name="label_Copy" Content="窗" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Margin="40,247,0,0" Grid.Row="1" FontSize="20" Foreground="#FFF9F4F4" Height="36" Width="30"/>
-        <GroupBox Style="{StaticResource GroupboxWithoutWhiteBorder}" x:Name="groupBox_Copy" Header="" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="15,20,0,0" Grid.Row="1" Height="80" Width="576" FontSize="18" Foreground="#FFF5F1F1" BorderBrush="#FF91ACBD">
-
-        </GroupBox>
-        <Button x:Name="Button_QCL_Shen"   Content="升" HorizontalAlignment="Left" Height="38" Margin="40,48,0,0" VerticalAlignment="Top" Width="84" Background="#FFF0A94D" Grid.Column="2" Grid.Row="1" FontSize="20" Foreground="#FFF7F1F1" Cursor="Hand" Click="Button_QCL_Shen_Click"/>
-        <Button x:Name="Button_QCL_Jiang"   Content="降" HorizontalAlignment="Left" Height="38" Margin="160,48,0,0" VerticalAlignment="Top" Width="84" Grid.Column="2" Grid.Row="1" FontSize="20" Foreground="#FFF5F2F2" Cursor="Hand" Background="#FF4EC47A" Click="Button_QCL_Jiang_Click"/>
-        <Button x:Name="button_QCL_Sheng"   Content="升" HorizontalAlignment="Left" Height="38" Margin="368,48,0,0" VerticalAlignment="Top" Width="84" Grid.Column="2" Grid.Row="1" FontSize="20" Foreground="#FFF7F1F1" Cursor="Hand" Background="#FFF0A94D" Click="button_QCL_Sheng_Click"/>
-        <Button x:Name="button_QCL_Jiang"   Content="降" HorizontalAlignment="Left" Height="38" Margin="487,48,0,0" VerticalAlignment="Top" Width="84" Background="#FF4EC47A" Grid.Column="2" Grid.Row="1" FontSize="20" Foreground="#FFF5F2F2" Cursor="Hand" Click="button_QCL_Jiang_Click_1"/>
-        <CheckBox  x:Name="CheckBox_FengMu" Style="{StaticResource OrangeSwitchStyle}" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="419,167,0,0" Grid.Row="1" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand" Checked="CheckBox_FengMu_Checked" Unchecked="CheckBox_FengMu_Unchecked"/>
-        <CheckBox  x:Name="CheckBox_FengMuDeng" Style="{StaticResource OrangeSwitchStyle}" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="89,167,0,0" Grid.Row="1" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand" Checked="CheckBox_FengMuDeng_Checked" Unchecked="CheckBox_FengMuDeng_Unchecked"/>
-        <GroupBox Style="{StaticResource GroupboxWithoutWhiteBorder}" x:Name="groupBox_Copy4" Header="" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="15,253,0,0" Grid.Row="1" Height="80" Width="576" FontSize="18" Foreground="#FFF5F1F1" BorderBrush="#FF91ACBD"/>
-        <CheckBox  x:Name="CheckBox_ZiDongChuang" Style="{StaticResource OrangeSwitchStyle}" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="89,286,0,0" Grid.Row="1" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand" Checked="CheckBox_ZiDongChuang_Checked"/>
+        <Border Grid.Column="1" Margin="31,200,37,45" Grid.Row="1"  CornerRadius="10" BorderBrush="#FF91ACBD" BorderThickness="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="26*"/>
+                    <ColumnDefinition Width="61*"/>
+                </Grid.ColumnDefinitions>
+                <CheckBox  x:Name="CheckBox_Men" Style="{StaticResource OrangeSwitchStyle}" Content="" HorizontalAlignment="Left" Margin="15,17,0,0" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand" Checked="CheckBox_Men_Checked" Unchecked="CheckBox_Men_Unchecked" Grid.Column="1"/>
+                <CheckBox x:Name="CheckBox_Chuang" Style="{StaticResource OrangeSwitchStyle}" Content="" HorizontalAlignment="Left" Margin="15,53,0,0" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand" Checked="CheckBox_Chuang_Checked" Unchecked="CheckBox_Chuang_Unchecked" Grid.Column="1"/>
+                <Label x:Name="label" Content="门" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="16,15,0,0" FontSize="20" Foreground="#FFF9F4F4" Height="36" Width="30"/>
+                <Label x:Name="label_Copy" Content="窗" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,49,0,0" FontSize="20" Foreground="#FFF9F4F4" Height="36" Width="30"/>
+            </Grid>
+        </Border>
+        <Border Grid.Column="2" Margin="10,27,33,252" Grid.Row="1" CornerRadius="10" BorderBrush="#FF91ACBD" BorderThickness="1">
+            <Grid>
+                <Button x:Name="Button_QCL_Shen"   Content="升" HorizontalAlignment="Left" Height="38" VerticalAlignment="Top" Width="84" Background="#FFF0A94D" FontSize="20" Foreground="#FFF7F1F1" Cursor="Hand" Click="Button_QCL_Shen_Click" Margin="29,21,0,0"/>
+                <Button x:Name="Button_QCL_Jiang"   Content="降" HorizontalAlignment="Left" Height="38" Margin="147,21,0,0" VerticalAlignment="Top" Width="84" FontSize="20" Foreground="#FFF5F2F2" Cursor="Hand" Background="#FF4EC47A" Click="Button_QCL_Jiang_Click"/>
+                <Button x:Name="button_QCL_Sheng"   Content="升" HorizontalAlignment="Left" Height="38" Margin="358,21,0,0" VerticalAlignment="Top" Width="84" FontSize="20" Foreground="#FFF7F1F1" Cursor="Hand" Background="#FFF0A94D" Click="button_QCL_Sheng_Click"/>
+                <Button x:Name="button_QCL_Jiang"   Content="降" HorizontalAlignment="Left" Height="38" Margin="471,21,0,0" VerticalAlignment="Top" Width="84" Background="#FF4EC47A" FontSize="20" Foreground="#FFF5F2F2" Cursor="Hand" Click="button_QCL_Jiang_Click_1"/>
+            </Grid>
+        </Border>
+        <Border Grid.Column="2" Margin="15,155,33,130" Grid.Row="1" CornerRadius="10" BorderBrush="#FF91ACBD" BorderThickness="1">
+            <Grid>
+                <CheckBox  x:Name="CheckBox_FengMu" Style="{StaticResource OrangeSwitchStyle}" Content="" HorizontalAlignment="Left" Margin="402,15,0,0" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand" Checked="CheckBox_FengMu_Checked" Unchecked="CheckBox_FengMu_Unchecked"/>
+                <CheckBox  x:Name="CheckBox_FengMuDeng" Style="{StaticResource OrangeSwitchStyle}" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand" Checked="CheckBox_FengMuDeng_Checked" Unchecked="CheckBox_FengMuDeng_Unchecked" Margin="73,15,0,0"/>
+            </Grid>
+        </Border>
         <Label x:Name="label1" Content="前窗帘" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="98,2,0,0" Foreground="#FFF9F4F4" FontSize="24" Background="#FF245D7C" Grid.Row="1" Height="42" Width="82"/>
-        <CheckBox  x:Name="CheckBox_BaoJingQi" Style="{StaticResource OrangeSwitchStyle}" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="419,286,0,0" Grid.Row="1" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand"/>
-        <GroupBox x:Name="groupBox1" Header="" Style="{StaticResource GroupboxWithoutWhiteBorder}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,136,0,0" Grid.Row="1" Height="80" Width="576" Grid.Column="2" BorderBrush="#FF91ACBD"/>
+        <Border Grid.Column="2" Margin="15,272,33,19" Grid.Row="1" CornerRadius="10" BorderBrush="#FF91ACBD" BorderThickness="1">
+            <Grid>
+                <CheckBox  x:Name="CheckBox_ZiDongChuang" Style="{StaticResource OrangeSwitchStyle}" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand" Checked="CheckBox_ZiDongChuang_Checked" Margin="73,15,0,0"/>
+                <CheckBox  x:Name="CheckBox_BaoJingQi" Style="{StaticResource OrangeSwitchStyle}" Content="" HorizontalAlignment="Left" Margin="402,15,0,0" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand"/>
+            </Grid>
+        </Border>
         <Label x:Name="label1_Copy" Content="右窗帘" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="423,0,0,0" Foreground="#FFF9F4F4" FontSize="24" Background="#FF245D7C" Grid.Row="1" Height="42" Width="82"/>
-        <Label x:Name="label1_Copy1" Content="风幕灯" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="98,121,0,0" Foreground="#FFF9F4F4" FontSize="24" Background="#FF245D7C" RenderTransformOrigin="1.056,4.109" Height="42" Width="82" Grid.Row="1"/>
-        <Label x:Name="label1_Copy2" Content="风幕" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="434,121,0,0" Foreground="#FFF9F4F4" FontSize="24" Background="#FF245D7C" RenderTransformOrigin="1.056,4.109" Height="42" Width="58" Grid.Row="1"/>
-        <Label x:Name="label1_Copy3" Content="自动窗" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="98,240,0,0" Foreground="#FFF9F4F4" FontSize="24" Background="#FF245D7C" RenderTransformOrigin="1.056,4.109" Height="42" Width="82" Grid.Row="1"/>
-        <Label x:Name="label1_Copy4" Content="报警器" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="423,240,0,0" Foreground="#FFF9F4F4" FontSize="24" Background="#FF245D7C" RenderTransformOrigin="1.056,4.109" Height="42" Width="82" Grid.Row="1"/>
-        <Label x:Name="label1_Copy5" Content="自动门" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Margin="76,173,0,0" Foreground="#FFF9F4F4" FontSize="24" Background="#FF245D7C" RenderTransformOrigin="1.056,4.109" Height="42" Width="82" Grid.Row="1"/>
+        <Label x:Name="label1_Copy1" Content="风幕灯" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="98,129,0,0" Foreground="#FFF9F4F4" FontSize="24" Background="#FF245D7C" RenderTransformOrigin="1.056,4.109" Height="42" Width="82" Grid.Row="1"/>
+        <Label x:Name="label1_Copy2" Content="风幕" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="434,129,0,0" Foreground="#FFF9F4F4" FontSize="24" Background="#FF245D7C" RenderTransformOrigin="1.056,4.109" Height="42" Width="58" Grid.Row="1"/>
+        <Label x:Name="label1_Copy3" Content="自动窗" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="98,247,0,0" Foreground="#FFF9F4F4" FontSize="24" Background="#FF245D7C" RenderTransformOrigin="1.056,4.109" Height="42" Width="82" Grid.Row="1"/>
+        <Label x:Name="label1_Copy4" Content="报警器" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="424,247,0,0" Foreground="#FFF9F4F4" FontSize="24" Background="#FF245D7C" RenderTransformOrigin="1.056,4.109" Height="42" Width="82" Grid.Row="1"/>
+        <Label x:Name="label1_Copy5" Content="自动门" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Margin="76,176,0,0" Foreground="#FFF9F4F4" FontSize="24" Background="#FF245D7C" RenderTransformOrigin="1.056,4.109" Height="42" Width="82" Grid.Row="1"/>
 
     </Grid>
 </Page>
