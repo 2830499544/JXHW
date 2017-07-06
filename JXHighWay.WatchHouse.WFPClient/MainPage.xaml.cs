@@ -96,7 +96,6 @@ namespace JXHighWay.WatchHouse.WFPClient
                     
                     Action action1 = () =>
                     {
-
                         initWatchHouse();
                     };
                     this.Dispatcher.BeginInvoke(action1);
@@ -115,21 +114,43 @@ namespace JXHighWay.WatchHouse.WFPClient
                 if (i < WatchHouseInfoList.Count)
                 {
                     Image vImage = (Image)FindName(string.Format("Image_WH{0}", i + 1));
-                    if (WatchHouseInfoList[i].IsOnline)
+                    int vRowIndex = (int)vImage.GetValue(Grid.RowProperty);
+                    int vColumnIndex = (int)vImage.GetValue(Grid.ColumnProperty);
+
+                    switch (WatchHouseInfoList[i].LeiXin)
                     {
-                        
-                        if (WatchHouseInfoList[i].LeiXin == "入口")
+                        case "入口":
                             vImage.Source = new BitmapImage(new Uri(@"Images/Main/Ru.jpg", UriKind.Relative));
-                        else
+                            break;
+                        case "出口":
                             vImage.Source = new BitmapImage(new Uri(@"Images/Main/Chu.jpg", UriKind.Relative));
+                            break;
+                        case "双向":
+                            vImage.Source = new BitmapImage(new Uri(@"Images/Main/ShuanXiang.jpg", UriKind.Relative));
+                            break;
                     }
-                    else
+
+
+                    //在线状态
+                    Image vImage_BJ = FindName(string.Format("Image_BJ{0}", i + 1))==null?null: (Image)FindName(string.Format("Image_BJ{0}", i + 1));
+                    if (vImage_BJ==null )
                     {
-                        if (WatchHouseInfoList[i].LeiXin == "入口")
-                            vImage.Source = new BitmapImage(new Uri(@"Images/Main/Ru_L.jpg", UriKind.Relative));
-                        else
-                            vImage.Source = new BitmapImage(new Uri(@"Images/Main/Chu_L.jpg", UriKind.Relative));
+                        //报警图标
+                        vImage_BJ = new Image()
+                        {
+                            Source = new BitmapImage(new Uri(@"Images/Main/BaoJing.png", UriKind.Relative)),
+                            Width = 47,
+                            Height = 47,
+                            Name = string.Format("Image_BJ{0}", i + 1)
+                        };
+                        vImage_BJ.SetValue(Grid.RowProperty, vRowIndex);
+                        vImage_BJ.SetValue(Grid.ColumnProperty, vColumnIndex);
+                        vImage_BJ.Margin = new Thickness(144, -159, 0, 0);
+                        Grid_GanTing.Children.Add(vImage_BJ);
+                        Grid_GanTing.RegisterName(vImage_BJ.Name, vImage_BJ);
                     }
+                    vImage_BJ.Visibility = WatchHouseInfoList[i].IsOnline ? Visibility.Hidden : Visibility.Visible;
+
                     Label vLabelName = (Label)FindName(string.Format("Label_Name_WH{0}", i + 1));
                     vLabelName.Content = WatchHouseInfoList[i].GangTingMC;
                     vImage.Tag = string.Format("{0}&{1}&{2}&{3}", WatchHouseInfoList[i].GangTingID, WatchHouseInfoList[i].GangTingMC, WatchHouseInfoList[i].DianYuanID, WatchHouseInfoList[i].GuanGaoPingIP);

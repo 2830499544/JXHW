@@ -183,9 +183,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Logo.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Setup.jpg" />
   </ItemGroup>
   <ItemGroup>
@@ -413,6 +410,11 @@
     <Resource Include="Images\GongHaoPai\BeiJing.jpg" />
     <Resource Include="Images\Login\BenJing.jpg" />
     <Resource Include="Images\LED\AnNiu.jpg" />
+    <Resource Include="Images\JianGe.jpg" />
+    <Resource Include="Images\Logo.jpg" />
+    <Resource Include="Images\Main\BaoJing.png" />
+    <Resource Include="Images\Main\1499220622931227.gif" />
+    <Resource Include="Images\Main\ShuanXiang.jpg" />
     <Content Include="Transmit.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

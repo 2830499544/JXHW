@@ -29,10 +29,13 @@ namespace JXHighWay.WatchHouse.WFPClient
             InitializeComponent();
         }
 
-        private  void image_25_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private async void image_25_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            //bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, WatchHouseDataPack_Send_CommandEnmu);
-            //luminance25();
+            bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, WatchHouseDataPack_Send_CommandEnmu.SheZhiLD,0x19);
+            if (vResult)
+                luminance25();
+            else
+                MessageBox.Show("调节亮度失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         void luminance25()
@@ -41,11 +44,16 @@ namespace JXHighWay.WatchHouse.WFPClient
             image_50.Source = new BitmapImage(new Uri(@"Images/DengGuang/50.jpg", UriKind.Relative));
             image_75.Source = new BitmapImage(new Uri(@"Images/DengGuang/75.jpg", UriKind.Relative));
             image_100.Source = new BitmapImage(new Uri(@"Images/DengGuang/100.jpg", UriKind.Relative));
+            Label_LD.Content = "25%";
         }
 
-        private void image_50_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private async void image_50_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            luminance50();
+            bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, WatchHouseDataPack_Send_CommandEnmu.SheZhiLD, 0x32);
+            if (vResult)
+                luminance50();
+            else
+                MessageBox.Show("调节亮度失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
         }
         
         void luminance50()
@@ -54,11 +62,16 @@ namespace JXHighWay.WatchHouse.WFPClient
             image_50.Source = new BitmapImage(new Uri(@"Images/DengGuang/50_A.jpg", UriKind.Relative));
             image_75.Source = new BitmapImage(new Uri(@"Images/DengGuang/75.jpg", UriKind.Relative));
             image_100.Source = new BitmapImage(new Uri(@"Images/DengGuang/100.jpg", UriKind.Relative));
+            Label_LD.Content = "50%";
         }
 
-        private void image_75_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private async void image_75_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            luminance75();
+            bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, WatchHouseDataPack_Send_CommandEnmu.SheZhiLD, 0x4b);
+            if (vResult)
+                luminance75();
+            else
+                MessageBox.Show("调节亮度失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         void luminance75()
@@ -67,11 +80,16 @@ namespace JXHighWay.WatchHouse.WFPClient
             image_50.Source = new BitmapImage(new Uri(@"Images/DengGuang/50.jpg", UriKind.Relative));
             image_75.Source = new BitmapImage(new Uri(@"Images/DengGuang/75_A.jpg", UriKind.Relative));
             image_100.Source = new BitmapImage(new Uri(@"Images/DengGuang/100.jpg", UriKind.Relative));
+            Label_LD.Content = "75%";
         }
 
-        private void image_100_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private async void image_100_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            luminance100();
+            bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, WatchHouseDataPack_Send_CommandEnmu.SheZhiLD, 0x64);
+            if (vResult)
+                luminance100();
+            else
+                MessageBox.Show("调节亮度失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         void luminance100()
@@ -80,6 +98,7 @@ namespace JXHighWay.WatchHouse.WFPClient
             image_50.Source = new BitmapImage(new Uri(@"Images/DengGuang/50.jpg", UriKind.Relative));
             image_75.Source = new BitmapImage(new Uri(@"Images/DengGuang/75.jpg", UriKind.Relative));
             image_100.Source = new BitmapImage(new Uri(@"Images/DengGuang/100_A.jpg", UriKind.Relative));
+            Label_LD.Content = "100%";
         }
 
         void luminance0()

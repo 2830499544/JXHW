@@ -11,11 +11,7 @@
     <Grid Background="#245d7c">
         <Image x:Name="image" HorizontalAlignment="Left" Height="341" Margin="166,61,0,0" VerticalAlignment="Top" Width="714" Source="Images/GongHaoPai/BeiJing.jpg"/>
         <Label x:Name="label" Content="工牌号码:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="381,170,0,0" FontSize="26"/>
-        <Label x:Name="label_Copy"  Content="输入新工牌号:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="329,257,0,0" FontSize="26" Foreground="#FF8E774E"/>
-        <Label x:Name="label_Copy1"  Content="工牌号图片:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="355,307,0,0" FontSize="26" Foreground="#FF8E774E"/>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="29" Margin="506,269,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="230"/>
-        <TextBox x:Name="textBox_Copy" HorizontalAlignment="Left" Height="29" Margin="506,318,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="230"/>
-        <Button x:Name="button" Content="上　传" HorizontalAlignment="Left" VerticalAlignment="Top" Width="95" Margin="751,291,0,0" FontSize="20" Height="38" Background="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"/>
+        <Label x:Name="label1" Content="电子工号牌" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="422,63,0,0" FontSize="36" Foreground="#FFF5F0F0"/>
 
     </Grid>
 </Page>

@@ -88,7 +88,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.GanTing
 
         public List<WatchHouseInfo> GetAllWatchHouseInfo()
         {
-            WatchHouseConfigEFModel[] vWatchHouseInfoArray =  m_BasicDBClass.SelectAllRecordsEx<WatchHouseConfigEFModel>();
+            WatchHouseConfigEFModel[] vWatchHouseInfoArray =  m_BasicDBClass.SelectCustomEx<WatchHouseConfigEFModel>("SELECT *From 岗亭配置 order by GangTingLX ,GangTingMC");
             List<WatchHouseInfo> vResut = new List<WatchHouseInfo>();
             foreach (WatchHouseConfigEFModel vTempWatchHouse in vWatchHouseInfoArray)
             {
@@ -105,24 +105,32 @@ namespace JXHighWay.WatchHouse.Bll.Client.GanTing
                     GongHao = vTempWatchHouse.GongHao,
                     GuanGaoPDK = vTempWatchHouse.GuanGaoPDK,
                     GuanGaoPingIP = vTempWatchHouse.GuanGaoPingIP,
-                    LeiXin = vTempWatchHouse.LeiXin,
+                    LeiXin = vTempWatchHouse.GangTingLX,
                     ID = vTempWatchHouse.ID,
                     ShouFeiZhangID = vTempWatchHouse.ShouFeiZhangID,
                     TongXunSJ = vTempWatchHouse.GangTingTXSJ,
-                    IsOnline = isOnline(vTempWatchHouse.GangTingTXSJ )
+                    IsOnline = isOnline(vTempWatchHouse.GangTingTXSJ, vTempWatchHouse.DianYuanTXSJ)
                 });
             }
             return vResut;
         }
 
-        bool isOnline(DateTime? tongXunSJ)
+        /// <summary>
+        /// 判断设备是否在线
+        /// </summary>
+        /// <param name="GangTingTXSJ"></param>
+        /// <param name="DianYuanTXSJ"></param>
+        /// <returns></returns>
+        bool isOnline(DateTime? GangTingTXSJ, DateTime? DianYuanTXSJ)
         {
             bool vResult = false;
-            if (tongXunSJ!=null)
+            if (GangTingTXSJ != null && DianYuanTXSJ!=null)
             {
-                if ((DateTime.Now - tongXunSJ.Value).TotalSeconds < m_OfflineTime)
+                if ((DateTime.Now - GangTingTXSJ.Value).TotalSeconds < m_OfflineTime && (DateTime.Now - DianYuanTXSJ.Value).TotalSeconds < m_OfflineTime)
                     vResult = true;
+
             }
+
             return vResult;
         }
 

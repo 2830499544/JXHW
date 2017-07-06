@@ -77,6 +77,11 @@ namespace JXHighWay.WatchHouse.WFPClient
         public static string LEDIP { get; set; }
 
         /// <summary>
+        /// 当前登陆管理员
+        /// </summary>
+        public static string AdminUser { get; set; }
+
+        /// <summary>
         /// 一级导航名称
         /// </summary>
         public string Navigation1_Name { get; set; }
@@ -104,11 +109,19 @@ namespace JXHighWay.WatchHouse.WFPClient
             Label vLabel_Navigation3 = (Label)Win.FindName("Label_Navigation3");
             Image vImage_Navigation3 = (Image)Win.FindName("Image_Navigation3");
 
+            Image vImage_DengGuan = (Image)Win.FindName("image_DengGuan");
+            Image vImage_ZhiDongMC = (Image)Win.FindName("image_ZhiDongMC");
+            Image vImage_DianYuan = (Image)Win.FindName("image_DianYuan");
+            Image vImage_LED = (Image)Win.FindName("image_LED");
+            Image vImage_XinFeng = (Image)Win.FindName("image_XinFeng");
+            Image vImage_KongTiao = (Image)Win.FindName("image_KongTiao");
+            Image vImage_DiNuan = (Image)Win.FindName("image_DiNuan");
+
             switch ( Level)
             {
                 case 1:
                     vLabel_Navigation1.Content = "主界面";
-                    vLabel_Navigation1.Visibility = Visibility.Visible;
+                    vLabel_Navigation1.Visibility = Visibility.Hidden;
                     vImage_Navigation1.Visibility = Visibility.Hidden;
 
                     vLabel_Navigation2.Visibility = Visibility.Hidden;
@@ -116,6 +129,14 @@ namespace JXHighWay.WatchHouse.WFPClient
 
                     vLabel_Navigation3.Visibility = Visibility.Hidden;
                     vImage_Navigation3.Visibility = Visibility.Hidden;
+
+                    vImage_DengGuan.Visibility = Visibility.Hidden;
+                    vImage_ZhiDongMC.Visibility = Visibility.Hidden;
+                    vImage_DianYuan.Visibility = Visibility.Hidden;
+                    vImage_LED.Visibility = Visibility.Hidden;
+                    vImage_XinFeng.Visibility = Visibility.Hidden;
+                    vImage_KongTiao.Visibility = Visibility.Hidden;
+                    vImage_DiNuan.Visibility = Visibility.Hidden;
                     break;
                 case 2:
                     vLabel_Navigation1.Visibility = Visibility.Visible;
@@ -127,6 +148,14 @@ namespace JXHighWay.WatchHouse.WFPClient
 
                     vLabel_Navigation3.Visibility = Visibility.Hidden;
                     vImage_Navigation3.Visibility = Visibility.Hidden;
+
+                    vImage_DengGuan.Visibility = Visibility.Visible;
+                    vImage_ZhiDongMC.Visibility = Visibility.Visible;
+                    vImage_DianYuan.Visibility = Visibility.Visible;
+                    vImage_LED.Visibility = Visibility.Visible;
+                    vImage_XinFeng.Visibility = Visibility.Visible;
+                    vImage_KongTiao.Visibility = Visibility.Visible;
+                    vImage_DiNuan.Visibility = Visibility.Visible;
                     break;
                 case 3:
                     vLabel_Navigation1.Visibility = Visibility.Visible;
@@ -138,6 +167,14 @@ namespace JXHighWay.WatchHouse.WFPClient
                     vLabel_Navigation3.Content = Title;
                     vLabel_Navigation3.Visibility = Visibility.Visible;
                     vImage_Navigation3.Visibility = Visibility.Visible;
+
+                    vImage_DengGuan.Visibility = Visibility.Visible;
+                    vImage_ZhiDongMC.Visibility = Visibility.Visible;
+                    vImage_DianYuan.Visibility = Visibility.Visible;
+                    vImage_LED.Visibility = Visibility.Visible;
+                    vImage_XinFeng.Visibility = Visibility.Visible;
+                    vImage_KongTiao.Visibility = Visibility.Visible;
+                    vImage_DiNuan.Visibility = Visibility.Visible;
                     break;
             }
             

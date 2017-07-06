@@ -29,7 +29,7 @@
                 <ColumnDefinition Width="86*"/>
             </Grid.ColumnDefinitions>
             <Image Grid.Column="0" HorizontalAlignment="Left" Height="69" VerticalAlignment="Top" Width="185" Source="Images/Logo.jpg"/>
-            <Label Content="智慧型收费岗亭管理系统" Grid.Column="1" HorizontalAlignment="Left" Margin="32,6,0,0" VerticalAlignment="Top" Width="418" FontSize="36" Height="55" FontFamily="Microsoft YaHei" Foreground="#FFF2F6F1"/>
+            <Label Content="智慧型收费岗亭管理系统" Grid.Column="1" HorizontalAlignment="Left" Margin="32,6,0,0" VerticalAlignment="Top" Width="418" FontSize="36" Height="55" FontFamily="兮妞-中黑体" Foreground="#FFF2F6F1"/>
             <Image Grid.Column="4" Margin="21,11,17,10" MouseLeftButtonDown="Image_MouseLeftButtonDown_1">
                 <Image.Style>
                     <Style TargetType="Image">
@@ -68,16 +68,16 @@
                 <ColumnDefinition Width="141*"/>
                 <ColumnDefinition Width="33*"/>
             </Grid.ColumnDefinitions>
-            <Label x:Name="Label_Navigation1" Grid.Column="0" Grid.Row="0" Background="#8cadae" Content="主界面" FontSize="18" Cursor="Hand" MouseLeftButtonDown="Label_Navigation1_MouseLeftButtonDown" HorizontalAlignment="Left" Width="141"/>
+            <Label x:Name="Label_Navigation1" Grid.Column="0" Grid.Row="0" Background="#8cadae" Content="主界面" FontSize="18" Cursor="Hand" MouseLeftButtonDown="Label_Navigation1_MouseLeftButtonDown" HorizontalAlignment="Left" Width="141" Foreground="#FFF9F5F5"/>
             <Image x:Name="Image_Navigation1" Grid.Row="0" HorizontalAlignment="Left" Height="33"  Width="43" Source="Images/DaoHan1.jpg" Grid.ColumnSpan="2" Margin="140,0,0,0"  />
-            <Label x:Name="Label_Navigation2" Height="32" Grid.Column="2" Grid.Row="0" Background="#546d7a"   FontSize="18" Content="导航二" Cursor="Hand" Margin="-2,0,0,0" MouseLeftButtonDown="Label_Navigation2_MouseLeftButtonDown" ></Label>
+            <Label x:Name="Label_Navigation2" Height="32" Grid.Column="1" Grid.Row="0" Background="#546d7a"   FontSize="18" Content="导航二" Cursor="Hand" Margin="31,2,0,0" MouseLeftButtonDown="Label_Navigation2_MouseLeftButtonDown" Foreground="#FFF7F2F2" Grid.ColumnSpan="2" ></Label>
             <Image x:Name="Image_Navigation2" Grid.Column="3" Grid.Row="0" HorizontalAlignment="Left" Height="33"   Width="33" Source="Images/DaoHan2.jpg" Grid.ColumnSpan="2" Margin="-2,0,0,0" />
-            <Label x:Name="Label_Navigation3" Height="32" Grid.Column="4" Grid.Row="0" Background="#d16349"   FontSize="18" Content="导航三" Margin="-2,0,0,0" HorizontalAlignment="Left" Width="140"/>
+            <Label x:Name="Label_Navigation3" Height="32" Grid.Column="3" Grid.Row="0" Background="#d16349"   FontSize="18" Content="导航三" Margin="31,2,0,0" HorizontalAlignment="Left" Width="140" Foreground="#FFF0EBEB" Grid.ColumnSpan="2"/>
             <Image x:Name="Image_Navigation3" Grid.Column="5" Grid.Row="0" HorizontalAlignment="Left" Height="33"   Width="33" Source="Images/DaoHan3.jpg" Margin="-4,0,0,0"  />
         </Grid>
         <Image HorizontalAlignment="Left" Height="150" Grid.Row="3" VerticalAlignment="Top" Width="1024" Source="Images/DiBu1.jpg"/>
         <Frame x:Name="MainFrame" Content="Frame" HorizontalAlignment="Left" Height="495" Grid.Row="1" VerticalAlignment="Top" Width="1024" Source="/JXHighWay.WatchHouse.WFPClient;component/MainPage.xaml" NavigationUIVisibility="Hidden" Margin="0,54,0,0" Grid.RowSpan="2"/>
-        <Image HorizontalAlignment="Left" Height="43" Margin="29,107,0,0" Grid.Row="3" VerticalAlignment="Top" Width="72" >
+        <Image x:Name="image_DengGuan" HorizontalAlignment="Left" Height="43" Margin="29,107,0,0" Grid.Row="3" VerticalAlignment="Top" Width="72" >
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
                     <Setter Property="Source" Value="Images/DengGuan.jpg"/>
@@ -89,7 +89,7 @@
                 </Style>
             </Image.Style>
         </Image>
-        <Image HorizontalAlignment="Left" Height="43" Margin="147,107,0,0" Grid.Row="3" VerticalAlignment="Top" Width="100" >
+        <Image x:Name="image_ZhiDongMC" HorizontalAlignment="Left" Height="43" Margin="147,107,0,0" Grid.Row="3" VerticalAlignment="Top" Width="100" >
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
                     <Setter Property="Source" Value="Images/ZhiDongMen.jpg"/>
@@ -101,7 +101,7 @@
                 </Style>
             </Image.Style>
         </Image>
-        <Image HorizontalAlignment="Left" Height="43" Margin="293,107,0,0" Grid.Row="3" VerticalAlignment="Top" Width="72" >
+        <Image x:Name="image_DianYuan" HorizontalAlignment="Left" Height="43" Margin="293,107,0,0" Grid.Row="3" VerticalAlignment="Top" Width="72" >
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
                     <Setter Property="Source" Value="Images/DianYuan.jpg"/>
@@ -113,7 +113,7 @@
                 </Style>
             </Image.Style>
         </Image>
-        <Image HorizontalAlignment="Left" Height="43" Margin="411,107,0,0" Grid.Row="3" VerticalAlignment="Top" Width="120" >
+        <Image x:Name="image_LED" HorizontalAlignment="Left" Height="43" Margin="411,107,0,0" Grid.Row="3" VerticalAlignment="Top" Width="120" >
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
                     <Setter Property="Source" Value="Images/LED.jpg"/>
@@ -125,7 +125,7 @@
                 </Style>
             </Image.Style>
         </Image>
-        <Image HorizontalAlignment="Left" Height="43" Margin="565,107,0,0" Grid.Row="3" VerticalAlignment="Top" Width="72" >
+        <Image x:Name="image_XinFeng" HorizontalAlignment="Left" Height="43" Margin="565,107,0,0" Grid.Row="3" VerticalAlignment="Top" Width="72" >
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
                     <Setter Property="Source" Value="Images/XinFeng.jpg"/>
@@ -137,7 +137,7 @@
                 </Style>
             </Image.Style>
         </Image>
-        <Image HorizontalAlignment="Left" Height="43" Margin="671,107,0,0" Grid.Row="3" VerticalAlignment="Top" Width="72" >
+        <Image x:Name="image_KongTiao" HorizontalAlignment="Left" Height="43" Margin="671,107,0,0" Grid.Row="3" VerticalAlignment="Top" Width="72" >
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
                     <Setter Property="Source" Value="Images/KongTiao.jpg"/>
@@ -149,7 +149,7 @@
                 </Style>
             </Image.Style>
         </Image>
-        <Image HorizontalAlignment="Left" Height="43" Margin="770,107,0,0" Grid.Row="3" VerticalAlignment="Top" Width="72" >
+        <Image x:Name="image_DiNuan" HorizontalAlignment="Left" Height="43" Margin="770,107,0,0" Grid.Row="3" VerticalAlignment="Top" Width="72" >
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
                     <Setter Property="Source" Value="Images/DiRuan.jpg"/>

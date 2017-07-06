@@ -80,7 +80,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.LED
             }
         }
 
-        public void SendImage(string ImagePath)
+        public void SendImage(string UserName,string ImagePath)
         {
             string vMD5 = CommHelper.GetMD5HashFromFile(ImagePath);
             long vFileSize = CommHelper.FileSize(ImagePath);
@@ -148,10 +148,19 @@ namespace JXHighWay.WatchHouse.Bll.Client.LED
 
             //Console.WriteLine(sw.ToString());
             HdTransmitTool t = HdTransmitTool.GetInstance();
-            t.Send("192.168.0.114", ms.ToArray(), true);
+            t.Send(m_IPAddress, ms.ToArray(), true);
+
+            LEDDataEFModel vLEDDataEFModel = new LEDDataEFModel()
+            {
+                UserName = UserName,
+                Time = DateTime.Now,
+                Pic = ImagePath
+            };
+
+            m_BasicDBClass.InsertRecord(vLEDDataEFModel);
         }
 
-        public void SendVideo( string VideoPath )
+        public void SendVideo( string UserName, string VideoPath )
         {
             string vMD5 = CommHelper.GetMD5HashFromFile(VideoPath);
             long vFileSize = CommHelper.FileSize(VideoPath);
@@ -214,10 +223,19 @@ namespace JXHighWay.WatchHouse.Bll.Client.LED
 
             Console.WriteLine(sw.ToString());
             HdTransmitTool t = HdTransmitTool.GetInstance();
-            t.Send("192.168.0.114", ms.ToArray(), true);
+            t.Send(m_IPAddress, ms.ToArray(), true);
+
+            LEDDataEFModel vLEDDataEFModel = new LEDDataEFModel()
+            {
+                UserName = UserName,
+                Time = DateTime.Now,
+                Pic = VideoPath
+            };
+
+            m_BasicDBClass.InsertRecord(vLEDDataEFModel);
         }
 
-        public void SendText(string Text)
+        public void SendText(string UserName,string Text)
         {
             HdTransmitTool t = HdTransmitTool.GetInstance();
             //t.Send("192.168.0.114", "E:\\1.xml", true);
@@ -228,6 +246,15 @@ namespace JXHighWay.WatchHouse.Bll.Client.LED
             font.TextColor = new HDColor(255, 255, 255, 128);
             byte[] data = HD_Base.GenerateSinglelineTextXml(new Size(m_Width, m_Heigth), Text, font);
             t.Send(m_IPAddress, data, true);
+
+            LEDDataEFModel vLEDDataEFModel = new LEDDataEFModel()
+            {
+                UserName = UserName,
+                Time = DateTime.Now,
+                Pic = Text
+            };
+
+            m_BasicDBClass.InsertRecord(vLEDDataEFModel);
         }
 
         static HD_Callback callback = (x, y) =>

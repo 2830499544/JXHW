@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LEDDataEFModel.cs" />
     <Compile Include="ManagerEFModel.cs" />
     <Compile Include="DoorGuardEFModel.cs" />
     <Compile Include="EmployeeEFModel.cs" />

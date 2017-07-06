@@ -47,7 +47,7 @@ namespace JXHighWay.WatchHouse.WFPClient
         {
             m_LEDControl = new LEDControl(App.WatchHouseID, 64, 64);
             if (System.IO.File.Exists(textBox_ShiPing.Text))
-                m_LEDControl.SendVideo(textBox_ShiPing.Text);
+                m_LEDControl.SendVideo( App.AdminUser, textBox_ShiPing.Text);
             else
                 MessageBox.Show("视频文件不存在", "信息", MessageBoxButton.OK, MessageBoxImage.Error);
         }
@@ -75,7 +75,7 @@ namespace JXHighWay.WatchHouse.WFPClient
         private void button_Text_ShangChuang_Click(object sender, RoutedEventArgs e)
         {
             if (textBox_Text.Text != "")
-                m_LEDControl.SendText(textBox_Text.Text);
+                m_LEDControl.SendText( App.AdminUser, textBox_Text.Text);
             else
             {
                 MessageBox.Show("请输入方字", "信息", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -87,7 +87,7 @@ namespace JXHighWay.WatchHouse.WFPClient
         {
             m_LEDControl = new LEDControl(App.WatchHouseID, 64, 64);
             if (System.IO.File.Exists(textBox_TuPian.Text))
-                m_LEDControl.SendVideo(textBox_TuPian.Text);
+                m_LEDControl.SendVideo( App.AdminUser, textBox_TuPian.Text);
             else
                 MessageBox.Show("图片文件不存在", "信息", MessageBoxButton.OK, MessageBoxImage.Error);
         }

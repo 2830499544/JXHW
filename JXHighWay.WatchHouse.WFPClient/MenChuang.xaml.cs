@@ -62,5 +62,86 @@ namespace JXHighWay.WatchHouse.WFPClient
             CheckBox_Men.IsChecked = vMenChuangStateModel.Men;
             CheckBox_ZiDongChuang.IsChecked = vMenChuangStateModel.ZiDonGChuang;
         }
+
+        private async void CheckBox_Men_Checked(object sender, RoutedEventArgs e)
+        {
+            bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiMen);
+            
+        }
+
+        private async void CheckBox_Men_Unchecked(object sender, RoutedEventArgs e)
+        {
+            bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanMen);
+            
+        }
+
+        private async void CheckBox_Chuang_Checked(object sender, RoutedEventArgs e)
+        {
+            bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiChuang);
+            
+        }
+
+        private async void CheckBox_Chuang_Unchecked(object sender, RoutedEventArgs e)
+        {
+            bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanChaugn);
+            
+        }
+
+        private async void Button_QCL_Shen_Click(object sender, RoutedEventArgs e)
+        {
+            bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.QianChuanLSS);
+            if (!vResult)
+                MessageBox.Show("前窗帘上升失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        private async void Button_QCL_Jiang_Click(object sender, RoutedEventArgs e)
+        {
+            bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.QianChuanLXJ);
+            if (!vResult)
+                MessageBox.Show("前窗帘下降失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        private async void button_QCL_Sheng_Click(object sender, RoutedEventArgs e)
+        {
+            bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.YouChuanLSS);
+            if (!vResult)
+                MessageBox.Show("右窗帘上升失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        private async void button_QCL_Jiang_Click_1(object sender, RoutedEventArgs e)
+        {
+            bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.YouChuanLXJ);
+            if (!vResult)
+                MessageBox.Show("右窗帘下降失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        private void CheckBox_ZiDongChuang_Checked(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private async void CheckBox_FengMuDeng_Checked(object sender, RoutedEventArgs e)
+        {
+            bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiChuangDeng);
+            
+        }
+
+        private async void CheckBox_FengMuDeng_Unchecked(object sender, RoutedEventArgs e)
+        {
+            bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanChuangDeng);
+            
+        }
+
+        private async void CheckBox_FengMu_Checked(object sender, RoutedEventArgs e)
+        {
+            bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiFengMu);
+            
+        }
+
+        private async void CheckBox_FengMu_Unchecked(object sender, RoutedEventArgs e)
+        {
+            bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanFengMu);
+            
+        }
     }
 }
