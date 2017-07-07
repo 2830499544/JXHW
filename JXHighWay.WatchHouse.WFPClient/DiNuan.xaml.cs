@@ -143,7 +143,6 @@ namespace JXHighWay.WatchHouse.WFPClient
                     Label_DanQianWD.Tag = vDanQianWD;
                     Label_DanQianWD.Content = string.Format("{0}℃", vDanQianWD);
                 }
-
             }
         }
     }

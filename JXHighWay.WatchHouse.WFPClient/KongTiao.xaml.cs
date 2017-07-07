@@ -275,22 +275,19 @@ namespace JXHighWay.WatchHouse.WFPClient
             });
         }
 
-        private async void CheckBox_KongTiao_Checked(object sender, RoutedEventArgs e)
+        private async void CheckBox_KongTiao_Click(object sender, RoutedEventArgs e)
         {
             if (m_IsInit)
             {
-                bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiKongTiao);
-                if (!vResult)
-                    MessageBox.Show("空调开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
-        private  async void CheckBox_KongTiao_Unchecked(object sender, RoutedEventArgs e)
-        {
-            if (m_IsInit)
-            {
-                bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanKongTiao);
-                if (!vResult)
+                bool vOldValue = CheckBox_KongTiao.IsChecked??false;
+                bool vResult;
+                if (vOldValue)
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanKongTiao);
+                else
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiKongTiao);
+                if (vResult)
+                    CheckBox_KongTiao.IsChecked = !vOldValue;
+                else
                     MessageBox.Show("空调开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }

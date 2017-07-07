@@ -40,7 +40,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
         }
 
         public bool Update(int ID, int GanTingID, string GanTingMC, string GanTingLX,
-            string LedIP, int DianYuanID, ref string OutInfo)
+            string LedIP, int DianYuanID, DataTable SwitchInfoTable, ref string OutInfo)
         {
             bool vResult = false;
             WatchHouseConfigEFModel vWatchHouseConfigEFModel = new WatchHouseConfigEFModel()
@@ -52,23 +52,46 @@ namespace JXHighWay.WatchHouse.Bll.Server
                 DianYuanID = DianYuanID,
                 ID = ID
             };
+            m_BasicDBClass.TransactionBegin();
             if (m_BasicDBClass.UpdateRecord(vWatchHouseConfigEFModel))
             {
-                vResult = true;
+                foreach (DataRow vTempSwitch in SwitchInfoTable.Rows)
+                {
+                    PowerSwithConfigEFModel vModel = new PowerSwithConfigEFModel()
+                    {
+                        ID = DBConvert.ToInt32(vTempSwitch["ID"]),
+                        LeiXing = DBConvert.ToString(vTempSwitch["类型"]),
+                        LuHao = DBConvert.ToString(vTempSwitch["路号"]),
+                        MinCheng = DBConvert.ToString(vTempSwitch["名称"])
+                    };
+
+                    if (!m_BasicDBClass.UpdateRecord(vModel) )
+                    {
+                        vResult = false;
+                        m_BasicDBClass.TransactionRollback();
+                        break;
+                    }
+                    else
+                        vResult = true;
+                }
+                if (vResult)
+                    m_BasicDBClass.TransactionCommit();
             }
             else
             {
-                OutInfo = "增加岗亭数据失败";
+                OutInfo = "修改岗亭数据失败";
             }
             return vResult;
         }
 
         public bool Add(int GanTingID,string GanTingMC,string GanTingLX,
-            string LedIP,int DianYuanID,ref string OutInfo )
+            string LedIP,int DianYuanID, DataTable SwitchInfoTable,
+            ref string OutInfo )
         {
             bool vResult = false;
             if ( !findGanTing(GanTingID,DianYuanID) )
             {
+                m_BasicDBClass.TransactionBegin();
                 WatchHouseConfigEFModel vWatchHouseConfigEFModel = new WatchHouseConfigEFModel()
                 {
                     GangTingID = GanTingID,
@@ -80,7 +103,26 @@ namespace JXHighWay.WatchHouse.Bll.Server
                 };
                 if ( m_BasicDBClass.InsertRecord(vWatchHouseConfigEFModel) > 0)
                 {
-                    vResult = true;
+                    foreach(DataRow vTempSwitch in SwitchInfoTable.Rows)
+                    {
+                        PowerSwithConfigEFModel vModel = new PowerSwithConfigEFModel()
+                        {
+                            DianYuanID = DianYuanID,
+                            LeiXing = DBConvert.ToString( vTempSwitch["类型"] ),
+                            LuHao = DBConvert.ToString(vTempSwitch["路号"]),
+                            MinCheng = DBConvert.ToString(vTempSwitch["名称"])
+                        };
+                        if (m_BasicDBClass.InsertRecord(vModel) <= 0)
+                        {
+                            vResult = false;
+                            m_BasicDBClass.TransactionRollback();
+                            break;
+                        }
+                        else
+                            vResult = true;
+                    }
+                    if (vResult)
+                        m_BasicDBClass.TransactionCommit();
                 }
                 else
                 {

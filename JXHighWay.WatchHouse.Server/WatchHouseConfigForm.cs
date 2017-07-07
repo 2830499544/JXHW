@@ -28,7 +28,7 @@ namespace JXHighWay.WatchHouse.Server
                 && int.TryParse(textBox_DY_ID.Text,out vDianYuanID)  )
             {
                 if (m_WatchHouseConfig.Add(vGanTingID, textBox_GanTing_MC.Text,
-                    comboBox_GanTing_LX.Text, textBox_LED_IP.Text, vDianYuanID, ref vOutInfo))
+                    comboBox_GanTing_LX.Text, textBox_LED_IP.Text, vDianYuanID, null,ref vOutInfo))
                 {
                     MessageBox.Show("增加岗亭数据成功", "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     dataGridView_List.DataSource = m_WatchHouseConfig.GetAll();
@@ -77,7 +77,7 @@ namespace JXHighWay.WatchHouse.Server
             {
                 int vID = (int)dataGridView_List.SelectedRows[0].Cells["Column_ID"].Value;
                 if (m_WatchHouseConfig.Update(vID, vGanTingID, textBox_GanTing_MC.Text,
-                    comboBox_GanTing_LX.Text, textBox_LED_IP.Text, vDianYuanID, ref vOutInfo))
+                    comboBox_GanTing_LX.Text, textBox_LED_IP.Text, vDianYuanID,null, ref vOutInfo))
                 {
                     MessageBox.Show("增加岗亭数据成功", "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     dataGridView_List.DataSource = m_WatchHouseConfig.GetAll();
