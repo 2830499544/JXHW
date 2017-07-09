@@ -140,6 +140,7 @@ namespace JXHighWay.WatchHouse.WFPClient
 
         WatchHouseMonitoring m_Monitoring = null;
         bool m_IsInit = false;
+        bool m_IsSwitch = true;
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             m_Monitoring = new WatchHouseMonitoring();
@@ -174,25 +175,39 @@ namespace JXHighWay.WatchHouse.WFPClient
             });
         }
 
-        private async void CheckBox_XinFeng_Checked(object sender, RoutedEventArgs e)
+        private async void CheckBox_XinFeng_Click(object sender, RoutedEventArgs e)
         {
-            if (m_IsInit)
+            if (m_IsInit && m_IsSwitch)
             {
-                bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiXinFeng);
-                if ( !vResult)
+                m_IsSwitch = false;
+                bool vOldValue = CheckBox_XinFeng.IsChecked ?? false;
+                bool vResult;
+                if (vOldValue)
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanXinFeng);
+                else
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiXinFeng);
+                if (!vResult)
+                {
+                    CheckBox_XinFeng.IsChecked = !vOldValue;
                     MessageBox.Show("新风开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-
+                }
+                changeSwitchColor();
+                m_IsSwitch = true;
             }
         }
 
-        private async void CheckBox_XinFeng_Unchecked(object sender, RoutedEventArgs e)
+        void changeSwitchColor()
         {
-            if (m_IsInit)
+            if (CheckBox_XinFeng.IsChecked ?? false)
             {
-                bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanXinFeng);
-                if (!vResult)
-                    MessageBox.Show("新风开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
 
+                label_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
+                label_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF079E23"));
+            }
+            else
+            {
+                label_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF0190F"));
+                label_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
             }
         }
     }

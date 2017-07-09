@@ -204,11 +204,11 @@ namespace JXHighWay.WatchHouse.WFPClient
 
         WatchHouseMonitoring m_Monitoring = null;
         bool m_IsInit = false;
+        bool m_IsSwitch = true;
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             m_Monitoring = new WatchHouseMonitoring();
             RefreshState();
-            
         }
 
         void initKongTiao()
@@ -255,6 +255,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                     kongTiaoFS_Kong();
                     break;
             }
+            changeSwitchColor();
             m_IsInit = true;
         }
 
@@ -277,18 +278,36 @@ namespace JXHighWay.WatchHouse.WFPClient
 
         private async void CheckBox_KongTiao_Click(object sender, RoutedEventArgs e)
         {
-            if (m_IsInit)
+            if (m_IsInit && m_IsSwitch)
             {
+                m_IsSwitch = false;
                 bool vOldValue = CheckBox_KongTiao.IsChecked??false;
                 bool vResult;
                 if (vOldValue)
                     vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanKongTiao);
                 else
                     vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiKongTiao);
-                if (vResult)
+                if (!vResult)
+                {
                     CheckBox_KongTiao.IsChecked = !vOldValue;
-                else
                     MessageBox.Show("空调开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                changeSwitchColor();
+                m_IsSwitch = true;
+            }
+        }
+
+        void changeSwitchColor()
+        {
+            if (CheckBox_KongTiao.IsChecked ?? false)
+            {
+                label_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
+                label_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF079E23"));
+            }
+            else
+            {
+                label_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF0190F"));
+                label_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
             }
         }
     }

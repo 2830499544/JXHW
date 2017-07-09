@@ -8,179 +8,48 @@
       d:DesignHeight="460" d:DesignWidth="1024"
       Title="XinFeng" Loaded="Page_Loaded">
     <Page.Resources>
-        <LinearGradientBrush x:Key="CheckedBlue" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Color="#FF285AB3" Offset="0" />
-            <GradientStop Color="#FF4184EC" Offset="0.5" />
-            <GradientStop Color="#FF558BED" Offset="0.5" />
-            <GradientStop Color="#FF7DACF0" Offset="1" />
-        </LinearGradientBrush>
-        <LinearGradientBrush x:Key="CheckedOrange" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Color="#FFCA6A13" Offset="0" />
-            <GradientStop Color="#FFF67D0C" Offset="0.2" />
-            <GradientStop Color="#FFFE7F0C" Offset="0.2" />
-            <GradientStop Color="#FFFA8E12" Offset="0.5" />
-            <GradientStop Color="#FFFF981D" Offset="0.5" />
-            <GradientStop Color="#FFFCBC5A" Offset="1" />
-        </LinearGradientBrush>
-        <SolidColorBrush x:Key="CheckedOrangeBorder" Color="#FF8E4A1B" />
-        <SolidColorBrush x:Key="CheckedBlueBorder" Color="#FF143874" />
-        <Style x:Key="OrangeSwitchStyle" TargetType="{x:Type CheckBox}">
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" />
-            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type CheckBox}">
-                        <ControlTemplate.Resources>
-                            <Storyboard x:Key="OnChecking">
-                                <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="slider" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                                    <SplineDoubleKeyFrame KeyTime="00:00:00.1000000" Value="53" />
-                                </DoubleAnimationUsingKeyFrames>
-                            </Storyboard>
-                            <Storyboard x:Key="OnUnchecking">
-                                <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="slider" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                                    <SplineDoubleKeyFrame KeyTime="00:00:00.1000000" Value="0" />
-                                </DoubleAnimationUsingKeyFrames>
-                            </Storyboard>
-                        </ControlTemplate.Resources>
-                        <DockPanel x:Name="dockPanel">
-                            <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" ContentTemplate="{TemplateBinding ContentTemplate}" RecognizesAccessKey="True" VerticalAlignment="Center" />
-                            <Grid>
-                                <Border x:Name="BackgroundBorder" BorderBrush="#FF939393" BorderThickness="1" CornerRadius="3" Height="27" Width="94">
-                                    <Border.Background>
-                                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                                            <GradientStop Color="#FFB5B5B5" Offset="0" />
-                                            <GradientStop Color="#FFDEDEDE" Offset="0.1" />
-                                            <GradientStop Color="#FFEEEEEE" Offset="0.5" />
-                                            <GradientStop Color="#FFFAFAFA" Offset="0.5" />
-                                            <GradientStop Color="#FFFEFEFE" Offset="1" />
-                                        </LinearGradientBrush>
-                                    </Border.Background>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition />
-                                            <ColumnDefinition />
-                                        </Grid.ColumnDefinitions>
-                                        <Ellipse x:Name="Off" Width="14" Height="14" Stroke="#FF7A7A7A" StrokeThickness="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                        <Line x:Name="On" X1="0" Y1="0" X2="0" Y2="14" Stroke="#FF7A7A7A" StrokeThickness="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                    </Grid>
-                                </Border>
-                                <Border BorderBrush="#FF939393" HorizontalAlignment="Left" x:Name="slider" Width="41" Height="27" BorderThickness="1" CornerRadius="3" RenderTransformOrigin="0.5,0.5" Margin="0">
-                                    <Border.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform ScaleX="1" ScaleY="1" />
-                                            <SkewTransform AngleX="0" AngleY="0" />
-                                            <RotateTransform Angle="0" />
-                                            <TranslateTransform X="0" Y="0" />
-                                        </TransformGroup>
-                                    </Border.RenderTransform>
-                                    <Border.Background>
-                                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                                            <GradientStop Color="#FFF0F0F0" Offset="0" />
-                                            <GradientStop Color="#FFCDCDCD" Offset="0.1" />
-                                            <GradientStop Color="#FFFBFBFB" Offset="1" />
-                                        </LinearGradientBrush>
-                                    </Border.Background>
-                                </Border>
-                            </Grid>
-                        </DockPanel>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsChecked" Value="True">
-                                <Trigger.ExitActions>
-                                    <BeginStoryboard Storyboard="{StaticResource OnUnchecking}" x:Name="OnUnchecking_BeginStoryboard" />
-                                </Trigger.ExitActions>
-                                <Trigger.EnterActions>
-                                    <BeginStoryboard Storyboard="{StaticResource OnChecking}" x:Name="OnChecking_BeginStoryboard" />
-                                </Trigger.EnterActions>
-                                <Setter TargetName="On" Property="Stroke" Value="White" />
-                                <Setter TargetName="Off" Property="Stroke" Value="White" />
-                                <!-- Change Orange or Blue color here -->
-                                <Setter TargetName="BackgroundBorder" Property="Background" Value="{StaticResource CheckedOrange}" />
-                                <Setter TargetName="BackgroundBorder" Property="BorderBrush" Value="{StaticResource CheckedOrangeBorder}" />
-                            </Trigger>
-                            <Trigger Property="IsEnabled" Value="False">
-                                <!-- ToDo: Add Style for Isenabled == False -->
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>
-        <Style x:Key="GroupboxWithoutWhiteBorder" TargetType="{x:Type GroupBox}">
-            <Setter Property="BorderBrush" Value="#D5DFE5" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type GroupBox}">
-                        <Grid SnapsToDevicePixels="true">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="6" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="6" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="6" />
-                            </Grid.RowDefinitions>
-                            <Border CornerRadius="4" Grid.Row="1" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="4" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="Transparent" Background="{TemplateBinding Background}" />
-                            <Border x:Name="Header" Padding="3,1,3,0" Grid.Row="0" Grid.RowSpan="2" Grid.Column="1">
-                                <ContentPresenter ContentSource="Header" RecognizesAccessKey="true" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                            </Border>
-                            <ContentPresenter Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                            <Border Grid.Row="1" Grid.RowSpan="3" Grid.ColumnSpan="4"  BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="3">
-                                <Border.OpacityMask>
-                                    <MultiBinding Converter="{StaticResource BorderGapMaskConverter}" ConverterParameter="7">
-                                        <Binding ElementName="Header" Path="ActualWidth" />
-                                        <Binding Path="ActualWidth" RelativeSource="{RelativeSource Self}" />
-                                        <Binding Path="ActualHeight" RelativeSource="{RelativeSource Self}" />
-                                    </MultiBinding>
-                                </Border.OpacityMask>
-                            </Border>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resource\CheckboxResource.xaml" />
+                <ResourceDictionary Source="Resource\GroupboxResource.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Page.Resources>
 
     <Grid Background="#245d7c">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="120*"/>
-            <ColumnDefinition Width="222*"/>
-            <ColumnDefinition Width="158*"/>
+            <ColumnDefinition Width="190*"/>
+            <ColumnDefinition Width="190*"/>
             <ColumnDefinition Width="479*"/>
             <ColumnDefinition Width="45*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="108*"  />
-            <RowDefinition Height="247*" />
-            <RowDefinition Height="105*" />
+            <RowDefinition Height="269*" />
+            <RowDefinition Height="83*" />
         </Grid.RowDefinitions>
+        <GroupBox Style="{StaticResource GroupboxWithoutWhiteBorder}" x:Name="groupBox_1" Header="新风等级" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="10,30,0,0" Height="146" Width="170" FontSize="18" Foreground="#FFF5F1F1" BorderBrush="#FF91ACBD" Cursor="Hand"  Grid.Row="1"/>
         <Image x:Name="image" HorizontalAlignment="Left" Height="147" VerticalAlignment="Top" Width="147" Grid.Column="1" Margin="33,39,0,0" Grid.Row="1" Source="Images/XinFeng/XingFeng.jpg"/>
-        <Label x:Name="label_Copy4" Content="新风等级" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="24,47,0,0" FontSize="18" Foreground="WhiteSmoke" Grid.Row="1" Height="34" Width="82" RenderTransformOrigin="0.5,1.5"/>
-        <Label x:Name="Label_DengJi" Content="1级" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="24,81,0,0" FontSize="72" Foreground="WhiteSmoke" Grid.Row="1" Height="105" Width="158" Grid.ColumnSpan="2"/>
-        <CheckBox x:Name="CheckBox_XinFeng" Style="{StaticResource OrangeSwitchStyle}" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="59,191,0,0" Grid.Row="1" VerticalAlignment="Top" Height="36" Width="91" IsChecked="True" Cursor="Hand" Checked="CheckBox_XinFeng_Checked" Unchecked="CheckBox_XinFeng_Unchecked"/>
-        <Border Grid.Column="3" Margin="10,30,10,181" Grid.Row="1"  CornerRadius="10" BorderBrush="#FF91ACBD" BorderThickness="1">
-            <Grid Margin="0,1,-1,9">
+        <Label x:Name="Label_DengJi" Content="1级" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="29,54,0,0" FontSize="72" Foreground="WhiteSmoke" Grid.Row="1" Height="105" Width="134" RenderTransformOrigin="0.291,0.524"/>
+        <CheckBox x:Name="CheckBox_XinFeng" Style="{StaticResource OrangeSwitchStyle}" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="59,191,0,0" Grid.Row="1" VerticalAlignment="Top" Height="36" Width="91" IsChecked="True" Cursor="Hand" Click="CheckBox_XinFeng_Click"/>
+        <Border Grid.Column="3" Margin="10,30,10,201" Grid.Row="1"  CornerRadius="10" BorderBrush="#FF91ACBD" BorderThickness="1">
+            <Grid  >
                 <Label x:Name="Label_WenDu" Content="88" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="20" Foreground="#FFF1EAEA" Margin="109,6,0,-18" Height="36" Width="33"/>
                 <Label x:Name="label" Content="新风温度:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" Foreground="#FFF1EAEA" Height="36" Width="95" Margin="9,6,0,-18"/>
                 <Label x:Name="label_Copy2" Content="新风湿度:" HorizontalAlignment="Left" Margin="233,7,0,-19" VerticalAlignment="Top" FontSize="20" Foreground="#FFF1EAEA" Height="36" Width="95"/>
                 <Label x:Name="Label_ShiDu" Content="88" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="20" Foreground="#FFF1EAEA" Margin="333,7,0,-19" Height="36" Width="33" RenderTransformOrigin="2.788,0.528"/>
             </Grid>
         </Border>
-        <Border Grid.Column="3" Margin="10,103,10,110" Grid.Row="1"  CornerRadius="10" BorderBrush="#FF91ACBD" BorderThickness="1">
-            <Grid Margin="2,4,-2,-4">
+        <Border Grid.Column="3" Margin="10,103,10,130" Grid.Row="1"  CornerRadius="10" BorderBrush="#FF91ACBD" BorderThickness="1">
+            <Grid >
                 <Label x:Name="label_Copy5" Content="入口APM:" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="20" Foreground="#FFF1EAEA" Height="36" Width="156" Margin="1,4,0,-8"/>
                 <Label x:Name="Label_APM_RK" Content="88" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="20" Foreground="#FFF1EAEA" Margin="107,4,0,-8" Height="36" Width="50"/>
                 <Label x:Name="label_Copy7" Content="出口APM:" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="20" Foreground="#FFF1EAEA" Margin="226,4,0,-8" Height="36" Width="156"/>
                 <Label x:Name="Label_APM_CK" Content="88" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="20" Foreground="#FFF1EAEA" Margin="333,4,0,-8" Height="36" Width="61"/>
             </Grid>
         </Border>
-        <Label x:Name="label_Copy10" Content="风力调节" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="10,168,0,0" FontSize="18" Foreground="WhiteSmoke" Grid.Row="1" Height="34" Width="82"/>
-        <Grid  Grid.Column="3" HorizontalAlignment="Left" Width="315" Margin="30,197,0,91" Grid.Row="1" Grid.RowSpan="2" RenderTransformOrigin="0.502,1.203">
+        <Grid  Grid.Column="3" HorizontalAlignment="Left" Width="315" Margin="30,197,0,1" Grid.Row="1" RenderTransformOrigin="0.502,1.203">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="5*"/>
                 <ColumnDefinition Width="48*"/>
@@ -206,5 +75,8 @@
             <Image x:Name="image_FL_5J" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="50" Source="Images/XinFeng/5j.jpg"  Grid.Column="9" Cursor="Hand"  Margin="0,1,0,0" Grid.ColumnSpan="2" MouseLeftButtonDown="image_FL_5J_MouseLeftButtonDown" />
             <Image x:Name="image8" HorizontalAlignment="Left" Height="55"  VerticalAlignment="Top" Width="7" Source="Images/XinFeng/YouYuanJiao.jpg" Grid.Column="10" />
         </Grid>
+        <GroupBox Style="{StaticResource GroupboxWithoutWhiteBorder}" x:Name="groupBox_1_Copy" Header="风力调节" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="10,164,0,0" Height="95" Width="459" FontSize="18" Foreground="#FFF5F1F1" BorderBrush="#FF91ACBD" Cursor="Hand"  Grid.Row="1"/>
+        <Label x:Name="label_Guan" Content="×关" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="21,192,0,0" FontSize="16" Foreground="#FFF0190F" Grid.Column="1" Grid.Row="1"/>
+        <Label x:Name="label_Kai" Content="√开" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,192,0,0" FontSize="16" Foreground="#FF079E23" IsEnabled="False" Grid.Column="1" Grid.Row="1"/>
     </Grid>
 </Page>

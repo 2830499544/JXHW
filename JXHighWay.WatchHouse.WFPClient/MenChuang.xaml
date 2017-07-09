@@ -8,149 +8,17 @@
       d:DesignHeight="460" d:DesignWidth="1024"
       Title="MenChuang" Loaded="Page_Loaded">
     <Page.Resources>
-        <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>
-        <Style x:Key="GroupboxWithoutWhiteBorder" TargetType="{x:Type GroupBox}">
-            <Setter Property="BorderBrush" Value="#D5DFE5" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type GroupBox}">
-                        <Grid SnapsToDevicePixels="true">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="6" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="6" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="6" />
-                            </Grid.RowDefinitions>
-                            <Border CornerRadius="4" Grid.Row="1" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="4" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="Transparent" Background="{TemplateBinding Background}" />
-                            <Border Name="Header" Padding="3,1,3,0" Grid.Row="0" Grid.RowSpan="2" Grid.Column="1">
-                                <ContentPresenter ContentSource="Header" RecognizesAccessKey="true" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                            </Border>
-                            <ContentPresenter Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                            <Border Grid.Row="1" Grid.RowSpan="3" Grid.ColumnSpan="4"  BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="3">
-                                <Border.OpacityMask>
-                                    <MultiBinding Converter="{StaticResource BorderGapMaskConverter}" ConverterParameter="7">
-                                        <Binding ElementName="Header" Path="ActualWidth" />
-                                        <Binding Path="ActualWidth" RelativeSource="{RelativeSource Self}" />
-                                        <Binding Path="ActualHeight" RelativeSource="{RelativeSource Self}" />
-                                    </MultiBinding>
-                                </Border.OpacityMask>
-                            </Border>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <LinearGradientBrush x:Key="CheckedBlue" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Color="#FF285AB3" Offset="0" />
-            <GradientStop Color="#FF4184EC" Offset="0.5" />
-            <GradientStop Color="#FF558BED" Offset="0.5" />
-            <GradientStop Color="#FF7DACF0" Offset="1" />
-        </LinearGradientBrush>
-        <LinearGradientBrush x:Key="CheckedOrange" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Color="#FFCA6A13" Offset="0" />
-            <GradientStop Color="#FFF67D0C" Offset="0.2" />
-            <GradientStop Color="#FFFE7F0C" Offset="0.2" />
-            <GradientStop Color="#FFFA8E12" Offset="0.5" />
-            <GradientStop Color="#FFFF981D" Offset="0.5" />
-            <GradientStop Color="#FFFCBC5A" Offset="1" />
-        </LinearGradientBrush>
-        <SolidColorBrush x:Key="CheckedOrangeBorder" Color="#FF8E4A1B" />
-        <SolidColorBrush x:Key="CheckedBlueBorder" Color="#FF143874" />
-        <Style x:Key="OrangeSwitchStyle" TargetType="{x:Type CheckBox}">
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" />
-            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type CheckBox}">
-                        <ControlTemplate.Resources>
-                            <Storyboard x:Key="OnChecking">
-                                <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="slider" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                                    <SplineDoubleKeyFrame KeyTime="00:00:00.1000000" Value="53" />
-                                </DoubleAnimationUsingKeyFrames>
-                            </Storyboard>
-                            <Storyboard x:Key="OnUnchecking">
-                                <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="slider" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                                    <SplineDoubleKeyFrame KeyTime="00:00:00.1000000" Value="0" />
-                                </DoubleAnimationUsingKeyFrames>
-                            </Storyboard>
-                        </ControlTemplate.Resources>
-                        <DockPanel x:Name="dockPanel">
-                            <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" ContentTemplate="{TemplateBinding ContentTemplate}" RecognizesAccessKey="True" VerticalAlignment="Center" />
-                            <Grid>
-                                <Border x:Name="BackgroundBorder" BorderBrush="#FF939393" BorderThickness="1" CornerRadius="3" Height="27" Width="94">
-                                    <Border.Background>
-                                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                                            <GradientStop Color="#FFB5B5B5" Offset="0" />
-                                            <GradientStop Color="#FFDEDEDE" Offset="0.1" />
-                                            <GradientStop Color="#FFEEEEEE" Offset="0.5" />
-                                            <GradientStop Color="#FFFAFAFA" Offset="0.5" />
-                                            <GradientStop Color="#FFFEFEFE" Offset="1" />
-                                        </LinearGradientBrush>
-                                    </Border.Background>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition />
-                                            <ColumnDefinition />
-                                        </Grid.ColumnDefinitions>
-                                        <Ellipse x:Name="Off" Width="14" Height="14" Stroke="#FF7A7A7A" StrokeThickness="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                        <Line x:Name="On" X1="0" Y1="0" X2="0" Y2="14" Stroke="#FF7A7A7A" StrokeThickness="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                    </Grid>
-                                </Border>
-                                <Border BorderBrush="#FF939393" HorizontalAlignment="Left" x:Name="slider" Width="41" Height="27" BorderThickness="1" CornerRadius="3" RenderTransformOrigin="0.5,0.5" Margin="0">
-                                    <Border.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform ScaleX="1" ScaleY="1" />
-                                            <SkewTransform AngleX="0" AngleY="0" />
-                                            <RotateTransform Angle="0" />
-                                            <TranslateTransform X="0" Y="0" />
-                                        </TransformGroup>
-                                    </Border.RenderTransform>
-                                    <Border.Background>
-                                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                                            <GradientStop Color="#FFF0F0F0" Offset="0" />
-                                            <GradientStop Color="#FFCDCDCD" Offset="0.1" />
-                                            <GradientStop Color="#FFFBFBFB" Offset="1" />
-                                        </LinearGradientBrush>
-                                    </Border.Background>
-                                </Border>
-                            </Grid>
-                        </DockPanel>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsChecked" Value="True">
-                                <Trigger.ExitActions>
-                                    <BeginStoryboard Storyboard="{StaticResource OnUnchecking}" x:Name="OnUnchecking_BeginStoryboard" />
-                                </Trigger.ExitActions>
-                                <Trigger.EnterActions>
-                                    <BeginStoryboard Storyboard="{StaticResource OnChecking}" x:Name="OnChecking_BeginStoryboard" />
-                                </Trigger.EnterActions>
-                                <Setter TargetName="On" Property="Stroke" Value="White" />
-                                <Setter TargetName="Off" Property="Stroke" Value="White" />
-                                <!-- Change Orange or Blue color here -->
-                                <Setter TargetName="BackgroundBorder" Property="Background" Value="{StaticResource CheckedOrange}" />
-                                <Setter TargetName="BackgroundBorder" Property="BorderBrush" Value="{StaticResource CheckedOrangeBorder}" />
-                            </Trigger>
-                            <Trigger Property="IsEnabled" Value="False">
-                                <!-- ToDo: Add Style for Isenabled == False -->
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resource\CheckboxResource.xaml" />
+                <ResourceDictionary Source="Resource\GroupboxResource.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Page.Resources>
     <Grid Background="#245d7c" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="39*"/>
             <ColumnDefinition Width="122*"/>
-
             <ColumnDefinition Width="312*"/>
             <ColumnDefinition Width="39*"/>
         </Grid.ColumnDefinitions>
@@ -160,16 +28,12 @@
             <RowDefinition Height="64*" />
         </Grid.RowDefinitions>
         <Image HorizontalAlignment="Left" Height="147" VerticalAlignment="Top" Width="147" Grid.Column="1" Margin="39,0,0,0" Source="Images/MenChuang/Men.jpg"  Grid.Row="1"/>
-        <Border Grid.Column="1" Margin="31,200,37,45" Grid.Row="1"  CornerRadius="10" BorderBrush="#FF91ACBD" BorderThickness="1">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="26*"/>
-                    <ColumnDefinition Width="61*"/>
-                </Grid.ColumnDefinitions>
-                <CheckBox  x:Name="CheckBox_Men" Style="{StaticResource OrangeSwitchStyle}" Content="" HorizontalAlignment="Left" Margin="15,17,0,0" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand" Checked="CheckBox_Men_Checked" Unchecked="CheckBox_Men_Unchecked" Grid.Column="1"/>
-                <CheckBox x:Name="CheckBox_Chuang" Style="{StaticResource OrangeSwitchStyle}" Content="" HorizontalAlignment="Left" Margin="15,53,0,0" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand" Checked="CheckBox_Chuang_Checked" Unchecked="CheckBox_Chuang_Unchecked" Grid.Column="1"/>
-                <Label x:Name="label" Content="门" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="16,15,0,0" FontSize="20" Foreground="#FFF9F4F4" Height="36" Width="30"/>
-                <Label x:Name="label_Copy" Content="窗" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,49,0,0" FontSize="20" Foreground="#FFF9F4F4" Height="36" Width="30"/>
+        <Border Grid.Column="1" Margin="8,170,32,30" Grid.Row="1"  CornerRadius="10" BorderBrush="#FF91ACBD" BorderThickness="1">
+            <Grid Margin="2,0,-2,0">
+                <CheckBox  x:Name="CheckBox_Men" Style="{StaticResource OrangeSwitchStyle}" Content="" HorizontalAlignment="Left" Margin="50,25,0,0" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand" Click="CheckBox_Men_Click"/>
+                <CheckBox x:Name="CheckBox_Chuang" Style="{StaticResource OrangeSwitchStyle}" Content="" HorizontalAlignment="Left" Margin="50,81,0,0" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand" Click="CheckBox_Chuang_Click"/>
+                <Label x:Name="label_Suo_Guan" Content="×开锁" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-3,81,0,0" FontSize="16" Foreground="#FFF0190F"/>
+                <Label x:Name="label_Suo_Kai" Content="√上锁" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="143,81,0,0" FontSize="16" Foreground="#FF079E23" IsEnabled="False" RenderTransformOrigin="-0.751,-4.291"/>
             </Grid>
         </Border>
         <Border Grid.Column="2" Margin="10,27,33,252" Grid.Row="1" CornerRadius="10" BorderBrush="#FF91ACBD" BorderThickness="1">
@@ -182,14 +46,14 @@
         </Border>
         <Border Grid.Column="2" Margin="15,155,33,130" Grid.Row="1" CornerRadius="10" BorderBrush="#FF91ACBD" BorderThickness="1">
             <Grid>
-                <CheckBox  x:Name="CheckBox_FengMu" Style="{StaticResource OrangeSwitchStyle}" Content="" HorizontalAlignment="Left" Margin="402,15,0,0" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand" Checked="CheckBox_FengMu_Checked" Unchecked="CheckBox_FengMu_Unchecked"/>
-                <CheckBox  x:Name="CheckBox_FengMuDeng" Style="{StaticResource OrangeSwitchStyle}" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand" Checked="CheckBox_FengMuDeng_Checked" Unchecked="CheckBox_FengMuDeng_Unchecked" Margin="73,15,0,0"/>
+                <CheckBox  x:Name="CheckBox_FengMu" Style="{StaticResource OrangeSwitchStyle}" Content="" HorizontalAlignment="Left" Margin="402,15,0,0" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand" Click="CheckBox_FengMu_Click"/>
+                <CheckBox  x:Name="CheckBox_FengMuDeng" Style="{StaticResource OrangeSwitchStyle}" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand" Margin="73,15,0,0" Click="CheckBox_FengMuDeng_Click"/>
             </Grid>
         </Border>
         <Label x:Name="label1" Content="前窗帘" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="98,2,0,0" Foreground="#FFF9F4F4" FontSize="24" Background="#FF245D7C" Grid.Row="1" Height="42" Width="82"/>
         <Border Grid.Column="2" Margin="15,272,33,19" Grid.Row="1" CornerRadius="10" BorderBrush="#FF91ACBD" BorderThickness="1">
             <Grid>
-                <CheckBox  x:Name="CheckBox_ZiDongChuang" Style="{StaticResource OrangeSwitchStyle}" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand" Checked="CheckBox_ZiDongChuang_Checked" Margin="73,15,0,0"/>
+                <CheckBox  x:Name="CheckBox_ZiDongChuang" Style="{StaticResource OrangeSwitchStyle}" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand" Margin="76,15,0,-11" Click="CheckBox_ZiDongChuang_Click"/>
                 <CheckBox  x:Name="CheckBox_BaoJingQi" Style="{StaticResource OrangeSwitchStyle}" Content="" HorizontalAlignment="Left" Margin="402,15,0,0" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand"/>
             </Grid>
         </Border>
@@ -198,7 +62,16 @@
         <Label x:Name="label1_Copy2" Content="风幕" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="434,129,0,0" Foreground="#FFF9F4F4" FontSize="24" Background="#FF245D7C" RenderTransformOrigin="1.056,4.109" Height="42" Width="58" Grid.Row="1"/>
         <Label x:Name="label1_Copy3" Content="自动窗" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="98,247,0,0" Foreground="#FFF9F4F4" FontSize="24" Background="#FF245D7C" RenderTransformOrigin="1.056,4.109" Height="42" Width="82" Grid.Row="1"/>
         <Label x:Name="label1_Copy4" Content="报警器" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="424,247,0,0" Foreground="#FFF9F4F4" FontSize="24" Background="#FF245D7C" RenderTransformOrigin="1.056,4.109" Height="42" Width="82" Grid.Row="1"/>
-        <Label x:Name="label1_Copy5" Content="自动门" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Margin="76,176,0,0" Foreground="#FFF9F4F4" FontSize="24" Background="#FF245D7C" RenderTransformOrigin="1.056,4.109" Height="42" Width="82" Grid.Row="1"/>
-
+        <Label x:Name="label1_Copy5" Content="自动门" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Margin="67,147,0,0" Foreground="#FFF9F4F4" FontSize="24" Background="#FF245D7C" RenderTransformOrigin="1.056,4.109" Height="42" Width="82" Grid.Row="1"/>
+        <Label x:Name="label_Men_Guan" Content="×关门" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,198,0,0" FontSize="16" Foreground="#FFF0190F" Grid.Column="1" Grid.Row="1"/>
+        <Label x:Name="label_Men_Kai" Content="√开门" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="154,198,0,0" FontSize="16" Foreground="#FF079E23" IsEnabled="False" Grid.Column="1" Grid.Row="1"/>
+        <Label x:Name="label_FMD_Guan" Content="×关" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="51,173,0,0" FontSize="16" Foreground="#FFF0190F" Grid.Column="2" Grid.Row="1"/>
+        <Label x:Name="label_FMD_Kai" Content="√开" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,173,0,0" FontSize="16" Foreground="#FF079E23" IsEnabled="False" Grid.Column="2" Grid.Row="1"/>
+        <Label x:Name="label_FM_Guan" Content="×关" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="380,173,0,0" FontSize="16" Foreground="#FFF0190F" Grid.Column="2" Grid.Row="1"/>
+        <Label x:Name="label_FM_Kai" Content="√开" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="510,174,0,0" FontSize="16" Foreground="#FF079E23" IsEnabled="False" Grid.Column="2" Grid.Row="1"/>
+        <Label x:Name="label_ZDC_Guan" Content="×关" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="54,290,0,0" FontSize="16" Foreground="#FFF0190F" Grid.Column="2" Grid.Row="1"/>
+        <Label x:Name="label_ZDC_Kai" Content="√开" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="184,290,0,0" FontSize="16" Foreground="#FF079E23" IsEnabled="False" Grid.Column="2" Grid.Row="1"/>
+        <Label x:Name="label_BJQ_Guan" Content="×关" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="380,290,0,0" FontSize="16" Foreground="#FFF0190F" Grid.Column="2" Grid.Row="1"/>
+        <Label x:Name="label_BJQ_Kai" Content="√开" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="509,290,0,0" FontSize="16" Foreground="#FF079E23" IsEnabled="False" Grid.Column="2" Grid.Row="1"/>
     </Grid>
 </Page>

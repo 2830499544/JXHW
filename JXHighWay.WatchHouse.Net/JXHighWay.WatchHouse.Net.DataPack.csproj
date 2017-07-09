@@ -51,6 +51,7 @@
     <Compile Include="PowerDataPack_Send_GetIPAddress.cs" />
     <Compile Include="PowerDataPack_Send_SetIPAddress.cs" />
     <Compile Include="PowerDataPack_Send_Switch.cs" />
+    <Compile Include="PowerDataPack_Send_Timing.cs" />
     <Compile Include="WatchHouseDataPack.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WatchHouseDataPack_Receive_DoorGuard.cs" />

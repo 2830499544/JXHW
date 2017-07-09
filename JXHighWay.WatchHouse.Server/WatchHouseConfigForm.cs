@@ -27,8 +27,9 @@ namespace JXHighWay.WatchHouse.Server
             if (  int.TryParse( textBox_GanTing_ID.Text,out vGanTingID)
                 && int.TryParse(textBox_DY_ID.Text,out vDianYuanID)  )
             {
+                DataTable vSwitchTable = button_DY_KaiGuan.Tag == null ? null : (DataTable)button_DY_KaiGuan.Tag;
                 if (m_WatchHouseConfig.Add(vGanTingID, textBox_GanTing_MC.Text,
-                    comboBox_GanTing_LX.Text, textBox_LED_IP.Text, vDianYuanID, null,ref vOutInfo))
+                    comboBox_GanTing_LX.Text, textBox_LED_IP.Text, vDianYuanID, vSwitchTable, ref vOutInfo))
                 {
                     MessageBox.Show("增加岗亭数据成功", "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     dataGridView_List.DataSource = m_WatchHouseConfig.GetAll();
@@ -56,8 +57,12 @@ namespace JXHighWay.WatchHouse.Server
             if ( dataGridView_List.SelectedRows.Count>0)
             {
                 int vID = (int)dataGridView_List.SelectedRows[0].Cells["Column_ID"].Value;
-                if ( m_WatchHouseConfig.Del(vID) )
-                    MessageBox.Show("岗亭删除成功","信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (m_WatchHouseConfig.Del(vID))
+                {
+                    MessageBox.Show("岗亭删除成功", "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ((DataTable)dataGridView_List.DataSource).Rows.Find(vID).Delete();
+                    ((DataTable)dataGridView_List.DataSource).AcceptChanges();
+                }
                 else
                     MessageBox.Show("岗亭删除失败", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -75,9 +80,10 @@ namespace JXHighWay.WatchHouse.Server
             if (int.TryParse(textBox_GanTing_ID.Text, out vGanTingID)
                 && int.TryParse(textBox_DY_ID.Text, out vDianYuanID))
             {
+                DataTable vSwitchTable = button_DY_KaiGuan.Tag == null ? null : (DataTable)button_DY_KaiGuan.Tag;
                 int vID = (int)dataGridView_List.SelectedRows[0].Cells["Column_ID"].Value;
                 if (m_WatchHouseConfig.Update(vID, vGanTingID, textBox_GanTing_MC.Text,
-                    comboBox_GanTing_LX.Text, textBox_LED_IP.Text, vDianYuanID,null, ref vOutInfo))
+                    comboBox_GanTing_LX.Text, textBox_LED_IP.Text, vDianYuanID, vSwitchTable, ref vOutInfo))
                 {
                     MessageBox.Show("增加岗亭数据成功", "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     dataGridView_List.DataSource = m_WatchHouseConfig.GetAll();
@@ -95,6 +101,7 @@ namespace JXHighWay.WatchHouse.Server
         {
             if ( dataGridView_List.SelectedRows.Count>0)
             {
+                button_DY_KaiGuan.Tag = null;
                 textBox_GanTing_ID.Text = dataGridView_List.SelectedRows[0].Cells["Column_GanTing_ID"].Value.ToString(); ;
                 textBox_GanTing_MC.Text = dataGridView_List.SelectedRows[0].Cells["Column_GanTing_MC"].Value.ToString();
                 comboBox_GanTing_LX.Text = dataGridView_List.SelectedRows[0].Cells["Column_GanTing_LX"].Value.ToString();
@@ -105,6 +112,21 @@ namespace JXHighWay.WatchHouse.Server
                 textBox_DY_ID.Text = dataGridView_List.SelectedRows[0].Cells["Column_DianYuan_ID"].Value.ToString();
                 textBox_DY_IP.Text = dataGridView_List.SelectedRows[0].Cells["Column_DianYuan_IP"].Value.ToString();
             }
+        }
+
+        private void button_DY_KaiGuan_Click(object sender, EventArgs e)
+        {
+            int vDianYuanID = textBox_DY_ID.Text == "" ? 0 : int.Parse(textBox_DY_ID.Text);
+            DataTable vSwitchTable = new DataTable();
+            if (button_DY_KaiGuan.Tag == null)
+                vSwitchTable = m_WatchHouseConfig.GetSwitchTable(vDianYuanID);
+            else
+                vSwitchTable = (DataTable)textBox_DY_ID.Tag;
+            SwitchConfigForm vSwitchConfigForm = new SwitchConfigForm();
+            vSwitchConfigForm.SwitchTable = vSwitchTable;
+            vSwitchConfigForm.DianYuanID = vDianYuanID;
+            vSwitchConfigForm.ShowDialog();
+            button_DY_KaiGuan.Tag = vSwitchTable;
         }
     }
 }

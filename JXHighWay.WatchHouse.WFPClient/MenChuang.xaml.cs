@@ -53,6 +53,12 @@ namespace JXHighWay.WatchHouse.WFPClient
 
         WatchHouseMonitoring m_Monitoring = null;
         bool m_IsInit = false;
+        bool m_Switch_Men = true;
+        bool m_Switch_Suo = true;
+        bool m_Switch_FMD = true;
+        bool m_Switch_FM = true;
+        bool m_Switch_ZDC = true;
+        //bool m_Switch_BJQ = true;
         void initMenChaung()
         {
             MenChuangStateInfo vMenChuangStateModel =  m_Monitoring.MenChuangState(App.WatchHouseID);
@@ -62,48 +68,14 @@ namespace JXHighWay.WatchHouse.WFPClient
             CheckBox_FengMuDeng.IsChecked = vMenChuangStateModel.FengMuDeng;
             CheckBox_Men.IsChecked = vMenChuangStateModel.Men;
             CheckBox_ZiDongChuang.IsChecked = vMenChuangStateModel.ZiDonGChuang;
+            changeSwitchColor_FM();
+            changeSwitchColor_FMD();
+            changeSwitchColor_Men();
+            changeSwitchColor_Suo();
+            changeSwitchColor_ZDC();
             m_IsInit = true;
         }
 
-        private async void CheckBox_Men_Checked(object sender, RoutedEventArgs e)
-        {
-            if (m_IsInit)
-            {
-                bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiMen);
-                if (!vResult)
-                    MessageBox.Show("门开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
-        private async void CheckBox_Men_Unchecked(object sender, RoutedEventArgs e)
-        {
-            if (m_IsInit)
-            {
-                bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanMen);
-                if (vResult)
-                    MessageBox.Show("门开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
-        private async void CheckBox_Chuang_Checked(object sender, RoutedEventArgs e)
-        {
-            if (m_IsInit)
-            {
-                bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiChuang);
-                if (vResult)
-                    MessageBox.Show("窗开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
-        private async void CheckBox_Chuang_Unchecked(object sender, RoutedEventArgs e)
-        {
-            if (m_IsInit)
-            {
-                bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanChaugn);
-                if (vResult)
-                    MessageBox.Show("窗开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
 
         private async void Button_QCL_Shen_Click(object sender, RoutedEventArgs e)
         {
@@ -145,49 +117,194 @@ namespace JXHighWay.WatchHouse.WFPClient
             }
         }
 
-        private void CheckBox_ZiDongChuang_Checked(object sender, RoutedEventArgs e)
+        #region 门控制
+        private async void CheckBox_Men_Click(object sender, RoutedEventArgs e)
         {
-            
+            if (m_IsInit && m_Switch_Men )
+            {
+                m_Switch_Men = false;
+                bool vOldValue = CheckBox_Men.IsChecked ?? false;
+                bool vResult;
+                if (vOldValue)
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanMen);
+                else
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiMen);
+                if (!vResult)
+                {
+                    CheckBox_Men.IsChecked = !vOldValue;
+                    MessageBox.Show("门开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                changeSwitchColor_Men();
+                m_Switch_Men = true;
+            }
         }
 
-        private async void CheckBox_FengMuDeng_Checked(object sender, RoutedEventArgs e)
+        void changeSwitchColor_Men()
         {
-            if (m_IsInit)
+            if (CheckBox_Men.IsChecked ?? false)
             {
-                bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiChuangDeng);
+                label_Men_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
+                label_Men_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF079E23"));
+            }
+            else
+            {
+                label_Men_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF0190F"));
+                label_Men_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
+            }
+        }
+
+        #endregion
+
+        #region 锁控制
+        private async void CheckBox_Chuang_Click(object sender, RoutedEventArgs e)
+        {
+            if (m_IsInit && m_Switch_Suo)
+            {
+                m_Switch_Suo = false;
+                bool vOldValue = CheckBox_Chuang.IsChecked ?? false;
+                bool vResult;
+                if (vOldValue)
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiShuo);
+                else
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.ShangShuo);
                 if (!vResult)
+                {
+                    CheckBox_Chuang.IsChecked = !vOldValue;
+                    MessageBox.Show("锁开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                changeSwitchColor_Suo();
+                m_Switch_Suo = true;
+            }
+        }
+
+
+        void changeSwitchColor_Suo()
+        {
+            if (CheckBox_Men.IsChecked ?? false)
+            {
+                label_Suo_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
+                label_Suo_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF079E23"));
+            }
+            else
+            {
+                label_Suo_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF0190F"));
+                label_Suo_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
+            }
+        }
+
+        #endregion
+
+        #region 风幕灯
+        private async void CheckBox_FengMuDeng_Click(object sender, RoutedEventArgs e)
+        {
+            if (m_IsInit && m_Switch_FMD)
+            {
+                m_Switch_FMD = false;
+                bool vOldValue = CheckBox_FengMuDeng.IsChecked ?? false;
+                bool vResult;
+                if (vOldValue)
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanChuangDeng);
+                else
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiChuangDeng);
+                if (!vResult)
+                {
+                    CheckBox_FengMuDeng.IsChecked = !vOldValue;
                     MessageBox.Show("风幕灯开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                changeSwitchColor_FMD();
+                m_Switch_FMD = true;
             }
         }
 
-        private async void CheckBox_FengMuDeng_Unchecked(object sender, RoutedEventArgs e)
+        void changeSwitchColor_FMD()
         {
-            if (m_IsInit)
+            if (CheckBox_FengMuDeng.IsChecked ?? false)
             {
-                bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanChuangDeng);
-                if (!vResult)
-                    MessageBox.Show("风幕灯开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                label_FMD_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
+                label_FMD_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF079E23"));
+            }
+            else
+            {
+                label_FMD_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF0190F"));
+                label_FMD_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
             }
         }
+        #endregion
 
-        private async void CheckBox_FengMu_Checked(object sender, RoutedEventArgs e)
+        #region 风幕
+        private async void CheckBox_FengMu_Click(object sender, RoutedEventArgs e)
         {
-            if (m_IsInit)
+            if (m_IsInit && m_Switch_FM)
             {
-                bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiFengMu);
+                m_Switch_FM = false;
+                bool vOldValue = CheckBox_FengMu.IsChecked ?? false;
+                bool vResult;
+                if (vOldValue)
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanFengMu);
+                else
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiFengMu);
                 if (!vResult)
+                {
+                    CheckBox_FengMu.IsChecked = !vOldValue;
                     MessageBox.Show("风幕开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                changeSwitchColor_FM();
+                m_Switch_FM = true;
             }
         }
 
-        private async void CheckBox_FengMu_Unchecked(object sender, RoutedEventArgs e)
+
+        void changeSwitchColor_FM()
         {
-            if (m_IsInit)
+            if (CheckBox_FengMu.IsChecked ?? false)
             {
-                bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanFengMu);
-                if (!vResult)
-                    MessageBox.Show("风幕开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                label_FM_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
+                label_FM_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF079E23"));
+            }
+            else
+            {
+                label_FM_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF0190F"));
+                label_FM_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
             }
         }
+
+        #endregion
+
+        #region 自动窗
+        private async void CheckBox_ZiDongChuang_Click(object sender, RoutedEventArgs e)
+        {
+            if (m_IsInit && m_Switch_ZDC)
+            {
+                m_Switch_ZDC = false;
+                bool vOldValue = CheckBox_ZiDongChuang.IsChecked ?? false;
+                bool vResult;
+                if (vOldValue)
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanChaugn);
+                else
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiChuang);
+                if (!vResult)
+                { 
+                    CheckBox_ZiDongChuang.IsChecked = !vOldValue;
+                    MessageBox.Show("自动窗开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                changeSwitchColor_FM();
+                m_Switch_ZDC = true;
+            }
+        }
+
+        void changeSwitchColor_ZDC()
+        {
+            if (CheckBox_ZiDongChuang.IsChecked ?? false)
+            {
+                label_ZDC_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
+                label_ZDC_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF079E23"));
+            }
+            else
+            {
+                label_ZDC_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF0190F"));
+                label_ZDC_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
+            }
+        }
+        #endregion
     }
 }

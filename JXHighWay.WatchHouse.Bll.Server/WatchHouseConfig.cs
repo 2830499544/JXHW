@@ -34,9 +34,40 @@ namespace JXHighWay.WatchHouse.Bll.Server
             return m_BasicDBClass.SelectAllRecords<WatchHouseConfigEFModel>();
         }
 
+        public DataTable GetSwitchTable( int DianYuanID )
+        {
+            PowerSwithConfigEFModel vPowerSwithConfigEFModel = new PowerSwithConfigEFModel()
+            {
+                DianYuanID = DianYuanID
+            };
+            return m_BasicDBClass.SelectRecords(vPowerSwithConfigEFModel);
+        }
+
+        public void SaveSwitchTable( DataTable SwitchTable )
+        {
+
+            foreach (  DataRow vTempRow in SwitchTable.Rows  )
+            {
+                PowerSwithConfigEFModel vModel = new PowerSwithConfigEFModel();
+                CommClass.ConvertDataRowToStruct(ref vModel, vTempRow);
+                switch ( vTempRow.RowState )
+                {
+                    case DataRowState.Added:
+                        m_BasicDBClass.InsertRecord(vModel);
+                        break;
+                    case DataRowState.Deleted:
+                        m_BasicDBClass.DeleteRecordByPrimaryKey<PowerSwithConfigEFModel>(vModel.ID);
+                        break;
+                    case DataRowState.Modified:
+                        m_BasicDBClass.UpdateRecord(vModel);
+                        break;
+                }
+            }
+        }
+
         public bool Del(int ID)
         {
-            return m_BasicDBClass.DeleteRecordByPrimaryKey(ID);
+            return m_BasicDBClass.DeleteRecordByPrimaryKey< WatchHouseConfigEFModel>(ID);
         }
 
         public bool Update(int ID, int GanTingID, string GanTingMC, string GanTingLX,
@@ -53,29 +84,36 @@ namespace JXHighWay.WatchHouse.Bll.Server
                 ID = ID
             };
             m_BasicDBClass.TransactionBegin();
-            if (m_BasicDBClass.UpdateRecord(vWatchHouseConfigEFModel))
+            if (vResult = m_BasicDBClass.UpdateRecord(vWatchHouseConfigEFModel) && SwitchInfoTable!=null)
             {
                 foreach (DataRow vTempSwitch in SwitchInfoTable.Rows)
                 {
-                    PowerSwithConfigEFModel vModel = new PowerSwithConfigEFModel()
+                    PowerSwithConfigEFModel vModel = new PowerSwithConfigEFModel();
+                    vModel.DianYuanID = DianYuanID;
+                    CommClass.ConvertDataRowToStruct(ref vModel, vTempSwitch);
+                    switch (vTempSwitch.RowState)
                     {
-                        ID = DBConvert.ToInt32(vTempSwitch["ID"]),
-                        LeiXing = DBConvert.ToString(vTempSwitch["类型"]),
-                        LuHao = DBConvert.ToString(vTempSwitch["路号"]),
-                        MinCheng = DBConvert.ToString(vTempSwitch["名称"])
-                    };
-
-                    if (!m_BasicDBClass.UpdateRecord(vModel) )
+                        case DataRowState.Added:
+                            vResult = m_BasicDBClass.InsertRecord(vModel)>0?true:false;
+                            break;
+                        case DataRowState.Deleted:
+                            vResult = m_BasicDBClass.DeleteRecordByPrimaryKey<PowerSwithConfigEFModel>(vModel.ID);
+                            break;
+                        case DataRowState.Modified:
+                            vResult = m_BasicDBClass.UpdateRecord(vModel);
+                            break;
+                    }
+                    if (!vResult)
                     {
-                        vResult = false;
                         m_BasicDBClass.TransactionRollback();
                         break;
                     }
-                    else
-                        vResult = true;
                 }
                 if (vResult)
+                {
                     m_BasicDBClass.TransactionCommit();
+                    SwitchInfoTable.AcceptChanges();
+                }
             }
             else
             {
@@ -101,28 +139,36 @@ namespace JXHighWay.WatchHouse.Bll.Server
                     DianYuanID = DianYuanID,
                     ShouFeiZhangID = 1
                 };
-                if ( m_BasicDBClass.InsertRecord(vWatchHouseConfigEFModel) > 0)
+                if ( vResult= m_BasicDBClass.InsertRecord(vWatchHouseConfigEFModel) > 0 && SwitchInfoTable != null)
                 {
                     foreach(DataRow vTempSwitch in SwitchInfoTable.Rows)
                     {
-                        PowerSwithConfigEFModel vModel = new PowerSwithConfigEFModel()
+                        PowerSwithConfigEFModel vModel = new PowerSwithConfigEFModel();
+                        vModel.DianYuanID = DianYuanID;
+                        CommClass.ConvertDataRowToStruct(ref vModel, vTempSwitch);
+                        switch (vTempSwitch.RowState)
                         {
-                            DianYuanID = DianYuanID,
-                            LeiXing = DBConvert.ToString( vTempSwitch["类型"] ),
-                            LuHao = DBConvert.ToString(vTempSwitch["路号"]),
-                            MinCheng = DBConvert.ToString(vTempSwitch["名称"])
-                        };
-                        if (m_BasicDBClass.InsertRecord(vModel) <= 0)
+                            case DataRowState.Added:
+                                vResult = m_BasicDBClass.InsertRecord(vModel) > 0 ? true : false;
+                                break;
+                            case DataRowState.Deleted:
+                                vResult = m_BasicDBClass.DeleteRecordByPrimaryKey<PowerSwithConfigEFModel>(vModel.ID);
+                                break;
+                            case DataRowState.Modified:
+                                vResult = m_BasicDBClass.UpdateRecord(vModel);
+                                break;
+                        }
+                        if (!vResult)
                         {
-                            vResult = false;
                             m_BasicDBClass.TransactionRollback();
                             break;
                         }
-                        else
-                            vResult = true;
                     }
                     if (vResult)
+                    {
                         m_BasicDBClass.TransactionCommit();
+                        SwitchInfoTable.AcceptChanges();
+                    }
                 }
                 else
                 {

@@ -77,7 +77,7 @@
         </Grid>
         <Image HorizontalAlignment="Left" Height="150" Grid.Row="3" VerticalAlignment="Top" Width="1024" Source="Images/DiBu1.jpg"/>
         <Frame x:Name="MainFrame" Content="Frame" HorizontalAlignment="Left" Height="495" Grid.Row="1" VerticalAlignment="Top" Width="1024" Source="/JXHighWay.WatchHouse.WFPClient;component/MainPage.xaml" NavigationUIVisibility="Hidden" Margin="0,54,0,0" Grid.RowSpan="2"/>
-        <Image x:Name="image_DengGuan" HorizontalAlignment="Left" Height="43" Margin="29,107,0,0" Grid.Row="3" VerticalAlignment="Top" Width="72" >
+        <Image x:Name="image_DengGuan" HorizontalAlignment="Left" Height="43" Margin="29,107,0,0" Grid.Row="3" VerticalAlignment="Top" Width="72" Cursor="Hand" MouseLeftButtonDown="image_DengGuan_MouseLeftButtonDown" >
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
                     <Setter Property="Source" Value="Images/DengGuan.jpg"/>
@@ -89,7 +89,7 @@
                 </Style>
             </Image.Style>
         </Image>
-        <Image x:Name="image_ZhiDongMC" HorizontalAlignment="Left" Height="43" Margin="147,107,0,0" Grid.Row="3" VerticalAlignment="Top" Width="100" >
+        <Image x:Name="image_ZhiDongMC" HorizontalAlignment="Left" Height="43" Margin="147,107,0,0" Grid.Row="3" VerticalAlignment="Top" Width="100" Cursor="Hand" MouseLeftButtonDown="image_ZhiDongMC_MouseLeftButtonDown" >
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
                     <Setter Property="Source" Value="Images/ZhiDongMen.jpg"/>
@@ -101,7 +101,7 @@
                 </Style>
             </Image.Style>
         </Image>
-        <Image x:Name="image_DianYuan" HorizontalAlignment="Left" Height="43" Margin="293,107,0,0" Grid.Row="3" VerticalAlignment="Top" Width="72" >
+        <Image x:Name="image_DianYuan" HorizontalAlignment="Left" Height="43" Margin="293,107,0,0" Grid.Row="3" VerticalAlignment="Top" Width="72" Cursor="Hand" MouseLeftButtonDown="image_DianYuan_MouseLeftButtonDown" >
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
                     <Setter Property="Source" Value="Images/DianYuan.jpg"/>
@@ -113,7 +113,7 @@
                 </Style>
             </Image.Style>
         </Image>
-        <Image x:Name="image_LED" HorizontalAlignment="Left" Height="43" Margin="411,107,0,0" Grid.Row="3" VerticalAlignment="Top" Width="120" >
+        <Image x:Name="image_LED" HorizontalAlignment="Left" Height="43" Margin="411,107,0,0" Grid.Row="3" VerticalAlignment="Top" Width="120" Cursor="Hand" MouseLeftButtonDown="image_LED_MouseLeftButtonDown" >
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
                     <Setter Property="Source" Value="Images/LED.jpg"/>
@@ -125,7 +125,7 @@
                 </Style>
             </Image.Style>
         </Image>
-        <Image x:Name="image_XinFeng" HorizontalAlignment="Left" Height="43" Margin="565,107,0,0" Grid.Row="3" VerticalAlignment="Top" Width="72" >
+        <Image x:Name="image_XinFeng" HorizontalAlignment="Left" Height="43" Margin="565,107,0,0" Grid.Row="3" VerticalAlignment="Top" Width="72" Cursor="Hand" MouseLeftButtonDown="image_XinFeng_MouseLeftButtonDown" >
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
                     <Setter Property="Source" Value="Images/XinFeng.jpg"/>
@@ -137,7 +137,7 @@
                 </Style>
             </Image.Style>
         </Image>
-        <Image x:Name="image_KongTiao" HorizontalAlignment="Left" Height="43" Margin="671,107,0,0" Grid.Row="3" VerticalAlignment="Top" Width="72" >
+        <Image x:Name="image_KongTiao" HorizontalAlignment="Left" Height="43" Margin="671,107,0,0" Grid.Row="3" VerticalAlignment="Top" Width="72" Cursor="Hand" MouseLeftButtonDown="image_KongTiao_MouseLeftButtonDown" >
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
                     <Setter Property="Source" Value="Images/KongTiao.jpg"/>
@@ -149,13 +149,25 @@
                 </Style>
             </Image.Style>
         </Image>
-        <Image x:Name="image_DiNuan" HorizontalAlignment="Left" Height="43" Margin="770,107,0,0" Grid.Row="3" VerticalAlignment="Top" Width="72" >
+        <Image x:Name="image_DiNuan" HorizontalAlignment="Left" Height="43" Margin="770,107,0,0" Grid.Row="3" VerticalAlignment="Top" Width="72" Cursor="Hand" MouseLeftButtonDown="image_DiNuan_MouseLeftButtonDown" >
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
                     <Setter Property="Source" Value="Images/DiRuan.jpg"/>
                     <Style.Triggers>
                         <Trigger Property="IsMouseOver"  Value="True">
                             <Setter Property="Source" Value="Images/DiRuan_A.jpg"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Image.Style>
+        </Image>
+        <Image x:Name="image_GongHao" HorizontalAlignment="Left" Height="43" Margin="867,109,0,-2" Grid.Row="3" VerticalAlignment="Top" Width="111" Cursor="Hand"  RenderTransformOrigin="0.5,0.5" MouseLeftButtonDown="image_GongHao_MouseLeftButtonDown" >
+            <Image.Style>
+                <Style TargetType="{x:Type Image}">
+                    <Setter Property="Source" Value="Images/GongHao.jpg"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver"  Value="True">
+                            <Setter Property="Source" Value="Images/GongHao_A.jpg"/>
                         </Trigger>
                     </Style.Triggers>
                 </Style>

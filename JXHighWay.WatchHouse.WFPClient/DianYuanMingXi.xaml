@@ -1,0 +1,195 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:datavis="clr-namespace:System.Windows.Controls.DataVisualization;assembly=System.Windows.Controls.DataVisualization.Toolkit" 
+        xmlns:charting="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+        xmlns:local="clr-namespace:JXHighWay.WatchHouse.WFPClient"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="JXHighWay.WatchHouse.WFPClient.DianYuanMingXi"
+        mc:Ignorable="d"
+        Title="DianYuanMingXi" Height="489" Width="501" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resource\ButtonResource.xaml" />
+                <ResourceDictionary Source="Resource\ComboBoxResource.xaml" />
+                <ResourceDictionary Source="Resource\ZWCheckboxResource.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid Background="#e4e4e4" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="11*"  />
+            <RowDefinition Height="142*" />
+        </Grid.RowDefinitions>
+        <Image x:Name="image" HorizontalAlignment="Left" Height="35" VerticalAlignment="Top" Width="492" Source="Images/DianYuanMingXi/Tou.jpg" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"/>
+        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="420" Margin="0,6,0,0" Grid.Row="1" VerticalAlignment="Top" Width="492">
+            <TabItem Header="状　态" FontSize="18" Width="95">
+                <Grid Background="#e4e4e4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Label x:Name="label1" Content="电压：" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="25,10,0,0" FontSize="16"/>
+                    <Label x:Name="label2" Content="电流：" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="25,10,0,0" FontSize="16"/>
+                    <Label x:Name="label3" Content="电能：" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="25,10,0,0" FontSize="16"/>
+                    <Label x:Name="label4" Content="有功功率：" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="25,10,0,0" FontSize="16"/>
+                    <Label x:Name="label5" Content="无功功率：" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="25,10,0,0" FontSize="16"/>
+                    <Label x:Name="label6" Content="温度：" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,10,0,0" FontSize="16"/>
+                    <Label x:Name="label7" Content="功率因素：" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,10,0,0" FontSize="16"/>
+                    <Label x:Name="label8" Content="漏电流：" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,10,0,0" FontSize="16"/>
+                    <Label x:Name="label9" Content="频率：" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,10,0,0" FontSize="16"/>
+                    <Label x:Name="label_ZT_DY" Content="电压" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="163,10,0,0" FontSize="16" HorizontalContentAlignment="Right" Width="74"/>
+                    <Label x:Name="label_ZT_DL" Content="电压" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="163,10,0,0" FontSize="16" HorizontalContentAlignment="Right" Width="74"/>
+                    <Label x:Name="label_ZT_DN" Content="电能" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="163,10,0,0" FontSize="16" HorizontalContentAlignment="Right" Width="74"/>
+                    <Label x:Name="label_ZT_YGGL" Content="功率" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="163,10,0,0" FontSize="16" HorizontalContentAlignment="Right" Width="74"/>
+                    <Label x:Name="label_ZT_WGGL" Content="功率" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="163,10,0,0" FontSize="16" HorizontalContentAlignment="Right" Width="74"/>
+                    <Label x:Name="label_ZT_WD" Content="温度" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="149,10,0,0" FontSize="16" HorizontalContentAlignment="Right" Width="74"/>
+                    <Label x:Name="label_ZT_GLYS" Content="功素" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="149,10,0,0" FontSize="16" HorizontalContentAlignment="Right" Width="74"/>
+                    <Label x:Name="label_ZT_LDL" Content="电流" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="149,10,0,0" FontSize="16" HorizontalContentAlignment="Right" Width="74"/>
+                    <Label x:Name="label_ZT_PL" Content="频率" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="149,10,0,0" FontSize="16" HorizontalContentAlignment="Right" Width="74"/>
+                    <Image x:Name="image1" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Height="5" Margin="32,42,0,0" VerticalAlignment="Top" Width="198" Source="Images/DianYuanMingXi/XuXian.jpg" Grid.RowSpan="2" />
+                    <Image x:Name="image2" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Height="5" Margin="32,42,0,0" VerticalAlignment="Top" Width="198" Source="Images/DianYuanMingXi/XuXian.jpg" Grid.RowSpan="2" />
+                    <Image x:Name="image3" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Height="5" Margin="32,42,0,0" VerticalAlignment="Top" Width="198" Source="Images/DianYuanMingXi/XuXian.jpg" Grid.RowSpan="2" />
+                    <Image x:Name="image4" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" Height="5" Margin="32,42,0,0" VerticalAlignment="Top" Width="198" Source="Images/DianYuanMingXi/XuXian.jpg" Grid.RowSpan="2" />
+                    <Image x:Name="image5" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" Height="5" Margin="32,42,0,0" VerticalAlignment="Top" Width="198" Source="Images/DianYuanMingXi/XuXian.jpg" Grid.RowSpan="2" />
+                    <Image x:Name="image6" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Height="5" Margin="24,42,0,0" VerticalAlignment="Top" Width="198" Source="Images/DianYuanMingXi/XuXian.jpg" />
+                    <Image x:Name="image7" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Height="5" Margin="24,42,0,0" VerticalAlignment="Top" Width="198" Source="Images/DianYuanMingXi/XuXian.jpg" />
+                    <Image x:Name="image8" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Height="5" Margin="24,42,0,0" VerticalAlignment="Top" Width="198" Source="Images/DianYuanMingXi/XuXian.jpg" />
+                    <Image x:Name="image9" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Height="5" Margin="24,42,0,0" VerticalAlignment="Top" Width="198" Source="Images/DianYuanMingXi/XuXian.jpg" />
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="用　电" FontSize="18" Width="95">
+                <Grid Background="#e4e4e4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40*" />
+                        <RowDefinition Height="283*" />
+                    </Grid.RowDefinitions>
+                    <Button x:Name="button_YD_RYD"  Grid.Row="0" Grid.Column="0" Content="日用电量统计" HorizontalAlignment="Left" VerticalAlignment="Top" Width="125" Margin="31,6,0,0" Click="button_YD_RYD_Click" Style="{DynamicResource MyWpfButton}" Cursor="Hand"/>
+                    <Button x:Name="button_YD_YYD" Grid.Row="0" Grid.Column="0" Content="月用电量统计" HorizontalAlignment="Left" VerticalAlignment="Top" Width="126" Margin="175,6,0,0" Style="{DynamicResource MyWpfButton}" Cursor="Hand" Click="button_YD_YYD_Click"/>
+                    <Button x:Name="button_YD_NYD" Grid.Row="0" Grid.Column="0" Content="年用电量统计" HorizontalAlignment="Left" VerticalAlignment="Top" Width="128" Margin="321,6,0,0" Style="{DynamicResource MyWpfButton}" Cursor="Hand" Click="button_YD_NYD_Click"/>
+
+                    <charting:Chart x:Name="Chart_YD" Grid.Row="1" Grid.Column="0" BorderBrush="Transparent" BorderThickness="0" VerticalAlignment="Stretch" >
+                        <charting:Chart.TitleStyle>
+                            <Style TargetType="{x:Type datavis:Title}">
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="Foreground" Value="#FF248caf"/>
+                            </Style>
+                        </charting:Chart.TitleStyle>
+                        <charting:Chart.LegendStyle>
+                            <Style TargetType="{x:Type datavis:Legend}">
+                                <Setter Property="Width" Value="0" />
+                            </Style>
+                        </charting:Chart.LegendStyle>
+                        <charting:LineSeries DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding}" IsSelectionEnabled="True" 
+                                    AnimationSequence="FirstToLast" FontSize="16"/>
+                    </charting:Chart>
+                </Grid>
+            </TabItem>
+            <TabItem Header="定　时" FontSize="18" Width="95">
+                <Grid Background="#e4e4e4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="106*"/>
+                        <ColumnDefinition Width="135*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Label x:Name="label" Content="操作:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Margin="7,0,0,0" RenderTransformOrigin="0.043,0.581" Height="31" Width="46"/>
+                    <Label x:Name="label_DS_CZ" Content="无" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="57,0,0,0" FontSize="16" Height="31" Width="42"/>
+                    <Label x:Name="label_Copy" Content="周期:" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="7,0,0,38" FontSize="16" Height="31" Width="46" RenderTransformOrigin="-0.913,1.419"/>
+                    <Label x:Name="label_DS_ZQ" Content="无" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="57,26,0,0" FontSize="16" Height="31" Width="42" RenderTransformOrigin="-0.952,1.452"/>
+                    <Label x:Name="label_Copy1" Content="任务时间:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="7,54,0,0" FontSize="16" Width="81" Height="31"/>
+                    <Label x:Name="label_DS_ZQ_Copy" Content="无" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="81,54,0,0" Width="127" FontSize="16" Height="31"/>
+                    <Border BorderBrush="#FF248CAF" BorderThickness="1" Grid.Column="1" HorizontalAlignment="Left" Height="338" Margin="4,32,0,0" Grid.RowSpan="4" VerticalAlignment="Top" Width="259" Background="White">
+                        <Grid x:Name="Grid_CS">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="44*" />
+                                <RowDefinition Height="84*" />
+                                <RowDefinition Height="46*" />
+                                <RowDefinition Height="71*" />
+                                <RowDefinition Height="91*" />
+                            </Grid.RowDefinitions>
+                            <Label x:Name="label_Copy12" Content="周期:" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top"  FontSize="16" Height="31" Width="46" RenderTransformOrigin="-0.913,1.419" Foreground="#FF248CAF" Margin="7,6,0,0"/>
+                            <ComboBox x:Name="comboBox_ZQ" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" Width="134"  Height="30" Margin="59,8,0,0" SelectionChanged="comboBox_ZQ_SelectionChanged" >
+                                <ComboBoxItem IsSelected="True">单次</ComboBoxItem>
+                                <ComboBoxItem>每天</ComboBoxItem>
+                                <ComboBoxItem>每周</ComboBoxItem>
+                                <ComboBoxItem>每月</ComboBoxItem>
+                            </ComboBox>
+                            <Label x:Name="label_Copy13" Content="时间:" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top"  FontSize="16" Height="31" Width="46" RenderTransformOrigin="-0.913,1.419" Foreground="#FF248CAF" Margin="7,16,0,0"/>
+                            <xctk:TimePicker x:Name="timePicker_Time" HorizontalAlignment="Left" Margin="59,51,0,0" Grid.Row="1" VerticalAlignment="Top" Width="94" Height="28"/>
+                            <Label x:Name="label_Copy15" Content="操作:" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top"  FontSize="16" Height="31" Width="46" RenderTransformOrigin="-0.913,1.419" Foreground="#FF248CAF" Margin="7,8,0,0"/>
+                            <CheckBox x:Name="CheckBox_DiNuan" Style="{StaticResource OrangeSwitchStyle}" Content="" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Top" Height="37" Width="97" Cursor="Hand" Margin="59,5,0,0" FontSize="13"/>
+                            <Button x:Name="button_BaoChun" Content="保  存" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Grid.Row="3" Margin="73,10,0,0" Style="{DynamicResource MyWpfButton}" Height="35"/>
+                        </Grid>
+                    </Border>
+                    <Label x:Name="label_Copy2" Content="定时参数" HorizontalAlignment="Left" Grid.Column="1" Margin="85,0,0,61" Foreground="#FF248CAF" Width="82"/>
+                    <Image x:Name="image1_Copy" Grid.Column="0" HorizontalAlignment="Left" Height="5" Margin="10,90,0,0" VerticalAlignment="Top" Width="198" Source="Images/DianYuanMingXi/XuXian.jpg" />
+                    <Button x:Name="button_BianJi1" Content="编辑" HorizontalAlignment="Left" VerticalAlignment="Top" Width="51" Margin="151,12,0,0" Height="38" Style="{DynamicResource MyWpfButton}" FontSize="16"/>
+                    <Label x:Name="label_Copy3" Content="操作:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Margin="7,1,0,0" RenderTransformOrigin="0.043,0.581" Height="31" Width="46" Grid.Row="1"/>
+                    <Label x:Name="label_DS_CZ_Copy" Content="无" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="57,1,0,0" FontSize="16" Height="31" Width="42" Grid.Row="1"/>
+                    <Label x:Name="label_Copy4" Content="周期:" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="7,0,0,37" FontSize="16" Height="31" Width="46" RenderTransformOrigin="-0.913,1.419" Grid.Row="1"/>
+                    <Label x:Name="label_DS_ZQ_Copy1" Content="无" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="57,27,0,0" FontSize="16" Height="31" Width="42" RenderTransformOrigin="-0.952,1.452" Grid.Row="1"/>
+                    <Label x:Name="label_Copy5" Content="任务时间:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="7,55,0,0" FontSize="16" Width="81" Height="31" Grid.Row="1"/>
+                    <Label x:Name="label_DS_ZQ_Copy2" Content="无" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="81,55,0,0" Width="127" FontSize="16" Height="31" Grid.Row="1"/>
+                    <Button x:Name="button_BianJi2" Content="编辑" HorizontalAlignment="Left" VerticalAlignment="Top" Width="51" Margin="151,13,0,0" Height="38" Style="{DynamicResource MyWpfButton}" Grid.Row="1" FontSize="16"/>
+                    <Image x:Name="image1_Copy1" Grid.Column="0" HorizontalAlignment="Left" Height="5" Margin="4,86,0,0" VerticalAlignment="Top" Width="198" Source="Images/DianYuanMingXi/XuXian.jpg" Grid.Row="1" />
+                    <Label x:Name="label_Copy6" Content="操作:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Margin="7,6,0,0" RenderTransformOrigin="0.043,0.581" Height="31" Width="46" Grid.Row="2"/>
+                    <Label x:Name="label_DS_CZ_Copy1" Content="无" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="57,6,0,0" FontSize="16" Height="31" Width="42" Grid.Row="2"/>
+                    <Label x:Name="label_Copy7" Content="周期:" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="7,0,0,32" FontSize="16" Height="31" Width="46" RenderTransformOrigin="-0.913,1.419" Grid.Row="2"/>
+                    <Label x:Name="label_DS_ZQ_Copy3" Content="无" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="57,32,0,0" FontSize="16" Height="31" Width="42" RenderTransformOrigin="-0.952,1.452" Grid.Row="2"/>
+                    <Label x:Name="label_Copy8" Content="任务时间:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="7,60,0,0" FontSize="16" Width="81" Height="31" Grid.Row="2"/>
+                    <Label x:Name="label_DS_ZQ_Copy4" Content="无" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="81,60,0,0" Width="127" FontSize="16" Height="31" Grid.Row="2"/>
+                    <Button x:Name="button_BianJi3" Content="编辑" HorizontalAlignment="Left" VerticalAlignment="Top" Width="51" Margin="151,18,0,0" Height="38" Style="{DynamicResource MyWpfButton}" Grid.Row="2" FontSize="16"/>
+                    <Image x:Name="image1_Copy2" Grid.Column="0" HorizontalAlignment="Left" Height="5" Margin="4,90,0,0" VerticalAlignment="Top" Width="198" Source="Images/DianYuanMingXi/XuXian.jpg" Grid.Row="2" />
+                    <Label x:Name="label_Copy9" Content="操作:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Margin="7,5,0,0" RenderTransformOrigin="0.043,0.581" Height="31" Width="46" Grid.Row="3"/>
+                    <Label x:Name="label_DS_CZ_Copy2" Content="无" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="57,5,0,0" FontSize="16" Height="31" Width="42" Grid.Row="3"/>
+                    <Label x:Name="label_Copy10" Content="周期:" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="7,0,0,33" FontSize="16" Height="31" Width="46" RenderTransformOrigin="-0.913,1.419" Grid.Row="3"/>
+                    <Label x:Name="label_DS_ZQ_Copy5" Content="无" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="57,31,0,0" FontSize="16" Height="31" Width="42" RenderTransformOrigin="-0.952,1.452" Grid.Row="3"/>
+                    <Label x:Name="label_Copy11" Content="任务时间:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="7,59,0,0" FontSize="16" Width="81" Height="31" Grid.Row="3"/>
+                    <Label x:Name="label_DS_ZQ_Copy6" Content="无" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="81,59,0,0" Width="127" FontSize="16" Height="31" Grid.Row="3"/>
+                    <Button x:Name="button_BianJi4" Content="编辑" HorizontalAlignment="Left" VerticalAlignment="Top" Width="51" Margin="151,17,0,0" Height="38" Style="{DynamicResource MyWpfButton}" Grid.Row="3" FontSize="16"/>
+
+
+
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="设　置" FontSize="18" Width="95">
+                <Grid Background="#e4e4e4"/>
+            </TabItem>
+            <TabItem Header="日　志" FontSize="18" Width="95">
+                <Grid Background="#e4e4e4">
+                    <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Margin="29,32,0,0" VerticalAlignment="Top" Height="233" Width="410"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+
+
+    </Grid>
+</Window>

@@ -28,6 +28,10 @@ namespace JXHighWay.WatchHouse.WFPClient
             InitializeComponent();
         }
 
+        bool m_IsInit = false;
+        bool m_Switch_DiNuan = true;
+        bool m_Switch_You = true;
+        bool m_Switch_Zhuo = true;
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             m_Monitoring = new WatchHouseMonitoring();
@@ -63,49 +67,12 @@ namespace JXHighWay.WatchHouse.WFPClient
             Label_DanQianWD.Content = string.Format("{0}℃", vDiNuanStateModel.DanQianWD) ;
             Label_DanQianWD.Tag = vDiNuanStateModel.DanQianWD;
             Label_SheZiWenDu.Content = vDiNuanStateModel.SheZhiWD;
+            changeSwitchColor_DiNuan();
+            changeSwitchColor_YouJiao();
+            changeSwitchColor_ZuoJiao();
+            m_IsInit = true;
         }
 
-        private async void CheckBox_DiNuan_Checked(object sender, RoutedEventArgs e)
-        {
-            bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiDiNuan);
-            if (!vResult)
-                MessageBox.Show("地暖开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-        }
-
-        private async void CheckBox_DiNuan_Unchecked(object sender, RoutedEventArgs e)
-        {
-            bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanDiNuan);
-            if (!vResult)
-                MessageBox.Show("地暖开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-        }
-
-        private async void CheckBox_ZuoJiao_Checked(object sender, RoutedEventArgs e)
-        {
-            bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiZuoNJ);
-            if (!vResult)
-                MessageBox.Show("左暖脚开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-        }
-
-        private async void CheckBox_ZuoJiao_Unchecked(object sender, RoutedEventArgs e)
-        {
-            bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanZuoNJ);
-            if (!vResult)
-                MessageBox.Show("左暖脚开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-        }
-
-        private async void CheckBox_YouJiao_Checked(object sender, RoutedEventArgs e)
-        {
-            bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiYouNJ);
-            if (!vResult)
-                MessageBox.Show("右暖脚开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-        }
-
-        private async void CheckBox_YouJiao_Unchecked(object sender, RoutedEventArgs e)
-        {
-            bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanYouNJ);
-            if (!vResult)
-                MessageBox.Show("右暖脚开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-        }
 
         private  async void Button_Shen_Click(object sender, RoutedEventArgs e)
         {
@@ -143,6 +110,111 @@ namespace JXHighWay.WatchHouse.WFPClient
                     Label_DanQianWD.Tag = vDanQianWD;
                     Label_DanQianWD.Content = string.Format("{0}℃", vDanQianWD);
                 }
+            }
+        }
+
+        private async void CheckBox_DiNuan_Click(object sender, RoutedEventArgs e)
+        {
+            if (m_IsInit && m_Switch_DiNuan)
+            {
+                m_Switch_DiNuan = false;
+                bool vOldValue = CheckBox_DiNuan.IsChecked ?? false;
+                bool vResult;
+                if (vOldValue)
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiDiNuan);
+                else
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanDiNuan);
+                if (!vResult)
+                {
+                    CheckBox_DiNuan.IsChecked = !vOldValue;
+                    MessageBox.Show("地暖开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                changeSwitchColor_DiNuan();
+                m_Switch_DiNuan = true;
+            }
+        }
+
+        void changeSwitchColor_DiNuan()
+        {
+            if (CheckBox_DiNuan.IsChecked ?? false)
+            {
+                label_DiNuan_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
+                label_DiNuan_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF079E23"));
+            }
+            else
+            {
+                label_DiNuan_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF0190F"));
+                label_DiNuan_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
+            }
+        }
+
+        private async void CheckBox_ZuoJiao_Click(object sender, RoutedEventArgs e)
+        {
+            if (m_IsInit && m_Switch_Zhuo)
+            {
+                m_Switch_DiNuan = false;
+                bool vOldValue = CheckBox_ZuoJiao.IsChecked ?? false;
+                bool vResult;
+                if (vOldValue)
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiZuoNJ);
+                else
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanZuoNJ);
+                if (!vResult)
+                {
+                    CheckBox_ZuoJiao.IsChecked = !vOldValue;
+                    MessageBox.Show("左暖脚开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                changeSwitchColor_ZuoJiao();
+                m_Switch_DiNuan = true;
+            }
+        }
+
+        void changeSwitchColor_ZuoJiao()
+        {
+            if (CheckBox_ZuoJiao.IsChecked ?? false)
+            {
+                label_Zhuo_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
+                label_Zhuo_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF079E23"));
+            }
+            else
+            {
+                label_Zhuo_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF0190F"));
+                label_Zhuo_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
+            }
+        }
+
+        private async void CheckBox_YouJiao_Click(object sender, RoutedEventArgs e)
+        {
+            if (m_IsInit && m_Switch_You)
+            {
+                m_Switch_DiNuan = false;
+                bool vOldValue = CheckBox_YouJiao.IsChecked ?? false;
+                bool vResult;
+                if (vOldValue)
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiYouNJ);
+                else
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanYouNJ);
+                if (!vResult)
+                {
+                    CheckBox_YouJiao.IsChecked = !vOldValue;
+                    MessageBox.Show("右暖脚开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                changeSwitchColor_YouJiao();
+                m_Switch_DiNuan = true;
+            }
+        }
+
+        void changeSwitchColor_YouJiao()
+        {
+            if (CheckBox_YouJiao.IsChecked ?? false)
+            {
+                label_You_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
+                label_You_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF079E23"));
+            }
+            else
+            {
+                label_You_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF0190F"));
+                label_You_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
             }
         }
     }

@@ -110,6 +110,7 @@ namespace JXHighWay.WatchHouse.WFPClient
         }
 
         WatchHouseMonitoring m_Monitoring = null;
+        bool m_IsInit = false;
         void init()
         {
             m_Monitoring = new WatchHouseMonitoring();
@@ -147,6 +148,8 @@ namespace JXHighWay.WatchHouse.WFPClient
                                 luminance0();
                                 break;
                         }
+                        changeSwitchColor();
+                        m_IsInit = true;
                     };
                     Dispatcher.BeginInvoke(action1);
                     Thread.Sleep(App.RefreshTime*1000);
@@ -159,42 +162,39 @@ namespace JXHighWay.WatchHouse.WFPClient
             init();
         }
 
-        private async void CheckBox_Switch_Checked(object sender, RoutedEventArgs e)
+        bool m_Switch = true;
+        private async void CheckBox_Switch_Click(object sender, RoutedEventArgs e)
         {
-
-            //Action action1 = async () =>
-            //{
-            //    bool vResult;
-            //    if (CheckBox_Switch.IsChecked.Value)
-            //    {
-            //        vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, WatchHouseDataPack_Send_CommandEnmu.KaiDeng);
-            //    }
-            //    else
-            //    {
-            //        vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, WatchHouseDataPack_Send_CommandEnmu.GuanDeng);
-            //    }
-
-            //    if (!vResult)
-            //        CheckBox_Switch.IsChecked = !CheckBox_Switch.IsChecked;
-
-            //};
-            //Dispatcher.BeginInvoke(action1);
-
-            bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, WatchHouseDataPack_Send_CommandEnmu.KaiDeng);
-            if (!vResult)
+            if (m_IsInit && m_Switch)
             {
-                CheckBox_Switch.IsChecked = false;
-                MessageBox.Show("开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                m_Switch = false;
+                bool vOldValue = CheckBox_Switch.IsChecked ?? false;
+                bool vResult;
+                if (vOldValue)
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, WatchHouseDataPack_Send_CommandEnmu.KaiDeng);
+                else
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, WatchHouseDataPack_Send_CommandEnmu.GuanDeng);
+                if (!vResult)
+                {
+                    CheckBox_Switch.IsChecked = !vOldValue;
+                    MessageBox.Show("灯光开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                changeSwitchColor();
+                 m_Switch = true;
             }
         }
 
-        private async void CheckBox_Switch_Unchecked(object sender, RoutedEventArgs e)
+        void changeSwitchColor()
         {
-            bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, WatchHouseDataPack_Send_CommandEnmu.GuanDeng);
-            if (!vResult)
+            if (CheckBox_Switch.IsChecked ?? false)
             {
-                CheckBox_Switch.IsChecked = false;
-                MessageBox.Show("开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                label_GuanDeng.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
+                label_KaiDeng.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF079E23"));
+            }
+            else
+            {
+                label_GuanDeng.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF0190F"));
+                label_KaiDeng.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
             }
         }
     }

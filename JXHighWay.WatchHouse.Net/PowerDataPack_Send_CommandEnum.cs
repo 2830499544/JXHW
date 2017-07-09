@@ -20,7 +20,13 @@ namespace JXHighWay.WatchHouse.Net.DataPack
 
         #region 控制分路开关
         Send_Switch = 0x41,
-        Receive_Switch = 0x42
+        Receive_Switch = 0x42,
         #endregion
+
+        #region 定时设置
+        Send_Timing = 0x49,
+        Receive_Timing = 0x4a,
+        #endregion
+
     }
 }
