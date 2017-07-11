@@ -126,9 +126,13 @@ namespace JXHighWay.WatchHouse.Bll.Server
                                     PowerDataPack_Receive_RunningStatus vDataPack1 = Helper.NetHelper.ByteToStructure<PowerDataPack_Receive_RunningStatus>(vReceiveData.Data);
                                     processorData_RunningStatus(vDataPack1, vReceiveData.IPAddress);
                                     break;
+                                //处理接收到电源开关状态数据
                                 case (byte)PowerDataPack_Receive_CommandEnum.SwitchStatus:
                                     PowerDataPack_Receive_ReplyCMD vDataPack2 = Helper.NetHelper.ByteToStructure<PowerDataPack_Receive_ReplyCMD>(vReceiveData.Data);
                                     processorData_ReplyCMD(PowerDataPack_Receive_CommandEnum.SwitchStatus, vDataPack2);
+                                    break;
+                                case (byte)PowerDataPack_Receive_CommandEnum.Event:
+                                    PowerDataPack_Receive_Event vDataPack3 = Helper.NetHelper.ByteToStructure<PowerDataPack_Receive_Event>(vReceiveData.Data);
                                     break;
 
                             }
@@ -168,6 +172,8 @@ namespace JXHighWay.WatchHouse.Bll.Server
             return vResult;
         }
 
+        
+
         void processorData_ReplyCMD(PowerDataPack_Receive_CommandEnum comm, PowerDataPack_Receive_ReplyCMD dataPack)
         {
             string vSql = "";
@@ -186,6 +192,26 @@ namespace JXHighWay.WatchHouse.Bll.Server
             if (vSql != "")
                 m_BasicDBClass_Return.UpdateRecord(vPowerSendCMDEFModel, vSql);
         }
+
+        void processorData_Event(PowerDataPack_Receive_Event data,string IPAddress)
+        {
+            try
+            {
+                PowerEventEFModel vPowerEventEFModel = new PowerEventEFModel()
+                {
+                    DianYuanID = data.Addition,
+                    LeiXi = convertDianYuanLeiXing(data.LeiXing),
+                    LuHao = data.LuHao,
+                    NeiRong = data.ShiJinLX
+                       
+                };
+            }
+            catch( Exception ex)
+            {
+                Console.WriteLine(string.Format("插入数据至[电源数据表]中发生异常，异常信息为:{0}", ex.Message));
+            }
+        }
+
         void processorData_RunningStatus(PowerDataPack_Receive_RunningStatus vData, string IPAddress)
         {
            try

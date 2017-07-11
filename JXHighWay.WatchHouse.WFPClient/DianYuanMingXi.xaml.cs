@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using JXHighWay.WatchHouse.Bll.Client.DianYuan;
+using JXHighWay.WatchHouse.Helper;
 using System.Windows.Controls.DataVisualization.Charting;
 using Xceed.Wpf.Toolkit.Primitives;
 using Xceed.Wpf.Toolkit;
@@ -27,6 +28,21 @@ namespace JXHighWay.WatchHouse.WFPClient
         /// 路号
         /// </summary>
         public int LuHao { get; set; }
+        //是否初始化
+        bool m_IsInit = false;
+        /// <summary>
+        /// 定时组数据
+        /// </summary>
+        List<TimingInfo> m_TimingInfoList = null;
+        /// <summary>
+        /// 正在编辑的定时组号
+        /// </summary>
+        int m_EditZhuHao = -1;
+        /// <summary>
+        /// 设置信息
+        /// </summary>
+        ParamInfo m_ParamInfo;
+
 
         PowerMonitoring m_PowerMonitoring { get; set; }
         public DianYuanMingXi()
@@ -34,14 +50,32 @@ namespace JXHighWay.WatchHouse.WFPClient
             InitializeComponent();
         }
 
-        bool m_IsInit = false;
+       
         void init()
         {
             m_IsInit = false;
             m_PowerMonitoring = new PowerMonitoring();
             init_ZhuanTai();
             init_DingShi();
+            init_SheZhi();
             m_IsInit = true;
+        }
+
+        /// <summary>
+        /// 初始化设置
+        /// </summary>
+        void init_SheZhi()
+        {
+            m_ParamInfo =  m_PowerMonitoring.GetSwitchParamInfo(App.PowerID, LuHao);
+            integerUpDown_XDDN.Value = m_ParamInfo.XianDingDN;
+            integerUpDown_XDGL.Value = m_ParamInfo.XianDingGL;
+            integerUpDown_DLNLZ.Value = m_ParamInfo.DianLiuLLZ;
+            integerUpDown_CWBH.Value = m_ParamInfo.ChaoWenBHZ;
+            integerUpDown_CWYJZ.Value = m_ParamInfo.ChaoWenYJZ;
+            integerUpDown_GYSX.Value = m_ParamInfo.GuoYaSX;
+            integerUpDown_QYXX.Value = m_ParamInfo.QianYaXX;
+            integerUpDown_EDLD.Value = m_ParamInfo.EDingLDDZDL;
+            integerUpDown_LDYJZ.Value = m_ParamInfo.LouDianLYJZ;
         }
 
         /// <summary>
@@ -61,6 +95,56 @@ namespace JXHighWay.WatchHouse.WFPClient
             label_ZT_YGGL.Content = string.Format("{0}W", vPowerInfo.YouGongGL);
         }
 
+        void bindTimingInfo(TimingInfo timingInfo,int zhuHao)
+        {
+            if (timingInfo != null && timingInfo.DianYuanID != 0)
+            {
+                Label vLabel_DS_CZ = (Label)FindName(string.Format("label_DS_CZ{0}", zhuHao));
+                Label vLabel_DS_ZQ = (Label)FindName(string.Format("label_DS_ZQ{0}", zhuHao));
+                Label vLabel_DS_SJ = (Label)FindName(string.Format("label_DS_SJ{0}", zhuHao));
+                //操作
+                if (timingInfo.YunXuKZ == 0x00)
+                {
+                    vLabel_DS_CZ.Content = "禁止";
+                    vLabel_DS_CZ.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EA3B3A"));
+                }
+                else
+                {
+                    vLabel_DS_CZ.Content = "允许";
+                    vLabel_DS_CZ.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#1BA261"));
+                }
+                byte vWeek, vHour, vMinute, vDay;
+                switch (timingInfo.ZhouQi)
+                {
+                    case 0:
+                        //vLabel_DS_ZQ.Content = "单次";
+                        vLabel_DS_SJ.Content = CommHelper.TimestampToDateTime(timingInfo.TimeData).ToString("yyyy-MM-dd hh:mm:ss");
+                        break;
+                    case 1:
+                        //vLabel_DS_ZQ.Content = "每天";
+                        vHour = (byte)(timingInfo.TimeData >> 8);
+                        vMinute = (byte)(timingInfo.TimeData >> 0);
+                        vLabel_DS_SJ.Content = string.Format("{0}:{1}", vHour, vMinute);
+                        break;
+                    case 2:
+                        //vLabel_DS_ZQ.Content = "每周";
+                        vWeek = (byte)(timingInfo.TimeData >> 16);
+                        vHour = (byte)(timingInfo.TimeData >> 8);
+                        vMinute = (byte)(timingInfo.TimeData >> 0);
+                        vLabel_DS_SJ.Content = string.Format("周{0} {1}:{2}", vWeek, vHour, vMinute);
+                        break;
+                    case 3:
+                        //vLabel_DS_ZQ.Content = "每月";
+                        vDay = (byte)(timingInfo.TimeData >> 16);
+                        vHour = (byte)(timingInfo.TimeData >> 8);
+                        vMinute = (byte)(timingInfo.TimeData >> 0);
+                        vLabel_DS_SJ.Content = string.Format("{0}日 {1}:{2}", vDay, vHour, vMinute);
+                        break;
+                }
+                vLabel_DS_ZQ.Content = m_PowerMonitoring.ConvertTimingZQToStr(timingInfo.ZhouQi);
+            }
+        }
+       
         /// <summary>
         /// 初始化定时
         /// </summary>
@@ -70,6 +154,13 @@ namespace JXHighWay.WatchHouse.WFPClient
             createDatePicker();
             createValueRangeTextBox();
             timePicker_Time.Value = DateTime.Now;
+            for(int i=0;i<4;i++)
+            {
+                byte vLuHao = (byte)(i >> 0);
+                m_TimingInfoList =  m_PowerMonitoring.GetTimingInfo(App.PowerID, vLuHao);
+                TimingInfo vTimingInfo = m_TimingInfoList.Where(m => m.LuHao == i).FirstOrDefault();
+                bindTimingInfo(vTimingInfo,i);
+            }
         }
 
         /// <summary>
@@ -176,7 +267,7 @@ namespace JXHighWay.WatchHouse.WFPClient
         }
         private void comboBox_ZQ_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (m_IsInit)
+            if (m_IsInit && e.AddedItems.Count>0)
             {
                 ComboBoxItem obj = (ComboBoxItem)e.AddedItems[0];
                 string str = (string)obj.Content;
@@ -210,6 +301,310 @@ namespace JXHighWay.WatchHouse.WFPClient
                 }
             }
             
+        }
+
+        private void button_BianJi1_Click(object sender, RoutedEventArgs e)
+        {
+            Button vButton = (Button)sender;
+            int vZhuHao = Convert.ToInt32( vButton.Tag );
+            m_EditZhuHao = vZhuHao;
+            label_DS_Title.Content = string.Format("定时参数（{0}组）", vZhuHao);
+
+            Label vLabel_DS_CZ = (Label)FindName(string.Format("label_DS_CZ{0}", m_EditZhuHao));
+            TimingInfo vTimingInfo = m_TimingInfoList.Where(m => m.LuHao == m_EditZhuHao).FirstOrDefault();
+            if (vTimingInfo!=null && vTimingInfo.DianYuanID!=0)
+            {
+                //comboBox_ZQ.Text = m_PowerMonitoring.ConvertTimingZQ(vTimingInfo.ZhouQi);
+               
+                DateTime vDateTime = CommHelper.TimestampToDateTime(vTimingInfo.TimeData);
+                switch (vTimingInfo.ZhouQi)
+                {
+                    case 0:
+                        comboBox_ZQ.SelectedValue = "单次";
+                        m_DatePicker.DisplayDate = vDateTime;
+                        break;
+                    case 1:
+                        comboBox_ZQ.SelectedValue = "每天";
+                        break;
+                    case 2:
+                        byte vWeek = (byte)(vTimingInfo.TimeData >> 16);
+                        m_ComboBox.Text = string.Format("周{0}", vWeek);
+                        comboBox_ZQ.SelectedValue = "每周";
+                        break;
+                    case 3:
+                        byte vDay = (byte)(vTimingInfo.TimeData >> 16);
+                        m_IntegerUpDown.Value = vDay;
+                        comboBox_ZQ.SelectedValue = "每月";
+                        break;
+                    
+                }
+                timePicker_Time.Value = vDateTime;
+                CheckBox_ChaoZhuo.IsChecked = vTimingInfo.YunXuKZ == 0 ? false : true;
+            }
+        }
+
+        private async void button_BaoChun_Click(object sender, RoutedEventArgs e)
+        {
+            if ( m_EditZhuHao!=-1 )
+            {
+                byte vLuHao = (byte)(LuHao >> 0);
+
+                //int vZhuHaoInt = (int)vButton.Tag;
+                byte vZhuHao = (byte)(m_EditZhuHao >> 0);
+                byte vRenWuLeiXin = CheckBox_ChaoZhuo.IsChecked.Value?(byte)0x01:(byte)0x00;
+                byte vZhouQi = (byte)m_PowerMonitoring.ConvertTimingStrToZQ(comboBox_ZQ.Text);
+                byte vTimeData1=0x00, vTimeData2=0x00, vTimeData3=0x00, vTimeData4=0x00;
+                int vTimeData = 0;
+                switch( vZhouQi )
+                {
+                    //单次
+                    case 0x00:
+                        DateTime vDate = new DateTime(m_DatePicker.SelectedDate.Value.Year, m_DatePicker.SelectedDate.Value.Month, m_DatePicker.SelectedDate.Value.Day, timePicker_Time.Value.Value.Hour, timePicker_Time.Value.Value.Minute, timePicker_Time.Value.Value.Second);
+                        vTimeData = CommHelper.DateTimeToTimestamp(vDate);
+                        break;
+                    //每天
+                    case 0x01:
+                        vTimeData3 = (byte)(timePicker_Time.Value.Value.Hour>>0);
+                        vTimeData4 = (byte)(timePicker_Time.Value.Value.Minute >> 0);
+                        vTimeData = BitConverter.ToInt32(new byte[] { vTimeData4,vTimeData3,vTimeData2,vTimeData1 },0);
+                        break;
+                    //每周
+                    case 0x02:
+                        switch ( m_ComboBox.Text )
+                        {
+                            case "周一":
+                                vTimeData2 = 0x01;
+                                break;
+                            case "周二":
+                                vTimeData2 = 0x02;
+                                break;
+                            case "周三":
+                                vTimeData2 = 0x03;
+                                break;
+                            case "周四":
+                                vTimeData2 = 0x04;
+                                break;
+                            case "周五":
+                                vTimeData2 = 0x05;
+                                break;
+                            case "周六":
+                                vTimeData2 = 0x06;
+                                break;
+                            case "周日":
+                                vTimeData2 = 0x07;
+                                break;
+                        }
+                        vTimeData3 = (byte)(timePicker_Time.Value.Value.Hour >> 0);
+                        vTimeData4 = (byte)(timePicker_Time.Value.Value.Minute >> 0);
+                        vTimeData = BitConverter.ToInt32(new byte[] { vTimeData4, vTimeData3, vTimeData2, vTimeData1 },0);
+                        break;
+                }
+                bool vResult = await m_PowerMonitoring.SendCMD_Timing(App.PowerID, 0x01, vLuHao, vZhuHao, vRenWuLeiXin, vZhouQi, 0x01, vTimeData);
+                if (vResult)
+                {
+                    TimingInfo vTimingInfo = m_TimingInfoList.Where(m => m.ZhuHao == m_EditZhuHao).FirstOrDefault();
+                    if (vTimingInfo!=null )
+                    {
+                        vTimingInfo = new TimingInfo()
+                        {
+                            DianYuanID = App.PowerID,
+                            LeiXing = 0x01,
+                            RenWuLX = vRenWuLeiXin,
+                            TimeData = vTimeData,
+                            YunXuKZ = 0x01,
+                            ZhouQi = vZhouQi,
+                            ZhuHao = vZhuHao
+                        };
+                    }
+                    else
+                    {
+                        vTimingInfo = new TimingInfo()
+                        {
+                            DianYuanID = App.PowerID,
+                            LeiXing = 0x01,
+                            RenWuLX = vRenWuLeiXin,
+                            TimeData = vTimeData,
+                            YunXuKZ = 0x01,
+                            ZhouQi = vZhouQi,
+                            ZhuHao = vZhuHao
+                        };
+                        m_TimingInfoList.Add(vTimingInfo);
+                    }
+                    bindTimingInfo(vTimingInfo, m_EditZhuHao);
+                }
+                else
+                    Xceed.Wpf.Toolkit.MessageBox.Show("保存失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+                Xceed.Wpf.Toolkit.MessageBox.Show("请选择需要编辑定时组", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+
+        }
+
+        private async void button_SheZhi_XDDN_Click(object sender, RoutedEventArgs e)
+        {
+            byte vLuHao = (byte)(LuHao >> 0);
+            short vData = Convert.ToInt16(integerUpDown_XDDN.Value);
+            bool vResult = await m_PowerMonitoring.SendCMD_SwitchParam(App.PowerID, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.XianDingDN, vData);
+            if (vResult)
+            {
+                Xceed.Wpf.Toolkit.MessageBox.Show("设置成功", "信息", MessageBoxButton.OK, MessageBoxImage.Information);
+                m_ParamInfo.XianDingDN = vData;
+            }
+            else
+            {
+                Xceed.Wpf.Toolkit.MessageBox.Show("设置失败", "信息", MessageBoxButton.OK, MessageBoxImage.Error);
+                integerUpDown_XDDN.Value = m_ParamInfo.XianDingDN;
+            }
+        }
+
+        private async void button_SheZhi_XDGL_Click(object sender, RoutedEventArgs e)
+        {
+            byte vLuHao = (byte)(LuHao >> 0);
+            short vData = Convert.ToInt16(integerUpDown_XDGL.Value);
+            bool vResult = await m_PowerMonitoring.SendCMD_SwitchParam(App.PowerID, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.XianDingGL, vData);
+            if (vResult)
+            {
+                Xceed.Wpf.Toolkit.MessageBox.Show("设置成功", "信息", MessageBoxButton.OK, MessageBoxImage.Information);
+                m_ParamInfo.XianDingGL = vData;
+            }
+            else
+            {
+                Xceed.Wpf.Toolkit.MessageBox.Show("设置失败", "信息", MessageBoxButton.OK, MessageBoxImage.Error);
+                integerUpDown_XDGL.Value = m_ParamInfo.XianDingGL;
+            }
+        }
+
+        private async void button_SheZhi_DLNLZ_Click(object sender, RoutedEventArgs e)
+        {
+            byte vLuHao = (byte)(LuHao >> 0);
+            short vData = Convert.ToInt16(integerUpDown_DLNLZ.Value);
+            bool vResult = await m_PowerMonitoring.SendCMD_SwitchParam(App.PowerID, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.DianLiuLLZ, vData);
+            if (vResult)
+            {
+                Xceed.Wpf.Toolkit.MessageBox.Show("设置成功", "信息", MessageBoxButton.OK, MessageBoxImage.Information);
+                m_ParamInfo.DianLiuLLZ = vData;
+            }
+            else
+            {
+                Xceed.Wpf.Toolkit.MessageBox.Show("设置失败", "信息", MessageBoxButton.OK, MessageBoxImage.Error);
+                integerUpDown_DLNLZ.Value = m_ParamInfo.DianLiuLLZ;
+            }
+        }
+
+        private async void button_SheZhi_CWBH_Click(object sender, RoutedEventArgs e)
+        {
+            byte vLuHao = (byte)(LuHao >> 0);
+            short vData = Convert.ToInt16(integerUpDown_CWBH.Value);
+            bool vResult = await m_PowerMonitoring.SendCMD_SwitchParam(App.PowerID, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.ChaoWenBHZ, vData);
+            if (vResult)
+            {
+                Xceed.Wpf.Toolkit.MessageBox.Show("设置成功", "信息", MessageBoxButton.OK, MessageBoxImage.Information);
+                m_ParamInfo.ChaoWenBHZ = vData;
+            }
+            else
+            {
+                Xceed.Wpf.Toolkit.MessageBox.Show("设置失败", "信息", MessageBoxButton.OK, MessageBoxImage.Error);
+                integerUpDown_CWBH.Value = m_ParamInfo.ChaoWenBHZ;
+            }
+        }
+
+        private async void button_SheZhi_CWYJZ_Click(object sender, RoutedEventArgs e)
+        {
+            byte vLuHao = (byte)(LuHao >> 0);
+            short vData = Convert.ToInt16(integerUpDown_CWYJZ.Value);
+            bool vResult = await m_PowerMonitoring.SendCMD_SwitchParam(App.PowerID, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.ChaoWenYJZ, vData);
+            if (vResult)
+            {
+                Xceed.Wpf.Toolkit.MessageBox.Show("设置成功", "信息", MessageBoxButton.OK, MessageBoxImage.Information);
+                m_ParamInfo.ChaoWenYJZ = vData;
+            }
+            else
+            {
+                Xceed.Wpf.Toolkit.MessageBox.Show("设置失败", "信息", MessageBoxButton.OK, MessageBoxImage.Error);
+                integerUpDown_CWYJZ.Value = m_ParamInfo.ChaoWenYJZ;
+            }
+        }
+
+        private async void button_SheZhi_GYSX_Click(object sender, RoutedEventArgs e)
+        {
+            byte vLuHao = (byte)(LuHao >> 0);
+            short vData = Convert.ToInt16(integerUpDown_GYSX.Value);
+            bool vResult = await m_PowerMonitoring.SendCMD_SwitchParam(App.PowerID, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.GuoYaSX, vData);
+            if (vResult)
+            {
+                Xceed.Wpf.Toolkit.MessageBox.Show("设置成功", "信息", MessageBoxButton.OK, MessageBoxImage.Information);
+                m_ParamInfo.GuoYaSX = vData;
+            }
+            else
+            {
+                Xceed.Wpf.Toolkit.MessageBox.Show("设置失败", "信息", MessageBoxButton.OK, MessageBoxImage.Error);
+                integerUpDown_GYSX.Value = m_ParamInfo.GuoYaSX;
+            }
+        }
+
+        private async void button_SheZhi_QYXX_Click(object sender, RoutedEventArgs e)
+        {
+            byte vLuHao = (byte)(LuHao >> 0);
+            short vData = Convert.ToInt16(integerUpDown_QYXX.Value);
+            bool vResult = await m_PowerMonitoring.SendCMD_SwitchParam(App.PowerID, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.QianYaXX, vData);
+            if (vResult)
+            {
+                Xceed.Wpf.Toolkit.MessageBox.Show("设置成功", "信息", MessageBoxButton.OK, MessageBoxImage.Information);
+                m_ParamInfo.QianYaXX = vData;
+            }
+            else
+            {
+                Xceed.Wpf.Toolkit.MessageBox.Show("设置失败", "信息", MessageBoxButton.OK, MessageBoxImage.Error);
+                integerUpDown_QYXX.Value = m_ParamInfo.QianYaXX;
+            }
+        }
+
+        private async void button_SheZhi_EDLD_Click(object sender, RoutedEventArgs e)
+        {
+            byte vLuHao = (byte)(LuHao >> 0);
+            short vData = Convert.ToInt16(integerUpDown_EDLD.Value);
+            bool vResult = await m_PowerMonitoring.SendCMD_SwitchParam(App.PowerID, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.EDingLDDZDL, vData);
+            if (vResult)
+            {
+                Xceed.Wpf.Toolkit.MessageBox.Show("设置成功", "信息", MessageBoxButton.OK, MessageBoxImage.Information);
+                m_ParamInfo.EDingLDDZDL = vData;
+            }
+            else
+            {
+                Xceed.Wpf.Toolkit.MessageBox.Show("设置失败", "信息", MessageBoxButton.OK, MessageBoxImage.Error);
+                integerUpDown_EDLD.Value = m_ParamInfo.EDingLDDZDL;
+            }
+        }
+
+        private async void button_SheZhi_LDYJZ_Click(object sender, RoutedEventArgs e)
+        {
+            byte vLuHao = (byte)(LuHao >> 0);
+            short vData = Convert.ToInt16(integerUpDown_LDYJZ.Value);
+            bool vResult = await m_PowerMonitoring.SendCMD_SwitchParam(App.PowerID, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.EDingLDDZDL, vData);
+            if (vResult)
+            {
+                Xceed.Wpf.Toolkit.MessageBox.Show("设置成功", "信息", MessageBoxButton.OK, MessageBoxImage.Information);
+                m_ParamInfo.LouDianLYJZ = vData;
+            }
+            else
+            {
+                Xceed.Wpf.Toolkit.MessageBox.Show("设置失败", "信息", MessageBoxButton.OK, MessageBoxImage.Error);
+                integerUpDown_LDYJZ.Value = m_ParamInfo.LouDianLYJZ;
+            }
+        }
+
+        private void image_Close_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Close();
+        }
+
+        private void image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                this.DragMove();
+            }
+            catch { }
         }
     }
 }

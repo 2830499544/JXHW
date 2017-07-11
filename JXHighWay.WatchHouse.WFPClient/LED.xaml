@@ -12,6 +12,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resource\CheckboxResource.xaml" />
                 <ResourceDictionary Source="Resource\GroupboxResource.xaml" />
+                <ResourceDictionary Source="Resource\ButtonResource.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Page.Resources>

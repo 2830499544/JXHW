@@ -15,7 +15,11 @@ namespace JXHighWay.WatchHouse.Net.DataPack
         /// <summary>
         /// 电源开关命令返回
         /// </summary>
-        SwitchStatus =0x42
+        SwitchStatus =0x42,
+        /// <summary>
+        /// 上报配电箱事件
+        /// </summary>
+        Event = 0xca
 
 
 

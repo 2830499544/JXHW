@@ -9,7 +9,7 @@ namespace JXHighWay.WatchHouse.Net.DataPack
     /// <summary>
     /// 定时设置
     /// </summary>
-    public class PowerDataPack_Send_Timing
+    public struct PowerDataPack_Send_Timing
     {
         /// <summary>
         /// 设备类型 (0漏保 1分路 2分路（带漏保）3漏保插座 4普插座 5MESH节点)

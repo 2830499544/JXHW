@@ -50,6 +50,7 @@
     <Compile Include="PowerEventEFModel.cs" />
     <Compile Include="PowerSendCMDEFModel.cs" />
     <Compile Include="PowerSwithConfigEFModel.cs" />
+    <Compile Include="PowerTimingEFModel.cs" />
     <Compile Include="WatchHouseSendCMDEFModel.cs" />
     <Compile Include="WatchHouseConfigEFModel.cs" />
     <Compile Include="WathHouseDataEFModel.cs" />

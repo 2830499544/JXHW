@@ -44,6 +44,7 @@
     <Compile Include="EmptyData.cs" />
     <Compile Include="IWatchHouseDataPack.cs" />
     <Compile Include="PowerDataPack_Receive_CommandEnum.cs" />
+    <Compile Include="PowerDataPack_Receive_Event.cs" />
     <Compile Include="PowerDataPack_Receive_ReplyCMD.cs" />
     <Compile Include="PowerDataPack_Receive_RuningStatues.cs" />
     <Compile Include="PowerDataPack_Main.cs" />
@@ -51,6 +52,7 @@
     <Compile Include="PowerDataPack_Send_GetIPAddress.cs" />
     <Compile Include="PowerDataPack_Send_SetIPAddress.cs" />
     <Compile Include="PowerDataPack_Send_Switch.cs" />
+    <Compile Include="PowerDataPack_Send_SwitchParam.cs" />
     <Compile Include="PowerDataPack_Send_Timing.cs" />
     <Compile Include="WatchHouseDataPack.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

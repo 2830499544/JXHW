@@ -28,5 +28,9 @@ namespace JXHighWay.WatchHouse.Net.DataPack
         Receive_Timing = 0x4a,
         #endregion
 
+        #region 开关参数设置
+        Send_SwitchParam = 0x45,
+        Receive_SwitchParam = 0x46
+        #endregion
     }
 }

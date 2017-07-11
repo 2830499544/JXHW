@@ -88,7 +88,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.GanTing
 
         public List<WatchHouseInfo> GetAllWatchHouseInfo()
         {
-            WatchHouseConfigEFModel[] vWatchHouseInfoArray =  m_BasicDBClass.SelectCustomEx<WatchHouseConfigEFModel>("SELECT *From 岗亭配置 order by GangTingLX ,GangTingMC");
+            WatchHouseConfigEFModel[] vWatchHouseInfoArray =  m_BasicDBClass.SelectCustomEx<WatchHouseConfigEFModel>("SELECT *From 岗亭配置 order by OrderID ,GangTingMC");
             List<WatchHouseInfo> vResut = new List<WatchHouseInfo>();
             foreach (WatchHouseConfigEFModel vTempWatchHouse in vWatchHouseInfoArray)
             {

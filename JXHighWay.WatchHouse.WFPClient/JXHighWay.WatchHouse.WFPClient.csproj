@@ -149,6 +149,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Resource\GreenButtonResource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resource\GroupboxResource.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -433,6 +437,10 @@
       <Project>{1e2cbd19-b02c-46bb-947c-f67329d5e6f4}</Project>
       <Name>JXHighWay.WatchHouse.Bll.Client</Name>
     </ProjectReference>
+    <ProjectReference Include="..\JXHighWay.WatchHouse.Helper\JXHighWay.WatchHouse.Helper.csproj">
+      <Project>{3282a5f3-7d7f-4423-9793-8da25e2ad7ab}</Project>
+      <Name>JXHighWay.WatchHouse.Helper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\JXHighWay.WatchHouse.LED\JXHighWay.WatchHouse.LED.csproj">
       <Project>{245383e0-0f1e-41f8-86a6-293191e88581}</Project>
       <Name>JXHighWay.WatchHouse.LED</Name>
@@ -475,6 +483,8 @@
     <Resource Include="Images\GongHao.jpg" />
     <Resource Include="Images\DianYuanMingXi\Tou.jpg" />
     <Resource Include="Images\DianYuanMingXi\XuXian.jpg" />
+    <Resource Include="Images\DianYuanMingXi\XuXianChang.jpg" />
+    <Resource Include="Images\DianYuanMingXi\GuanBi.jpg" />
     <Content Include="Transmit.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
