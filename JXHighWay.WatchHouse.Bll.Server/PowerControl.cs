@@ -7,6 +7,8 @@ using JXHighWay.WatchHouse.Net.DataPack;
 using JXHighWay.WatchHouse.Net;
 using System.Net;
 using JXHighWay.WatchHouse.EFModel;
+using JXHighWay.WatchHouse.Helper;
+using System.Threading;
 
 namespace JXHighWay.WatchHouse.Bll.Server
 {
@@ -81,6 +83,17 @@ namespace JXHighWay.WatchHouse.Bll.Server
             vResult[1] = (byte)(vCalcResult >> 0);
             return vResult[1];
         }
+        public async Task<bool> SendCMD_SetIP( int DianYuanID,string IPAddress,string Mask,string Gateway,bool DHCP,
+            string ServerIP,short Port )
+        {
+            PowerDataPack_Send_SetIPAddress vData = new PowerDataPack_Send_SetIPAddress()
+            {
+                 DHCP = DHCP?(byte)0x01:(byte)0x00,
+                 
+            };
+            bool vResult = await asyncSendCommandToDB(DianYuanID, PowerDataPack_Send_CommandEnum.Send_SetIPAddress, vData);
+            return vResult;
+        }
 
         public void Send()
         {
@@ -101,6 +114,39 @@ namespace JXHighWay.WatchHouse.Bll.Server
             m_SocketManager.SendMessage(m_SocketManager.ClientList[0], vDataPackBytes);
         }
 
+        async Task<bool> asyncSendCommandToDB<T>(int dianYuanID, PowerDataPack_Send_CommandEnum command, T SendData)
+        {
+            return await Task.Run(() =>
+            {
+                string vDataStr = System.Text.Encoding.Default.GetString(NetHelper.StructureToByte(SendData));
+                PowerSendCMDEFModel vSendCMDEFModel = new PowerSendCMDEFModel()
+                {
+                    State = false,
+                    IsSend = false,
+                    IsReply = false,
+                    CMD = (byte)command,
+                    DianYuanID = dianYuanID,
+                    SendTime = DateTime.Now,
+                    SN = NetHelper.MarkSN_Byte(),
+                    Data = vDataStr
+                };
+                
+                int vID = m_BasicDBClass_Send.InsertRecord(vSendCMDEFModel);
+
+                DateTime vStartTime = DateTime.Now;
+                bool vResult = false;
+                do
+                {
+                    PowerSendCMDEFModel vSelectResult = m_BasicDBClass_Send.SelectRecordByPrimaryKeyEx<PowerSendCMDEFModel>(vID);
+                    vResult = vSelectResult.State ?? false;
+                    if (!vResult && (DateTime.Now - vStartTime).TotalMilliseconds >= 2000)
+                        break;
+                    Thread.Sleep(200);
+                } while (!vResult);
+                //m_BasicDBClass.DeleteRecordByPrimaryKey<PowerSendCMDEFModel>(vID);
+                return vResult;
+            });
+        }
 
         #region 处理接收到的数据
         async void asyncProcessorRecieveData()
@@ -131,12 +177,13 @@ namespace JXHighWay.WatchHouse.Bll.Server
                                     PowerDataPack_Receive_ReplyCMD vDataPack2 = Helper.NetHelper.ByteToStructure<PowerDataPack_Receive_ReplyCMD>(vReceiveData.Data);
                                     processorData_ReplyCMD(PowerDataPack_Receive_CommandEnum.SwitchStatus, vDataPack2);
                                     break;
+                                //电源上报事件
                                 case (byte)PowerDataPack_Receive_CommandEnum.Event:
                                     PowerDataPack_Receive_Event vDataPack3 = Helper.NetHelper.ByteToStructure<PowerDataPack_Receive_Event>(vReceiveData.Data);
+                                    processorData_Event(vDataPack3, vReceiveData.IPAddress);
                                     break;
-
                             }
-
+                            
                         }
                     }
                     catch (Exception ex)
@@ -147,6 +194,19 @@ namespace JXHighWay.WatchHouse.Bll.Server
             });
         }
 
+
+        /// <summary>
+        /// 更新电源最后通讯时间
+        /// </summary>
+        /// <param name="dianYuanID"></param>
+        void updateTongXunSJ(int dianYuanID )
+        {
+            WatchHouseConfigEFModel vWatchHouseConfigEFModel = new WatchHouseConfigEFModel()
+            {
+                DianYuanTXSJ = DateTime.Now,
+                DianYuanID = 11
+            };
+        }
 
         string convertDianYuanLeiXing(byte leiXing)
         {
@@ -172,7 +232,153 @@ namespace JXHighWay.WatchHouse.Bll.Server
             return vResult;
         }
 
-        
+        /// <summary>
+        /// 转换事情类型
+        /// </summary>
+        /// <returns></returns>
+        string convertShiJianLX(byte shiJianLeiXing)
+        {
+            string vResult = "";
+            switch (shiJianLeiXing)
+            {
+                case 0x00:
+                    vResult = "操作类";
+                    break;
+                case 0x01:
+                    vResult = "报警类";
+                    break;
+                case 0x02:
+                    vResult = "故障类";
+                    break;
+            }
+            return vResult;
+        }
+
+        string convertShiJianNR(byte shiJianLeiXing,byte shiJianNR)
+        {
+            string vResult = "";
+            switch (shiJianLeiXing)
+            {
+                case 0x00:
+                    switch (shiJianNR)
+                    {
+                        case 0x00:
+                            vResult = "无效";
+                            break;
+                        case 0x01:
+                            vResult = "远程关";
+                            break;
+                        case 0x02:
+                            vResult = "远程关";
+                            break;
+                        case 0x03:
+                            vResult = "远程开";
+                            break;
+                        case 0x04:
+                            vResult = "本地开";
+                            break;
+                        case 0x05:
+                            vResult = "定时关";
+                            break;
+                        case 0x06:
+                            vResult = "定时开";
+                            break;
+                        case 0x07:
+                            vResult = "手动漏电试验有效";
+                            break;
+                        case 0x08:
+                            vResult = "手动漏电试验失效";
+                            break;
+                        case 0x09:
+                            vResult = "远程漏电试验有效";
+                            break;
+                        case 0x0A:
+                            vResult = "远程漏电试验失效";
+                            break;
+                        case 0x0B:
+                            vResult = "定时漏电试验有效";
+                            break;
+                        case 0x0C:
+                            vResult = "定时漏电试验失效";
+                            break;
+                    }
+                    break;
+                case 0x01:
+                    switch(shiJianNR)
+                    {
+                        case 0x00:
+                            vResult = "无效";
+                            break;
+                        case 0x01:
+                            vResult = "短路跳闸";
+                            break;
+                        case 0x02:
+                            vResult = "过载跳闸";
+                            break;
+                        case 0x03:
+                            vResult = "超功率跳闸";
+                            break;
+                        case 0x04:
+                            vResult = "电能用完跳闸";
+                            break;
+                        case 0x05:
+                            vResult = "超温跳闸";
+                            break;
+                        case 0x06:
+                            vResult = "过压跳闸";
+                            break;
+                        case 0x07:
+                            vResult = "欠压跳闸";
+                            break;
+                        case 0x08:
+                            vResult = "打火跳闸";
+                            break;
+                        case 0x09:
+                            vResult = "漏电跳闸";
+                            break;
+                        case 0x0a:
+                            vResult = "过压预警";
+                            break;
+                        case 0x0b:
+                            vResult = "欠压预警";
+                            break;
+                        case 0x0C:
+                            vResult = "超温预警";
+                            break;
+                        case 0x0D:
+                            vResult = "漏电预警";
+                            break;
+                        case 0x0E:
+                            vResult = "过载预警";
+                            break;
+                        case 0x0F:
+                            vResult = "超功率预警";
+                            break;
+                        case 0x10:
+                            vResult = "电能将用完";
+                            break;
+                    }
+                    break;
+                case 0x02:
+                    switch (shiJianNR)
+                    {
+                        case 0x00:
+                            vResult = "无效";
+                            break;
+                        case 0x01:
+                            vResult = "通信错误";
+                            break;
+                        case 0x02:
+                            vResult = "数据异常";
+                            break;
+                        case 0x03:
+                            vResult = "触点开关异常";
+                            break;
+                    }
+                    break;
+            }
+            return vResult;
+        }
 
         void processorData_ReplyCMD(PowerDataPack_Receive_CommandEnum comm, PowerDataPack_Receive_ReplyCMD dataPack)
         {
@@ -202,13 +408,15 @@ namespace JXHighWay.WatchHouse.Bll.Server
                     DianYuanID = data.Addition,
                     LeiXi = convertDianYuanLeiXing(data.LeiXing),
                     LuHao = data.LuHao,
-                    NeiRong = data.ShiJinLX
-                       
+                    ShiJianLX = convertShiJianLX(data.ShiJinLX),
+                    NeiRong = convertShiJianNR(data.ShiJinLX, data.ShiJianBM),
+                    Time = DateTime.Now
                 };
+                m_BasicDBClass_Receive.InsertRecord(vPowerEventEFModel);
             }
             catch( Exception ex)
             {
-                Console.WriteLine(string.Format("插入数据至[电源数据表]中发生异常，异常信息为:{0}", ex.Message));
+                Console.WriteLine(string.Format("插入数据至[电源事件表]中发生异常，异常信息为:{0}", ex.Message));
             }
         }
 

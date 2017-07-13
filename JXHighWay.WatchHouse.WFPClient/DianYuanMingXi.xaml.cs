@@ -16,6 +16,8 @@ using JXHighWay.WatchHouse.Helper;
 using System.Windows.Controls.DataVisualization.Charting;
 using Xceed.Wpf.Toolkit.Primitives;
 using Xceed.Wpf.Toolkit;
+using System.IO;
+using Microsoft.Win32;
 
 namespace JXHighWay.WatchHouse.WFPClient
 {
@@ -58,7 +60,17 @@ namespace JXHighWay.WatchHouse.WFPClient
             init_ZhuanTai();
             init_DingShi();
             init_SheZhi();
+            init_RiZi();
             m_IsInit = true;
+        }
+
+        /// <summary>
+        /// 初始化日志
+        /// </summary>
+        void init_RiZi()
+        {
+            LogInfo[] vLogInfoArray = m_PowerMonitoring.GetLog(App.PowerID, LuHao, "操作类");
+            dataGrid_Log.ItemsSource = vLogInfoArray;
         }
 
         /// <summary>
@@ -606,5 +618,66 @@ namespace JXHighWay.WatchHouse.WFPClient
             }
             catch { }
         }
+
+        private void button_RZ_ZCL_Click(object sender, RoutedEventArgs e)
+        {
+            LogInfo[] vLogInfoArray = m_PowerMonitoring.GetLog(App.PowerID, LuHao, "操作类");
+            dataGrid_Log.ItemsSource = vLogInfoArray;
+        }
+
+        private void button_RZ_BJL_Click(object sender, RoutedEventArgs e)
+        {
+            LogInfo[] vLogInfoArray = m_PowerMonitoring.GetLog(App.PowerID, LuHao, "报警类");
+            dataGrid_Log.ItemsSource = vLogInfoArray;
+        }
+
+        private void button_RZ_GZL_Click(object sender, RoutedEventArgs e)
+        {
+            LogInfo[] vLogInfoArray = m_PowerMonitoring.GetLog(App.PowerID, LuHao, "故障类");
+            dataGrid_Log.ItemsSource = vLogInfoArray;
+        }
+
+        private void button_RZ_DC_Click(object sender, RoutedEventArgs e)
+        {
+            LogInfo[] vDataSource= (LogInfo[])dataGrid_Log.ItemsSource;
+            if ( vDataSource != null && vDataSource.Length>0 )
+            {
+                SaveFileDialog vSaveFileDialog = new SaveFileDialog();
+                vSaveFileDialog.Filter = " Excel文件|*.csv ";
+                if ( vSaveFileDialog.ShowDialog().Value )
+                {
+                    ExportDataGridToCSV(vDataSource, vSaveFileDialog.FileName);
+                }
+            }
+            else
+                Xceed.Wpf.Toolkit.MessageBox.Show("没有可以导出的日志数据", "信息", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        /// <summary>
+        /// 导出Excel
+        /// </summary>
+        /// <param name="logInfo"></param>
+        /// <param name="filePath"></param>
+        void ExportDataGridToCSV(LogInfo[] logInfo ,string filePath)
+        {
+            FileStream vFile = new FileStream(filePath, System.IO.FileMode.Create, System.IO.FileAccess.Write);
+            StreamWriter vStreamWriter = new StreamWriter(vFile, new System.Text.UnicodeEncoding());
+            
+            vStreamWriter.Write("事件类型\t");
+            vStreamWriter.Write("事件内容\t");
+            vStreamWriter.Write("时间\t");
+            vStreamWriter.WriteLine("");
+            //Table body
+            for (int i = 0; i < logInfo.Length; i++)
+            {
+                vStreamWriter.Write(logInfo[i].ShiJianLX+"\t");
+                vStreamWriter.Write(logInfo[i].NeiRong + "\t");
+                vStreamWriter.Write(logInfo[i].Time.ToString("yyyy-MM-dd HH:mm:ss" + "\t") );
+                vStreamWriter.WriteLine("");
+            }
+            vStreamWriter.Flush();
+            vStreamWriter.Close();
+        }
+
     }
 }

@@ -25,17 +25,17 @@ namespace JXHighWay.WatchHouse.Bll.Server
         }
 
 
-        bool findGonHaoKaoHao(string gongHao,string kaHao)
+        bool findGonHaoKaoHao(int gongHao,string kaHao)
         {
             bool vResult = false;
-            string vSql = string.Format("Select *From `员工信息` Where KaHao='{0}' or GongHao='{1}'",kaHao,gongHao);
+            string vSql = string.Format("Select *From `员工信息` Where KaHao='{0}' or GongHao={1}",kaHao,gongHao);
             EmployeeEFModel[] vSelectResult = m_BasicDBClass.SelectCustomEx<EmployeeEFModel>(vSql);
             if (vSelectResult == null || vSelectResult.Length > 0)
                 vResult = true;
             return vResult;
         }
 
-        public bool Add( string XingMing,string XingBie,string GongHao,
+        public bool Add( string XingMing,string XingBie,int GongHao,
             string KaHao,string ZhaoPian,ref string OutInfo)
         {
             bool vResult = false;
@@ -70,7 +70,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
             return m_BasicDBClass.DeleteRecordByPrimaryKey<EmployeeEFModel>(ID);
         }
 
-        public bool Update(int ID,string XingMing, string XingBie, string GongHao,
+        public bool Update(int ID,string XingMing, string XingBie, int GongHao,
             string KaHao, string ZhaoPian)
         {
             if (ZhaoPian != null)

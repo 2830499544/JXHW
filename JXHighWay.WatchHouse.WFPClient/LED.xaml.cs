@@ -65,7 +65,7 @@ namespace JXHighWay.WatchHouse.WFPClient
         private void button_TuPian_LiuLan_Click(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.OpenFileDialog vOpenFile = new Microsoft.Win32.OpenFileDialog();
-            vOpenFile.Filter = "视频文件|*.mp4;*.avi;";
+            vOpenFile.Filter = "图片文件|*.jpg;*.png;";
             if (vOpenFile.ShowDialog().Value)
             {
                 textBox_TuPian.Text = vOpenFile.FileName;

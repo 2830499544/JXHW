@@ -18,8 +18,11 @@ namespace JXHighWay.WatchHouse.EFModel
         public int? LuHao { get; set; }
         [ColumnAttrib("LeiXi")]
         public String LeiXi { get; set; }
+        [ColumnAttrib("ShiJianLX")]
+        public String ShiJianLX { get; set; }
         [ColumnAttrib("NeiRong")]
         public String NeiRong { get; set; }
+
         [ColumnAttrib("Time")]
         public DateTime? Time { get; set; }
 

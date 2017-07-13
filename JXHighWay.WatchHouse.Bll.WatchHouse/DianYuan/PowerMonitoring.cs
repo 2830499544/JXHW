@@ -470,5 +470,33 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
             return vResult;
         }
         #endregion
+
+        #region 日志
+        public LogInfo[] GetLog(int DianYuanID,int LuHoa,string LeiXing)
+        {
+            LogInfo[] vResult = new LogInfo[0];
+            PowerEventEFModel vModel = new PowerEventEFModel()
+            {
+                DianYuanID = DianYuanID,
+                LuHao = LuHoa,
+                ShiJianLX = LeiXing
+            };
+            PowerEventEFModel[] vSelectResult = m_BasicDBClassSelect.SelectRecordsEx(vModel);
+            if (vSelectResult!=null)
+            {
+                vResult = new LogInfo[vSelectResult.Length];
+                for(int i=0;i< vSelectResult.Length;i++)
+                {
+                    vResult[i] = new LogInfo()
+                    {
+                        NeiRong = vSelectResult[i].NeiRong,
+                        ShiJianLX = vSelectResult[i].ShiJianLX,
+                        Time = vSelectResult[i].Time ?? DateTime.MinValue
+                    };
+                }
+            }
+            return vResult;
+        }
+        #endregion
     }
 }

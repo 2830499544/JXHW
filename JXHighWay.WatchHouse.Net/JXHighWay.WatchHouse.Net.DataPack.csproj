@@ -59,7 +59,9 @@
     <Compile Include="WatchHouseDataPack_Receive_DoorGuard.cs" />
     <Compile Include="WatchHouseDataPack_Receive_IDCard.cs" />
     <Compile Include="WatchHouseDataPack_Receive_Main.cs" />
+    <Compile Include="WatchHouseDataPack_Receive_Pic.cs" />
     <Compile Include="WatchHouseDataPack_SendData_Main.cs" />
+    <Compile Include="WatchHouseDataPack_SendData_Pic.cs" />
     <Compile Include="WatchHouseDataPack_Send_CommandEnmu.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:JXHighWay.WatchHouse.WFPClient"
       mc:Ignorable="d" 
       d:DesignHeight="460" d:DesignWidth="1024"
-      Title="GanTingMingXi">
+      Title="GanTingMingXi" Loaded="Page_Loaded">
+   
 
     <Grid Background="#245d7c">
         <Grid.ColumnDefinitions>

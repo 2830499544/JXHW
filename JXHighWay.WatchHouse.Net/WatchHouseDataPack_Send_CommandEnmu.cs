@@ -183,7 +183,17 @@ namespace JXHighWay.WatchHouse.Net
         /// <summary>
         /// 显示指定工作牌号
         /// </summary>
-        XianShiGZPH = 0x02101001
+        XianShiGZPH = 0x02101001,
         #endregion
+        
+        /// <summary>
+        /// 更新图片
+        /// </summary>
+        GenXingTP  = 0x02011002,
+        /// <summary>
+        /// 更新员工信息
+        /// </summary>
+        YuanGongXX = 0x02011003
+
     }
 }

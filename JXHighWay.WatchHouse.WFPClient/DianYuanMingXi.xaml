@@ -13,6 +13,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resource\ButtonResource.xaml" />
+                <ResourceDictionary Source="Resource\GreenButtonResource.xaml" />
                 <ResourceDictionary Source="Resource\ComboBoxResource.xaml" />
                 <ResourceDictionary Source="Resource\ZWCheckboxResource.xaml" />
             </ResourceDictionary.MergedDictionaries>
@@ -300,6 +301,17 @@
                         <RowDefinition Height="34*"  />
                         <RowDefinition Height="351*"  />
                     </Grid.RowDefinitions>
+                    <Button x:Name="button_RZ_ZCL"  Grid.Row="0" Grid.Column="0" Content="操作类" HorizontalAlignment="Left" VerticalAlignment="Top" Width="92" Margin="17,3,0,0" Style="{DynamicResource MyWpfButton}" Cursor="Hand" Click="button_RZ_ZCL_Click"/>
+                    <Button x:Name="button_RZ_BJL"  Grid.Row="0" Grid.Column="0" Content="报警类" HorizontalAlignment="Left" VerticalAlignment="Top" Width="92" Margin="142,3,0,0" Style="{DynamicResource MyWpfButton}" Cursor="Hand" Click="button_RZ_BJL_Click"/>
+                    <Button x:Name="button_RZ_GZL"  Grid.Row="0" Grid.Column="0" Content="故障类" HorizontalAlignment="Left" VerticalAlignment="Top" Width="92" Margin="265,3,0,0" Style="{DynamicResource MyWpfButton}" Cursor="Hand" Click="button_RZ_GZL_Click"/>
+                    <Button x:Name="button_RZ_DC"  Grid.Row="0" Grid.Column="0" Content="导出" HorizontalAlignment="Left" VerticalAlignment="Top" Width="92" Margin="384,3,0,0" Style="{DynamicResource GreenButton}" Cursor="Hand" Click="button_RZ_DC_Click"/>
+                    <DataGrid x:Name="dataGrid_Log" AutoGenerateColumns="False" Grid.Row="1" HorizontalAlignment="Center">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="事件类型" Width="100" Binding="{Binding ShiJianLX, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="13" />
+                            <DataGridTextColumn Header="事件内容" Width="230" Binding="{Binding NeiRong, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="13" />
+                            <DataGridTextColumn Header="时间" Width="150" Binding="{Binding Time,StringFormat='{}{0:yyyy-MM-dd HH:mm:ss}', Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="13" />
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </Grid>
             </TabItem>
         </TabControl>

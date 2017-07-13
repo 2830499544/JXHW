@@ -36,7 +36,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.GanTing
                     State = false,
                     IsSend = false,
                     IsReply = false,
-                    Data = Data
+                    Data = System.Text.Encoding.Default.GetString(NetHelper.StructureToByte(Data))
                 };
                 int vID = m_BasicDBClass.InsertRecord(vSendCMDEFModel);
                 //Thread.Sleep(1000);
@@ -84,6 +84,27 @@ namespace JXHighWay.WatchHouse.Bll.Client.GanTing
                 } while (!vResult);
             });
             return vResult;
+        }
+
+
+        public void GetWatchHouseState( int GangTingID,ref bool GangTingState,
+            ref bool DianYuanState )
+        {
+            WatchHouseInfo vResult = new WatchHouseInfo();
+            WatchHouseConfigEFModel vWatchHouseConfigEFModel = new WatchHouseConfigEFModel()
+            {
+                 GangTingID = GangTingID
+            };
+            WatchHouseConfigEFModel[] vSelectResult = m_BasicDBClassSelect.SelectRecordsEx(vWatchHouseConfigEFModel);
+            if (vSelectResult != null && vSelectResult.Length > 0)
+            {
+                if (vSelectResult[0].GangTingTXSJ != null &&
+                    (DateTime.Now - vSelectResult[0].GangTingTXSJ.Value).TotalSeconds < m_OfflineTime)
+                    GangTingState = true;
+                if (vSelectResult[0].DianYuanTXSJ != null &&
+                    (DateTime.Now - vSelectResult[0].DianYuanTXSJ.Value).TotalSeconds < m_OfflineTime)
+                    DianYuanState = true;
+            }
         }
 
         public List<WatchHouseInfo> GetAllWatchHouseInfo()

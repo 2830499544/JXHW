@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using JXHighWay.WatchHouse.Bll.Client.GanTing;
 
 namespace JXHighWay.WatchHouse.WFPClient
 {
@@ -42,6 +43,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                 Window vWin = Window.GetWindow(this);
                 App.ChangeNavigation(3, vWin, "灯光");
             }
+           
         }
 
         private void image_Copy4_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -175,6 +177,30 @@ namespace JXHighWay.WatchHouse.WFPClient
                 Window vWin = Window.GetWindow(this);
                 App.ChangeNavigation(3, vWin, "电子工号牌");
             }
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            init();
+        }
+
+        void init()
+        {
+            WatchHouseMonitoring vWatchHouseMonitoring = new WatchHouseMonitoring();
+            bool vGangTingState = false, vDianYuanState = false;
+            vWatchHouseMonitoring.GetWatchHouseState(App.PowerID, ref vGangTingState, ref vDianYuanState);
+            if (!vGangTingState)
+            {
+                Image_DengGuan.Source = new BitmapImage(new Uri(@"Images/GanTingMingXi/DengGuan_L.jpg", UriKind.Relative));
+                Image_MenChuang.Source = new BitmapImage(new Uri(@"Images/GanTingMingXi/Men_L.jpg", UriKind.Relative));
+                Image_DianYuan.Source = new BitmapImage(new Uri(@"Images/GanTingMingXi/DianYuan_L.jpg", UriKind.Relative));
+                Image_LED.Source = new BitmapImage(new Uri(@"Images/GanTingMingXi/LED_L.jpg", UriKind.Relative));
+                Image_XinFeng.Source = new BitmapImage(new Uri(@"Images/GanTingMingXi/XingFeng_L.jpg", UriKind.Relative));
+                Image_KongTiao.Source = new BitmapImage(new Uri(@"Images/GanTingMingXi/KongTiao_L.jpg", UriKind.Relative));
+                Image_DiNuan.Source = new BitmapImage(new Uri(@"Images/GanTingMingXi/DiRuan_L.jpg", UriKind.Relative));
+            }
+            if ( !vDianYuanState)
+                Image_DianYuan.Source = new BitmapImage(new Uri(@"Images/GanTingMingXi/DianYuan_L.jpg", UriKind.Relative));
         }
     }
 }

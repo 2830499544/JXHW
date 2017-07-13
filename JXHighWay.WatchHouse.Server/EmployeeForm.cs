@@ -38,9 +38,15 @@ namespace JXHighWay.WatchHouse.Server
                 MessageBox.Show("请输入员工姓名", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            int vJobNo = 0;
+            if (!int.TryParse(textBox_JobNo.Text, out vJobNo))
+            {
+                MessageBox.Show("工号必须为数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             string vOutInfo = "";
             string vPhotoPath = pictureBox_Photo.Tag==null?"":(string)pictureBox_Photo.Tag;
-            if (m_Employee.Add(textBox_Name.Text, comboBox_Sex.Text, textBox_JobNo.Text, textBox_CardNo.Text, vPhotoPath, ref vOutInfo))
+            if (m_Employee.Add(textBox_Name.Text, comboBox_Sex.Text, vJobNo, textBox_CardNo.Text, vPhotoPath, ref vOutInfo))
             {
                 MessageBox.Show("新增员工信息成功", "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 dataGridView_EmployeeInfo.DataSource = m_Employee.GetAllEmplyees();
@@ -84,7 +90,7 @@ namespace JXHighWay.WatchHouse.Server
             {
                 textBox_Name.Text = (string)dataGridView_EmployeeInfo.SelectedRows[0].Cells["Column_XingMing"].Value;
                 comboBox_Sex.Text = (string)dataGridView_EmployeeInfo.SelectedRows[0].Cells["Column_XingBie"].Value;
-                textBox_JobNo.Text = (string)dataGridView_EmployeeInfo.SelectedRows[0].Cells["Column_GongHao"].Value;
+                textBox_JobNo.Text = dataGridView_EmployeeInfo.SelectedRows[0].Cells["Column_GongHao"].Value.ToString();
                 textBox_CardNo.Text = (string)dataGridView_EmployeeInfo.SelectedRows[0].Cells["Column_KaHao"].Value;
                 string vPhotoPath = string.Format(@"{0}\Photo\{1}", System.Environment.CurrentDirectory, (string)dataGridView_EmployeeInfo.SelectedRows[0].Cells["Column_Photo"].Value);
                 if (System.IO.File.Exists(vPhotoPath))
@@ -107,16 +113,34 @@ namespace JXHighWay.WatchHouse.Server
                 MessageBox.Show("请输入员工姓名", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            int vJobNo = 0;
+            if ( !int.TryParse(textBox_JobNo.Text,out vJobNo) )
+            {
+                MessageBox.Show("工号必须为数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             int vID = (int)dataGridView_EmployeeInfo.SelectedRows[0].Cells["Column_ID"].Value;
             string vOutInfo = "";
             string vPhotoPath = pictureBox_Photo.Tag == null ? "" : (string)pictureBox_Photo.Tag;
-            if (m_Employee.Update(vID, textBox_Name.Text, comboBox_Sex.Text, textBox_JobNo.Text, textBox_CardNo.Text, vPhotoPath))
+            if (m_Employee.Update(vID, textBox_Name.Text, comboBox_Sex.Text, vJobNo, textBox_CardNo.Text, vPhotoPath))
             {
                 MessageBox.Show("更新员工信息成功", "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 dataGridView_EmployeeInfo.DataSource = m_Employee.GetAllEmplyees();
             }
             else
                 MessageBox.Show(vOutInfo, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private async void button_Synch_Click(object sender, EventArgs e)
+        {
+            WatchHouseControl vWatchHouseControl = new WatchHouseControl();
+            Dictionary<string,bool> vResult = await vWatchHouseControl.AsyncUpdateWatchHouseAllPic("");
+            string vMessageInfo = "";
+            foreach (var vTemp in vResult)
+            {
+                vMessageInfo += string.Format("岗亭名称：{0}  更新状态：{1}", vTemp.Key, vTemp.Value ? "成功" : "失败");
+            }
+            MessageBox.Show(vMessageInfo, "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

@@ -27,6 +27,9 @@ namespace JXHighWay.WatchHouse.Bll.Server
         public string DBUserName { get; set; }
         public string DBPassword { get; set; }
 
+        public string PicUrl { get; set; }
+        public string EmployeeUrl { get; set; }
+
         #endregion
 
         #region 构造
@@ -41,6 +44,8 @@ namespace JXHighWay.WatchHouse.Bll.Server
             DBPort = int.Parse( m_Configuration.AppSettings.Settings["DBPort"].Value );
             DBUserName = m_Configuration.AppSettings.Settings["DBUserName"].Value;
             DBPassword = m_Configuration.AppSettings.Settings["DBPassword"].Value;
+            PicUrl = m_Configuration.AppSettings.Settings["PicUrl"].Value;
+            EmployeeUrl = m_Configuration.AppSettings.Settings["EmployeeUrl"].Value;
 
         }
         #endregion
@@ -57,6 +62,9 @@ namespace JXHighWay.WatchHouse.Bll.Server
             m_Configuration.AppSettings.Settings["DBPort"].Value = DBPort.ToString();
             m_Configuration.AppSettings.Settings["DBUserName"].Value = DBUserName;
             m_Configuration.AppSettings.Settings["DBPassword"].Value = DBPassword;
+
+            m_Configuration.AppSettings.Settings["PicUrl"].Value = PicUrl;
+            m_Configuration.AppSettings.Settings["EmployeeUrl"].Value = EmployeeUrl;
         }
         #endregion
     }

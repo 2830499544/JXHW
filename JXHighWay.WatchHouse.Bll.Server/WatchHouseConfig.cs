@@ -81,7 +81,8 @@ namespace JXHighWay.WatchHouse.Bll.Server
                 GangTingLX = GanTingLX,
                 GuanGaoPingIP = LedIP,
                 DianYuanID = DianYuanID,
-                ID = ID
+                ID = ID,
+                OrderID = convertWatchHouseLXToOrderID(GanTingLX)
             };
             m_BasicDBClass.TransactionBegin();
             if (vResult = m_BasicDBClass.UpdateRecord(vWatchHouseConfigEFModel) && SwitchInfoTable!=null)
@@ -122,6 +123,24 @@ namespace JXHighWay.WatchHouse.Bll.Server
             return vResult;
         }
 
+        int convertWatchHouseLXToOrderID( string leiXing)
+        {
+            int vResult = 1;
+            switch ( leiXing )
+            {
+                case "入口":
+                    vResult = 1;
+                    break;
+                case "双向":
+                    vResult = 2;
+                    break;
+                case "出口":
+                    vResult = 3;
+                    break;
+            }
+            return vResult;
+        }
+
         public bool Add(int GanTingID,string GanTingMC,string GanTingLX,
             string LedIP,int DianYuanID, DataTable SwitchInfoTable,
             ref string OutInfo )
@@ -137,11 +156,13 @@ namespace JXHighWay.WatchHouse.Bll.Server
                     GangTingLX = GanTingLX,
                     GuanGaoPingIP = LedIP,
                     DianYuanID = DianYuanID,
-                    ShouFeiZhangID = 1
+                    ShouFeiZhangID = 1,
+                     OrderID = convertWatchHouseLXToOrderID(GanTingLX)
                 };
-                if ( vResult= m_BasicDBClass.InsertRecord(vWatchHouseConfigEFModel) > 0 && SwitchInfoTable != null)
+                vResult = m_BasicDBClass.InsertRecord(vWatchHouseConfigEFModel) > 0;
+                if (vResult && SwitchInfoTable != null)
                 {
-                    foreach(DataRow vTempSwitch in SwitchInfoTable.Rows)
+                    foreach (DataRow vTempSwitch in SwitchInfoTable.Rows)
                     {
                         PowerSwithConfigEFModel vModel = new PowerSwithConfigEFModel();
                         vModel.DianYuanID = DianYuanID;
@@ -160,18 +181,19 @@ namespace JXHighWay.WatchHouse.Bll.Server
                         }
                         if (!vResult)
                         {
-                            m_BasicDBClass.TransactionRollback();
                             break;
                         }
                     }
-                    if (vResult)
-                    {
-                        m_BasicDBClass.TransactionCommit();
+                }
+                if (vResult)
+                {
+                    m_BasicDBClass.TransactionCommit();
+                    if ( SwitchInfoTable != null)
                         SwitchInfoTable.AcceptChanges();
-                    }
                 }
                 else
                 {
+                    m_BasicDBClass.TransactionRollback();
                     OutInfo = "增加岗亭数据失败";
                 }
             }

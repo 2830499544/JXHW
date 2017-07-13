@@ -7,7 +7,34 @@
       mc:Ignorable="d" 
       d:DesignHeight="460" d:DesignWidth="1024"
       Title="MainPage" Loaded="Page_Loaded">
+    <Page.Resources>
+        <Style x:Key="ChuStyle" TargetType="{x:Type Image}">
+            <Setter Property="Source" Value="Images/Main/Chu.jpg"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver"  Value="True">
+                    <Setter Property="Source" Value="Images/Main/Chu_A.jpg"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
 
+        <Style x:Key="RuStyle" TargetType="{x:Type Image}">
+            <Setter Property="Source" Value="Images/Main/Ru.jpg"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver"  Value="True">
+                    <Setter Property="Source" Value="Images/Main/Ru_A.jpg"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="SuanXiangStyle" TargetType="{x:Type Image}">
+            <Setter Property="Source" Value="Images/Main/ShuanXiang.jpg"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver"  Value="True">
+                    <Setter Property="Source" Value="Images/Main/ShuanXiang_A.jpg"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
     <Grid  Background="#245d7c">
         <Grid x:Name="Grid_GanTing" Height="460" VerticalAlignment="Top" Margin="65,0">
             <Grid.ColumnDefinitions>
@@ -47,12 +74,78 @@
                     </Style>
                 </Image.Style>
             </Image>
-            <Image x:Name="Image_WH3" HorizontalAlignment="Left" Height="148" Margin="36,4,0,0" Grid.Row="1" VerticalAlignment="Top" Width="148" Source="Images/GanTing.jpg" Grid.Column="2" Cursor="Hand"/>
-            <Image x:Name="Image_WH4" HorizontalAlignment="Left" Height="148" Margin="34,4,0,0" Grid.Row="1" VerticalAlignment="Top" Width="148" Source="Images/GanTing.jpg" Grid.Column="3" Cursor="Hand"/>
-            <Image x:Name="Image_WH5" HorizontalAlignment="Left" Height="148" Margin="36,7,0,0" Grid.Row="2" VerticalAlignment="Top" Width="148" Source="Images/GanTing.jpg" Cursor="Hand"/>
-            <Image x:Name="Image_WH6" HorizontalAlignment="Left" Height="148" Margin="37,7,0,0" Grid.Row="2" VerticalAlignment="Top" Width="148" Source="Images/GanTing_Down.jpg" Grid.Column="1" Cursor="Hand"/>
-            <Image x:Name="Image_WH7" HorizontalAlignment="Left" Height="148" Margin="36,7,0,0" Grid.Row="2" VerticalAlignment="Top" Width="148" Source="Images/GanTing_Down.jpg" Grid.Column="2" Cursor="Hand"/>
-            <Image x:Name="Image_WH8" HorizontalAlignment="Left" Height="148" Margin="34,7,0,0" Grid.Row="2" VerticalAlignment="Top" Width="148" Source="Images/GanTing_Down.jpg" Grid.Column="3" Cursor="Hand"/>
+            <Image x:Name="Image_WH3" HorizontalAlignment="Left" Height="148" Margin="36,4,0,0" Grid.Row="1" VerticalAlignment="Top" Width="148"  Grid.Column="2" Cursor="Hand">
+                <Image.Style>
+                    <Style TargetType="{x:Type Image}">
+                        <Setter Property="Source" Value="Images/Main/Ru.jpg"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver"  Value="True">
+                                <Setter Property="Source" Value="Images/Main/Ru_A.jpg"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
+            <Image x:Name="Image_WH4" HorizontalAlignment="Left" Height="148" Margin="34,4,0,0" Grid.Row="1" VerticalAlignment="Top" Width="148"  Grid.Column="3" Cursor="Hand">
+                <Image.Style>
+                    <Style TargetType="{x:Type Image}">
+                        <Setter Property="Source" Value="Images/Main/Ru.jpg"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver"  Value="True">
+                                <Setter Property="Source" Value="Images/Main/Ru_A.jpg"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
+            <Image x:Name="Image_WH5" HorizontalAlignment="Left" Height="148" Margin="36,7,0,0" Grid.Row="2" VerticalAlignment="Top" Width="148"  Cursor="Hand">
+                <Image.Style>
+                    <Style TargetType="{x:Type Image}">
+                        <Setter Property="Source" Value="Images/Main/Ru.jpg"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver"  Value="True">
+                                <Setter Property="Source" Value="Images/Main/Ru_A.jpg"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
+            <Image x:Name="Image_WH6" HorizontalAlignment="Left" Height="148" Margin="37,7,0,0" Grid.Row="2" VerticalAlignment="Top" Width="148"  Grid.Column="1" Cursor="Hand">
+                <Image.Style>
+                    <Style TargetType="{x:Type Image}">
+                        <Setter Property="Source" Value="Images/Main/Ru.jpg"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver"  Value="True">
+                                <Setter Property="Source" Value="Images/Main/Ru_A.jpg"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
+            <Image x:Name="Image_WH7" HorizontalAlignment="Left" Height="148" Margin="36,7,0,0" Grid.Row="2" VerticalAlignment="Top" Width="148" Grid.Column="2" Cursor="Hand">
+                <Image.Style>
+                    <Style TargetType="{x:Type Image}">
+                        <Setter Property="Source" Value="Images/Main/Ru.jpg"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver"  Value="True">
+                                <Setter Property="Source" Value="Images/Main/Ru_A.jpg"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
+            <Image x:Name="Image_WH8" HorizontalAlignment="Left" Height="148" Margin="34,7,0,0" Grid.Row="2" VerticalAlignment="Top" Width="148"  Grid.Column="3" Cursor="Hand">
+                <Image.Style>
+                    <Style TargetType="{x:Type Image}">
+                        <Setter Property="Source" Value="Images/Main/Ru.jpg"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver"  Value="True">
+                                <Setter Property="Source" Value="Images/Main/Ru_A.jpg"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
             <Label x:Name="Label_Name_WH1" Content="1号岗亭" HorizontalAlignment="Center" Margin="35,151,39,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16" Foreground="#FFF7EEEE" Height="31" Width="150" HorizontalContentAlignment="Center"/>
             <Label x:Name="Label_JobNo_1" Content="工号:XXXXXX" HorizontalAlignment="Left" Margin="38,174,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16" Foreground="#FFF7EEEE" Height="31" Width="150" HorizontalContentAlignment="Center"/>
             <Label x:Name="Label_Name_WH2" Content="2号岗亭" HorizontalAlignment="Center" Margin="36,152,37,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16" Foreground="#FFF7EEEE" Height="31" Width="150" Grid.Column="1" HorizontalContentAlignment="Center"/>

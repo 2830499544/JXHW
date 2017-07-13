@@ -61,6 +61,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConfigForm.Designer.cs">
+      <DependentUpon>ConfigForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="EmployeeForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -79,6 +85,12 @@
     <Compile Include="ManagerForm.Designer.cs">
       <DependentUpon>ManagerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PowerIPConfigForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PowerIPConfigForm.Designer.cs">
+      <DependentUpon>PowerIPConfigForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SwitchConfigForm.cs">
@@ -93,6 +105,9 @@
     <Compile Include="WatchHouseConfigForm.Designer.cs">
       <DependentUpon>WatchHouseConfigForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ConfigForm.resx">
+      <DependentUpon>ConfigForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EmployeeForm.resx">
       <DependentUpon>EmployeeForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -101,6 +116,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ManagerForm.resx">
       <DependentUpon>ManagerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PowerIPConfigForm.resx">
+      <DependentUpon>PowerIPConfigForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -162,9 +180,18 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="EmployeeInfo\3.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Photo\3.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\save.png" />
+    <None Include="Resources\Exit.png" />
+    <None Include="Resources\Info.png" />
+    <None Include="Resources\Config.png" />
+    <Content Include="Resources\Synch.png" />
+    <None Include="Resources\Synch1.png" />
     <None Include="Resources\Employee.png" />
     <None Include="Resources\Stop.png" />
     <None Include="Resources\Start.png" />

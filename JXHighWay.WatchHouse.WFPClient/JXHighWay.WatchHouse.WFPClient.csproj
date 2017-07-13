@@ -201,6 +201,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Resource\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resource\ZWCheckboxResource.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -415,11 +419,7 @@
     <Resource Include="Images\DiNuan\DiRuan.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Main\Chu.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Main\Chu_L.jpg" />
-    <Resource Include="Images\Main\Chu_A.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Main\Ru_A.jpg" />
@@ -477,7 +477,6 @@
     <Resource Include="Images\JianGe.jpg" />
     <Resource Include="Images\Logo.jpg" />
     <Resource Include="Images\Main\BaoJing.png" />
-    <Resource Include="Images\Main\1499220622931227.gif" />
     <Resource Include="Images\Main\ShuanXiang.jpg" />
     <Resource Include="Images\GongHao_A.jpg" />
     <Resource Include="Images\GongHao.jpg" />
@@ -485,6 +484,17 @@
     <Resource Include="Images\DianYuanMingXi\XuXian.jpg" />
     <Resource Include="Images\DianYuanMingXi\XuXianChang.jpg" />
     <Resource Include="Images\DianYuanMingXi\GuanBi.jpg" />
+    <Resource Include="Images\Main\ShuanXiang_A.jpg" />
+    <Resource Include="Images\Main\Chu.jpg" />
+    <Resource Include="Images\Main\Chu_A.jpg" />
+    <Resource Include="Images\GanTingMingXi\DengGuan_L.jpg" />
+    <Resource Include="Images\GanTingMingXi\Men_L.jpg" />
+    <Resource Include="Images\GanTingMingXi\DianYuan_L.jpg" />
+    <Resource Include="Images\GanTingMingXi\LED_L.jpg" />
+    <Resource Include="Images\GanTingMingXi\XingFeng_L.jpg" />
+    <Resource Include="Images\GanTingMingXi\KongTiao_L.jpg" />
+    <Resource Include="Images\GanTingMingXi\DiRuan_L.jpg" />
+    <Resource Include="Images\GanTingMingXi\DianZhiPai_L.jpg" />
     <Content Include="Transmit.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

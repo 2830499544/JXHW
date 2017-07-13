@@ -58,6 +58,10 @@ namespace JXHighWay.WatchHouse.Net
         public byte UserID3 { get; set; }
         public byte UserID4 { get; set; }
         /// <summary>
+        /// 控制平板类型
+        /// </summary>
+        public byte PinBanLX { get; set; }
+        /// <summary>
         /// 预留字段
         /// [17-20]
         /// </summary>
@@ -65,7 +69,6 @@ namespace JXHighWay.WatchHouse.Net
         public byte Empty2 { get; set; }
         public byte Empty3 { get; set; }
 
-        public byte Empty4 { get; set; }
 
         public byte ID_H{ get; set; }
         public byte ID_L{ get; set; }

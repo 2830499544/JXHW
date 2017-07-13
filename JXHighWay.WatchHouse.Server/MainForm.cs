@@ -136,5 +136,37 @@ namespace JXHighWay.WatchHouse.Server
         {
             vPowerControl.Send();
         }
+
+        private void ToolStripMenuItem_Setup_Basic_Click(object sender, EventArgs e)
+        {
+            ConfigForm vConfigForm = new ConfigForm();
+            vConfigForm.ShowDialog();
+        }
+
+        private async void ToolStripMenuItem_Synch_Pic_Click(object sender, EventArgs e)
+        {
+            Config vConfig = new Config();
+            WatchHouseControl vWatchHouseControl = new WatchHouseControl();
+            var vResult =await vWatchHouseControl.AsyncUpdateWatchHouseAllPic(vConfig.PicUrl);
+            string vInfo = "";
+            foreach ( var vTempResult in vResult)
+            {
+                vInfo += string.Format("岗亭名称:{0}  状态:{1}\r",vTempResult.Key,vTempResult.Value ? "成功" : "失败");
+            }
+            MessageBox.Show(vInfo, "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private async void ToolStripMenuItem_Synch_Employee_Click(object sender, EventArgs e)
+        {
+            Config vConfig = new Config();
+            WatchHouseControl vWatchHouseControl = new WatchHouseControl();
+            var vResult = await vWatchHouseControl.AsyncUpdateWatchHouseEmployeeInfo(vConfig.PicUrl);
+            string vInfo = "";
+            foreach (var vTempResult in vResult)
+            {
+                vInfo += string.Format("岗亭名称:{0}  状态:{1}\r", vTempResult.Key, vTempResult.Value?"成功":"失败");
+            }
+            MessageBox.Show(vInfo, "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
     }
 }

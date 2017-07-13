@@ -18,29 +18,33 @@ namespace JXHighWay.WatchHouse.Server
             InitializeComponent();
         }
 
-        
+
         private void button_Add_Click(object sender, EventArgs e)
         {
             int vGanTingID = 0;
             int vDianYuanID = 0;
             string vOutInfo = "";
-            if (  int.TryParse( textBox_GanTing_ID.Text,out vGanTingID)
-                && int.TryParse(textBox_DY_ID.Text,out vDianYuanID)  )
-            {
-                DataTable vSwitchTable = button_DY_KaiGuan.Tag == null ? null : (DataTable)button_DY_KaiGuan.Tag;
-                if (m_WatchHouseConfig.Add(vGanTingID, textBox_GanTing_MC.Text,
-                    comboBox_GanTing_LX.Text, textBox_LED_IP.Text, vDianYuanID, vSwitchTable, ref vOutInfo))
-                {
-                    MessageBox.Show("增加岗亭数据成功", "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    dataGridView_List.DataSource = m_WatchHouseConfig.GetAll();
-                }
-                else
-                    MessageBox.Show(vOutInfo, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
+            if (!int.TryParse(textBox_GanTing_ID.Text, out vGanTingID))
             {
                 MessageBox.Show("岗亭编号必须为数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
+
+            if (!int.TryParse(textBox_DY_ID.Text, out vDianYuanID))
+            {
+                MessageBox.Show("电源编号必须为数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            DataTable vSwitchTable = button_DY_KaiGuan.Tag == null ? null : (DataTable)button_DY_KaiGuan.Tag;
+            if (m_WatchHouseConfig.Add(vGanTingID, textBox_GanTing_MC.Text,
+                comboBox_GanTing_LX.Text, textBox_LED_IP.Text, vDianYuanID, vSwitchTable, ref vOutInfo))
+            {
+                MessageBox.Show("增加岗亭数据成功", "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                dataGridView_List.DataSource = m_WatchHouseConfig.GetAll();
+            }
+            else
+                MessageBox.Show(vOutInfo, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         WatchHouseConfig m_WatchHouseConfig;
@@ -54,21 +58,24 @@ namespace JXHighWay.WatchHouse.Server
 
         private void button_Del_Click(object sender, EventArgs e)
         {
-            if ( dataGridView_List.SelectedRows.Count>0)
+            if (MessageBox.Show("是否确认删除岗亭", "信息", MessageBoxButtons.OKCancel, MessageBoxIcon.Question)== DialogResult.OK)
             {
-                int vID = (int)dataGridView_List.SelectedRows[0].Cells["Column_ID"].Value;
-                if (m_WatchHouseConfig.Del(vID))
+                if (dataGridView_List.SelectedRows.Count > 0)
                 {
-                    MessageBox.Show("岗亭删除成功", "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    ((DataTable)dataGridView_List.DataSource).Rows.Find(vID).Delete();
-                    ((DataTable)dataGridView_List.DataSource).AcceptChanges();
+                    int vID = (int)dataGridView_List.SelectedRows[0].Cells["Column_ID"].Value;
+                    if (m_WatchHouseConfig.Del(vID))
+                    {
+                        MessageBox.Show("岗亭删除成功", "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        ((DataTable)dataGridView_List.DataSource).Rows.Find(vID).Delete();
+                        ((DataTable)dataGridView_List.DataSource).AcceptChanges();
+                    }
+                    else
+                        MessageBox.Show("岗亭删除失败", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
-                    MessageBox.Show("岗亭删除失败", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
-            {
-                MessageBox.Show("请选择需要删除的岗亭", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                {
+                    MessageBox.Show("请选择需要删除的岗亭", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -77,25 +84,30 @@ namespace JXHighWay.WatchHouse.Server
             int vGanTingID = 0;
             int vDianYuanID = 0;
             string vOutInfo = "";
-            if (int.TryParse(textBox_GanTing_ID.Text, out vGanTingID)
-                && int.TryParse(textBox_DY_ID.Text, out vDianYuanID))
-            {
-                DataTable vSwitchTable = button_DY_KaiGuan.Tag == null ? null : (DataTable)button_DY_KaiGuan.Tag;
-                int vID = (int)dataGridView_List.SelectedRows[0].Cells["Column_ID"].Value;
-                if (m_WatchHouseConfig.Update(vID, vGanTingID, textBox_GanTing_MC.Text,
-                    comboBox_GanTing_LX.Text, textBox_LED_IP.Text, vDianYuanID, vSwitchTable, ref vOutInfo))
-                {
-                    MessageBox.Show("增加岗亭数据成功", "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    dataGridView_List.DataSource = m_WatchHouseConfig.GetAll();
-                }
-                else
-                    MessageBox.Show(vOutInfo, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
+            if (!int.TryParse(textBox_GanTing_ID.Text, out vGanTingID))
             {
                 MessageBox.Show("岗亭编号必须为数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
+
+            if (!int.TryParse(textBox_DY_ID.Text, out vDianYuanID))
+            {
+                MessageBox.Show("电源编号必须为数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            DataTable vSwitchTable = button_DY_KaiGuan.Tag == null ? null : (DataTable)button_DY_KaiGuan.Tag;
+            int vID = (int)dataGridView_List.SelectedRows[0].Cells["Column_ID"].Value;
+            if (m_WatchHouseConfig.Update(vID, vGanTingID, textBox_GanTing_MC.Text,
+                comboBox_GanTing_LX.Text, textBox_LED_IP.Text, vDianYuanID, vSwitchTable, ref vOutInfo))
+            {
+                MessageBox.Show("更新岗亭数据成功", "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                dataGridView_List.DataSource = m_WatchHouseConfig.GetAll();
+            }
+            else
+                MessageBox.Show(vOutInfo, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+    
 
         private void dataGridView_List_SelectionChanged(object sender, EventArgs e)
         {
@@ -127,6 +139,12 @@ namespace JXHighWay.WatchHouse.Server
             vSwitchConfigForm.DianYuanID = vDianYuanID;
             vSwitchConfigForm.ShowDialog();
             button_DY_KaiGuan.Tag = vSwitchTable;
+        }
+
+        private void button_PowerIP_Click(object sender, EventArgs e)
+        {
+            PowerIPConfigForm vPowerIPConfigForm = new PowerIPConfigForm();
+            vPowerIPConfigForm.ShowDialog();
         }
     }
 }

@@ -10,6 +10,7 @@ namespace JXHighWay.WatchHouse.Bll.Client
     public class BasicMonitoring
     {
         protected BasicDBClass m_BasicDBClass = null;
+        protected BasicDBClass m_BasicDBClassSelect = null;
         protected BasicDBClass m_BasicDBClassInsert = null;
         protected BasicDBClass m_BasicDBClassUpdate = null;
         protected BasicDBClass m_BasicDBClassDelete = null;
@@ -25,6 +26,7 @@ namespace JXHighWay.WatchHouse.Bll.Client
             BasicDBClass.Password = vConfig.DBPassword;
             m_OfflineTime = vConfig.OfflineTime;
             m_BasicDBClass = new BasicDBClass(DataBaseType.MySql);
+            m_BasicDBClassSelect = new BasicDBClass(DataBaseType.MySql);
             m_BasicDBClassInsert = new BasicDBClass(DataBaseType.MySql);
             m_BasicDBClassUpdate = new BasicDBClass(DataBaseType.MySql);
             m_BasicDBClassDelete = new BasicDBClass(DataBaseType.MySql);

@@ -50,12 +50,15 @@ namespace JXHighWay.WatchHouse.Net
         public byte UserID3 { get; set; }
         public byte UserID4 { get; set; }
         /// <summary>
+        /// 控制平板类型
+        /// </summary>
+        public byte PinBanLX { get; set; }
+        /// <summary>
         /// 预留字段
         /// </summary>
         public byte Empty1 { get; set; }
         public byte Empty2 { get; set; }
         public byte Empty3 { get; set; }
-        public byte Empty4 { get; set; }
 
         /// <summary>
         /// 智慧系列设备
@@ -83,15 +86,15 @@ namespace JXHighWay.WatchHouse.Net
         /// </summary>
         public byte Data{ get; set; }
 
-        #region 预留8字节
+        #region 预留4字节
         public byte Kong1{ get; set; }
         public byte Kong2{ get; set; }
         public byte Kong3{ get; set; }
         public byte kong4{ get; set; }
-        public byte Kong5{ get; set; }
-        public byte Kong6{ get; set; }
-        public byte Kong7{ get; set; }
-        public byte Kong8{ get; set; }
+        public byte Kong5 { get; set; }
+        public byte Kong6 { get; set; }
+        public byte Kong7 { get; set; }
+        public byte Kong8 { get; set; }
         #endregion
 
         public byte Check1 { get; set; }

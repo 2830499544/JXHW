@@ -47,12 +47,16 @@ namespace JXHighWay.WatchHouse.Net
         byte UserID3 { get; set; }
         byte UserID4 { get; set; }
         /// <summary>
+        /// 控制平板类型
+        /// </summary>
+        byte PinBanLX { get; set; }
+        /// <summary>
         /// 预留字段
         /// </summary>
         byte Empty1 { get; set; }
         byte Empty2 { get; set; }
         byte Empty3 { get; set; }
-        byte Empty4 { get; set; }
+   
 
 
         /// <summary>

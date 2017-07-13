@@ -44,6 +44,9 @@ namespace JXHighWay.WatchHouse.EFModel
         public string LeiXin { get; set; }
         [ColumnAttrib("GongHao")]
         public string GongHao { get; set; }
+        [ColumnAttrib("OrderID")]
+        public int? OrderID { get; set; }
+
 
     }
 }

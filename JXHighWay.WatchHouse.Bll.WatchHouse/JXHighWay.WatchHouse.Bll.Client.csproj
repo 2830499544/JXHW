@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="BasicMonitoring.cs" />
     <Compile Include="Config.cs" />
+    <Compile Include="DianYuan\LogInfo.cs" />
     <Compile Include="DianYuan\ParamInfo.cs" />
     <Compile Include="DianYuan\PowerInfo.cs" />
     <Compile Include="DianYuan\PowerMonitoring.cs" />
