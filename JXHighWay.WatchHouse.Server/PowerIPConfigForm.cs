@@ -40,10 +40,15 @@ namespace JXHighWay.WatchHouse.Server
             }
         }
 
-        private void button_Config_Click(object sender, EventArgs e)
+        private async void button_Config_Click(object sender, EventArgs e)
         {
-            //PowerControl vPowerControl = new PowerControl();
-            //vPowerControl.SendCMD_SetIP(DianYuanID,maskedTextBox_IPAddress.Text,mak)
+            PowerControl vPowerControl = new PowerControl();
+            bool vResult = await vPowerControl.SendCMD_SetIP(DianYuanID, maskedTextBox_IPAddress.Text, maskedTextBox_SubMask.Text, maskedTextBox_SubMask.Text,
+                checkBox_DHCP.Checked, maskedTextBox_ServerIP.Text, Convert.ToInt16( numericUpDown_ServerPort.Value ));
+            if (vResult)
+                MessageBox.Show("配置成功", "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else
+                MessageBox.Show("配置失败", "信息", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }

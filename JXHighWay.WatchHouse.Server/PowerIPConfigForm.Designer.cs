@@ -32,7 +32,7 @@
             this.maskedTextBox_GateWay = new System.Windows.Forms.MaskedTextBox();
             this.maskedTextBox_SubMask = new System.Windows.Forms.MaskedTextBox();
             this.maskedTextBox_IPAddress = new System.Windows.Forms.MaskedTextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBox_DHCP = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -53,7 +53,7 @@
             this.groupBox1.Controls.Add(this.maskedTextBox_GateWay);
             this.groupBox1.Controls.Add(this.maskedTextBox_SubMask);
             this.groupBox1.Controls.Add(this.maskedTextBox_IPAddress);
-            this.groupBox1.Controls.Add(this.checkBox1);
+            this.groupBox1.Controls.Add(this.checkBox_DHCP);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
@@ -95,15 +95,15 @@
             this.maskedTextBox_IPAddress.TabIndex = 4;
             this.maskedTextBox_IPAddress.KeyDown += new System.Windows.Forms.KeyEventHandler(this.maskedTextBox_IPAddress_KeyDown);
             // 
-            // checkBox1
+            // checkBox_DHCP
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(195, 157);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(70, 22);
-            this.checkBox1.TabIndex = 3;
-            this.checkBox1.Text = "DHCP";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox_DHCP.AutoSize = true;
+            this.checkBox_DHCP.Location = new System.Drawing.Point(195, 157);
+            this.checkBox_DHCP.Name = "checkBox_DHCP";
+            this.checkBox_DHCP.Size = new System.Drawing.Size(70, 22);
+            this.checkBox_DHCP.TabIndex = 3;
+            this.checkBox_DHCP.Text = "DHCP";
+            this.checkBox_DHCP.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
@@ -233,7 +233,7 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBox_DHCP;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
