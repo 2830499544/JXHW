@@ -26,6 +26,11 @@ namespace JXHighWay.WatchHouse.WFPClient
             InitializeComponent();
         }
 
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            init();
+        }
+
         private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Frame pageFrame = null;
@@ -77,7 +82,10 @@ namespace JXHighWay.WatchHouse.WFPClient
             // Change the page of the frame.
             if (pageFrame != null)
             {
-                pageFrame.Source = new Uri("MenChuang.xaml", UriKind.Relative);
+                if ( App.WatchHouseType == "双向")
+                    pageFrame.Source = new Uri("MenChuang_S.xaml", UriKind.Relative);
+                else
+                    pageFrame.Source = new Uri("MenChuang.xaml", UriKind.Relative);
 
                 Window vWin = Window.GetWindow(this);
                 App.ChangeNavigation(3, vWin, "自动门窗");
@@ -153,8 +161,10 @@ namespace JXHighWay.WatchHouse.WFPClient
             // Change the page of the frame.
             if (pageFrame != null)
             {
-                pageFrame.Source = new Uri("DianYuan.xaml", UriKind.Relative);
-
+                if (App.WatchHouseType == "双向")
+                    pageFrame.Source = new Uri("DianYuan_S.xaml", UriKind.Relative);
+                else
+                    pageFrame.Source = new Uri("DianYuan.xaml", UriKind.Relative);
                 Window vWin = Window.GetWindow(this);
                 App.ChangeNavigation(3, vWin, "电源");
             }
@@ -179,10 +189,7 @@ namespace JXHighWay.WatchHouse.WFPClient
             }
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            init();
-        }
+       
 
         void init()
         {

@@ -54,7 +54,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                 }
             }
             else
-                Xceed.Wpf.Toolkit.MessageBox.Show("用户名或密码错误", "错误",MessageBoxButton.OK,MessageBoxImage.Error);
+               Xceed.Wpf.Toolkit.MessageBox.Show("用户名或密码错误", "错误",MessageBoxButton.OK,MessageBoxImage.Error);
             
         }
     }

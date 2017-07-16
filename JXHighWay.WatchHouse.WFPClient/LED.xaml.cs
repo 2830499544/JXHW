@@ -49,7 +49,7 @@ namespace JXHighWay.WatchHouse.WFPClient
             if (System.IO.File.Exists(textBox_ShiPing.Text))
                 m_LEDControl.SendVideo( App.AdminUser, textBox_ShiPing.Text);
             else
-                MessageBox.Show("视频文件不存在", "信息", MessageBoxButton.OK, MessageBoxImage.Error);
+                Xceed.Wpf.Toolkit.MessageBox.Show("视频文件不存在", "信息", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         private void button_ShiPing_LiuLan_Click(object sender, RoutedEventArgs e)
@@ -78,7 +78,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                 m_LEDControl.SendText( App.AdminUser, textBox_Text.Text);
             else
             {
-                MessageBox.Show("请输入方字", "信息", MessageBoxButton.OK, MessageBoxImage.Error);
+                Xceed.Wpf.Toolkit.MessageBox.Show("请输入方字", "信息", MessageBoxButton.OK, MessageBoxImage.Error);
                 textBox_Text.Focus();
             }
         }
@@ -89,7 +89,7 @@ namespace JXHighWay.WatchHouse.WFPClient
             if (System.IO.File.Exists(textBox_TuPian.Text))
                 m_LEDControl.SendVideo( App.AdminUser, textBox_TuPian.Text);
             else
-                MessageBox.Show("图片文件不存在", "信息", MessageBoxButton.OK, MessageBoxImage.Error);
+                Xceed.Wpf.Toolkit.MessageBox.Show("图片文件不存在", "信息", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 }

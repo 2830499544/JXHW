@@ -47,7 +47,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                 Label_DengJi.Content = "1级";
             }
             else
-                MessageBox.Show("新风风量调节失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                Xceed.Wpf.Toolkit.MessageBox.Show("新风风量调节失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         private void image_FL_2J_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -69,7 +69,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                 Label_DengJi.Content = "2级";
             }
             else
-                MessageBox.Show("新风风量调节失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                Xceed.Wpf.Toolkit.MessageBox.Show("新风风量调节失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         private void image_FL_3J_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -91,7 +91,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                 Label_DengJi.Content = "3级";
             }
             else
-                MessageBox.Show("新风风量调节失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                Xceed.Wpf.Toolkit.MessageBox.Show("新风风量调节失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         private void image_FL_4J_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -113,7 +113,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                 Label_DengJi.Content = "4级";
             }
             else
-                MessageBox.Show("新风风量调节失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                Xceed.Wpf.Toolkit.MessageBox.Show("新风风量调节失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         private void image_FL_5J_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -135,7 +135,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                 Label_DengJi.Content = "5级";
             }
             else
-                MessageBox.Show("新风风量调节失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                Xceed.Wpf.Toolkit.MessageBox.Show("新风风量调节失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         WatchHouseMonitoring m_Monitoring = null;
@@ -189,7 +189,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                 if (!vResult)
                 {
                     CheckBox_XinFeng.IsChecked = !vOldValue;
-                    MessageBox.Show("新风开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Xceed.Wpf.Toolkit.MessageBox.Show("新风开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 changeSwitchColor();
                 m_IsSwitch = true;

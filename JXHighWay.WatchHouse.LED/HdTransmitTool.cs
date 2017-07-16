@@ -78,7 +78,7 @@ namespace JXHighWay.WatchHouse.LED
                     }
                     TimeSpan span = DateTime.Now.Subtract(trans.time);
                     Console.WriteLine(errCode.ToString() + " time : " + span.Milliseconds.ToString() + " " + DateTime.Now.ToString("HH:mm:ss.fff"));
-                    //MessageBox.Show(errCode.ToString() + " time : " + span.Milliseconds.ToString() + " " + DateTime.Now.ToString("HH:mm:ss.fff"));
+                    //Xceed.Wpf.Toolkit.Xceed.Wpf.Toolkit.MessageBox.Show(errCode.ToString() + " time : " + span.Milliseconds.ToString() + " " + DateTime.Now.ToString("HH:mm:ss.fff"));
                     try
                     {
                         trans.semaphore.Release();

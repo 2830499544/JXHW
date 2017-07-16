@@ -45,13 +45,14 @@ namespace JXHighWay.WatchHouse.WFPClient
                 Image vImage = (Image)sender;
                 Window vWin = Window.GetWindow(this);
                 string[] vTagInfo = ((string)vImage.Tag).Split('&');
-                if (vTagInfo.Length == 4)
+                if (vTagInfo.Length == 5)
                 {
                     int vWatchHouseID ,vPowerID;
                     if (int.TryParse(vTagInfo[0], out vWatchHouseID) && int.TryParse(vTagInfo[2],out vPowerID) )
                     {
                         App.WatchHouseID = vWatchHouseID;
                         App.WatchHouseName = vTagInfo[1];
+                        App.WatchHouseType = vTagInfo[4];
                         App.PowerID = vPowerID;
                         App.LEDIP = vTagInfo[3];
                         pageFrame.Source = new Uri("GanTingMingXi.xaml", UriKind.Relative);
@@ -59,12 +60,12 @@ namespace JXHighWay.WatchHouse.WFPClient
                     }
                     else
                     {
-                        MessageBox.Show("岗亭ID转换错误", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                        Xceed.Wpf.Toolkit.MessageBox.Show("岗亭ID转换错误", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("岗亭信息错误", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Xceed.Wpf.Toolkit.MessageBox.Show("岗亭信息错误", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
@@ -159,7 +160,7 @@ namespace JXHighWay.WatchHouse.WFPClient
 
                     Label vLabelName = (Label)FindName(string.Format("Label_Name_WH{0}", i + 1));
                     vLabelName.Content = WatchHouseInfoList[i].GangTingMC;
-                    vImage.Tag = string.Format("{0}&{1}&{2}&{3}", WatchHouseInfoList[i].GangTingID, WatchHouseInfoList[i].GangTingMC, WatchHouseInfoList[i].DianYuanID, WatchHouseInfoList[i].GuanGaoPingIP);
+                    vImage.Tag = string.Format("{0}&{1}&{2}&{3}&{4}", WatchHouseInfoList[i].GangTingID, WatchHouseInfoList[i].GangTingMC, WatchHouseInfoList[i].DianYuanID, WatchHouseInfoList[i].GuanGaoPingIP, WatchHouseInfoList[i].LeiXin);
 
                     Label vLabelJob = (Label)FindName(string.Format("Label_JobNo_{0}", i + 1));
                     vLabelJob.Content = WatchHouseInfoList[i].GongHao;

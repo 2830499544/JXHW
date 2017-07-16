@@ -309,7 +309,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.LED
                 mInstance = HD_Transmit.CreateSendInstance(callback, IntPtr.Zero);
                 if (mInstance == IntPtr.Zero)
                 {
-                    //MessageBox.Show("Error : CreateSendInstance failed!");
+                    //Xceed.Wpf.Toolkit.Xceed.Wpf.Toolkit.MessageBox.Show("Error : CreateSendInstance failed!");
                     Console.WriteLine("Error : CreateSendInstance failed!");
                 }
 

@@ -67,7 +67,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
             WatchHouseConfigEFModel[] vWatchHouseConfig = m_BasicDBClass_Receive.SelectAllRecordsEx<WatchHouseConfigEFModel>();
             foreach (WatchHouseConfigEFModel vTempConfig in vWatchHouseConfig)
             {
-                m_ClientDict.Add(vTempConfig.DianYuanID??0, "");
+                m_ClientDict.Add(vTempConfig.DianYuan1ID??0, "");
             }
         }
 
@@ -204,7 +204,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
             WatchHouseConfigEFModel vWatchHouseConfigEFModel = new WatchHouseConfigEFModel()
             {
                 DianYuanTXSJ = DateTime.Now,
-                DianYuanID = 11
+                DianYuan1ID = 11
             };
         }
 
@@ -441,7 +441,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
                 WatchHouseConfigEFModel vWatchHouseConfigEFModel = new WatchHouseConfigEFModel()
                 {
                     DianYuanTXSJ = DateTime.Now,
-                    DianYuanIP = IPAddress
+                    DianYuan1IP = IPAddress
                 };
                 m_BasicDBClass_Receive.TransactionBegin();
                 m_BasicDBClass_Receive.InsertRecord(vModel);

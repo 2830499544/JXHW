@@ -217,7 +217,7 @@ namespace JXHighWay.WatchHouse.WFPClient
 
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            //MessageBox.Show("OK");
+            //Xceed.Wpf.Toolkit.MessageBox.Show("OK");
         }
 
         DatePicker m_DatePicker = null;

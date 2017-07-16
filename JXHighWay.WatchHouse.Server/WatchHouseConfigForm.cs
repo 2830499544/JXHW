@@ -22,7 +22,7 @@ namespace JXHighWay.WatchHouse.Server
         private void button_Add_Click(object sender, EventArgs e)
         {
             int vGanTingID = 0;
-            int vDianYuanID = 0;
+            int vDianYuanID1 = 0, vDianYuanID2=0;
             string vOutInfo = "";
             if (!int.TryParse(textBox_GanTing_ID.Text, out vGanTingID))
             {
@@ -30,15 +30,22 @@ namespace JXHighWay.WatchHouse.Server
                 return;
             }
 
-            if (!int.TryParse(textBox_DY_ID.Text, out vDianYuanID))
+            if (!int.TryParse(textBox_DY1_ID.Text, out vDianYuanID1))
             {
-                MessageBox.Show("电源编号必须为数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("电源1编号必须为数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            DataTable vSwitchTable = button_DY_KaiGuan.Tag == null ? null : (DataTable)button_DY_KaiGuan.Tag;
+            if (!int.TryParse(textBox_DY2_ID.Text, out vDianYuanID2))
+            {
+                MessageBox.Show("电源2编号必须为数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            DataTable vSwitchTable1 = button_DY1_KaiGuan.Tag == null ? null : (DataTable)button_DY1_KaiGuan.Tag;
+            DataTable vSwitchTable2 = button_DY2_KaiGuan.Tag == null ? null : (DataTable)button_DY2_KaiGuan.Tag;
             if (m_WatchHouseConfig.Add(vGanTingID, textBox_GanTing_MC.Text,
-                comboBox_GanTing_LX.Text, textBox_LED_IP.Text, vDianYuanID, vSwitchTable, ref vOutInfo))
+                comboBox_GanTing_LX.Text, textBox_LED_IP.Text, vDianYuanID1,vDianYuanID2, vSwitchTable1, vSwitchTable2, ref vOutInfo))
             {
                 MessageBox.Show("增加岗亭数据成功", "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 dataGridView_List.DataSource = m_WatchHouseConfig.GetAll();
@@ -82,7 +89,7 @@ namespace JXHighWay.WatchHouse.Server
         private void button_Update_Click(object sender, EventArgs e)
         {
             int vGanTingID = 0;
-            int vDianYuanID = 0;
+            int vDianYuanID1 = 0, vDianYuanID2=0;
             string vOutInfo = "";
             if (!int.TryParse(textBox_GanTing_ID.Text, out vGanTingID))
             {
@@ -90,16 +97,23 @@ namespace JXHighWay.WatchHouse.Server
                 return;
             }
 
-            if (!int.TryParse(textBox_DY_ID.Text, out vDianYuanID))
+            if (!int.TryParse(textBox_DY1_ID.Text, out vDianYuanID1))
             {
-                MessageBox.Show("电源编号必须为数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("电源1编号必须为数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            DataTable vSwitchTable = button_DY_KaiGuan.Tag == null ? null : (DataTable)button_DY_KaiGuan.Tag;
+            if (!int.TryParse(textBox_DY2_ID.Text, out vDianYuanID2))
+            {
+                MessageBox.Show("电源2编号必须为数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            DataTable vSwitchTable1 = button_DY1_KaiGuan.Tag == null ? null : (DataTable)button_DY1_KaiGuan.Tag;
+            DataTable vSwitchTable2 = button_DY2_KaiGuan.Tag == null ? null : (DataTable)button_DY2_KaiGuan.Tag;
             int vID = (int)dataGridView_List.SelectedRows[0].Cells["Column_ID"].Value;
             if (m_WatchHouseConfig.Update(vID, vGanTingID, textBox_GanTing_MC.Text,
-                comboBox_GanTing_LX.Text, textBox_LED_IP.Text, vDianYuanID, vSwitchTable, ref vOutInfo))
+                comboBox_GanTing_LX.Text, textBox_LED_IP.Text, vDianYuanID1, vDianYuanID2,vSwitchTable1, vSwitchTable2, ref vOutInfo))
             {
                 MessageBox.Show("更新岗亭数据成功", "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 dataGridView_List.DataSource = m_WatchHouseConfig.GetAll();
@@ -113,7 +127,7 @@ namespace JXHighWay.WatchHouse.Server
         {
             if ( dataGridView_List.SelectedRows.Count>0)
             {
-                button_DY_KaiGuan.Tag = null;
+                button_DY1_KaiGuan.Tag = null;
                 textBox_GanTing_ID.Text = dataGridView_List.SelectedRows[0].Cells["Column_GanTing_ID"].Value.ToString(); ;
                 textBox_GanTing_MC.Text = dataGridView_List.SelectedRows[0].Cells["Column_GanTing_MC"].Value.ToString();
                 comboBox_GanTing_LX.Text = dataGridView_List.SelectedRows[0].Cells["Column_GanTing_LX"].Value.ToString();
@@ -121,30 +135,78 @@ namespace JXHighWay.WatchHouse.Server
 
                 textBox_LED_IP.Text = dataGridView_List.SelectedRows[0].Cells["Column_LED_IP"].Value.ToString(); ;
                 
-                textBox_DY_ID.Text = dataGridView_List.SelectedRows[0].Cells["Column_DianYuan_ID"].Value.ToString();
-                textBox_DY_IP.Text = dataGridView_List.SelectedRows[0].Cells["Column_DianYuan_IP"].Value.ToString();
+                textBox_DY1_ID.Text = dataGridView_List.SelectedRows[0].Cells["Column_DianYuan_ID"].Value.ToString();
+                textBox_DY1_IP.Text = dataGridView_List.SelectedRows[0].Cells["Column_DianYuan_IP"].Value.ToString();
             }
         }
 
         private void button_DY_KaiGuan_Click(object sender, EventArgs e)
         {
-            int vDianYuanID = textBox_DY_ID.Text == "" ? 0 : int.Parse(textBox_DY_ID.Text);
-            DataTable vSwitchTable = new DataTable();
-            if (button_DY_KaiGuan.Tag == null)
-                vSwitchTable = m_WatchHouseConfig.GetSwitchTable(vDianYuanID);
+            int vDianYuanID = textBox_DY1_ID.Text == "" ? 0 : int.Parse(textBox_DY1_ID.Text);
+            if (vDianYuanID != 0)
+            {
+                DataTable vSwitchTable = new DataTable();
+                if (button_DY1_KaiGuan.Tag == null)
+                    vSwitchTable = m_WatchHouseConfig.GetSwitchTable(vDianYuanID);
+                else
+                    vSwitchTable = (DataTable)textBox_DY1_ID.Tag;
+                SwitchConfigForm vSwitchConfigForm = new SwitchConfigForm();
+                vSwitchConfigForm.SwitchTable = vSwitchTable;
+                vSwitchConfigForm.DianYuanID = vDianYuanID;
+                vSwitchConfigForm.ShowDialog();
+                button_DY1_KaiGuan.Tag = vSwitchTable;
+            }
             else
-                vSwitchTable = (DataTable)textBox_DY_ID.Tag;
-            SwitchConfigForm vSwitchConfigForm = new SwitchConfigForm();
-            vSwitchConfigForm.SwitchTable = vSwitchTable;
-            vSwitchConfigForm.DianYuanID = vDianYuanID;
-            vSwitchConfigForm.ShowDialog();
-            button_DY_KaiGuan.Tag = vSwitchTable;
+                MessageBox.Show("请输入电源ID", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void button_PowerIP_Click(object sender, EventArgs e)
         {
             PowerIPConfigForm vPowerIPConfigForm = new PowerIPConfigForm();
             vPowerIPConfigForm.ShowDialog();
+        }
+
+        private void comboBox_GanTing_LX_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string vSelectText = ((ComboBox)sender).Text;
+            switch ( vSelectText )
+            {
+                case "出口":
+                case "入口":
+                    groupBox_Power1.Enabled = true;
+                    groupBox_Power2.Enabled = false;
+                    break;
+                case "双向":
+                    groupBox_Power1.Enabled = true;
+                    groupBox_Power2.Enabled = true;
+                    break;
+            }
+        }
+        
+        private void button_DY2_PowerIP_Click(object sender, EventArgs e)
+        {
+            PowerIPConfigForm vPowerIPConfigForm = new PowerIPConfigForm();
+            vPowerIPConfigForm.ShowDialog();
+        }
+
+        private void button_DY2_KaiGuan_Click(object sender, EventArgs e)
+        {
+            int vDianYuanID = textBox_DY2_ID.Text == "" ? 0 : int.Parse(textBox_DY2_ID.Text);
+            if (vDianYuanID != 0)
+            {
+                DataTable vSwitchTable = new DataTable();
+                if (button_DY1_KaiGuan.Tag == null)
+                    vSwitchTable = m_WatchHouseConfig.GetSwitchTable(vDianYuanID);
+                else
+                    vSwitchTable = (DataTable)textBox_DY2_ID.Tag;
+                SwitchConfigForm vSwitchConfigForm = new SwitchConfigForm();
+                vSwitchConfigForm.SwitchTable = vSwitchTable;
+                vSwitchConfigForm.DianYuanID = vDianYuanID;
+                vSwitchConfigForm.ShowDialog();
+                button_DY2_KaiGuan.Tag = vSwitchTable;
+            }
+            else
+                MessageBox.Show("请输入电源ID", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }

@@ -17,11 +17,11 @@ namespace JXHighWay.WatchHouse.EFModel
         [ColumnAttrib("MiMa")]
         public String MiMa { get; set; }
         [ColumnAttrib("GangTingGZ")]
-        public bool GangTingGZ { get; set; }
+        public bool? GangTingGZ { get; set; }
         [ColumnAttrib("LEDGongZhi")]
-        public bool LEDGongZhi { get; set; }
+        public bool? LEDGongZhi { get; set; }
         [ColumnAttrib("DianYuanGZ")]
-        public bool DianYuanGZ { get; set; }
+        public bool? DianYuanGZ { get; set; }
     }
 
 }

@@ -25,12 +25,12 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="151*"  />
-            <RowDefinition Height="66*" />
-            <RowDefinition Height="58*"  />
-            <RowDefinition Height="185*"  />
+            <RowDefinition Height="81*" />
+            <RowDefinition Height="57*"  />
+            <RowDefinition Height="171*"  />
         </Grid.RowDefinitions>
-        <TextBox x:Name="textBox_UserName" HorizontalAlignment="Left" Height="30" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="195" Margin="424,20.8,0,0" Grid.Row="1" RenderTransformOrigin="0.581,0.4" FontSize="18"/>
-        <PasswordBox x:Name="passwordBox_Password" HorizontalAlignment="Left" VerticalAlignment="Top" Width="195" Margin="424,16.2,0,0" Grid.Row="2" Height="30" FontSize="18"/>
-        <Button x:Name="button_Login" Content="登     录" HorizontalAlignment="Left" VerticalAlignment="Top" Width="162" Margin="424,9.8,0,0" Grid.Row="3" Height="33" Style="{DynamicResource MyWpfButton}" FontSize="18" Cursor="Hand" Click="button_Login_Click"/>
+        <TextBox x:Name="textBox_UserName" HorizontalAlignment="Left" Height="30" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="195" Margin="424,41,0,0" Grid.Row="1" RenderTransformOrigin="0.581,0.4" FontSize="18"/>
+        <PasswordBox x:Name="passwordBox_Password" HorizontalAlignment="Left" VerticalAlignment="Top" Width="195" Margin="424,22,0,0" Grid.Row="2" Height="30" FontSize="18"/>
+        <Button x:Name="button_Login" Content="登     录" HorizontalAlignment="Left" VerticalAlignment="Top" Width="162" Margin="424,16,0,0" Grid.Row="3" Height="33" Style="{DynamicResource MyWpfButton}" FontSize="18" Cursor="Hand" Click="button_Login_Click"/>
     </Grid>
 </Page>

@@ -28,14 +28,31 @@ namespace JXHighWay.WatchHouse.EFModel
         public String GuanGaoPingIP { get; set; }
         [ColumnAttrib("GuanGaoPDK")]
         public int? GuanGaoPDK { get; set; }
-        [ColumnAttrib("DianYuanID")]
-        public int? DianYuanID { get; set; }
-        [ColumnAttrib("DianYuanIP")]
-        public String DianYuanIP { get; set; }
-        [ColumnAttrib("DianYuanDK")]
-        public int? DianYuanDK { get; set; }
-        [ColumnAttrib("DianYuanLS")]
-        public int? DianYuanLS { get; set; }
+
+        [ColumnAttrib("DianYuan1ID")]
+        public int? DianYuan1ID { get; set; }
+
+        [ColumnAttrib("DianYuan1IP")]
+        public String DianYuan1IP { get; set; }
+
+        [ColumnAttrib("DianYuan1DK")]
+        public int? DianYuan1DK { get; set; }
+
+        [ColumnAttrib("DianYuan1LS")]
+        public int? DianYuan1LS { get; set; }
+
+        [ColumnAttrib("DianYuan2ID")]
+        public int? DianYuan2ID { get; set; }
+
+        [ColumnAttrib("DianYuan2IP")]
+        public String DianYuan2IP { get; set; }
+
+        [ColumnAttrib("DianYuan2DK")]
+        public int? DianYuan2DK { get; set; }
+
+        [ColumnAttrib("DianYuan2LS")]
+        public int? DianYuan2LS { get; set; }
+
         [ColumnAttrib("GangTingTXSJ")]
         public DateTime? GangTingTXSJ { get; set; }
         [ColumnAttrib("DianYuanTXSJ")]

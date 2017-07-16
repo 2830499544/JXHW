@@ -63,13 +63,15 @@ namespace JXHighWay.WatchHouse.Server
             dataGridView_EmployeeInfo.AutoGenerateColumns = false;
             dataGridView_EmployeeInfo.DataSource = vEmplyeeTable;
             comboBox_Sex.Text = "男";
+            pictureBox_Photo.SizeMode = PictureBoxSizeMode.StretchImage;
         }
 
         private void button_Del_Click(object sender, EventArgs e)
         {
-            if ( dataGridView_EmployeeInfo.SelectedRows.Count>0 )
+            if (MessageBox.Show("是否确认删除", "信息", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK && 
+                dataGridView_EmployeeInfo.SelectedRows.Count>0 )
             {
-                int vID = (int)dataGridView_EmployeeInfo.SelectedRows[0].Cells["ID"].Value;
+                int vID = (int)dataGridView_EmployeeInfo.SelectedRows[0].Cells["Column_ID"].Value;
                 if (m_Employee.Del(vID))
                 {
                     MessageBox.Show("删除员工成功", "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -102,6 +104,7 @@ namespace JXHighWay.WatchHouse.Server
                 {
                     pictureBox_Photo.Image = null;
                     pictureBox_Photo.Tag = null;
+                    
                 }
             }
         }

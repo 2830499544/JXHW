@@ -91,6 +91,9 @@
     <Compile Include="DianYuanMingXi.xaml.cs">
       <DependentUpon>DianYuanMingXi.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DianYuan_S.xaml.cs">
+      <DependentUpon>DianYuan_S.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DiNuan.xaml.cs">
       <DependentUpon>DiNuan.xaml</DependentUpon>
     </Compile>
@@ -105,6 +108,9 @@
     </Compile>
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MenChuang_S.xaml.cs">
+      <DependentUpon>MenChuang_S.xaml</DependentUpon>
     </Compile>
     <Compile Include="XinFeng.xaml.cs">
       <DependentUpon>XinFeng.xaml</DependentUpon>
@@ -121,7 +127,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="DianYuan_S.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MenChuang_S.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -201,7 +215,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resource\MainPage.xaml">
+    <Page Include="Resource\TabControlResource.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -496,6 +510,7 @@
     <Resource Include="Images\Main\ShuanXiang.jpg" />
     <Resource Include="Images\Main\ShuanXiang_A.jpg" />
     <Resource Include="Images\Login\LoginPage.jpg" />
+    <Resource Include="Images\MenChuang\XuXiang.jpg" />
     <Content Include="Transmit.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

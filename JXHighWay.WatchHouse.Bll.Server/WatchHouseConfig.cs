@@ -71,7 +71,8 @@ namespace JXHighWay.WatchHouse.Bll.Server
         }
 
         public bool Update(int ID, int GanTingID, string GanTingMC, string GanTingLX,
-            string LedIP, int DianYuanID, DataTable SwitchInfoTable, ref string OutInfo)
+            string LedIP, int DianYuanID1,int DianYuanID2,  DataTable SwitchInfoTable1,DataTable SwitchInfoTable2,
+            ref string OutInfo)
         {
             bool vResult = false;
             WatchHouseConfigEFModel vWatchHouseConfigEFModel = new WatchHouseConfigEFModel()
@@ -80,40 +81,74 @@ namespace JXHighWay.WatchHouse.Bll.Server
                 GangTingMC = GanTingMC,
                 GangTingLX = GanTingLX,
                 GuanGaoPingIP = LedIP,
-                DianYuanID = DianYuanID,
+                DianYuan1ID = DianYuanID1,
                 ID = ID,
                 OrderID = convertWatchHouseLXToOrderID(GanTingLX)
             };
             m_BasicDBClass.TransactionBegin();
-            if (vResult = m_BasicDBClass.UpdateRecord(vWatchHouseConfigEFModel) && SwitchInfoTable!=null)
+            if (vResult = m_BasicDBClass.UpdateRecord(vWatchHouseConfigEFModel) )
             {
-                foreach (DataRow vTempSwitch in SwitchInfoTable.Rows)
+                if (SwitchInfoTable1 != null)
                 {
-                    PowerSwithConfigEFModel vModel = new PowerSwithConfigEFModel();
-                    vModel.DianYuanID = DianYuanID;
-                    CommClass.ConvertDataRowToStruct(ref vModel, vTempSwitch);
-                    switch (vTempSwitch.RowState)
+                    foreach (DataRow vTempSwitch in SwitchInfoTable1.Rows)
                     {
-                        case DataRowState.Added:
-                            vResult = m_BasicDBClass.InsertRecord(vModel)>0?true:false;
+                        PowerSwithConfigEFModel vModel = new PowerSwithConfigEFModel();
+                        vModel.DianYuanID = DianYuanID1;
+                        CommClass.ConvertDataRowToStruct(ref vModel, vTempSwitch);
+                        switch (vTempSwitch.RowState)
+                        {
+                            case DataRowState.Added:
+                                vResult = m_BasicDBClass.InsertRecord(vModel) > 0 ? true : false;
+                                break;
+                            case DataRowState.Deleted:
+                                vResult = m_BasicDBClass.DeleteRecordByPrimaryKey<PowerSwithConfigEFModel>(vModel.ID);
+                                break;
+                            case DataRowState.Modified:
+                                vResult = m_BasicDBClass.UpdateRecord(vModel);
+                                break;
+                        }
+                        if (!vResult)
+                        {
+                            m_BasicDBClass.TransactionRollback();
                             break;
-                        case DataRowState.Deleted:
-                            vResult = m_BasicDBClass.DeleteRecordByPrimaryKey<PowerSwithConfigEFModel>(vModel.ID);
-                            break;
-                        case DataRowState.Modified:
-                            vResult = m_BasicDBClass.UpdateRecord(vModel);
-                            break;
-                    }
-                    if (!vResult)
-                    {
-                        m_BasicDBClass.TransactionRollback();
-                        break;
+                        }
                     }
                 }
+
+                if (SwitchInfoTable2 != null )
+                {
+                    foreach (DataRow vTempSwitch in SwitchInfoTable2.Rows)
+                    {
+                        PowerSwithConfigEFModel vModel = new PowerSwithConfigEFModel();
+                        vModel.DianYuanID = DianYuanID1;
+                        CommClass.ConvertDataRowToStruct(ref vModel, vTempSwitch);
+                        switch (vTempSwitch.RowState)
+                        {
+                            case DataRowState.Added:
+                                vResult = m_BasicDBClass.InsertRecord(vModel) > 0 ? true : false;
+                                break;
+                            case DataRowState.Deleted:
+                                vResult = m_BasicDBClass.DeleteRecordByPrimaryKey<PowerSwithConfigEFModel>(vModel.ID);
+                                break;
+                            case DataRowState.Modified:
+                                vResult = m_BasicDBClass.UpdateRecord(vModel);
+                                break;
+                        }
+                        if (!vResult)
+                        {
+                            m_BasicDBClass.TransactionRollback();
+                            break;
+                        }
+                    }
+                }
+
                 if (vResult)
                 {
                     m_BasicDBClass.TransactionCommit();
-                    SwitchInfoTable.AcceptChanges();
+                    if (SwitchInfoTable1!=null)
+                        SwitchInfoTable1.AcceptChanges();
+                    if (SwitchInfoTable2 != null)
+                        SwitchInfoTable2.AcceptChanges();
                 }
             }
             else
@@ -142,11 +177,11 @@ namespace JXHighWay.WatchHouse.Bll.Server
         }
 
         public bool Add(int GanTingID,string GanTingMC,string GanTingLX,
-            string LedIP,int DianYuanID, DataTable SwitchInfoTable,
+            string LedIP,int DianYuanID1,int DianYuanID2,DataTable SwitchInfoTable1,DataTable SwitchInfoTable2,
             ref string OutInfo )
         {
             bool vResult = false;
-            if ( !findGanTing(GanTingID,DianYuanID) )
+            if ( !findGanTing(GanTingID,DianYuanID1) )
             {
                 m_BasicDBClass.TransactionBegin();
                 WatchHouseConfigEFModel vWatchHouseConfigEFModel = new WatchHouseConfigEFModel()
@@ -155,17 +190,19 @@ namespace JXHighWay.WatchHouse.Bll.Server
                     GangTingMC = GanTingMC,
                     GangTingLX = GanTingLX,
                     GuanGaoPingIP = LedIP,
-                    DianYuanID = DianYuanID,
+                    DianYuan1ID = DianYuanID1,
+                    DianYuan2ID = DianYuanID2,
                     ShouFeiZhangID = 1,
                      OrderID = convertWatchHouseLXToOrderID(GanTingLX)
                 };
                 vResult = m_BasicDBClass.InsertRecord(vWatchHouseConfigEFModel) > 0;
-                if (vResult && SwitchInfoTable != null)
+                //开关1
+                if (vResult && SwitchInfoTable1 != null)
                 {
-                    foreach (DataRow vTempSwitch in SwitchInfoTable.Rows)
+                    foreach (DataRow vTempSwitch in SwitchInfoTable1.Rows)
                     {
                         PowerSwithConfigEFModel vModel = new PowerSwithConfigEFModel();
-                        vModel.DianYuanID = DianYuanID;
+                        vModel.DianYuanID = DianYuanID1;
                         CommClass.ConvertDataRowToStruct(ref vModel, vTempSwitch);
                         switch (vTempSwitch.RowState)
                         {
@@ -185,11 +222,38 @@ namespace JXHighWay.WatchHouse.Bll.Server
                         }
                     }
                 }
+                //开关2
+                if (vResult && SwitchInfoTable2 != null)
+                {
+                    foreach (DataRow vTempSwitch in SwitchInfoTable2.Rows)
+                    {
+                        PowerSwithConfigEFModel vModel = new PowerSwithConfigEFModel();
+                        vModel.DianYuanID = DianYuanID1;
+                        CommClass.ConvertDataRowToStruct(ref vModel, vTempSwitch);
+                        switch (vTempSwitch.RowState)
+                        {
+                            case DataRowState.Added:
+                                vResult = m_BasicDBClass.InsertRecord(vModel) > 0 ? true : false;
+                                break;
+                            case DataRowState.Deleted:
+                                vResult = m_BasicDBClass.DeleteRecordByPrimaryKey<PowerSwithConfigEFModel>(vModel.ID);
+                                break;
+                            case DataRowState.Modified:
+                                vResult = m_BasicDBClass.UpdateRecord(vModel);
+                                break;
+                        }
+                        if (!vResult)
+                        {
+                            break;
+                        }
+                    }
+                }
+
                 if (vResult)
                 {
                     m_BasicDBClass.TransactionCommit();
-                    if ( SwitchInfoTable != null)
-                        SwitchInfoTable.AcceptChanges();
+                    if ( SwitchInfoTable1 != null)
+                        SwitchInfoTable1.AcceptChanges();
                 }
                 else
                 {

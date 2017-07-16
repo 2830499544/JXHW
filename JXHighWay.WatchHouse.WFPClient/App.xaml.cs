@@ -68,6 +68,10 @@ namespace JXHighWay.WatchHouse.WFPClient
         /// </summary>
         public static string WatchHouseName { get; set; }
         /// <summary>
+        /// 岗亭类型
+        /// </summary>
+        public static string WatchHouseType { get; set; }
+        /// <summary>
         /// 当前电源ID
         /// </summary>
         public static int PowerID { get; set; }

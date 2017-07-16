@@ -35,7 +35,7 @@ namespace JXHighWay.WatchHouse.WFPClient
             if (vResult)
                 luminance25();
             else
-                MessageBox.Show("调节亮度失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                Xceed.Wpf.Toolkit.MessageBox.Show("调节亮度失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         void luminance25()
@@ -53,7 +53,7 @@ namespace JXHighWay.WatchHouse.WFPClient
             if (vResult)
                 luminance50();
             else
-                MessageBox.Show("调节亮度失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                Xceed.Wpf.Toolkit.MessageBox.Show("调节亮度失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
         }
         
         void luminance50()
@@ -71,7 +71,7 @@ namespace JXHighWay.WatchHouse.WFPClient
             if (vResult)
                 luminance75();
             else
-                MessageBox.Show("调节亮度失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                Xceed.Wpf.Toolkit.MessageBox.Show("调节亮度失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         void luminance75()
@@ -89,7 +89,7 @@ namespace JXHighWay.WatchHouse.WFPClient
             if (vResult)
                 luminance100();
             else
-                MessageBox.Show("调节亮度失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                Xceed.Wpf.Toolkit.MessageBox.Show("调节亮度失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         void luminance100()
@@ -177,7 +177,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                 if (!vResult)
                 {
                     CheckBox_Switch.IsChecked = !vOldValue;
-                    MessageBox.Show("灯光开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Xceed.Wpf.Toolkit.MessageBox.Show("灯光开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 changeSwitchColor();
                  m_Switch = true;

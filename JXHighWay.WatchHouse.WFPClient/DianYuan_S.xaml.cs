@@ -1,7 +1,9 @@
-﻿using System;
+﻿using JXHighWay.WatchHouse.Bll.Client.DianYuan;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,15 +14,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using JXHighWay.WatchHouse.Bll.Client.DianYuan;
-using System.Threading;
 
-namespace JXHighWay.WatchHouse.WFPClient.Images
+namespace JXHighWay.WatchHouse.WFPClient
 {
+
+   
+
     /// <summary>
-    /// DianYuan.xaml 的交互逻辑
+    /// DianYuan_S.xaml 的交互逻辑
     /// </summary>
-    public partial class DianYuan : Page
+    public partial class DianYuan_S : Page
     {
         PowerMonitoring m_PowerMonitoring = null;
         /// <summary>
@@ -28,9 +31,66 @@ namespace JXHighWay.WatchHouse.WFPClient.Images
         /// </summary>
         //int m_LS = 0;
         List<int> m_LuoHaoList = null;
-        public DianYuan()
+
+        public DianYuan_S()
         {
             InitializeComponent();
+        }
+
+        private async void checkBox_Switch1_Checked(object sender, RoutedEventArgs e)
+        {
+            CheckBox vCheckBox = (CheckBox)sender;
+            byte vLuHao = (byte)vCheckBox.Tag;
+            bool vResult = await m_PowerMonitoring.SendCMD_Switch(App.PowerID, 0x01, vLuHao, true);
+            if (!vResult)
+            {
+                Xceed.Wpf.Toolkit.MessageBox.Show("开关失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                vCheckBox.IsChecked = false;
+            }
+        }
+
+        private async void checkBox_Switch1_Unchecked(object sender, RoutedEventArgs e)
+        {
+            CheckBox vCheckBox = (CheckBox)sender;
+            byte vLuHao = (byte)vCheckBox.Tag;
+            bool vResult = await m_PowerMonitoring.SendCMD_Switch(App.PowerID, 0x01, 0x02, false);
+            if (!vResult)
+            {
+                Xceed.Wpf.Toolkit.MessageBox.Show("开关失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                vCheckBox.IsChecked = true;
+            }
+        }
+
+        async void RefreshState()
+        {
+            await Task.Run(() =>
+            {
+                while (true)
+                {
+                    Action action1 = () =>
+                    {
+                        for (int i = 1; i <= m_LuoHaoList.Count; i++)
+                        {
+                            PowerInfo vPowerInfo = m_PowerMonitoring.GetNewPowerInfo(App.PowerID, m_LuoHaoList[i - 1]);
+                            if (vPowerInfo != null)
+                            {
+                                Label vLabel_DY = (Label)FindName(string.Format("label_DY_{0}", i));
+                                vLabel_DY.Content = string.Format("{0}V", vPowerInfo.DianYa);
+
+                                Label vLabel_DL = (Label)FindName(string.Format("label_DL_{0}", i));
+                                vLabel_DL.Content = string.Format("{0}A", vPowerInfo.DianLiu);
+
+                                CheckBox vCheckBox = (CheckBox)FindName(string.Format("checkBox_Switch{0}", i));
+                                vCheckBox.IsChecked = vPowerInfo.ZhuangTai;
+
+                                changeSwitchColor(vCheckBox, i);
+                            }
+                        }
+                    };
+                    Dispatcher.BeginInvoke(action1);
+                    Thread.Sleep(App.RefreshTime * 1000);
+                }
+            });
         }
 
         void init()
@@ -118,71 +178,13 @@ namespace JXHighWay.WatchHouse.WFPClient.Images
             m_IsInit = true;
         }
 
-        private async void checkBox_Switch1_Checked(object sender, RoutedEventArgs e)
-        {
-            CheckBox vCheckBox = (CheckBox)sender;
-            byte vLuHao = (byte)vCheckBox.Tag;
-            bool vResult = await m_PowerMonitoring.SendCMD_Switch(App.PowerID, 0x01, vLuHao, true);
-            if (!vResult)
-            {
-                Xceed.Wpf.Toolkit.MessageBox.Show("开关失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-                vCheckBox.IsChecked = false;
-            }
-        }
-
-        private async void checkBox_Switch1_Unchecked(object sender, RoutedEventArgs e)
-        {
-            CheckBox vCheckBox = (CheckBox)sender;
-            byte vLuHao = (byte)vCheckBox.Tag;
-            bool vResult = await m_PowerMonitoring.SendCMD_Switch(App.PowerID, 0x01, 0x02, false);
-            if (!vResult)
-            {
-                Xceed.Wpf.Toolkit.MessageBox.Show("开关失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-                vCheckBox.IsChecked = true;
-            }
-        }
-
-        async void RefreshState()
-        {
-            await Task.Run(() =>
-            {
-                while (true)
-                {
-                    Action action1 = () =>
-                    {
-                        for (int i = 1; i <= m_LuoHaoList.Count; i++)
-                        {
-                            PowerInfo vPowerInfo = m_PowerMonitoring.GetNewPowerInfo(App.PowerID, m_LuoHaoList[i-1]);
-                            if (vPowerInfo != null)
-                            {
-                                Label vLabel_DY = (Label)FindName(string.Format("label_DY_{0}", i));
-                                vLabel_DY.Content = string.Format("{0}V", vPowerInfo.DianYa);
-
-                                Label vLabel_DL = (Label)FindName(string.Format("label_DL_{0}", i));
-                                vLabel_DL.Content = string.Format("{0}A", vPowerInfo.DianLiu);
-
-                                CheckBox vCheckBox = (CheckBox)FindName(string.Format("checkBox_Switch{0}", i));
-                                vCheckBox.IsChecked = vPowerInfo.ZhuangTai;
-
-                                changeSwitchColor(vCheckBox, i);
-                            }
-                        }
-                    };
-                    Dispatcher.BeginInvoke(action1);
-                    Thread.Sleep(App.RefreshTime * 1000);
-                }
-            });
-        }
-       
-        
-
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             init();
             RefreshState();
         }
 
-        void changeSwitchColor( CheckBox checkBox,int luHao)
+        void changeSwitchColor(CheckBox checkBox, int luHao)
         {
             Label vlabel_Guan = (Label)FindName(string.Format("label_Guan_{0}", luHao));
 
@@ -221,7 +223,7 @@ namespace JXHighWay.WatchHouse.WFPClient.Images
                 bool vOldValue = vCheckBox_Switch.IsChecked ?? false;
                 bool vResult;
                 if (vOldValue)
-                    vResult = await m_PowerMonitoring.SendCMD_Switch(App.PowerID, 0x01, vLuHao, true); 
+                    vResult = await m_PowerMonitoring.SendCMD_Switch(App.PowerID, 0x01, vLuHao, true);
                 else
                     vResult = await m_PowerMonitoring.SendCMD_Switch(App.PowerID, 0x01, vLuHao, false);
                 if (!vResult)
@@ -234,4 +236,6 @@ namespace JXHighWay.WatchHouse.WFPClient.Images
             }
         }
     }
+
+
 }

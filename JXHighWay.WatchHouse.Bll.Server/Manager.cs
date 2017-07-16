@@ -71,7 +71,9 @@ namespace JXHighWay.WatchHouse.Bll.Server
             bool GangTingGZ, bool LEDGongZhi, bool DianYuanGZ,ref string OutInfo )
         {
             bool vResult = false;
-            if (!findZhangHao(ZhangHao))
+            string vSql = string.Format( "Select *From `管理员` Where ID<>{0} and ZhangHao='{1}'",ID,ZhangHao );
+            ManagerEFModel[] vSelectResult = m_BasicDBClass.SelectCustomEx<ManagerEFModel>(vSql);
+            if (vSelectResult==null || vSelectResult.Length==0)
             {
                 ManagerEFModel vManagerEFModel = new ManagerEFModel()
                 {
@@ -82,7 +84,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
                     LEDGongZhi = LEDGongZhi,
                     ID = ID
                 };
-                vResult = m_BasicDBClass.InsertRecord(vManagerEFModel) > 0 ? true : false;
+                vResult = m_BasicDBClass.UpdateRecord(vManagerEFModel);
             }
             else
             {

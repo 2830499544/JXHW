@@ -43,6 +43,7 @@
             this.dataGridView_MangerInfo = new System.Windows.Forms.DataGridView();
             this.Column_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_ZhangHao = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_MiMa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_GangTingGZ = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Column_LEDGongZhi = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Column_DianYuanGZ = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -183,10 +184,12 @@
             // dataGridView_MangerInfo
             // 
             this.dataGridView_MangerInfo.AllowUserToAddRows = false;
+            this.dataGridView_MangerInfo.AllowUserToDeleteRows = false;
             this.dataGridView_MangerInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_MangerInfo.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column_ID,
             this.Column_ZhangHao,
+            this.Column_MiMa,
             this.Column_GangTingGZ,
             this.Column_LEDGongZhi,
             this.Column_DianYuanGZ});
@@ -195,11 +198,14 @@
             this.dataGridView_MangerInfo.Name = "dataGridView_MangerInfo";
             this.dataGridView_MangerInfo.ReadOnly = true;
             this.dataGridView_MangerInfo.RowTemplate.Height = 23;
+            this.dataGridView_MangerInfo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView_MangerInfo.Size = new System.Drawing.Size(388, 126);
             this.dataGridView_MangerInfo.TabIndex = 0;
+            this.dataGridView_MangerInfo.SelectionChanged += new System.EventHandler(this.dataGridView_MangerInfo_SelectionChanged);
             // 
             // Column_ID
             // 
+            this.Column_ID.DataPropertyName = "ID";
             this.Column_ID.HeaderText = "ID";
             this.Column_ID.Name = "Column_ID";
             this.Column_ID.ReadOnly = true;
@@ -207,13 +213,23 @@
             // 
             // Column_ZhangHao
             // 
+            this.Column_ZhangHao.DataPropertyName = "ZhangHao";
             this.Column_ZhangHao.HeaderText = "帐号";
             this.Column_ZhangHao.Name = "Column_ZhangHao";
             this.Column_ZhangHao.ReadOnly = true;
             this.Column_ZhangHao.Width = 130;
             // 
+            // Column_MiMa
+            // 
+            this.Column_MiMa.DataPropertyName = "MiMa";
+            this.Column_MiMa.HeaderText = "密码";
+            this.Column_MiMa.Name = "Column_MiMa";
+            this.Column_MiMa.ReadOnly = true;
+            this.Column_MiMa.Visible = false;
+            // 
             // Column_GangTingGZ
             // 
+            this.Column_GangTingGZ.DataPropertyName = "GangTingGZ";
             this.Column_GangTingGZ.HeaderText = "岗亭";
             this.Column_GangTingGZ.Name = "Column_GangTingGZ";
             this.Column_GangTingGZ.ReadOnly = true;
@@ -221,6 +237,7 @@
             // 
             // Column_LEDGongZhi
             // 
+            this.Column_LEDGongZhi.DataPropertyName = "LEDGongZhi";
             this.Column_LEDGongZhi.HeaderText = "LED";
             this.Column_LEDGongZhi.Name = "Column_LEDGongZhi";
             this.Column_LEDGongZhi.ReadOnly = true;
@@ -228,6 +245,7 @@
             // 
             // Column_DianYuanGZ
             // 
+            this.Column_DianYuanGZ.DataPropertyName = "DianYuanGZ";
             this.Column_DianYuanGZ.HeaderText = "电源";
             this.Column_DianYuanGZ.Name = "Column_DianYuanGZ";
             this.Column_DianYuanGZ.ReadOnly = true;
@@ -273,6 +291,7 @@
         private System.Windows.Forms.DataGridView dataGridView_MangerInfo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_ZhangHao;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_MiMa;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Column_GangTingGZ;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Column_LEDGongZhi;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Column_DianYuanGZ;

@@ -36,7 +36,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                 if (vResult)
                     kongTiaoFS_DF();
                 else
-                    MessageBox.Show("低风速失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Xceed.Wpf.Toolkit.MessageBox.Show("低风速失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -55,7 +55,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                 if (vResult)
                     kongTiaoFS_ZF();
                 else
-                    MessageBox.Show("中风速失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Xceed.Wpf.Toolkit.MessageBox.Show("中风速失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         void kongTiaoFS_ZF()
@@ -73,7 +73,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                 if (vResult)
                     kongTiaoFS_GF();
                 else
-                    MessageBox.Show("高风速失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Xceed.Wpf.Toolkit.MessageBox.Show("高风速失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -99,7 +99,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                 if (vResult)
                     kongTiaoMS_CS();
                 else
-                    MessageBox.Show("除湿模式失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Xceed.Wpf.Toolkit.MessageBox.Show("除湿模式失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -120,7 +120,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                 if (vResult)
                     kongTiaoMS_ZR();
                 else
-                    MessageBox.Show("制热模式失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Xceed.Wpf.Toolkit.MessageBox.Show("制热模式失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         void kongTiaoMS_ZR()
@@ -141,7 +141,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                 if (vResult)
                     kongTiaoMS_ZL();
                 else
-                MessageBox.Show("制冷模式失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                Xceed.Wpf.Toolkit.MessageBox.Show("制冷模式失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -162,7 +162,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                 if (vResult)
                     kongTiaoMS_SF();
                 else
-                    MessageBox.Show("送风模式失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Xceed.Wpf.Toolkit.MessageBox.Show("送风模式失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -178,7 +178,7 @@ namespace JXHighWay.WatchHouse.WFPClient
 
         private void image_MS_ZD_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            MessageBox.Show("自动模式失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+            Xceed.Wpf.Toolkit.MessageBox.Show("自动模式失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
             //kongTiaoMS_ZD();
         }
 
@@ -290,7 +290,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                 if (!vResult)
                 {
                     CheckBox_KongTiao.IsChecked = !vOldValue;
-                    MessageBox.Show("空调开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Xceed.Wpf.Toolkit.MessageBox.Show("空调开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 changeSwitchColor();
                 m_IsSwitch = true;

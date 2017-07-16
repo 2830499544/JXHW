@@ -79,12 +79,12 @@ namespace JXHighWay.WatchHouse.WFPClient
             int vDanQianWD = (int)Label_DanQianWD.Tag;
             vDanQianWD++;
             if (vDanQianWD<15 || vDanQianWD>35 )
-                MessageBox.Show("超出地暖温度区间范围15至35度", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                Xceed.Wpf.Toolkit.MessageBox.Show("超出地暖温度区间范围15至35度", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
             else
             {
                 bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.TiaoJieSW, (byte)(vDanQianWD>>0));
                 if ( !vResult )
-                    MessageBox.Show("地暖温度设置失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Xceed.Wpf.Toolkit.MessageBox.Show("地暖温度设置失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 else
                 {
                     Label_DanQianWD.Tag = vDanQianWD;
@@ -99,12 +99,12 @@ namespace JXHighWay.WatchHouse.WFPClient
             int vDanQianWD = (int)Label_DanQianWD.Tag;
             vDanQianWD--;
             if (vDanQianWD < 15 || vDanQianWD > 35)
-                MessageBox.Show("超出地暖温度区间范围15至35度", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                Xceed.Wpf.Toolkit.MessageBox.Show("超出地暖温度区间范围15至35度", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
             else
             {
                 bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.TiaoJieSW, (byte)(vDanQianWD >> 0));
                 if (!vResult)
-                    MessageBox.Show("地暖温度设置失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Xceed.Wpf.Toolkit.MessageBox.Show("地暖温度设置失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 else
                 {
                     Label_DanQianWD.Tag = vDanQianWD;
@@ -127,7 +127,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                 if (!vResult)
                 {
                     CheckBox_DiNuan.IsChecked = !vOldValue;
-                    MessageBox.Show("地暖开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Xceed.Wpf.Toolkit.MessageBox.Show("地暖开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 changeSwitchColor_DiNuan();
                 m_Switch_DiNuan = true;
@@ -162,7 +162,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                 if (!vResult)
                 {
                     CheckBox_ZuoJiao.IsChecked = !vOldValue;
-                    MessageBox.Show("左暖脚开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Xceed.Wpf.Toolkit.MessageBox.Show("左暖脚开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 changeSwitchColor_ZuoJiao();
                 m_Switch_DiNuan = true;
@@ -197,7 +197,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                 if (!vResult)
                 {
                     CheckBox_YouJiao.IsChecked = !vOldValue;
-                    MessageBox.Show("右暖脚开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Xceed.Wpf.Toolkit.MessageBox.Show("右暖脚开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 changeSwitchColor_YouJiao();
                 m_Switch_DiNuan = true;
