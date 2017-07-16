@@ -65,6 +65,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
 
             m_Configuration.AppSettings.Settings["PicUrl"].Value = PicUrl;
             m_Configuration.AppSettings.Settings["EmployeeUrl"].Value = EmployeeUrl;
+            m_Configuration.Save();
         }
         #endregion
     }

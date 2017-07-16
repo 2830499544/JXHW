@@ -121,6 +121,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resource\ButtonResource.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -162,10 +166,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="LED.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -473,7 +473,7 @@
     <Resource Include="Images\LED\LED.jpg" />
     <Resource Include="Images\GongHaoPai\BeiJing.jpg" />
     <Resource Include="Images\Login\BenJing.jpg" />
-    <Resource Include="Images\LED\AnNiu.jpg" />
+    <Resource Include="Images\Login\DenLu.jpg" />
     <Resource Include="Images\JianGe.jpg" />
     <Resource Include="Images\Logo.jpg" />
     <Resource Include="Images\Main\BaoJing.png" />
@@ -495,6 +495,7 @@
     <Resource Include="Images\Main\Chu.jpg" />
     <Resource Include="Images\Main\ShuanXiang.jpg" />
     <Resource Include="Images\Main\ShuanXiang_A.jpg" />
+    <Resource Include="Images\Login\LoginPage.jpg" />
     <Content Include="Transmit.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

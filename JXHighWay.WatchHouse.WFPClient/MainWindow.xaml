@@ -28,8 +28,8 @@
                 <ColumnDefinition Width="86*"/>
                 <ColumnDefinition Width="86*"/>
             </Grid.ColumnDefinitions>
-            <Image Grid.Column="0" HorizontalAlignment="Left" Height="69" VerticalAlignment="Top" Width="185" Source="Images/Logo.jpg"/>
-            <Label Content="智慧型收费岗亭管理系统" Grid.Column="1" HorizontalAlignment="Left" Margin="32,6,0,0" VerticalAlignment="Top" Width="418" FontSize="36" Height="55" FontFamily="兮妞-中黑体" Foreground="#FFF2F6F1"/>
+            <Image x:Name="Image_Logo" Grid.Column="0" HorizontalAlignment="Left" Height="69" VerticalAlignment="Top" Width="185" Source="Images/Logo.jpg"/>
+            <Label x:Name="Label_Title" Content="智慧型收费岗亭管理系统" Grid.Column="1" HorizontalAlignment="Left" Margin="32,6,0,0" VerticalAlignment="Top" Width="418" FontSize="36" Height="55" FontFamily="兮妞-中黑体" Foreground="#FFF2F6F1"/>
             <Image Grid.Column="4" Margin="21,11,17,10" MouseLeftButtonDown="Image_MouseLeftButtonDown_1">
                 <Image.Style>
                     <Style TargetType="Image">
@@ -61,12 +61,12 @@
         </Grid>
         <Grid Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left"  Height="34" Margin="10,6.667,0,0" VerticalAlignment="Top" Width="521">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="141*"/>
-                <ColumnDefinition Width="33*"/>
-                <ColumnDefinition Width="141*"/>
-                <ColumnDefinition Width="33*"/>
-                <ColumnDefinition Width="141*"/>
-                <ColumnDefinition Width="33*"/>
+                <ColumnDefinition Width="47*"/>
+                <ColumnDefinition Width="11*"/>
+                <ColumnDefinition Width="47*"/>
+                <ColumnDefinition Width="32.8"/>
+                <ColumnDefinition Width="47*"/>
+                <ColumnDefinition Width="33.6"/>
             </Grid.ColumnDefinitions>
             <Label x:Name="Label_Navigation1" Grid.Column="0" Grid.Row="0" Background="#8cadae" Content="主界面" FontSize="18" Cursor="Hand" MouseLeftButtonDown="Label_Navigation1_MouseLeftButtonDown" HorizontalAlignment="Left" Width="141" Foreground="#FFF9F5F5"/>
             <Image x:Name="Image_Navigation1" Grid.Row="0" HorizontalAlignment="Left" Height="33"  Width="43" Source="Images/DaoHan1.jpg" Grid.ColumnSpan="2" Margin="140,0,0,0"  />
@@ -76,7 +76,7 @@
             <Image x:Name="Image_Navigation3" Grid.Column="4" Grid.Row="0" HorizontalAlignment="Left" Height="33"   Width="33" Source="Images/DaoHan3.jpg" Margin="136,0,0,0" Grid.ColumnSpan="2"  />
         </Grid>
         <Image HorizontalAlignment="Left" Height="150" Grid.Row="3" VerticalAlignment="Top" Width="1024" Source="Images/DiBu1.jpg"/>
-        <Frame x:Name="MainFrame" Content="Frame" HorizontalAlignment="Left" Height="495" Grid.Row="1" VerticalAlignment="Top" Width="1024" Source="/JXHighWay.WatchHouse.WFPClient;component/MainPage.xaml" NavigationUIVisibility="Hidden" Margin="0,54,0,0" Grid.RowSpan="2"/>
+        <Frame x:Name="MainFrame" Content="Frame" HorizontalAlignment="Left" Height="495" Grid.Row="1" VerticalAlignment="Top" Width="1024" Source="/JXHighWay.WatchHouse.WFPClient;component/Login.xaml" NavigationUIVisibility="Hidden" Margin="0,54,0,0" Grid.RowSpan="2"/>
         <Image x:Name="image_DengGuan" HorizontalAlignment="Left" Height="43" Margin="29,107,0,0" Grid.Row="3" VerticalAlignment="Top" Width="72" Cursor="Hand" MouseLeftButtonDown="image_DengGuan_MouseLeftButtonDown" >
             <Image.Style>
                 <Style TargetType="{x:Type Image}">

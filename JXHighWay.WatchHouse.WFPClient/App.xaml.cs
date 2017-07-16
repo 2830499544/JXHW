@@ -80,6 +80,18 @@ namespace JXHighWay.WatchHouse.WFPClient
         /// 当前登陆管理员
         /// </summary>
         public static string AdminUser { get; set; }
+        /// <summary>
+        /// 岗亭权限
+        /// </summary>
+        public static bool Power_GangTing { get; set; }
+        /// <summary>
+        /// 电源权限
+        /// </summary>
+        public static bool Power_DianYuan { get; set; }
+        /// <summary>
+        /// LED控制权限
+        /// </summary>
+        public static bool Power_LED { get; set; }
 
         /// <summary>
         /// 一级导航名称
@@ -100,6 +112,9 @@ namespace JXHighWay.WatchHouse.WFPClient
         {
             //更改导航
 
+            Label vLabel_Title = (Label)Win.FindName("Label_Title");
+            Image vImage_Logo = (Image)Win.FindName("Image_Logo");
+
             Label vLabel_Navigation1 = (Label)Win.FindName("Label_Navigation1");
             Image vImage_Navigation1 = (Image)Win.FindName("Image_Navigation1");
 
@@ -116,10 +131,15 @@ namespace JXHighWay.WatchHouse.WFPClient
             Image vImage_XinFeng = (Image)Win.FindName("image_XinFeng");
             Image vImage_KongTiao = (Image)Win.FindName("image_KongTiao");
             Image vImage_DiNuan = (Image)Win.FindName("image_DiNuan");
+            Image vImage_GongHao = (Image)Win.FindName("image_GongHao");
+            
 
             switch ( Level)
             {
-                case 1:
+                case 0:
+                    vLabel_Title.Visibility = Visibility.Hidden;
+                    vImage_Logo.Visibility = Visibility.Hidden;
+
                     vLabel_Navigation1.Content = "主界面";
                     vLabel_Navigation1.Visibility = Visibility.Hidden;
                     vImage_Navigation1.Visibility = Visibility.Hidden;
@@ -137,8 +157,35 @@ namespace JXHighWay.WatchHouse.WFPClient
                     vImage_XinFeng.Visibility = Visibility.Hidden;
                     vImage_KongTiao.Visibility = Visibility.Hidden;
                     vImage_DiNuan.Visibility = Visibility.Hidden;
+                    vImage_GongHao.Visibility = Visibility.Hidden;
+                    break;
+                case 1:
+                    vLabel_Title.Visibility = Visibility.Visible;
+                    vImage_Logo.Visibility = Visibility.Visible;
+
+                    vLabel_Navigation1.Content = "主界面";
+                    vLabel_Navigation1.Visibility = Visibility.Hidden;
+                    vImage_Navigation1.Visibility = Visibility.Hidden;
+
+                    vLabel_Navigation2.Visibility = Visibility.Hidden;
+                    vImage_Navigation2.Visibility = Visibility.Hidden;
+
+                    vLabel_Navigation3.Visibility = Visibility.Hidden;
+                    vImage_Navigation3.Visibility = Visibility.Hidden;
+
+                    vImage_DengGuan.Visibility = Visibility.Hidden;
+                    vImage_ZhiDongMC.Visibility = Visibility.Hidden;
+                    vImage_DianYuan.Visibility = Visibility.Hidden;
+                    vImage_LED.Visibility = Visibility.Hidden;
+                    vImage_XinFeng.Visibility = Visibility.Hidden;
+                    vImage_KongTiao.Visibility = Visibility.Hidden;
+                    vImage_DiNuan.Visibility = Visibility.Hidden;
+                    vImage_GongHao.Visibility = Visibility.Hidden;
                     break;
                 case 2:
+                    vLabel_Title.Visibility = Visibility.Visible;
+                    vImage_Logo.Visibility = Visibility.Visible;
+
                     vLabel_Navigation1.Visibility = Visibility.Visible;
                     vImage_Navigation1.Visibility = Visibility.Visible;
 
@@ -156,8 +203,12 @@ namespace JXHighWay.WatchHouse.WFPClient
                     vImage_XinFeng.Visibility = Visibility.Visible;
                     vImage_KongTiao.Visibility = Visibility.Visible;
                     vImage_DiNuan.Visibility = Visibility.Visible;
+                    vImage_GongHao.Visibility = Visibility.Visible;
                     break;
                 case 3:
+                    vLabel_Title.Visibility = Visibility.Visible;
+                    vImage_Logo.Visibility = Visibility.Visible;
+
                     vLabel_Navigation1.Visibility = Visibility.Visible;
                     vImage_Navigation1.Visibility = Visibility.Visible;
 
@@ -175,6 +226,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                     vImage_XinFeng.Visibility = Visibility.Visible;
                     vImage_KongTiao.Visibility = Visibility.Visible;
                     vImage_DiNuan.Visibility = Visibility.Visible;
+                    vImage_GongHao.Visibility = Visibility.Visible;
                     break;
             }
             

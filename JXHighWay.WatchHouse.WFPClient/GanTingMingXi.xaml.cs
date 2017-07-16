@@ -189,18 +189,34 @@ namespace JXHighWay.WatchHouse.WFPClient
             WatchHouseMonitoring vWatchHouseMonitoring = new WatchHouseMonitoring();
             bool vGangTingState = false, vDianYuanState = false;
             vWatchHouseMonitoring.GetWatchHouseState(App.PowerID, ref vGangTingState, ref vDianYuanState);
+            //在线状态
             if (!vGangTingState)
             {
                 Image_DengGuan.Source = new BitmapImage(new Uri(@"Images/GanTingMingXi/DengGuan_L.jpg", UriKind.Relative));
                 Image_MenChuang.Source = new BitmapImage(new Uri(@"Images/GanTingMingXi/Men_L.jpg", UriKind.Relative));
-                Image_DianYuan.Source = new BitmapImage(new Uri(@"Images/GanTingMingXi/DianYuan_L.jpg", UriKind.Relative));
-                Image_LED.Source = new BitmapImage(new Uri(@"Images/GanTingMingXi/LED_L.jpg", UriKind.Relative));
                 Image_XinFeng.Source = new BitmapImage(new Uri(@"Images/GanTingMingXi/XingFeng_L.jpg", UriKind.Relative));
                 Image_KongTiao.Source = new BitmapImage(new Uri(@"Images/GanTingMingXi/KongTiao_L.jpg", UriKind.Relative));
                 Image_DiNuan.Source = new BitmapImage(new Uri(@"Images/GanTingMingXi/DiRuan_L.jpg", UriKind.Relative));
+                Image_GongHao.Source = new BitmapImage(new Uri(@"Images/GanTingMingXi/DianZhiPai_L.jpg", UriKind.Relative));
             }
             if ( !vDianYuanState)
                 Image_DianYuan.Source = new BitmapImage(new Uri(@"Images/GanTingMingXi/DianYuan_L.jpg", UriKind.Relative));
+
+            //权限控制
+            if ( !App.Power_GangTing )
+            {
+                Image_DengGuan.IsEnabled = false;
+                Image_MenChuang.IsEnabled = false;
+                Image_XinFeng.IsEnabled = false;
+                Image_KongTiao.IsEnabled = false;
+                Image_DiNuan.IsEnabled = false;
+                Image_GongHao.IsEnabled = false;
+            }
+            if (!App.Power_LED)
+                Image_LED.IsEnabled = false;
+            if (!App.Power_DianYuan)
+                Image_DianYuan.IsEnabled = false;
+
         }
     }
 }

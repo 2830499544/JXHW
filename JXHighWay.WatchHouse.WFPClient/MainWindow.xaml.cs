@@ -67,7 +67,7 @@ namespace JXHighWay.WatchHouse.WFPClient
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Window vWin = Window.GetWindow(this);
-            App.ChangeNavigation(1, vWin, "主界面");
+            App.ChangeNavigation(0, vWin, "主界面");
         }
 
         private void Image_MouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
