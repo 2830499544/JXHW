@@ -71,7 +71,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
         }
 
         public bool Update(int ID, int GanTingID, string GanTingMC, string GanTingLX,
-            string LedIP, string DianYuanID1,int DianYuanID2,  DataTable SwitchInfoTable1,DataTable SwitchInfoTable2,
+            string LedIP, string DianYuanID1,string DianYuanID2,  DataTable SwitchInfoTable1,DataTable SwitchInfoTable2,
             ref string OutInfo)
         {
             bool vResult = false;
@@ -82,6 +82,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
                 GangTingLX = GanTingLX,
                 GuanGaoPingIP = LedIP,
                 DianYuan1ID = DianYuanID1,
+                DianYuan2ID = DianYuanID2,
                 ID = ID,
                 OrderID = convertWatchHouseLXToOrderID(GanTingLX)
             };

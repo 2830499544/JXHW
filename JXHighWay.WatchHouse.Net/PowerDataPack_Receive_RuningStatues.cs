@@ -48,6 +48,12 @@ namespace JXHighWay.WatchHouse.Net.DataPack
         /// 设备类型 0漏保 1分路 2分路(带漏保) 3漏保插座 4 普插座
         /// </summary>
         public byte LeiXing { get; set; }
+
+        /// <summary>
+        /// 开关状态
+        /// </summary>
+        public byte SwitchState1 { get; set; }
+        public byte SwitchState2 { get; set; }
         /// <summary>
         /// 路号
         /// </summary>

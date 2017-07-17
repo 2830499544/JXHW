@@ -15,7 +15,7 @@ namespace JXHighWay.WatchHouse.Server
     {
 
         public DataTable SwitchTable { get; set; }
-        public int DianYuanID { get; set; }
+        public string DianYuanID { get; set; }
         public SwitchConfigForm()
         {
             InitializeComponent();

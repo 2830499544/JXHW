@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace JXHighWay.WatchHouse.Net.DataPack
 {
-    public class PowerDataPack_Receive_Event
+    public struct PowerDataPack_Receive_Event
     {
         /// <summary>
         /// 头

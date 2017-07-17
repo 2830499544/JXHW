@@ -8,7 +8,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
 {
     public class TimingInfo
     {
-        public int DianYuanID { get; set; }
+        public string DianYuanID { get; set; }
         public byte LuHao { get; set; }
 
         public byte LeiXing { get; set; }

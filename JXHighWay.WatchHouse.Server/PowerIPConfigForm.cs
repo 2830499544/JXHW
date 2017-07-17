@@ -18,7 +18,7 @@ namespace JXHighWay.WatchHouse.Server
             InitializeComponent();
         }
 
-        public int DianYuanID { get; set; }
+        public string DianYuanID { get; set; }
 
         private void maskedTextBox_IPAddress_KeyDown(object sender, KeyEventArgs e)
         {

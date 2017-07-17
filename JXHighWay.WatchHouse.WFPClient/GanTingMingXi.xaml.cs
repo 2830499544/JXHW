@@ -195,7 +195,7 @@ namespace JXHighWay.WatchHouse.WFPClient
         {
             WatchHouseMonitoring vWatchHouseMonitoring = new WatchHouseMonitoring();
             bool vGangTingState = false, vDianYuanState = false;
-            vWatchHouseMonitoring.GetWatchHouseState(App.PowerID, ref vGangTingState, ref vDianYuanState);
+            vWatchHouseMonitoring.GetWatchHouseState(App.WatchHouseID, ref vGangTingState, ref vDianYuanState);
             //在线状态
             if (!vGangTingState)
             {

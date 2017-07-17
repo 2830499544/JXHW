@@ -109,7 +109,7 @@ namespace JXHighWay.WatchHouse.WFPClient
 
         void bindTimingInfo(TimingInfo timingInfo,int zhuHao)
         {
-            if (timingInfo != null && timingInfo.DianYuanID != 0)
+            if (timingInfo != null && timingInfo.DianYuanID != null && timingInfo.DianYuanID != "")
             {
                 Label vLabel_DS_CZ = (Label)FindName(string.Format("label_DS_CZ{0}", zhuHao));
                 Label vLabel_DS_ZQ = (Label)FindName(string.Format("label_DS_ZQ{0}", zhuHao));
@@ -324,7 +324,7 @@ namespace JXHighWay.WatchHouse.WFPClient
 
             Label vLabel_DS_CZ = (Label)FindName(string.Format("label_DS_CZ{0}", m_EditZhuHao));
             TimingInfo vTimingInfo = m_TimingInfoList.Where(m => m.LuHao == m_EditZhuHao).FirstOrDefault();
-            if (vTimingInfo!=null && vTimingInfo.DianYuanID!=0)
+            if (vTimingInfo!=null && vTimingInfo.DianYuanID != null && vTimingInfo.DianYuanID!="")
             {
                 //comboBox_ZQ.Text = m_PowerMonitoring.ConvertTimingZQ(vTimingInfo.ZhouQi);
                

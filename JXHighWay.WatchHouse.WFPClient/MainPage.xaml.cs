@@ -47,13 +47,13 @@ namespace JXHighWay.WatchHouse.WFPClient
                 string[] vTagInfo = ((string)vImage.Tag).Split('&');
                 if (vTagInfo.Length == 5)
                 {
-                    int vWatchHouseID ,vPowerID=0;
-                    if (int.TryParse(vTagInfo[0], out vWatchHouseID) && int.TryParse(vTagInfo[2], out vPowerID))
+                    int vWatchHouseID;
+                    if (int.TryParse(vTagInfo[0], out vWatchHouseID) )
                     {
                         App.WatchHouseID = vWatchHouseID;
                         App.WatchHouseName = vTagInfo[1];
                         App.WatchHouseType = vTagInfo[4];
-                        App.PowerID = vPowerID;
+                        App.PowerID = vTagInfo[2];
                         App.LEDIP = vTagInfo[3];
                         pageFrame.Source = new Uri("GanTingMingXi.xaml", UriKind.Relative);
                         App.ChangeNavigation(2, vWin, App.WatchHouseName);

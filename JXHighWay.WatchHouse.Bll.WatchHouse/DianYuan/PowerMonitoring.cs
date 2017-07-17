@@ -31,7 +31,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
         /// <param name="BiaoShiMa"></param>
         /// <param name="Data"></param>
         /// <returns></returns>
-        public async Task<bool> SendCMD_SwitchParam(int DianYuanID, byte SheBieLX, byte LuHao, 
+        public async Task<bool> SendCMD_SwitchParam(string DianYuanID, byte SheBieLX, byte LuHao, 
             PowerDataPack_Send_SwitchParam_CommandEnum BiaoShiMa,short Data)
         {
             PowerDataPack_Send_SwitchParam vData = new PowerDataPack_Send_SwitchParam()
@@ -89,7 +89,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
         /// <param name="LuHao">路号</param>
         /// <param name="IsOn">开或关</param>
         /// <returns></returns>
-        public async Task<bool> SendCMD_Switch(int DianYuanID, byte SheBieLX, byte LuHao, bool IsOn)
+        public async Task<bool> SendCMD_Switch(string DianYuanID, byte SheBieLX, byte LuHao, bool IsOn)
         {
             PowerDataPack_Send_Switch vData = new PowerDataPack_Send_Switch()
             {
@@ -113,7 +113,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
         /// <param name="YunXuKZ">允许控制</param>
         /// <param name="TimeData">时间数据</param>
         /// <returns></returns>
-        public async Task<bool> SendCMD_Timing(int DianYuanID, byte SheBieLX, byte LuHao,
+        public async Task<bool> SendCMD_Timing(string DianYuanID, byte SheBieLX, byte LuHao,
             byte ZhuHao,byte RenWuLX,byte ZhouQi,byte YunXuKZ,int TimeData  )
         {
             PowerDataPack_Send_Timing vData = new PowerDataPack_Send_Timing()
@@ -176,7 +176,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
             return vResult;
         }
 
-        async Task<bool> asyncSendCommandToDB<T>(int dianYuanID, PowerDataPack_Send_CommandEnum command, T SendData)
+        async Task<bool> asyncSendCommandToDB<T>(string dianYuanID, PowerDataPack_Send_CommandEnum command, T SendData)
         {
             return await Task.Run(() =>
             {
@@ -211,7 +211,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
         #endregion
 
 
-        public PowerInfo[] GetPowerLuSu( int DianYuanID)
+        public PowerInfo[] GetPowerLuSu( string DianYuanID)
         {
             PowerSwithConfigEFModel vPowerSwithConfigEFModel = new PowerSwithConfigEFModel()
             {
@@ -239,14 +239,14 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
         /// <param name="DianYuanID">电源ID</param>
         /// <param name="LuHao">路号</param>
         /// <returns></returns>
-        public PowerInfo[] GetYongDianLiang_Yue(int DianYuanID, int LuHao)
+        public PowerInfo[] GetYongDianLiang_Yue(string DianYuanID, int LuHao)
         {
             PowerInfo[] vResult = null;
             DateTime vKaiShiSJ = DateTime.Now.AddDays(-7);
             DateTime vJieShuSJ = DateTime.Now;
             string vSql = string.Format("Select MAX(DianNeng) as DianNeng,Time From `电源数据` where unix_timestamp( Time ) "
                 + "between unix_timestamp( '{0:yyyy-MM-dd 00:00:00}') and unix_timestamp('{1:yyyy-MM-dd 23:59:59}') "
-                + "and DianYuanID={2} and LuHao={3} GROUP BY DAYOFYEAR(Time)", vKaiShiSJ, vJieShuSJ, DianYuanID, LuHao);
+                + "and DianYuanID='{2}' and LuHao={3} GROUP BY DAYOFYEAR(Time)", vKaiShiSJ, vJieShuSJ, DianYuanID, LuHao);
             PowerDataViewEFModel[] vSelectResult = m_BasicDBClass.SelectCustomEx<PowerDataViewEFModel>(vSql);
             vResult = new PowerInfo[vSelectResult.Length];
             double vOldDianNeng = 0;
@@ -269,14 +269,14 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
         /// <param name="DianYuanID"></param>
         /// <param name="LuHao"></param>
         /// <returns></returns>
-        public PowerInfo[] GetYongDianLiang_Ri(int DianYuanID, int LuHao)
+        public PowerInfo[] GetYongDianLiang_Ri(string DianYuanID, int LuHao)
         {
             PowerInfo[] vResult = null;
             DateTime vKaiShiSJ = DateTime.Now;
             DateTime vJieShuSJ = DateTime.Now;
             string vSql = string.Format("Select MAX(DianNeng) as DianNeng,Time From `电源数据` where unix_timestamp( Time ) "
                 + "between unix_timestamp( '{0:yyyy-MM-dd 00:00:00}') and unix_timestamp('{1:yyyy-MM-dd 23:59:59}') "
-                + "and DianYuanID={2} and LuHao={3} GROUP BY HOUR(Time)", vKaiShiSJ, vJieShuSJ, DianYuanID, LuHao);
+                + "and DianYuanID='{2}' and LuHao={3} GROUP BY HOUR(Time)", vKaiShiSJ, vJieShuSJ, DianYuanID, LuHao);
             PowerDataViewEFModel[] vSelectResult = m_BasicDBClass.SelectCustomEx<PowerDataViewEFModel>(vSql);
             vResult = new PowerInfo[vSelectResult.Length];
             double vOldDianNeng = 0;
@@ -299,14 +299,14 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
         /// <param name="DianYuanID"></param>
         /// <param name="LuHao"></param>
         /// <returns></returns>
-        public PowerInfo[] GetYongDianLiang_Nian(int DianYuanID, int LuHao)
+        public PowerInfo[] GetYongDianLiang_Nian(string DianYuanID, int LuHao)
         {
             PowerInfo[] vResult = null;
             DateTime vKaiShiSJ = DateTime.Now.AddMonths(-12);
             DateTime vJieShuSJ = DateTime.Now;
             string vSql = string.Format("Select MAX(DianNeng) as DianNeng,Time From `电源数据` where unix_timestamp( Time ) "
                 + "between unix_timestamp( '{0:yyyy-MM-dd 00:00:00}') and unix_timestamp('{1:yyyy-MM-dd 23:59:59}') "
-                + "and DianYuanID={2} and LuHao={3} GROUP BY Month(Time)", vKaiShiSJ, vJieShuSJ, DianYuanID, LuHao);
+                + "and DianYuanID='{2}' and LuHao={3} GROUP BY Month(Time)", vKaiShiSJ, vJieShuSJ, DianYuanID, LuHao);
             PowerDataViewEFModel[] vSelectResult = m_BasicDBClass.SelectCustomEx<PowerDataViewEFModel>(vSql);
             vResult = new PowerInfo[vSelectResult.Length];
             double vOldDianNeng = 0;
@@ -327,7 +327,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
         #endregion
 
         #region 定时
-        public List<TimingInfo> GetTimingInfo( int DianYuanID,byte LuHao)
+        public List<TimingInfo> GetTimingInfo( string DianYuanID,byte LuHao)
         {
             TimingInfo[] vResult = new TimingInfo[0];
             PowerTimingEFModel vPowerTimingEFModel = new PowerTimingEFModel()
@@ -407,14 +407,14 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
         /// <param name="DianYuanID"></param>
         /// <param name="LuShu"></param>
         /// <returns></returns>
-        public PowerInfo GetNewPowerInfo( int DianYuanID ,int LuHao )
+        public PowerInfo GetNewPowerInfo( string DianYuanID ,int LuHao )
         {
             PowerInfo vResult = null;
             //string vSql = string.Format("Select `电源数据`.*,`电源开关配置`.MinCheng,`电源开关配置`.LeiXing From "
             //    +"`电源数据` inner join `电源开关配置` on `电源数据`.DianYuanID=`电源开关配置`.DianYuanID Where "
             //    +"`电源数据`.DianYuanID={0} and `电源数据`.LuHao={1} and  `电源开关配置`.LuHao={1} order by `电源数据`.id desc LIMIT 1", DianYuanID,LuHao);
 
-            string vSql = string.Format("Select * From `V_电源数据` Where DianYuanID={0} and LuHao={1} order by id desc LIMIT 1", DianYuanID,LuHao);
+            string vSql = string.Format("Select * From `V_电源数据` Where DianYuanID='{0}' and LuHao={1} order by id desc LIMIT 1", DianYuanID,LuHao);
 
             PowerDataViewEFModel vSelectResult = m_BasicDBClass.SelectCustomEx<PowerDataViewEFModel>(vSql).FirstOrDefault();
             if (vSelectResult.ID != 0 )
@@ -441,7 +441,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
         #endregion
 
         #region 分路开关参数
-        public ParamInfo GetSwitchParamInfo(int DianYuanID,int LuoHao)
+        public ParamInfo GetSwitchParamInfo(string DianYuanID,int LuoHao)
         {
             ParamInfo vResult = new ParamInfo();
             PowerSwithConfigEFModel vPowerSwithConfigEFModel = new PowerSwithConfigEFModel()
@@ -472,7 +472,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
         #endregion
 
         #region 日志
-        public LogInfo[] GetLog(int DianYuanID,int LuHoa,string LeiXing)
+        public LogInfo[] GetLog(string DianYuanID,int LuHoa,string LeiXing)
         {
             LogInfo[] vResult = new LogInfo[0];
             PowerEventEFModel vModel = new PowerEventEFModel()

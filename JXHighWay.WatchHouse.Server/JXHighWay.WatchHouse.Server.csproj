@@ -183,6 +183,7 @@
     <Content Include="EmployeeInfo\3.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="highway.sql" />
     <Content Include="Photo\3.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

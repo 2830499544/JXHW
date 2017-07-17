@@ -82,7 +82,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
             vResult[1] = (byte)(vCalcResult >> 0);
             return vResult[1];
         }
-        public async Task<bool> SendCMD_SetIP( int DianYuanID,string IPAddress,string Mask,string Gateway,bool DHCP,
+        public async Task<bool> SendCMD_SetIP( string DianYuanID,string IPAddress,string Mask,string Gateway,bool DHCP,
             string ServerIP,short Port )
         {
             PowerDataPack_Send_SetIPAddress vData = new PowerDataPack_Send_SetIPAddress()
@@ -112,7 +112,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
             m_SocketManager.SendMessage(m_SocketManager.ClientList[0], vDataPackBytes);
         }
 
-        async Task<bool> asyncSendCommandToDB<T>(int dianYuanID, PowerDataPack_Send_CommandEnum command, T SendData)
+        async Task<bool> asyncSendCommandToDB<T>(string dianYuanID, PowerDataPack_Send_CommandEnum command, T SendData)
         {
             return await Task.Run(() =>
             {
@@ -163,7 +163,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
                         if (ReceiveQueue.Count > 0)
                         {
                             WHQueueModel vReceiveData = ReceiveQueue.Dequeue();
-                            switch (vReceiveData.Data[5])
+                            switch (vReceiveData.Data[11])
                             {
                                 //处理接收到的电源状态数据
                                 case (byte)PowerDataPack_Receive_CommandEnum.RunningStatus:
@@ -206,7 +206,35 @@ namespace JXHighWay.WatchHouse.Bll.Server
             };
         }
 
-        string convertDianYuanLeiXing(byte leiXing)
+
+        string convertSwitchState(byte[] zhuanTai )
+        {
+            string vResult = "";
+            string vZhuanTaiStr = BitConverter.ToString(zhuanTai);
+            switch ( vZhuanTaiStr.ToUpper() )
+            {
+                case "00-00":
+                    vResult = "关";
+                    break;
+                case "FF-00":
+                    vResult = "开";
+                    break;
+                case "00-FF":
+                    vResult = "开时关";
+                    break;
+                case "FF-FF":
+                    vResult = "开时开";
+                    break;
+            }
+            return vResult;
+        }
+
+        /// <summary>
+        /// 转换开关类型
+        /// </summary>
+        /// <param name="leiXing"></param>
+        /// <returns></returns>
+        string convertSwitchLeiXing(byte leiXing)
         {
             string vResult = "";
             switch ( leiXing)
@@ -405,7 +433,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
                 PowerEventEFModel vPowerEventEFModel = new PowerEventEFModel()
                 {
                     DianYuanID = BitConverter.ToString( new byte[] { data.MAC1,data.MAC2,data.MAC3,data.MAC4,data.MAC5,data.MAC6 } ),
-                    LeiXi = convertDianYuanLeiXing(data.LeiXing),
+                    LeiXi = convertSwitchLeiXing(data.LeiXing),
                     LuHao = data.LuHao,
                     ShiJianLX = convertShiJianLX(data.ShiJinLX),
                     NeiRong = convertShiJianNR(data.ShiJinLX, data.ShiJianBM),
@@ -435,8 +463,11 @@ namespace JXHighWay.WatchHouse.Bll.Server
                     WenDu = BitConverter.ToInt16(new byte[] { vData.WenDu2, vData.WenDu1 }, 0),
                     WuGongGL = BitConverter.ToInt16(new byte[] { vData.WuGongGL2, vData.WuGongGL1 }, 0),
                     YouGongGL = BitConverter.ToInt16(new byte[] { vData.YouGongGL2, vData.YouGongGL1 }, 0),
-                    LeiXing = convertDianYuanLeiXing(vData.LeiXing),
-                    DianYuanID = BitConverter.ToString(new byte[] { vData.MAC1, vData.MAC2, vData.MAC3, vData.MAC4, vData.MAC5, vData.MAC6 })
+                    LeiXing = convertSwitchLeiXing(vData.LeiXing),
+                    DianYuanID = BitConverter.ToString(new byte[] { vData.MAC1, vData.MAC2, vData.MAC3, vData.MAC4, vData.MAC5, vData.MAC6 }),
+                    ZhuanTai = convertSwitchState( new byte[] {vData.SwitchState1,vData.SwitchState2 } ),
+                    Time = DateTime.Now
+                     
                 };
                 WatchHouseConfigEFModel vWatchHouseConfigEFModel = new WatchHouseConfigEFModel()
                 {
@@ -445,7 +476,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
                 };
                 m_BasicDBClass_Receive.TransactionBegin();
                 m_BasicDBClass_Receive.InsertRecord(vModel);
-                m_BasicDBClass_Receive.UpdateRecord(vWatchHouseConfigEFModel, string.Format("DianYuanID='{0}'", vModel.DianYuanID));
+                m_BasicDBClass_Receive.UpdateRecord(vWatchHouseConfigEFModel, string.Format("DianYuan1ID='{0}'", vModel.DianYuanID));
                 m_BasicDBClass_Receive.TransactionCommit();
                 //更新客户端字典表
                 if (m_ClientDict.ContainsKey(vModel.DianYuanID) )
@@ -478,19 +509,26 @@ namespace JXHighWay.WatchHouse.Bll.Server
                             vAsyncUserToken = m_SocketManager.ClientList[0];
                         if (vAsyncUserToken != null)
                         {
+                            byte[] vMac = NetHelper.StringToBytes(vTempResult.DianYuanID);
                             PowerDataPack_Main vCommandDataPack = new PowerDataPack_Main()
                             {
                                 Head = 0x5a,
                                 Tail = 0x5b,
-                                SN = 0x01,//vTempResult.SN ?? 0x00,
+                                SN = NetHelper.MarkSN_Byte(),// 0x01,//vTempResult.SN ?? 0x00,
                                 CMD = vTempResult.CMD ?? 0x00,
-                                Addition = 0x00
+                                Addition = 0x00,
+                                MAC1 = vMac[0],
+                                MAC2 = vMac[1],
+                                MAC3 = vMac[2],
+                                MAC4 = vMac[3],
+                                MAC5 = vMac[4],
+                                MAC6 = vMac[5],
                             };
                             List<byte> vCMDDataPack = Helper.NetHelper.StructureToByte(vCommandDataPack).ToList();
                             if ( vTempResult.Data != null )
                             {
                                 List<byte> vDataPack = System.Text.Encoding.Default.GetBytes(vTempResult.Data).ToList();
-                                vCMDDataPack.InsertRange(6, vDataPack);
+                                vCMDDataPack.InsertRange(12, vDataPack);
                             }
                             byte[] vLength = BitConverter.GetBytes((short)vCMDDataPack.Count);
                             //包长度

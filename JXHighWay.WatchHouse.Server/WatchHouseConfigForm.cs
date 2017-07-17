@@ -22,7 +22,7 @@ namespace JXHighWay.WatchHouse.Server
         private void button_Add_Click(object sender, EventArgs e)
         {
             int vGanTingID = 0;
-            int vDianYuanID1 = 0, vDianYuanID2=0;
+            string vDianYuanID1 = "", vDianYuanID2="";
             string vOutInfo = "";
             if (!int.TryParse(textBox_GanTing_ID.Text, out vGanTingID))
             {
@@ -30,18 +30,19 @@ namespace JXHighWay.WatchHouse.Server
                 return;
             }
 
-            if (!int.TryParse(textBox_DY1_ID.Text, out vDianYuanID1))
-            {
-                MessageBox.Show("电源1编号必须为数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+            //if (!int.TryParse(textBox_DY1_ID.Text, out vDianYuanID1))
+            //{
+            //    MessageBox.Show("电源1编号必须为数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    return;
+            //}
 
-            if (!int.TryParse(textBox_DY2_ID.Text, out vDianYuanID2))
-            {
-                MessageBox.Show("电源2编号必须为数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
+            //if (!int.TryParse(textBox_DY2_ID.Text, out vDianYuanID2))
+            //{
+            //    MessageBox.Show("电源2编号必须为数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    return;
+            //}
+            vDianYuanID1 = textBox_DY1_ID.Text;
+            vDianYuanID2 = textBox_DY2_ID.Text;
             DataTable vSwitchTable1 = button_DY1_KaiGuan.Tag == null ? null : (DataTable)button_DY1_KaiGuan.Tag;
             DataTable vSwitchTable2 = button_DY2_KaiGuan.Tag == null ? null : (DataTable)button_DY2_KaiGuan.Tag;
             if (m_WatchHouseConfig.Add(vGanTingID, textBox_GanTing_MC.Text,
@@ -89,7 +90,7 @@ namespace JXHighWay.WatchHouse.Server
         private void button_Update_Click(object sender, EventArgs e)
         {
             int vGanTingID = 0;
-            int vDianYuanID1 = 0, vDianYuanID2=0;
+            string vDianYuanID1 = "", vDianYuanID2="";
             string vOutInfo = "";
             if (!int.TryParse(textBox_GanTing_ID.Text, out vGanTingID))
             {
@@ -97,18 +98,19 @@ namespace JXHighWay.WatchHouse.Server
                 return;
             }
 
-            if (!int.TryParse(textBox_DY1_ID.Text, out vDianYuanID1))
-            {
-                MessageBox.Show("电源1编号必须为数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+            //if (!int.TryParse(textBox_DY1_ID.Text, out vDianYuanID1))
+            //{
+            //    MessageBox.Show("电源1编号必须为数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    return;
+            //}
 
-            if (!int.TryParse(textBox_DY2_ID.Text, out vDianYuanID2))
-            {
-                MessageBox.Show("电源2编号必须为数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
+            //if (!int.TryParse(textBox_DY2_ID.Text, out vDianYuanID2))
+            //{
+            //    MessageBox.Show("电源2编号必须为数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    return;
+            //}
+            vDianYuanID1 = textBox_DY1_ID.Text;
+            vDianYuanID2 = textBox_DY2_ID.Text;
             DataTable vSwitchTable1 = button_DY1_KaiGuan.Tag == null ? null : (DataTable)button_DY1_KaiGuan.Tag;
             DataTable vSwitchTable2 = button_DY2_KaiGuan.Tag == null ? null : (DataTable)button_DY2_KaiGuan.Tag;
             int vID = (int)dataGridView_List.SelectedRows[0].Cells["Column_ID"].Value;
@@ -142,8 +144,8 @@ namespace JXHighWay.WatchHouse.Server
 
         private void button_DY_KaiGuan_Click(object sender, EventArgs e)
         {
-            int vDianYuanID = textBox_DY1_ID.Text == "" ? 0 : int.Parse(textBox_DY1_ID.Text);
-            if (vDianYuanID != 0)
+            string vDianYuanID = textBox_DY1_ID.Text;
+            if (vDianYuanID != "")
             {
                 DataTable vSwitchTable = new DataTable();
                 if (button_DY1_KaiGuan.Tag == null)
@@ -191,8 +193,8 @@ namespace JXHighWay.WatchHouse.Server
 
         private void button_DY2_KaiGuan_Click(object sender, EventArgs e)
         {
-            int vDianYuanID = textBox_DY2_ID.Text == "" ? 0 : int.Parse(textBox_DY2_ID.Text);
-            if (vDianYuanID != 0)
+            string vDianYuanID = textBox_DY2_ID.Text;
+            if (vDianYuanID != "")
             {
                 DataTable vSwitchTable = new DataTable();
                 if (button_DY1_KaiGuan.Tag == null)

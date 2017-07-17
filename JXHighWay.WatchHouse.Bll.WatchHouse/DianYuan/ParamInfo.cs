@@ -11,7 +11,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
         /// <summary>
         /// 电源ID
         /// </summary>
-        public int DianYuanID { get; set; }
+        public string DianYuanID { get; set; }
         /// <summary>
         /// 路号
         /// </summary>
