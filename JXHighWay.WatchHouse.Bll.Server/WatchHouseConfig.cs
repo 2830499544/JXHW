@@ -23,9 +23,9 @@ namespace JXHighWay.WatchHouse.Bll.Server
             m_BasicDBClass = new BasicDBClass(DataBaseType.MySql);
         }
 
-        bool findGanTing(int GangTingID,int DianYuanID)
+        bool findGanTing(int GangTingID,string DianYuanID)
         {
-            string vSql = string.Format("Select *From `岗亭配置` Where GangTingID={0} or DianYuanID={1}", GangTingID, DianYuanID);
+            string vSql = string.Format("Select *From `岗亭配置` Where GangTingID={0} or DianYuanID='{1}'", GangTingID, DianYuanID);
             return m_BasicDBClass.SelectCustomEx<WatchHouseConfigEFModel>(vSql).Length > 0 ? true : false;
         }
 
@@ -34,7 +34,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
             return m_BasicDBClass.SelectAllRecords<WatchHouseConfigEFModel>();
         }
 
-        public DataTable GetSwitchTable( int DianYuanID )
+        public DataTable GetSwitchTable( string DianYuanID )
         {
             PowerSwithConfigEFModel vPowerSwithConfigEFModel = new PowerSwithConfigEFModel()
             {
@@ -71,7 +71,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
         }
 
         public bool Update(int ID, int GanTingID, string GanTingMC, string GanTingLX,
-            string LedIP, int DianYuanID1,int DianYuanID2,  DataTable SwitchInfoTable1,DataTable SwitchInfoTable2,
+            string LedIP, string DianYuanID1,int DianYuanID2,  DataTable SwitchInfoTable1,DataTable SwitchInfoTable2,
             ref string OutInfo)
         {
             bool vResult = false;
@@ -177,7 +177,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
         }
 
         public bool Add(int GanTingID,string GanTingMC,string GanTingLX,
-            string LedIP,int DianYuanID1,int DianYuanID2,DataTable SwitchInfoTable1,DataTable SwitchInfoTable2,
+            string LedIP,string DianYuanID1,string DianYuanID2,DataTable SwitchInfoTable1,DataTable SwitchInfoTable2,
             ref string OutInfo )
         {
             bool vResult = false;

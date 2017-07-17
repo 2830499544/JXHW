@@ -64,5 +64,17 @@ namespace JXHighWay.WatchHouse.Helper
             vRD.NextBytes(vResult);
             return vResult[0];
         }
+
+
+        public static byte[] StringToBytes( string StrBytes)
+        {
+            List<byte> vByteList = new List<byte>();
+            string[] vStrBytesArray = StrBytes.Split('-');
+            foreach( string vTempStr in vStrBytesArray)
+            {
+                vByteList.Add(byte.Parse(vTempStr, System.Globalization.NumberStyles.AllowHexSpecifier));
+            }
+            return vByteList.ToArray();
+        }
     }
 }

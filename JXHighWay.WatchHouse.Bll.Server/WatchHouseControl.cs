@@ -17,7 +17,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
 {
     public class WatchHouseControl:BasicControl
     {
-
+        new Dictionary<int, string> m_ClientDict = null;
 
         bool m_IsRun = false;
         BasicDBClass m_BasicDBClassSelect = null;
@@ -27,6 +27,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
             Config vConfig = new Config();
             Port = vConfig.WatchHousePort;
             m_BasicDBClassSelect = new BasicDBClass(DataBaseType.MySql);
+            m_ClientDict = new Dictionary<int, string>();
         }
 
         public void Start()
@@ -57,7 +58,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
             WatchHouseConfigEFModel[] vWatchHouseConfig= m_BasicDBClass_Receive.SelectAllRecordsEx<WatchHouseConfigEFModel>();
             foreach(WatchHouseConfigEFModel vTempConfig in vWatchHouseConfig)
             {
-                m_ClientDict.Add(vTempConfig.GangTingID.Value, "");
+                m_ClientDict.Add(vTempConfig.GangTingID??0, "");
             }
         }
 
@@ -242,6 +243,18 @@ namespace JXHighWay.WatchHouse.Bll.Server
         //        }
         //    });
         //}
+
+        protected AsyncUserToken findAsyncUserToken(int id)
+        {
+            AsyncUserToken vResult = null;
+            if (m_ClientDict.ContainsKey(id))
+            {
+                string vIPAddress = m_ClientDict[id];
+                vResult = m_SocketManager.ClientList.Where(m => m.IPAddress.ToString() == vIPAddress).FirstOrDefault();
+            }
+
+            return vResult;
+        }
 
         async void asyncProcessorDBSendCMD()
         {

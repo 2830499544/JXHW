@@ -39,7 +39,6 @@ namespace JXHighWay.WatchHouse.Bll.Server
 
             //处理数据库中的待发送命令
             asyncProcessorDBSendCMD();
-
         }
 
         public void Stop()
@@ -67,7 +66,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
             WatchHouseConfigEFModel[] vWatchHouseConfig = m_BasicDBClass_Receive.SelectAllRecordsEx<WatchHouseConfigEFModel>();
             foreach (WatchHouseConfigEFModel vTempConfig in vWatchHouseConfig)
             {
-                m_ClientDict.Add(vTempConfig.DianYuan1ID??0, "");
+                m_ClientDict.Add(vTempConfig.DianYuan1ID, "");
             }
         }
 
@@ -89,7 +88,6 @@ namespace JXHighWay.WatchHouse.Bll.Server
             PowerDataPack_Send_SetIPAddress vData = new PowerDataPack_Send_SetIPAddress()
             {
                  DHCP = DHCP?(byte)0x01:(byte)0x00,
-                 
             };
             bool vResult = await asyncSendCommandToDB(DianYuanID, PowerDataPack_Send_CommandEnum.Send_SetIPAddress, vData);
             return vResult;
@@ -204,7 +202,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
             WatchHouseConfigEFModel vWatchHouseConfigEFModel = new WatchHouseConfigEFModel()
             {
                 DianYuanTXSJ = DateTime.Now,
-                DianYuan1ID = 11
+                DianYuan1ID = "11" //测试数据
             };
         }
 
@@ -383,15 +381,16 @@ namespace JXHighWay.WatchHouse.Bll.Server
         void processorData_ReplyCMD(PowerDataPack_Receive_CommandEnum comm, PowerDataPack_Receive_ReplyCMD dataPack)
         {
             string vSql = "";
+            string vDianYuanID = BitConverter.ToString(new byte[] { dataPack.MAC1, dataPack.MAC2, dataPack.MAC3, dataPack.MAC4, dataPack.MAC5, dataPack.MAC6 });
             PowerSendCMDEFModel vPowerSendCMDEFModel = new PowerSendCMDEFModel()
             {
                 IsReply = true,
                 State = dataPack.State == 0x00 ? true : false
             };
-            switch ( comm)
+            switch ( comm )
             {
                 case PowerDataPack_Receive_CommandEnum.SwitchStatus:
-                    vSql = string.Format("DianYuanID={0} and CMD={1:D} and SN={2}", 11, 0x41, dataPack.SN);
+                    vSql = string.Format("DianYuanID={0} and CMD={1:D} and SN={2}", vDianYuanID, 0x41, dataPack.SN);
                     break;
             }
 
@@ -405,12 +404,12 @@ namespace JXHighWay.WatchHouse.Bll.Server
             {
                 PowerEventEFModel vPowerEventEFModel = new PowerEventEFModel()
                 {
-                    DianYuanID = data.Addition,
+                    DianYuanID = BitConverter.ToString( new byte[] { data.MAC1,data.MAC2,data.MAC3,data.MAC4,data.MAC5,data.MAC6 } ),
                     LeiXi = convertDianYuanLeiXing(data.LeiXing),
                     LuHao = data.LuHao,
                     ShiJianLX = convertShiJianLX(data.ShiJinLX),
                     NeiRong = convertShiJianNR(data.ShiJinLX, data.ShiJianBM),
-                    Time = DateTime.Now
+                    Time = DateTime.Now,
                 };
                 m_BasicDBClass_Receive.InsertRecord(vPowerEventEFModel);
             }
@@ -426,17 +425,18 @@ namespace JXHighWay.WatchHouse.Bll.Server
             {
                 PowerDataEFModel vModel = new PowerDataEFModel()
                 {
-                    DianLiu = BitConverter.ToInt16(new byte[] { vData.DianLiu2, vData.DianLiu1 },0),
-                    DianYa = BitConverter.ToInt16(new byte[] { vData.DianYa2, vData.DianYa1 },0),
-                    DianNeng = BitConverter.ToInt32(new byte[] { vData.DianNeng4, vData.DianNeng3, vData.DianNeng2, vData.DianNeng1 },0),
-                    GongLuYinShu = BitConverter.ToInt16(new byte[] { vData.GongLuYS2, vData.GongLuYS1 },0),
-                    LouDianLiu = BitConverter.ToInt16(new byte[] { vData.LouDianLiu2, vData.LouDianLiu1 },0),
+                    DianLiu = BitConverter.ToInt16(new byte[] { vData.DianLiu2, vData.DianLiu1 }, 0),
+                    DianYa = BitConverter.ToInt16(new byte[] { vData.DianYa2, vData.DianYa1 }, 0),
+                    DianNeng = BitConverter.ToInt32(new byte[] { vData.DianNeng4, vData.DianNeng3, vData.DianNeng2, vData.DianNeng1 }, 0),
+                    GongLuYinShu = BitConverter.ToInt16(new byte[] { vData.GongLuYS2, vData.GongLuYS1 }, 0),
+                    LouDianLiu = BitConverter.ToInt16(new byte[] { vData.LouDianLiu2, vData.LouDianLiu1 }, 0),
                     LuHao = vData.LuHao,
-                    PinLu = BitConverter.ToInt16(new byte[] { vData.PinLu2, vData.PinLu1 },0),
-                    WenDu = BitConverter.ToInt16(new byte[] { vData.WenDu2, vData.WenDu1 },0),
-                    WuGongGL = BitConverter.ToInt16(new byte[] { vData.WuGongGL2, vData.WuGongGL1 },0),
-                    YouGongGL = BitConverter.ToInt16(new byte[] { vData.YouGongGL2, vData.YouGongGL1 },0),
-                    LeiXing = convertDianYuanLeiXing(vData.LeiXing)
+                    PinLu = BitConverter.ToInt16(new byte[] { vData.PinLu2, vData.PinLu1 }, 0),
+                    WenDu = BitConverter.ToInt16(new byte[] { vData.WenDu2, vData.WenDu1 }, 0),
+                    WuGongGL = BitConverter.ToInt16(new byte[] { vData.WuGongGL2, vData.WuGongGL1 }, 0),
+                    YouGongGL = BitConverter.ToInt16(new byte[] { vData.YouGongGL2, vData.YouGongGL1 }, 0),
+                    LeiXing = convertDianYuanLeiXing(vData.LeiXing),
+                    DianYuanID = BitConverter.ToString(new byte[] { vData.MAC1, vData.MAC2, vData.MAC3, vData.MAC4, vData.MAC5, vData.MAC6 })
                 };
                 WatchHouseConfigEFModel vWatchHouseConfigEFModel = new WatchHouseConfigEFModel()
                 {
@@ -445,11 +445,11 @@ namespace JXHighWay.WatchHouse.Bll.Server
                 };
                 m_BasicDBClass_Receive.TransactionBegin();
                 m_BasicDBClass_Receive.InsertRecord(vModel);
-                m_BasicDBClass_Receive.UpdateRecord(vWatchHouseConfigEFModel, string.Format("DianYuanID={0}", vModel.DianYuanID??0));
+                m_BasicDBClass_Receive.UpdateRecord(vWatchHouseConfigEFModel, string.Format("DianYuanID='{0}'", vModel.DianYuanID));
                 m_BasicDBClass_Receive.TransactionCommit();
                 //更新客户端字典表
-                if (m_ClientDict.ContainsKey(vModel.DianYuanID.Value) )
-                    m_ClientDict[vModel.DianYuanID.Value] = IPAddress;
+                if (m_ClientDict.ContainsKey(vModel.DianYuanID) )
+                    m_ClientDict[vModel.DianYuanID] = IPAddress;
             }
             catch(Exception ex)
             {

@@ -35,7 +35,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
         /// <summary>
         /// 客户端字典表
         /// </summary>
-        protected Dictionary<int, string> m_ClientDict { get; set; }
+        protected Dictionary<string, string> m_ClientDict { get; set; }
 
         public BasicControl()
         {
@@ -49,11 +49,11 @@ namespace JXHighWay.WatchHouse.Bll.Server
             m_BasicDBClass_Receive = new BasicDBClass(DataBaseType.MySql);
             m_BasicDBClass_Send = new BasicDBClass(DataBaseType.MySql);
             m_BasicDBClass_Return = new BasicDBClass(DataBaseType.MySql);
-            m_ClientDict = new Dictionary<int, string>();
+            m_ClientDict = new Dictionary<string, string>();
 
         }
 
-        protected AsyncUserToken findAsyncUserToken(int id)
+        protected virtual AsyncUserToken findAsyncUserToken(string id)
         {
             AsyncUserToken vResult = null;
             if (m_ClientDict.ContainsKey(id))
@@ -64,6 +64,8 @@ namespace JXHighWay.WatchHouse.Bll.Server
 
             return vResult;
         }
+
+        
 
     }
 }

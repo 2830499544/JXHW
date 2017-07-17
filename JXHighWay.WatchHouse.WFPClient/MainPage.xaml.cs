@@ -47,8 +47,8 @@ namespace JXHighWay.WatchHouse.WFPClient
                 string[] vTagInfo = ((string)vImage.Tag).Split('&');
                 if (vTagInfo.Length == 5)
                 {
-                    int vWatchHouseID ,vPowerID;
-                    if (int.TryParse(vTagInfo[0], out vWatchHouseID) && int.TryParse(vTagInfo[2],out vPowerID) )
+                    int vWatchHouseID ,vPowerID=0;
+                    if (int.TryParse(vTagInfo[0], out vWatchHouseID) && int.TryParse(vTagInfo[2], out vPowerID))
                     {
                         App.WatchHouseID = vWatchHouseID;
                         App.WatchHouseName = vTagInfo[1];

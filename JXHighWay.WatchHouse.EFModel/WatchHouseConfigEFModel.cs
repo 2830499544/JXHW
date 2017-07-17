@@ -30,7 +30,7 @@ namespace JXHighWay.WatchHouse.EFModel
         public int? GuanGaoPDK { get; set; }
 
         [ColumnAttrib("DianYuan1ID")]
-        public int? DianYuan1ID { get; set; }
+        public string DianYuan1ID { get; set; }
 
         [ColumnAttrib("DianYuan1IP")]
         public String DianYuan1IP { get; set; }
@@ -42,7 +42,7 @@ namespace JXHighWay.WatchHouse.EFModel
         public int? DianYuan1LS { get; set; }
 
         [ColumnAttrib("DianYuan2ID")]
-        public int? DianYuan2ID { get; set; }
+        public string DianYuan2ID { get; set; }
 
         [ColumnAttrib("DianYuan2IP")]
         public String DianYuan2IP { get; set; }

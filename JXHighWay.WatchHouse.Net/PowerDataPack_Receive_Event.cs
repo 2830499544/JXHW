@@ -19,6 +19,16 @@ namespace JXHighWay.WatchHouse.Net.DataPack
         public byte Length2 { get; set; }
 
         /// <summary>
+        /// MAC地址
+        /// </summary>
+        public byte MAC1 { get; set; }
+        public byte MAC2 { get; set; }
+        public byte MAC3 { get; set; }
+        public byte MAC4 { get; set; }
+        public byte MAC5 { get; set; }
+        public byte MAC6 { get; set; }
+
+        /// <summary>
         /// 序列号
         /// </summary>
         public byte SN { get; set; }
