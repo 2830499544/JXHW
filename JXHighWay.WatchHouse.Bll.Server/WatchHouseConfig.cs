@@ -25,7 +25,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
 
         bool findGanTing(int GangTingID,string DianYuanID)
         {
-            string vSql = string.Format("Select *From `岗亭配置` Where GangTingID={0} or DianYuanID='{1}'", GangTingID, DianYuanID);
+            string vSql = string.Format("Select *From `岗亭配置` Where GangTingID={0} or DianYuan1ID='{1}'", GangTingID, DianYuanID);
             return m_BasicDBClass.SelectCustomEx<WatchHouseConfigEFModel>(vSql).Length > 0 ? true : false;
         }
 

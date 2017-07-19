@@ -118,12 +118,12 @@ namespace JXHighWay.WatchHouse.WFPClient
             if (m_IsInit && m_Switch_DiNuan)
             {
                 m_Switch_DiNuan = false;
-                bool vOldValue = CheckBox_DiNuan.IsChecked ?? false;
+                bool vOldValue = !(CheckBox_DiNuan.IsChecked ?? false);
                 bool vResult;
                 if (vOldValue)
-                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiDiNuan);
-                else
                     vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanDiNuan);
+                else
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiDiNuan);
                 if (!vResult)
                 {
                     CheckBox_DiNuan.IsChecked = !vOldValue;
@@ -153,12 +153,12 @@ namespace JXHighWay.WatchHouse.WFPClient
             if (m_IsInit && m_Switch_Zhuo)
             {
                 m_Switch_DiNuan = false;
-                bool vOldValue = CheckBox_ZuoJiao.IsChecked ?? false;
+                bool vOldValue = !(CheckBox_ZuoJiao.IsChecked ?? false);
                 bool vResult;
                 if (vOldValue)
-                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiZuoNJ);
-                else
                     vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanZuoNJ);
+                else
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiZuoNJ);
                 if (!vResult)
                 {
                     CheckBox_ZuoJiao.IsChecked = !vOldValue;
@@ -188,12 +188,12 @@ namespace JXHighWay.WatchHouse.WFPClient
             if (m_IsInit && m_Switch_You)
             {
                 m_Switch_DiNuan = false;
-                bool vOldValue = CheckBox_YouJiao.IsChecked ?? false;
+                bool vOldValue = !(CheckBox_YouJiao.IsChecked ?? false);
                 bool vResult;
                 if (vOldValue)
-                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiYouNJ);
-                else
                     vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanYouNJ);
+                else
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiYouNJ);
                 if (!vResult)
                 {
                     CheckBox_YouJiao.IsChecked = !vOldValue;

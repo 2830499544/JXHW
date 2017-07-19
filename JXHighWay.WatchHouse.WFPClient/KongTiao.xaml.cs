@@ -176,10 +176,17 @@ namespace JXHighWay.WatchHouse.WFPClient
             image_MS_ZD.Source = new BitmapImage(new Uri(@"Images/KongTiao/zd.jpg", UriKind.Relative));
         }
 
-        private void image_MS_ZD_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private async void image_MS_ZD_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Xceed.Wpf.Toolkit.MessageBox.Show("自动模式失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-            //kongTiaoMS_ZD();
+            if (m_IsInit)
+            {
+                bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.ZhiDong);
+                if (vResult)
+                    kongTiaoMS_ZD();
+                else
+                    Xceed.Wpf.Toolkit.MessageBox.Show("自动模式失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+               
+            }
         }
 
         void kongTiaoMS_ZD()
@@ -219,16 +226,16 @@ namespace JXHighWay.WatchHouse.WFPClient
             //模式
             switch (vState.MoShi)
             {
-                case "除湿":
+                case "除湿模式":
                     kongTiaoMS_CS();
                     break;
-                case "制冷":
+                case "制冷模式":
                     kongTiaoMS_ZL();
                     break;
-                case "制热":
+                case "制热模式":
                     kongTiaoMS_ZR();
                     break;
-                case "送风":
+                case "送风模式":
                     kongTiaoMS_SF();
                     break;
                 case "自动模式":
@@ -281,7 +288,7 @@ namespace JXHighWay.WatchHouse.WFPClient
             if (m_IsInit && m_IsSwitch)
             {
                 m_IsSwitch = false;
-                bool vOldValue = CheckBox_KongTiao.IsChecked??false;
+                bool vOldValue = !(CheckBox_KongTiao.IsChecked??false);
                 bool vResult;
                 if (vOldValue)
                     vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanKongTiao);

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace JXHighWay.WatchHouse.Net.DataPack
 {
-    public class WatchHouseDataPack_Receive_Pic
+    public struct WatchHouseDataPack_Receive_Pic
     {
         /// <summary>
         /// 头

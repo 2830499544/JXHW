@@ -147,7 +147,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\JXHighWay.WatchHouse.Bll.Server\JXHighWay.WatchHouse.Bll.Server.csproj">
@@ -184,6 +186,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="highway.sql" />
+    <Content Include="Photo\20172518060704.jpg" />
+    <Content Include="Photo\20172518060730.jpg" />
     <Content Include="Photo\3.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -58,6 +58,7 @@ namespace JXHighWay.WatchHouse.WFPClient
         bool m_Switch_FMD = true;
         bool m_Switch_FM = true;
         bool m_Switch_ZDC = true;
+        bool m_Switch_BJ = true;
         //bool m_Switch_BJQ = true;
         void initMenChaung()
         {
@@ -120,10 +121,11 @@ namespace JXHighWay.WatchHouse.WFPClient
         #region 门控制
         private async void CheckBox_Men_Click(object sender, RoutedEventArgs e)
         {
-            if (m_IsInit && m_Switch_Men )
+            if (m_IsInit && m_Switch_Men)
             {
                 m_Switch_Men = false;
-                bool vOldValue = CheckBox_Men.IsChecked ?? false;
+                //CheckBox_Men.IsEnabled = false;
+                bool vOldValue = !(CheckBox_Men.IsChecked ?? false);
                 bool vResult;
                 if (vOldValue)
                     vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanMen);
@@ -136,6 +138,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                 }
                 changeSwitchColor_Men();
                 m_Switch_Men = true;
+                //CheckBox_Men.IsEnabled = true;
             }
         }
 
@@ -158,15 +161,16 @@ namespace JXHighWay.WatchHouse.WFPClient
         #region 锁控制
         private async void CheckBox_Chuang_Click(object sender, RoutedEventArgs e)
         {
-            if (m_IsInit && m_Switch_Suo)
+            if (m_IsInit )
             {
+                //CheckBox_Chuang.IsEnabled = false;
                 m_Switch_Suo = false;
-                bool vOldValue = CheckBox_Chuang.IsChecked ?? false;
+                bool vOldValue = !(CheckBox_Chuang.IsChecked ?? false);
                 bool vResult;
                 if (vOldValue)
-                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiShuo);
-                else
                     vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.ShangShuo);
+                else
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiShuo);
                 if (!vResult)
                 {
                     CheckBox_Chuang.IsChecked = !vOldValue;
@@ -174,6 +178,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                 }
                 changeSwitchColor_Suo();
                 m_Switch_Suo = true;
+                //CheckBox_Chuang.IsEnabled = true;
             }
         }
 
@@ -200,12 +205,12 @@ namespace JXHighWay.WatchHouse.WFPClient
             if (m_IsInit && m_Switch_FMD)
             {
                 m_Switch_FMD = false;
-                bool vOldValue = CheckBox_FengMuDeng.IsChecked ?? false;
+                bool vOldValue = !(CheckBox_FengMuDeng.IsChecked ?? false);
                 bool vResult;
                 if (vOldValue)
-                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanChuangDeng);
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanChuangDeng_Qian);
                 else
-                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiChuangDeng);
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiChuangDeng_Qian);
                 if (!vResult)
                 {
                     CheckBox_FengMuDeng.IsChecked = !vOldValue;
@@ -237,12 +242,12 @@ namespace JXHighWay.WatchHouse.WFPClient
             if (m_IsInit && m_Switch_FM)
             {
                 m_Switch_FM = false;
-                bool vOldValue = CheckBox_FengMu.IsChecked ?? false;
+                bool vOldValue = !(CheckBox_FengMu.IsChecked ?? false);
                 bool vResult;
                 if (vOldValue)
-                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanFengMu);
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanFengMu_Qian);
                 else
-                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiFengMu);
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiFengMu_Qian);
                 if (!vResult)
                 {
                     CheckBox_FengMu.IsChecked = !vOldValue;
@@ -276,12 +281,12 @@ namespace JXHighWay.WatchHouse.WFPClient
             if (m_IsInit && m_Switch_ZDC)
             {
                 m_Switch_ZDC = false;
-                bool vOldValue = CheckBox_ZiDongChuang.IsChecked ?? false;
+                bool vOldValue = !(CheckBox_ZiDongChuang.IsChecked ?? false);
                 bool vResult;
                 if (vOldValue)
-                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanChaugn);
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanChaugn_Qian);
                 else
-                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiChuang);
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiChuang_Qian);
                 if (!vResult)
                 { 
                     CheckBox_ZiDongChuang.IsChecked = !vOldValue;
@@ -306,5 +311,27 @@ namespace JXHighWay.WatchHouse.WFPClient
             }
         }
         #endregion
+
+        private async void CheckBox_BaoJingQi_Click(object sender, RoutedEventArgs e)
+        {
+            if (m_IsInit && m_Switch_BJ)
+            {
+
+                m_Switch_BJ = false;
+                bool vOldValue = !(CheckBox_BaoJingQi.IsChecked ?? false);
+                bool vResult;
+                if (vOldValue)
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanBaoJing);
+                else
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiBaoJing);
+                if (!vResult)
+                {
+                    CheckBox_BaoJingQi.IsChecked = !vOldValue;
+                    Xceed.Wpf.Toolkit.MessageBox.Show("报警开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                changeSwitchColor_FM();
+                m_Switch_BJ = true;
+            }
+        }
     }
 }

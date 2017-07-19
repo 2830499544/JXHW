@@ -151,23 +151,23 @@ namespace JXHighWay.WatchHouse.WFPClient
         #region 锁控制
         private async void CheckBox_Chuang_Click(object sender, RoutedEventArgs e)
         {
-            if (m_IsInit && m_Switch_Suo)
-            {
-                m_Switch_Suo = false;
-                bool vOldValue = CheckBox_Chuang.IsChecked ?? false;
-                bool vResult;
-                if (vOldValue)
-                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiShuo);
-                else
-                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.ShangShuo);
-                if (!vResult)
-                {
-                    CheckBox_Chuang.IsChecked = !vOldValue;
-                    Xceed.Wpf.Toolkit.MessageBox.Show("锁开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                changeSwitchColor_Suo();
-                m_Switch_Suo = true;
-            }
+            //if (m_IsInit && m_Switch_Suo)
+            //{
+            //    m_Switch_Suo = false;
+            //    bool vOldValue = CheckBox_Chuang.IsChecked ?? false;
+            //    bool vResult;
+            //    if (vOldValue)
+            //        vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiShuo);
+            //    else
+            //        vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.ShangShuo);
+            //    if (!vResult)
+            //    {
+            //        CheckBox_Chuang.IsChecked = !vOldValue;
+            //        Xceed.Wpf.Toolkit.MessageBox.Show("锁开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    }
+            //    changeSwitchColor_Suo();
+            //    m_Switch_Suo = true;
+            //}
         }
 
 

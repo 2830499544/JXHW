@@ -36,7 +36,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.GanTing
                     State = false,
                     IsSend = false,
                     IsReply = false,
-                    Data = System.Text.Encoding.Default.GetString(NetHelper.StructureToByte(Data))
+                    Data = new byte[] { Data }
                 };
                 int vID = m_BasicDBClass.InsertRecord(vSendCMDEFModel);
                 //Thread.Sleep(1000);
@@ -163,10 +163,10 @@ namespace JXHighWay.WatchHouse.Bll.Client.GanTing
             if (vNewData.WatchHouseID != null)
             {
                 vResult.DanQianWD = vNewData.CaiLuanKZWBWD??0;
-                vResult.DiNuan = vNewData.DiNuan == "闭" ? false : true;
+                vResult.DiNuan = vNewData.DiNuan == "关" ? false : true;
                 vResult.SheZhiWD = vNewData.CaiLuanKZWD ?? 0;
-                vResult.YouNuanJQ = vNewData.YouNuanJQ == "闭" ? false : true;
-                vResult.ZuoNuanJQ = vNewData.ZuoNuanJQ == "闭" ? false : true;
+                vResult.YouNuanJQ = vNewData.YouNuanJQ == "关" ? false : true;
+                vResult.ZuoNuanJQ = vNewData.ZuoNuanJQ == "关" ? false : true;
             }
             return vResult;
         }
@@ -182,11 +182,11 @@ namespace JXHighWay.WatchHouse.Bll.Client.GanTing
             MenChuangStateInfo vResult = new MenChuangStateInfo();
             if (vNewData.WatchHouseID != null)
             {
-                vResult.BaoJinQi = vNewData.BaoJingQi=="闭"?false:true;
-                vResult.Chuang = vNewData.Chuang == "闭" ? false : true;
-                vResult.FengMu = vNewData.FengMu == "闭" ? false : true;
-                vResult.FengMuDeng = vNewData.ChuangDeng == "闭" ? false : true;
-                vResult.Men= vNewData.MenZhuanTai == "闭" ? false : true;
+                vResult.BaoJinQi = vNewData.BaoJingQi=="关"?false:true;
+                vResult.Chuang = vNewData.Chuang == "关" ? false : true;
+                vResult.FengMu = vNewData.FengMu == "关" ? false : true;
+                vResult.FengMuDeng = vNewData.ChuangDeng == "关" ? false : true;
+                vResult.Men= vNewData.MenZhuanTai == "关" ? false : true;
                 vResult.ZiDonGChuang = false;//协议中暂不支持此数据
             }
             return vResult;
@@ -203,7 +203,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.GanTing
             DengGuanStateInfo vResult = new DengGuanStateInfo();
             if (vNewData.WatchHouseID != null)
             {
-                vResult.IsOpen = vNewData.Deng == "闭" ? false : true;
+                vResult.IsOpen = vNewData.Deng == "关" ? false : true;
                 vResult.LianDu = vNewData.DengGuanLD.Value;
             }
             return vResult;
@@ -220,7 +220,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.GanTing
             KongTiaoStateInfo vResult = new KongTiaoStateInfo();
             if (vNewData.WatchHouseID != null)
             {
-                vResult.IsOpen = vNewData.KongTiao == "闭" ? false : true;
+                vResult.IsOpen = vNewData.KongTiao == "关" ? false : true;
                 vResult.FengShu = vNewData.KongTiaoGZFL;
                 vResult.MoShi = vNewData.KongTiaoGZMS;
                 vResult.ShiLeiWD = vNewData.ShiLeiWD ?? 0;
@@ -234,7 +234,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.GanTing
             XinFengStateInfo vResutl = new XinFengStateInfo();
             if ( vNewData.WatchHouseID != null )
             {
-                vResutl.IsOpen = vNewData.XinFeng == "闭" ? false : true;
+                vResutl.IsOpen = vNewData.XinFeng == "关" ? false : true;
                 vResutl.ChuKouAPM = vNewData.ChuKouAPM??0;
                 vResutl.RuKouAPM = vNewData.RuKouAPM??0;
                 vResutl.WenDu = vNewData.XinFengWD ?? 0;

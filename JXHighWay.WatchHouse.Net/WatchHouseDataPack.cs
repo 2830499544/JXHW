@@ -155,7 +155,7 @@ namespace JXHighWay.WatchHouse.Net
 
         public byte[] Send_KaiChuang()
         {
-            WatchHouseDataPack_Send_CommandEnmu vCommand = WatchHouseDataPack_Send_CommandEnmu.KaiChuang;
+            WatchHouseDataPack_Send_CommandEnmu vCommand = WatchHouseDataPack_Send_CommandEnmu.KaiChuang_Qian;
             WatchHouseDataPack_SendData_Main vSendData = new WatchHouseDataPack_SendData_Main()
             {
                 ID_H = (byte)((int)vCommand >> 24),
@@ -172,7 +172,7 @@ namespace JXHighWay.WatchHouse.Net
         /// <returns></returns>
         public byte[] Send_GuanChaugn()
         {
-            WatchHouseDataPack_Send_CommandEnmu vCommand = WatchHouseDataPack_Send_CommandEnmu.GuanChaugn;
+            WatchHouseDataPack_Send_CommandEnmu vCommand = WatchHouseDataPack_Send_CommandEnmu.GuanChaugn_Qian;
             WatchHouseDataPack_SendData_Main vSendData = new WatchHouseDataPack_SendData_Main()
             {
                 ID_H = (byte)((int)vCommand >> 24),
@@ -189,7 +189,7 @@ namespace JXHighWay.WatchHouse.Net
         /// <returns></returns>
         public byte[] Send_KaiFengMu()
         {
-            WatchHouseDataPack_Send_CommandEnmu vCommand = WatchHouseDataPack_Send_CommandEnmu.KaiFengMu;
+            WatchHouseDataPack_Send_CommandEnmu vCommand = WatchHouseDataPack_Send_CommandEnmu.KaiFengMu_Qian;
             WatchHouseDataPack_SendData_Main vSendData = new WatchHouseDataPack_SendData_Main()
             {
                 ID_H = (byte)((int)vCommand >> 24),
@@ -206,7 +206,7 @@ namespace JXHighWay.WatchHouse.Net
         /// <returns></returns>
         public byte[] Send_GuanFengMu()
         {
-            WatchHouseDataPack_Send_CommandEnmu vCommand = WatchHouseDataPack_Send_CommandEnmu.GuanFengMu;
+            WatchHouseDataPack_Send_CommandEnmu vCommand = WatchHouseDataPack_Send_CommandEnmu.GuanFengMu_Qian;
             WatchHouseDataPack_SendData_Main vSendData = new WatchHouseDataPack_SendData_Main()
             {
                 ID_H = (byte)((int)vCommand >> 24),
@@ -223,7 +223,7 @@ namespace JXHighWay.WatchHouse.Net
         /// <returns></returns>
         public byte[] Send_KaiChuangDeng()
         {
-            WatchHouseDataPack_Send_CommandEnmu vCommand = WatchHouseDataPack_Send_CommandEnmu.KaiChuangDeng;
+            WatchHouseDataPack_Send_CommandEnmu vCommand = WatchHouseDataPack_Send_CommandEnmu.KaiChuangDeng_Qian;
             WatchHouseDataPack_SendData_Main vSendData = new WatchHouseDataPack_SendData_Main()
             {
                 ID_H = (byte)((int)vCommand >> 24),
@@ -240,7 +240,7 @@ namespace JXHighWay.WatchHouse.Net
         /// <returns></returns>
         public byte[] Send_GuanChuangDeng()
         {
-            WatchHouseDataPack_Send_CommandEnmu vCommand = WatchHouseDataPack_Send_CommandEnmu.GuanChuangDeng;
+            WatchHouseDataPack_Send_CommandEnmu vCommand = WatchHouseDataPack_Send_CommandEnmu.GuanChuangDeng_Qian;
             WatchHouseDataPack_SendData_Main vSendData = new WatchHouseDataPack_SendData_Main()
             {
                 ID_H = (byte)((int)vCommand >> 24),

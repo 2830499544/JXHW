@@ -12,12 +12,14 @@ using MXKJ.DBMiddleWareLib;
 using System.Threading;
 using JXHighWay.WatchHouse.Net.DataPack;
 using System.IO;
+using System.Data;
 
 namespace JXHighWay.WatchHouse.Bll.Server
 {
     public class WatchHouseControl:BasicControl
     {
         new Dictionary<int, string> m_ClientDict = null;
+        Dictionary<int, int> m_ClientMaxID = null;
 
         bool m_IsRun = false;
         BasicDBClass m_BasicDBClassSelect = null;
@@ -28,6 +30,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
             Port = vConfig.WatchHousePort;
             m_BasicDBClassSelect = new BasicDBClass(DataBaseType.MySql);
             m_ClientDict = new Dictionary<int, string>();
+            m_ClientMaxID = new Dictionary<int, int>();
         }
 
         public void Start()
@@ -59,6 +62,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
             foreach(WatchHouseConfigEFModel vTempConfig in vWatchHouseConfig)
             {
                 m_ClientDict.Add(vTempConfig.GangTingID??0, "");
+                m_ClientMaxID.Add(vTempConfig.GangTingID ??0,0);
             }
         }
 
@@ -164,7 +168,8 @@ namespace JXHighWay.WatchHouse.Bll.Server
 
                 //总数
                 byte[] vCount = BitConverter.GetBytes((short)vEmployeeEFModel.Length);
-                vDataPack.AddRange(vCount);
+                vDataPack.Add(vCount[1]);
+                vDataPack.Add(vCount[0]);
 
                 foreach (EmployeeEFModel vTempEmployeeEFModel in vEmployeeEFModel)
                 {
@@ -173,7 +178,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
                 }
                 
                 //Url地址
-                byte[] vUrl = System.Text.Encoding.Default.GetBytes(Url);
+                byte[] vUrl = System.Text.Encoding.UTF8.GetBytes(Url);
                 vDataPack.AddRange(vUrl);
 
                 WatchHouseConfigEFModel[] vSelectResult = m_BasicDBClassSelect.SelectAllRecordsEx<WatchHouseConfigEFModel>();
@@ -273,39 +278,10 @@ namespace JXHighWay.WatchHouse.Bll.Server
                         if (vAsyncUserToken != null)
                         {
                             byte[] vSN = BitConverter.GetBytes(vTempResult.SN??0);
-                            List<byte> vDataPack = System.Text.Encoding.Default.GetBytes(vTempResult.Data).ToList();
+                            //List<byte> vDataPack = System.Text.Encoding.UTF8.GetBytes(vTempResult.Data??"").ToList();
+                            List<byte> vDataPack = vTempResult.Data==null? new List<byte>():vTempResult.Data.ToList();
                             byte[] vByteArray = null;
                             vByteArray = processorDBSendCMD_JoinData(vTempResult, vDataPack);
-                            //WatchHouseDataPack_SendData_Main vCommandDataPack = new WatchHouseDataPack_SendData_Main()
-                            //{
-                            //    Head = 0x02,
-                            //    Length1 = 0x00,//长度固定为35
-                            //    Length2 = 0x23,
-                            //    Ver1 = 0x00,
-                            //    Ver2 = 0x00,
-                            //    LoginSN1 = 0x00,
-                            //    LoginSN2 = 0x01,
-                            //    SN1 = vSN[0],
-                            //    SN2 = vSN[1],
-                            //    WatchHouseID1 = (byte)(vTempResult.GangTingID.Value>>24),
-                            //    WatchHouseID2 = (byte)(vTempResult.GangTingID.Value >>16),
-                            //    WatchHouseID3 = (byte)(vTempResult.GangTingID.Value >>8),
-                            //    WatchHouseID4 = (byte)(vTempResult.GangTingID.Value >> 0),
-                            //    UserID1 = (byte)(vTempResult.GangTingID.Value>>24),
-                            //    UserID2 = (byte)(vTempResult.GangTingID.Value >>16),
-                            //    UserID3 = (byte)(vTempResult.GangTingID.Value >>8),
-                            //    UserID4 = (byte)(vTempResult.GangTingID.Value >>0),
-                            //    ID_H = vTempResult.ID_H.Value,
-                            //    ID_L = vTempResult.ID_L.Value,
-                            //    CMD = vTempResult.CMD.Value,
-                            //    SUB = vTempResult.SUB.Value,
-                            //    Data = vTempResult.Data??0x00
-                            //};
-                            //byte[] vByteArray = Helper.NetHelper.StructureToByte(vCommandDataPack);
-                            //byte[] vCheckCode = calcCheckCode(vByteArray);
-                            //vCommandDataPack.Check1 = vCheckCode[0];
-                            //vCommandDataPack.Check2 = vCheckCode[1];
-                            //vByteArray = Helper.NetHelper.StructureToByte(vCommandDataPack);
                             m_SocketManager.SendMessage(vAsyncUserToken, vByteArray);
                             Console.WriteLine("发送命令数据包,IP地址({0}):{1}", vAsyncUserToken.IPAddress.ToString(), BitConverter.ToString(vByteArray));
                             //更新数据库状态
@@ -314,6 +290,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
                             m_BasicDBClass_Send.UpdateRecord<WatchHouseSendCMDEFModel>(vModel);
                         }
                     }
+                    //Thread.Sleep(300);
                 }
             });
         }
@@ -345,17 +322,23 @@ namespace JXHighWay.WatchHouse.Bll.Server
                 ID_L = vTempResult.ID_L.Value,
                 CMD = vTempResult.CMD.Value,
                 SUB = vTempResult.SUB.Value,
-                Data = dataPack == null ? (byte)0x00 : dataPack[0]
+                Data = dataPack.Count==0 ? (byte)0x00 : dataPack[0]
             };
             List<byte> vByteArray = Helper.NetHelper.StructureToByte(vCommandDataPack).ToList();
-            if (dataPack == null)
-                vByteArray.Insert(21, 0x00);
-            else
-                vByteArray.InsertRange(21, dataPack);
+            if (dataPack.Count > 1)
+            {
+                bool vv = vByteArray.Remove(vByteArray[25]);
+                vByteArray.InsertRange(25, dataPack);
+            }
+
+            //if (dataPack.Count == 0)
+            //    vByteArray.Insert(21, 0x00);
+            //else
+            //    vByteArray.InsertRange(21, dataPack);
             //长度
-            byte[] vLength = BitConverter.GetBytes((short)vByteArray.Count);
-            vByteArray[1] = vLength[0];
-            vByteArray[2] = vLength[1];
+            byte[] vLength = BitConverter.GetBytes((short)vByteArray.Count-1);
+            vByteArray[1] = vLength[1];
+            vByteArray[2] = vLength[0];
             //校验码
             byte[] vCheckCode = calcCheckCode(vByteArray.ToArray());
             vByteArray[vByteArray.Count-1] = vCheckCode[0];
@@ -429,7 +412,9 @@ namespace JXHighWay.WatchHouse.Bll.Server
                     SendTime = DateTime.Now,
                     SN = BitConverter.ToInt16(NetHelper.MarkSN(), 0),
                     State = false,
-                    Data = System.Text.Encoding.Default.GetString(DataPack)
+                    Data = DataPack,
+                    IsReply = false,
+                    IsSend = false
                 };
                 int vID = m_BasicDBClass_Receive.InsertRecord(vSendCMDEFModel);
                 Thread.Sleep(1000);
@@ -627,50 +612,121 @@ namespace JXHighWay.WatchHouse.Bll.Server
                         {
                             WHQueueModel vReceiveData = ReceiveQueue.Dequeue();
 
-                            //处理接收到的岗亭状态数据
-                           if ( vReceiveData.Data[23]==0x10 && vReceiveData.Data[24] == 0x20 )
+                            int vReceiveCMD = BitConverter.ToInt32(new byte[] { vReceiveData.Data[24], vReceiveData.Data[23], vReceiveData.Data[22], vReceiveData.Data[21] },0 );
+                            switch( vReceiveCMD)
                             {
-                                //byte[] vCheckCode = calcCheckCode(vReceiveData.Data);
-                                WatchHouseDataPack_Receive_Main vDataPack = Helper.NetHelper.ByteToStructure<WatchHouseDataPack_Receive_Main>(vReceiveData.Data);
-                                processorData_Receive(vDataPack, vReceiveData.IPAddress);
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.KaiMen: //开门
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.GuanMen: //关门
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.ShangShuo: //上锁
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.KaiShuo: //开锁
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.KaiBaoJing: //开报警
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.GuanBaoJing: //关报警
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.KaiChuang: //开窗
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.GuanChaugn: //关窗
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.KaiFengMu: //开风幕
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.GuanFengMu://关风幕
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.KaiChuangDeng://开窗灯
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.GuanChuangDeng://关窗灯
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.KaiXinFeng://开新风
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.GuanXinFeng://关新风
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.TiaoJieFL://调节风量
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.KaiDeng://开灯
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.GuanDeng://关灯
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.SheZhiLD://设置亮度
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.KaiKongTiao://开空调
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.GuanKongTiao://关空调
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.ZhiLeng://制冷
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.ChuShi: //除湿
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.ZhiLe: //制热
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.SongFeng://送风
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.ZhiDong: //自动
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.DiFeng: //低风
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.ZhongFeng://中风
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.GaoFeng://高风
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.SheZhiWD://设置温度
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.KaiDiNuan://开地暖
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.GuanDiNuan://关地暖
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.KaiYouNJ://开右暖脚
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.GuanYouNJ://关右暖脚
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.KaiZuoNJ://开左暖脚
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.GuanZuoNJ://关左暖脚
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.QianChuanLSS://前窗帘上升
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.QianChuanLXJ://前窗帘下降
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.YouChuanLSS://右窗帘上升
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.YouChuanLXJ://右窗帘下降
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.TiaoJieSW://调节室温
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.XianShiGZPH://指定显示工作片号
+                                    WatchHouseDataPack_SendData_Main vDataPack = Helper.NetHelper.ByteToStructure<WatchHouseDataPack_SendData_Main>(vReceiveData.Data);
+                                    processorData_ReturnCMD(vDataPack, vReceiveData.IPAddress, vReceiveCMD);
+                                    break;
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.GongZuoSJ://岗亭返回的工作数据
+                                    WatchHouseDataPack_Receive_Main vDataPack1 = Helper.NetHelper.ByteToStructure<WatchHouseDataPack_Receive_Main>(vReceiveData.Data);
+                                    processorData_Receive(vDataPack1, vReceiveData.IPAddress);
+                                    break;
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.MenJingJL://门禁记录
+                                    WatchHouseDataPack_Receive_DoorGuard vDataPack2 = Helper.NetHelper.ByteToStructure<WatchHouseDataPack_Receive_DoorGuard>(vReceiveData.Data);
+                                    processorData_DoorGuard(vDataPack2);
+                                    break;
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.DianZhiGHP://电子工作牌
+                                    WatchHouseDataPack_Receive_IDCard vDataPack3 = Helper.NetHelper.ByteToStructure<WatchHouseDataPack_Receive_IDCard>(vReceiveData.Data);
+                                    processorData_IDCard(vDataPack3);
+                                    break;
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.TuPianGX://图片更新 
+                                    WatchHouseDataPack_Receive_Pic vDataPack4 = Helper.NetHelper.ByteToStructure<WatchHouseDataPack_Receive_Pic>(vReceiveData.Data);
+                                    processorData_ReturnPic(vDataPack4, vReceiveData.IPAddress);
+                                    break;
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.GongHaoGX://工号更新
+                                    WatchHouseDataPack_Receive_Pic vDataPack5 = Helper.NetHelper.ByteToStructure<WatchHouseDataPack_Receive_Pic>(vReceiveData.Data);
+                                    processorData_ReturnPic(vDataPack5, vReceiveData.IPAddress);
+                                    break;
                             }
+
+
+
+                            //处理接收到的岗亭状态数据
+                           //if ( vReceiveData.Data[23]==0x10 && vReceiveData.Data[24] == 0x20 )
+                           // {
+                           //     //byte[] vCheckCode = calcCheckCode(vReceiveData.Data);
+                           //     WatchHouseDataPack_Receive_Main vDataPack = Helper.NetHelper.ByteToStructure<WatchHouseDataPack_Receive_Main>(vReceiveData.Data);
+                           //     processorData_Receive(vDataPack, vReceiveData.IPAddress);
+                           // }
 
                            //门禁记录
-                            if (vReceiveData.Data[23] == 0x00 && vReceiveData.Data[24] == 0x21)
-                            {
-                                WatchHouseDataPack_Receive_DoorGuard vDataPack = Helper.NetHelper.ByteToStructure<WatchHouseDataPack_Receive_DoorGuard>(vReceiveData.Data);
-                                processorData_DoorGuard(vDataPack);
-                            }
+                            //if (vReceiveData.Data[23] == 0x00 && vReceiveData.Data[24] == 0x21)
+                            //{
+                            //    WatchHouseDataPack_Receive_DoorGuard vDataPack = Helper.NetHelper.ByteToStructure<WatchHouseDataPack_Receive_DoorGuard>(vReceiveData.Data);
+                            //    processorData_DoorGuard(vDataPack);
+                            //}
 
                             //电子工作牌
-                            if (vReceiveData.Data[23] == 0x00 && vReceiveData.Data[24] == 0x22)
-                            {
-                                WatchHouseDataPack_Receive_IDCard vDataPack = Helper.NetHelper.ByteToStructure<WatchHouseDataPack_Receive_IDCard>(vReceiveData.Data);
-                                processorData_IDCard(vDataPack);
-                            }
+                            //if (vReceiveData.Data[23] == 0x00 && vReceiveData.Data[24] == 0x22)
+                            //{
+                            //    WatchHouseDataPack_Receive_IDCard vDataPack = Helper.NetHelper.ByteToStructure<WatchHouseDataPack_Receive_IDCard>(vReceiveData.Data);
+                            //    processorData_IDCard(vDataPack);
+                            //}
 
                             //处理发送命令的返回
-                            if (vReceiveData.Data[21]==0x02 && ( vReceiveData.Data[22]==0x02 || vReceiveData.Data[22]==0x03 
-                            || vReceiveData.Data[22] == 0x04 || vReceiveData.Data[22] == 0x05 || 
-                            vReceiveData.Data[22] == 0x0c || vReceiveData.Data[22] == 0x10 ))
-                            {
-                                WatchHouseDataPack_SendData_Main vDataPack = Helper.NetHelper.ByteToStructure<WatchHouseDataPack_SendData_Main>(vReceiveData.Data);
-                                processorData_ReturnCMD(vDataPack, vReceiveData.IPAddress);
-                            }
+                            //if (vReceiveData.Data[21]==0x02 && ( vReceiveData.Data[22]==0x02 || vReceiveData.Data[22]==0x03 
+                            //|| vReceiveData.Data[22] == 0x04 || vReceiveData.Data[22] == 0x05 || 
+                            //vReceiveData.Data[22] == 0x0c || vReceiveData.Data[22] == 0x10 ))
+                            //{
+                            //    WatchHouseDataPack_SendData_Main vDataPack = Helper.NetHelper.ByteToStructure<WatchHouseDataPack_SendData_Main>(vReceiveData.Data);
+                            //    processorData_ReturnCMD(vDataPack, vReceiveData.IPAddress);
+                            //}
 
-                            //处理图片更新命令返回
-                            if (vReceiveData.Data[21] == 0x02 && vReceiveData.Data[22] == 0x01 && vReceiveData.Data[23] == 0x10 && vReceiveData.Data[23] == 0x02)
-                            {
-                                WatchHouseDataPack_Receive_Pic vDataPack = Helper.NetHelper.ByteToStructure<WatchHouseDataPack_Receive_Pic>(vReceiveData.Data);
-                                processorData_ReturnPic(vDataPack, vReceiveData.IPAddress);
-                            }
+                                //处理图片更新命令返回
+                            //    if (vReceiveData.Data[21] == 0x02 && vReceiveData.Data[22] == 0x01 && vReceiveData.Data[23] == 0x10 && vReceiveData.Data[24] == 0x02)
+                            //{
+                            //    WatchHouseDataPack_Receive_Pic vDataPack = Helper.NetHelper.ByteToStructure<WatchHouseDataPack_Receive_Pic>(vReceiveData.Data);
+                            //    processorData_ReturnPic(vDataPack, vReceiveData.IPAddress);
+                            //}
 
                             //处理员工信息更新命令返回
-                            if (vReceiveData.Data[21] == 0x02 && vReceiveData.Data[22] == 0x01 && vReceiveData.Data[23] == 0x10 && vReceiveData.Data[23] == 0x03)
-                            {
-                                WatchHouseDataPack_Receive_Pic vDataPack = Helper.NetHelper.ByteToStructure<WatchHouseDataPack_Receive_Pic>(vReceiveData.Data);
-                                processorData_ReturnPic(vDataPack, vReceiveData.IPAddress);
-                            }
+                            //if (vReceiveData.Data[21] == 0x02 && vReceiveData.Data[22] == 0x01 && vReceiveData.Data[23] == 0x10 && vReceiveData.Data[23] == 0x03)
+                            //{
+                            //    WatchHouseDataPack_Receive_Pic vDataPack = Helper.NetHelper.ByteToStructure<WatchHouseDataPack_Receive_Pic>(vReceiveData.Data);
+                            //    processorData_ReturnPic(vDataPack, vReceiveData.IPAddress);
+                            //}
 
 
                         }
@@ -701,18 +757,22 @@ namespace JXHighWay.WatchHouse.Bll.Server
         {
             DoorGuardEFModel vModel = new DoorGuardEFModel()
             {
-                GangTingID = BitConverter.ToInt32(new byte[] { vData.WatchHouseID1, vData.WatchHouseID2, vData.WatchHouseID3, vData.WatchHouseID4 },0),
+                GangTingID = BitConverter.ToInt32(new byte[] { vData.WatchHouseID4, vData.WatchHouseID3, vData.WatchHouseID2, vData.WatchHouseID1 }, 0),
                 //20170503155601
-                ShiJiang = DateTime.Parse(string.Format("{0:D}{1:D}{2:D}{3:D}-{4:D}{5:D}-{6:D}{7:D} {8:D}{9:D}:{10:D}{11:D}:{12:D}{13:D}",
-                vData.DateTime0, vData.DateTime1, vData.DateTime2, vData.DateTime3, vData.DateTime4, vData.DateTime5, vData.DateTime6,
-                vData.DateTime7, vData.DateTime8, vData.DateTime9, vData.DateTime10, vData.DateTime11, vData.DateTime12, vData.DateTime13)),
-                KaiHao = vData.KaHao0,
+                //ShiJiang = DateTime.Parse(string.Format("{0:D}{1:D}{2:D}{3:D}-{4:D}{5:D}-{6:D}{7:D} {8:D}{9:D}:{10:D}{11:D}:{12:D}{13:D}",
+                //vData.DateTime0, vData.DateTime1, vData.DateTime2, vData.DateTime3, vData.DateTime4, vData.DateTime5, vData.DateTime6,
+                //vData.DateTime7, vData.DateTime8, vData.DateTime9, vData.DateTime10, vData.DateTime11, vData.DateTime12, vData.DateTime13)),
+                //KaiHao = vData.KaHao0,
+                KaiHao = BitConverter.ToInt32(new byte[] { vData.KaHao3, vData.KaHao2, vData.KaHao1, vData.KaHao0 },0),
+                ShiJiang = DateTime.Now,
+                MoShi = vData.KaiMenMS==0x00?"用户卡号":"密码开门",
                 DongZuo = vData.MenZhuangTai==0?"关闭":"开门"
             };
             m_BasicDBClass_Receive.InsertRecord(vModel);
         }
 
-        void processorData_ReturnCMD(WatchHouseDataPack_SendData_Main vData, string IPAddress)
+        void processorData_ReturnCMD(WatchHouseDataPack_SendData_Main vData, string IPAddress,
+            int Command)
         {
             int vGangTingID = BitConverter.ToInt32(new byte[] { vData.WatchHouseID4, vData.WatchHouseID3, vData.WatchHouseID2, vData.WatchHouseID1 }, 0);
             short vSN = BitConverter.ToInt16(new byte[] { vData.SN1, vData.SN2 }, 0);
@@ -722,6 +782,132 @@ namespace JXHighWay.WatchHouse.Bll.Server
                 IsReply = true
                 
             };
+            if (vSendCMDModel.State??false)
+            {
+                if (m_ClientMaxID.ContainsKey(vGangTingID) )
+                {
+                    WathHouseDataEFModel vModel = new WathHouseDataEFModel()
+                    {
+                        ID = m_ClientMaxID[vGangTingID]
+                    };
+                    switch( Command )
+                    {
+                        case (int)WatchHouseDataPack_Receive_CommandEnmu.KaiMen: //开门
+                            vModel.MenZhuanTai = "开";
+                            break;
+                        case (int)WatchHouseDataPack_Receive_CommandEnmu.GuanMen: //关门
+                            vModel.MenZhuanTai = "关";
+                            break;
+                        case (int)WatchHouseDataPack_Receive_CommandEnmu.ShangShuo: //上锁
+                            vModel.DianChiSuo = "关";
+                            break;
+                        case (int)WatchHouseDataPack_Receive_CommandEnmu.KaiShuo: //开锁
+                            vModel.DianChiSuo = "开";
+                            break;
+                        case (int)WatchHouseDataPack_Receive_CommandEnmu.KaiBaoJing: //开报警
+                            vModel.BaoJingQi = "开";
+                            break;
+                        case (int)WatchHouseDataPack_Receive_CommandEnmu.GuanBaoJing: //关报警
+                            vModel.BaoJingQi = "关";
+                            break;
+                        case (int)WatchHouseDataPack_Receive_CommandEnmu.KaiChuang: //开窗
+                            vModel.Chuang = "开";
+                            break;
+                        case (int)WatchHouseDataPack_Receive_CommandEnmu.GuanChaugn: //关窗
+                            vModel.Chuang = "关";
+                            break;
+                        case (int)WatchHouseDataPack_Receive_CommandEnmu.KaiFengMu: //开风幕
+                            vModel.FengMu = "开";
+                            break;
+                        case (int)WatchHouseDataPack_Receive_CommandEnmu.GuanFengMu://关风幕
+                            vModel.FengMu = "关";
+                            break;
+                        case (int)WatchHouseDataPack_Receive_CommandEnmu.KaiChuangDeng://开窗灯
+                            vModel.ChuangDeng = "开";
+                            break;
+                        case (int)WatchHouseDataPack_Receive_CommandEnmu.GuanChuangDeng://关窗灯
+                            vModel.ChuangDeng = "关";
+                            break;
+                        case (int)WatchHouseDataPack_Receive_CommandEnmu.KaiXinFeng://开新风
+                            vModel.XinFeng = "开";
+                            break;
+                        case (int)WatchHouseDataPack_Receive_CommandEnmu.GuanXinFeng://关新风
+                            vModel.XinFeng = "关";
+                            break;
+                        case (int)WatchHouseDataPack_Receive_CommandEnmu.TiaoJieFL://调节风量
+
+                            break;
+                        case (int)WatchHouseDataPack_Receive_CommandEnmu.KaiDeng://开灯
+                            vModel.Deng = "开";
+                            break;
+                        case (int)WatchHouseDataPack_Receive_CommandEnmu.GuanDeng://关灯
+                            vModel.Deng = "关";
+                            break;
+                        case (int)WatchHouseDataPack_Receive_CommandEnmu.SheZhiLD://设置亮度
+                            break;
+                        case (int)WatchHouseDataPack_Receive_CommandEnmu.KaiKongTiao://开空调
+                            vModel.KongTiao = "开";
+                            break;
+                        case (int)WatchHouseDataPack_Receive_CommandEnmu.GuanKongTiao://关空调
+                            vModel.KongTiao = "关";
+                            break;
+                        case (int)WatchHouseDataPack_Receive_CommandEnmu.ZhiLeng://制冷
+                            vModel.KongTiaoGZMS = "制冷模式";
+                            break;
+                        case (int)WatchHouseDataPack_Receive_CommandEnmu.ChuShi: //除湿
+                            vModel.KongTiaoGZMS = "除湿模式";
+                            break;
+                        case (int)WatchHouseDataPack_Receive_CommandEnmu.ZhiLe: //制热
+                            vModel.KongTiaoGZMS = "制热模式";
+                            break;
+                        case (int)WatchHouseDataPack_Receive_CommandEnmu.SongFeng://送风
+                            vModel.KongTiaoGZMS = "送风模式";
+                            break;
+                        case (int)WatchHouseDataPack_Receive_CommandEnmu.ZhiDong: //自动
+                            vModel.KongTiaoGZMS = "自动模式";
+                            break;
+                        case (int)WatchHouseDataPack_Receive_CommandEnmu.DiFeng: //低风
+                            vModel.KongTiaoGZFL = "低风";
+                            break;
+                        case (int)WatchHouseDataPack_Receive_CommandEnmu.ZhongFeng://中风
+                            vModel.KongTiaoGZFL = "中风";
+                            break;
+                        case (int)WatchHouseDataPack_Receive_CommandEnmu.GaoFeng://高风
+                            vModel.KongTiaoGZFL = "高风";
+                            break;
+                        case (int)WatchHouseDataPack_Receive_CommandEnmu.SheZhiWD://设置温度
+                            break;
+                        case (int)WatchHouseDataPack_Receive_CommandEnmu.KaiDiNuan://开地暖
+                            vModel.DiNuan = "开";
+                            break;
+                        case (int)WatchHouseDataPack_Receive_CommandEnmu.GuanDiNuan://关地暖
+                            vModel.DiNuan = "关";
+                            break;
+                        case (int)WatchHouseDataPack_Receive_CommandEnmu.KaiYouNJ://开右暖脚
+                            vModel.YouNuanJQ = "开";
+                            break;
+                        case (int)WatchHouseDataPack_Receive_CommandEnmu.GuanYouNJ://关右暖脚
+                            vModel.YouNuanJQ = "关";
+                            break;
+                        case (int)WatchHouseDataPack_Receive_CommandEnmu.KaiZuoNJ://开左暖脚
+                            vModel.ZuoNuanJQ = "开";
+                            break;
+                        case (int)WatchHouseDataPack_Receive_CommandEnmu.GuanZuoNJ://关左暖脚
+                            vModel.ZuoNuanJQ = "关";
+                            break;
+                        case (int)WatchHouseDataPack_Receive_CommandEnmu.QianChuanLSS://前窗帘上升
+                        case (int)WatchHouseDataPack_Receive_CommandEnmu.QianChuanLXJ://前窗帘下降
+                        case (int)WatchHouseDataPack_Receive_CommandEnmu.YouChuanLSS://右窗帘上升
+                        case (int)WatchHouseDataPack_Receive_CommandEnmu.YouChuanLXJ://右窗帘下降
+                            break;
+                        case (int)WatchHouseDataPack_Receive_CommandEnmu.TiaoJieSW://调节室温
+                            break;
+                        case (int)WatchHouseDataPack_Receive_CommandEnmu.XianShiGZPH://指定显示工作片号
+                            break;
+                    }
+                    m_BasicDBClass_Return.UpdateRecord<WathHouseDataEFModel>(vModel);
+                }
+            }
             m_BasicDBClass_Return.UpdateRecord(vSendCMDModel, string.Format("GangTingID={0} and SN={1} and IsSend=1", vGangTingID, vSN));
         }
 
@@ -748,18 +934,18 @@ namespace JXHighWay.WatchHouse.Bll.Server
                     MenZhuanTai = vData.MenZhuanTai == 0 ? "开" : "关",
                     DianChiSuo = vData.DianChiSuo == 0 ? "开" : "关",
                     JiXieSuo = vData.JiXieSuo == 0 ? "开" : "关",
-                    BaoJingQi = vData.BaoJingQi == 0 ? "闭" : "开",
+                    BaoJingQi = vData.BaoJingQi == 0 ? "关" : "开",
                     Chuang = vData.Chuang == 0 ? "开" : "关",
-                    FengMu = vData.FengMu == 0 ? "闭" : "开",
-                    ChuangDeng = vData.ChuangDeng == 0 ? "闭" : "开",
-                    XinFeng = vData.XinFeng == 0 ? "闭" : "开",
-                    Deng = vData.Deng == 0 ? "闭" : "开",
-                    DiNuan = vData.DiNuan == 0 ? "闭" : "开",
-                    ZuoNuanJQ = vData.ZuoNuanJQ == 0 ? "闭" : "开",
-                    YouNuanJQ = vData.YouNuanJQ == 0 ? "闭" : "开",
+                    FengMu = vData.FengMu == 0 ? "关" : "开",
+                    ChuangDeng = vData.ChuangDeng == 0 ? "关" : "开",
+                    XinFeng = vData.XinFeng == 0 ? "关" : "开",
+                    Deng = vData.Deng == 0 ? "关" : "开",
+                    DiNuan = vData.DiNuan == 0 ? "关" : "开",
+                    ZuoNuanJQ = vData.ZuoNuanJQ == 0 ? "关" : "开",
+                    YouNuanJQ = vData.YouNuanJQ == 0 ? "关" : "开",
                     ShiLeiWD = BitConverter.ToInt16(new byte[] { vData.ShiLeiWD2, vData.ShiLeiWD1 }, 0),
                     ShiLeiSD = vData.ShiLeiSD,
-                    KongTiao = vData.KongTiao == 0 ? "闭" : "开",
+                    KongTiao = vData.KongTiao == 0 ? "关" : "开",
                     KongTiaoGZMS = convertKongTiaoGZMS(vData.KongTiaoGZMS),
                     KongTiaoGZFL = convertKongTiaoGZFL(vData.KongTiaoGZFL),
                     KongQiZL = convertKongQiZL(vData.KongQiZL),
@@ -785,9 +971,18 @@ namespace JXHighWay.WatchHouse.Bll.Server
                     GangTingIP = IPAddress
                 };
                 m_BasicDBClass_Receive.TransactionBegin();
-                m_BasicDBClass_Receive.InsertRecord(vModel);
-                m_BasicDBClass_Receive.UpdateRecord(vWatchHouseConfigEFModel, string.Format("GangTingID={0}", vModel.WatchHouseID));
-                m_BasicDBClass_Receive.TransactionCommit();
+                int vMaxID = m_BasicDBClass_Receive.InsertRecord(vModel);
+                if (vMaxID != 0)
+                {
+                    m_BasicDBClass_Receive.UpdateRecord(vWatchHouseConfigEFModel, string.Format("GangTingID={0}", vModel.WatchHouseID));
+                    m_BasicDBClass_Receive.TransactionCommit();
+                    if (m_ClientMaxID.ContainsKey(vModel.WatchHouseID.Value))
+                        m_ClientMaxID[vModel.WatchHouseID.Value] = vMaxID;
+
+                }
+                else
+                    m_BasicDBClass_Receive.TransactionRollback();
+
                 //更新客户端字典表
                 if (m_ClientDict.ContainsKey(vModel.WatchHouseID.Value) )
                     m_ClientDict[vModel.WatchHouseID.Value] = IPAddress;

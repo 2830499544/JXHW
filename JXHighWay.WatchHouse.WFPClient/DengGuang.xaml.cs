@@ -167,20 +167,22 @@ namespace JXHighWay.WatchHouse.WFPClient
         {
             if (m_IsInit && m_Switch)
             {
+                CheckBox_Switch.IsEnabled = false;
                 m_Switch = false;
-                bool vOldValue = CheckBox_Switch.IsChecked ?? false;
+                bool vOldValue = !(CheckBox_Switch.IsChecked ?? false);
                 bool vResult;
                 if (vOldValue)
-                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, WatchHouseDataPack_Send_CommandEnmu.KaiDeng);
-                else
                     vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, WatchHouseDataPack_Send_CommandEnmu.GuanDeng);
+                else
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, WatchHouseDataPack_Send_CommandEnmu.KaiDeng);
                 if (!vResult)
                 {
                     CheckBox_Switch.IsChecked = !vOldValue;
                     Xceed.Wpf.Toolkit.MessageBox.Show("灯光开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 changeSwitchColor();
-                 m_Switch = true;
+                CheckBox_Switch.IsEnabled = true;
+                m_Switch = true;
             }
         }
 

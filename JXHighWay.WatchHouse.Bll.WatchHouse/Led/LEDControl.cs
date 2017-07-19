@@ -29,15 +29,15 @@ namespace JXHighWay.WatchHouse.Bll.Client.LED
 
         public LEDControl(int WatchHouseID,int Heigth,int Width)
         {
-            m_IPAddress = getLEDIPAddress(WatchHouseID);
+          
             Config vConfig = new Config();
             BasicDBClass.DataSource = vConfig.DBSource;
             BasicDBClass.DBName = vConfig.DBName;
             BasicDBClass.Port = vConfig.DBPort;
             BasicDBClass.UserID = vConfig.DBUserName;
             BasicDBClass.Password = vConfig.DBPassword;
-
-           
+            m_BasicDBClass = new BasicDBClass( DataBaseType.MySql);
+            m_IPAddress = getLEDIPAddress(WatchHouseID);
 
 
             m_Heigth = Heigth;
@@ -54,7 +54,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.LED
             };
 
             WatchHouseConfigEFModel[] vSelectResult = m_BasicDBClass.SelectRecordsEx(vWatchHouseConfigEFModel);
-            if (vResult != null && vResult.Length > 0)
+            if (vSelectResult != null && vSelectResult.Length > 0)
             {
                 vResult = vSelectResult[0].GuanGaoPingIP;
             }

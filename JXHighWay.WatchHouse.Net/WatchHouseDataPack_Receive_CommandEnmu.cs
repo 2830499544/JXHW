@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JXHighWay.WatchHouse.Net
+namespace JXHighWay.WatchHouse.Net.DataPack
 {
-    public enum WatchHouseDataPack_Send_CommandEnmu
+    public enum WatchHouseDataPack_Receive_CommandEnmu
     {
         #region 门控(0x0202)
         /// <summary>
@@ -35,60 +35,31 @@ namespace JXHighWay.WatchHouse.Net
         GuanBaoJing = 0x02021006,
         #endregion
 
-        #region 前窗控(0x0203)
+        #region 窗控(0x0203)
         /// <summary>
-        /// 开窗(前)
+        /// 开窗
         /// </summary>
-        KaiChuang_Qian = 0x02031001,
+        KaiChuang = 0x02031001,
         /// <summary>
-        /// 关窗(前)
+        /// 关窗
         /// </summary>
-        GuanChaugn_Qian = 0x02031002,
+        GuanChaugn = 0x02031002,
         /// <summary>
-        /// 开风幕(前)
+        /// 开风幕
         /// </summary>
-        KaiFengMu_Qian = 0x02031003,
+        KaiFengMu = 0x02031003,
         /// <summary>
-        /// 关风幕(前)
+        /// 关风幕
         /// </summary>
-        GuanFengMu_Qian = 0x02031004,
+        GuanFengMu = 0x02031004,
         /// <summary>
-        /// 开窗灯(前)
+        /// 开窗灯
         /// </summary>
-        KaiChuangDeng_Qian = 0x02031005,
+        KaiChuangDeng = 0x02031005,
         /// <summary>
-        /// 关窗灯(前)
+        /// 关窗灯
         /// </summary>
-        GuanChuangDeng_Qian = 0x02031006,
-        #endregion
-
-        #region 后窗控0x020A
-        /// <summary>
-        /// 开窗(后)
-        /// </summary>
-        KaiChuang_Hou = 0x020a1001,
-        /// <summary>
-        /// 关窗(后)
-        /// </summary>
-        GuanChaugn_Hou = 0x020a1002,
-        /// <summary>
-        /// 开风幕(后)
-        /// </summary>
-        KaiFengMu_Hou = 0x020a1003,
-        /// <summary>
-        /// 关风幕(后)
-        /// </summary>
-        GuanFengMu_Hou = 0x020a1004,
-        /// <summary>
-        /// 开窗灯(后)
-        /// </summary>
-        KaiChuangDeng_Hou = 0x020a1005,
-        /// <summary>
-        /// 关窗灯(前)
-        /// </summary>
-        //GuanChuangDeng_Qian = 0x02031006,
-
-
+        GuanChuangDeng = 0x02031006,
         #endregion
 
         #region 新风(0x0204)
@@ -214,23 +185,36 @@ namespace JXHighWay.WatchHouse.Net
 
         #region 电子工作牌
         /// <summary>
-        /// 显示后工作牌号
+        /// 显示指定工作牌号
         /// </summary>
-        XianShiGZPH_Hou = 0x02101001,
-        /// <summary>
-        /// 显示前工作牌号
-        /// </summary>
-        XianShiGZPH_Qian = 0x02061001,
+        XianShiGZPH = 0x02101001,
         #endregion
 
+        #region 其它
         /// <summary>
-        /// 更新图片
+        /// 接收岗亭工作状态数据
         /// </summary>
-        GenXingTP  = 0x02011002,
+        GongZuoSJ = 0x02011020,
         /// <summary>
-        /// 更新员工信息
+        /// 门禁记录
         /// </summary>
-        YuanGongXX = 0x02011003
+        MenJingJL = 0x02010021,
+        /// <summary>
+        /// 切换电子工作牌
+        /// </summary>
+        DianZhiGHP = 0x02010022,
+        /// <summary>
+        /// 更新图片数据
+        /// </summary>
+        TuPianGX = 0x02011002,
+        /// <summary>
+        /// 工号更新
+        /// </summary>
+        GongHaoGX = 0x02011003
+
+        #endregion
+
+
 
     }
 }

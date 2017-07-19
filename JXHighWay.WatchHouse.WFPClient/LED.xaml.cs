@@ -45,7 +45,7 @@ namespace JXHighWay.WatchHouse.WFPClient
       
         private void button_ShiPing_ShangChuang_Click(object sender, RoutedEventArgs e)
         {
-            m_LEDControl = new LEDControl(App.WatchHouseID, 64, 64);
+            m_LEDControl = new LEDControl(App.WatchHouseID, 160, 224);
             if (System.IO.File.Exists(textBox_ShiPing.Text))
                 m_LEDControl.SendVideo( App.AdminUser, textBox_ShiPing.Text);
             else
@@ -74,6 +74,7 @@ namespace JXHighWay.WatchHouse.WFPClient
 
         private void button_Text_ShangChuang_Click(object sender, RoutedEventArgs e)
         {
+            m_LEDControl = new LEDControl(App.WatchHouseID, 160, 224);
             if (textBox_Text.Text != "")
                 m_LEDControl.SendText( App.AdminUser, textBox_Text.Text);
             else
@@ -85,9 +86,9 @@ namespace JXHighWay.WatchHouse.WFPClient
 
         private void button_TuPian_ShangChuang_Click(object sender, RoutedEventArgs e)
         {
-            m_LEDControl = new LEDControl(App.WatchHouseID, 64, 64);
+            m_LEDControl = new LEDControl(App.WatchHouseID, 160, 224);
             if (System.IO.File.Exists(textBox_TuPian.Text))
-                m_LEDControl.SendVideo( App.AdminUser, textBox_TuPian.Text);
+                m_LEDControl.SendImage( App.AdminUser, textBox_TuPian.Text);
             else
                 Xceed.Wpf.Toolkit.MessageBox.Show("图片文件不存在", "信息", MessageBoxButton.OK, MessageBoxImage.Error);
         }

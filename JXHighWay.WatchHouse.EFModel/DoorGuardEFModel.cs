@@ -16,5 +16,9 @@ namespace JXHighWay.WatchHouse.EFModel
         public int? KaiHao { get; set; }
         [ColumnAttrib("DongZuo")]
         public String DongZuo { get; set; }
+        /// <summary>
+        /// 开门模式
+        /// </summary>
+        public string MoShi { get; set; }
     }
 }

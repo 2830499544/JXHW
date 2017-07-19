@@ -180,7 +180,7 @@ namespace JXHighWay.WatchHouse.WFPClient
             if (m_IsInit && m_IsSwitch)
             {
                 m_IsSwitch = false;
-                bool vOldValue = CheckBox_XinFeng.IsChecked ?? false;
+                bool vOldValue = !(CheckBox_XinFeng.IsChecked ?? false);
                 bool vResult;
                 if (vOldValue)
                     vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanXinFeng);

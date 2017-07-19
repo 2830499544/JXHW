@@ -84,7 +84,7 @@ namespace JXHighWay.WatchHouse.Net
         /// 数据
         /// Data[4]
         /// </summary>
-        public byte Data{ get; set; }
+        public byte Data { get; set; }
 
         #region 预留4字节
         public byte Kong1{ get; set; }

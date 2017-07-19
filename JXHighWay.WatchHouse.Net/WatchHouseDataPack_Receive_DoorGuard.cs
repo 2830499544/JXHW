@@ -143,29 +143,24 @@ namespace JXHighWay.WatchHouse.Net
         public byte KaiMenMS { get; set; }
         /// <summary>
         /// 卡号或以‘*’代替密码
-        /// Data[14]
+        /// Data[15]
         /// </summary>
         public byte KaHao0 { get; set; }
         /// <summary>
         /// 卡号或以‘*’代替密码
-        /// Data[15]
+        /// Data[16]
         /// </summary>
         public byte KaHao1 { get; set; }
         /// <summary>
         /// 卡号或以‘*’代替密码
-        /// Data[16]
+        /// Data[17]
         /// </summary>
         public byte KaHao2 { get; set; }
         /// <summary>
         /// 卡号或以‘*’代替密码
-        /// Data[17]
-        /// </summary>
-        public byte KaHao3 { get; set; }
-        /// <summary>
-        /// 卡号或以‘*’代替密码
         /// Data[18]
         /// </summary>
-        public byte KaHao4 { get; set; }
+        public byte KaHao3 { get; set; }
         /// <summary>
         /// 门状态(0:关闭 1：开门)
         /// Data[19]
