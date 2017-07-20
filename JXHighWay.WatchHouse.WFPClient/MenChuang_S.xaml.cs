@@ -26,10 +26,17 @@ namespace JXHighWay.WatchHouse.WFPClient
         bool m_IsInit = false;
         bool m_Switch_Men = true;
         bool m_Switch_Suo = true;
-        bool m_Switch_FMD = true;
-        bool m_Switch_FM = true;
-        bool m_Switch_ZDC = true;
         bool m_Switch_BJ = true;
+
+        //前风幕灯、前风幕、前自动窗
+        bool m_Switch_QFMD = true;
+        bool m_Switch_QFM = true;
+        bool m_Switch_QZDC = true;
+        //后风幕灯、后风幕、后风幕灯
+        bool m_Switch_HFMD = true;
+        bool m_Switch_HFM = true;
+        bool m_Switch_HZDC = true;
+
 
         public MenChuang_S()
         {
@@ -55,22 +62,35 @@ namespace JXHighWay.WatchHouse.WFPClient
 
         void initMenChaung()
         {
-            //MenChuangStateInfo vMenChuangStateModel = m_Monitoring.MenChuangState(App.WatchHouseID);
-            //CheckBox_BaoJingQi.IsChecked = vMenChuangStateModel.BaoJinQi;
-            //CheckBox_Chuang.IsChecked = vMenChuangStateModel.Chuang;
-            //CheckBox_FengMu.IsChecked = vMenChuangStateModel.FengMu;
-            //CheckBox_FengMuDeng.IsChecked = vMenChuangStateModel.FengMuDeng;
-            //CheckBox_Men.IsChecked = vMenChuangStateModel.Men;
-            //CheckBox_ZiDongChuang.IsChecked = vMenChuangStateModel.ZiDonGChuang;
-            //changeSwitchColor_FM();
-            //changeSwitchColor_FMD();
-            //changeSwitchColor_Men();
-            //changeSwitchColor_Suo();
-            //changeSwitchColor_ZDC();
-            //m_IsInit = true;
+            MenChuangStateInfo vMenChuangStateModel = m_Monitoring.MenChuangState(App.WatchHouseID);
+
+            CheckBox_Men.IsChecked = vMenChuangStateModel.Men;
+            CheckBox_BaoJing.IsChecked = vMenChuangStateModel.BaoJinQi;
+            CheckBox_Shuo.IsChecked = vMenChuangStateModel.Shuo;
+            changeSwitchColor_Men();
+            changeSwitchColor_Suo();
+            changeSwitchColor_BaoJingQi();
+
+            //前
+            CheckBox_QianFengMD.IsChecked = vMenChuangStateModel.FengMuDeng;
+            CheckBox_QianFengMu.IsChecked = vMenChuangStateModel.FengMu;
+            CheckBox_QianZhiDC.IsChecked = vMenChuangStateModel.ZiDonGChuang;
+            changeSwitchColor_QFM();
+            changeSwitchColor_QFMD();
+            changeSwitchColor_QZDC();
+
+            //后
+            CheckBox_HouFengMD.IsChecked = vMenChuangStateModel.FengMuDeng2;
+            CheckBox_HouFengMu.IsChecked = vMenChuangStateModel.FengMu2;
+            CheckBox_HouZhiDC.IsChecked = vMenChuangStateModel.ZiDonGChuang2;
+            changeSwitchColor_HFM();
+            changeSwitchColor_HFMD();
+            changeSwitchColor_HZDC();
+
+            m_IsInit = true;
         }
 
-
+        #region 前窗帘 
         private async void Button_QCL_Shen_Click(object sender, RoutedEventArgs e)
         {
             if (m_IsInit)
@@ -80,6 +100,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                     Xceed.Wpf.Toolkit.MessageBox.Show("前窗帘上升失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        
 
         private async void Button_QCL_Jiang_Click(object sender, RoutedEventArgs e)
         {
@@ -90,7 +111,9 @@ namespace JXHighWay.WatchHouse.WFPClient
                     Xceed.Wpf.Toolkit.MessageBox.Show("前窗帘下降失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        #endregion
 
+        #region 右窗帘
         private async void button_QCL_Sheng_Click(object sender, RoutedEventArgs e)
         {
             if (m_IsInit)
@@ -110,6 +133,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                     Xceed.Wpf.Toolkit.MessageBox.Show("右窗帘下降失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        #endregion
 
         #region 门控制
         private async void CheckBox_Men_Click(object sender, RoutedEventArgs e)
@@ -137,40 +161,42 @@ namespace JXHighWay.WatchHouse.WFPClient
         {
             if (CheckBox_Men.IsChecked ?? false)
             {
-                //label_Men_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
-                //label_Men_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF079E23"));
+                label_Men_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
+                label_Men_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF079E23"));
             }
             else
             {
-                //label_Men_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF0190F"));
-                //label_Men_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
+                label_Men_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF0190F"));
+                label_Men_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
             }
         }
 
         #endregion
 
         #region 锁控制
-        private async void CheckBox_Chuang_Click(object sender, RoutedEventArgs e)
+
+        private async void CheckBox_Shuo_Click(object sender, RoutedEventArgs e)
         {
-            //if (m_IsInit && m_Switch_Suo)
-            //{
-            //    m_Switch_Suo = false;
-            //    bool vOldValue = CheckBox_Chuang.IsChecked ?? false;
-            //    bool vResult;
-            //    if (vOldValue)
-            //        vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiShuo);
-            //    else
-            //        vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.ShangShuo);
-            //    if (!vResult)
-            //    {
-            //        CheckBox_Chuang.IsChecked = !vOldValue;
-            //        Xceed.Wpf.Toolkit.MessageBox.Show("锁开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-            //    }
-            //    changeSwitchColor_Suo();
-            //    m_Switch_Suo = true;
-            //}
+            if (m_IsInit && m_Switch_Suo)
+            {
+                m_Switch_Suo = false;
+                bool vOldValue = CheckBox_Shuo.IsChecked ?? false;
+                bool vResult;
+                if (vOldValue)
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiShuo);
+                else
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.ShangShuo);
+                if (!vResult)
+                {
+                    CheckBox_Shuo.IsChecked = !vOldValue;
+                    Xceed.Wpf.Toolkit.MessageBox.Show("锁开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                changeSwitchColor_Suo();
+                m_Switch_Suo = true;
+            }
         }
 
+      
 
         void changeSwitchColor_Suo()
         {
@@ -191,75 +217,144 @@ namespace JXHighWay.WatchHouse.WFPClient
         #region 风幕灯
         private async void CheckBox_FengMuDeng_Click(object sender, RoutedEventArgs e)
         {
-            //if (m_IsInit && m_Switch_FMD)
-            //{
-            //    m_Switch_FMD = false;
-            //    bool vOldValue = CheckBox_FengMuDeng.IsChecked ?? false;
-            //    bool vResult;
-            //    if (vOldValue)
-            //        vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanChuangDeng);
-            //    else
-            //        vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiChuangDeng);
-            //    if (!vResult)
-            //    {
-            //        CheckBox_FengMuDeng.IsChecked = !vOldValue;
-            //        Xceed.Wpf.Toolkit.Xceed.Wpf.Toolkit.MessageBox.Show("风幕灯开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-            //    }
-            //    changeSwitchColor_FMD();
-            //    m_Switch_FMD = true;
-            //}
+            if (m_IsInit && m_Switch_QFMD)
+            {
+                m_Switch_QFMD = false;
+                bool vOldValue = CheckBox_QianFengMD.IsChecked ?? false;
+                bool vResult;
+                if (vOldValue)
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanChuangDeng_Qian);
+                else
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiChuangDeng_Qian);
+                if (!vResult)
+                {
+                    CheckBox_QianFengMD.IsChecked = !vOldValue;
+                    Xceed.Wpf.Toolkit.MessageBox.Show("风幕灯开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                changeSwitchColor_QFMD();
+                m_Switch_QFMD = true;
+            }
         }
 
-        void changeSwitchColor_FMD()
+        private async void CheckBox_HouFengMD_Click(object sender, RoutedEventArgs e)
         {
-            //if (CheckBox_FengMuDeng.IsChecked ?? false)
-            //{
-            //    label_FMD_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
-            //    label_FMD_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF079E23"));
-            //}
-            //else
-            //{
-            //    label_FMD_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF0190F"));
-            //    label_FMD_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
-            //}
+            if (m_IsInit && m_Switch_HFMD)
+            {
+                m_Switch_HFMD = false;
+                bool vOldValue = CheckBox_HouFengMD.IsChecked ?? false;
+                bool vResult;
+                if (vOldValue)
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanChuangDeng_Hou);
+                else
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiChuangDeng_Hou);
+                if (!vResult)
+                {
+                    CheckBox_HouFengMD.IsChecked = !vOldValue;
+                    Xceed.Wpf.Toolkit.MessageBox.Show("风幕灯开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                changeSwitchColor_HFMD();
+                m_Switch_HFMD = true;
+            }
+        }
+
+        void changeSwitchColor_HFMD()
+        {
+            if (CheckBox_HouFengMD.IsChecked ?? false)
+            {
+                label_HFMD_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
+                label_HFMD_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF079E23"));
+            }
+            else
+            {
+                label_HFMD_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF0190F"));
+                label_HFMD_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
+            }
+        }
+
+        void changeSwitchColor_QFMD()
+        {
+            if (CheckBox_QianFengMD.IsChecked ?? false)
+            {
+                label_QFMD_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
+                label_QFMD_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF079E23"));
+            }
+            else
+            {
+                label_QFMD_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF0190F"));
+                label_QFMD_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
+            }
         }
         #endregion
 
         #region 风幕
         private async void CheckBox_FengMu_Click(object sender, RoutedEventArgs e)
         {
-            //if (m_IsInit && m_Switch_FM)
-            //{
-            //    m_Switch_FM = false;
-            //    bool vOldValue = CheckBox_FengMu.IsChecked ?? false;
-            //    bool vResult;
-            //    if (vOldValue)
-            //        vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanFengMu);
-            //    else
-            //        vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiFengMu);
-            //    if (!vResult)
-            //    {
-            //        CheckBox_FengMu.IsChecked = !vOldValue;
-            //        Xceed.Wpf.Toolkit.Xceed.Wpf.Toolkit.MessageBox.Show("风幕开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-            //    }
-            //    changeSwitchColor_FM();
-            //    m_Switch_FM = true;
-            //}
+            if (m_IsInit && m_Switch_QFM)
+            {
+                m_Switch_QFM = false;
+                bool vOldValue = CheckBox_QianFengMu.IsChecked ?? false;
+                bool vResult;
+                if (vOldValue)
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanFengMu_Qian);
+                else
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiFengMu_Qian);
+                if (!vResult)
+                {
+                    CheckBox_QianFengMu.IsChecked = !vOldValue;
+                    Xceed.Wpf.Toolkit.MessageBox.Show("风幕开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                changeSwitchColor_QFM();
+                m_Switch_QFM = true;
+            }
         }
 
-
-        void changeSwitchColor_FM()
+        private async void CheckBox_HouFengMu_Click(object sender, RoutedEventArgs e)
         {
-            //if (CheckBox_FengMu.IsChecked ?? false)
-            //{
-            //    label_FM_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
-            //    label_FM_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF079E23"));
-            //}
-            //else
-            //{
-            //    label_FM_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF0190F"));
-            //    label_FM_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
-            //}
+            if (m_IsInit && m_Switch_HFM)
+            {
+                m_Switch_HFM = false;
+                bool vOldValue = CheckBox_HouFengMu.IsChecked ?? false;
+                bool vResult;
+                if (vOldValue)
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanFengMu_Hou);
+                else
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiFengMu_Hou);
+                if (!vResult)
+                {
+                    CheckBox_HouFengMu.IsChecked = !vOldValue;
+                    Xceed.Wpf.Toolkit.MessageBox.Show("风幕开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                changeSwitchColor_HFM();
+                m_Switch_HFM = true;
+            }
+        }
+
+        void changeSwitchColor_HFM()
+        {
+            if (CheckBox_HouFengMu.IsChecked ?? false)
+            {
+                label_HFM_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
+                label_HFM_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF079E23"));
+            }
+            else
+            {
+                label_HFM_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF0190F"));
+                label_HFM_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
+            }
+        }
+
+        void changeSwitchColor_QFM()
+        {
+            if (CheckBox_QianFengMu.IsChecked ?? false)
+            {
+                label_QFM_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
+                label_QFM_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF079E23"));
+            }
+            else
+            {
+                label_QFM_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF0190F"));
+                label_QFM_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
+            }
         }
 
         #endregion
@@ -267,38 +362,121 @@ namespace JXHighWay.WatchHouse.WFPClient
         #region 自动窗
         private async void CheckBox_ZiDongChuang_Click(object sender, RoutedEventArgs e)
         {
-            //if (m_IsInit && m_Switch_ZDC)
-            //{
-            //    m_Switch_ZDC = false;
-            //    bool vOldValue = CheckBox_ZiDongChuang.IsChecked ?? false;
-            //    bool vResult;
-            //    if (vOldValue)
-            //        vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanChaugn);
-            //    else
-            //        vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiChuang);
-            //    if (!vResult)
-            //    {
-            //        CheckBox_ZiDongChuang.IsChecked = !vOldValue;
-            //        Xceed.Wpf.Toolkit.Xceed.Wpf.Toolkit.MessageBox.Show("自动窗开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-            //    }
-            //    changeSwitchColor_FM();
-            //    m_Switch_ZDC = true;
-            //}
+            if (m_IsInit && m_Switch_QZDC)
+            {
+                m_Switch_QZDC = false;
+                bool vOldValue = CheckBox_QianZhiDC.IsChecked ?? false;
+                bool vResult;
+                if (vOldValue)
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanChaugn_Qian);
+                else
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiChuang_Hou);
+                if (!vResult)
+                {
+                    CheckBox_QianZhiDC.IsChecked = !vOldValue;
+                    Xceed.Wpf.Toolkit.MessageBox.Show("自动窗开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                changeSwitchColor_QZDC();
+                m_Switch_QZDC = true;
+            }
         }
 
-        void changeSwitchColor_ZDC()
+        private async void CheckBox_HouZhiDC_Click(object sender, RoutedEventArgs e)
         {
-            //if (CheckBox_ZiDongChuang.IsChecked ?? false)
-            //{
-            //    label_ZDC_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
-            //    label_ZDC_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF079E23"));
-            //}
-            //else
-            //{
-            //    label_ZDC_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF0190F"));
-            //    label_ZDC_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
-            //}
+            if (m_IsInit && m_Switch_HZDC)
+            {
+                m_Switch_HZDC = false;
+                bool vOldValue = CheckBox_HouZhiDC.IsChecked ?? false;
+                bool vResult;
+                if (vOldValue)
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanChaugn_Hou);
+                else
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiChuang_Hou);
+                if (!vResult)
+                {
+                    CheckBox_HouZhiDC.IsChecked = !vOldValue;
+                    Xceed.Wpf.Toolkit.MessageBox.Show("自动窗开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                changeSwitchColor_HZDC();
+                m_Switch_HZDC = true;
+            }
         }
+
+        void changeSwitchColor_HZDC()
+        {
+            if (CheckBox_HouZhiDC.IsChecked ?? false)
+            {
+                label_HZDC_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
+                label_HZDC_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF079E23"));
+            }
+            else
+            {
+                label_HZDC_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF0190F"));
+                label_HZDC_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
+            }
+        }
+
+        void changeSwitchColor_QZDC()
+        {
+            if (CheckBox_QianZhiDC.IsChecked ?? false)
+            {
+                label_QZDC_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
+                label_QZDC_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF079E23"));
+            }
+            else
+            {
+                label_QZDC_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF0190F"));
+                label_QZDC_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
+            }
+        }
+
         #endregion
+
+        #region 报警器
+        private async void CheckBox_BaoJing_Click(object sender, RoutedEventArgs e)
+        {
+            if (m_IsInit && m_Switch_BJ)
+            {
+
+                m_Switch_BJ = false;
+                bool vOldValue = !(CheckBox_BaoJing.IsChecked ?? false);
+                bool vResult;
+                if (vOldValue)
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.GuanBaoJing);
+                else
+                    vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.KaiBaoJing);
+                if (!vResult)
+                {
+                    CheckBox_BaoJing.IsChecked = !vOldValue;
+                    Xceed.Wpf.Toolkit.MessageBox.Show("报警开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                changeSwitchColor_BaoJingQi();
+                m_Switch_BJ = true;
+            }
+        }
+
+        void changeSwitchColor_BaoJingQi()
+        {
+            if (CheckBox_BaoJing.IsChecked ?? false)
+            {
+                label_BJ_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
+                label_BJ_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF079E23"));
+            }
+            else
+            {
+                label_BJ_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF0190F"));
+                label_BJ_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
+            }
+        }
+
+
+
+        #endregion
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            m_Monitoring = new WatchHouseMonitoring();
+            RefreshState();
+        }
     }
 }

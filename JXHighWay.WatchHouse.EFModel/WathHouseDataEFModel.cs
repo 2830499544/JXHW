@@ -83,12 +83,23 @@ namespace JXHighWay.WatchHouse.EFModel
         public String DianLiuJK { get; set; }
         [ColumnAttrib("MenKongCKQ")]
         public String MenKongCKQ { get; set; }
+
         [ColumnAttrib("ChuangKongCKQ")]
         public String ChuangKongCKQ { get; set; }
         [ColumnAttrib("GongKongJSC")]
         public String GongKongJSC { get; set; }
         [ColumnAttrib("GongKongJSR")]
         public String GongKongJSR { get; set; }
+
+
+        [ColumnAttrib("ChuangKongCKQ2")]
+        public String ChuangKongCKQ2 { get; set; }
+        [ColumnAttrib("GongKongJSC2")]
+        public String GongKongJSC2 { get; set; }
+        [ColumnAttrib("GongKongJSR2")]
+        public String GongKongJSR2 { get; set; }
+
+
         [ColumnAttrib("DengGuanLD")]
         public Int16? DengGuanLD { get; set; }
         [ColumnAttrib("XieRuSJ")]

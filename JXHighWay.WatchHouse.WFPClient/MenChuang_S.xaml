@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:JXHighWay.WatchHouse.WFPClient"
       mc:Ignorable="d" 
       d:DesignHeight="460" d:DesignWidth="1024"
-      Title="MenChuang_S">
+      Title="MenChuang_S" Loaded="Page_Loaded">
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -32,10 +32,10 @@
         <Image HorizontalAlignment="Left" Height="147" VerticalAlignment="Top" Width="147" Grid.Column="1" Margin="44,39,0,0" Source="Images/MenChuang/Men.jpg"  Grid.RowSpan="2"/>
         <Border Grid.Column="1" Margin="19,0,21,0" Grid.Row="2"  CornerRadius="10" BorderBrush="#FF91ACBD" BorderThickness="1">
             <Grid Margin="2,0,-2,0">
-                <CheckBox  x:Name="CheckBox_Men" Style="{StaticResource OrangeSwitchStyle}" Content="" HorizontalAlignment="Left" Margin="53,15,0,0" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand"/>
-                <CheckBox x:Name="CheckBox_Shuo" Style="{StaticResource OrangeSwitchStyle}" Content="" HorizontalAlignment="Left" Margin="53,69,0,0" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand"/>
-                <Label x:Name="label_Suo_Guan1" Content="关门×" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,17,0,0" FontSize="16" Foreground="#FFF0190F"/>
-                <Label x:Name="label_Suo_Kai3" Content="√开门" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="146,17,0,0" FontSize="16" Foreground="#FF079E23" IsEnabled="False" />
+                <CheckBox  x:Name="CheckBox_Men" Style="{StaticResource OrangeSwitchStyle}" Content="" HorizontalAlignment="Left" Margin="53,15,0,0" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand" Click="CheckBox_Men_Click"/>
+                <CheckBox x:Name="CheckBox_Shuo" Style="{StaticResource OrangeSwitchStyle}" Content="" HorizontalAlignment="Left" Margin="53,69,0,0" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand" Click="CheckBox_Shuo_Click"/>
+                <Label x:Name="label_Men_Guan" Content="关门×" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,17,0,0" FontSize="16" Foreground="#FFF0190F"/>
+                <Label x:Name="label_Men_Kai" Content="√开门" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="146,17,0,0" FontSize="16" Foreground="#FF079E23" IsEnabled="False" />
                 <Label x:Name="label_Suo_Guan" Content="开锁×" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,69,0,0" FontSize="16" Foreground="#FFF0190F"/>
                 <Label x:Name="label_Suo_Kai" Content="√上锁" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="146,69,0,0" FontSize="16" Foreground="#FF079E23" IsEnabled="False" />
                 <Label x:Name="label1_Copy5" Content="自动门" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="59,-26,0,0" Foreground="#FFF9F4F4" FontSize="24" Background="#FF245D7C" RenderTransformOrigin="1.056,4.109" Height="42" Width="82"/>
@@ -44,9 +44,9 @@
 
         <Border Grid.Column="1" Margin="19,26,21,27" Grid.Row="3"  CornerRadius="10" BorderBrush="#FF91ACBD" BorderThickness="1">
             <Grid Margin="2,-1,-2,1">
-                <CheckBox  x:Name="CheckBox_Men1" Style="{StaticResource OrangeSwitchStyle}" Content="" HorizontalAlignment="Left" Margin="53,15,0,0" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand"/>
-                <Label x:Name="label_Suo_Guan2" Content="关×" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="16,17,0,0" FontSize="16" Foreground="#FFF0190F"/>
-                <Label x:Name="label_Suo_Kai1" Content="√开" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="146,17,0,0" FontSize="16" Foreground="#FF079E23" IsEnabled="False" />
+                <CheckBox  x:Name="CheckBox_BaoJing" Style="{StaticResource OrangeSwitchStyle}" Content="" HorizontalAlignment="Left" Margin="53,15,0,0" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand" Click="CheckBox_BaoJing_Click"/>
+                <Label x:Name="label_BJ_Guan" Content="关×" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="16,17,0,0" FontSize="16" Foreground="#FFF0190F"/>
+                <Label x:Name="label_BJ_Kai" Content="√开" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="146,17,0,0" FontSize="16" Foreground="#FF079E23" IsEnabled="False" />
                 <Label x:Name="label1_Copy" Content="报   警" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="57,-25,0,0" Foreground="#FFF9F4F4" FontSize="24" Background="#FF245D7C" RenderTransformOrigin="1.056,4.109" Height="42" Width="82"/>
             </Grid>
         </Border>
@@ -57,29 +57,29 @@
                     <ColumnDefinition Width="152*"/>
                     <ColumnDefinition Width="39*"/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="Button_QCL_Shen"   Content="升" HorizontalAlignment="Left" Height="38" VerticalAlignment="Top" Width="84" Background="#FFF0A94D" FontSize="20" Foreground="#FFF7F1F1" Cursor="Hand" Margin="23,14,0,0"/>
-                <Button x:Name="Button_QCL_Jiang"   Content="降" HorizontalAlignment="Left" Height="38" Margin="153,14,0,0" VerticalAlignment="Top" Width="84" FontSize="20" Foreground="#FFF5F2F2" Cursor="Hand" Background="#FF4EC47A"/>
-                <Button x:Name="Button_YCL_Shen"   Content="升" HorizontalAlignment="Left" Height="38" VerticalAlignment="Top" Width="84" Background="#FFF0A94D" FontSize="20" Foreground="#FFF7F1F1" Cursor="Hand" Margin="336,14,0,0"/>
-                <Button x:Name="Button_YCL_Jiang"   Content="降" HorizontalAlignment="Left" Height="38" Margin="10.915,14,0,0" VerticalAlignment="Top" Width="84" FontSize="20" Foreground="#FFF5F2F2" Cursor="Hand" Background="#FF4EC47A" Grid.Column="1"/>
+                <Button x:Name="Button_QCL_Shen"   Content="升" HorizontalAlignment="Left" Height="38" VerticalAlignment="Top" Width="84" Background="#FFF0A94D" FontSize="20" Foreground="#FFF7F1F1" Cursor="Hand" Margin="23,14,0,0" Click="Button_QCL_Shen_Click"/>
+                <Button x:Name="Button_QCL_Jiang"   Content="降" HorizontalAlignment="Left" Height="38" Margin="153,14,0,0" VerticalAlignment="Top" Width="84" FontSize="20" Foreground="#FFF5F2F2" Cursor="Hand" Background="#FF4EC47A" Click="Button_QCL_Jiang_Click"/>
+                <Button x:Name="Button_YCL_Shen"   Content="升" HorizontalAlignment="Left" Height="38" VerticalAlignment="Top" Width="84" Background="#FFF0A94D" FontSize="20" Foreground="#FFF7F1F1" Cursor="Hand" Margin="336,14,0,0" Click="button_QCL_Sheng_Click"/>
+                <Button x:Name="Button_YCL_Jiang"   Content="降" HorizontalAlignment="Left" Height="38" Margin="10.915,14,0,0" VerticalAlignment="Top" Width="84" FontSize="20" Foreground="#FFF5F2F2" Cursor="Hand" Background="#FF4EC47A" Grid.Column="1" Click="button_QCL_Jiang_Click_1"/>
                 <Label x:Name="label1_Copy1" Content="前窗帘" HorizontalAlignment="Left" VerticalAlignment="Top"  Foreground="#FFF9F4F4" FontSize="24" Background="#FF245D7C" RenderTransformOrigin="1.056,4.109" Height="39" Width="82" Margin="86,-26,0,0" />
                 <Label x:Name="label1_Copy2" Content="右窗帘" HorizontalAlignment="Left" VerticalAlignment="Top"  Foreground="#FFF9F4F4" FontSize="24" Background="#FF245D7C" RenderTransformOrigin="1.056,4.109" Height="39" Width="82" Margin="408,-26,0,0" Grid.ColumnSpan="2"/>
             </Grid>
         </Border>
         <Border Grid.Column="2" Margin="31,25,18,25"  CornerRadius="10" BorderBrush="#FF91ACBD" BorderThickness="1" Grid.Row="1">
             <Grid Margin="2,-1,-2,1">
-                <CheckBox  x:Name="CheckBox_FengMuDeng1" Style="{StaticResource OrangeSwitchStyle}" Content="" HorizontalAlignment="Left" Margin="46,15,0,0" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand"/>
-                <Label x:Name="label_Suo_Guan4" Content="关×" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="9,17,0,0" FontSize="16" Foreground="#FFF0190F"/>
-                <Label x:Name="label_Suo_Kai4" Content="√开" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="139,17,0,0" FontSize="16" Foreground="#FF079E23" IsEnabled="False" />
+                <CheckBox  x:Name="CheckBox_QianFengMD" Style="{StaticResource OrangeSwitchStyle}" Content="" HorizontalAlignment="Left" Margin="46,15,0,0" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand" Click="CheckBox_FengMuDeng_Click"/>
+                <Label x:Name="label_QFMD_Guan" Content="关×" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="9,17,0,0" FontSize="16" Foreground="#FFF0190F"/>
+                <Label x:Name="label_QFMD_Kai" Content="√开" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="139,17,0,0" FontSize="16" Foreground="#FF079E23" IsEnabled="False" />
                 <Label x:Name="label1_Copy3" Content="风幕灯" HorizontalAlignment="Left" VerticalAlignment="Top"  Foreground="#FFF9F4F4" FontSize="24" Background="#FF245D7C" RenderTransformOrigin="1.056,4.109" Height="39" Width="82" Margin="49,-25,0,0"/>
 
-                <CheckBox  x:Name="CheckBox_Men3a" Style="{StaticResource OrangeSwitchStyle}" Content="" HorizontalAlignment="Left" Margin="243,15,0,0" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand"/>
-                <Label x:Name="label_Suo_Guan4a" Content="关×" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="206,17,0,0" FontSize="16" Foreground="#FFF0190F"/>
-                <Label x:Name="label_Suo_Kai4a" Content="√开" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="336,17,0,0" FontSize="16" Foreground="#FF079E23" IsEnabled="False" />
+                <CheckBox  x:Name="CheckBox_QianFengMu" Style="{StaticResource OrangeSwitchStyle}" Content="" HorizontalAlignment="Left" Margin="243,15,0,0" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand" Click="CheckBox_FengMu_Click"/>
+                <Label x:Name="label_QFM_Guan" Content="关×" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="206,17,0,0" FontSize="16" Foreground="#FFF0190F"/>
+                <Label x:Name="label_QFM_Kai" Content="√开" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="336,17,0,0" FontSize="16" Foreground="#FF079E23" IsEnabled="False" />
                 <Label x:Name="label1_Copy3a" Content="风　幕" HorizontalAlignment="Left" VerticalAlignment="Top"  Foreground="#FFF9F4F4" FontSize="24" Background="#FF245D7C" RenderTransformOrigin="1.056,4.109" Height="39" Width="82" Margin="246,-25,0,0"/>
 
-                <CheckBox  x:Name="CheckBox_Men3b" Style="{StaticResource OrangeSwitchStyle}" Content="" HorizontalAlignment="Left" Margin="435,15,0,0" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand"/>
-                <Label x:Name="label_Suo_Guan4b" Content="关×" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="398,17,0,0" FontSize="16" Foreground="#FFF0190F"/>
-                <Label x:Name="label_Suo_Kai4b" Content="√开" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="528,17,0,0" FontSize="16" Foreground="#FF079E23" IsEnabled="False" />
+                <CheckBox  x:Name="CheckBox_QianZhiDC" Style="{StaticResource OrangeSwitchStyle}" Content="" HorizontalAlignment="Left" Margin="435,15,0,0" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand" Click="CheckBox_ZiDongChuang_Click"/>
+                <Label x:Name="label_QZDC_Guan" Content="关×" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="398,17,0,0" FontSize="16" Foreground="#FFF0190F"/>
+                <Label x:Name="label_QZDC_Kai" Content="√开" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="528,17,0,0" FontSize="16" Foreground="#FF079E23" IsEnabled="False" />
                 <Label x:Name="label1_Copy3b" Content="自动窗" HorizontalAlignment="Left" VerticalAlignment="Top"  Foreground="#FFF9F4F4" FontSize="24" Background="#FF245D7C" RenderTransformOrigin="1.056,4.109" Height="39" Width="82" Margin="438,-25,0,0"/>
             </Grid>
         </Border>
@@ -87,19 +87,19 @@
 
         <Border Grid.Column="2" Margin="31,25,18,28"  CornerRadius="10" BorderBrush="#FF91ACBD" BorderThickness="1" Grid.Row="3">
             <Grid Margin="2,-1,-2,1">
-                <CheckBox  x:Name="CheckBox_Men2" Style="{StaticResource OrangeSwitchStyle}" Content="" HorizontalAlignment="Left" Margin="46,15,0,0" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand"/>
-                <Label x:Name="label_Suo_Guan3" Content="关×" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="9,17,0,0" FontSize="16" Foreground="#FFF0190F"/>
-                <Label x:Name="label_Suo_Kai2" Content="√开" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="139,17,0,0" FontSize="16" Foreground="#FF079E23" IsEnabled="False" />
+                <CheckBox  x:Name="CheckBox_HouFengMD" Style="{StaticResource OrangeSwitchStyle}" Content="" HorizontalAlignment="Left" Margin="46,15,0,0" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand" Click="CheckBox_HouFengMD_Click"/>
+                <Label x:Name="label_HFMD_Guan" Content="关×" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="9,17,0,0" FontSize="16" Foreground="#FFF0190F"/>
+                <Label x:Name="label_HFMD_Kai" Content="√开" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="139,17,0,0" FontSize="16" Foreground="#FF079E23" IsEnabled="False" />
                 <Label x:Name="label1_Copy4" Content="风幕灯" HorizontalAlignment="Left" VerticalAlignment="Top"  Foreground="#FFF9F4F4" FontSize="24" Background="#FF245D7C" RenderTransformOrigin="1.056,4.109" Height="39" Width="82" Margin="49,-25,0,0"/>
 
-                <CheckBox  x:Name="CheckBox_Men3a1" Style="{StaticResource OrangeSwitchStyle}" Content="" HorizontalAlignment="Left" Margin="243,15,0,0" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand"/>
-                <Label x:Name="label_Suo_Guan4a1" Content="关×" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="206,17,0,0" FontSize="16" Foreground="#FFF0190F"/>
-                <Label x:Name="label_Suo_Kai4a1" Content="√开" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="336,17,0,0" FontSize="16" Foreground="#FF079E23" IsEnabled="False" />
+                <CheckBox  x:Name="CheckBox_HouFengMu" Style="{StaticResource OrangeSwitchStyle}" Content="" HorizontalAlignment="Left" Margin="243,15,0,0" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand" Click="CheckBox_HouFengMu_Click"/>
+                <Label x:Name="label_HFM_Guan" Content="关×" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="206,17,0,0" FontSize="16" Foreground="#FFF0190F"/>
+                <Label x:Name="label_HFM_Kai" Content="√开" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="336,17,0,0" FontSize="16" Foreground="#FF079E23" IsEnabled="False" />
                 <Label x:Name="label1_Copy3a1" Content="风　幕" HorizontalAlignment="Left" VerticalAlignment="Top"  Foreground="#FFF9F4F4" FontSize="24" Background="#FF245D7C" RenderTransformOrigin="1.056,4.109" Height="39" Width="82" Margin="246,-25,0,0"/>
 
-                <CheckBox  x:Name="CheckBox_Men3b1" Style="{StaticResource OrangeSwitchStyle}" Content="" HorizontalAlignment="Left" Margin="435,15,0,0" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand"/>
-                <Label x:Name="label_Suo_Guan4b1" Content="关×" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="398,17,0,0" FontSize="16" Foreground="#FFF0190F"/>
-                <Label x:Name="label_Suo_Kai4b1" Content="√开" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="528,17,0,0" FontSize="16" Foreground="#FF079E23" IsEnabled="False" />
+                <CheckBox  x:Name="CheckBox_HouZhiDC" Style="{StaticResource OrangeSwitchStyle}" Content="" HorizontalAlignment="Left" Margin="435,15,0,0" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand" Click="CheckBox_HouZhiDC_Click"/>
+                <Label x:Name="label_HZDC_Guan" Content="关×" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="398,17,0,0" FontSize="16" Foreground="#FFF0190F"/>
+                <Label x:Name="label_HZDC_Kai" Content="√开" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="528,17,0,0" FontSize="16" Foreground="#FF079E23" IsEnabled="False" />
                 <Label x:Name="label1_Copy3b1" Content="自动窗" HorizontalAlignment="Left" VerticalAlignment="Top"  Foreground="#FFF9F4F4" FontSize="24" Background="#FF245D7C" RenderTransformOrigin="1.056,4.109" Height="39" Width="82" Margin="438,-25,0,0"/>
             </Grid>
         </Border>
@@ -109,10 +109,10 @@
                     <ColumnDefinition Width="152*"/>
                     <ColumnDefinition Width="39*"/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="Button_QCL_Shen1"   Content="升" HorizontalAlignment="Left" Height="38" VerticalAlignment="Top" Width="84" Background="#FFF0A94D" FontSize="20" Foreground="#FFF7F1F1" Cursor="Hand" Margin="23,14,0,0"/>
-                <Button x:Name="Button_QCL_Jiang1"   Content="降" HorizontalAlignment="Left" Height="38" Margin="153,14,0,0" VerticalAlignment="Top" Width="84" FontSize="20" Foreground="#FFF5F2F2" Cursor="Hand" Background="#FF4EC47A"/>
-                <Button x:Name="Button_QCL_Shen_Copy1"   Content="升" HorizontalAlignment="Left" Height="38" VerticalAlignment="Top" Width="84" Background="#FFF0A94D" FontSize="20" Foreground="#FFF7F1F1" Cursor="Hand" Margin="336,14,0,0"/>
-                <Button x:Name="Button_QCL_Jiang_Copy1"   Content="降" HorizontalAlignment="Left" Height="38" Margin="10.915,14,0,0" VerticalAlignment="Top" Width="84" FontSize="20" Foreground="#FFF5F2F2" Cursor="Hand" Background="#FF4EC47A" Grid.Column="1"/>
+                <Button x:Name="Button_HCL_Shen"   Content="升" HorizontalAlignment="Left" Height="38" VerticalAlignment="Top" Width="84" Background="#FFF0A94D" FontSize="20" Foreground="#FFF7F1F1" Cursor="Hand" Margin="23,14,0,0" Click="Button_QCL_Shen_Click"/>
+                <Button x:Name="Button_HCL_Jiang"   Content="降" HorizontalAlignment="Left" Height="38" Margin="153,14,0,0" VerticalAlignment="Top" Width="84" FontSize="20" Foreground="#FFF5F2F2" Cursor="Hand" Background="#FF4EC47A" Click="Button_QCL_Jiang_Click"/>
+                <Button x:Name="Button_ZCL_Shen"   Content="升" HorizontalAlignment="Left" Height="38" VerticalAlignment="Top" Width="84" Background="#FFF0A94D" FontSize="20" Foreground="#FFF7F1F1" Cursor="Hand" Margin="336,14,0,0" Click="button_QCL_Sheng_Click"/>
+                <Button x:Name="Button_ZCL_Jiang"   Content="降" HorizontalAlignment="Left" Height="38" Margin="10.915,14,0,0" VerticalAlignment="Top" Width="84" FontSize="20" Foreground="#FFF5F2F2" Cursor="Hand" Background="#FF4EC47A" Grid.Column="1" Click="button_QCL_Jiang_Click_1"/>
                 <Label x:Name="label1_Copy6" Content="后窗帘" HorizontalAlignment="Left" VerticalAlignment="Top"  Foreground="#FFF9F4F4" FontSize="24" Background="#FF245D7C" RenderTransformOrigin="1.056,4.109" Height="39" Width="82" Margin="86,-26,0,0" />
                 <Label x:Name="label1_Copy7" Content="左窗帘" HorizontalAlignment="Left" VerticalAlignment="Top"  Foreground="#FFF9F4F4" FontSize="24" Background="#FF245D7C" RenderTransformOrigin="1.056,4.109" Height="39" Width="82" Margin="408,-26,0,0" Grid.ColumnSpan="2"/>
             </Grid>

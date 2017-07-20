@@ -660,8 +660,17 @@ namespace JXHighWay.WatchHouse.Bll.Server
                                     processorData_ReturnCMD(vDataPack, vReceiveData.IPAddress, vReceiveCMD);
                                     break;
                                 case (int)WatchHouseDataPack_Receive_CommandEnmu.GongZuoSJ://岗亭返回的工作数据
-                                    WatchHouseDataPack_Receive_Main vDataPack1 = Helper.NetHelper.ByteToStructure<WatchHouseDataPack_Receive_Main>(vReceiveData.Data);
-                                    processorData_Receive(vDataPack1, vReceiveData.IPAddress);
+                                    switch(vReceiveData.Data[16])
+                                    {
+                                        case 0x00://安卓单向岗亭
+                                            WatchHouseDataPack_Receive_Main vDataPack1 = Helper.NetHelper.ByteToStructure<WatchHouseDataPack_Receive_Main>(vReceiveData.Data);
+                                            processorData_Receive(vDataPack1, vReceiveData.IPAddress);
+                                            break;
+                                        case 0x01://安卓双向岗亭 
+                                            WatchHouseDataPack_Receive_MainSX vDataPack6 = Helper.NetHelper.ByteToStructure<WatchHouseDataPack_Receive_MainSX>(vReceiveData.Data);
+                                            processorData_ReceiveSX(vDataPack6, vReceiveData.IPAddress);
+                                            break;
+                                    }
                                     break;
                                 case (int)WatchHouseDataPack_Receive_CommandEnmu.MenJingJL://门禁记录
                                     WatchHouseDataPack_Receive_DoorGuard vDataPack2 = Helper.NetHelper.ByteToStructure<WatchHouseDataPack_Receive_DoorGuard>(vReceiveData.Data);
@@ -929,7 +938,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
         /// </summary>
         /// <param name="vData">数据</param>
         /// <param name="IPAddress">IP地址</param>
-        void processorData_ReceiveSX(WatchHouseDataPack_Receive_Main vData, string IPAddress)
+        void processorData_ReceiveSX(WatchHouseDataPack_Receive_MainSX vData, string IPAddress)
         {
             try
             {
@@ -940,9 +949,15 @@ namespace JXHighWay.WatchHouse.Bll.Server
                     DianChiSuo = vData.DianChiSuo == 0 ? "开" : "关",
                     JiXieSuo = vData.JiXieSuo == 0 ? "开" : "关",
                     BaoJingQi = vData.BaoJingQi == 0 ? "关" : "开",
-                    Chuang = vData.Chuang == 0 ? "开" : "关",
-                    FengMu = vData.FengMu == 0 ? "关" : "开",
-                    ChuangDeng = vData.ChuangDeng == 0 ? "关" : "开",
+                    //前窗、前风幕、前窗灯
+                    Chuang = vData.QianChuang == 0 ? "开" : "关",
+                    FengMu = vData.QianFengMu == 0 ? "关" : "开",
+                    ChuangDeng = vData.QianChuangDeng == 0 ? "关" : "开",
+                    //后窗、后风幕、后窗灯
+                    Chuang2 = vData.HouChuang == 0 ? "开" : "关",
+                    FengMu2 = vData.HouFengMu == 0 ? "关" : "开",
+                    ChuangDeng2 = vData.HouChuangDeng == 0 ? "关" : "开",
+
                     XinFeng = vData.XinFeng == 0 ? "关" : "开",
                     Deng = vData.Deng == 0 ? "关" : "开",
                     DiNuan = vData.DiNuan == 0 ? "关" : "开",
@@ -964,9 +979,15 @@ namespace JXHighWay.WatchHouse.Bll.Server
                     CaiLuanKZDBWD = BitConverter.ToInt16(new byte[] { vData.CaiLuanKZDBWD2, vData.CaiLuanKZDBWD1 }, 0),
                     DianLiuJK = convertDianLiuJK(vData.DianLiuJK),
                     MenKongCKQ = convertMenKongCKQ(vData.MenKongCKQ),
-                    ChuangKongCKQ = convertChuangKongCKQ(vData.ChuangKongCKQ),
-                    GongKongJSC = convertGongKongJSC(vData.GongKongJSC),
-                    GongKongJSR = convertGongKongJSR(vData.GongKongJSR),
+                    //前窗控传感器、前工控机输出、前工控机输入
+                    ChuangKongCKQ = convertChuangKongCKQ(vData.QianChuangKongCKQ),
+                    GongKongJSC = convertGongKongJSC(vData.QianGongKongJSC),
+                    GongKongJSR = convertGongKongJSR(vData.QianGongKongJSR),
+                    //后窗控传感器、后工控机输出、后工控机输入
+                    ChuangKongCKQ2 = convertChuangKongCKQ(vData.HouChuangKongCKQ),
+                    GongKongJSC2 = convertGongKongJSC(vData.HouGongKongJSC),
+                    GongKongJSR2 = convertGongKongJSR(vData.HouGongKongJSR),
+
                     DengGuanLD = vData.DengGuanLD,
                     XieRuSJ = DateTime.Now
                 };

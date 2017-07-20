@@ -105,7 +105,7 @@ namespace JXHighWay.WatchHouse.Net.DataPack
         /// 前风幕状态(0:闭 1:开)
         /// Data[6]
         /// </summary>
-        public byte QianFengMuQian { get; set; }
+        public byte QianFengMu { get; set; }
         /// <summary>
         /// 前窗灯状态(0:闭 1:开)
         /// Data[7]

@@ -172,7 +172,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.GanTing
         }
 
         /// <summary>
-        /// 门窗状态
+        /// 门窗状态(单向)
         /// </summary>
         /// <param name="WatchHouseID">岗亭编号</param>
         /// <returns></returns>
@@ -183,11 +183,36 @@ namespace JXHighWay.WatchHouse.Bll.Client.GanTing
             if (vNewData.WatchHouseID != null)
             {
                 vResult.BaoJinQi = vNewData.BaoJingQi=="关"?false:true;
+                vResult.Men = vNewData.MenZhuanTai == "关" ? false : true;
+                vResult.Shuo = vNewData.DianChiSuo == "关" ? false : true;
+
                 vResult.Chuang = vNewData.Chuang == "关" ? false : true;
                 vResult.FengMu = vNewData.FengMu == "关" ? false : true;
                 vResult.FengMuDeng = vNewData.ChuangDeng == "关" ? false : true;
-                vResult.Men= vNewData.MenZhuanTai == "关" ? false : true;
                 vResult.ZiDonGChuang = false;//协议中暂不支持此数据
+            }
+            return vResult;
+        }
+
+        public MenChuangStateInfo MenChuangStateSX(int WatchHouseID)
+        {
+            WathHouseDataEFModel vNewData = getNewData(WatchHouseID);
+            MenChuangStateInfo vResult = new MenChuangStateInfo();
+            if (vNewData.WatchHouseID != null)
+            {
+                vResult.BaoJinQi = vNewData.BaoJingQi == "关" ? false : true;
+                vResult.Men = vNewData.MenZhuanTai == "关" ? false : true;
+                vResult.Shuo = vNewData.DianChiSuo == "关" ? false : true;
+
+                vResult.Chuang = vNewData.Chuang == "关" ? false : true;
+                vResult.FengMu = vNewData.FengMu == "关" ? false : true;
+                vResult.FengMuDeng = vNewData.ChuangDeng == "关" ? false : true;
+                vResult.ZiDonGChuang = false;//协议中暂不支持此数据
+
+                vResult.Chuang2 = vNewData.Chuang2 == "开" ? true : false;
+                vResult.FengMu2 = vNewData.FengMu2 == "开" ? true : false;
+                vResult.FengMuDeng2 = vNewData.ChuangDeng2 == "开" ? true : false;
+                vResult.ZiDonGChuang2 = false;//协议中暂不支持此数据
             }
             return vResult;
         }
