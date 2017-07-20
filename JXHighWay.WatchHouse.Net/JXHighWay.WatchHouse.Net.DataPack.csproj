@@ -60,6 +60,7 @@
     <Compile Include="WatchHouseDataPack_Receive_DoorGuard.cs" />
     <Compile Include="WatchHouseDataPack_Receive_IDCard.cs" />
     <Compile Include="WatchHouseDataPack_Receive_Main.cs" />
+    <Compile Include="WatchHouseDataPack_Receive_MainSX.cs" />
     <Compile Include="WatchHouseDataPack_Receive_Pic.cs" />
     <Compile Include="WatchHouseDataPack_SendData_Main.cs" />
     <Compile Include="WatchHouseDataPack_SendData_Pic.cs" />

@@ -79,6 +79,17 @@ namespace JXHighWay.WatchHouse.Bll.Client.LED
                 HD_Transmit.SendToBoxPlayer(mInstance, buffer, buffer.Length/*, containFile*/);
             }
         }
+        public void SendImageQF(string UserName, string ImagePath)
+        {
+            WatchHouseConfigEFModel[] vSelectResult = m_BasicDBClass.SelectAllRecordsEx<WatchHouseConfigEFModel>();
+            foreach (WatchHouseConfigEFModel vTempResult in vSelectResult)
+            {
+                if (vTempResult.GuanGaoPingIP != null && vTempResult.GuanGaoPingIP != "")
+                {
+                    SendImage(UserName, ImagePath);
+                }
+            }
+        }
 
         public void SendImage(string UserName,string ImagePath)
         {
@@ -160,6 +171,18 @@ namespace JXHighWay.WatchHouse.Bll.Client.LED
             m_BasicDBClass.InsertRecord(vLEDDataEFModel);
         }
 
+        public void SendVideoQF(string UserName,string VideoPath)
+        {
+            WatchHouseConfigEFModel[] vSelectResult = m_BasicDBClass.SelectAllRecordsEx<WatchHouseConfigEFModel>();
+            foreach (WatchHouseConfigEFModel vTempResult in vSelectResult)
+            {
+                if (vTempResult.GuanGaoPingIP != null && vTempResult.GuanGaoPingIP != "")
+                {
+                    SendVideo(UserName, VideoPath);
+                }
+            }
+        }
+
         public void SendVideo( string UserName, string VideoPath )
         {
             string vMD5 = CommHelper.GetMD5HashFromFile(VideoPath);
@@ -233,6 +256,23 @@ namespace JXHighWay.WatchHouse.Bll.Client.LED
             };
 
             m_BasicDBClass.InsertRecord(vLEDDataEFModel);
+        }
+
+        /// <summary>
+        /// 文字群发
+        /// </summary>
+        /// <param name="UserName"></param>
+        /// <param name="Text"></param>
+        public void SendTextQF(string UserName,string Text )
+        {
+            WatchHouseConfigEFModel[] vSelectResult = m_BasicDBClass.SelectAllRecordsEx<WatchHouseConfigEFModel>();
+            foreach(WatchHouseConfigEFModel vTempResult in vSelectResult)
+            {
+                if ( vTempResult.GuanGaoPingIP!=null && vTempResult.GuanGaoPingIP!="")
+                {
+                    SendText(UserName, Text);
+                }
+            }
         }
 
         public void SendText(string UserName,string Text)

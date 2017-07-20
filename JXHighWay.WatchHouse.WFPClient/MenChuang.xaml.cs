@@ -59,7 +59,6 @@ namespace JXHighWay.WatchHouse.WFPClient
         bool m_Switch_FM = true;
         bool m_Switch_ZDC = true;
         bool m_Switch_BJ = true;
-        //bool m_Switch_BJQ = true;
         void initMenChaung()
         {
             MenChuangStateInfo vMenChuangStateModel =  m_Monitoring.MenChuangState(App.WatchHouseID);
@@ -124,7 +123,6 @@ namespace JXHighWay.WatchHouse.WFPClient
             if (m_IsInit && m_Switch_Men)
             {
                 m_Switch_Men = false;
-                //CheckBox_Men.IsEnabled = false;
                 bool vOldValue = !(CheckBox_Men.IsChecked ?? false);
                 bool vResult;
                 if (vOldValue)
@@ -138,7 +136,6 @@ namespace JXHighWay.WatchHouse.WFPClient
                 }
                 changeSwitchColor_Men();
                 m_Switch_Men = true;
-                //CheckBox_Men.IsEnabled = true;
             }
         }
 

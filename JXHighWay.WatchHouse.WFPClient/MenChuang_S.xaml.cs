@@ -22,6 +22,15 @@ namespace JXHighWay.WatchHouse.WFPClient
     /// </summary>
     public partial class MenChuang_S : Page
     {
+        WatchHouseMonitoring m_Monitoring = null;
+        bool m_IsInit = false;
+        bool m_Switch_Men = true;
+        bool m_Switch_Suo = true;
+        bool m_Switch_FMD = true;
+        bool m_Switch_FM = true;
+        bool m_Switch_ZDC = true;
+        bool m_Switch_BJ = true;
+
         public MenChuang_S()
         {
             InitializeComponent();
@@ -44,14 +53,6 @@ namespace JXHighWay.WatchHouse.WFPClient
             });
         }
 
-        WatchHouseMonitoring m_Monitoring = null;
-        bool m_IsInit = false;
-        bool m_Switch_Men = true;
-        bool m_Switch_Suo = true;
-        bool m_Switch_FMD = true;
-        bool m_Switch_FM = true;
-        bool m_Switch_ZDC = true;
-        //bool m_Switch_BJQ = true;
         void initMenChaung()
         {
             //MenChuangStateInfo vMenChuangStateModel = m_Monitoring.MenChuangState(App.WatchHouseID);

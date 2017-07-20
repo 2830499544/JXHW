@@ -924,6 +924,85 @@ namespace JXHighWay.WatchHouse.Bll.Server
             m_BasicDBClass_Return.UpdateRecord(vSendCMDModel, string.Format("GangTingID={0} and SN={1} and IsSend=1", vGangTingID, vSN));
         }
 
+        /// <summary>
+        /// 处理岗亭上报数据(双向)
+        /// </summary>
+        /// <param name="vData">数据</param>
+        /// <param name="IPAddress">IP地址</param>
+        void processorData_ReceiveSX(WatchHouseDataPack_Receive_Main vData, string IPAddress)
+        {
+            try
+            {
+                WathHouseDataEFModel vModel = new WathHouseDataEFModel()
+                {
+                    WatchHouseID = BitConverter.ToInt32(new byte[] { vData.WatchHouseID4, vData.WatchHouseID3, vData.WatchHouseID2, vData.WatchHouseID1 }, 0),
+                    MenZhuanTai = vData.MenZhuanTai == 0 ? "开" : "关",
+                    DianChiSuo = vData.DianChiSuo == 0 ? "开" : "关",
+                    JiXieSuo = vData.JiXieSuo == 0 ? "开" : "关",
+                    BaoJingQi = vData.BaoJingQi == 0 ? "关" : "开",
+                    Chuang = vData.Chuang == 0 ? "开" : "关",
+                    FengMu = vData.FengMu == 0 ? "关" : "开",
+                    ChuangDeng = vData.ChuangDeng == 0 ? "关" : "开",
+                    XinFeng = vData.XinFeng == 0 ? "关" : "开",
+                    Deng = vData.Deng == 0 ? "关" : "开",
+                    DiNuan = vData.DiNuan == 0 ? "关" : "开",
+                    ZuoNuanJQ = vData.ZuoNuanJQ == 0 ? "关" : "开",
+                    YouNuanJQ = vData.YouNuanJQ == 0 ? "关" : "开",
+                    ShiLeiWD = BitConverter.ToInt16(new byte[] { vData.ShiLeiWD2, vData.ShiLeiWD1 }, 0),
+                    ShiLeiSD = vData.ShiLeiSD,
+                    KongTiao = vData.KongTiao == 0 ? "关" : "开",
+                    KongTiaoGZMS = convertKongTiaoGZMS(vData.KongTiaoGZMS),
+                    KongTiaoGZFL = convertKongTiaoGZFL(vData.KongTiaoGZFL),
+                    KongQiZL = convertKongQiZL(vData.KongQiZL),
+                    XinFengXTKQZL = vData.XinFengXTKQZL,
+                    XinFengDJ = vData.XinFengDJ,
+                    XinFengWD = BitConverter.ToInt16(new byte[] { vData.XinFengWD2, vData.XinFengWD1 }, 0),
+                    RuKouAPM = BitConverter.ToInt16(new byte[] { vData.RuKouFAPM2, vData.RuKouFAPM1 }, 0),
+                    ChuKouAPM = BitConverter.ToInt16(new byte[] { vData.ChuKouAPM2, vData.ChuKouAPM1 }, 0),
+                    CaiLuanKZWD = vData.CaiLuanKZWD,
+                    CaiLuanKZWBWD = BitConverter.ToInt16(new byte[] { vData.CaiLuanKZWBWD2, vData.CaiLuanKZWBWD1 }, 0),
+                    CaiLuanKZDBWD = BitConverter.ToInt16(new byte[] { vData.CaiLuanKZDBWD2, vData.CaiLuanKZDBWD1 }, 0),
+                    DianLiuJK = convertDianLiuJK(vData.DianLiuJK),
+                    MenKongCKQ = convertMenKongCKQ(vData.MenKongCKQ),
+                    ChuangKongCKQ = convertChuangKongCKQ(vData.ChuangKongCKQ),
+                    GongKongJSC = convertGongKongJSC(vData.GongKongJSC),
+                    GongKongJSR = convertGongKongJSR(vData.GongKongJSR),
+                    DengGuanLD = vData.DengGuanLD,
+                    XieRuSJ = DateTime.Now
+                };
+                WatchHouseConfigEFModel vWatchHouseConfigEFModel = new WatchHouseConfigEFModel()
+                {
+                    GangTingTXSJ = DateTime.Now,
+                    GangTingIP = IPAddress
+                };
+                m_BasicDBClass_Receive.TransactionBegin();
+                int vMaxID = m_BasicDBClass_Receive.InsertRecord(vModel);
+                if (vMaxID != 0)
+                {
+                    m_BasicDBClass_Receive.UpdateRecord(vWatchHouseConfigEFModel, string.Format("GangTingID={0}", vModel.WatchHouseID));
+                    m_BasicDBClass_Receive.TransactionCommit();
+                    if (m_ClientMaxID.ContainsKey(vModel.WatchHouseID.Value))
+                        m_ClientMaxID[vModel.WatchHouseID.Value] = vMaxID;
+
+                }
+                else
+                    m_BasicDBClass_Receive.TransactionRollback();
+
+                //更新客户端字典表
+                if (m_ClientDict.ContainsKey(vModel.WatchHouseID.Value))
+                    m_ClientDict[vModel.WatchHouseID.Value] = IPAddress;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(string.Format("插入数据至[岗亭数据表]中发生异常，异常信息为:{0}", ex.Message));
+            }
+        }
+
+        /// <summary>
+        /// 处理岗亭上报数据(单向)
+        /// </summary>
+        /// <param name="vData">数据</param>
+        /// <param name="IPAddress">岗亭IP地址</param>
         void processorData_Receive(WatchHouseDataPack_Receive_Main vData,string IPAddress)
         {
             try

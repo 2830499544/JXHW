@@ -28,6 +28,14 @@ namespace JXHighWay.WatchHouse.EFModel
         public String FengMu { get; set; }
         [ColumnAttrib("ChuangDeng")]
         public String ChuangDeng { get; set; }
+
+        [ColumnAttrib("Chuang2")]
+        public String Chuang2 { get; set; }
+        [ColumnAttrib("FengMu2")]
+        public String FengMu2 { get; set; }
+        [ColumnAttrib("ChuangDeng2")]
+        public String ChuangDeng2 { get; set; }
+
         [ColumnAttrib("XinFeng")]
         public String XinFeng { get; set; }
         [ColumnAttrib("Deng")]

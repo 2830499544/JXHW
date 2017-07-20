@@ -84,9 +84,9 @@ namespace JXHighWay.WatchHouse.Net
         /// </summary>
         KaiChuangDeng_Hou = 0x020a1005,
         /// <summary>
-        /// 关窗灯(前)
+        /// 关窗灯(后)
         /// </summary>
-        //GuanChuangDeng_Qian = 0x02031006,
+        GuanChuangDeng_Hou = 0x02031006,
 
 
         #endregion
