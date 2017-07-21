@@ -82,12 +82,69 @@ namespace JXHighWay.WatchHouse.Bll.Server
             vResult[1] = (byte)(vCalcResult >> 0);
             return vResult[1];
         }
-        public async Task<bool> SendCMD_SetIP( string DianYuanID,string IPAddress,string Mask,string Gateway,bool DHCP,
-            string ServerIP,short Port )
+
+        public async Task<PowerIPConfigInfo> SendCMD_GetIP(string DianYuanID)
         {
+            PowerIPConfigInfo vIPConfigResult = new PowerIPConfigInfo()
+            {
+                MAC = DianYuanID
+            };
+            bool vResult = await asyncSendCommandToDB(DianYuanID, PowerDataPack_Send_CommandEnum.Send_GetIPAddress);
+            if ( vResult )
+            {
+                PowerIPConfigInfo[] vSelectResult = m_BasicDBClass_Send.SelectRecordsEx(vIPConfigResult);
+                if ( vSelectResult !=null && vSelectResult.Length>0)
+                    vIPConfigResult = vSelectResult[0];
+            }
+            return vIPConfigResult;
+        }
+
+        public async Task<bool> SendCMD_SetIP( string DianYuanID,PowerIPConfigInfo IPConfig )
+        {
+            byte[] vIPAddress = NetHelper.StringToBytes_IP(IPConfig.IPAddress );
+            byte[] vSubMaksArray = NetHelper.StringToBytes_IP(IPConfig.SubMask);
+            byte[] vGateway = NetHelper.StringToBytes_IP(IPConfig.Gateway);
+            byte[] vMAC = NetHelper.StringToBytes_MAC(IPConfig.MAC);
+            byte[] vServerIP = NetHelper.StringToBytes_IP(IPConfig.ServerIPAddress);
+
+
             PowerDataPack_Send_SetIPAddress vData = new PowerDataPack_Send_SetIPAddress()
             {
-                 DHCP = DHCP?(byte)0x01:(byte)0x00,
+                IPAddress1 = vIPAddress[0],
+                IPAddress2 = vIPAddress[1],
+                IPAddress3 = vIPAddress[2],
+                IPAddress4 = vIPAddress[3],
+
+                SubnetMask1 = vSubMaksArray[0],
+                SubnetMask2 = vSubMaksArray[1],
+                SubnetMask3 = vSubMaksArray[2],
+                SubnetMask4 = vSubMaksArray[3],
+
+                Gateway1 = vGateway[0],
+                Gateway2 = vGateway[1],
+                Gateway3 = vGateway[2],
+                Gateway4 = vGateway[3],
+
+                MAC1 = vMAC[0],
+                MAC2 = vMAC[1],
+                MAC3 = vMAC[2],
+                MAC4 = vMAC[3],
+                MAC5 = vMAC[4],
+                MAC6 = vMAC[5],
+
+                ServerIPAddress1 = vServerIP[0],
+                ServerIPAddress2 = vServerIP[1],
+                ServerIPAddress3 = vServerIP[2],
+                ServerIPAddress4 = vServerIP[3],
+
+                Port1 = (byte)(IPConfig.Port >> 8),
+                Port2 = (byte)(IPConfig.Port >> 0),
+
+                ServerPort1 = (byte)(IPConfig.ServerPort >> 8),
+                ServerPort2 = (byte)(IPConfig.ServerPort >> 0),
+
+                DHCP = IPConfig.IsDHCP ? (byte)0x01 : (byte)0x00
+
             };
             bool vResult = await asyncSendCommandToDB(DianYuanID, PowerDataPack_Send_CommandEnum.Send_SetIPAddress, vData);
             return vResult;
@@ -116,7 +173,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
         {
             return await Task.Run(() =>
             {
-                string vDataStr = System.Text.Encoding.Default.GetString(NetHelper.StructureToByte(SendData));
+               // string vDataStr = System.Text.Encoding.Default.GetString(NetHelper.StructureToByte(SendData));
                 PowerSendCMDEFModel vSendCMDEFModel = new PowerSendCMDEFModel()
                 {
                     State = false,
@@ -126,9 +183,42 @@ namespace JXHighWay.WatchHouse.Bll.Server
                     DianYuanID = dianYuanID,
                     SendTime = DateTime.Now,
                     SN = NetHelper.MarkSN_Byte(),
-                    Data = vDataStr
+                    Data = NetHelper.StructureToByte(SendData)
                 };
                 
+                int vID = m_BasicDBClass_Send.InsertRecord(vSendCMDEFModel);
+
+                DateTime vStartTime = DateTime.Now;
+                bool vResult = false;
+                do
+                {
+                    PowerSendCMDEFModel vSelectResult = m_BasicDBClass_Send.SelectRecordByPrimaryKeyEx<PowerSendCMDEFModel>(vID);
+                    vResult = vSelectResult.State ?? false;
+                    if (!vResult && (DateTime.Now - vStartTime).TotalMilliseconds >= 2000)
+                        break;
+                    Thread.Sleep(200);
+                } while (!vResult);
+                //m_BasicDBClass.DeleteRecordByPrimaryKey<PowerSendCMDEFModel>(vID);
+                return vResult;
+            });
+        }
+
+        async Task<bool> asyncSendCommandToDB(string dianYuanID, PowerDataPack_Send_CommandEnum command)
+        {
+            return await Task.Run(() =>
+            {
+                PowerSendCMDEFModel vSendCMDEFModel = new PowerSendCMDEFModel()
+                {
+                    State = false,
+                    IsSend = false,
+                    IsReply = false,
+                    CMD = (byte)command,
+                    DianYuanID = dianYuanID,
+                    SendTime = DateTime.Now,
+                    SN = NetHelper.MarkSN_Byte()
+                    //Data = NetHelper.StructureToByte(SendData)
+                };
+
                 int vID = m_BasicDBClass_Send.InsertRecord(vSendCMDEFModel);
 
                 DateTime vStartTime = DateTime.Now;
@@ -167,18 +257,23 @@ namespace JXHighWay.WatchHouse.Bll.Server
                             {
                                 //处理接收到的电源状态数据
                                 case (byte)PowerDataPack_Receive_CommandEnum.RunningStatus:
-                                    PowerDataPack_Receive_RunningStatus vDataPack1 = Helper.NetHelper.ByteToStructure<PowerDataPack_Receive_RunningStatus>(vReceiveData.Data);
+                                    PowerDataPack_Receive_RunningStatus vDataPack1 = NetHelper.ByteToStructure<PowerDataPack_Receive_RunningStatus>(vReceiveData.Data);
                                     processorData_RunningStatus(vDataPack1, vReceiveData.IPAddress);
                                     break;
                                 //处理接收到电源开关状态数据
                                 case (byte)PowerDataPack_Receive_CommandEnum.SwitchStatus:
-                                    PowerDataPack_Receive_ReplyCMD vDataPack2 = Helper.NetHelper.ByteToStructure<PowerDataPack_Receive_ReplyCMD>(vReceiveData.Data);
+                                    PowerDataPack_Receive_ReplyCMD vDataPack2 = NetHelper.ByteToStructure<PowerDataPack_Receive_ReplyCMD>(vReceiveData.Data);
                                     processorData_ReplyCMD(PowerDataPack_Receive_CommandEnum.SwitchStatus, vDataPack2);
                                     break;
                                 //电源上报事件
                                 case (byte)PowerDataPack_Receive_CommandEnum.Event:
-                                    PowerDataPack_Receive_Event vDataPack3 = Helper.NetHelper.ByteToStructure<PowerDataPack_Receive_Event>(vReceiveData.Data);
+                                    PowerDataPack_Receive_Event vDataPack3 = NetHelper.ByteToStructure<PowerDataPack_Receive_Event>(vReceiveData.Data);
                                     processorData_Event(vDataPack3, vReceiveData.IPAddress);
+                                    break;
+                                //获取IP地址
+                                case (byte)PowerDataPack_Send_CommandEnum.Receive_GetIPAddress:
+                                    PowerDataPack_Receive_GetIPAddress vDataPack4 = NetHelper.ByteToStructure<PowerDataPack_Receive_GetIPAddress>(vReceiveData.Data);
+                                    processorData_GetIPAddress(vDataPack4);
                                     break;
                             }
                             
@@ -406,6 +501,42 @@ namespace JXHighWay.WatchHouse.Bll.Server
             return vResult;
         }
 
+        void processorData_GetIPAddress(PowerDataPack_Receive_GetIPAddress dataPack)
+        {
+            string vMAC = NetHelper.BytesToString_MAC(new byte[] { dataPack.MAC_1, dataPack.MAC_2, dataPack.MAC_3, dataPack.MAC_4,
+                dataPack.MAC_5, dataPack.MAC_6 });
+            PowerNetConfigEFModel vPowerNetConfigEFModel = new PowerNetConfigEFModel()
+            {
+                MAC = vMAC,
+                DHCP = dataPack.DHCP == 0x01 ? true : false,
+                Gateway = NetHelper.BytesToString_IP(new byte[] { dataPack.gateway1, dataPack.gateway2, dataPack.gateway3, dataPack.gateway4 }),
+                IPAddress = NetHelper.BytesToString_IP(new byte[] { dataPack.IPAddress1, dataPack.IPAddress2, dataPack.IPAddress3, dataPack.IPAddress4 }),
+                ServerIPAddress = NetHelper.BytesToString_IP(new byte[] { dataPack.ServerIPAddress1,dataPack.ServerIPAddress2,dataPack.ServerIPAddress3,dataPack.ServerIPAddress4 } ),
+                SubMask = NetHelper.BytesToString_IP(new byte[] { dataPack.SubnetMask1,dataPack.SubnetMask2,dataPack.SubnetMask3,dataPack.SubnetMask4 } ),
+                Port = BitConverter.ToInt16( new byte[]{ dataPack.Port2,dataPack.Port2 },0),
+                ServerPort = BitConverter.ToInt16( new byte[] { dataPack.ServerPort2,dataPack.ServerPort1 },0)
+            };
+            try
+            {
+                m_BasicDBClass_Receive.TransactionBegin();
+                m_BasicDBClass_Receive.DeleteRecordCustom<PowerNetConfigEFModel>(string.Format("MAC='{0}'", vMAC));
+                m_BasicDBClass_Receive.InsertRecord(vPowerNetConfigEFModel);
+                PowerSendCMDEFModel vPowerSendCMDEFModel = new PowerSendCMDEFModel()
+                {
+                    IsReply = true,
+                    State = true
+                };
+                string vSql = string.Format("DianYuanID={0} and CMD={1:D} and SN={2}", vMAC,(byte)PowerDataPack_Send_CommandEnum.Receive_GetIPAddress, dataPack.SN);
+                m_BasicDBClass_Receive.UpdateRecord(vPowerSendCMDEFModel, vSql);
+                m_BasicDBClass_Receive.TransactionCommit();
+            }
+            catch
+            {
+                m_BasicDBClass_Receive.TransactionRollback();
+            }
+        }
+
+
         void processorData_ReplyCMD(PowerDataPack_Receive_CommandEnum comm, PowerDataPack_Receive_ReplyCMD dataPack)
         {
             string vSql = "";
@@ -509,7 +640,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
                             vAsyncUserToken = m_SocketManager.ClientList[0];
                         if (vAsyncUserToken != null)
                         {
-                            byte[] vMac = NetHelper.StringToBytes(vTempResult.DianYuanID);
+                            byte[] vMac = NetHelper.StringToBytes_MAC(vTempResult.DianYuanID);
                             PowerDataPack_Main vCommandDataPack = new PowerDataPack_Main()
                             {
                                 Head = 0x5a,
@@ -527,7 +658,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
                             List<byte> vCMDDataPack = Helper.NetHelper.StructureToByte(vCommandDataPack).ToList();
                             if ( vTempResult.Data != null )
                             {
-                                List<byte> vDataPack = System.Text.Encoding.Default.GetBytes(vTempResult.Data).ToList();
+                                List<byte> vDataPack = vTempResult.Data.ToList();
                                 vCMDDataPack.InsertRange(12, vDataPack);
                             }
                             byte[] vLength = BitConverter.GetBytes((short)vCMDDataPack.Count);

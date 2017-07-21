@@ -53,7 +53,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                         App.WatchHouseID = vWatchHouseID;
                         App.WatchHouseName = vTagInfo[1];
                         App.WatchHouseType = vTagInfo[4];
-                        App.PowerID = vTagInfo[2];
+                        App.PowerID1 = vTagInfo[2];
                         App.LEDIP = vTagInfo[3];
                         pageFrame.Source = new Uri("GanTingMingXi.xaml", UriKind.Relative);
                         App.ChangeNavigation(2, vWin, App.WatchHouseName);

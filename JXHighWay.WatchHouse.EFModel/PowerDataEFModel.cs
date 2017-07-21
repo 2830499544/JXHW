@@ -14,7 +14,6 @@ namespace JXHighWay.WatchHouse.EFModel
         public int? ID { get; set; }
         [ColumnAttrib("LeiXing")]
         public string LeiXing { get; set; }
-
         [ColumnAttrib("DianYuanID")]
         public string DianYuanID { get; set; }
         [ColumnAttrib("ZhuanTai")]

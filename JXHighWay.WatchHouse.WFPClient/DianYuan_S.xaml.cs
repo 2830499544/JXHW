@@ -27,10 +27,14 @@ namespace JXHighWay.WatchHouse.WFPClient
     {
         PowerMonitoring m_PowerMonitoring = null;
         /// <summary>
-        /// 电源总共路数
+        /// 电源总共路数(电源1)
         /// </summary>
         //int m_LS = 0;
-        List<int> m_LuoHaoList = null;
+        List<int> m_LuoHaoList1 = null;
+        /// <summary>
+        /// 电源总共路数(电源2)
+        /// </summary>
+        List<int> m_LuoHaoList2 = null;
 
         public DianYuan_S()
         {
@@ -41,7 +45,7 @@ namespace JXHighWay.WatchHouse.WFPClient
         {
             CheckBox vCheckBox = (CheckBox)sender;
             byte vLuHao = (byte)vCheckBox.Tag;
-            bool vResult = await m_PowerMonitoring.SendCMD_Switch(App.PowerID, 0x01, vLuHao, true);
+            bool vResult = await m_PowerMonitoring.SendCMD_Switch(App.PowerID1, 0x01, vLuHao, true);
             if (!vResult)
             {
                 Xceed.Wpf.Toolkit.MessageBox.Show("开关失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -53,7 +57,7 @@ namespace JXHighWay.WatchHouse.WFPClient
         {
             CheckBox vCheckBox = (CheckBox)sender;
             byte vLuHao = (byte)vCheckBox.Tag;
-            bool vResult = await m_PowerMonitoring.SendCMD_Switch(App.PowerID, 0x01, 0x02, false);
+            bool vResult = await m_PowerMonitoring.SendCMD_Switch(App.PowerID1, 0x01, 0x02, false);
             if (!vResult)
             {
                 Xceed.Wpf.Toolkit.MessageBox.Show("开关失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -69,21 +73,39 @@ namespace JXHighWay.WatchHouse.WFPClient
                 {
                     Action action1 = () =>
                     {
-                        for (int i = 1; i <= m_LuoHaoList.Count; i++)
+                        for (int i = 1; i <= m_LuoHaoList1.Count; i++)
                         {
-                            PowerInfo vPowerInfo = m_PowerMonitoring.GetNewPowerInfo(App.PowerID, m_LuoHaoList[i - 1]);
+                            PowerInfo vPowerInfo = m_PowerMonitoring.GetNewPowerInfo(App.PowerID1, m_LuoHaoList1[i - 1]);
                             if (vPowerInfo != null)
                             {
-                                Label vLabel_DY = (Label)FindName(string.Format("label_DY_{0}", i));
+                                Label vLabel_DY = (Label)FindName(string.Format("label_DY1_DY_{0}", i));
                                 vLabel_DY.Content = string.Format("{0}V", vPowerInfo.DianYa);
 
-                                Label vLabel_DL = (Label)FindName(string.Format("label_DL_{0}", i));
+                                Label vLabel_DL = (Label)FindName(string.Format("label_DY1_DL_{0}", i));
                                 vLabel_DL.Content = string.Format("{0}A", vPowerInfo.DianLiu);
 
-                                CheckBox vCheckBox = (CheckBox)FindName(string.Format("checkBox_Switch{0}", i));
+                                CheckBox vCheckBox = (CheckBox)FindName(string.Format("checkBox_DY1_Switch{0}", i));
                                 vCheckBox.IsChecked = vPowerInfo.ZhuangTai;
 
-                                changeSwitchColor(vCheckBox, i);
+                                changeSwitchColor(vCheckBox,1, i);
+                            }
+                        }
+
+                        for (int i = 1; i <= m_LuoHaoList2.Count; i++)
+                        {
+                            PowerInfo vPowerInfo = m_PowerMonitoring.GetNewPowerInfo(App.PowerID2, m_LuoHaoList2[i - 1]);
+                            if (vPowerInfo != null)
+                            {
+                                Label vLabel_DY = (Label)FindName(string.Format("label_DY2_DY_{0}", i));
+                                vLabel_DY.Content = string.Format("{0}V", vPowerInfo.DianYa);
+
+                                Label vLabel_DL = (Label)FindName(string.Format("label_DY2_DL_{0}", i));
+                                vLabel_DL.Content = string.Format("{0}A", vPowerInfo.DianLiu);
+
+                                CheckBox vCheckBox = (CheckBox)FindName(string.Format("checkBox_DY2_Switch{0}", i));
+                                vCheckBox.IsChecked = vPowerInfo.ZhuangTai;
+
+                                changeSwitchColor(vCheckBox, 2, i);
                             }
                         }
                     };
@@ -96,86 +118,92 @@ namespace JXHighWay.WatchHouse.WFPClient
         void init()
         {
             m_PowerMonitoring = new PowerMonitoring();
-            m_LuoHaoList = new List<int>();
-            PowerInfo[] vPowerInfoArray = m_PowerMonitoring.GetPowerLuSu(App.PowerID);
-            // m_LS = vPowerInfoArray == null ? 0 : vPowerInfoArray.Length;
+            m_LuoHaoList1 = new List<int>();
+            m_LuoHaoList2 = new List<int>();
+            PowerInfo[] vPower1InfoArray = m_PowerMonitoring.GetPowerLuSu(App.PowerID1);
+            init_DianYuan(1, vPower1InfoArray, m_LuoHaoList1);
 
+            PowerInfo[] vPower2InfoArray = m_PowerMonitoring.GetPowerLuSu(App.PowerID2);
+            init_DianYuan(2, vPower2InfoArray, m_LuoHaoList2);
+
+            m_IsInit = true;
+        }
+
+        void init_DianYuan(int powerNum, PowerInfo[] powerInfo, List<int> LuoHaoList)
+        {
             for (int i = 1; i <= 12; i++)
             {
-
-                if (i <= vPowerInfoArray.LongLength)
+                if (i <= powerInfo.LongLength)
                 {
-                    PowerInfo vPowerInfo = vPowerInfoArray[i - 1];
+                    PowerInfo vPowerInfo = powerInfo[i - 1];
 
-                    m_LuoHaoList.Add(vPowerInfo.LuHao);
+                    LuoHaoList.Add(vPowerInfo.LuHao);
 
-                    GroupBox vGroupBox = (GroupBox)FindName(string.Format("groupBox_{0}", i));
+                    GroupBox vGroupBox = (GroupBox)FindName(string.Format("groupBox_DY{0}_{1}", powerNum, i));
                     vGroupBox.Visibility = Visibility.Visible;
                     vGroupBox.Header = vPowerInfo.MingCheng;
-                    vGroupBox.Tag = vPowerInfo.LuHao;
+                    vGroupBox.Tag = new int[] { powerNum,vPowerInfo.LuHao };
 
-                    Image vImageDY = (Image)FindName(string.Format("image_DY{0}", i));
+                    Image vImageDY = (Image)FindName(string.Format("image_DY{0}_DY{1}", powerNum,i));
                     vImageDY.Visibility = Visibility.Visible;
 
-                    Label vLabelDY = (Label)FindName(string.Format("label_DY{0}", i));
+                    Label vLabelDY = (Label)FindName(string.Format("label_DY{0}_DY{1}", powerNum,i));
                     vLabelDY.Visibility = Visibility.Visible;
 
-                    Label vLabel_DY = (Label)FindName(string.Format("label_DY_{0}", i));
+                    Label vLabel_DY = (Label)FindName(string.Format("label_DY{0}_DY_{1}",powerNum, i));
                     vLabel_DY.Visibility = Visibility.Visible;
 
-                    Image vImageDL = (Image)FindName(string.Format("image_DL{0}", i));
+                    Image vImageDL = (Image)FindName(string.Format("image_DY{0}_DL{1}",powerNum, i));
                     vImageDL.Visibility = Visibility.Visible;
 
-                    Label vLabelDL = (Label)FindName(string.Format("label_DL{0}", i));
+                    Label vLabelDL = (Label)FindName(string.Format("label_DY{0}_DL{1}",powerNum, i));
                     vLabelDL.Visibility = Visibility.Visible;
 
-                    Label vLabel_DL = (Label)FindName(string.Format("label_DL_{0}", i));
+                    Label vLabel_DL = (Label)FindName(string.Format("label_DY{0}_DL_{1}",powerNum, i));
                     vLabel_DL.Visibility = Visibility.Visible;
 
-                    CheckBox vCheckBox = (CheckBox)FindName(string.Format("checkBox_Switch{0}", i));
+                    CheckBox vCheckBox = (CheckBox)FindName(string.Format("checkBox_DY{0}_Switch{1}",powerNum, i));
                     vCheckBox.Visibility = Visibility.Visible;
                     vCheckBox.Tag = (byte)i;
 
-                    Label vlabel_Guan = (Label)FindName(string.Format("label_Guan_{0}", i));
+                    Label vlabel_Guan = (Label)FindName(string.Format("label_DY{0}_Guan_{1}", powerNum, i));
                     vlabel_Guan.Visibility = Visibility.Visible;
 
-                    Label vlabel_Kai = (Label)FindName(string.Format("label_Kai_{0}", i));
+                    Label vlabel_Kai = (Label)FindName(string.Format("label_DY{0}_Kai_{1}",powerNum, i));
                     vlabel_Kai.Visibility = Visibility.Visible;
                 }
                 else
                 {
-                    GroupBox vGroupBox = (GroupBox)FindName(string.Format("groupBox_{0}", i));
+                    GroupBox vGroupBox = (GroupBox)FindName(string.Format("groupBox_DY{0}_{1}", powerNum, i));
                     vGroupBox.Visibility = Visibility.Hidden;
 
-                    Image vImageDY = (Image)FindName(string.Format("image_DY{0}", i));
+                    Image vImageDY = (Image)FindName(string.Format("image_DY{0}_DY{1}", powerNum, i));
                     vImageDY.Visibility = Visibility.Hidden;
 
-                    Label vLabelDY = (Label)FindName(string.Format("label_DY{0}", i));
+                    Label vLabelDY = (Label)FindName(string.Format("label_DY{0}_DY{1}", powerNum, i));
                     vLabelDY.Visibility = Visibility.Hidden;
 
-                    Label vLabel_DY = (Label)FindName(string.Format("label_DY_{0}", i));
+                    Label vLabel_DY = (Label)FindName(string.Format("label_DY{0}_DY_{1}", powerNum, i));
                     vLabel_DY.Visibility = Visibility.Hidden;
-
-                    Image vImageDL = (Image)FindName(string.Format("image_DL{0}", i));
+                    Image vImageDL = (Image)FindName(string.Format("image_DY{0}_DL{1}", powerNum, i));
                     vImageDL.Visibility = Visibility.Hidden;
 
-                    Label vLabelDL = (Label)FindName(string.Format("label_DL{0}", i));
+                    Label vLabelDL = (Label)FindName(string.Format("label_DY{0}_DL{1}", powerNum, i));
                     vLabelDL.Visibility = Visibility.Hidden;
 
-                    Label vLabel_DL = (Label)FindName(string.Format("label_DL_{0}", i));
+                    Label vLabel_DL = (Label)FindName(string.Format("label_DY{0}_DL_{1}", powerNum, i));
                     vLabel_DL.Visibility = Visibility.Hidden;
 
-                    CheckBox vCheckBox = (CheckBox)FindName(string.Format("checkBox_Switch{0}", i));
+                    CheckBox vCheckBox = (CheckBox)FindName(string.Format("checkBox_DY{0}_Switch{1}", powerNum, i));
                     vCheckBox.Visibility = Visibility.Hidden;
 
-                    Label vlabel_Guan = (Label)FindName(string.Format("label_Guan_{0}", i));
+                    Label vlabel_Guan = (Label)FindName(string.Format("label_DY{0}_Guan_{1}", powerNum, i));
                     vlabel_Guan.Visibility = Visibility.Hidden;
 
-                    Label vlabel_Kai = (Label)FindName(string.Format("label_Kai_{0}", i));
+                    Label vlabel_Kai = (Label)FindName(string.Format("label_DY{0}_Kai_{1}", powerNum, i));
                     vlabel_Kai.Visibility = Visibility.Hidden;
                 }
             }
-            m_IsInit = true;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -184,11 +212,11 @@ namespace JXHighWay.WatchHouse.WFPClient
             RefreshState();
         }
 
-        void changeSwitchColor(CheckBox checkBox, int luHao)
+        void changeSwitchColor(CheckBox checkBox,int powerNum, int luHao)
         {
-            Label vlabel_Guan = (Label)FindName(string.Format("label_Guan_{0}", luHao));
+            Label vlabel_Guan = (Label)FindName(string.Format("label_DY{0}_Guan_{1}",powerNum, luHao));
 
-            Label vlabel_Kai = (Label)FindName(string.Format("label_Kai_{0}", luHao));
+            Label vlabel_Kai = (Label)FindName(string.Format("label_DY{0}_Kai_{1}",powerNum, luHao));
 
             if (checkBox.IsChecked ?? false)
             {
@@ -216,25 +244,30 @@ namespace JXHighWay.WatchHouse.WFPClient
         private async void checkBox_Switch1_Click(object sender, RoutedEventArgs e)
         {
             CheckBox vCheckBox_Switch = (CheckBox)sender;
-            byte vLuHao = (byte)vCheckBox_Switch.Tag;
+            int[] vTagData = (int[])vCheckBox_Switch.Tag;
+            int vPowerNum = vTagData[0];
+            byte vLuHao = (byte)(vTagData[1]>>0);
+            
             if (m_IsInit && m_Switch)
             {
                 m_Switch = false;
                 bool vOldValue = vCheckBox_Switch.IsChecked ?? false;
                 bool vResult;
                 if (vOldValue)
-                    vResult = await m_PowerMonitoring.SendCMD_Switch(App.PowerID, 0x01, vLuHao, true);
+                    vResult = await m_PowerMonitoring.SendCMD_Switch(App.PowerID1, 0x01, vLuHao, true);
                 else
-                    vResult = await m_PowerMonitoring.SendCMD_Switch(App.PowerID, 0x01, vLuHao, false);
+                    vResult = await m_PowerMonitoring.SendCMD_Switch(App.PowerID1, 0x01, vLuHao, false);
                 if (!vResult)
                 {
                     vCheckBox_Switch.IsChecked = !vOldValue;
                     Xceed.Wpf.Toolkit.MessageBox.Show("开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-                changeSwitchColor(vCheckBox_Switch, vLuHao);
+                changeSwitchColor(vCheckBox_Switch,vPowerNum, vLuHao);
                 m_Switch = true;
             }
         }
+
+       
     }
 
 

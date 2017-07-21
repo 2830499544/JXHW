@@ -37,7 +37,7 @@ namespace JXHighWay.WatchHouse.WFPClient.Images
         {
             m_PowerMonitoring = new PowerMonitoring();
             m_LuoHaoList = new List<int>();
-            PowerInfo[] vPowerInfoArray = m_PowerMonitoring.GetPowerLuSu(App.PowerID);
+            PowerInfo[] vPowerInfoArray = m_PowerMonitoring.GetPowerLuSu(App.PowerID1);
             // m_LS = vPowerInfoArray == null ? 0 : vPowerInfoArray.Length;
 
             for (int i = 1; i <= 12; i++)
@@ -122,7 +122,7 @@ namespace JXHighWay.WatchHouse.WFPClient.Images
         {
             CheckBox vCheckBox = (CheckBox)sender;
             byte vLuHao = (byte)vCheckBox.Tag;
-            bool vResult = await m_PowerMonitoring.SendCMD_Switch(App.PowerID, 0x01, vLuHao, true);
+            bool vResult = await m_PowerMonitoring.SendCMD_Switch(App.PowerID1, 0x01, vLuHao, true);
             if (!vResult)
             {
                 Xceed.Wpf.Toolkit.MessageBox.Show("开关失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -134,7 +134,7 @@ namespace JXHighWay.WatchHouse.WFPClient.Images
         {
             CheckBox vCheckBox = (CheckBox)sender;
             byte vLuHao = (byte)vCheckBox.Tag;
-            bool vResult = await m_PowerMonitoring.SendCMD_Switch(App.PowerID, 0x01, 0x02, false);
+            bool vResult = await m_PowerMonitoring.SendCMD_Switch(App.PowerID1, 0x01, 0x02, false);
             if (!vResult)
             {
                 Xceed.Wpf.Toolkit.MessageBox.Show("开关失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -152,7 +152,7 @@ namespace JXHighWay.WatchHouse.WFPClient.Images
                     {
                         for (int i = 1; i <= m_LuoHaoList.Count; i++)
                         {
-                            PowerInfo vPowerInfo = m_PowerMonitoring.GetNewPowerInfo(App.PowerID, m_LuoHaoList[i-1]);
+                            PowerInfo vPowerInfo = m_PowerMonitoring.GetNewPowerInfo(App.PowerID1, m_LuoHaoList[i-1]);
                             if (vPowerInfo != null)
                             {
                                 Label vLabel_DY = (Label)FindName(string.Format("label_DY_{0}", i));
@@ -221,9 +221,9 @@ namespace JXHighWay.WatchHouse.WFPClient.Images
                 bool vOldValue = vCheckBox_Switch.IsChecked ?? false;
                 bool vResult;
                 if (vOldValue)
-                    vResult = await m_PowerMonitoring.SendCMD_Switch(App.PowerID, 0x01, vLuHao, true); 
+                    vResult = await m_PowerMonitoring.SendCMD_Switch(App.PowerID1, 0x01, vLuHao, true); 
                 else
-                    vResult = await m_PowerMonitoring.SendCMD_Switch(App.PowerID, 0x01, vLuHao, false);
+                    vResult = await m_PowerMonitoring.SendCMD_Switch(App.PowerID1, 0x01, vLuHao, false);
                 if (!vResult)
                 {
                     vCheckBox_Switch.IsChecked = !vOldValue;

@@ -6,8 +6,42 @@ using System.Threading.Tasks;
 
 namespace JXHighWay.WatchHouse.Net.DataPack
 {
-    public struct PowerDataPack_Send_GetIPAddress
+    public struct PowerDataPack_Receive_GetIPAddress
     {
+        /// <summary>
+        /// 头
+        /// </summary>
+        public byte Head { get; set; }
+        /// <summary>
+        /// 信息长度
+        /// </summary>
+        public byte Length1 { get; set; }
+        public byte Length2 { get; set; }
+
+        /// <summary>
+        /// MAC地址
+        /// </summary>
+        public byte MAC1 { get; set; }
+        public byte MAC2 { get; set; }
+        public byte MAC3 { get; set; }
+        public byte MAC4 { get; set; }
+        public byte MAC5 { get; set; }
+        public byte MAC6 { get; set; }
+
+        /// <summary>
+        /// 序列号
+        /// </summary>
+        public byte SN { get; set; }
+        /// <summary>
+        /// 附加码
+        /// </summary>
+        public byte Addition { get; set; }
+        /// <summary>
+        /// 功能码
+        /// </summary>
+        public byte CMD { get; set; }
+
+        #region 数据区域
         #region 网关
         public byte gateway1 { get; set; }
         public byte gateway2 { get; set; }
@@ -35,12 +69,12 @@ namespace JXHighWay.WatchHouse.Net.DataPack
         #endregion
 
         #region MAC地址
-        public byte MAC1 { get; set; }
-        public byte MAC2 { get; set; }
-        public byte MAC3 { get; set; }
-        public byte MAC4 { get; set; }
-        public byte MAC5 { get; set; }
-        public byte MAC6 { get; set; }
+        public byte MAC_1 { get; set; }
+        public byte MAC_2 { get; set; }
+        public byte MAC_3 { get; set; }
+        public byte MAC_4 { get; set; }
+        public byte MAC_5 { get; set; }
+        public byte MAC_6 { get; set; }
         #endregion
 
         #region 服务器IP地址
@@ -59,5 +93,15 @@ namespace JXHighWay.WatchHouse.Net.DataPack
         /// 为1时表示开启，0时表示关闭
         /// </summary>
         public byte DHCP { get; set; }
+        #endregion
+
+        /// <summary>
+        /// 检验和
+        /// </summary>
+        public byte Check { get; set; }
+        /// <summary>
+        /// 尾
+        /// </summary>
+        public byte Tail { get; set; }
     }
 }

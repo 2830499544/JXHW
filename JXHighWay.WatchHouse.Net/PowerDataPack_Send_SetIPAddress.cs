@@ -9,10 +9,10 @@ namespace JXHighWay.WatchHouse.Net.DataPack
     public struct PowerDataPack_Send_SetIPAddress
     {
         #region 网关
-        public byte gateway1 { get; set; }
-        public byte gateway2 { get; set; }
-        public byte gateway3 { get; set; }
-        public byte gateway4 { get; set; }
+        public byte Gateway1 { get; set; }
+        public byte Gateway2 { get; set; }
+        public byte Gateway3 { get; set; }
+        public byte Gateway4 { get; set; }
         #endregion
 
         #region 子网掩码

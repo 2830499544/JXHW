@@ -116,9 +116,9 @@ namespace JXHighWay.WatchHouse.Bll.Client.GanTing
                 vResut.Add(new WatchHouseInfo()
                 {
                     DianYuanID = vTempWatchHouse.DianYuan1ID,
-                    DianYuanDK = vTempWatchHouse.DianYuan1DK,
+                    //DianYuanDK = vTempWatchHouse.DianYuan1DK,
                     DianYuanIP = vTempWatchHouse.DianYuan1IP,
-                    DianYuanLS = vTempWatchHouse.DianYuan1LS,
+                    //DianYuanLS = vTempWatchHouse.DianYuan1LS,
                     GangTingDK = vTempWatchHouse.GangTingDK,
                     GangTingID = vTempWatchHouse.GangTingID,
                     GangTingIP = vTempWatchHouse.GangTingIP,

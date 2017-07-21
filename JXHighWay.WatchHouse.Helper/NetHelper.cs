@@ -65,16 +65,95 @@ namespace JXHighWay.WatchHouse.Helper
             return vResult[0];
         }
 
-
-        public static byte[] StringToBytes( string StrBytes)
+        public static string BytesToString_MAC(byte[] MAC)
         {
-            List<byte> vByteList = new List<byte>();
-            string[] vStrBytesArray = StrBytes.Split('-');
-            foreach( string vTempStr in vStrBytesArray)
+            string vResult = "00-00-00-00-00-00";
+            try
             {
-                vByteList.Add(byte.Parse(vTempStr, System.Globalization.NumberStyles.AllowHexSpecifier));
+                if (MAC.Length == 6)
+                {
+                    vResult = string.Format("{0:X}-{1:X}-{2:X}-{3:X}-{4:X}-{5:X}", MAC[0], MAC[1], MAC[2], MAC[3], MAC[4], MAC[5]);
+                }
             }
-            return vByteList.ToArray();
+            catch { }
+            return vResult;
+        }
+
+        /// <summary>
+        /// MAC字符串转Bytes
+        /// </summary>
+        /// <param name="StrBytes"></param>
+        /// <returns></returns>
+        public static byte[] StringToBytes_MAC( string MacStr)
+        {
+            byte[] vResult = new byte[6];
+            try
+            {
+                string[] vStrBytesArray = MacStr.Split('-');
+                if (vStrBytesArray.Length == 6)
+                {
+                    for(int i=0;i<6;i++)
+                    {
+                        vResult[i] = byte.Parse(vStrBytesArray[i], System.Globalization.NumberStyles.AllowHexSpecifier);
+                    }
+                }
+            }
+            catch
+            {
+                vResult = new byte[6];
+            }
+            return vResult;
+        }
+
+
+        public static string BytesToString_IP( byte[] IP)
+        {
+            string vResult = "127.0.0.1";
+            try
+            {
+                if (IP.Length == 4)
+                {
+                    vResult = string.Format("{0:D}.{1:D}.{2:D}.{3:D}", IP[0], IP[1], IP[2], IP[3]);
+                }
+            }
+            catch { }
+            return vResult;
+        }
+
+
+        public static byte[] StringToBytes_IP (string IPStr )
+        {
+            byte[] vResult = new byte[4];
+            try
+            {
+                string[] vStrBytesArray = IPStr.Split('.');
+                if (vStrBytesArray.Length == 4)
+                {
+                    for (int i = 0; i < 4; i++)
+                    {
+                        vResult[i] = byte.Parse(vStrBytesArray[i], System.Globalization.NumberStyles.AllowHexSpecifier);
+                    }
+                }
+            }
+            catch
+            {
+                vResult = new byte[4];
+            }
+            return vResult;
+        }
+
+        public static byte StringToByte (string StrByte)
+        {
+            byte vResult = 0x00;
+            try
+            {
+                vResult = byte.Parse(StrByte, System.Globalization.NumberStyles.AllowHexSpecifier);
+            }
+            catch
+            {
+
+            }
+            return vResult;
         }
     }
 }

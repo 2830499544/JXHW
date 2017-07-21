@@ -180,7 +180,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
         {
             return await Task.Run(() =>
             {
-                string vDataStr = System.Text.Encoding.Default.GetString(NetHelper.StructureToByte(SendData));
+                //string vDataStr = System.Text.Encoding.Default.GetString(NetHelper.StructureToByte(SendData));
                 PowerSendCMDEFModel vSendCMDEFModel = new PowerSendCMDEFModel()
                 {
                     State = false,
@@ -190,7 +190,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
                     DianYuanID = dianYuanID,
                     SendTime = DateTime.Now,
                     SN = NetHelper.MarkSN_Byte(),
-                    Data = vDataStr
+                    Data = NetHelper.StructureToByte(SendData)
                 };
                 int vID = m_BasicDBClassInsert.InsertRecord(vSendCMDEFModel);
 
@@ -215,7 +215,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
         {
             PowerSwithConfigEFModel vPowerSwithConfigEFModel = new PowerSwithConfigEFModel()
             {
-                DianYuanID = DianYuanID
+                DianYuanID = DianYuanID??""
             };
             PowerSwithConfigEFModel[] vSelectResult = m_BasicDBClass.SelectRecordsEx(vPowerSwithConfigEFModel);
             PowerInfo[] vResult = new PowerInfo[vSelectResult.Length];

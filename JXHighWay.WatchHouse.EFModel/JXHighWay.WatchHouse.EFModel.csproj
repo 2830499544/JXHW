@@ -49,6 +49,7 @@
     <Compile Include="PowerDataEFModel.cs" />
     <Compile Include="PowerDataViewEFModel.cs" />
     <Compile Include="PowerEventEFModel.cs" />
+    <Compile Include="PowerNetConfigEFModel.cs" />
     <Compile Include="PowerSendCMDEFModel.cs" />
     <Compile Include="PowerSwithConfigEFModel.cs" />
     <Compile Include="PowerTimingEFModel.cs" />

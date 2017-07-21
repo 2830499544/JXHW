@@ -35,11 +35,11 @@ namespace JXHighWay.WatchHouse.EFModel
         [ColumnAttrib("DianYuan1IP")]
         public String DianYuan1IP { get; set; }
 
-        [ColumnAttrib("DianYuan1DK")]
-        public int? DianYuan1DK { get; set; }
+        //[ColumnAttrib("DianYuan1DK")]
+        //public int? DianYuan1DK { get; set; }
 
-        [ColumnAttrib("DianYuan1LS")]
-        public int? DianYuan1LS { get; set; }
+        //[ColumnAttrib("DianYuan1LS")]
+        //public int? DianYuan1LS { get; set; }
 
         [ColumnAttrib("DianYuan2ID")]
         public string DianYuan2ID { get; set; }
@@ -47,11 +47,11 @@ namespace JXHighWay.WatchHouse.EFModel
         [ColumnAttrib("DianYuan2IP")]
         public String DianYuan2IP { get; set; }
 
-        [ColumnAttrib("DianYuan2DK")]
-        public int? DianYuan2DK { get; set; }
+        //[ColumnAttrib("DianYuan2DK")]
+        //public int? DianYuan2DK { get; set; }
 
-        [ColumnAttrib("DianYuan2LS")]
-        public int? DianYuan2LS { get; set; }
+        //[ColumnAttrib("DianYuan2LS")]
+        //public int? DianYuan2LS { get; set; }
 
         [ColumnAttrib("GangTingTXSJ")]
         public DateTime? GangTingTXSJ { get; set; }

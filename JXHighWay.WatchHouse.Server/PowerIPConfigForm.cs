@@ -19,6 +19,7 @@ namespace JXHighWay.WatchHouse.Server
         }
 
         public string DianYuanID { get; set; }
+        public string MAC { get; set; }
 
         private void maskedTextBox_IPAddress_KeyDown(object sender, KeyEventArgs e)
         {
@@ -43,12 +44,33 @@ namespace JXHighWay.WatchHouse.Server
         private async void button_Config_Click(object sender, EventArgs e)
         {
             PowerControl vPowerControl = new PowerControl();
-            bool vResult = await vPowerControl.SendCMD_SetIP(DianYuanID, maskedTextBox_IPAddress.Text, maskedTextBox_SubMask.Text, maskedTextBox_SubMask.Text,
-                checkBox_DHCP.Checked, maskedTextBox_ServerIP.Text, Convert.ToInt16( numericUpDown_ServerPort.Value ));
+            PowerIPConfigInfo vPowerIPConfigInfo = new PowerIPConfigInfo()
+            {
+                Gateway = maskedTextBox_GateWay.Text,
+                IPAddress = maskedTextBox_IPAddress.Text,
+                IsDHCP = checkBox_DHCP.Checked,
+                MAC = MAC,
+                ServerPort = Convert.ToInt16(numericUpDown_ServerPort.Value),
+                ServerIPAddress = maskedTextBox_ServerIP.Text,
+                SubMask = maskedTextBox_SubMask.Text,
+            };
+            bool vResult = await vPowerControl.SendCMD_SetIP(DianYuanID, vPowerIPConfigInfo);
             if (vResult)
                 MessageBox.Show("配置成功", "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else
                 MessageBox.Show("配置失败", "信息", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private async void button_Get_Click(object sender, EventArgs e)
+        {
+            PowerControl vPowerControl = new PowerControl();
+            PowerIPConfigInfo vPowerIPConfigInfo =  await vPowerControl.SendCMD_GetIP(DianYuanID);
+            maskedTextBox_GateWay.Text = vPowerIPConfigInfo.Gateway;
+            maskedTextBox_IPAddress.Text = vPowerIPConfigInfo.IPAddress;
+            checkBox_DHCP.Checked = vPowerIPConfigInfo.IsDHCP;
+            numericUpDown_ServerPort.Value = vPowerIPConfigInfo.ServerPort;
+            maskedTextBox_ServerIP.Text = vPowerIPConfigInfo.ServerIPAddress;
+            maskedTextBox_SubMask.Text = vPowerIPConfigInfo.SubMask;
         }
     }
 }

@@ -69,7 +69,7 @@ namespace JXHighWay.WatchHouse.WFPClient
         /// </summary>
         void init_RiZi()
         {
-            LogInfo[] vLogInfoArray = m_PowerMonitoring.GetLog(App.PowerID, LuHao, "操作类");
+            LogInfo[] vLogInfoArray = m_PowerMonitoring.GetLog(App.PowerID1, LuHao, "操作类");
             dataGrid_Log.ItemsSource = vLogInfoArray;
         }
 
@@ -78,7 +78,7 @@ namespace JXHighWay.WatchHouse.WFPClient
         /// </summary>
         void init_SheZhi()
         {
-            m_ParamInfo =  m_PowerMonitoring.GetSwitchParamInfo(App.PowerID, LuHao);
+            m_ParamInfo =  m_PowerMonitoring.GetSwitchParamInfo(App.PowerID1, LuHao);
             integerUpDown_XDDN.Value = m_ParamInfo.XianDingDN;
             integerUpDown_XDGL.Value = m_ParamInfo.XianDingGL;
             integerUpDown_DLNLZ.Value = m_ParamInfo.DianLiuLLZ;
@@ -95,7 +95,7 @@ namespace JXHighWay.WatchHouse.WFPClient
         /// </summary>
         void init_ZhuanTai()
         {
-            PowerInfo vPowerInfo = m_PowerMonitoring.GetNewPowerInfo(App.PowerID, LuHao);
+            PowerInfo vPowerInfo = m_PowerMonitoring.GetNewPowerInfo(App.PowerID1, LuHao);
             label_ZT_DL.Content = string.Format("{0}A", vPowerInfo.DianLiu );
             label_ZT_DN.Content = string.Format("{0}kWh" ,vPowerInfo.DianNeng);
             label_ZT_DY.Content = string.Format("{0}V", vPowerInfo.DianYa);
@@ -169,7 +169,7 @@ namespace JXHighWay.WatchHouse.WFPClient
             for(int i=0;i<4;i++)
             {
                 byte vLuHao = (byte)(i >> 0);
-                m_TimingInfoList =  m_PowerMonitoring.GetTimingInfo(App.PowerID, vLuHao);
+                m_TimingInfoList =  m_PowerMonitoring.GetTimingInfo(App.PowerID1, vLuHao);
                 TimingInfo vTimingInfo = m_TimingInfoList.Where(m => m.LuHao == i).FirstOrDefault();
                 bindTimingInfo(vTimingInfo,i);
             }
@@ -194,7 +194,7 @@ namespace JXHighWay.WatchHouse.WFPClient
 
         private void button_YD_RYD_Click(object sender, RoutedEventArgs e)
         {
-            PowerInfo[] vDataSource = m_PowerMonitoring.GetYongDianLiang_Ri(App.PowerID, LuHao);
+            PowerInfo[] vDataSource = m_PowerMonitoring.GetYongDianLiang_Ri(App.PowerID1, LuHao);
             yongDianTongJi(vDataSource, string.Format("日用电量统计(总计:{0}kwh)", vDataSource.Sum(m => m.DianNeng)));
         }
 
@@ -205,13 +205,13 @@ namespace JXHighWay.WatchHouse.WFPClient
 
         private void button_YD_YYD_Click(object sender, RoutedEventArgs e)
         {
-            PowerInfo[] vDataSource = m_PowerMonitoring.GetYongDianLiang_Yue(App.PowerID, LuHao);
+            PowerInfo[] vDataSource = m_PowerMonitoring.GetYongDianLiang_Yue(App.PowerID1, LuHao);
             yongDianTongJi(vDataSource, string.Format("月用电量统计(总计:{0}kwh)", vDataSource.Sum(m => m.DianNeng)));
         }
 
         private void button_YD_NYD_Click(object sender, RoutedEventArgs e)
         {
-            PowerInfo[] vDataSource = m_PowerMonitoring.GetYongDianLiang_Nian(App.PowerID, LuHao);
+            PowerInfo[] vDataSource = m_PowerMonitoring.GetYongDianLiang_Nian(App.PowerID1, LuHao);
             yongDianTongJi(vDataSource, string.Format("年用电量统计(总计:{0}kwh)", vDataSource.Sum(m => m.DianNeng)));
         }
 
@@ -411,7 +411,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                         vTimeData = BitConverter.ToInt32(new byte[] { vTimeData4, vTimeData3, vTimeData2, vTimeData1 },0);
                         break;
                 }
-                bool vResult = await m_PowerMonitoring.SendCMD_Timing(App.PowerID, 0x01, vLuHao, vZhuHao, vRenWuLeiXin, vZhouQi, 0x01, vTimeData);
+                bool vResult = await m_PowerMonitoring.SendCMD_Timing(App.PowerID1, 0x01, vLuHao, vZhuHao, vRenWuLeiXin, vZhouQi, 0x01, vTimeData);
                 if (vResult)
                 {
                     TimingInfo vTimingInfo = m_TimingInfoList.Where(m => m.ZhuHao == m_EditZhuHao).FirstOrDefault();
@@ -419,7 +419,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                     {
                         vTimingInfo = new TimingInfo()
                         {
-                            DianYuanID = App.PowerID,
+                            DianYuanID = App.PowerID1,
                             LeiXing = 0x01,
                             RenWuLX = vRenWuLeiXin,
                             TimeData = vTimeData,
@@ -432,7 +432,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                     {
                         vTimingInfo = new TimingInfo()
                         {
-                            DianYuanID = App.PowerID,
+                            DianYuanID = App.PowerID1,
                             LeiXing = 0x01,
                             RenWuLX = vRenWuLeiXin,
                             TimeData = vTimeData,
@@ -456,7 +456,7 @@ namespace JXHighWay.WatchHouse.WFPClient
         {
             byte vLuHao = (byte)(LuHao >> 0);
             short vData = Convert.ToInt16(integerUpDown_XDDN.Value);
-            bool vResult = await m_PowerMonitoring.SendCMD_SwitchParam(App.PowerID, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.XianDingDN, vData);
+            bool vResult = await m_PowerMonitoring.SendCMD_SwitchParam(App.PowerID1, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.XianDingDN, vData);
             if (vResult)
             {
                 Xceed.Wpf.Toolkit.MessageBox.Show("设置成功", "信息", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -473,7 +473,7 @@ namespace JXHighWay.WatchHouse.WFPClient
         {
             byte vLuHao = (byte)(LuHao >> 0);
             short vData = Convert.ToInt16(integerUpDown_XDGL.Value);
-            bool vResult = await m_PowerMonitoring.SendCMD_SwitchParam(App.PowerID, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.XianDingGL, vData);
+            bool vResult = await m_PowerMonitoring.SendCMD_SwitchParam(App.PowerID1, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.XianDingGL, vData);
             if (vResult)
             {
                 Xceed.Wpf.Toolkit.MessageBox.Show("设置成功", "信息", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -490,7 +490,7 @@ namespace JXHighWay.WatchHouse.WFPClient
         {
             byte vLuHao = (byte)(LuHao >> 0);
             short vData = Convert.ToInt16(integerUpDown_DLNLZ.Value);
-            bool vResult = await m_PowerMonitoring.SendCMD_SwitchParam(App.PowerID, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.DianLiuLLZ, vData);
+            bool vResult = await m_PowerMonitoring.SendCMD_SwitchParam(App.PowerID1, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.DianLiuLLZ, vData);
             if (vResult)
             {
                 Xceed.Wpf.Toolkit.MessageBox.Show("设置成功", "信息", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -507,7 +507,7 @@ namespace JXHighWay.WatchHouse.WFPClient
         {
             byte vLuHao = (byte)(LuHao >> 0);
             short vData = Convert.ToInt16(integerUpDown_CWBH.Value);
-            bool vResult = await m_PowerMonitoring.SendCMD_SwitchParam(App.PowerID, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.ChaoWenBHZ, vData);
+            bool vResult = await m_PowerMonitoring.SendCMD_SwitchParam(App.PowerID1, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.ChaoWenBHZ, vData);
             if (vResult)
             {
                 Xceed.Wpf.Toolkit.MessageBox.Show("设置成功", "信息", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -524,7 +524,7 @@ namespace JXHighWay.WatchHouse.WFPClient
         {
             byte vLuHao = (byte)(LuHao >> 0);
             short vData = Convert.ToInt16(integerUpDown_CWYJZ.Value);
-            bool vResult = await m_PowerMonitoring.SendCMD_SwitchParam(App.PowerID, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.ChaoWenYJZ, vData);
+            bool vResult = await m_PowerMonitoring.SendCMD_SwitchParam(App.PowerID1, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.ChaoWenYJZ, vData);
             if (vResult)
             {
                 Xceed.Wpf.Toolkit.MessageBox.Show("设置成功", "信息", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -541,7 +541,7 @@ namespace JXHighWay.WatchHouse.WFPClient
         {
             byte vLuHao = (byte)(LuHao >> 0);
             short vData = Convert.ToInt16(integerUpDown_GYSX.Value);
-            bool vResult = await m_PowerMonitoring.SendCMD_SwitchParam(App.PowerID, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.GuoYaSX, vData);
+            bool vResult = await m_PowerMonitoring.SendCMD_SwitchParam(App.PowerID1, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.GuoYaSX, vData);
             if (vResult)
             {
                 Xceed.Wpf.Toolkit.MessageBox.Show("设置成功", "信息", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -558,7 +558,7 @@ namespace JXHighWay.WatchHouse.WFPClient
         {
             byte vLuHao = (byte)(LuHao >> 0);
             short vData = Convert.ToInt16(integerUpDown_QYXX.Value);
-            bool vResult = await m_PowerMonitoring.SendCMD_SwitchParam(App.PowerID, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.QianYaXX, vData);
+            bool vResult = await m_PowerMonitoring.SendCMD_SwitchParam(App.PowerID1, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.QianYaXX, vData);
             if (vResult)
             {
                 Xceed.Wpf.Toolkit.MessageBox.Show("设置成功", "信息", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -575,7 +575,7 @@ namespace JXHighWay.WatchHouse.WFPClient
         {
             byte vLuHao = (byte)(LuHao >> 0);
             short vData = Convert.ToInt16(integerUpDown_EDLD.Value);
-            bool vResult = await m_PowerMonitoring.SendCMD_SwitchParam(App.PowerID, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.EDingLDDZDL, vData);
+            bool vResult = await m_PowerMonitoring.SendCMD_SwitchParam(App.PowerID1, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.EDingLDDZDL, vData);
             if (vResult)
             {
                 Xceed.Wpf.Toolkit.MessageBox.Show("设置成功", "信息", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -592,7 +592,7 @@ namespace JXHighWay.WatchHouse.WFPClient
         {
             byte vLuHao = (byte)(LuHao >> 0);
             short vData = Convert.ToInt16(integerUpDown_LDYJZ.Value);
-            bool vResult = await m_PowerMonitoring.SendCMD_SwitchParam(App.PowerID, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.EDingLDDZDL, vData);
+            bool vResult = await m_PowerMonitoring.SendCMD_SwitchParam(App.PowerID1, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.EDingLDDZDL, vData);
             if (vResult)
             {
                 Xceed.Wpf.Toolkit.MessageBox.Show("设置成功", "信息", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -621,19 +621,19 @@ namespace JXHighWay.WatchHouse.WFPClient
 
         private void button_RZ_ZCL_Click(object sender, RoutedEventArgs e)
         {
-            LogInfo[] vLogInfoArray = m_PowerMonitoring.GetLog(App.PowerID, LuHao, "操作类");
+            LogInfo[] vLogInfoArray = m_PowerMonitoring.GetLog(App.PowerID1, LuHao, "操作类");
             dataGrid_Log.ItemsSource = vLogInfoArray;
         }
 
         private void button_RZ_BJL_Click(object sender, RoutedEventArgs e)
         {
-            LogInfo[] vLogInfoArray = m_PowerMonitoring.GetLog(App.PowerID, LuHao, "报警类");
+            LogInfo[] vLogInfoArray = m_PowerMonitoring.GetLog(App.PowerID1, LuHao, "报警类");
             dataGrid_Log.ItemsSource = vLogInfoArray;
         }
 
         private void button_RZ_GZL_Click(object sender, RoutedEventArgs e)
         {
-            LogInfo[] vLogInfoArray = m_PowerMonitoring.GetLog(App.PowerID, LuHao, "故障类");
+            LogInfo[] vLogInfoArray = m_PowerMonitoring.GetLog(App.PowerID1, LuHao, "故障类");
             dataGrid_Log.ItemsSource = vLogInfoArray;
         }
 

@@ -49,7 +49,7 @@
     <Compile Include="PowerDataPack_Receive_RuningStatues.cs" />
     <Compile Include="PowerDataPack_Main.cs" />
     <Compile Include="PowerDataPack_Send_CommandEnum.cs" />
-    <Compile Include="PowerDataPack_Send_GetIPAddress.cs" />
+    <Compile Include="PowerDataPack_Receive_GetIPAddress.cs" />
     <Compile Include="PowerDataPack_Send_SetIPAddress.cs" />
     <Compile Include="PowerDataPack_Send_Switch.cs" />
     <Compile Include="PowerDataPack_Send_SwitchParam.cs" />

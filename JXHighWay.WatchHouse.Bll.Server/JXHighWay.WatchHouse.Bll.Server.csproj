@@ -46,6 +46,7 @@
     <Compile Include="Employee.cs" />
     <Compile Include="Manager.cs" />
     <Compile Include="PowerControl.cs" />
+    <Compile Include="PowerIPConfigInfo.cs" />
     <Compile Include="PowerSwitchInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SendCMDModel.cs" />

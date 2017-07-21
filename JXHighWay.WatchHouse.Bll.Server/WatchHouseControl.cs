@@ -660,7 +660,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
                                     processorData_ReturnCMD(vDataPack, vReceiveData.IPAddress, vReceiveCMD);
                                     break;
                                 case (int)WatchHouseDataPack_Receive_CommandEnmu.GongZuoSJ://岗亭返回的工作数据
-                                    switch(vReceiveData.Data[16])
+                                    switch(vReceiveData.Data[17])
                                     {
                                         case 0x00://安卓单向岗亭
                                             WatchHouseDataPack_Receive_Main vDataPack1 = Helper.NetHelper.ByteToStructure<WatchHouseDataPack_Receive_Main>(vReceiveData.Data);

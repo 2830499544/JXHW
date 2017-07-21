@@ -72,9 +72,13 @@ namespace JXHighWay.WatchHouse.WFPClient
         /// </summary>
         public static string WatchHouseType { get; set; }
         /// <summary>
-        /// 当前电源ID
+        /// 当前电源ID(单向)
         /// </summary>
-        public static string PowerID { get; set; }
+        public static string PowerID1 { get; set; }
+        /// <summary>
+        /// 当前电源ID(双向)
+        /// </summary>
+        public static string PowerID2 { get; set; }
         /// <summary>
         /// 广告屏IP
         /// </summary>
