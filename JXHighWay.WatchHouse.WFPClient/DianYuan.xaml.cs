@@ -74,7 +74,7 @@ namespace JXHighWay.WatchHouse.WFPClient.Images
 
                     CheckBox vCheckBox = (CheckBox)FindName(string.Format("checkBox_Switch{0}", i));
                     vCheckBox.Visibility = Visibility.Visible;
-                    vCheckBox.Tag = (byte)i;
+                    vCheckBox.Tag = (byte)vPowerInfo.LuHao;
 
                     Label vlabel_Guan = (Label)FindName(string.Format("label_Guan_{0}", i));
                     vlabel_Guan.Visibility = Visibility.Visible;
@@ -116,30 +116,6 @@ namespace JXHighWay.WatchHouse.WFPClient.Images
                 }
             }
             m_IsInit = true;
-        }
-
-        private async void checkBox_Switch1_Checked(object sender, RoutedEventArgs e)
-        {
-            CheckBox vCheckBox = (CheckBox)sender;
-            byte vLuHao = (byte)vCheckBox.Tag;
-            bool vResult = await m_PowerMonitoring.SendCMD_Switch(App.PowerID1, 0x01, vLuHao, true);
-            if (!vResult)
-            {
-                Xceed.Wpf.Toolkit.MessageBox.Show("开关失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-                vCheckBox.IsChecked = false;
-            }
-        }
-
-        private async void checkBox_Switch1_Unchecked(object sender, RoutedEventArgs e)
-        {
-            CheckBox vCheckBox = (CheckBox)sender;
-            byte vLuHao = (byte)vCheckBox.Tag;
-            bool vResult = await m_PowerMonitoring.SendCMD_Switch(App.PowerID1, 0x01, 0x02, false);
-            if (!vResult)
-            {
-                Xceed.Wpf.Toolkit.MessageBox.Show("开关失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-                vCheckBox.IsChecked = true;
-            }
         }
 
         async void RefreshState()
@@ -206,7 +182,7 @@ namespace JXHighWay.WatchHouse.WFPClient.Images
             DianYuanMingXi vDianYuanMingXi = new DianYuanMingXi();
             vDianYuanMingXi.LuHao = (int)vGroupBox.Tag;
             vDianYuanMingXi.ShowDialog();
-            //Xceed.Wpf.Toolkit.Xceed.Wpf.Toolkit.MessageBox.Show("OK");
+            
         }
 
         bool m_Switch = true;

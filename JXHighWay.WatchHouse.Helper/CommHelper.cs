@@ -3,12 +3,29 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace JXHighWay.WatchHouse.Helper
 {
     public class CommHelper
     {
+        public static bool IsIPAddress (string IPAddress)
+        {
+            Regex vRegex = new Regex("^(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|[1-9])\\."
+                                    + "(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|\\d)\\."
+                                    + "(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|\\d)\\."
+                                    + "(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|\\d)$");
+            return vRegex.IsMatch(IPAddress);
+        }
+
+        public static bool IsMAC (string MAC)
+        {
+            Regex vRegex = new Regex("^[A-F0-9]{2}(-[A-F0-9]{2}){5}$");
+            return vRegex.IsMatch(MAC);
+        }
+        
+        
         /// <summary>
         /// 时间戳转DateTime
         /// timestamp为10位秒级* 10000000，若为13位毫秒级*10000

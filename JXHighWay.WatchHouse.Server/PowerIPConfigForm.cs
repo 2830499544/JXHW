@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using JXHighWay.WatchHouse.Bll.Server;
+using System.Text.RegularExpressions;
+using JXHighWay.WatchHouse.Helper;
 
 namespace JXHighWay.WatchHouse.Server
 {
@@ -19,7 +21,9 @@ namespace JXHighWay.WatchHouse.Server
         }
 
         public string DianYuanID { get; set; }
-        public string MAC { get; set; }
+        //public string MAC { get; set; }
+
+        PowerControl m_PowerControl = null;
 
         private void maskedTextBox_IPAddress_KeyDown(object sender, KeyEventArgs e)
         {
@@ -41,36 +45,77 @@ namespace JXHighWay.WatchHouse.Server
             }
         }
 
+        bool verifyIPAddress()
+        {
+            bool vResult = false;
+            if (CommHelper.IsIPAddress(textBox_IPAddress.Text))
+                vResult = true;
+            else
+                MessageBox.Show("IP地址输入错误", "信息", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            if (CommHelper.IsIPAddress(textBox_SubMask.Text))
+                vResult = true;
+            else
+                MessageBox.Show("子网掩码输入错误", "信息", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            if (CommHelper.IsIPAddress(textBox_GateWay.Text))
+                vResult = true;
+            else
+                MessageBox.Show("网关输入错误", "信息", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            if (CommHelper.IsIPAddress(textBox_ServerIP.Text))
+                vResult = true;
+            else
+                MessageBox.Show("服务器IP地址输入错误", "信息", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return vResult;
+        }
+
         private async void button_Config_Click(object sender, EventArgs e)
         {
-            PowerControl vPowerControl = new PowerControl();
-            PowerIPConfigInfo vPowerIPConfigInfo = new PowerIPConfigInfo()
+            if (verifyIPAddress())
             {
-                Gateway = maskedTextBox_GateWay.Text,
-                IPAddress = maskedTextBox_IPAddress.Text,
-                IsDHCP = checkBox_DHCP.Checked,
-                MAC = MAC,
-                ServerPort = Convert.ToInt16(numericUpDown_ServerPort.Value),
-                ServerIPAddress = maskedTextBox_ServerIP.Text,
-                SubMask = maskedTextBox_SubMask.Text,
-            };
-            bool vResult = await vPowerControl.SendCMD_SetIP(DianYuanID, vPowerIPConfigInfo);
-            if (vResult)
-                MessageBox.Show("配置成功", "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            else
-                MessageBox.Show("配置失败", "信息", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                m_PowerControl = new PowerControl();
+                PowerIPConfigInfo vPowerIPConfigInfo = new PowerIPConfigInfo()
+                {
+                    Gateway = textBox_GateWay.Text,
+                    IPAddress = textBox_IPAddress .Text,
+                    IsDHCP = checkBox_DHCP.Checked,
+                    MAC = DianYuanID,
+                    ServerPort = Convert.ToInt16(numericUpDown_ServerPort.Value),
+                    ServerIPAddress = textBox_ServerIP.Text,
+                    SubMask = textBox_SubMask.Text,
+                };
+                bool vResult = await m_PowerControl.SendCMD_SetIP(DianYuanID, vPowerIPConfigInfo);
+                if (vResult)
+                    MessageBox.Show("配置成功", "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                else
+                    MessageBox.Show("配置失败", "信息", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private async void button_Get_Click(object sender, EventArgs e)
         {
-            PowerControl vPowerControl = new PowerControl();
-            PowerIPConfigInfo vPowerIPConfigInfo =  await vPowerControl.SendCMD_GetIP(DianYuanID);
-            maskedTextBox_GateWay.Text = vPowerIPConfigInfo.Gateway;
-            maskedTextBox_IPAddress.Text = vPowerIPConfigInfo.IPAddress;
+            m_PowerControl = new PowerControl();
+            PowerIPConfigInfo vPowerIPConfigInfo =  await m_PowerControl.SendCMD_GetIP(DianYuanID);
+            textBox_GateWay.Text = vPowerIPConfigInfo.Gateway;
+            textBox_IPAddress.Text = vPowerIPConfigInfo.IPAddress;
             checkBox_DHCP.Checked = vPowerIPConfigInfo.IsDHCP;
             numericUpDown_ServerPort.Value = vPowerIPConfigInfo.ServerPort;
-            maskedTextBox_ServerIP.Text = vPowerIPConfigInfo.ServerIPAddress;
-            maskedTextBox_SubMask.Text = vPowerIPConfigInfo.SubMask;
+            textBox_ServerIP.Text = vPowerIPConfigInfo.ServerIPAddress;
+            textBox_SubMask.Text = vPowerIPConfigInfo.SubMask;
+        }
+
+        
+        private void PowerIPConfigForm_Load(object sender, EventArgs e)
+        {
+            m_PowerControl = new PowerControl();
+            PowerIPConfigInfo vPowerIPConfigInfo = m_PowerControl.GetIPConfig(DianYuanID);
+            textBox_GateWay.Text = vPowerIPConfigInfo.Gateway;
+            textBox_IPAddress.Text = vPowerIPConfigInfo.IPAddress;
+            checkBox_DHCP.Checked = vPowerIPConfigInfo.IsDHCP;
+            numericUpDown_ServerPort.Value = vPowerIPConfigInfo.ServerPort;
+            textBox_ServerIP.Text = vPowerIPConfigInfo.ServerIPAddress;
+            textBox_SubMask.Text = vPowerIPConfigInfo.SubMask;
         }
     }
 }

@@ -17,10 +17,10 @@ namespace JXHighWay.WatchHouse.Bll.Client.GanTing
         public int? GangTingDK { get; set; }
         public String GuanGaoPingIP { get; set; }
         public int? GuanGaoPDK { get; set; }
-        public string DianYuanID { get; set; }
-        public String DianYuanIP { get; set; }
-        public int? DianYuanDK { get; set; }
-        public int? DianYuanLS { get; set; }
+        public string DianYuan1ID { get; set; }
+        public String DianYuan1IP { get; set; }
+        public string DianYuan2ID { get; set; }
+        public String DianYuan2IP { get; set; }
         public DateTime? TongXunSJ { get; set; }
         public string LeiXin { get; set; }
         public string GongHao { get; set; }

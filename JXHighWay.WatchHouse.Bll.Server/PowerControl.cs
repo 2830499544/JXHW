@@ -15,10 +15,11 @@ namespace JXHighWay.WatchHouse.Bll.Server
     public class PowerControl:BasicControl
     {
         bool m_IsRun = false;
-    
+        Dictionary<string, int> m_ClientMaxID = null;
 
         public PowerControl()
         {
+            
             Config vConfig = new Config();
             Port = vConfig.PowerPort;
         }
@@ -26,7 +27,9 @@ namespace JXHighWay.WatchHouse.Bll.Server
         public void Start()
         {
             ReceiveQueue = new Queue<WHQueueModel>();
+            m_ClientMaxID = new Dictionary<string, int>();
             initPower();
+
             m_IsRun = true;
 
             m_SocketManager = new SocketManager(MaxConnNum, BufferSize);
@@ -66,7 +69,18 @@ namespace JXHighWay.WatchHouse.Bll.Server
             WatchHouseConfigEFModel[] vWatchHouseConfig = m_BasicDBClass_Receive.SelectAllRecordsEx<WatchHouseConfigEFModel>();
             foreach (WatchHouseConfigEFModel vTempConfig in vWatchHouseConfig)
             {
-                m_ClientDict.Add(vTempConfig.DianYuan1ID, "");
+                if (vTempConfig.DianYuan1ID != null && vTempConfig.DianYuan1ID != "")
+                {
+                    m_ClientDict.Add(vTempConfig.DianYuan1ID, "");
+                    m_ClientMaxID.Add(vTempConfig.DianYuan2ID, 0);
+                }
+
+                if (vTempConfig.DianYuan2ID != null && vTempConfig.DianYuan2ID != "")
+                {
+                    m_ClientDict.Add(vTempConfig.DianYuan2ID, "");
+                    m_ClientMaxID.Add(vTempConfig.DianYuan2ID, 0);
+                }
+                
             }
         }
 
@@ -83,18 +97,59 @@ namespace JXHighWay.WatchHouse.Bll.Server
             return vResult[1];
         }
 
-        public async Task<PowerIPConfigInfo> SendCMD_GetIP(string DianYuanID)
+        public PowerIPConfigInfo GetIPConfig(string DianYuanID)
         {
-            PowerIPConfigInfo vIPConfigResult = new PowerIPConfigInfo()
+            PowerIPConfigInfo vIPConfigResult = new PowerIPConfigInfo();
+
+            PowerNetConfigEFModel vPowerNetConfigEFModel = new PowerNetConfigEFModel()
             {
                 MAC = DianYuanID
             };
-            bool vResult = await asyncSendCommandToDB(DianYuanID, PowerDataPack_Send_CommandEnum.Send_GetIPAddress);
-            if ( vResult )
+
+            PowerNetConfigEFModel[] vSelectResult = m_BasicDBClass_Send.SelectRecordsEx(vPowerNetConfigEFModel);
+            if (vSelectResult != null && vSelectResult.Length > 0)
             {
-                PowerIPConfigInfo[] vSelectResult = m_BasicDBClass_Send.SelectRecordsEx(vIPConfigResult);
-                if ( vSelectResult !=null && vSelectResult.Length>0)
-                    vIPConfigResult = vSelectResult[0];
+                vIPConfigResult = new PowerIPConfigInfo()
+                {
+                    MAC = DianYuanID,
+                    Gateway = vSelectResult[0].Gateway,
+                    IPAddress = vSelectResult[0].IPAddress,
+                    IsDHCP = vSelectResult[0].DHCP,
+                    Port = vSelectResult[0].Port ?? 0,
+                    ServerIPAddress = vSelectResult[0].ServerIPAddress,
+                    ServerPort = vSelectResult[0].ServerPort ?? 0,
+                    SubMask = vSelectResult[0].SubMask
+                };
+            }
+            return vIPConfigResult;
+        }
+
+        public async Task<PowerIPConfigInfo> SendCMD_GetIP(string DianYuanID)
+        {
+            PowerIPConfigInfo vIPConfigResult = new PowerIPConfigInfo();
+            bool vResult = await asyncSendCommandToDB(DianYuanID, PowerDataPack_Send_CommandEnum.Send_GetIPAddress);
+            if (vResult)
+            {
+                PowerNetConfigEFModel vPowerNetConfigEFModel = new PowerNetConfigEFModel()
+                {
+                    MAC = DianYuanID
+                };
+
+                PowerNetConfigEFModel[] vSelectResult = m_BasicDBClass_Send.SelectRecordsEx(vPowerNetConfigEFModel);
+                if (vSelectResult != null && vSelectResult.Length > 0)
+                {
+                    vIPConfigResult = new PowerIPConfigInfo()
+                    {
+                        MAC = DianYuanID,
+                        Gateway = vSelectResult[0].Gateway,
+                        IPAddress = vSelectResult[0].IPAddress,
+                        IsDHCP = vSelectResult[0].DHCP,
+                        Port = vSelectResult[0].Port ?? 0,
+                        ServerIPAddress = vSelectResult[0].ServerIPAddress,
+                        ServerPort = vSelectResult[0].ServerPort ?? 0,
+                        SubMask = vSelectResult[0].SubMask
+                    };
+                }
             }
             return vIPConfigResult;
         }
@@ -146,7 +201,27 @@ namespace JXHighWay.WatchHouse.Bll.Server
                 DHCP = IPConfig.IsDHCP ? (byte)0x01 : (byte)0x00
 
             };
-            bool vResult = await asyncSendCommandToDB(DianYuanID, PowerDataPack_Send_CommandEnum.Send_SetIPAddress, vData);
+            bool vResult = await asyncSendCommandToDB(DianYuanID, PowerDataPack_Send_CommandEnum.SetIPAddress, vData);
+            if ( vResult )
+            {
+                PowerNetConfigEFModel vPowerNetConfigEFModel = new PowerNetConfigEFModel()
+                {
+                    DHCP = IPConfig.IsDHCP,
+                    Gateway = IPConfig.Gateway,
+                    IPAddress = IPConfig.IPAddress,
+                    MAC = IPConfig.MAC,
+                    Port = IPConfig.Port,
+                    ServerIPAddress = IPConfig.ServerIPAddress,
+                    ServerPort = IPConfig.ServerPort,
+                    SubMask = IPConfig.SubMask
+                };
+                string vSql = string.Format("MAC='{0}'", IPConfig.MAC);
+                m_BasicDBClass_Send.TransactionBegin();
+                m_BasicDBClass_Send.DeleteRecordCustom<PowerNetConfigEFModel>(vSql);
+                m_BasicDBClass_Send.InsertRecord(vPowerNetConfigEFModel);
+                m_BasicDBClass_Send.TransactionCommit();
+
+            }
             return vResult;
         }
 
@@ -260,8 +335,11 @@ namespace JXHighWay.WatchHouse.Bll.Server
                                     PowerDataPack_Receive_RunningStatus vDataPack1 = NetHelper.ByteToStructure<PowerDataPack_Receive_RunningStatus>(vReceiveData.Data);
                                     processorData_RunningStatus(vDataPack1, vReceiveData.IPAddress);
                                     break;
-                                //处理接收到电源开关状态数据
-                                case (byte)PowerDataPack_Receive_CommandEnum.SwitchStatus:
+                                case (byte)PowerDataPack_Receive_CommandEnum.SwitchStatus://处理接收到回复电源开关状态数据
+                                case (byte)PowerDataPack_Receive_CommandEnum.SetTime://设置时间
+                                case (byte)PowerDataPack_Receive_CommandEnum.SwitchParam://开关参数设置
+                                case (byte)PowerDataPack_Receive_CommandEnum.Timing: //定时设置
+                                case (byte)PowerDataPack_Receive_CommandEnum.SetIPAddress: //设置IP地址
                                     PowerDataPack_Receive_ReplyCMD vDataPack2 = NetHelper.ByteToStructure<PowerDataPack_Receive_ReplyCMD>(vReceiveData.Data);
                                     processorData_ReplyCMD(PowerDataPack_Receive_CommandEnum.SwitchStatus, vDataPack2);
                                     break;
@@ -271,10 +349,11 @@ namespace JXHighWay.WatchHouse.Bll.Server
                                     processorData_Event(vDataPack3, vReceiveData.IPAddress);
                                     break;
                                 //获取IP地址
-                                case (byte)PowerDataPack_Send_CommandEnum.Receive_GetIPAddress:
+                                case (byte)PowerDataPack_Receive_CommandEnum.GetIPAddress:
                                     PowerDataPack_Receive_GetIPAddress vDataPack4 = NetHelper.ByteToStructure<PowerDataPack_Receive_GetIPAddress>(vReceiveData.Data);
                                     processorData_GetIPAddress(vDataPack4);
                                     break;
+                                
                             }
                             
                         }
@@ -526,7 +605,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
                     IsReply = true,
                     State = true
                 };
-                string vSql = string.Format("DianYuanID={0} and CMD={1:D} and SN={2}", vMAC,(byte)PowerDataPack_Send_CommandEnum.Receive_GetIPAddress, dataPack.SN);
+                string vSql = string.Format("DianYuanID={0} and CMD={1:D} and SN={2}", vMAC,(byte)PowerDataPack_Send_CommandEnum.Send_GetIPAddress, dataPack.SN);
                 m_BasicDBClass_Receive.UpdateRecord(vPowerSendCMDEFModel, vSql);
                 m_BasicDBClass_Receive.TransactionCommit();
             }
@@ -540,6 +619,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
         void processorData_ReplyCMD(PowerDataPack_Receive_CommandEnum comm, PowerDataPack_Receive_ReplyCMD dataPack)
         {
             string vSql = "";
+            
             string vDianYuanID = BitConverter.ToString(new byte[] { dataPack.MAC1, dataPack.MAC2, dataPack.MAC3, dataPack.MAC4, dataPack.MAC5, dataPack.MAC6 });
             PowerSendCMDEFModel vPowerSendCMDEFModel = new PowerSendCMDEFModel()
             {
@@ -549,8 +629,10 @@ namespace JXHighWay.WatchHouse.Bll.Server
             switch ( comm )
             {
                 case PowerDataPack_Receive_CommandEnum.SwitchStatus:
-                    vSql = string.Format("DianYuanID={0} and CMD={1:D} and SN={2}", vDianYuanID, 0x41, dataPack.SN);
+                case PowerDataPack_Receive_CommandEnum.SetTime:
+                    vSql = string.Format("DianYuanID={0} and CMD={1:D} and SN={2}", vDianYuanID, (byte)PowerDataPack_Send_CommandEnum.Switch, dataPack.SN);
                     break;
+
             }
 
             if (vSql != "")
@@ -570,7 +652,36 @@ namespace JXHighWay.WatchHouse.Bll.Server
                     NeiRong = convertShiJianNR(data.ShiJinLX, data.ShiJianBM),
                     Time = DateTime.Now,
                 };
+                m_BasicDBClass_Receive.TransactionBegin();
                 m_BasicDBClass_Receive.InsertRecord(vPowerEventEFModel);
+                //更新电源数据开关状态
+                switch (vPowerEventEFModel.NeiRong)
+                {
+                    case "本地开":
+                    case "远程开":
+                    case "定时开":
+                    case "短路跳闸":
+                    case "过载跳闸":
+                    case "超功率跳闸":
+                    case "电能用完跳闸":
+                    case "超温跳闸":
+                    case "过压跳闸":
+                    case "欠压跳闸":
+                    case "打火跳闸":
+                    case "漏电跳闸":
+                        string vSql1 = string.Format("update  `电源数据` set `ZhuanTai`='{0}'  where LuHao={1:D} and `ID` in ( select a.MaxID from "
+                             + "(Select max(id) as MaxID From `电源数据` where DianYuanID = '{2}') a )", "开", vPowerEventEFModel.LuHao, vPowerEventEFModel.DianYuanID);
+                        m_BasicDBClass_Receive.UpdateRecord(vSql1);
+                        break;
+                    case "本地关":
+                    case "远程关":
+                    case "定时关":
+                        string vSql2 = string.Format("update  `电源数据` set `ZhuanTai`='{0}'  where LuHao={1:D} and `ID` in ( select a.MaxID from "
+                             + "(Select max(id) as MaxID From `电源数据` where DianYuanID = '{2}') a )", "关", vPowerEventEFModel.LuHao, vPowerEventEFModel.DianYuanID);
+                        m_BasicDBClass_Receive.UpdateRecord(vSql2);
+                        break;
+                }
+                m_BasicDBClass_Receive.TransactionCommit();
             }
             catch( Exception ex)
             {
@@ -606,12 +717,15 @@ namespace JXHighWay.WatchHouse.Bll.Server
                     DianYuan1IP = IPAddress
                 };
                 m_BasicDBClass_Receive.TransactionBegin();
-                m_BasicDBClass_Receive.InsertRecord(vModel);
+                int vID = m_BasicDBClass_Receive.InsertRecord(vModel);
                 m_BasicDBClass_Receive.UpdateRecord(vWatchHouseConfigEFModel, string.Format("DianYuan1ID='{0}'", vModel.DianYuanID));
                 m_BasicDBClass_Receive.TransactionCommit();
                 //更新客户端字典表
                 if (m_ClientDict.ContainsKey(vModel.DianYuanID) )
                     m_ClientDict[vModel.DianYuanID] = IPAddress;
+                //更新客户端最大ID字段
+                if (m_ClientMaxID.ContainsKey(vModel.DianYuanID))
+                    m_ClientMaxID[vModel.DianYuanID] = vID;
             }
             catch(Exception ex)
             {

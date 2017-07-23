@@ -160,6 +160,10 @@
       <Project>{1e2cbd19-b02c-46bb-947c-f67329d5e6f4}</Project>
       <Name>JXHighWay.WatchHouse.Bll.Client</Name>
     </ProjectReference>
+    <ProjectReference Include="..\JXHighWay.WatchHouse.Helper\JXHighWay.WatchHouse.Helper.csproj">
+      <Project>{3282a5f3-7d7f-4423-9793-8da25e2ad7ab}</Project>
+      <Name>JXHighWay.WatchHouse.Helper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\JXHighWay.WatchHouse.Net.Socket\JXHighWay.WatchHouse.Net.csproj">
       <Project>{d0cf1157-6b33-41a9-8eae-faeba9fbfe48}</Project>
       <Name>JXHighWay.WatchHouse.Net</Name>

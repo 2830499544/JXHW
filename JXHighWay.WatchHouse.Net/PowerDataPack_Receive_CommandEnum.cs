@@ -19,9 +19,26 @@ namespace JXHighWay.WatchHouse.Net.DataPack
         /// <summary>
         /// 上报配电箱事件
         /// </summary>
-        Event = 0xca
-
-
-
+        Event = 0xca,
+        /// <summary>
+        /// 设置时间
+        /// </summary>
+        SetTime = 0x48,
+        /// <summary>
+        /// 获取IP地址
+        /// </summary>
+        GetIPAddress = 0x39,
+        /// <summary>
+        /// 设置IP地址
+        /// </summary>
+        SetIPAddress = 0x40,
+        /// <summary>
+        ///开关参数设置 
+        /// </summary>
+        SwitchParam = 0x46,
+        /// <summary>
+        ///定时设置 
+        /// </summary>
+        Timing = 0x4a,
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace JXHighWay.WatchHouse.Net.DataPack
 {
-    public class WatchHouseDataPack_Receive_MainSX
+    public struct WatchHouseDataPack_Receive_MainSX
     {
         /// <summary>
         /// 头

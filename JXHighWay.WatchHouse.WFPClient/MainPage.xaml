@@ -164,6 +164,30 @@
             <Label x:Name="Label_JobNo_8" Content="工号:XXXXXX" HorizontalAlignment="Left" Margin="35,168,0,0" Grid.Row="2" VerticalAlignment="Top" FontSize="16" Foreground="#FFF7EEEE" Height="31" Width="150" Grid.Column="3" HorizontalContentAlignment="Center"/>
         </Grid>
         <Image x:Name="image" HorizontalAlignment="Left" Height="19" VerticalAlignment="Top" Width="382" Margin="320,37,0,0" Source="Images/JianGe.jpg"/>
+        <Image x:Name="image_ShanYei" HorizontalAlignment="Left" Height="60" VerticalAlignment="Top" Width="60" Margin="0,206,0,0" Cursor="Hand" MouseLeftButtonDown="image_ShanYei_MouseLeftButtonDown" >
+            <Image.Style>
+                <Style TargetType="{x:Type Image}">
+                    <Setter Property="Source" Value="Images/Main/ShanYei.jpg"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver"  Value="True">
+                            <Setter Property="Source" Value="Images/Main/ShanYei_A.jpg"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Image.Style>
+        </Image>
+        <Image x:Name="image_XiaYei" HorizontalAlignment="Left" Height="60" VerticalAlignment="Top" Width="60" Margin="964,206,0,0" Cursor="Hand" MouseLeftButtonDown="image_XiaYei_MouseLeftButtonDown" >
+            <Image.Style>
+                <Style TargetType="{x:Type Image}">
+                    <Setter Property="Source" Value="Images/Main/XiaYei.jpg"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver"  Value="True">
+                            <Setter Property="Source" Value="Images/Main/XiaYei_A.jpg"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Image.Style>
+        </Image>
 
     </Grid>
 </Page>

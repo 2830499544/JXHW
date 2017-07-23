@@ -511,6 +511,10 @@
     <Resource Include="Images\Main\ShuanXiang_A.jpg" />
     <Resource Include="Images\Login\LoginPage.jpg" />
     <Resource Include="Images\MenChuang\XuXiang.jpg" />
+    <Resource Include="Images\Main\ShanYei_A.jpg" />
+    <Resource Include="Images\Main\ShanYei.jpg" />
+    <Resource Include="Images\Main\XiaYei_A.jpg" />
+    <Resource Include="Images\Main\XiaYei.jpg" />
     <Content Include="Transmit.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -22,6 +22,29 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
         }
 
         #region 命令
+
+        /// <summary>
+        /// 设置配电箱时间
+        /// </summary>
+        /// <param name="DianYuanID">电源编号</param>
+        /// <param name="ShiQu">时区</param>
+        /// <param name="Time">时间戳</param>
+        /// <returns></returns>
+        public async Task<bool> SendCMD_SetTime(string DianYuanID,byte ShiQu,int Time)
+        {
+            PowerDataPack_Send_SetTime vData = new PowerDataPack_Send_SetTime()
+            {
+                ShiQu = ShiQu,
+                Time1 = (byte)(Time>>24),
+                Time2 = (byte)(Time >> 16),
+                Time3 = (byte)(Time >> 8),
+                Time4 = (byte)(Time >> 0)
+            };
+
+            bool vResult = await asyncSendCommandToDB(DianYuanID, PowerDataPack_Send_CommandEnum.SetTime, vData);
+            return vResult;
+        }
+
         /// <summary>
         /// 分路开关参数配置
         /// </summary>
@@ -42,7 +65,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
                 Data1 = (byte)(Data >> 8),
                 Data2 = (byte)(Data >> 0)
             };
-            bool vResult = await asyncSendCommandToDB(DianYuanID, PowerDataPack_Send_CommandEnum.Send_Switch, vData);
+            bool vResult = await asyncSendCommandToDB(DianYuanID, PowerDataPack_Send_CommandEnum.Switch, vData);
             if(vResult)
             {
                 PowerSwithConfigEFModel vPowerSwithConfigEFModel = new PowerSwithConfigEFModel();
@@ -97,7 +120,14 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
                 SheBeiLX = SheBieLX,
                 Switch = IsOn ? (byte)0x01 : (byte)0x00
             };
-            bool vResult = await asyncSendCommandToDB(DianYuanID, PowerDataPack_Send_CommandEnum.Send_Switch, vData);
+            bool vResult = await asyncSendCommandToDB(DianYuanID, PowerDataPack_Send_CommandEnum.Switch, vData);
+            //更新电源开关状态
+            if ( vResult )
+            {
+                string vSql = string.Format("update  `电源数据` set `ZhuanTai`='{0}'  where LuHao={1:D} and `ID` in ( select a.MaxID from "
+                            + "(Select max(id) as MaxID From `电源数据` where DianYuanID = '{2}') a )", IsOn ? "开":"关", LuHao,DianYuanID);
+                m_BasicDBClassUpdate.UpdateRecord(vSql);
+            }
             return vResult;
         }
 
@@ -157,7 +187,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
                     break;
             }
 
-            bool vResult = await asyncSendCommandToDB(DianYuanID, PowerDataPack_Send_CommandEnum.Send_Switch, vData);
+            bool vResult = await asyncSendCommandToDB(DianYuanID, PowerDataPack_Send_CommandEnum.Switch, vData);
             if ( vResult )
             {
                 PowerTimingEFModel vPowerTimingEFModel = new PowerTimingEFModel()

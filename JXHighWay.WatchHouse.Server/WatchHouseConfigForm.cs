@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using JXHighWay.WatchHouse.Bll.Server;
+using JXHighWay.WatchHouse.Helper;
 
 namespace JXHighWay.WatchHouse.Server
 {
@@ -145,13 +146,13 @@ namespace JXHighWay.WatchHouse.Server
         private void button_DY_KaiGuan_Click(object sender, EventArgs e)
         {
             string vDianYuanID = textBox_DY1_ID.Text;
-            if (vDianYuanID != "")
+            if ( CommHelper.IsMAC(vDianYuanID))
             {
                 DataTable vSwitchTable = new DataTable();
                 if (button_DY1_KaiGuan.Tag == null)
                     vSwitchTable = m_WatchHouseConfig.GetSwitchTable(vDianYuanID);
                 else
-                    vSwitchTable = (DataTable)textBox_DY1_ID.Tag;
+                    vSwitchTable = (DataTable)button_DY1_KaiGuan.Tag;
                 SwitchConfigForm vSwitchConfigForm = new SwitchConfigForm();
                 vSwitchConfigForm.SwitchTable = vSwitchTable;
                 vSwitchConfigForm.DianYuanID = vDianYuanID;
@@ -159,13 +160,19 @@ namespace JXHighWay.WatchHouse.Server
                 button_DY1_KaiGuan.Tag = vSwitchTable;
             }
             else
-                MessageBox.Show("请输入电源ID", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("请输入正确的电源ID", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void button_PowerIP_Click(object sender, EventArgs e)
         {
-            PowerIPConfigForm vPowerIPConfigForm = new PowerIPConfigForm();
-            vPowerIPConfigForm.ShowDialog();
+            if ( CommHelper.IsMAC( textBox_DY1_ID.Text ))
+            {
+                PowerIPConfigForm vPowerIPConfigForm = new PowerIPConfigForm();
+                vPowerIPConfigForm.DianYuanID = textBox_DY1_ID.Text;
+                vPowerIPConfigForm.ShowDialog();
+            }
+            else
+                MessageBox.Show("请输入正确的电源ID", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void comboBox_GanTing_LX_SelectedIndexChanged(object sender, EventArgs e)
@@ -187,20 +194,26 @@ namespace JXHighWay.WatchHouse.Server
         
         private void button_DY2_PowerIP_Click(object sender, EventArgs e)
         {
-            PowerIPConfigForm vPowerIPConfigForm = new PowerIPConfigForm();
-            vPowerIPConfigForm.ShowDialog();
+            if ( CommHelper.IsMAC( textBox_DY2_ID.Text ))
+            {
+                PowerIPConfigForm vPowerIPConfigForm = new PowerIPConfigForm();
+                vPowerIPConfigForm.DianYuanID = textBox_DY2_ID.Text;
+                vPowerIPConfigForm.ShowDialog();
+            }
+            else
+                MessageBox.Show("请输入正确的电源ID", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void button_DY2_KaiGuan_Click(object sender, EventArgs e)
         {
             string vDianYuanID = textBox_DY2_ID.Text;
-            if (vDianYuanID != "")
+            if ( CommHelper.IsMAC( vDianYuanID))
             {
                 DataTable vSwitchTable = new DataTable();
-                if (button_DY1_KaiGuan.Tag == null)
+                if (button_DY2_KaiGuan.Tag == null)
                     vSwitchTable = m_WatchHouseConfig.GetSwitchTable(vDianYuanID);
                 else
-                    vSwitchTable = (DataTable)textBox_DY2_ID.Tag;
+                    vSwitchTable = (DataTable)button_DY2_KaiGuan.Tag;
                 SwitchConfigForm vSwitchConfigForm = new SwitchConfigForm();
                 vSwitchConfigForm.SwitchTable = vSwitchTable;
                 vSwitchConfigForm.DianYuanID = vDianYuanID;
@@ -208,7 +221,7 @@ namespace JXHighWay.WatchHouse.Server
                 button_DY2_KaiGuan.Tag = vSwitchTable;
             }
             else
-                MessageBox.Show("请输入电源ID", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("请输入正确的电源ID", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }

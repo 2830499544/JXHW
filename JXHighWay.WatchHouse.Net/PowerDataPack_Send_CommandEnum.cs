@@ -8,29 +8,34 @@ namespace JXHighWay.WatchHouse.Net.DataPack
 {
     public enum PowerDataPack_Send_CommandEnum:byte
     {
-        #region 获取IP地址
+        /// <summary>
+        /// 获取IP地址
+        /// </summary>
         Send_GetIPAddress = 0x38,
-        Receive_GetIPAddress = 0x39,
-        #endregion
 
-        #region 设置IP地址
-        Send_SetIPAddress = 0x3a,
-        Receive_SetIPAddress = 0x40,
-        #endregion
+        /// <summary>
+        /// 设置IP地址
+        /// </summary>
+        SetIPAddress = 0x3a,
 
-        #region 控制分路开关
-        Send_Switch = 0x41,
-        Receive_Switch = 0x42,
-        #endregion
+        /// <summary>
+        /// 控制分路开关
+        /// </summary>
+        Switch = 0x41,
 
-        #region 定时设置
-        Send_Timing = 0x49,
-        Receive_Timing = 0x4a,
-        #endregion
+        /// <summary>
+        /// 定时设置
+        /// </summary>
+        Timing = 0x49,
 
-        #region 开关参数设置
-        Send_SwitchParam = 0x45,
-        Receive_SwitchParam = 0x46
-        #endregion
+        /// <summary>
+        /// 开关参数设置
+        /// </summary>
+        SwitchParam = 0x45,
+
+        /// <summary>
+        /// 时间设置
+        /// </summary>
+        SetTime = 0x47,
     }
 }

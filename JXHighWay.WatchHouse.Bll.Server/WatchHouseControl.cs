@@ -689,55 +689,6 @@ namespace JXHighWay.WatchHouse.Bll.Server
                                     processorData_ReturnPic(vDataPack5, vReceiveData.IPAddress);
                                     break;
                             }
-
-
-
-                            //处理接收到的岗亭状态数据
-                           //if ( vReceiveData.Data[23]==0x10 && vReceiveData.Data[24] == 0x20 )
-                           // {
-                           //     //byte[] vCheckCode = calcCheckCode(vReceiveData.Data);
-                           //     WatchHouseDataPack_Receive_Main vDataPack = Helper.NetHelper.ByteToStructure<WatchHouseDataPack_Receive_Main>(vReceiveData.Data);
-                           //     processorData_Receive(vDataPack, vReceiveData.IPAddress);
-                           // }
-
-                           //门禁记录
-                            //if (vReceiveData.Data[23] == 0x00 && vReceiveData.Data[24] == 0x21)
-                            //{
-                            //    WatchHouseDataPack_Receive_DoorGuard vDataPack = Helper.NetHelper.ByteToStructure<WatchHouseDataPack_Receive_DoorGuard>(vReceiveData.Data);
-                            //    processorData_DoorGuard(vDataPack);
-                            //}
-
-                            //电子工作牌
-                            //if (vReceiveData.Data[23] == 0x00 && vReceiveData.Data[24] == 0x22)
-                            //{
-                            //    WatchHouseDataPack_Receive_IDCard vDataPack = Helper.NetHelper.ByteToStructure<WatchHouseDataPack_Receive_IDCard>(vReceiveData.Data);
-                            //    processorData_IDCard(vDataPack);
-                            //}
-
-                            //处理发送命令的返回
-                            //if (vReceiveData.Data[21]==0x02 && ( vReceiveData.Data[22]==0x02 || vReceiveData.Data[22]==0x03 
-                            //|| vReceiveData.Data[22] == 0x04 || vReceiveData.Data[22] == 0x05 || 
-                            //vReceiveData.Data[22] == 0x0c || vReceiveData.Data[22] == 0x10 ))
-                            //{
-                            //    WatchHouseDataPack_SendData_Main vDataPack = Helper.NetHelper.ByteToStructure<WatchHouseDataPack_SendData_Main>(vReceiveData.Data);
-                            //    processorData_ReturnCMD(vDataPack, vReceiveData.IPAddress);
-                            //}
-
-                                //处理图片更新命令返回
-                            //    if (vReceiveData.Data[21] == 0x02 && vReceiveData.Data[22] == 0x01 && vReceiveData.Data[23] == 0x10 && vReceiveData.Data[24] == 0x02)
-                            //{
-                            //    WatchHouseDataPack_Receive_Pic vDataPack = Helper.NetHelper.ByteToStructure<WatchHouseDataPack_Receive_Pic>(vReceiveData.Data);
-                            //    processorData_ReturnPic(vDataPack, vReceiveData.IPAddress);
-                            //}
-
-                            //处理员工信息更新命令返回
-                            //if (vReceiveData.Data[21] == 0x02 && vReceiveData.Data[22] == 0x01 && vReceiveData.Data[23] == 0x10 && vReceiveData.Data[23] == 0x03)
-                            //{
-                            //    WatchHouseDataPack_Receive_Pic vDataPack = Helper.NetHelper.ByteToStructure<WatchHouseDataPack_Receive_Pic>(vReceiveData.Data);
-                            //    processorData_ReturnPic(vDataPack, vReceiveData.IPAddress);
-                            //}
-
-
                         }
                     }
                     catch(Exception ex)

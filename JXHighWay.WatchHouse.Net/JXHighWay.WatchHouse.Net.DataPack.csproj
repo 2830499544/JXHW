@@ -51,6 +51,7 @@
     <Compile Include="PowerDataPack_Send_CommandEnum.cs" />
     <Compile Include="PowerDataPack_Receive_GetIPAddress.cs" />
     <Compile Include="PowerDataPack_Send_SetIPAddress.cs" />
+    <Compile Include="PowerDataPack_Send_SetTime.cs" />
     <Compile Include="PowerDataPack_Send_Switch.cs" />
     <Compile Include="PowerDataPack_Send_SwitchParam.cs" />
     <Compile Include="PowerDataPack_Send_Timing.cs" />

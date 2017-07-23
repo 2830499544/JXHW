@@ -18,8 +18,6 @@ using System.Windows.Shapes;
 namespace JXHighWay.WatchHouse.WFPClient
 {
 
-   
-
     /// <summary>
     /// DianYuan_S.xaml 的交互逻辑
     /// </summary>
@@ -39,30 +37,6 @@ namespace JXHighWay.WatchHouse.WFPClient
         public DianYuan_S()
         {
             InitializeComponent();
-        }
-
-        private async void checkBox_Switch1_Checked(object sender, RoutedEventArgs e)
-        {
-            CheckBox vCheckBox = (CheckBox)sender;
-            byte vLuHao = (byte)vCheckBox.Tag;
-            bool vResult = await m_PowerMonitoring.SendCMD_Switch(App.PowerID1, 0x01, vLuHao, true);
-            if (!vResult)
-            {
-                Xceed.Wpf.Toolkit.MessageBox.Show("开关失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-                vCheckBox.IsChecked = false;
-            }
-        }
-
-        private async void checkBox_Switch1_Unchecked(object sender, RoutedEventArgs e)
-        {
-            CheckBox vCheckBox = (CheckBox)sender;
-            byte vLuHao = (byte)vCheckBox.Tag;
-            bool vResult = await m_PowerMonitoring.SendCMD_Switch(App.PowerID1, 0x01, 0x02, false);
-            if (!vResult)
-            {
-                Xceed.Wpf.Toolkit.MessageBox.Show("开关失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-                vCheckBox.IsChecked = true;
-            }
         }
 
         async void RefreshState()
@@ -164,7 +138,7 @@ namespace JXHighWay.WatchHouse.WFPClient
 
                     CheckBox vCheckBox = (CheckBox)FindName(string.Format("checkBox_DY{0}_Switch{1}",powerNum, i));
                     vCheckBox.Visibility = Visibility.Visible;
-                    vCheckBox.Tag = (byte)i;
+                    vCheckBox.Tag = new int[] { powerNum, vPowerInfo.LuHao };
 
                     Label vlabel_Guan = (Label)FindName(string.Format("label_DY{0}_Guan_{1}", powerNum, i));
                     vlabel_Guan.Visibility = Visibility.Visible;
