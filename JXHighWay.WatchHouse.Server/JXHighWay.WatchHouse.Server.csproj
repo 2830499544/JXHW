@@ -191,7 +191,7 @@
     </Content>
     <Content Include="highway.sql" />
     <Content Include="Photo\20172518060704.jpg" />
-    <Content Include="Photo\20172518060730.jpg" />
+    <Content Include="Photo\3610802.jpg" />
     <Content Include="Photo\3.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

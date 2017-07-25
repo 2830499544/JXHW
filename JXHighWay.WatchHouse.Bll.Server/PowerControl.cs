@@ -72,7 +72,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
                 if (vTempConfig.DianYuan1ID != null && vTempConfig.DianYuan1ID != "")
                 {
                     m_ClientDict.Add(vTempConfig.DianYuan1ID, "");
-                    m_ClientMaxID.Add(vTempConfig.DianYuan2ID, 0);
+                    m_ClientMaxID.Add(vTempConfig.DianYuan1ID, 0);
                 }
 
                 if (vTempConfig.DianYuan2ID != null && vTempConfig.DianYuan2ID != "")
