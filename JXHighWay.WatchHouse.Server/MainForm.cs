@@ -128,6 +128,9 @@ namespace JXHighWay.WatchHouse.Server
         PowerControl vPowerControl;
         private void button1_Click_1(object sender, EventArgs e)
         {
+            //byte[] aa = new byte[] { 0x68-74-74-70-3A-2F-2F-31-39-32-2E-31-36-38-2E-30-2E-32-3A-39-39-2F-50-68-6F-74-6F")};
+            //BitConverter.ToString(aa);
+
             vPowerControl = new PowerControl();
             vPowerControl.Start();
             

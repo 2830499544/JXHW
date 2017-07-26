@@ -90,7 +90,31 @@ namespace JXHighWay.WatchHouse.Bll.Server
         }
 
 
-        #region 更新所有岗亭的图片、工号信息
+        #region 更新所有岗亭的图片、工号信息、App
+
+        public async Task<Dictionary<string, bool>> AsyncUpdateWatchHouseApp(string AppPath,byte[] Ver,bool Update)
+        {
+            Dictionary<string, bool> vResult = new Dictionary<string, bool>();
+
+            WatchHouseConfigEFModel[] vSelectResult = m_BasicDBClassSelect.SelectAllRecordsEx<WatchHouseConfigEFModel>();
+            if (vSelectResult != null && vSelectResult.Length > 0)
+            {
+                List<byte> vDataPack = new List<byte>();
+                //增加序号
+                vDataPack.AddRange(Ver);
+                //增加文件地址
+                vDataPack.AddRange(System.Text.Encoding.Default.GetBytes(AppPath));
+                //是否强制更新
+                vDataPack.Add(Update ?(byte)0x01 :(byte)0x00);
+
+                foreach (WatchHouseConfigEFModel vTempWatchHouseConfigEFModel in vSelectResult)
+                {
+                    bool vDBResult = await AsyncSendCommandToDB(vTempWatchHouseConfigEFModel.GangTingID ?? 0, WatchHouseDataPack_Send_CommandEnmu.YuanGongXX, vDataPack.ToArray());
+                    vResult.Add(vTempWatchHouseConfigEFModel.GangTingMC, vDBResult);
+                }
+            }
+            return vResult;
+        }
 
         /// <summary>
         /// 更新所有岗亭工号信息
@@ -174,7 +198,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
                 foreach (EmployeeEFModel vTempEmployeeEFModel in vEmployeeEFModel)
                 {
                     byte[] vGongHao = BitConverter.GetBytes( vTempEmployeeEFModel.GongHao??0 );
-                    vDataPack.AddRange(vGongHao);
+                    vDataPack.AddRange( new byte[] { vGongHao[3], vGongHao[2], vGongHao[1], vGongHao[0] });
                 }
                 
                 //Url地址
