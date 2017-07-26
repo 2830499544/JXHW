@@ -230,7 +230,13 @@ namespace JXHighWay.WatchHouse.Net
         /// <summary>
         /// 更新员工信息
         /// </summary>
-        YuanGongXX = 0x02011003
+        YuanGongXX = 0x02011003,
+        /// <summary>
+        /// 更新App
+        /// </summary>
+        GenXingApp = 0x02011005
+
+
 
     }
 }

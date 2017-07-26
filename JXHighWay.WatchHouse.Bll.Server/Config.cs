@@ -30,6 +30,8 @@ namespace JXHighWay.WatchHouse.Bll.Server
         public string PicUrl { get; set; }
         public string EmployeeUrl { get; set; }
 
+        public string AppUrl { get; set; }
+
         #endregion
 
         #region 构造
@@ -46,7 +48,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
             DBPassword = m_Configuration.AppSettings.Settings["DBPassword"].Value;
             PicUrl = m_Configuration.AppSettings.Settings["PicUrl"].Value;
             EmployeeUrl = m_Configuration.AppSettings.Settings["EmployeeUrl"].Value;
-
+            AppUrl = m_Configuration.AppSettings.Settings["AppUrl"].Value;
         }
         #endregion
 
@@ -65,6 +67,8 @@ namespace JXHighWay.WatchHouse.Bll.Server
 
             m_Configuration.AppSettings.Settings["PicUrl"].Value = PicUrl;
             m_Configuration.AppSettings.Settings["EmployeeUrl"].Value = EmployeeUrl;
+            m_Configuration.AppSettings.Settings["AppUrl"].Value = AppUrl;
+
             m_Configuration.Save();
         }
         #endregion

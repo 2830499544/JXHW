@@ -42,6 +42,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button_Stop = new System.Windows.Forms.Button();
             this.button_Start = new System.Windows.Forms.Button();
+            this.ToolStripMenuItem_App = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -102,7 +103,8 @@
             // 
             this.ToolStripMenuItem_Synch.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolStripMenuItem_Synch_Pic,
-            this.ToolStripMenuItem_Synch_Employee});
+            this.ToolStripMenuItem_Synch_Employee,
+            this.ToolStripMenuItem_App});
             this.ToolStripMenuItem_Synch.Name = "ToolStripMenuItem_Synch";
             this.ToolStripMenuItem_Synch.Size = new System.Drawing.Size(51, 24);
             this.ToolStripMenuItem_Synch.Text = "同步";
@@ -110,14 +112,14 @@
             // ToolStripMenuItem_Synch_Pic
             // 
             this.ToolStripMenuItem_Synch_Pic.Name = "ToolStripMenuItem_Synch_Pic";
-            this.ToolStripMenuItem_Synch_Pic.Size = new System.Drawing.Size(144, 26);
+            this.ToolStripMenuItem_Synch_Pic.Size = new System.Drawing.Size(181, 26);
             this.ToolStripMenuItem_Synch_Pic.Text = "电子工号";
             this.ToolStripMenuItem_Synch_Pic.Click += new System.EventHandler(this.ToolStripMenuItem_Synch_Pic_Click);
             // 
             // ToolStripMenuItem_Synch_Employee
             // 
             this.ToolStripMenuItem_Synch_Employee.Name = "ToolStripMenuItem_Synch_Employee";
-            this.ToolStripMenuItem_Synch_Employee.Size = new System.Drawing.Size(144, 26);
+            this.ToolStripMenuItem_Synch_Employee.Size = new System.Drawing.Size(181, 26);
             this.ToolStripMenuItem_Synch_Employee.Text = "员工信息";
             this.ToolStripMenuItem_Synch_Employee.Click += new System.EventHandler(this.ToolStripMenuItem_Synch_Employee_Click);
             // 
@@ -186,6 +188,13 @@
             this.button_Start.UseVisualStyleBackColor = true;
             this.button_Start.Click += new System.EventHandler(this.button_OK_Click);
             // 
+            // ToolStripMenuItem_App
+            // 
+            this.ToolStripMenuItem_App.Name = "ToolStripMenuItem_App";
+            this.ToolStripMenuItem_App.Size = new System.Drawing.Size(181, 26);
+            this.ToolStripMenuItem_App.Text = "更新App";
+            this.ToolStripMenuItem_App.Click += new System.EventHandler(this.ToolStripMenuItem_App_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -225,6 +234,7 @@
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_Synch;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_Synch_Pic;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_Synch_Employee;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_App;
     }
 }
 

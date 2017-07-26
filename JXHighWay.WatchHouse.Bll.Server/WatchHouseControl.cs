@@ -92,24 +92,31 @@ namespace JXHighWay.WatchHouse.Bll.Server
 
         #region 更新所有岗亭的图片、工号信息、App
 
-        public async Task<Dictionary<string, bool>> AsyncUpdateWatchHouseApp(string AppPath,byte[] Ver,bool Update)
+        public async Task<Dictionary<string, bool>> AsyncUpdateWatchHouseApp(string AppPath,byte[] Ver,
+            bool Update,string Url)
         {
             Dictionary<string, bool> vResult = new Dictionary<string, bool>();
 
             WatchHouseConfigEFModel[] vSelectResult = m_BasicDBClassSelect.SelectAllRecordsEx<WatchHouseConfigEFModel>();
             if (vSelectResult != null && vSelectResult.Length > 0)
             {
+                //拷贝文件
+                string vPath = System.Environment.CurrentDirectory;
+                string vFileName = AppPath.Remove(0, AppPath.LastIndexOf('\\')+1);
+                File.Copy(AppPath, string.Format(@"{0}\App\{1}", vPath, vFileName));
+
                 List<byte> vDataPack = new List<byte>();
                 //增加序号
                 vDataPack.AddRange(Ver);
                 //增加文件地址
-                vDataPack.AddRange(System.Text.Encoding.Default.GetBytes(AppPath));
+                string vDownUrl = string.Format(@"{0}\{1}", Url, vFileName);
+                vDataPack.AddRange(System.Text.Encoding.Default.GetBytes(vDownUrl));
                 //是否强制更新
                 vDataPack.Add(Update ?(byte)0x01 :(byte)0x00);
 
                 foreach (WatchHouseConfigEFModel vTempWatchHouseConfigEFModel in vSelectResult)
                 {
-                    bool vDBResult = await AsyncSendCommandToDB(vTempWatchHouseConfigEFModel.GangTingID ?? 0, WatchHouseDataPack_Send_CommandEnmu.YuanGongXX, vDataPack.ToArray());
+                    bool vDBResult = await AsyncSendCommandToDB(vTempWatchHouseConfigEFModel.GangTingID ?? 0, WatchHouseDataPack_Send_CommandEnmu.GenXingApp, vDataPack.ToArray());
                     vResult.Add(vTempWatchHouseConfigEFModel.GangTingMC, vDBResult);
                 }
             }
@@ -126,7 +133,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
             Dictionary<string, bool> vResult = new Dictionary<string, bool>();
 
             string vPath = System.Environment.CurrentDirectory;
-            vPath = string.Format(@"{0}\EmployeeInfo\1.txt", vPath);
+            vPath = string.Format(@"{0}\1.txt", Url);
             byte[] vSN = NetHelper.MarkSN();
             createEmployeeInfo(vPath, vSN);
 
@@ -154,7 +161,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
             FileStream vFile = new FileStream(filePath, System.IO.FileMode.Create, System.IO.FileAccess.Write);
             StreamWriter vStreamWriter = new StreamWriter(vFile, new System.Text.UnicodeEncoding());
             vStreamWriter.WriteLine("START");
-            vStreamWriter.WriteLine(string.Format("Version=", BitConverter.ToString(sn)));
+            vStreamWriter.WriteLine(string.Format("Version=99", BitConverter.ToString(sn)));
 
             EmployeeEFModel[] vEmployeeEFModel = m_BasicDBClassSelect.SelectAllRecordsEx<EmployeeEFModel>();
             if (vEmployeeEFModel != null)

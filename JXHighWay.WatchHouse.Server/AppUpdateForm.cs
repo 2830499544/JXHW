@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JXHighWay.WatchHouse.Bll.Server;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -28,11 +29,11 @@ namespace JXHighWay.WatchHouse.Server
             vOpenFileDialog.Filter = "APK files (*.apk)|*.apk";
             if (  vOpenFileDialog.ShowDialog() == DialogResult.OK )
             {
-                textBox_LuJing.Text =  vOpenFileDialog.FileName
+                textBox_LuJing.Text = vOpenFileDialog.FileName;
             }
         }
 
-        private void button_GenXing_Click(object sender, EventArgs e)
+        private async void button_GenXing_Click(object sender, EventArgs e)
         {
             if (!System.IO.File.Exists( textBox_LuJing.Text) )
             {
@@ -45,6 +46,16 @@ namespace JXHighWay.WatchHouse.Server
             byte vBanBen4 = (byte)(((int)numericUpDown_BanBen4.Value) >> 0);
             byte[] vBanBenArray = new byte[] { vBanBen1,vBanBen2,vBanBen3,vBanBen4 };
 
+            Config vConfig = new Config();
+            WatchHouseControl vWatchHouseControl = new WatchHouseControl();
+            var vResult = await vWatchHouseControl.AsyncUpdateWatchHouseApp(textBox_LuJing.Text, vBanBenArray,
+                checkBox_QiangZhi.Checked,vConfig.AppUrl);
+            string vInfo = "";
+            foreach (var vTempResult in vResult)
+            {
+                vInfo += string.Format("岗亭名称:{0}  状态:{1}\r", vTempResult.Key, vTempResult.Value ? "成功" : "失败");
+            }
+            MessageBox.Show(vInfo, "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         }
     }

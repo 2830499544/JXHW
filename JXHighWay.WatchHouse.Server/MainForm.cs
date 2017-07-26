@@ -164,13 +164,19 @@ namespace JXHighWay.WatchHouse.Server
         {
             Config vConfig = new Config();
             WatchHouseControl vWatchHouseControl = new WatchHouseControl();
-            var vResult = await vWatchHouseControl.AsyncUpdateWatchHouseEmployeeInfo(vConfig.PicUrl);
+            var vResult = await vWatchHouseControl.AsyncUpdateWatchHouseEmployeeInfo(vConfig.EmployeeUrl);
             string vInfo = "";
             foreach (var vTempResult in vResult)
             {
                 vInfo += string.Format("岗亭名称:{0}  状态:{1}\r", vTempResult.Key, vTempResult.Value?"成功":"失败");
             }
             MessageBox.Show(vInfo, "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void ToolStripMenuItem_App_Click(object sender, EventArgs e)
+        {
+            AppUpdateForm vAppUpdateForm = new AppUpdateForm();
+            vAppUpdateForm.ShowDialog();
         }
     }
 }
