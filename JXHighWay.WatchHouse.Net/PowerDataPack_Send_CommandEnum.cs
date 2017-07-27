@@ -31,7 +31,7 @@ namespace JXHighWay.WatchHouse.Net.DataPack
         /// <summary>
         /// 开关参数设置
         /// </summary>
-        SwitchParam = 0x45,
+        SwitchParam = 0x4b,
 
         /// <summary>
         /// 时间设置

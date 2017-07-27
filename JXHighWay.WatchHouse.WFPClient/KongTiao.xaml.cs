@@ -317,5 +317,45 @@ namespace JXHighWay.WatchHouse.WFPClient
                 label_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
             }
         }
+
+        private async void Button_Jian_Click(object sender, RoutedEventArgs e)
+        {
+            int vDanQianWD = (int)Label_SheZiWenDu.Tag;
+            vDanQianWD++;
+            if (vDanQianWD < 17 || vDanQianWD > 30)
+                Xceed.Wpf.Toolkit.MessageBox.Show("超出空调温度区间范围17至30度", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+            else
+            {
+                bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.SheZhiWD, (byte)(vDanQianWD >> 0));
+                if (!vResult)
+                    Xceed.Wpf.Toolkit.MessageBox.Show("空调温度设置失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                else
+                {
+                    Label_SheZiWenDu.Tag = vDanQianWD;
+                    Label_SheZiWenDu.Content = string.Format("{0}℃", vDanQianWD);
+                }
+
+            }
+        }
+
+        private async void Button_Shen_Click(object sender, RoutedEventArgs e)
+        {
+            int vDanQianWD = (int)Label_SheZiWenDu.Tag;
+            vDanQianWD--;
+            if (vDanQianWD < 17 || vDanQianWD > 30)
+                Xceed.Wpf.Toolkit.MessageBox.Show("超出空调温度区间范围17至30度", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+            else
+            {
+                bool vResult = await m_Monitoring.AsyncSendCommandToDB(App.WatchHouseID, Net.WatchHouseDataPack_Send_CommandEnmu.SheZhiWD, (byte)(vDanQianWD >> 0));
+                if (!vResult)
+                    Xceed.Wpf.Toolkit.MessageBox.Show("空调温度设置失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                else
+                {
+                    Label_SheZiWenDu.Tag = vDanQianWD;
+                    Label_SheZiWenDu.Content = string.Format("{0}℃", vDanQianWD);
+                }
+
+            }
+        }
     }
 }

@@ -210,8 +210,11 @@ namespace JXHighWay.WatchHouse.Net.DataPack
         /// <summary>
         /// 工号更新
         /// </summary>
-        GongHaoGX = 0x02011003
-
+        GongHaoGX = 0x02011003,
+        /// <summary>
+        /// App更新
+        /// </summary>
+        AppGenXing = 0x02011005
         #endregion
 
 

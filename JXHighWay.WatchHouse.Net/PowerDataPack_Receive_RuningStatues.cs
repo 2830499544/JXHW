@@ -52,8 +52,8 @@ namespace JXHighWay.WatchHouse.Net.DataPack
         /// <summary>
         /// 开关状态
         /// </summary>
-        public byte SwitchState1 { get; set; }
-        public byte SwitchState2 { get; set; }
+        public byte SwitchState { get; set; }
+        //public byte SwitchState2 { get; set; }
         /// <summary>
         /// 路号
         /// </summary>

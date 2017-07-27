@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace JXHighWay.WatchHouse.Net.DataPack
 {
-    public class PowerDataPack_Receive_ReplyCMD
+    public struct PowerDataPack_Receive_ReplyCMD
     {
         /// <summary>
         /// 头

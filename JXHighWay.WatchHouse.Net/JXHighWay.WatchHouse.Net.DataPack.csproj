@@ -57,6 +57,7 @@
     <Compile Include="PowerDataPack_Send_Timing.cs" />
     <Compile Include="WatchHouseDataPack.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WatchHouseDataPack_Receive_App.cs" />
     <Compile Include="WatchHouseDataPack_Receive_CommandEnmu.cs" />
     <Compile Include="WatchHouseDataPack_Receive_DoorGuard.cs" />
     <Compile Include="WatchHouseDataPack_Receive_IDCard.cs" />

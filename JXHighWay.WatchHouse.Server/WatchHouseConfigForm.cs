@@ -24,6 +24,7 @@ namespace JXHighWay.WatchHouse.Server
         {
             int vGanTingID = 0;
             string vDianYuanID1 = "", vDianYuanID2="";
+            int vLEDGao, vLEDKuan;
             string vOutInfo = "";
             if (!int.TryParse(textBox_GanTing_ID.Text, out vGanTingID))
             {
@@ -31,23 +32,15 @@ namespace JXHighWay.WatchHouse.Server
                 return;
             }
 
-            //if (!int.TryParse(textBox_DY1_ID.Text, out vDianYuanID1))
-            //{
-            //    MessageBox.Show("电源1编号必须为数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    return;
-            //}
-
-            //if (!int.TryParse(textBox_DY2_ID.Text, out vDianYuanID2))
-            //{
-            //    MessageBox.Show("电源2编号必须为数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    return;
-            //}
             vDianYuanID1 = textBox_DY1_ID.Text;
             vDianYuanID2 = textBox_DY2_ID.Text;
+            vLEDGao = (int)numericUpDown_LED_Gao.Value;
+            vLEDKuan = (int)numericUpDown_LED_Kuan.Value;
+
             DataTable vSwitchTable1 = button_DY1_KaiGuan.Tag == null ? null : (DataTable)button_DY1_KaiGuan.Tag;
             DataTable vSwitchTable2 = button_DY2_KaiGuan.Tag == null ? null : (DataTable)button_DY2_KaiGuan.Tag;
             if (m_WatchHouseConfig.Add(vGanTingID, textBox_GanTing_MC.Text,
-                comboBox_GanTing_LX.Text, textBox_LED_IP.Text, vDianYuanID1,vDianYuanID2, vSwitchTable1, vSwitchTable2, ref vOutInfo))
+                comboBox_GanTing_LX.Text, textBox_LED_IP.Text,vLEDGao,vLEDKuan, vDianYuanID1,vDianYuanID2, vSwitchTable1, vSwitchTable2, ref vOutInfo))
             {
                 MessageBox.Show("增加岗亭数据成功", "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 dataGridView_List.DataSource = m_WatchHouseConfig.GetAll();
@@ -92,6 +85,7 @@ namespace JXHighWay.WatchHouse.Server
         {
             int vGanTingID = 0;
             string vDianYuanID1 = "", vDianYuanID2="";
+            int vLEDGao, vLEDKuan;
             string vOutInfo = "";
             if (!int.TryParse(textBox_GanTing_ID.Text, out vGanTingID))
             {
@@ -99,24 +93,15 @@ namespace JXHighWay.WatchHouse.Server
                 return;
             }
 
-            //if (!int.TryParse(textBox_DY1_ID.Text, out vDianYuanID1))
-            //{
-            //    MessageBox.Show("电源1编号必须为数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    return;
-            //}
-
-            //if (!int.TryParse(textBox_DY2_ID.Text, out vDianYuanID2))
-            //{
-            //    MessageBox.Show("电源2编号必须为数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    return;
-            //}
             vDianYuanID1 = textBox_DY1_ID.Text;
             vDianYuanID2 = textBox_DY2_ID.Text;
+            vLEDGao = (int)numericUpDown_LED_Gao.Value;
+            vLEDKuan = (int)numericUpDown_LED_Kuan.Value;
             DataTable vSwitchTable1 = button_DY1_KaiGuan.Tag == null ? null : (DataTable)button_DY1_KaiGuan.Tag;
             DataTable vSwitchTable2 = button_DY2_KaiGuan.Tag == null ? null : (DataTable)button_DY2_KaiGuan.Tag;
             int vID = (int)dataGridView_List.SelectedRows[0].Cells["Column_ID"].Value;
             if (m_WatchHouseConfig.Update(vID, vGanTingID, textBox_GanTing_MC.Text,
-                comboBox_GanTing_LX.Text, textBox_LED_IP.Text, vDianYuanID1, vDianYuanID2,vSwitchTable1, vSwitchTable2, ref vOutInfo))
+                comboBox_GanTing_LX.Text, textBox_LED_IP.Text,vLEDGao,vLEDKuan, vDianYuanID1, vDianYuanID2,vSwitchTable1, vSwitchTable2, ref vOutInfo))
             {
                 MessageBox.Show("更新岗亭数据成功", "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 dataGridView_List.DataSource = m_WatchHouseConfig.GetAll();
@@ -131,13 +116,15 @@ namespace JXHighWay.WatchHouse.Server
             if ( dataGridView_List.SelectedRows.Count>0)
             {
                 button_DY1_KaiGuan.Tag = null;
-                textBox_GanTing_ID.Text = dataGridView_List.SelectedRows[0].Cells["Column_GanTing_ID"].Value.ToString(); ;
+                textBox_GanTing_ID.Text = dataGridView_List.SelectedRows[0].Cells["Column_GanTing_ID"].Value.ToString();
                 textBox_GanTing_MC.Text = dataGridView_List.SelectedRows[0].Cells["Column_GanTing_MC"].Value.ToString();
                 comboBox_GanTing_LX.Text = dataGridView_List.SelectedRows[0].Cells["Column_GanTing_LX"].Value.ToString();
                 textBox_GanTing_IP.Text = dataGridView_List.SelectedRows[0].Cells["Column_GanTing_IP"].Value.ToString();
 
-                textBox_LED_IP.Text = dataGridView_List.SelectedRows[0].Cells["Column_LED_IP"].Value.ToString(); ;
-                
+                textBox_LED_IP.Text = dataGridView_List.SelectedRows[0].Cells["Column_LED_IP"].Value.ToString();
+                numericUpDown_LED_Gao.Value =  dataGridView_List.SelectedRows[0].Cells["Column_LED_Gao"].Value==DBNull.Value?0:(int)dataGridView_List.SelectedRows[0].Cells["Column_LED_Gao"].Value;
+                numericUpDown_LED_Kuan.Value = dataGridView_List.SelectedRows[0].Cells["Column_LED_Kuan"].Value==DBNull.Value?0:(int)dataGridView_List.SelectedRows[0].Cells["Column_LED_Kuan"].Value;
+
                 textBox_DY1_ID.Text = dataGridView_List.SelectedRows[0].Cells["Column_DianYuan_ID"].Value.ToString();
                 textBox_DY1_IP.Text = dataGridView_List.SelectedRows[0].Cells["Column_DianYuan_IP"].Value.ToString();
             }

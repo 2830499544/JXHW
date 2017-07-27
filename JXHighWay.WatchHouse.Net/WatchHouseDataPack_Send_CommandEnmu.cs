@@ -235,8 +235,5 @@ namespace JXHighWay.WatchHouse.Net
         /// 更新App
         /// </summary>
         GenXingApp = 0x02011005
-
-
-
     }
 }

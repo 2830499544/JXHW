@@ -85,7 +85,7 @@ namespace JXHighWay.WatchHouse.Net.DataPack
         public byte Data2 { get; set; }
         public byte Data3 { get; set; }
 
-        #region 预留4字节
+        #region 预留8字节
         public byte Kong1 { get; set; }
         public byte Kong2 { get; set; }
         public byte Kong3 { get; set; }

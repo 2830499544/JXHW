@@ -145,6 +145,8 @@
     <EmbeddedResource Include="WatchHouseConfigForm.resx">
       <DependentUpon>WatchHouseConfigForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="App\DX.apk" />
+    <None Include="App\SX.apk" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -211,6 +213,7 @@
     <None Include="Resources\Exit.png" />
     <None Include="Resources\Info.png" />
     <None Include="Resources\Config.png" />
+    <Content Include="Photo\3610802.png" />
     <Content Include="Resources\Synch.png" />
     <None Include="Resources\Synch1.png" />
     <None Include="Resources\Employee.png" />

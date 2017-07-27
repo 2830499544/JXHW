@@ -308,7 +308,7 @@
                     <DataGrid x:Name="dataGrid_Log" AutoGenerateColumns="False" Grid.Row="1" HorizontalAlignment="Center">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="事件类型" Width="100" Binding="{Binding ShiJianLX, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="13" />
-                            <DataGridTextColumn Header="事件内容" Width="230" Binding="{Binding NeiRong, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="13" />
+                            <DataGridTextColumn Header="事件内容" Width="200" Binding="{Binding NeiRong, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="13" />
                             <DataGridTextColumn Header="时间" Width="150" Binding="{Binding Time,StringFormat='{}{0:yyyy-MM-dd HH:mm:ss}', Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="13" />
                         </DataGrid.Columns>
                     </DataGrid>
