@@ -87,6 +87,41 @@ namespace JXHighWay.WatchHouse.Bll.Client.GanTing
         }
 
 
+        /// <summary>
+        /// 获取当前工作的工号信息
+        /// </summary>
+        /// <param name="GangTingID"></param>
+        /// <returns></returns>
+        public GongHaoPaiInfo GetGongHaoPaiInfo(int GangTingID)
+        {
+            GongHaoPaiInfo vResult = new GongHaoPaiInfo();
+            WatchHouseConfigEFModel vWatchHouseConfigEFModel = new WatchHouseConfigEFModel()
+            {
+                GangTingID = GangTingID
+            };
+            WatchHouseConfigEFModel vSelectResult = m_BasicDBClassSelect.SelectRecordsEx(vWatchHouseConfigEFModel).FirstOrDefault();
+            if (vSelectResult.GongHao != null)
+            {
+                EmployeeEFModel vEmployeeEFModel = new EmployeeEFModel()
+                {
+                    GongHao = vSelectResult.GongHao
+                };
+                EmployeeEFModel vSelectResult1 = m_BasicDBClassSelect.SelectRecordsEx(vEmployeeEFModel).FirstOrDefault();
+                if (vSelectResult1.XingMing != null)
+                {
+                    vResult = new GongHaoPaiInfo()
+                    {
+                        XinMing = vSelectResult1.XingMing,
+                        GeYan = vSelectResult1.GeYan,
+                        XingJi = vSelectResult1.XingJi,
+                        GonHao = vSelectResult1.GongHao.Value
+
+                    };
+                }
+            }
+            return vResult;
+        }
+
         public void GetWatchHouseState( int GangTingID,ref bool GangTingState,
             ref bool DianYuanState )
         {
@@ -123,7 +158,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.GanTing
                     GangTingID = vTempWatchHouse.GangTingID,
                     GangTingIP = vTempWatchHouse.GangTingIP,
                     GangTingMC = vTempWatchHouse.GangTingMC,
-                    GongHao = vTempWatchHouse.GongHao,
+                    GongHao = vTempWatchHouse.GongHao??0,
                     GuanGaoPDK = vTempWatchHouse.GuanGaoPDK,
                     GuanGaoPingIP = vTempWatchHouse.GuanGaoPingIP,
                     LeiXin = vTempWatchHouse.GangTingLX,

@@ -9,6 +9,7 @@ using System.Net;
 using JXHighWay.WatchHouse.EFModel;
 using JXHighWay.WatchHouse.Helper;
 using System.Threading;
+using System.Collections;
 
 namespace JXHighWay.WatchHouse.Bll.Server
 {
@@ -381,23 +382,19 @@ namespace JXHighWay.WatchHouse.Bll.Server
         }
 
 
-        string convertSwitchState(byte[] zhuanTai )
+        string convertSwitchState(byte zhuanTai )
         {
             string vResult = "";
-            string vZhuanTaiStr = BitConverter.ToString(zhuanTai);
-            switch ( vZhuanTaiStr.ToUpper() )
+            //string vZhuanTaiStr = Convert.ToString( zhuanTai,2);
+            //switch ( vZhuanTaiStr.ToUpper() )
+            BitArray vBitArray = new BitArray(new byte[] { zhuanTai });
+            switch(zhuanTai)
             {
-                case "00-00":
+                case 0x00:
                     vResult = "关";
                     break;
-                case "FF-00":
+                case 0x01:
                     vResult = "开";
-                    break;
-                case "00-FF":
-                    vResult = "开时关";
-                    break;
-                case "FF-FF":
-                    vResult = "开时开";
                     break;
             }
             return vResult;
@@ -708,10 +705,11 @@ namespace JXHighWay.WatchHouse.Bll.Server
                     YouGongGL = BitConverter.ToInt16(new byte[] { vData.YouGongGL2, vData.YouGongGL1 }, 0),
                     LeiXing = convertSwitchLeiXing(vData.LeiXing),
                     DianYuanID = BitConverter.ToString(new byte[] { vData.MAC1, vData.MAC2, vData.MAC3, vData.MAC4, vData.MAC5, vData.MAC6 }),
-                    //ZhuanTai = convertSwitchState( new byte[] {vData.SwitchState1,vData.SwitchState2 } ),
+                    ZhuanTai = convertSwitchState( vData.SwitchState),
                     Time = DateTime.Now
                      
                 };
+
                 WatchHouseConfigEFModel vWatchHouseConfigEFModel = new WatchHouseConfigEFModel()
                 {
                     DianYuanTXSJ = DateTime.Now,

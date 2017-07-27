@@ -461,10 +461,10 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
                     WenDu = vSelectResult.WenDu ?? 0,
                     WuGongGL = vSelectResult.WuGongGL ?? 0,
                     YouGongGL = vSelectResult.YouGongGL ?? 0,
-                    //ZhuangTai = (vSelectResult[0].DianYa ?? 0) == 0 ? false : true,
+                    ZhuangTai = vSelectResult.ZhuanTai=="开"?true:false,
                     MingCheng = vSelectResult.MinCheng
                 };
-                vResult.ZhuangTai = vResult.DianYa == 0 ? false : true;
+                //vResult.ZhuangTai = vResult.DianYa == 0 ? false : true;
             }
             return vResult;
         }

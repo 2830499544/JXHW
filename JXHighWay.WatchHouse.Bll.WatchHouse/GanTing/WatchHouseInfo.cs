@@ -23,7 +23,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.GanTing
         public String DianYuan2IP { get; set; }
         public DateTime? TongXunSJ { get; set; }
         public string LeiXin { get; set; }
-        public string GongHao { get; set; }
+        public int GongHao { get; set; }
         public bool IsOnline { get; set; }
     }
 }

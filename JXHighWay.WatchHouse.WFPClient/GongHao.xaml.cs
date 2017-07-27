@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using JXHighWay.WatchHouse.Bll.Client.GanTing;
 
 namespace JXHighWay.WatchHouse.WFPClient
 {
@@ -23,6 +24,16 @@ namespace JXHighWay.WatchHouse.WFPClient
         public GongHao()
         {
             InitializeComponent();
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            WatchHouseMonitoring vWatchHouseMonitoring = new WatchHouseMonitoring();
+            GongHaoPaiInfo vGongHaoPaiInfo =  vWatchHouseMonitoring.GetGongHaoPaiInfo(App.WatchHouseID);
+            label_GongHao.Content = vGongHaoPaiInfo.GonHao;
+            label_XingMing.Content = vGongHaoPaiInfo.XinMing;
+            label_XingJi.Content = vGongHaoPaiInfo.XingJi;
+            textBlock_GeYan.Text = vGongHaoPaiInfo.GeYan;
         }
     }
 }

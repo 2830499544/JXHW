@@ -141,15 +141,25 @@ namespace JXHighWay.WatchHouse.Net
         /// </summary>
         public byte HuanBan{ get; set; }
         /// <summary>
-        /// 1，换班 
-        /// Data[14]
-        /// </summary>
-        public byte KaHao0{ get; set; }
-        /// <summary>
-        /// 唯一ID 
+        /// 
         /// Data[15-18]
         /// </summary>
-        public int UniqID {get; set; }
+        public byte GongHao1{ get; set; }
+        public byte GongHao2 { get; set; }
+        public byte GongHao3 { get; set; }
+        public byte GongHao4 { get; set; }
+
+        #region 预留8字节
+        public byte Kong1 { get; set; }
+        public byte Kong2 { get; set; }
+        public byte Kong3 { get; set; }
+        public byte kong4 { get; set; }
+        public byte Kong5 { get; set; }
+        public byte Kong6 { get; set; }
+        public byte Kong7 { get; set; }
+        public byte Kong8 { get; set; }
+        #endregion
+
         public byte Check1 { get; set; }
         public byte Check2 { get; set; }
     }

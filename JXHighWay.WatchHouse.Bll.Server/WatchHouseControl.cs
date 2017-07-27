@@ -739,14 +739,23 @@ namespace JXHighWay.WatchHouse.Bll.Server
         {
             IDCardEFModel vModel = new IDCardEFModel()
             {
-                GangTingID = BitConverter.ToInt32( new byte[] { vData.WatchHouseID1, vData.WatchHouseID2, vData.WatchHouseID3, vData.WatchHouseID4 },0 ),
-                ShiJiang = DateTime.Parse(string.Format("{0:D}{1:D}{2:D}{3:D}-{4:D}{5:D}-{6:D}{7:D} {8:D}{9:D}:{10:D}{11:D}:{12:D}{13:D}",
-                vData.DateTime0, vData.DateTime1, vData.DateTime2, vData.DateTime3, vData.DateTime4, vData.DateTime5, vData.DateTime6,
-                vData.DateTime7, vData.DateTime8, vData.DateTime9, vData.DateTime10, vData.DateTime11, vData.DateTime12, vData.DateTime13)),
-                HuanBan = vData.HuanBan == 0x01?"换班":"",
-                WeiYIID= vData.UniqID
+                GangTingID = BitConverter.ToInt32(new byte[] { vData.WatchHouseID4, vData.WatchHouseID3, vData.WatchHouseID2, vData.WatchHouseID1 }, 0),
+                ShiJiang = DateTime.Now,// DateTime.Parse(string.Format("{0:D}{1:D}{2:D}{3:D}-{4:D}{5:D}-{6:D}{7:D} {8:D}{9:D}:{10:D}{11:D}:{12:D}{13:D}",
+                //vData.DateTime0, vData.DateTime1, vData.DateTime2, vData.DateTime3, vData.DateTime4, vData.DateTime5, vData.DateTime6,
+                //vData.DateTime7, vData.DateTime8, vData.DateTime9, vData.DateTime10, vData.DateTime11, vData.DateTime12, vData.DateTime13)),
+                HuanBan = vData.HuanBan == 0x01 ? "换班" : "下班",
+                GongHao = BitConverter.ToInt32( new byte[] { vData.GongHao4, vData.GongHao3, vData.GongHao2, vData.GongHao1 },0 )//  vData.UniqID
             };
+            m_BasicDBClass_Receive.TransactionBegin();
             m_BasicDBClass_Receive.InsertRecord(vModel);
+            WatchHouseConfigEFModel vWatchHouseConfigEFModel = new WatchHouseConfigEFModel();
+            if (vModel.HuanBan == "换班")
+                vWatchHouseConfigEFModel.GongHao = vModel.GongHao;
+            else
+                vWatchHouseConfigEFModel.GongHao = 0;
+            string vSql = string.Format("GangTingID={0}", vModel.GangTingID);
+            m_BasicDBClass_Receive.UpdateRecord(vWatchHouseConfigEFModel, vSql);
+            m_BasicDBClass_Receive.TransactionCommit();
         }
 
 

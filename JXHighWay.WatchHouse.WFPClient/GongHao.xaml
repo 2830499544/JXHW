@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:JXHighWay.WatchHouse.WFPClient"
       mc:Ignorable="d" 
       d:DesignHeight="460" d:DesignWidth="1024"
-      Title="GongHao">
+      Title="GongHao" Loaded="Page_Loaded">
 
     <Grid Background="#245d7c">
         <Image x:Name="image" HorizontalAlignment="Left" Height="341" Margin="166,61,0,0" VerticalAlignment="Top" Width="714" Source="Images/GongHaoPai/BeiJing.jpg"/>
@@ -16,10 +16,10 @@
         <Label x:Name="label_Copy" Content="工号:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="377,186,0,0" FontSize="20" Foreground="#FF71604A"/>
         <Label x:Name="label_Copy1" Content="星级:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="377,229,0,0" FontSize="20" Foreground="#FF71604A"/>
         <Label x:Name="label_Copy2" Content="格言:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="377,272,0,0" FontSize="20" Foreground="#FF71604A"/>
-        <Label x:Name="label2_GongHao" Content="88888" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="432,186,0,0" FontSize="20" Width="190"/>
-        <Label x:Name="label2_XingJi" Content="5星" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="432,229,0,0" FontSize="20" Width="190"/>
+        <Label x:Name="label_GongHao" Content="88888" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="432,186,0,0" FontSize="20" Width="190"/>
+        <Label x:Name="label_XingJi" Content="5星" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="432,229,0,0" FontSize="20" Width="190"/>
         <Label x:Name="label2_Copy2"    HorizontalAlignment="Left" VerticalAlignment="Top" Margin="434,270,0,0" FontSize="20" Width="427" Height="114">
-            <TextBlock TextWrapping="Wrap" Text="人生的磨难是很多的，所以我们不可对于每一件轻微的伤害都过于敏感。在生活磨难面前，精神上的坚强和无动于衷是我们抵抗罪恶和人生意外的最好武器" />
+            <TextBlock x:Name="textBlock_GeYan" TextWrapping="Wrap" Text="人生的磨难是很多的，所以我们不可对于每一件轻微的伤害都过于敏感。在生活磨难面前，精神上的坚强和无动于衷是我们抵抗罪恶和人生意外的最好武器" />
         </Label>
 
     </Grid>

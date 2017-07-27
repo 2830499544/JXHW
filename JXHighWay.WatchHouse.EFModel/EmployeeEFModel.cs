@@ -22,6 +22,10 @@ namespace JXHighWay.WatchHouse.EFModel
         public String KaHao { get; set; }
         [ColumnAttrib("ZhaoPian")]
         public String ZhaoPian { get; set; }
+        [ColumnAttrib("XingJi")]
+        public String XingJi { get; set; }
+        [ColumnAttrib("GeYan")]
+        public String GeYan { get; set; }
     }
 
 }
