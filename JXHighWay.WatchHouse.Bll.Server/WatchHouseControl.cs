@@ -103,13 +103,13 @@ namespace JXHighWay.WatchHouse.Bll.Server
                 //拷贝文件
                 string vPath = System.Environment.CurrentDirectory;
                 string vFileName = AppPath.Remove(0, AppPath.LastIndexOf('\\')+1);
-                File.Copy(AppPath, string.Format(@"{0}\App\{1}", vPath, vFileName));
+                File.Copy(AppPath, string.Format(@"{0}\App\{1}", vPath, vFileName),true);
 
                 List<byte> vDataPack = new List<byte>();
                 //增加序号
                 vDataPack.AddRange(Ver);
                 //增加文件地址
-                string vDownUrl = string.Format(@"{0}\{1}", Url, vFileName);
+                string vDownUrl = string.Format(@"{0}/{1}", Url, vFileName);
                 vDataPack.AddRange(System.Text.Encoding.Default.GetBytes(vDownUrl));
                 //是否强制更新
                 vDataPack.Add(Update ?(byte)0x01 :(byte)0x00);
@@ -133,7 +133,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
             Dictionary<string, bool> vResult = new Dictionary<string, bool>();
 
             string vPath = System.Environment.CurrentDirectory;
-            vPath = string.Format(@"{0}\1.txt", Url);
+            vPath = string.Format(@"{0}\EmployeeInfo\1.txt", vPath);
             byte[] vSN = NetHelper.MarkSN();
             createEmployeeInfo(vPath, vSN);
 
@@ -144,7 +144,8 @@ namespace JXHighWay.WatchHouse.Bll.Server
                 //增加序号
                 vDataPack.AddRange(vSN);
                 //增加文件地址
-                vDataPack.AddRange(System.Text.Encoding.Default.GetBytes(vPath));
+                string vDownUrl = string.Format(@"{0}/1.txt", Url);
+                vDataPack.AddRange(System.Text.Encoding.Default.GetBytes(vDownUrl));
 
                 foreach (WatchHouseConfigEFModel vTempWatchHouseConfigEFModel in vSelectResult)
                 {
@@ -358,7 +359,8 @@ namespace JXHighWay.WatchHouse.Bll.Server
             List<byte> vByteArray = Helper.NetHelper.StructureToByte(vCommandDataPack).ToList();
             if (dataPack.Count > 1)
             {
-                bool vv = vByteArray.Remove(vByteArray[25]);
+                //bool vv = vByteArray.Remove(vByteArray[25]);
+                vByteArray.RemoveAt(25);
                 vByteArray.InsertRange(25, dataPack);
             }
 
@@ -719,6 +721,10 @@ namespace JXHighWay.WatchHouse.Bll.Server
                                     WatchHouseDataPack_Receive_Pic vDataPack5 = Helper.NetHelper.ByteToStructure<WatchHouseDataPack_Receive_Pic>(vReceiveData.Data);
                                     processorData_ReturnPic(vDataPack5, vReceiveData.IPAddress);
                                     break;
+                                case (int)WatchHouseDataPack_Receive_CommandEnmu.AppGenXing://App更新
+                                    WatchHouseDataPack_Receive_App vDataPack7 = Helper.NetHelper.ByteToStructure<WatchHouseDataPack_Receive_App>(vReceiveData.Data);
+                                    processorData_ReturnApp(vDataPack7, vReceiveData.IPAddress);
+                                    break;
                             }
                         }
                     }
@@ -733,14 +739,23 @@ namespace JXHighWay.WatchHouse.Bll.Server
         {
             IDCardEFModel vModel = new IDCardEFModel()
             {
-                GangTingID = BitConverter.ToInt32( new byte[] { vData.WatchHouseID1, vData.WatchHouseID2, vData.WatchHouseID3, vData.WatchHouseID4 },0 ),
-                ShiJiang = DateTime.Parse(string.Format("{0:D}{1:D}{2:D}{3:D}-{4:D}{5:D}-{6:D}{7:D} {8:D}{9:D}:{10:D}{11:D}:{12:D}{13:D}",
-                vData.DateTime0, vData.DateTime1, vData.DateTime2, vData.DateTime3, vData.DateTime4, vData.DateTime5, vData.DateTime6,
-                vData.DateTime7, vData.DateTime8, vData.DateTime9, vData.DateTime10, vData.DateTime11, vData.DateTime12, vData.DateTime13)),
-                HuanBan = vData.HuanBan == 0x01?"换班":"",
-                WeiYIID= vData.UniqID
+                GangTingID = BitConverter.ToInt32(new byte[] { vData.WatchHouseID4, vData.WatchHouseID3, vData.WatchHouseID2, vData.WatchHouseID1 }, 0),
+                ShiJiang = DateTime.Now,// DateTime.Parse(string.Format("{0:D}{1:D}{2:D}{3:D}-{4:D}{5:D}-{6:D}{7:D} {8:D}{9:D}:{10:D}{11:D}:{12:D}{13:D}",
+                //vData.DateTime0, vData.DateTime1, vData.DateTime2, vData.DateTime3, vData.DateTime4, vData.DateTime5, vData.DateTime6,
+                //vData.DateTime7, vData.DateTime8, vData.DateTime9, vData.DateTime10, vData.DateTime11, vData.DateTime12, vData.DateTime13)),
+                HuanBan = vData.HuanBan == 0x01 ? "换班" : "下班",
+                GongHao = BitConverter.ToInt32( new byte[] { vData.GongHao4, vData.GongHao3, vData.GongHao2, vData.GongHao1 },0 )//  vData.UniqID
             };
+            m_BasicDBClass_Receive.TransactionBegin();
             m_BasicDBClass_Receive.InsertRecord(vModel);
+            WatchHouseConfigEFModel vWatchHouseConfigEFModel = new WatchHouseConfigEFModel();
+            if (vModel.HuanBan == "换班")
+                vWatchHouseConfigEFModel.GongHao = vModel.GongHao;
+            else
+                vWatchHouseConfigEFModel.GongHao = 0;
+            string vSql = string.Format("GangTingID={0}", vModel.GangTingID);
+            m_BasicDBClass_Receive.UpdateRecord(vWatchHouseConfigEFModel, vSql);
+            m_BasicDBClass_Receive.TransactionCommit();
         }
 
 
@@ -902,13 +917,29 @@ namespace JXHighWay.WatchHouse.Bll.Server
             m_BasicDBClass_Return.UpdateRecord(vSendCMDModel, string.Format("GangTingID={0} and SN={1} and IsSend=1", vGangTingID, vSN));
         }
 
+
+        void processorData_ReturnApp(WatchHouseDataPack_Receive_App vData, string IPAddress)
+        {
+            int vGangTingID = BitConverter.ToInt32(new byte[] { vData.WatchHouseID4, vData.WatchHouseID3, vData.WatchHouseID2, vData.WatchHouseID1 }, 0);
+            short vSN = BitConverter.ToInt16(new byte[] { vData.SN1, vData.SN2 }, 0);
+            WatchHouseSendCMDEFModel vSendCMDModel = new WatchHouseSendCMDEFModel()
+            {
+                State = vData.JieGuo == 0x5a ? true : false,
+                IsReply = true
+
+            };
+            m_BasicDBClass_Return.UpdateRecord(vSendCMDModel, string.Format("GangTingID={0} and SN={1} and IsSend=1", vGangTingID, vSN));
+        }
+
+
         void processorData_ReturnPic(WatchHouseDataPack_Receive_Pic vData, string IPAddress)
         {
             int vGangTingID = BitConverter.ToInt32(new byte[] { vData.WatchHouseID4, vData.WatchHouseID3, vData.WatchHouseID2, vData.WatchHouseID1 }, 0);
             short vSN = BitConverter.ToInt16(new byte[] { vData.SN1, vData.SN2 }, 0);
             WatchHouseSendCMDEFModel vSendCMDModel = new WatchHouseSendCMDEFModel()
             {
-                State = vData.Data3 == 0x5a ? true : false,
+                //State = vData.Data3 == 0x5a ? true : false,
+                State = true,
                 IsReply = true
 
             };

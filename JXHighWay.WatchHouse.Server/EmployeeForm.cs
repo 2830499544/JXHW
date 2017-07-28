@@ -46,7 +46,8 @@ namespace JXHighWay.WatchHouse.Server
             }
             string vOutInfo = "";
             string vPhotoPath = pictureBox_Photo.Tag==null?"":(string)pictureBox_Photo.Tag;
-            if (m_Employee.Add(textBox_Name.Text, comboBox_Sex.Text, vJobNo, textBox_CardNo.Text, vPhotoPath, ref vOutInfo))
+            if (m_Employee.Add(textBox_Name.Text, comboBox_Sex.Text, vJobNo, textBox_CardNo.Text,comboBox_XingJi.Text,
+                textBox_GeYan.Text, vPhotoPath, ref vOutInfo))
             {
                 MessageBox.Show("新增员工信息成功", "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 dataGridView_EmployeeInfo.DataSource = m_Employee.GetAllEmplyees();
@@ -58,11 +59,13 @@ namespace JXHighWay.WatchHouse.Server
 
         private void EmployeeForm_Load(object sender, EventArgs e)
         {
+            comboBox_Sex.Text = "男";
+            comboBox_XingJi.Text = "一星";
             m_Employee = new Employee();
             DataTable vEmplyeeTable = m_Employee.GetAllEmplyees();
             dataGridView_EmployeeInfo.AutoGenerateColumns = false;
             dataGridView_EmployeeInfo.DataSource = vEmplyeeTable;
-            comboBox_Sex.Text = "男";
+            
             pictureBox_Photo.SizeMode = PictureBoxSizeMode.StretchImage;
         }
 
@@ -94,6 +97,8 @@ namespace JXHighWay.WatchHouse.Server
                 comboBox_Sex.Text = (string)dataGridView_EmployeeInfo.SelectedRows[0].Cells["Column_XingBie"].Value;
                 textBox_JobNo.Text = dataGridView_EmployeeInfo.SelectedRows[0].Cells["Column_GongHao"].Value.ToString();
                 textBox_CardNo.Text = (string)dataGridView_EmployeeInfo.SelectedRows[0].Cells["Column_KaHao"].Value;
+                comboBox_XingJi.Text = (string)dataGridView_EmployeeInfo.SelectedRows[0].Cells["Column_XingJi"].Value;
+                textBox_GeYan.Text = (string)dataGridView_EmployeeInfo.SelectedRows[0].Cells["Column_GeYan"].Value;
                 string vPhotoPath = string.Format(@"{0}\Photo\{1}", System.Environment.CurrentDirectory, (string)dataGridView_EmployeeInfo.SelectedRows[0].Cells["Column_Photo"].Value);
                 if (System.IO.File.Exists(vPhotoPath))
                 {
@@ -125,7 +130,7 @@ namespace JXHighWay.WatchHouse.Server
             int vID = (int)dataGridView_EmployeeInfo.SelectedRows[0].Cells["Column_ID"].Value;
             string vOutInfo = "";
             string vPhotoPath = pictureBox_Photo.Tag == null ? "" : (string)pictureBox_Photo.Tag;
-            if (m_Employee.Update(vID, textBox_Name.Text, comboBox_Sex.Text, vJobNo, textBox_CardNo.Text, vPhotoPath))
+            if (m_Employee.Update(vID, textBox_Name.Text, comboBox_Sex.Text, vJobNo, textBox_CardNo.Text, vPhotoPath,comboBox_XingJi.Text,textBox_GeYan.Text))
             {
                 MessageBox.Show("更新员工信息成功", "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 dataGridView_EmployeeInfo.DataSource = m_Employee.GetAllEmplyees();

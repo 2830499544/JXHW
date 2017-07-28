@@ -9,6 +9,7 @@ using System.Net;
 using JXHighWay.WatchHouse.EFModel;
 using JXHighWay.WatchHouse.Helper;
 using System.Threading;
+using System.Collections;
 
 namespace JXHighWay.WatchHouse.Bll.Server
 {
@@ -360,7 +361,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine(string.Format("处理数据报时发生异常,错误信息{0}", ex.Message));
+                        Console.WriteLine(string.Format("处理数据报文发生异常,错误信息{0}", ex.Message));
                     }
                 }
             });
@@ -381,23 +382,19 @@ namespace JXHighWay.WatchHouse.Bll.Server
         }
 
 
-        string convertSwitchState(byte[] zhuanTai )
+        string convertSwitchState(byte zhuanTai )
         {
             string vResult = "";
-            string vZhuanTaiStr = BitConverter.ToString(zhuanTai);
-            switch ( vZhuanTaiStr.ToUpper() )
+            //string vZhuanTaiStr = Convert.ToString( zhuanTai,2);
+            //switch ( vZhuanTaiStr.ToUpper() )
+            BitArray vBitArray = new BitArray(new byte[] { zhuanTai });
+            switch(zhuanTai)
             {
-                case "00-00":
+                case 0x00:
                     vResult = "关";
                     break;
-                case "FF-00":
+                case 0x01:
                     vResult = "开";
-                    break;
-                case "00-FF":
-                    vResult = "开时关";
-                    break;
-                case "FF-FF":
-                    vResult = "开时开";
                     break;
             }
             return vResult;
@@ -592,7 +589,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
                 IPAddress = NetHelper.BytesToString_IP(new byte[] { dataPack.IPAddress1, dataPack.IPAddress2, dataPack.IPAddress3, dataPack.IPAddress4 }),
                 ServerIPAddress = NetHelper.BytesToString_IP(new byte[] { dataPack.ServerIPAddress1,dataPack.ServerIPAddress2,dataPack.ServerIPAddress3,dataPack.ServerIPAddress4 } ),
                 SubMask = NetHelper.BytesToString_IP(new byte[] { dataPack.SubnetMask1,dataPack.SubnetMask2,dataPack.SubnetMask3,dataPack.SubnetMask4 } ),
-                Port = BitConverter.ToInt16( new byte[]{ dataPack.Port2,dataPack.Port2 },0),
+                Port = BitConverter.ToInt16( new byte[]{ dataPack.Port2,dataPack.Port1 },0),
                 ServerPort = BitConverter.ToInt16( new byte[] { dataPack.ServerPort2,dataPack.ServerPort1 },0)
             };
             try
@@ -605,12 +602,13 @@ namespace JXHighWay.WatchHouse.Bll.Server
                     IsReply = true,
                     State = true
                 };
-                string vSql = string.Format("DianYuanID={0} and CMD={1:D} and SN={2}", vMAC,(byte)PowerDataPack_Send_CommandEnum.Send_GetIPAddress, dataPack.SN);
+                string vSql = string.Format("DianYuanID='{0}' and CMD={1:D} and SN={2}", vMAC,(byte)PowerDataPack_Send_CommandEnum.Send_GetIPAddress, dataPack.SN);
                 m_BasicDBClass_Receive.UpdateRecord(vPowerSendCMDEFModel, vSql);
                 m_BasicDBClass_Receive.TransactionCommit();
             }
-            catch
+            catch(Exception ex)
             {
+                Console.WriteLine( string.Format( "获取电源IP地址错误:{0}",ex.Message));
                 m_BasicDBClass_Receive.TransactionRollback();
             }
         }
@@ -630,7 +628,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
             {
                 case PowerDataPack_Receive_CommandEnum.SwitchStatus:
                 case PowerDataPack_Receive_CommandEnum.SetTime:
-                    vSql = string.Format("DianYuanID={0} and CMD={1:D} and SN={2}", vDianYuanID, (byte)PowerDataPack_Send_CommandEnum.Switch, dataPack.SN);
+                    vSql = string.Format("DianYuanID='{0}' and CMD={1:D} and SN={2}", vDianYuanID, (byte)PowerDataPack_Send_CommandEnum.Switch, dataPack.SN);
                     break;
 
             }
@@ -669,15 +667,15 @@ namespace JXHighWay.WatchHouse.Bll.Server
                     case "欠压跳闸":
                     case "打火跳闸":
                     case "漏电跳闸":
-                        string vSql1 = string.Format("update  `电源数据` set `ZhuanTai`='{0}'  where LuHao={1:D} and `ID` in ( select a.MaxID from "
-                             + "(Select max(id) as MaxID From `电源数据` where DianYuanID = '{2}') a )", "开", vPowerEventEFModel.LuHao, vPowerEventEFModel.DianYuanID);
+                        string vSql1 = string.Format("update  `电源数据` set `ZhuanTai`='{0}'  where `ID` in ( select a.MaxID from "
+                             + "(Select max(id) as MaxID From `电源数据` where DianYuanID = '{2}' and LuHao={1:D}) a )", "开", vPowerEventEFModel.LuHao, vPowerEventEFModel.DianYuanID);
                         m_BasicDBClass_Receive.UpdateRecord(vSql1);
                         break;
                     case "本地关":
                     case "远程关":
                     case "定时关":
-                        string vSql2 = string.Format("update  `电源数据` set `ZhuanTai`='{0}'  where LuHao={1:D} and `ID` in ( select a.MaxID from "
-                             + "(Select max(id) as MaxID From `电源数据` where DianYuanID = '{2}') a )", "关", vPowerEventEFModel.LuHao, vPowerEventEFModel.DianYuanID);
+                        string vSql2 = string.Format("update  `电源数据` set `ZhuanTai`='{0}'  where `ID` in ( select a.MaxID from "
+                             + "(Select max(id) as MaxID From `电源数据` where DianYuanID = '{2}' and LuHao={1:D}) a )", "关", vPowerEventEFModel.LuHao, vPowerEventEFModel.DianYuanID);
                         m_BasicDBClass_Receive.UpdateRecord(vSql2);
                         break;
                 }
@@ -707,10 +705,11 @@ namespace JXHighWay.WatchHouse.Bll.Server
                     YouGongGL = BitConverter.ToInt16(new byte[] { vData.YouGongGL2, vData.YouGongGL1 }, 0),
                     LeiXing = convertSwitchLeiXing(vData.LeiXing),
                     DianYuanID = BitConverter.ToString(new byte[] { vData.MAC1, vData.MAC2, vData.MAC3, vData.MAC4, vData.MAC5, vData.MAC6 }),
-                    ZhuanTai = convertSwitchState( new byte[] {vData.SwitchState1,vData.SwitchState2 } ),
+                    ZhuanTai = convertSwitchState( vData.SwitchState),
                     Time = DateTime.Now
                      
                 };
+
                 WatchHouseConfigEFModel vWatchHouseConfigEFModel = new WatchHouseConfigEFModel()
                 {
                     DianYuanTXSJ = DateTime.Now,
@@ -759,7 +758,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
                             {
                                 Head = 0x5a,
                                 Tail = 0x5b,
-                                SN = NetHelper.MarkSN_Byte(),// 0x01,//vTempResult.SN ?? 0x00,
+                                SN = vTempResult.SN ?? 0x00,// 0x01,//vTempResult.SN ?? 0x00,
                                 CMD = vTempResult.CMD ?? 0x00,
                                 Addition = 0x00,
                                 MAC1 = vMac[0],

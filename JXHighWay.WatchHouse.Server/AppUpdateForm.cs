@@ -55,8 +55,16 @@ namespace JXHighWay.WatchHouse.Server
             {
                 vInfo += string.Format("岗亭名称:{0}  状态:{1}\r", vTempResult.Key, vTempResult.Value ? "成功" : "失败");
             }
+            vConfig.AppUrl = textBox_Url.Text;
+            vConfig.Save();
             MessageBox.Show(vInfo, "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+        }
+
+        private void AppUpdateForm_Load(object sender, EventArgs e)
+        {
+            Config vConfig = new Config();
+            textBox_Url.Text =  vConfig.AppUrl;
         }
     }
 }

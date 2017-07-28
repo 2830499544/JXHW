@@ -36,7 +36,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
         }
 
         public bool Add( string XingMing,string XingBie,int GongHao,
-            string KaHao,string ZhaoPian,ref string OutInfo)
+            string KaHao,string ZhaoPian,string XingJi,string GeYan,ref string OutInfo)
         {
             bool vResult = false;
             if (!findGonHaoKaoHao(GongHao, KaHao))
@@ -54,7 +54,9 @@ namespace JXHighWay.WatchHouse.Bll.Server
                     XingBie = XingBie,
                     GongHao = GongHao,
                     KaHao = KaHao,
-                    ZhaoPian = ZhaoPian
+                    ZhaoPian = ZhaoPian,
+                    XingJi = XingJi,
+                    GeYan = GeYan
                 };
                 vResult = m_BasicDBClass.InsertRecord(vModel) > 1 ? true : false;
             }
@@ -71,13 +73,14 @@ namespace JXHighWay.WatchHouse.Bll.Server
         }
 
         public bool Update(int ID,string XingMing, string XingBie, int GongHao,
-            string KaHao, string ZhaoPian)
+            string KaHao, string ZhaoPian,string XingJi,string GeYan)
         {
             if (ZhaoPian != null)
             {
                 string vPath = System.Environment.CurrentDirectory;
                 string vNewPhotoName = string.Format("{0:yyyymmddhhMMss}.jpg", DateTime.Now);
-                File.Copy(ZhaoPian, string.Format(@"{0}\Photo\{1}", vPath, vNewPhotoName));
+                if (ZhaoPian!="")
+                    File.Copy(ZhaoPian, string.Format(@"{0}\Photo\{1}", vPath, vNewPhotoName));
                 ZhaoPian = vNewPhotoName;
             }
             EmployeeEFModel vModel = new EmployeeEFModel()
@@ -87,7 +90,9 @@ namespace JXHighWay.WatchHouse.Bll.Server
                 XingBie = XingBie,
                 GongHao = GongHao,
                 KaHao = KaHao,
-                ZhaoPian = ZhaoPian
+                ZhaoPian = ZhaoPian,
+                XingJi = XingJi,
+                GeYan = GeYan
             };
             return m_BasicDBClass.UpdateRecord(vModel);
         }

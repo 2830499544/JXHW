@@ -35,18 +35,27 @@
         <CheckBox x:Name="CheckBox_XinFeng" Style="{StaticResource OrangeSwitchStyle}" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="59,191,0,0" Grid.Row="1" VerticalAlignment="Top" Height="36" Width="91" IsChecked="True" Cursor="Hand" Click="CheckBox_XinFeng_Click"/>
         <Border Grid.Column="3" Margin="10,30,10,201" Grid.Row="1"  CornerRadius="10" BorderBrush="#FF91ACBD" BorderThickness="1">
             <Grid  >
-                <Label x:Name="Label_WenDu" Content="88" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="20" Foreground="#FFF1EAEA" Margin="109,6,0,-18" Height="36" Width="33"/>
+                <Label x:Name="Label_WenDu" Content="88" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="20" Foreground="#FFF1EAEA" Margin="109,5,0,-5" Height="36" Width="74" RenderTransformOrigin="0.5,0.5">
+                    <Label.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-1.625"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Label.RenderTransform>
+                </Label>
                 <Label x:Name="label" Content="新风温度:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" Foreground="#FFF1EAEA" Height="36" Width="95" Margin="9,6,0,-18"/>
                 <Label x:Name="label_Copy2" Content="新风湿度:" HorizontalAlignment="Left" Margin="233,7,0,-19" VerticalAlignment="Top" FontSize="20" Foreground="#FFF1EAEA" Height="36" Width="95"/>
-                <Label x:Name="Label_ShiDu" Content="88" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="20" Foreground="#FFF1EAEA" Margin="333,7,0,-19" Height="36" Width="33" RenderTransformOrigin="2.788,0.528"/>
+                <Label x:Name="Label_ShiDu" Content="88" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="20" Foreground="#FFF1EAEA" Margin="333,7,0,-7" Height="36" Width="57" RenderTransformOrigin="2.788,0.528"/>
             </Grid>
         </Border>
         <Border Grid.Column="3" Margin="10,103,10,130" Grid.Row="1"  CornerRadius="10" BorderBrush="#FF91ACBD" BorderThickness="1">
             <Grid >
                 <Label x:Name="label_Copy5" Content="入口APM:" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="20" Foreground="#FFF1EAEA" Height="36" Width="156" Margin="1,4,0,-8"/>
-                <Label x:Name="Label_APM_RK" Content="88" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="20" Foreground="#FFF1EAEA" Margin="107,4,0,-8" Height="36" Width="50"/>
+                <Label x:Name="Label_APM_RK" Content="88" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="20" Foreground="#FFF1EAEA" Margin="107,4,0,-6" Height="36" Width="114"/>
                 <Label x:Name="label_Copy7" Content="出口APM:" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="20" Foreground="#FFF1EAEA" Margin="226,4,0,-8" Height="36" Width="156"/>
-                <Label x:Name="Label_APM_CK" Content="88" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="20" Foreground="#FFF1EAEA" Margin="333,4,0,-8" Height="36" Width="61"/>
+                <Label x:Name="Label_APM_CK" Content="88" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="20" Foreground="#FFF1EAEA" Margin="333,4,0,-6" Height="36" Width="114"/>
             </Grid>
         </Border>
         <Grid  Grid.Column="3" HorizontalAlignment="Left" Width="315" Margin="30,197,0,1" Grid.Row="1" RenderTransformOrigin="0.502,1.203">

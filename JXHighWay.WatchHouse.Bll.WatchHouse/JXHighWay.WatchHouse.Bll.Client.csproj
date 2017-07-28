@@ -51,6 +51,7 @@
     <Compile Include="DianYuan\TimingInfo.cs" />
     <Compile Include="GanTing\DengGuanStateInfo.cs" />
     <Compile Include="GanTing\DiNuanStateInfo.cs" />
+    <Compile Include="GanTing\GongHaoPaiInfo.cs" />
     <Compile Include="GanTing\KongTiaoStateInfo.cs" />
     <Compile Include="Led\LEDControl.cs" />
     <Compile Include="GanTing\MenChuangStateInfo.cs" />

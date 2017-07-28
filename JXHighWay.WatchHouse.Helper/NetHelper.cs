@@ -72,7 +72,7 @@ namespace JXHighWay.WatchHouse.Helper
             {
                 if (MAC.Length == 6)
                 {
-                    vResult = string.Format("{0:X}-{1:X}-{2:X}-{3:X}-{4:X}-{5:X}", MAC[0], MAC[1], MAC[2], MAC[3], MAC[4], MAC[5]);
+                    vResult = string.Format("{0:x2}-{1:x2}-{2:x2}-{3:x2}-{4:x2}-{5:x2}", MAC[0], MAC[1], MAC[2], MAC[3], MAC[4], MAC[5]);
                 }
             }
             catch { }
@@ -131,7 +131,7 @@ namespace JXHighWay.WatchHouse.Helper
                 {
                     for (int i = 0; i < 4; i++)
                     {
-                        vResult[i] = byte.Parse(vStrBytesArray[i], System.Globalization.NumberStyles.AllowHexSpecifier);
+                        vResult[i] = byte.Parse(string.Format("{0:X}",vStrBytesArray[i], System.Globalization.NumberStyles.AllowHexSpecifier) );
                     }
                 }
             }
