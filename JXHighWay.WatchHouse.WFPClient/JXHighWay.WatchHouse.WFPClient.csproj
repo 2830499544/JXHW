@@ -106,6 +106,9 @@
     <Compile Include="LED.xaml.cs">
       <DependentUpon>LED.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LEDText.xaml.cs">
+      <DependentUpon>LEDText.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
@@ -128,6 +131,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DianYuan_S.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LEDText.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

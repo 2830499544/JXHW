@@ -123,5 +123,11 @@ namespace JXHighWay.WatchHouse.WFPClient
             else
                 Xceed.Wpf.Toolkit.MessageBox.Show("图片文件不存在", "信息", MessageBoxButton.OK, MessageBoxImage.Error);
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            LEDText vLEDText = new LEDText();
+            vLEDText.ShowDialog();
+        }
     }
 }

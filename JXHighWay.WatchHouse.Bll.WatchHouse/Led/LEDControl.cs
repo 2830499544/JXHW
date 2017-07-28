@@ -130,6 +130,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.LED
             {
                 action = "add"
             };
+
             v1Changel_Area.materials.image = new configbooChannelAreaMaterialsImage[]{
                 vImage1
             };
@@ -218,11 +219,12 @@ namespace JXHighWay.WatchHouse.Bll.Client.LED
             };
             v1Changel_Area.rectangle = v1Changel_Area_Rectangle;
             v1Changel_Area.materials = new configbooChannelAreaMaterials();
+
             configbooChannelAreaMaterialsVideo vVideo1 = new configbooChannelAreaMaterialsVideo()
             {
                 action = "add",
             };
-
+            
             v1Changel_Area.materials.video = new configbooChannelAreaMaterialsVideo[]
             {
                 vVideo1

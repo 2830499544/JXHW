@@ -40,7 +40,7 @@ namespace JXHighWay.WatchHouse.Server
                 MessageBox.Show("文件不存在，请重新检查路径","信息", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            byte vBanBen1 = (byte)( ((int)numericUpDown_BanBen1.Value )>>0 );
+            byte vBanBen1 = (byte)(((int)numericUpDown_BanBen1.Value) >> 0);
             byte vBanBen2 = (byte)(((int)numericUpDown_BanBen2.Value) >> 0);
             byte vBanBen3 = (byte)(((int)numericUpDown_BanBen3.Value) >> 0);
             byte vBanBen4 = (byte)(((int)numericUpDown_BanBen4.Value) >> 0);
