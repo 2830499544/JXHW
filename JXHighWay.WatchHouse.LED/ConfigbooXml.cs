@@ -387,6 +387,8 @@ namespace JXHighWay.WatchHouse.LED
     public partial class configbooChannelAreaMaterialsText
     {
 
+        private configbooChannelAreaMaterialsImageEffect effectField;
+
         private byte singleModeField;
 
         private byte pageCountField;
@@ -398,6 +400,18 @@ namespace JXHighWay.WatchHouse.LED
         private string actionField;
 
         private string guidField;
+
+        public configbooChannelAreaMaterialsImageEffect effect
+        {
+            get
+            {
+                return this.effectField;
+            }
+            set
+            {
+                this.effectField = value;
+            }
+        }
 
         /// <remarks/>
         public byte singleMode
