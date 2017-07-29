@@ -105,6 +105,12 @@
     <Compile Include="SwitchConfigForm.Designer.cs">
       <DependentUpon>SwitchConfigForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="TimeConfigForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TimeConfigForm.Designer.cs">
+      <DependentUpon>TimeConfigForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="WatchHouseConfigForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -141,6 +147,9 @@
     </Compile>
     <EmbeddedResource Include="SwitchConfigForm.resx">
       <DependentUpon>SwitchConfigForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TimeConfigForm.resx">
+      <DependentUpon>TimeConfigForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WatchHouseConfigForm.resx">
       <DependentUpon>WatchHouseConfigForm.cs</DependentUpon>

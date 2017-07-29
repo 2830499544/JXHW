@@ -29,13 +29,21 @@ namespace JXHighWay.WatchHouse.Net.DataPack
         Timing = 0x49,
 
         /// <summary>
-        /// 开关参数设置
+        /// 设置开关参数设置
         /// </summary>
-        SwitchParam = 0x4b,
+        SetSwitchParam = 0x4b,
+        /// <summary>
+        /// 获取开关参数设置
+        /// </summary>
+        GetSwitchParam = 0x6B,
 
         /// <summary>
         /// 时间设置
         /// </summary>
         SetTime = 0x47,
+        /// <summary>
+        /// 获取时间
+        /// </summary>
+        GetTime = 0x61
     }
 }

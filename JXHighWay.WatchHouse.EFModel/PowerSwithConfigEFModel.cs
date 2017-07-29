@@ -31,10 +31,10 @@ namespace JXHighWay.WatchHouse.EFModel
         public short? DianLiuLLZ { get; set; }
 
         [ColumnAttrib("ChaoWenBHZ")]
-        public short? ChaoWenBHZ { get; set; }
+        public UInt16? ChaoWenBHZ { get; set; }
 
         [ColumnAttrib("ChaoWenYJZ")]
-        public short? ChaoWenYJZ { get; set; }
+        public UInt16? ChaoWenYJZ { get; set; }
 
         [ColumnAttrib("GuoYaSX")]
         public short? GuoYaSX { get; set; }

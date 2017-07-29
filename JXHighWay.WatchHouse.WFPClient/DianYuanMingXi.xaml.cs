@@ -26,10 +26,24 @@ namespace JXHighWay.WatchHouse.WFPClient
     /// </summary>
     public partial class DianYuanMingXi : Window
     {
+        byte m_LuHao;
         /// <summary>
         /// 路号
         /// </summary>
-        public int LuHao { get; set; }
+        public int LuHao {
+            get
+            {
+                return m_LuHao;
+            }
+            set
+            {
+                m_LuHao = (byte)(value >> 0);
+            }
+        }
+        /// <summary>
+        /// 电源编号
+        /// </summary>
+        public string DianYuanID { get; set;}
         //是否初始化
         bool m_IsInit = false;
         /// <summary>
@@ -69,7 +83,7 @@ namespace JXHighWay.WatchHouse.WFPClient
         /// </summary>
         void init_RiZi()
         {
-            LogInfo[] vLogInfoArray = m_PowerMonitoring.GetLog(App.PowerID1, LuHao, "操作类");
+            LogInfo[] vLogInfoArray = m_PowerMonitoring.GetLog(DianYuanID, LuHao, "操作类");
             dataGrid_Log.ItemsSource = vLogInfoArray;
         }
 
@@ -78,7 +92,7 @@ namespace JXHighWay.WatchHouse.WFPClient
         /// </summary>
         void init_SheZhi()
         {
-            m_ParamInfo =  m_PowerMonitoring.GetSwitchParamInfo(App.PowerID1, LuHao);
+            m_ParamInfo =  m_PowerMonitoring.GetSwitchParamInfo(DianYuanID, LuHao);
             integerUpDown_XDDN.Value = m_ParamInfo.XianDingDN;
             integerUpDown_XDGL.Value = m_ParamInfo.XianDingGL;
             integerUpDown_DLNLZ.Value = m_ParamInfo.DianLiuLLZ;
@@ -95,7 +109,7 @@ namespace JXHighWay.WatchHouse.WFPClient
         /// </summary>
         void init_ZhuanTai()
         {
-            PowerInfo vPowerInfo = m_PowerMonitoring.GetNewPowerInfo(App.PowerID1, LuHao);
+            PowerInfo vPowerInfo = m_PowerMonitoring.GetNewPowerInfo(DianYuanID, LuHao);
             label_ZT_DL.Content = string.Format("{0}A", vPowerInfo.DianLiu );
             label_ZT_DN.Content = string.Format("{0}kWh" ,vPowerInfo.DianNeng);
             label_ZT_DY.Content = string.Format("{0}V", vPowerInfo.DianYa);
@@ -169,7 +183,7 @@ namespace JXHighWay.WatchHouse.WFPClient
             for(int i=0;i<4;i++)
             {
                 byte vLuHao = (byte)(i >> 0);
-                m_TimingInfoList =  m_PowerMonitoring.GetTimingInfo(App.PowerID1, vLuHao);
+                m_TimingInfoList =  m_PowerMonitoring.GetTimingInfo(DianYuanID, vLuHao);
                 TimingInfo vTimingInfo = m_TimingInfoList.Where(m => m.LuHao == i).FirstOrDefault();
                 bindTimingInfo(vTimingInfo,i);
             }
@@ -194,7 +208,7 @@ namespace JXHighWay.WatchHouse.WFPClient
 
         private void button_YD_RYD_Click(object sender, RoutedEventArgs e)
         {
-            PowerInfo[] vDataSource = m_PowerMonitoring.GetYongDianLiang_Ri(App.PowerID1, LuHao);
+            PowerInfo[] vDataSource = m_PowerMonitoring.GetYongDianLiang_Ri(DianYuanID, LuHao);
             yongDianTongJi(vDataSource, string.Format("日用电量统计(总计:{0}kwh)", vDataSource.Sum(m => m.DianNeng)));
         }
 
@@ -205,13 +219,13 @@ namespace JXHighWay.WatchHouse.WFPClient
 
         private void button_YD_YYD_Click(object sender, RoutedEventArgs e)
         {
-            PowerInfo[] vDataSource = m_PowerMonitoring.GetYongDianLiang_Yue(App.PowerID1, LuHao);
+            PowerInfo[] vDataSource = m_PowerMonitoring.GetYongDianLiang_Yue(DianYuanID, LuHao);
             yongDianTongJi(vDataSource, string.Format("月用电量统计(总计:{0}kwh)", vDataSource.Sum(m => m.DianNeng)));
         }
 
         private void button_YD_NYD_Click(object sender, RoutedEventArgs e)
         {
-            PowerInfo[] vDataSource = m_PowerMonitoring.GetYongDianLiang_Nian(App.PowerID1, LuHao);
+            PowerInfo[] vDataSource = m_PowerMonitoring.GetYongDianLiang_Nian(DianYuanID, LuHao);
             yongDianTongJi(vDataSource, string.Format("年用电量统计(总计:{0}kwh)", vDataSource.Sum(m => m.DianNeng)));
         }
 
@@ -411,7 +425,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                         vTimeData = BitConverter.ToInt32(new byte[] { vTimeData4, vTimeData3, vTimeData2, vTimeData1 },0);
                         break;
                 }
-                bool vResult = await m_PowerMonitoring.SendCMD_Timing(App.PowerID1, 0x01, vLuHao, vZhuHao, vRenWuLeiXin, vZhouQi, 0x01, vTimeData);
+                bool vResult = await m_PowerMonitoring.SendCMD_Timing(DianYuanID, 0x01, vLuHao, vZhuHao, vRenWuLeiXin, vZhouQi, 0x01, vTimeData);
                 if (vResult)
                 {
                     TimingInfo vTimingInfo = m_TimingInfoList.Where(m => m.ZhuHao == m_EditZhuHao).FirstOrDefault();
@@ -419,7 +433,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                     {
                         vTimingInfo = new TimingInfo()
                         {
-                            DianYuanID = App.PowerID1,
+                            DianYuanID = DianYuanID,
                             LeiXing = 0x01,
                             RenWuLX = vRenWuLeiXin,
                             TimeData = vTimeData,
@@ -432,7 +446,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                     {
                         vTimingInfo = new TimingInfo()
                         {
-                            DianYuanID = App.PowerID1,
+                            DianYuanID = DianYuanID,
                             LeiXing = 0x01,
                             RenWuLX = vRenWuLeiXin,
                             TimeData = vTimeData,
@@ -454,155 +468,156 @@ namespace JXHighWay.WatchHouse.WFPClient
 
         private async void button_SheZhi_XDDN_Click(object sender, RoutedEventArgs e)
         {
-            byte vLuHao = (byte)(LuHao >> 0);
-            short vData = Convert.ToInt16(integerUpDown_XDDN.Value);
-            bool vResult = await m_PowerMonitoring.SendCMD_SwitchParam(App.PowerID1, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.XianDingDN, vData);
-            if (vResult)
-            {
-                Xceed.Wpf.Toolkit.MessageBox.Show("设置成功", "信息", MessageBoxButton.OK, MessageBoxImage.Information);
-                m_ParamInfo.XianDingDN = vData;
-            }
-            else
-            {
-                Xceed.Wpf.Toolkit.MessageBox.Show("设置失败", "信息", MessageBoxButton.OK, MessageBoxImage.Error);
-                integerUpDown_XDDN.Value = m_ParamInfo.XianDingDN;
-            }
+            //byte vLuHao = (byte)(LuHao >> 0);
+            //short vData = Convert.ToInt16(integerUpDown_XDDN.Value);
+            //bool vResult = await m_PowerMonitoring.SendCMD_SetSwitchParam(DianYuanID, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.XianDingDN,
+            //    vData);
+            //if (vResult)
+            //{
+            //    Xceed.Wpf.Toolkit.MessageBox.Show("设置成功", "信息", MessageBoxButton.OK, MessageBoxImage.Information);
+            //    m_ParamInfo.XianDingDN = vData;
+            //}
+            //else
+            //{
+            //    Xceed.Wpf.Toolkit.MessageBox.Show("设置失败", "信息", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    integerUpDown_XDDN.Value = m_ParamInfo.XianDingDN;
+            //}
         }
 
         private async void button_SheZhi_XDGL_Click(object sender, RoutedEventArgs e)
         {
-            byte vLuHao = (byte)(LuHao >> 0);
-            short vData = Convert.ToInt16(integerUpDown_XDGL.Value);
-            bool vResult = await m_PowerMonitoring.SendCMD_SwitchParam(App.PowerID1, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.XianDingGL, vData);
-            if (vResult)
-            {
-                Xceed.Wpf.Toolkit.MessageBox.Show("设置成功", "信息", MessageBoxButton.OK, MessageBoxImage.Information);
-                m_ParamInfo.XianDingGL = vData;
-            }
-            else
-            {
-                Xceed.Wpf.Toolkit.MessageBox.Show("设置失败", "信息", MessageBoxButton.OK, MessageBoxImage.Error);
-                integerUpDown_XDGL.Value = m_ParamInfo.XianDingGL;
-            }
+            //byte vLuHao = (byte)(LuHao >> 0);
+            //short vData = Convert.ToInt16(integerUpDown_XDGL.Value);
+            //bool vResult = await m_PowerMonitoring.SendCMD_SetSwitchParam(DianYuanID, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.XianDingGL, vData);
+            //if (vResult)
+            //{
+            //    Xceed.Wpf.Toolkit.MessageBox.Show("设置成功", "信息", MessageBoxButton.OK, MessageBoxImage.Information);
+            //    m_ParamInfo.XianDingGL = vData;
+            //}
+            //else
+            //{
+            //    Xceed.Wpf.Toolkit.MessageBox.Show("设置失败", "信息", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    integerUpDown_XDGL.Value = m_ParamInfo.XianDingGL;
+            //}
         }
 
         private async void button_SheZhi_DLNLZ_Click(object sender, RoutedEventArgs e)
         {
-            byte vLuHao = (byte)(LuHao >> 0);
-            short vData = Convert.ToInt16(integerUpDown_DLNLZ.Value);
-            bool vResult = await m_PowerMonitoring.SendCMD_SwitchParam(App.PowerID1, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.DianLiuLLZ, vData);
-            if (vResult)
-            {
-                Xceed.Wpf.Toolkit.MessageBox.Show("设置成功", "信息", MessageBoxButton.OK, MessageBoxImage.Information);
-                m_ParamInfo.DianLiuLLZ = vData;
-            }
-            else
-            {
-                Xceed.Wpf.Toolkit.MessageBox.Show("设置失败", "信息", MessageBoxButton.OK, MessageBoxImage.Error);
-                integerUpDown_DLNLZ.Value = m_ParamInfo.DianLiuLLZ;
-            }
+            //byte vLuHao = (byte)(LuHao >> 0);
+            //short vData = Convert.ToInt16(integerUpDown_DLNLZ.Value);
+            //bool vResult = await m_PowerMonitoring.SendCMD_SetSwitchParam(DianYuanID, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.DianLiuLLZ, vData);
+            //if (vResult)
+            //{
+            //    Xceed.Wpf.Toolkit.MessageBox.Show("设置成功", "信息", MessageBoxButton.OK, MessageBoxImage.Information);
+            //    m_ParamInfo.DianLiuLLZ = vData;
+            //}
+            //else
+            //{
+            //    Xceed.Wpf.Toolkit.MessageBox.Show("设置失败", "信息", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    integerUpDown_DLNLZ.Value = m_ParamInfo.DianLiuLLZ;
+            //}
         }
 
         private async void button_SheZhi_CWBH_Click(object sender, RoutedEventArgs e)
         {
-            byte vLuHao = (byte)(LuHao >> 0);
-            short vData = Convert.ToInt16(integerUpDown_CWBH.Value);
-            bool vResult = await m_PowerMonitoring.SendCMD_SwitchParam(App.PowerID1, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.ChaoWenBHZ, vData);
-            if (vResult)
-            {
-                Xceed.Wpf.Toolkit.MessageBox.Show("设置成功", "信息", MessageBoxButton.OK, MessageBoxImage.Information);
-                m_ParamInfo.ChaoWenBHZ = vData;
-            }
-            else
-            {
-                Xceed.Wpf.Toolkit.MessageBox.Show("设置失败", "信息", MessageBoxButton.OK, MessageBoxImage.Error);
-                integerUpDown_CWBH.Value = m_ParamInfo.ChaoWenBHZ;
-            }
+            //byte vLuHao = (byte)(LuHao >> 0);
+            //short vData = Convert.ToInt16(integerUpDown_CWBH.Value);
+            //bool vResult = await m_PowerMonitoring.SendCMD_SetSwitchParam(DianYuanID, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.ChaoWenBHZ, vData);
+            //if (vResult)
+            //{
+            //    Xceed.Wpf.Toolkit.MessageBox.Show("设置成功", "信息", MessageBoxButton.OK, MessageBoxImage.Information);
+            //    m_ParamInfo.ChaoWenBHZ = vData;
+            //}
+            //else
+            //{
+            //    Xceed.Wpf.Toolkit.MessageBox.Show("设置失败", "信息", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    integerUpDown_CWBH.Value = m_ParamInfo.ChaoWenBHZ;
+            //}
         }
 
         private async void button_SheZhi_CWYJZ_Click(object sender, RoutedEventArgs e)
         {
-            byte vLuHao = (byte)(LuHao >> 0);
-            short vData = Convert.ToInt16(integerUpDown_CWYJZ.Value);
-            bool vResult = await m_PowerMonitoring.SendCMD_SwitchParam(App.PowerID1, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.ChaoWenYJZ, vData);
-            if (vResult)
-            {
-                Xceed.Wpf.Toolkit.MessageBox.Show("设置成功", "信息", MessageBoxButton.OK, MessageBoxImage.Information);
-                m_ParamInfo.ChaoWenYJZ = vData;
-            }
-            else
-            {
-                Xceed.Wpf.Toolkit.MessageBox.Show("设置失败", "信息", MessageBoxButton.OK, MessageBoxImage.Error);
-                integerUpDown_CWYJZ.Value = m_ParamInfo.ChaoWenYJZ;
-            }
+            //byte vLuHao = (byte)(LuHao >> 0);
+            //short vData = Convert.ToInt16(integerUpDown_CWYJZ.Value);
+            //bool vResult = await m_PowerMonitoring.SendCMD_SetSwitchParam(DianYuanID, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.ChaoWenYJZ, vData);
+            //if (vResult)
+            //{
+            //    Xceed.Wpf.Toolkit.MessageBox.Show("设置成功", "信息", MessageBoxButton.OK, MessageBoxImage.Information);
+            //    m_ParamInfo.ChaoWenYJZ = vData;
+            //}
+            //else
+            //{
+            //    Xceed.Wpf.Toolkit.MessageBox.Show("设置失败", "信息", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    integerUpDown_CWYJZ.Value = m_ParamInfo.ChaoWenYJZ;
+            //}
         }
 
         private async void button_SheZhi_GYSX_Click(object sender, RoutedEventArgs e)
         {
-            byte vLuHao = (byte)(LuHao >> 0);
-            short vData = Convert.ToInt16(integerUpDown_GYSX.Value);
-            bool vResult = await m_PowerMonitoring.SendCMD_SwitchParam(App.PowerID1, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.GuoYaSX, vData);
-            if (vResult)
-            {
-                Xceed.Wpf.Toolkit.MessageBox.Show("设置成功", "信息", MessageBoxButton.OK, MessageBoxImage.Information);
-                m_ParamInfo.GuoYaSX = vData;
-            }
-            else
-            {
-                Xceed.Wpf.Toolkit.MessageBox.Show("设置失败", "信息", MessageBoxButton.OK, MessageBoxImage.Error);
-                integerUpDown_GYSX.Value = m_ParamInfo.GuoYaSX;
-            }
+            //byte vLuHao = (byte)(LuHao >> 0);
+            //short vData = Convert.ToInt16(integerUpDown_GYSX.Value);
+            //bool vResult = await m_PowerMonitoring.SendCMD_SetSwitchParam(DianYuanID, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.GuoYaSX, vData);
+            //if (vResult)
+            //{
+            //    Xceed.Wpf.Toolkit.MessageBox.Show("设置成功", "信息", MessageBoxButton.OK, MessageBoxImage.Information);
+            //    m_ParamInfo.GuoYaSX = vData;
+            //}
+            //else
+            //{
+            //    Xceed.Wpf.Toolkit.MessageBox.Show("设置失败", "信息", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    integerUpDown_GYSX.Value = m_ParamInfo.GuoYaSX;
+            //}
         }
 
         private async void button_SheZhi_QYXX_Click(object sender, RoutedEventArgs e)
         {
-            byte vLuHao = (byte)(LuHao >> 0);
-            short vData = Convert.ToInt16(integerUpDown_QYXX.Value);
-            bool vResult = await m_PowerMonitoring.SendCMD_SwitchParam(App.PowerID1, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.QianYaXX, vData);
-            if (vResult)
-            {
-                Xceed.Wpf.Toolkit.MessageBox.Show("设置成功", "信息", MessageBoxButton.OK, MessageBoxImage.Information);
-                m_ParamInfo.QianYaXX = vData;
-            }
-            else
-            {
-                Xceed.Wpf.Toolkit.MessageBox.Show("设置失败", "信息", MessageBoxButton.OK, MessageBoxImage.Error);
-                integerUpDown_QYXX.Value = m_ParamInfo.QianYaXX;
-            }
+            //byte vLuHao = (byte)(LuHao >> 0);
+            //short vData = Convert.ToInt16(integerUpDown_QYXX.Value);
+            //bool vResult = await m_PowerMonitoring.SendCMD_SetSwitchParam(DianYuanID, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.QianYaXX, vData);
+            //if (vResult)
+            //{
+            //    Xceed.Wpf.Toolkit.MessageBox.Show("设置成功", "信息", MessageBoxButton.OK, MessageBoxImage.Information);
+            //    m_ParamInfo.QianYaXX = vData;
+            //}
+            //else
+            //{
+            //    Xceed.Wpf.Toolkit.MessageBox.Show("设置失败", "信息", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    integerUpDown_QYXX.Value = m_ParamInfo.QianYaXX;
+            //}
         }
 
         private async void button_SheZhi_EDLD_Click(object sender, RoutedEventArgs e)
         {
-            byte vLuHao = (byte)(LuHao >> 0);
-            short vData = Convert.ToInt16(integerUpDown_EDLD.Value);
-            bool vResult = await m_PowerMonitoring.SendCMD_SwitchParam(App.PowerID1, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.EDingLDDZDL, vData);
-            if (vResult)
-            {
-                Xceed.Wpf.Toolkit.MessageBox.Show("设置成功", "信息", MessageBoxButton.OK, MessageBoxImage.Information);
-                m_ParamInfo.EDingLDDZDL = vData;
-            }
-            else
-            {
-                Xceed.Wpf.Toolkit.MessageBox.Show("设置失败", "信息", MessageBoxButton.OK, MessageBoxImage.Error);
-                integerUpDown_EDLD.Value = m_ParamInfo.EDingLDDZDL;
-            }
+            //byte vLuHao = (byte)(LuHao >> 0);
+            //short vData = Convert.ToInt16(integerUpDown_EDLD.Value);
+            //bool vResult = await m_PowerMonitoring.SendCMD_SetSwitchParam(DianYuanID, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.EDingLDDZDL, vData);
+            //if (vResult)
+            //{
+            //    Xceed.Wpf.Toolkit.MessageBox.Show("设置成功", "信息", MessageBoxButton.OK, MessageBoxImage.Information);
+            //    m_ParamInfo.EDingLDDZDL = vData;
+            //}
+            //else
+            //{
+            //    Xceed.Wpf.Toolkit.MessageBox.Show("设置失败", "信息", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    integerUpDown_EDLD.Value = m_ParamInfo.EDingLDDZDL;
+            //}
         }
 
         private async void button_SheZhi_LDYJZ_Click(object sender, RoutedEventArgs e)
         {
-            byte vLuHao = (byte)(LuHao >> 0);
-            short vData = Convert.ToInt16(integerUpDown_LDYJZ.Value);
-            bool vResult = await m_PowerMonitoring.SendCMD_SwitchParam(App.PowerID1, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.EDingLDDZDL, vData);
-            if (vResult)
-            {
-                Xceed.Wpf.Toolkit.MessageBox.Show("设置成功", "信息", MessageBoxButton.OK, MessageBoxImage.Information);
-                m_ParamInfo.LouDianLYJZ = vData;
-            }
-            else
-            {
-                Xceed.Wpf.Toolkit.MessageBox.Show("设置失败", "信息", MessageBoxButton.OK, MessageBoxImage.Error);
-                integerUpDown_LDYJZ.Value = m_ParamInfo.LouDianLYJZ;
-            }
+            //byte vLuHao = (byte)(LuHao >> 0);
+            //short vData = Convert.ToInt16(integerUpDown_LDYJZ.Value);
+            //bool vResult = await m_PowerMonitoring.SendCMD_SetSwitchParam(DianYuanID, 0x01, vLuHao, Net.DataPack.PowerDataPack_Send_SwitchParam_CommandEnum.EDingLDDZDL, vData);
+            //if (vResult)
+            //{
+            //    Xceed.Wpf.Toolkit.MessageBox.Show("设置成功", "信息", MessageBoxButton.OK, MessageBoxImage.Information);
+            //    m_ParamInfo.LouDianLYJZ = vData;
+            //}
+            //else
+            //{
+            //    Xceed.Wpf.Toolkit.MessageBox.Show("设置失败", "信息", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    integerUpDown_LDYJZ.Value = m_ParamInfo.LouDianLYJZ;
+            //}
         }
 
         private void image_Close_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -621,19 +636,19 @@ namespace JXHighWay.WatchHouse.WFPClient
 
         private void button_RZ_ZCL_Click(object sender, RoutedEventArgs e)
         {
-            LogInfo[] vLogInfoArray = m_PowerMonitoring.GetLog(App.PowerID1, LuHao, "操作类");
+            LogInfo[] vLogInfoArray = m_PowerMonitoring.GetLog(DianYuanID, LuHao, "操作类");
             dataGrid_Log.ItemsSource = vLogInfoArray;
         }
 
         private void button_RZ_BJL_Click(object sender, RoutedEventArgs e)
         {
-            LogInfo[] vLogInfoArray = m_PowerMonitoring.GetLog(App.PowerID1, LuHao, "报警类");
+            LogInfo[] vLogInfoArray = m_PowerMonitoring.GetLog(DianYuanID, LuHao, "报警类");
             dataGrid_Log.ItemsSource = vLogInfoArray;
         }
 
         private void button_RZ_GZL_Click(object sender, RoutedEventArgs e)
         {
-            LogInfo[] vLogInfoArray = m_PowerMonitoring.GetLog(App.PowerID1, LuHao, "故障类");
+            LogInfo[] vLogInfoArray = m_PowerMonitoring.GetLog(DianYuanID, LuHao, "故障类");
             dataGrid_Log.ItemsSource = vLogInfoArray;
         }
 
@@ -679,5 +694,59 @@ namespace JXHighWay.WatchHouse.WFPClient
             vStreamWriter.Close();
         }
 
+        private async void button_SZ_HuoQu_Click(object sender, RoutedEventArgs e)
+        {
+            bool vResult = await m_PowerMonitoring.SendCMD_GetSwitchParam(DianYuanID, 0x01, m_LuHao);
+            if (vResult)
+            {
+                init_SheZhi();
+                Xceed.Wpf.Toolkit.MessageBox.Show("刷新配电参数成功", "信息", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+                Xceed.Wpf.Toolkit.MessageBox.Show("刷新配电参数失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+
+        }
+
+        private async void button_SZ_SheZhi_Click(object sender, RoutedEventArgs e)
+        {
+            short vXianDingDN = (short)integerUpDown_XDDN.Value;
+            short vXianDingGL = (short)integerUpDown_XDGL.Value;
+            short vDianLiuLLZ = (short)integerUpDown_DLNLZ.Value;
+            UInt16 vChaoWenBHZ = (UInt16)integerUpDown_CWBH.Value;
+            UInt16 vChaoWenYJZ =  (UInt16)integerUpDown_CWYJZ.Value;
+            short vGuoYaSX =  (short)integerUpDown_GYSX.Value;
+            short vQianYaXX = (short)integerUpDown_QYXX.Value;
+            short vEDingLDDZDL = (short)integerUpDown_EDLD.Value;
+            short vLouDianLYJZ = (short)integerUpDown_LDYJZ.Value;
+
+            bool vResult = await m_PowerMonitoring.SendCMD_SetSwitchParam(DianYuanID, 0x01, m_LuHao, vXianDingDN, vXianDingGL, vDianLiuLLZ, vChaoWenBHZ, vChaoWenYJZ,
+                vGuoYaSX, vQianYaXX, vEDingLDDZDL, vLouDianLYJZ);
+            if ( vResult )
+            {
+                m_ParamInfo.XianDingDN = (short)integerUpDown_XDDN.Value;
+                m_ParamInfo.XianDingGL = (short)integerUpDown_XDGL.Value;
+                m_ParamInfo.DianLiuLLZ = (short)integerUpDown_DLNLZ.Value;
+                m_ParamInfo.ChaoWenBHZ = (UInt16)integerUpDown_CWBH.Value;
+                m_ParamInfo.ChaoWenYJZ = (UInt16)integerUpDown_CWYJZ.Value;
+                m_ParamInfo.GuoYaSX = (short)integerUpDown_GYSX.Value;
+                m_ParamInfo.QianYaXX= (short)integerUpDown_QYXX.Value;
+                m_ParamInfo.EDingLDDZDL = (short)integerUpDown_EDLD.Value;
+                m_ParamInfo.LouDianLYJZ = (short)integerUpDown_LDYJZ.Value;
+                Xceed.Wpf.Toolkit.MessageBox.Show("设置配电参数成功", "信息", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                integerUpDown_XDDN.Value = m_ParamInfo.XianDingDN;
+                integerUpDown_XDGL.Value = m_ParamInfo.XianDingGL;
+                integerUpDown_DLNLZ.Value = m_ParamInfo.DianLiuLLZ;
+                integerUpDown_CWBH.Value = m_ParamInfo.ChaoWenBHZ;
+                integerUpDown_CWYJZ.Value = m_ParamInfo.ChaoWenYJZ;
+                integerUpDown_GYSX.Value = m_ParamInfo.GuoYaSX;
+                integerUpDown_QYXX.Value = m_ParamInfo.QianYaXX;
+                integerUpDown_EDLD.Value = m_ParamInfo.EDingLDDZDL;
+                integerUpDown_LDYJZ.Value = m_ParamInfo.LouDianLYJZ;
+                Xceed.Wpf.Toolkit.MessageBox.Show("设置配电参数操作失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }

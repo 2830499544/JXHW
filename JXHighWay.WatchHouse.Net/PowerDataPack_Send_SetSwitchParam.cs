@@ -47,7 +47,7 @@ namespace JXHighWay.WatchHouse.Net.DataPack
         LouDianLYJZ = 0x08
     }
 
-    public  struct PowerDataPack_Send_SwitchParam
+    public  struct PowerDataPack_Send_SetSwitchParam
     {
         /// <summary>
         /// 设备类型 (0漏保 1分路 2分路（带漏保）3漏保插座 4普插座 5MESH节点)
@@ -58,14 +58,49 @@ namespace JXHighWay.WatchHouse.Net.DataPack
         /// </summary>
         public byte LuHao { get; set; }
         /// <summary>
-        /// 标识码
+        /// 限定电能
         /// </summary>
-        public byte BiaoShiMa { get; set; }
+        public byte XianDingDN1 { get; set; }
+        public byte XianDingDN2 { get; set; }
         /// <summary>
-        /// 数据
+        /// 限定功率
         /// </summary>
-        public byte Data1 { get; set; }
-        public byte Data2 { get; set; }
-
+        public byte XianDingGL1 { get; set; }
+        public byte XianDingGL2 { get; set; }
+        /// <summary>
+        /// 电流容量值
+        /// </summary>
+        public byte DianLiuRLZ1 { get; set; }
+        public byte DianLiuRLZ2 { get; set; }
+        /// <summary>
+        /// 超温保护值
+        /// </summary>
+        public byte ChaoWenBHZ1 { get; set; }
+        public byte ChaoWenBHZ2 { get; set; }
+        /// <summary>
+        /// 超温预警值
+        /// </summary>
+        public byte ChaoWenYJZ1 { get; set; }
+        public byte ChaoWenYJZ2 { get; set; }
+        /// <summary>
+        /// 过压上限
+        /// </summary>
+        public byte GuoYaSX1 { get; set; }
+        public byte GuoYaSX2 { get; set; }
+        /// <summary>
+        /// 欠压下限
+        /// </summary>
+        public byte QianYaXX1 { get; set; }
+        public byte QianYaXX2 { get; set; }
+        /// <summary>
+        /// 额定漏电动作电流
+        /// </summary>
+        public byte EDingLDDZDL1 { get; set; }
+        public byte EDingLDDZDL2 { get; set; }
+        /// <summary>
+        /// 漏电流预警值
+        /// </summary>
+        public byte LouDianLYJZ1 { get; set; }
+        public byte LouDianLYJZ2 { get; set; }
     }
 }

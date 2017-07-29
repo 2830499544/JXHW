@@ -181,6 +181,7 @@ namespace JXHighWay.WatchHouse.WFPClient.Images
             GroupBox vGroupBox = (GroupBox)sender;
             DianYuanMingXi vDianYuanMingXi = new DianYuanMingXi();
             vDianYuanMingXi.LuHao = (int)vGroupBox.Tag;
+            vDianYuanMingXi.DianYuanID = App.PowerID1;
             vDianYuanMingXi.ShowDialog();
             
         }

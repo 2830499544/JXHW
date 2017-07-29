@@ -13,18 +13,18 @@ using System.Collections;
 
 namespace JXHighWay.WatchHouse.Bll.Server
 {
-    public class PowerControl:BasicControl
+    public class PowerControl : BasicControl
     {
         bool m_IsRun = false;
         Dictionary<string, int> m_ClientMaxID = null;
 
         public PowerControl()
         {
-            
+
             Config vConfig = new Config();
             Port = vConfig.PowerPort;
         }
-        
+
         public void Start()
         {
             ReceiveQueue = new Queue<WHQueueModel>();
@@ -81,7 +81,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
                     m_ClientDict.Add(vTempConfig.DianYuan2ID, "");
                     m_ClientMaxID.Add(vTempConfig.DianYuan2ID, 0);
                 }
-                
+
             }
         }
 
@@ -125,6 +125,47 @@ namespace JXHighWay.WatchHouse.Bll.Server
             return vIPConfigResult;
         }
 
+        public async Task<bool> SendCMD_SetTime(string DianYuanID,int Time)
+        {
+            PowerDataPack_Send_SetTime vData = new PowerDataPack_Send_SetTime()
+            {
+                ShiQu = 0x08,
+                Time1 = (byte)(Time >> 24),
+                Time2 = (byte)(Time >> 16),
+                Time3 = (byte)(Time >> 8),
+                Time4 = (byte)(Time >> 0)
+            };
+            bool vResult = await asyncSendCommandToDB(DianYuanID, PowerDataPack_Send_CommandEnum.SetTime,vData);
+            return vResult;
+        }
+
+
+        /// <summary>
+        /// 获取电源模块的时间
+        /// </summary>
+        /// <param name="DianYuanID"></param>
+        /// <returns></returns>
+        public async Task<int> SendCMD_GetTime(string DianYuanID)
+        {
+            int vResultTime = 0;
+            bool vResult = await asyncSendCommandToDB(DianYuanID, PowerDataPack_Send_CommandEnum.GetTime);
+            if ( vResult)
+            {
+                PowerTimeConfigEFModel vPowerTimeConfigEFModel = new PowerTimeConfigEFModel()
+                {
+                    DianYuanID = DianYuanID
+                };
+                PowerTimeConfigEFModel vSelectResult = m_BasicDBClass_Send.SelectRecordsEx(vPowerTimeConfigEFModel).FirstOrDefault();
+                vResultTime = vSelectResult.Time??0;
+            }
+            return vResultTime;
+        }
+
+        /// <summary>
+        /// 获取IP地址(命令)
+        /// </summary>
+        /// <param name="DianYuanID"></param>
+        /// <returns></returns>
         public async Task<PowerIPConfigInfo> SendCMD_GetIP(string DianYuanID)
         {
             PowerIPConfigInfo vIPConfigResult = new PowerIPConfigInfo();
@@ -155,6 +196,12 @@ namespace JXHighWay.WatchHouse.Bll.Server
             return vIPConfigResult;
         }
 
+        /// <summary>
+        /// 设置IP地址(命令)
+        /// </summary>
+        /// <param name="DianYuanID"></param>
+        /// <param name="IPConfig"></param>
+        /// <returns></returns>
         public async Task<bool> SendCMD_SetIP( string DianYuanID,PowerIPConfigInfo IPConfig )
         {
             byte[] vIPAddress = NetHelper.StringToBytes_IP(IPConfig.IPAddress );
@@ -338,11 +385,11 @@ namespace JXHighWay.WatchHouse.Bll.Server
                                     break;
                                 case (byte)PowerDataPack_Receive_CommandEnum.SwitchStatus://处理接收到回复电源开关状态数据
                                 case (byte)PowerDataPack_Receive_CommandEnum.SetTime://设置时间
-                                case (byte)PowerDataPack_Receive_CommandEnum.SwitchParam://开关参数设置
+                                case (byte)PowerDataPack_Receive_CommandEnum.SetSwitchParam://开关参数设置
                                 case (byte)PowerDataPack_Receive_CommandEnum.Timing: //定时设置
                                 case (byte)PowerDataPack_Receive_CommandEnum.SetIPAddress: //设置IP地址
                                     PowerDataPack_Receive_ReplyCMD vDataPack2 = NetHelper.ByteToStructure<PowerDataPack_Receive_ReplyCMD>(vReceiveData.Data);
-                                    processorData_ReplyCMD(PowerDataPack_Receive_CommandEnum.SwitchStatus, vDataPack2);
+                                    processorData_ReplyCMD(vReceiveData.Data[11], vDataPack2);
                                     break;
                                 //电源上报事件
                                 case (byte)PowerDataPack_Receive_CommandEnum.Event:
@@ -354,7 +401,18 @@ namespace JXHighWay.WatchHouse.Bll.Server
                                     PowerDataPack_Receive_GetIPAddress vDataPack4 = NetHelper.ByteToStructure<PowerDataPack_Receive_GetIPAddress>(vReceiveData.Data);
                                     processorData_GetIPAddress(vDataPack4);
                                     break;
-                                
+                                //获取开关参数设置
+                                case (byte)PowerDataPack_Receive_CommandEnum.GetSwitchParam:
+                                    PowerDataPack_Receive_GetSwitchParam vDataPack5 = NetHelper.ByteToStructure<PowerDataPack_Receive_GetSwitchParam>(vReceiveData.Data);
+                                    processorData_GetSwitchParam(vDataPack5);
+                                    break;
+                                //获取电源时间
+                                case (byte)PowerDataPack_Receive_CommandEnum.GetTime:
+                                    PowerDataPack_Receive_GetTime vDataPack6 = NetHelper.ByteToStructure<PowerDataPack_Receive_GetTime>(vReceiveData.Data);
+                                    processorData_GetTime(vDataPack6);
+                                    break;
+
+
                             }
                             
                         }
@@ -577,6 +635,80 @@ namespace JXHighWay.WatchHouse.Bll.Server
             return vResult;
         }
 
+
+        /// <summary>
+        /// 处理接收到的获取时间数据
+        /// </summary>
+        /// <param name="dataPack"></param>
+        void processorData_GetTime(PowerDataPack_Receive_GetTime dataPack)
+        {
+            string vMAC = NetHelper.BytesToString_MAC(new byte[] { dataPack.MAC1, dataPack.MAC2, dataPack.MAC3, dataPack.MAC4,
+                dataPack.MAC5, dataPack.MAC6 });
+            PowerTimeConfigEFModel vPowerTimeConfigEFModel = new PowerTimeConfigEFModel()
+            {
+            
+                Time = BitConverter.ToInt32(new byte[] { dataPack.Time4, dataPack.Time3, dataPack.Time2, dataPack.Time1 }, 0)
+            };
+            bool vResult = m_BasicDBClass_Receive.UpdateRecord(vPowerTimeConfigEFModel, string.Format("DianYuanID='{0}'", vMAC));
+            if (!vResult)
+            {
+                vPowerTimeConfigEFModel.DianYuanID = vMAC;
+                vResult = m_BasicDBClass_Receive.InsertRecord(vPowerTimeConfigEFModel) > 0 ? true : false;
+            }
+
+            PowerSendCMDEFModel vPowerSendCMDEFModel = new PowerSendCMDEFModel()
+            {
+                IsReply = true
+            };
+            if (vResult)
+                vPowerSendCMDEFModel.State = true;
+            string vSql = string.Format("DianYuanID='{0}' and CMD={1:D} and SN={2}", vMAC, (byte)PowerDataPack_Send_CommandEnum.GetTime, dataPack.SN);
+            m_BasicDBClass_Receive.UpdateRecord(vPowerSendCMDEFModel, vSql);
+        }
+
+
+        /// <summary>
+        /// 处理收到的开关参数设置（IP地址设置）
+        /// </summary>
+        /// <param name="dataPack"></param>
+        void processorData_GetSwitchParam(PowerDataPack_Receive_GetSwitchParam dataPack)
+        {
+            string vMAC = NetHelper.BytesToString_MAC(new byte[] { dataPack.MAC1, dataPack.MAC2, dataPack.MAC3, dataPack.MAC4,
+                dataPack.MAC5, dataPack.MAC6 });
+            PowerSwithConfigEFModel vPowerSwithConfigEFModel = new PowerSwithConfigEFModel()
+            {
+                XianDingDN = BitConverter.ToInt16(new byte[] { dataPack.XianDingDN2, dataPack.XianDingDN1 }, 0),
+                XianDingGL = BitConverter.ToInt16(new byte[] { dataPack.XianDingGL2, dataPack.XianDingGL1 }, 0),
+                DianLiuLLZ = BitConverter.ToInt16(new byte[] { dataPack.DianLiuRLZ2, dataPack.DianLiuRLZ1 }, 0),
+                ChaoWenBHZ = BitConverter.ToUInt16(new byte[] { dataPack.ChaoWenBHZ2, dataPack.ChaoWenBHZ1 }, 0),
+                ChaoWenYJZ = BitConverter.ToUInt16(new byte[] { dataPack.ChaoWenYJZ2, dataPack.ChaoWenYJZ1 }, 0),
+                GuoYaSX = BitConverter.ToInt16(new byte[] { dataPack.GuoYaSX2, dataPack.GuoYaSX1 }, 0),
+                QianYaXX = BitConverter.ToInt16(new byte[] { dataPack.QianYaXX2, dataPack.QianYaXX1 }, 0),
+                EDingLDDZDL = BitConverter.ToInt16(new byte[] { dataPack.EDingLDDZDL2, dataPack.EDingLDDZDL1 }, 0),
+                LouDianLYJZ = BitConverter.ToInt16(new byte[] { dataPack.LouDianLYJZ2, dataPack.LouDianLYJZ1 }, 0)
+            };
+            bool vResult = m_BasicDBClass_Receive.UpdateRecord(vPowerSwithConfigEFModel, string.Format("DianYuanID='{0}' and LuHao={1:D}", vMAC, dataPack.LuHao));
+            if (!vResult)
+            {
+                vPowerSwithConfigEFModel.DianYuanID = vMAC;
+                vResult = m_BasicDBClass_Receive.InsertRecord(vPowerSwithConfigEFModel) > 0 ? true : false;
+
+            }
+
+            PowerSendCMDEFModel vPowerSendCMDEFModel = new PowerSendCMDEFModel()
+            {
+                IsReply = true
+            };
+            if (vResult)
+                vPowerSendCMDEFModel.State = true;
+            string vSql = string.Format("DianYuanID='{0}' and CMD={1:D} and SN={2}", vMAC, (byte)PowerDataPack_Send_CommandEnum.GetSwitchParam, dataPack.SN);
+            m_BasicDBClass_Receive.UpdateRecord(vPowerSendCMDEFModel, vSql);
+        }
+
+        /// <summary>
+        /// 处理收到的数据包（IP地址设置）
+        /// </summary>
+        /// <param name="dataPack"></param>
         void processorData_GetIPAddress(PowerDataPack_Receive_GetIPAddress dataPack)
         {
             string vMAC = NetHelper.BytesToString_MAC(new byte[] { dataPack.MAC_1, dataPack.MAC_2, dataPack.MAC_3, dataPack.MAC_4,
@@ -614,7 +746,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
         }
 
 
-        void processorData_ReplyCMD(PowerDataPack_Receive_CommandEnum comm, PowerDataPack_Receive_ReplyCMD dataPack)
+        void processorData_ReplyCMD(byte comm, PowerDataPack_Receive_ReplyCMD dataPack)
         {
             string vSql = "";
             
@@ -624,11 +756,27 @@ namespace JXHighWay.WatchHouse.Bll.Server
                 IsReply = true,
                 State = dataPack.State == 0x00 ? true : false
             };
+             //case (byte)PowerDataPack_Receive_CommandEnum.SwitchStatus://处理接收到回复电源开关状态数据
+             //case (byte)PowerDataPack_Receive_CommandEnum.SetTime://设置时间
+             //case (byte)PowerDataPack_Receive_CommandEnum.SetSwitchParam://开关参数设置
+             //case (byte)PowerDataPack_Receive_CommandEnum.Timing: //定时设置
+             //case (byte)PowerDataPack_Receive_CommandEnum.SetIPAddress: //设置IP地址
             switch ( comm )
             {
-                case PowerDataPack_Receive_CommandEnum.SwitchStatus:
-                case PowerDataPack_Receive_CommandEnum.SetTime:
+                case (byte)PowerDataPack_Receive_CommandEnum.SwitchStatus:
                     vSql = string.Format("DianYuanID='{0}' and CMD={1:D} and SN={2}", vDianYuanID, (byte)PowerDataPack_Send_CommandEnum.Switch, dataPack.SN);
+                    break;
+                case (byte)PowerDataPack_Receive_CommandEnum.SetTime:
+                    vSql = string.Format("DianYuanID='{0}' and CMD={1:D} and SN={2}", vDianYuanID, (byte)PowerDataPack_Send_CommandEnum.SetTime, dataPack.SN);
+                    break;
+                case (byte)PowerDataPack_Receive_CommandEnum.SetSwitchParam:
+                    vSql = string.Format("DianYuanID='{0}' and CMD={1:D} and SN={2}", vDianYuanID, (byte)PowerDataPack_Send_CommandEnum.SetSwitchParam, dataPack.SN);
+                    break;
+                case (byte)PowerDataPack_Receive_CommandEnum.Timing:
+                    vSql = string.Format("DianYuanID='{0}' and CMD={1:D} and SN={2}", vDianYuanID, (byte)PowerDataPack_Send_CommandEnum.Timing, dataPack.SN);
+                    break;
+                case (byte)PowerDataPack_Receive_CommandEnum.SetIPAddress:
+                    vSql = string.Format("DianYuanID='{0}' and CMD={1:D} and SN={2}", vDianYuanID, (byte)PowerDataPack_Send_CommandEnum.SetIPAddress, dataPack.SN);
                     break;
 
             }

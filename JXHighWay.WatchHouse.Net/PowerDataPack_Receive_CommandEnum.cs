@@ -25,6 +25,10 @@ namespace JXHighWay.WatchHouse.Net.DataPack
         /// </summary>
         SetTime = 0x48,
         /// <summary>
+        /// 获取时间
+        /// </summary>
+        GetTime = 0x62,
+        /// <summary>
         /// 获取IP地址
         /// </summary>
         GetIPAddress = 0x39,
@@ -33,9 +37,13 @@ namespace JXHighWay.WatchHouse.Net.DataPack
         /// </summary>
         SetIPAddress = 0x40,
         /// <summary>
-        ///开关参数设置 
+        ///设置开关参数设置 
         /// </summary>
-        SwitchParam = 0x4c,
+        SetSwitchParam = 0x4c,
+        /// <summary>
+        /// 获取开关参数设置
+        /// </summary>
+        GetSwitchParam = 0x6C,
         /// <summary>
         ///定时设置 
         /// </summary>

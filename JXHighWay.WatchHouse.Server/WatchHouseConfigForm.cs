@@ -210,5 +210,19 @@ namespace JXHighWay.WatchHouse.Server
             else
                 MessageBox.Show("请输入正确的电源ID", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+
+        private void button_DY1_Time_Click(object sender, EventArgs e)
+        {
+            TimeConfigForm vTimeConfigForm = new TimeConfigForm();
+            vTimeConfigForm.DianYuanID = textBox_DY1_ID.Text;
+            vTimeConfigForm.ShowDialog();
+        }
+
+        private void button_DY2_Time_Click(object sender, EventArgs e)
+        {
+            TimeConfigForm vTimeConfigForm = new TimeConfigForm();
+            vTimeConfigForm.DianYuanID = textBox_DY2_ID.Text;
+            vTimeConfigForm.ShowDialog();
+        }
     }
 }

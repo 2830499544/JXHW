@@ -31,11 +31,11 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
         /// <summary>
         /// 超温保护值
         /// </summary>
-        public short ChaoWenBHZ { get; set; }
+        public UInt16 ChaoWenBHZ { get; set; }
         /// <summary>
         /// 超温预警值
         /// </summary>
-        public short ChaoWenYJZ { get; set; }
+        public UInt16 ChaoWenYJZ { get; set; }
         /// <summary>
         /// 过压上限
         /// </summary>

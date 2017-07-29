@@ -23,6 +23,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
 
         #region 命令
 
+
         /// <summary>
         /// 设置配电箱时间
         /// </summary>
@@ -46,7 +47,66 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
         }
 
         /// <summary>
-        /// 分路开关参数配置
+        /// 获取分路开关参数配置
+        /// </summary>
+        /// <param name="DianYuanID"></param>
+        /// <param name="SheBieLX"></param>
+        /// <param name="LuHao"></param>
+        /// <returns></returns>
+        public async Task<bool> SendCMD_GetSwitchParam(string DianYuanID, byte SheBieLX, byte LuHao)
+        {
+            PowerDataPack_Send_GetSwitchParam vData = new PowerDataPack_Send_GetSwitchParam()
+            {
+                SheBeiLX = SheBieLX,
+                LuHao = LuHao
+            };
+            bool vResult = await asyncSendCommandToDB(DianYuanID, PowerDataPack_Send_CommandEnum.GetSwitchParam, vData);
+            return vResult;
+        }
+
+        public async Task<bool> SendCMD_SetSwitchParam(string DianYuanID, byte SheBieLX, byte LuHao,
+          Int16 XianDingDN, Int16 XianDingGL, int DianLiuLLZ,UInt16 ChaoWenBHZ,UInt16 ChaoWenYJZ,Int16 GuoYaSX,Int16 QianYaXX,
+          Int16 EDingLDDZDL,Int16 LouDianLYJZ)
+        {
+            PowerDataPack_Send_SetSwitchParam vData = new PowerDataPack_Send_SetSwitchParam()
+            {
+                XianDingDN1 = (byte)(XianDingDN >> 8),
+                XianDingDN2 = (byte)(XianDingDN >> 0),
+
+                XianDingGL1 = (byte)(XianDingGL >> 8),
+                XianDingGL2 = (byte)(XianDingGL >> 0),
+
+                DianLiuRLZ1 = (byte)(DianLiuLLZ >> 8),
+                DianLiuRLZ2 = (byte)(DianLiuLLZ >> 0),
+
+                ChaoWenBHZ1 = (byte)(ChaoWenBHZ >> 8),
+                ChaoWenBHZ2 = (byte)(ChaoWenBHZ >> 0),
+
+                ChaoWenYJZ1 = (byte)(ChaoWenYJZ >> 8),
+                ChaoWenYJZ2 = (byte)(ChaoWenYJZ >> 0),
+
+                GuoYaSX1 = (byte)(GuoYaSX >> 8),
+                GuoYaSX2 = (byte)(GuoYaSX >> 0),
+
+                QianYaXX1 = (byte)(QianYaXX >> 8),
+                QianYaXX2 = (byte)(QianYaXX >> 0),
+
+                EDingLDDZDL1 = (byte)(EDingLDDZDL >> 8),
+                EDingLDDZDL2 = (byte)(EDingLDDZDL >> 0),
+
+                LouDianLYJZ1 = (byte)(LouDianLYJZ >> 8),
+                LouDianLYJZ2 = (byte)(LouDianLYJZ >> 0),
+
+                LuHao = LuHao,
+                LeiXing = SheBieLX
+
+            };
+            bool vResult = await asyncSendCommandToDB(DianYuanID, PowerDataPack_Send_CommandEnum.SetSwitchParam, vData);
+            return vResult;
+        }
+
+        /// <summary>
+        /// 设置分路开关参数配置
         /// </summary>
         /// <param name="DianYuanID"></param>
         /// <param name="SheBieLX"></param>
@@ -54,55 +114,55 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
         /// <param name="BiaoShiMa"></param>
         /// <param name="Data"></param>
         /// <returns></returns>
-        public async Task<bool> SendCMD_SwitchParam(string DianYuanID, byte SheBieLX, byte LuHao, 
-            PowerDataPack_Send_SwitchParam_CommandEnum BiaoShiMa,short Data)
-        {
-            PowerDataPack_Send_SwitchParam vData = new PowerDataPack_Send_SwitchParam()
-            {
-                BiaoShiMa = (byte)BiaoShiMa,
-                LeiXing = SheBieLX,
-                LuHao = LuHao,
-                Data1 = (byte)(Data >> 8),
-                Data2 = (byte)(Data >> 0)
-            };
-            bool vResult = await asyncSendCommandToDB(DianYuanID, PowerDataPack_Send_CommandEnum.Switch, vData);
-            if(vResult)
-            {
-                PowerSwithConfigEFModel vPowerSwithConfigEFModel = new PowerSwithConfigEFModel();
-                switch(BiaoShiMa)
-                {
-                    case PowerDataPack_Send_SwitchParam_CommandEnum.ChaoWenBHZ:
-                        vPowerSwithConfigEFModel.ChaoWenBHZ = Data;
-                        break;
-                    case PowerDataPack_Send_SwitchParam_CommandEnum.ChaoWenYJZ:
-                        vPowerSwithConfigEFModel.ChaoWenYJZ = Data;
-                        break;
-                    case PowerDataPack_Send_SwitchParam_CommandEnum.DianLiuLLZ:
-                        vPowerSwithConfigEFModel.DianLiuLLZ = Data;
-                        break;
-                    case PowerDataPack_Send_SwitchParam_CommandEnum.EDingLDDZDL:
-                        vPowerSwithConfigEFModel.EDingLDDZDL = Data;
-                        break;
-                    case PowerDataPack_Send_SwitchParam_CommandEnum.GuoYaSX:
-                        vPowerSwithConfigEFModel.GuoYaSX = Data;
-                        break;
-                    case PowerDataPack_Send_SwitchParam_CommandEnum.LouDianLYJZ:
-                        vPowerSwithConfigEFModel.LouDianLYJZ = Data;
-                        break;
-                    case PowerDataPack_Send_SwitchParam_CommandEnum.QianYaXX:
-                        vPowerSwithConfigEFModel.QianYaXX = Data;
-                        break;
-                    case PowerDataPack_Send_SwitchParam_CommandEnum.XianDingDN:
-                        vPowerSwithConfigEFModel.XianDingDN = Data;
-                        break;
-                    case PowerDataPack_Send_SwitchParam_CommandEnum.XianDingGL:
-                        vPowerSwithConfigEFModel.XianDingGL = Data;
-                        break;
-                }
-                m_BasicDBClassUpdate.UpdateRecord(vPowerSwithConfigEFModel,string.Format( "DianYuanID={0} and LuHao{1}",DianYuanID,LuHao));
-            }
-            return vResult;
-        }
+        //public async Task<bool> SendCMD_SetSwitchParam(string DianYuanID, byte SheBieLX, byte LuHao, 
+        //    PowerDataPack_Send_SwitchParam_CommandEnum BiaoShiMa,short Data)
+        //{
+        //    PowerDataPack_Send_SwitchParam vData = new PowerDataPack_Send_SwitchParam()
+        //    {
+        //        BiaoShiMa = (byte)BiaoShiMa,
+        //        LeiXing = SheBieLX,
+        //        LuHao = LuHao,
+        //        Data1 = (byte)(Data >> 8),
+        //        Data2 = (byte)(Data >> 0)
+        //    };
+        //    bool vResult = await asyncSendCommandToDB(DianYuanID, PowerDataPack_Send_CommandEnum.Switch, vData);
+        //    if(vResult)
+        //    {
+        //        PowerSwithConfigEFModel vPowerSwithConfigEFModel = new PowerSwithConfigEFModel();
+        //        switch(BiaoShiMa)
+        //        {
+        //            case PowerDataPack_Send_SwitchParam_CommandEnum.ChaoWenBHZ:
+        //                vPowerSwithConfigEFModel.ChaoWenBHZ = Data;
+        //                break;
+        //            case PowerDataPack_Send_SwitchParam_CommandEnum.ChaoWenYJZ:
+        //                vPowerSwithConfigEFModel.ChaoWenYJZ = Data;
+        //                break;
+        //            case PowerDataPack_Send_SwitchParam_CommandEnum.DianLiuLLZ:
+        //                vPowerSwithConfigEFModel.DianLiuLLZ = Data;
+        //                break;
+        //            case PowerDataPack_Send_SwitchParam_CommandEnum.EDingLDDZDL:
+        //                vPowerSwithConfigEFModel.EDingLDDZDL = Data;
+        //                break;
+        //            case PowerDataPack_Send_SwitchParam_CommandEnum.GuoYaSX:
+        //                vPowerSwithConfigEFModel.GuoYaSX = Data;
+        //                break;
+        //            case PowerDataPack_Send_SwitchParam_CommandEnum.LouDianLYJZ:
+        //                vPowerSwithConfigEFModel.LouDianLYJZ = Data;
+        //                break;
+        //            case PowerDataPack_Send_SwitchParam_CommandEnum.QianYaXX:
+        //                vPowerSwithConfigEFModel.QianYaXX = Data;
+        //                break;
+        //            case PowerDataPack_Send_SwitchParam_CommandEnum.XianDingDN:
+        //                vPowerSwithConfigEFModel.XianDingDN = Data;
+        //                break;
+        //            case PowerDataPack_Send_SwitchParam_CommandEnum.XianDingGL:
+        //                vPowerSwithConfigEFModel.XianDingGL = Data;
+        //                break;
+        //        }
+        //        m_BasicDBClassUpdate.UpdateRecord(vPowerSwithConfigEFModel,string.Format( "DianYuanID={0} and LuHao{1}",DianYuanID,LuHao));
+        //    }
+        //    return vResult;
+        //}
 
         /// <summary>
         /// 控制分路开关
@@ -210,7 +270,6 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
         {
             return await Task.Run(() =>
             {
-                //string vDataStr = System.Text.Encoding.Default.GetString(NetHelper.StructureToByte(SendData));
                 PowerSendCMDEFModel vSendCMDEFModel = new PowerSendCMDEFModel()
                 {
                     State = false,
@@ -234,7 +293,36 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
                         break;
                     Thread.Sleep(200);
                 } while (!vResult);
-                //m_BasicDBClass.DeleteRecordByPrimaryKey<PowerSendCMDEFModel>(vID);
+                return vResult;
+            });
+        }
+
+        async Task<bool> asyncSendCommandToDB(string dianYuanID, PowerDataPack_Send_CommandEnum command)
+        {
+            return await Task.Run(() =>
+            {
+                PowerSendCMDEFModel vSendCMDEFModel = new PowerSendCMDEFModel()
+                {
+                    State = false,
+                    IsSend = false,
+                    IsReply = false,
+                    CMD = (byte)command,
+                    DianYuanID = dianYuanID,
+                    SendTime = DateTime.Now,
+                    SN = NetHelper.MarkSN_Byte()
+                };
+                int vID = m_BasicDBClassInsert.InsertRecord(vSendCMDEFModel);
+
+                DateTime vStartTime = DateTime.Now;
+                bool vResult = false;
+                do
+                {
+                    PowerSendCMDEFModel vSelectResult = m_BasicDBClass.SelectRecordByPrimaryKeyEx<PowerSendCMDEFModel>(vID);
+                    vResult = vSelectResult.State ?? false;
+                    if (!vResult && (DateTime.Now - vStartTime).TotalMilliseconds >= 2000)
+                        break;
+                    Thread.Sleep(200);
+                } while (!vResult);
                 return vResult;
             });
         }
