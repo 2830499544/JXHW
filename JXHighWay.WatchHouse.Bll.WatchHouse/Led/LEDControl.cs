@@ -11,6 +11,7 @@ using System.IO;
 using System.Xml.Serialization;
 using MXKJ.DBMiddleWareLib;
 using JXHighWay.WatchHouse.EFModel;
+using System.Xml;
 
 namespace JXHighWay.WatchHouse.Bll.Client.LED
 {
@@ -27,7 +28,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.LED
 
         ConfigbooXml m_ConfigbooXml = new ConfigbooXml();
 
-        public LEDControl(int WatchHouseID,int Heigth,int Width)
+        public LEDControl(int WatchHouseID)
         {
           
             Config vConfig = new Config();
@@ -37,28 +38,26 @@ namespace JXHighWay.WatchHouse.Bll.Client.LED
             BasicDBClass.UserID = vConfig.DBUserName;
             BasicDBClass.Password = vConfig.DBPassword;
             m_BasicDBClass = new BasicDBClass( DataBaseType.MySql);
-            m_IPAddress = getLEDIPAddress(WatchHouseID);
-
-
-            m_Heigth = Heigth;
-            m_Width = Width;
+            getLEDInfo(WatchHouseID,ref m_IPAddress,ref m_Width,ref m_Heigth);
+            //m_Heigth = Heigth;
+            //m_Width = Width;
             HD_Transmit.InitTransmit();
         }
 
-        string getLEDIPAddress( int WatchHouseID)
+        void getLEDInfo( int watchHouseID,ref string ipAddress,ref int width,ref int height )
         {
-            string vResult = "";
             WatchHouseConfigEFModel vWatchHouseConfigEFModel = new WatchHouseConfigEFModel()
             {
-                GangTingID = WatchHouseID
+                GangTingID = watchHouseID
             };
 
             WatchHouseConfigEFModel[] vSelectResult = m_BasicDBClass.SelectRecordsEx(vWatchHouseConfigEFModel);
             if (vSelectResult != null && vSelectResult.Length > 0)
             {
-                vResult = vSelectResult[0].GuanGaoPingIP;
+                ipAddress = vSelectResult[0].GuanGaoPingIP;
+                width = vSelectResult[0].GuanGaoKuang ?? 0;
+                height = vSelectResult[0].GuanGaoGao ?? 0;
             }
-            return vResult;
         }
 
         public void Init()
@@ -79,6 +78,130 @@ namespace JXHighWay.WatchHouse.Bll.Client.LED
                 HD_Transmit.SendToBoxPlayer(mInstance, buffer, buffer.Length/*, containFile*/);
             }
         }
+
+        public void Test()
+        {
+            HDFont font = new HDFont();
+            font.FontName = "SimSun";
+            font.FontSize = 16;
+            font.TextColor = new HDColor(255, 255, 255, 128);
+            byte[] vTextRead = HD_Base.GenerateSinglelineTextXml(new Size(m_Width, m_Heigth),"test", font);
+            System.IO.MemoryStream vMemoryStream = new MemoryStream(vTextRead);
+            //System.IO.FileStream vFileStream = new FileStream(@"c:\2.xml", FileMode.CreateNew);
+
+            //vFileStream.Write(vTextRead, 0, vTextRead.Length);
+            XmlDocument vXmlDocument = new XmlDocument();
+            vXmlDocument.Load(vMemoryStream);
+            XmlNodeList vList =  vXmlDocument.SelectNodes("/config.boo/content/channel/area/rectangle/materials/");
+            string aa = vList.ToString();
+
+            RenderTargtBitmap 
+            
+            //vFileStream.Flush();
+            //vFileStream.Close();
+        }
+
+        #region 发送多频道节目
+        public void SendMultiChannel(List<LEDChannelInfo> ChannelList)
+        {
+            string vMD5 = ""; //CommHelper.GetMD5HashFromFile(ImagePath);
+            long vFileSize = 0;// CommHelper.FileSize(ImagePath);
+
+            //清空原有节目
+            configbooChannel vClearChannel = new configbooChannel()
+            {
+                setSize = 0,
+                setSizeSpecified = true
+            };
+
+            foreach (LEDChannelInfo vTempChannel in ChannelList)
+            {
+                //第一个节目
+                configbooChannel vNewChannel = new configbooChannel();
+                vNewChannel.action = "add";
+                m_ConfigbooXml.content = new configbooChannel[] { vClearChannel, vNewChannel };
+
+                //第一个节目第一区域
+                configbooChannelArea vNewChannel_Area = new configbooChannelArea()
+                {
+                    action = "add"
+                };
+                vNewChannel.area = new configbooChannelArea[] { vNewChannel_Area };
+
+                configbooChannelAreaRectangle vNewChannel_Area_Rectangle = new configbooChannelAreaRectangle()
+                {
+                    x = 0,
+                    y = 0,
+                    height = m_Heigth,
+                    width = m_Width
+                };
+                vNewChannel_Area.rectangle = vNewChannel_Area_Rectangle;
+                vNewChannel_Area.materials = new configbooChannelAreaMaterials();
+                switch (vTempChannel.ChannelType)
+                {
+                    case LEDChanneTypeEnum.Image:
+                        vMD5 = CommHelper.GetMD5HashFromFile(vTempChannel.Content);
+                        vFileSize = CommHelper.FileSize(vTempChannel.Content);
+                        configbooChannelAreaMaterialsImage vNewImage = new configbooChannelAreaMaterialsImage()
+                        {
+                            action = "add"
+                        };
+                        vNewChannel_Area.materials.image = new configbooChannelAreaMaterialsImage[]
+                        {
+                            vNewImage
+                        };
+                        vNewImage.effect = new configbooChannelAreaMaterialsImageEffect()
+                        {
+                            @in = 0,
+                            @out = 20,
+                            inSpeed = 1,
+                            outSpeed = 1,
+                            holdTime = 8
+                        };
+                        vNewImage.file = new configbooChannelAreaMaterialsImageFile()
+                        {
+                            md5 = vMD5,
+                            size = vFileSize,
+                            path = vTempChannel.Content
+                        };
+                        break;
+                    case LEDChanneTypeEnum.Text:
+                        HDFont font = new HDFont();
+                        font.FontName = "SimSun";
+                        font.FontSize = 16;
+                        font.TextColor = new HDColor(255, 255, 255, 128);
+                        byte[] vTextRead = HD_Base.GenerateSinglelineTextXml(new Size(m_Width, m_Heigth), vTempChannel.Content, font);
+                        System.IO.MemoryStream vMemoryStream = new MemoryStream(vTextRead);
+                        XmlDocument vXmlDocument = new XmlDocument();
+                        vXmlDocument.Load(vMemoryStream);
+                       
+
+
+                        break;
+                    case LEDChanneTypeEnum.Video:
+                        vMD5 = CommHelper.GetMD5HashFromFile(vTempChannel.Content);
+                        vFileSize = CommHelper.FileSize(vTempChannel.Content);
+                        configbooChannelAreaMaterialsVideo vNewVideo = new configbooChannelAreaMaterialsVideo()
+                        {
+                            action = "add",
+                        };
+                        vNewChannel_Area.materials.video = new configbooChannelAreaMaterialsVideo[]
+                        {
+                            vNewVideo
+                        };
+                        vNewVideo.file = new configbooChannelAreaMaterialsVideoFile()
+                        {
+                            md5 = vMD5,
+                            size = vFileSize,
+                            path = vTempChannel.Content
+                        };
+                        break;
+                }
+            }
+        }
+        #endregion
+
+        #region 发送图像
         public void SendImageQF(string UserName, string ImagePath)
         {
             WatchHouseConfigEFModel[] vSelectResult = m_BasicDBClass.SelectAllRecordsEx<WatchHouseConfigEFModel>();
@@ -95,7 +218,6 @@ namespace JXHighWay.WatchHouse.Bll.Client.LED
         {
             string vMD5 = CommHelper.GetMD5HashFromFile(ImagePath);
             long vFileSize = CommHelper.FileSize(ImagePath);
-
             
             //清空原有节目
             configbooChannel vClearChannel = new configbooChannel()
@@ -103,7 +225,6 @@ namespace JXHighWay.WatchHouse.Bll.Client.LED
                 setSize = 0,
                 setSizeSpecified = true
             };
-            
 
             //第一个节目
             configbooChannel v1Changel = new configbooChannel();
@@ -171,7 +292,9 @@ namespace JXHighWay.WatchHouse.Bll.Client.LED
 
             m_BasicDBClass.InsertRecord(vLEDDataEFModel);
         }
+        #endregion
 
+        #region 发送视频
         public void SendVideoQF(string UserName,string VideoPath)
         {
             WatchHouseConfigEFModel[] vSelectResult = m_BasicDBClass.SelectAllRecordsEx<WatchHouseConfigEFModel>();
@@ -188,7 +311,6 @@ namespace JXHighWay.WatchHouse.Bll.Client.LED
         {
             string vMD5 = CommHelper.GetMD5HashFromFile(VideoPath);
             long vFileSize = CommHelper.FileSize(VideoPath);
-
 
             //清空原有节目
             configbooChannel vClearChannel = new configbooChannel()
@@ -259,7 +381,9 @@ namespace JXHighWay.WatchHouse.Bll.Client.LED
 
             m_BasicDBClass.InsertRecord(vLEDDataEFModel);
         }
+        #endregion
 
+        #region 发送文字
         /// <summary>
         /// 文字群发
         /// </summary>
@@ -287,6 +411,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.LED
             font.FontSize = 16;
             font.TextColor = new HDColor(255, 255, 255, 128);
             byte[] data = HD_Base.GenerateSinglelineTextXml(new Size(m_Width, m_Heigth), Text, font);
+            
             t.Send(m_IPAddress, data, true);
 
             LEDDataEFModel vLEDDataEFModel = new LEDDataEFModel()
@@ -298,6 +423,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.LED
 
             m_BasicDBClass.InsertRecord(vLEDDataEFModel);
         }
+        #endregion
 
         static HD_Callback callback = (x, y) =>
         {

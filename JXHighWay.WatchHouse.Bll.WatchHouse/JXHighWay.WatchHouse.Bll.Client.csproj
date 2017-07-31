@@ -53,7 +53,9 @@
     <Compile Include="GanTing\DiNuanStateInfo.cs" />
     <Compile Include="GanTing\GongHaoPaiInfo.cs" />
     <Compile Include="GanTing\KongTiaoStateInfo.cs" />
-    <Compile Include="Led\LEDControl.cs" />
+    <Compile Include="LED\LEDChanneTypeEnum.cs" />
+    <Compile Include="LED\LEDChannelInfo.cs" />
+    <Compile Include="LED\LEDControl.cs" />
     <Compile Include="GanTing\MenChuangStateInfo.cs" />
     <Compile Include="GanTing\WatchHouseMonitoring.cs" />
     <Compile Include="User.cs" />
