@@ -182,9 +182,9 @@ namespace JXHighWay.WatchHouse.WFPClient
             timePicker_Time.Value = DateTime.Now;
             for(int i=0;i<4;i++)
             {
-                byte vLuHao = (byte)(i >> 0);
+                byte vLuHao = (byte)(i+1 >> 0);
                 m_TimingInfoList =  m_PowerMonitoring.GetTimingInfo(DianYuanID, vLuHao);
-                TimingInfo vTimingInfo = m_TimingInfoList.Where(m => m.LuHao == i).FirstOrDefault();
+                TimingInfo vTimingInfo = m_TimingInfoList.Where(m =>m.LuHao == vLuHao).FirstOrDefault();
                 bindTimingInfo(vTimingInfo,i);
             }
         }

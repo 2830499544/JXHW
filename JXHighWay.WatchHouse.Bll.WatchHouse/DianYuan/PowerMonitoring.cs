@@ -215,7 +215,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
                 ZhouQi = ZhouQi,
                 ZhuHao = ZhuHao
             };
-            switch ( RenWuLX )
+            switch (ZhouQi)
             {
                 //单次
                 case 0x00:
@@ -247,7 +247,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
                     break;
             }
 
-            bool vResult = await asyncSendCommandToDB(DianYuanID, PowerDataPack_Send_CommandEnum.Switch, vData);
+            bool vResult = await asyncSendCommandToDB(DianYuanID, PowerDataPack_Send_CommandEnum.Timing, vData);
             if ( vResult )
             {
                 PowerTimingEFModel vPowerTimingEFModel = new PowerTimingEFModel()
@@ -466,7 +466,8 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
                     YunXuKZ = vSelectResult[i].YunXuKZ ?? 0,
                     ZhouQi = vSelectResult[i].ZhouQi ?? 0,
                     ZhuHao = vSelectResult[i].ZhuHao ?? 0,
-                    LuHao = vSelectResult[i].LuHao??0
+                    LuHao = vSelectResult[i].LuHao??0,
+                    TimeData = vSelectResult[i].TimeData ?? 0
                 };
             }
             return vResult.ToList();

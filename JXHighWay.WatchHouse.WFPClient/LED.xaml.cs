@@ -74,7 +74,6 @@ namespace JXHighWay.WatchHouse.WFPClient
 
         private void button_Text_ShangChuang_Click(object sender, RoutedEventArgs e)
         {
-           
             if (textBox_Text.Text != "")
                 m_LEDControl.SendText( App.AdminUser, textBox_Text.Text);
             else
@@ -127,6 +126,8 @@ namespace JXHighWay.WatchHouse.WFPClient
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             LEDText vLEDText = new LEDText();
+            vLEDText.RichHeigth = m_LEDControl.Heigth;
+            vLEDText.RichWidth = m_LEDControl.Width;
             vLEDText.ShowDialog();
         }
     }

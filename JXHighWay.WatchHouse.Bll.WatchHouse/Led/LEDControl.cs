@@ -18,7 +18,23 @@ namespace JXHighWay.WatchHouse.Bll.Client.LED
     {
         readonly string m_IPAddress;
         readonly int m_Heigth;
+        public int Heigth
+        {
+            get
+            {
+                return m_Heigth;
+            }
+        }
+
         readonly int m_Width;
+        public int Width
+        {
+            get
+            {
+                return m_Width;
+            }
+        }
+
         BasicDBClass m_BasicDBClass = null;
 
         static System.IntPtr mInstance = System.IntPtr.Zero;

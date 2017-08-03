@@ -470,6 +470,10 @@
       <Project>{0a3d0538-3339-4111-a7a4-c9907cb49f26}</Project>
       <Name>JXHighWay.WatchHouse.Net.DataPack</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RTFEditor\RTFEditor.csproj">
+      <Project>{6aec74bd-eee6-4402-93b0-4d4163e15e98}</Project>
+      <Name>RTFEditor</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Config\Top.jpg" />

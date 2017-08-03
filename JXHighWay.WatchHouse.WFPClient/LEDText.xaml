@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JXHighWay.WatchHouse.WFPClient"
+        xmlns:rtf="clr-namespace:RTFEditor;assembly=RTFEditor"
         mc:Ignorable="d"
-        Title="LEDText" Height="300" Width="500">
+        Title="LEDText" Height="600" Width="800" Loaded="Window_Loaded">
     <Grid Background="#245d7c">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="177*"/>
@@ -15,12 +16,6 @@
             <RowDefinition Height="47*" />
             <RowDefinition Height="179*" />
         </Grid.RowDefinitions>
-        <RichTextBox HorizontalAlignment="Left" Height="179" Grid.RowSpan="2" VerticalAlignment="Top" Width="494" Margin="0,47,-0.4,0" Grid.Row="1">
-            <FlowDocument>
-                <Paragraph>
-                    <Run Text="RichTextBox"/>
-                </Paragraph>
-            </FlowDocument>
-        </RichTextBox>
+        <rtf:RTFBox Name="RTFBox1" Grid.Column="0" Grid.Row="2"></rtf:RTFBox>
     </Grid>
 </Window>

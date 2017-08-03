@@ -19,9 +19,17 @@ namespace JXHighWay.WatchHouse.WFPClient
     /// </summary>
     public partial class LEDText : Window
     {
+        public int RichWidth { get; set; }
+        public int RichHeigth { get; set; }
         public LEDText()
         {
             InitializeComponent();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            RTFBox1.RichWidth = RichWidth;
+            RTFBox1.RichHeight = RichHeigth;
         }
     }
 }
