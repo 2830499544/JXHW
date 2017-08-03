@@ -104,7 +104,7 @@ namespace JXHighWay.WatchHouse.WFPClient
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            m_LEDControl = new LEDControl(App.WatchHouseID, 160, 224);
+            m_LEDControl = new LEDControl(App.WatchHouseID);
         }
 
         private void button_ShiPing_QunFa_Click(object sender, RoutedEventArgs e)
@@ -129,6 +129,12 @@ namespace JXHighWay.WatchHouse.WFPClient
             vLEDText.RichHeigth = m_LEDControl.Heigth;
             vLEDText.RichWidth = m_LEDControl.Width;
             vLEDText.ShowDialog();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            LEDControl vLEDControl = new LEDControl( App.WatchHouseID);
+            vLEDControl.Test();
         }
     }
 }
