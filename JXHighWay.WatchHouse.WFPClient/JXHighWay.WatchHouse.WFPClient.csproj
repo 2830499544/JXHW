@@ -106,6 +106,9 @@
     <Compile Include="LED.xaml.cs">
       <DependentUpon>LED.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LEDSend.xaml.cs">
+      <DependentUpon>LEDSend.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LEDText.xaml.cs">
       <DependentUpon>LEDText.xaml</DependentUpon>
     </Compile>
@@ -131,6 +134,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DianYuan_S.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LEDSend.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -526,6 +533,8 @@
     <Resource Include="Images\Main\ShanYei.jpg" />
     <Resource Include="Images\Main\XiaYei_A.jpg" />
     <Resource Include="Images\Main\XiaYei.jpg" />
+    <Resource Include="Images\LED\Tou.jpg" />
+    <Resource Include="Images\LED\GuanBi.jpg" />
     <Content Include="LED\1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -6,16 +6,17 @@
         xmlns:local="clr-namespace:JXHighWay.WatchHouse.WFPClient"
         xmlns:rtf="clr-namespace:RTFEditor;assembly=RTFEditor"
         mc:Ignorable="d"
-        Title="LEDText" Height="600" Width="800" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
+        Title="LEDText" Height="600" Width="709" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" AllowsTransparency="True" WindowStyle="None">
     <Grid >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="177*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions >
-            <RowDefinition Height="31*"  />
+            <RowDefinition Height="11*"   />
             <RowDefinition Height="254*" />
         </Grid.RowDefinitions>
         <rtf:RTFBox Name="RTFBox1" Grid.Column="0" Grid.Row="1"></rtf:RTFBox>
-        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,19,0,0" Click="button_Click"/>
+        <Image HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="709" Margin="0,0,-9,0" Source="Images/LED/Tou.jpg" MouseLeftButtonDown="Image_MouseLeftButtonDown"/>
+        <Image HorizontalAlignment="Left" Name="Image_Close" Height="16" VerticalAlignment="Top" Width="16" Margin="690,1,0,0" Source="Images/LED/GuanBi.jpg" MouseLeftButtonDown="Image_Close_MouseLeftButtonDown" Cursor="Hand"/>
     </Grid>
 </Window>

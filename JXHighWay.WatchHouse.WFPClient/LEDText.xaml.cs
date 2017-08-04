@@ -43,5 +43,20 @@ namespace JXHighWay.WatchHouse.WFPClient
             ImagePath = RTFBox1.GetImageFromControl();
             DialogResult = true;
         }
+
+        private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                this.DragMove();
+            }
+            catch { }
+        }
+
+        private void Image_Close_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            ImagePath = RTFBox1.ImagePath;
+            Close();
+        }
     }
 }

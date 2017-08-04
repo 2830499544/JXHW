@@ -48,12 +48,17 @@ namespace RTFEditor
             }
             set
             {
-                System.IO.StringReader vSR = new System.IO.StringReader(value);
-                System.Xml.XmlReader vXR = System.Xml.XmlReader.Create(vSR);
-                RichTextControl.Document = (FlowDocument)System.Windows.Markup.XamlReader.Load(vXR);
+                if (value != null)
+                {
+                    System.IO.StringReader vSR = new System.IO.StringReader(value);
+                    System.Xml.XmlReader vXR = System.Xml.XmlReader.Create(vSR);
+                    RichTextControl.Document = (FlowDocument)System.Windows.Markup.XamlReader.Load(vXR);
+                }
                 //privateText = value;
             }
         }
+
+        public string ImagePath { get; set; }
 
         public double RichWidth
         {
@@ -707,5 +712,10 @@ namespace RTFEditor
         // In der StatusBar Ausgabe von Grossschreibweise, Num Lock, Zoom
 
         #endregion TODO
+
+        private void ToolStripButtonSave_Click(object sender, RoutedEventArgs e)
+        {
+            ImagePath = GetImageFromControl();
+        }
     }
 }

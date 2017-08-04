@@ -16,8 +16,10 @@
 
     <DockPanel>
         <ToolBar x:Name="ToolBarOben" DockPanel.Dock="Top">
-        	
-			<Separator/>
+            <Button x:Name="ToolStripButtonSave" ToolTip="保存" Click="ToolStripButtonSave_Click">
+                <Image Source="Images\Save.png" Stretch="None"/>
+            </Button>
+            <Separator/>
 			<Button x:Name="ToolStripButtonCut" Command="ApplicationCommands.Cut" ToolTip="剪切">
 				<Image Source="Images\Cut.png" Stretch="None"/>				
 			</Button>
