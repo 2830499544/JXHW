@@ -26,6 +26,7 @@ namespace JXHighWay.WatchHouse.WFPClient
     public partial class LED : Page
     {
         LEDControl m_LEDControl;
+        string m_RichText;
         public LED()
         {
             InitializeComponent();
@@ -74,13 +75,13 @@ namespace JXHighWay.WatchHouse.WFPClient
 
         private void button_Text_ShangChuang_Click(object sender, RoutedEventArgs e)
         {
-            if (textBox_Text.Text != "")
-                m_LEDControl.SendText( App.AdminUser, textBox_Text.Text);
-            else
-            {
-                Xceed.Wpf.Toolkit.MessageBox.Show("请输入方字", "信息", MessageBoxButton.OK, MessageBoxImage.Error);
-                textBox_Text.Focus();
-            }
+            //if (textBox_Text.Text != "")
+            //    m_LEDControl.SendText( App.AdminUser, textBox_Text.Text);
+            //else
+            //{
+            //    Xceed.Wpf.Toolkit.MessageBox.Show("请输入方字", "信息", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    textBox_Text.Focus();
+            //}
         }
 
         private void button_TuPian_ShangChuang_Click(object sender, RoutedEventArgs e)
@@ -93,13 +94,13 @@ namespace JXHighWay.WatchHouse.WFPClient
 
         private void button_Text_QunFa_Click(object sender, RoutedEventArgs e)
         {
-            if (textBox_Text.Text != "")
-                m_LEDControl.SendTextQF(App.AdminUser, textBox_Text.Text);
-            else
-            {
-                Xceed.Wpf.Toolkit.MessageBox.Show("请输入方字", "信息", MessageBoxButton.OK, MessageBoxImage.Error);
-                textBox_Text.Focus();
-            }
+            //if (textBox_Text.Text != "")
+            //    m_LEDControl.SendTextQF(App.AdminUser, textBox_Text.Text);
+            //else
+            //{
+            //    Xceed.Wpf.Toolkit.MessageBox.Show("请输入方字", "信息", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    textBox_Text.Focus();
+            //}
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -135,6 +136,25 @@ namespace JXHighWay.WatchHouse.WFPClient
         {
             LEDControl vLEDControl = new LEDControl( App.WatchHouseID);
             vLEDControl.Test();
+        }
+
+        private void button_Text_BianJi_Click(object sender, RoutedEventArgs e)
+        {
+            if (m_LEDControl.Width != 0 && m_LEDControl.Heigth != 0)
+            {
+                LEDText vLEDText = new LEDText();
+                vLEDText.RichHeigth = m_LEDControl.Heigth;
+                vLEDText.RichWidth = m_LEDControl.Width;
+                vLEDText.RichText = m_RichText;
+                if (vLEDText.ShowDialog() ?? true)
+                {
+                    m_RichText = vLEDText.RichText;
+                    Console.WriteLine("LED图片->{0}",vLEDText.ImagePath);
+                }
+            }
+            else
+                Xceed.Wpf.Toolkit.MessageBox.Show("未设置LED广告屏的分辨率", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+
         }
     }
 }

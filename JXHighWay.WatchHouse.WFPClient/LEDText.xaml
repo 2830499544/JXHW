@@ -6,16 +6,16 @@
         xmlns:local="clr-namespace:JXHighWay.WatchHouse.WFPClient"
         xmlns:rtf="clr-namespace:RTFEditor;assembly=RTFEditor"
         mc:Ignorable="d"
-        Title="LEDText" Height="600" Width="800" Loaded="Window_Loaded">
-    <Grid Background="#245d7c">
+        Title="LEDText" Height="600" Width="800" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
+    <Grid >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="177*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions >
-            <RowDefinition Height="44*"  />
-            <RowDefinition Height="47*" />
-            <RowDefinition Height="179*" />
+            <RowDefinition Height="31*"  />
+            <RowDefinition Height="254*" />
         </Grid.RowDefinitions>
-        <rtf:RTFBox Name="RTFBox1" Grid.Column="0" Grid.Row="2"></rtf:RTFBox>
+        <rtf:RTFBox Name="RTFBox1" Grid.Column="0" Grid.Row="1"></rtf:RTFBox>
+        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,19,0,0" Click="button_Click"/>
     </Grid>
 </Window>

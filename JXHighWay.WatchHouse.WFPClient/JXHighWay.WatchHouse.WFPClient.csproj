@@ -526,6 +526,9 @@
     <Resource Include="Images\Main\ShanYei.jpg" />
     <Resource Include="Images\Main\XiaYei_A.jpg" />
     <Resource Include="Images\Main\XiaYei.jpg" />
+    <Content Include="LED\1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Transmit.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

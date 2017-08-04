@@ -16,26 +16,21 @@
 
     <DockPanel>
         <ToolBar x:Name="ToolBarOben" DockPanel.Dock="Top">
-        	<Button x:Name="ToolStripButtonOpen" Click="ToolStripButtonOpen_Click">
-				<Image Source="Images\Open.png" Stretch="None"/>				
-			</Button>
-			<Button x:Name="ToolStripButtonPrint" Click="ToolStripButtonPrint_Click">
-				<Image Source="Images\Print.png" Stretch="None"/>				
-			</Button>
+        	
 			<Separator/>
-			<Button x:Name="ToolStripButtonCut" Command="ApplicationCommands.Cut" ToolTip="Cut">
+			<Button x:Name="ToolStripButtonCut" Command="ApplicationCommands.Cut" ToolTip="剪切">
 				<Image Source="Images\Cut.png" Stretch="None"/>				
 			</Button>
-			<Button x:Name="ToolStripButtonCopy" Command="ApplicationCommands.Copy" ToolTip="Copy">
+			<Button x:Name="ToolStripButtonCopy" Command="ApplicationCommands.Copy" ToolTip="拷贝">
 				<Image Source="Images\Copy.png" Stretch="None"/>				
 			</Button>
-			<Button x:Name="ToolStripButtonPaste" Command="ApplicationCommands.Paste" ToolTip="Paste">
+			<Button x:Name="ToolStripButtonPaste" Command="ApplicationCommands.Paste" ToolTip="粘贴">
 				<Image Source="Images\Paste.png" Stretch="None"/>				
 			</Button>
-			<Button x:Name="ToolStripButtonUndo" Command="ApplicationCommands.Undo" ToolTip="Undo">
+			<Button x:Name="ToolStripButtonUndo" Command="ApplicationCommands.Undo" ToolTip="撤销">
 				<Image Source="Images\Undo.png" Stretch="None"/>				
 			</Button>
-			<Button x:Name="ToolStripButtonRedo" Command="ApplicationCommands.Redo" ToolTip="Redo">
+			<Button x:Name="ToolStripButtonRedo" Command="ApplicationCommands.Redo" ToolTip="还原">
 				<Image Source="Images\Redo.png" Stretch="None"/>				
 			</Button>
 			<Separator/>
@@ -43,16 +38,16 @@
             <ComboBox x:Name="Fontheight" ItemsSource="{Binding Mode=OneWay, Source={StaticResource FontHeightKlasse}}"  DropDownClosed="Fontheight_DropDownClosed" />
         </ToolBar>
         <ToolBar x:Name="ToolBarUnten" DockPanel.Dock="Top">
-        	<ToggleButton x:Name="ToolStripButtonBold" Command="EditingCommands.ToggleBold" ToolTip="Bold">
+        	<ToggleButton x:Name="ToolStripButtonBold" Command="EditingCommands.ToggleBold" ToolTip="粗体">
         		<Image Source="Images\Bold.png" Stretch="None"/>				
         	</ToggleButton>
-        	<ToggleButton x:Name="ToolStripButtonItalic" Command="EditingCommands.ToggleItalic" ToolTip="Italic">
+        	<ToggleButton x:Name="ToolStripButtonItalic" Command="EditingCommands.ToggleItalic" ToolTip="斜体">
         		<Image Source="Images\Italic.png" Stretch="None"/>				
         	</ToggleButton>
-			<ToggleButton x:Name="ToolStripButtonUnderline" Command="EditingCommands.ToggleUnderline" ToolTip="Underline">
+			<ToggleButton x:Name="ToolStripButtonUnderline" Command="EditingCommands.ToggleUnderline" ToolTip="下划线">
         		<Image Source="Images\Underline.png" Stretch="None"/>				
         	</ToggleButton>
-			<ToggleButton x:Name="ToolStripButtonStrikeout" ToolTip="Strikeout" Click="ToolStripButtonStrikeout_Click">
+			<ToggleButton x:Name="ToolStripButtonStrikeout" ToolTip="删除线" Click="ToolStripButtonStrikeout_Click">
         		<Image Source="Images\Strikeout.png" Stretch="None"/>				
         	</ToggleButton>
         	<Separator/>
@@ -63,34 +58,34 @@
         		<Image Source="Images\Backcolor.png" Stretch="None"/>				
         	</Button>
 			<Separator/>
-        	<ToggleButton x:Name="ToolStripButtonAlignLeft" Command="EditingCommands.AlignLeft" ToolTip="Align Left" Click="ToolStripButtonAlignLeft_Click">
+        	<ToggleButton x:Name="ToolStripButtonAlignLeft" Command="EditingCommands.AlignLeft" ToolTip="左对齐" Click="ToolStripButtonAlignLeft_Click">
         		<Image Source="Images\AlignLeft.png" Stretch="None"/>				
         	</ToggleButton>
-			<ToggleButton x:Name="ToolStripButtonAlignCenter" Command="EditingCommands.AlignCenter" ToolTip="Align Center" Click="ToolStripButtonAlignCenter_Click">
+			<ToggleButton x:Name="ToolStripButtonAlignCenter" Command="EditingCommands.AlignCenter" ToolTip="居中" Click="ToolStripButtonAlignCenter_Click">
         		<Image Source="Images\AlignCenter.png" Stretch="None"/>				
         	</ToggleButton>
-			<ToggleButton x:Name="ToolStripButtonAlignRight" Command="EditingCommands.AlignRight" ToolTip="Align Right" Click="ToolStripButtonAlignRight_Click">
+			<ToggleButton x:Name="ToolStripButtonAlignRight" Command="EditingCommands.AlignRight" ToolTip="右对齐" Click="ToolStripButtonAlignRight_Click">
         		<Image Source="Images\AlignRight.png" Stretch="None"/>				
         	</ToggleButton>
         	<Separator/>
-			<Button x:Name="ToolStripButtonBulletList" Command="EditingCommands.ToggleBullets" ToolTip="Bullets">
+			<Button x:Name="ToolStripButtonBulletList" Command="EditingCommands.ToggleBullets" ToolTip="项目符号">
         		<Image Source="Images\BulletList.png" Stretch="None"/>				
         	</Button>
-			<Button x:Name="ToolStripButtonNumbersList" Command="EditingCommands.ToggleNumbering" ToolTip="Numbers">
+			<Button x:Name="ToolStripButtonNumbersList" Command="EditingCommands.ToggleNumbering" ToolTip="编号">
         		<Image Source="Images\NumbersList.png" Stretch="None"/>				
         	</Button>
 			<Separator/>
-			<Button x:Name="ToolStripButtonIndent" Command="EditingCommands.IncreaseIndentation" ToolTip="Increase Indent">
+			<Button x:Name="ToolStripButtonIndent" Command="EditingCommands.IncreaseIndentation" ToolTip="减少缩进量">
         		<Image Source="Images\Indent.png" Stretch="None"/>				
         	</Button>
-			<Button x:Name="ToolStripButtonIndentDelete" Command="EditingCommands.DecreaseIndentation" ToolTip="Decrease Indent">
+			<Button x:Name="ToolStripButtonIndentDelete" Command="EditingCommands.DecreaseIndentation" ToolTip="增加缩进量">
         		<Image Source="Images\IndentRemove.png" Stretch="None"/>				
         	</Button>
 			<Separator/>
-			<ToggleButton x:Name="ToolStripButtonSubscript" ToolTip="Subscript" Click="ToolStripButtonSubscript_Click">
+			<ToggleButton x:Name="ToolStripButtonSubscript" ToolTip="下标" Click="ToolStripButtonSubscript_Click">
         		<Image Source="Images\Subscript.png" Stretch="None"/>				
         	</ToggleButton>
-			<ToggleButton x:Name="ToolStripButtonSuperscript" ToolTip="Superscript" Click="ToolStripButtonSuperscript_Click">
+			<ToggleButton x:Name="ToolStripButtonSuperscript" ToolTip="上标" Click="ToolStripButtonSuperscript_Click">
         		<Image Source="Images\Superscript.png" Stretch="None"/>				
         	</ToggleButton>
         </ToolBar>
@@ -108,6 +103,6 @@
                 <Slider x:Name="SliderZoom" Grid.Column="1" Width="100" Ticks="1, 2, 3, 4, 5, 6, 7, 8, 9, 10" Value="1" Delay="100" Interval="5" TickPlacement="BottomRight" Minimum="1" Maximum="10" ValueChanged="SliderZoom_ValueChanged" HorizontalContentAlignment="Left" />
             </StatusBarItem>                        
         </StatusBar>
-        <RichTextBox x:Name="RichTextControl" SpellCheck.IsEnabled="True" Background="Black" VerticalScrollBarVisibility="Disabled"  AcceptsReturn="True" AcceptsTab="True" SelectionChanged="RichTextControl_SelectionChanged" TextChanged="RichTextControl_TextChanged" KeyDown="RichTextControl_KeyDown" KeyUp="RichTextControl_KeyUp" Width="200" Height="200" />        
+        <RichTextBox x:Name="RichTextControl" SpellCheck.IsEnabled="True" Background="Black" VerticalScrollBarVisibility="Disabled"  AcceptsReturn="True" AcceptsTab="True" SelectionChanged="RichTextControl_SelectionChanged" TextChanged="RichTextControl_TextChanged" KeyDown="RichTextControl_KeyDown" KeyUp="RichTextControl_KeyUp" Width="200" Height="200" Foreground="#FFF50808" />        
     </DockPanel>
 </UserControl>

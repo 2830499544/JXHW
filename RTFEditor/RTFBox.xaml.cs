@@ -37,16 +37,21 @@ namespace RTFEditor
         private bool dataChanged = false; // ungespeicherte Textänderungen     
 
         private string privateText = null; // Inhalt der RTFBox im txt-Format
-        public string text
+        public string Text
         {
             get
             {
-                TextRange range = new TextRange(RichTextControl.Document.ContentStart, RichTextControl.Document.ContentEnd);
-                return range.Text;
+
+                return System.Windows.Markup.XamlWriter.Save(RichTextControl.Document);
+                //TextRange range = new TextRange(RichTextControl.Document.ContentStart, RichTextControl.Document.ContentEnd);
+                //return range.Text;
             }
             set
             {
-                privateText = value;
+                System.IO.StringReader vSR = new System.IO.StringReader(value);
+                System.Xml.XmlReader vXR = System.Xml.XmlReader.Create(vSR);
+                RichTextControl.Document = (FlowDocument)System.Windows.Markup.XamlReader.Load(vXR);
+                //privateText = value;
             }
         }
 
@@ -199,19 +204,21 @@ namespace RTFEditor
                 //g.CopyFromScreen((int)cc.X,(int)cc.Y, 0, 0, new System.Drawing.Size((int)RichTextControl.Width,(int)RichTextControl.Height));//保存整个窗体为图片
                 //                                                                               //g.CopyFromScreen(panel游戏区 .PointToScreen(Point.Empty), Point.Empty, panel游戏区.Size);//只保存某个控件（这里是panel游戏区）
                 //bit.Save(@"c:\weiboTemp.png");//默认保存格式为PNG，保存成jpg格式质量不是很好
-                GetImageFromControl(RichTextControl);
+               // GetImageFromControl(RichTextControl);
             //}
 		}
 
 
 
-        Stream GetImageFromControl(Control control)
+        public string GetImageFromControl()
         {
-            var aa = PresentationSource.FromVisual(this).CompositionTarget.TransformToDevice;
-          
+            Control control = RichTextControl;
+            var vTransformToDevice = PresentationSource.FromVisual(this).CompositionTarget.TransformToDevice;
 
             //MemoryStream ms = null;
-            FileStream ms = File.Create(@"c:\1.png");
+            string vFileName = DateTime.Now.ToString("yyyyMMddHHmmss")+".png";
+            string vPath = string.Format(@"{0}\LED\{1}",System.Environment.CurrentDirectory,vFileName );
+            FileStream ms = File.Create(vPath);
 
             DrawingVisual drawingVisual = new DrawingVisual();
             using (DrawingContext context = drawingVisual.RenderOpen())
@@ -222,8 +229,8 @@ namespace RTFEditor
             }
 
             //dpi可以自己设定   // 获取dpi方法：PresentationSource.FromVisual(this).CompositionTarget.TransformToDevice
-            double dipx = aa.M11 * 96;
-            double dipy = aa.M22 * 96;
+            double dipx = vTransformToDevice.M11 * 96;
+            double dipy = vTransformToDevice.M22 * 96;
 
             RenderTargetBitmap bitmap = new RenderTargetBitmap((int)control.Width, (int)control.Height, dipx,dipy, PixelFormats.Pbgra32);
             bitmap.Render(drawingVisual);
@@ -236,7 +243,7 @@ namespace RTFEditor
             ms.Flush();
             ms.Close();
 
-            return ms;
+            return vPath;
         }
         //
         // ToolStripButton Strikeout wurde gedrückt

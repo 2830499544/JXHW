@@ -110,8 +110,6 @@ namespace JXHighWay.WatchHouse.Bll.Client.LED
             vXmlDocument.Load(vMemoryStream);
             XmlNodeList vList =  vXmlDocument.SelectNodes("/config.boo/content/channel/area/rectangle/materials/");
             string aa = vList.ToString();
-
-            RenderTargtBitmap 
             
             //vFileStream.Flush();
             //vFileStream.Close();

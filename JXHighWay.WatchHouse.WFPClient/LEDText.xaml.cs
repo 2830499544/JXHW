@@ -21,6 +21,10 @@ namespace JXHighWay.WatchHouse.WFPClient
     {
         public int RichWidth { get; set; }
         public int RichHeigth { get; set; }
+
+        public string RichText { get; set; }
+        public string ImagePath { get; set; }
+
         public LEDText()
         {
             InitializeComponent();
@@ -30,6 +34,14 @@ namespace JXHighWay.WatchHouse.WFPClient
         {
             RTFBox1.RichWidth = RichWidth;
             RTFBox1.RichHeight = RichHeigth;
+            RTFBox1.Text = RichText;
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            RichText = RTFBox1.Text;
+            ImagePath = RTFBox1.GetImageFromControl();
+            DialogResult = true;
         }
     }
 }
