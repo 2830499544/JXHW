@@ -229,6 +229,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Resource\ListBoxResource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resource\TabControlResource.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -535,6 +539,7 @@
     <Resource Include="Images\Main\XiaYei.jpg" />
     <Resource Include="Images\LED\Tou.jpg" />
     <Resource Include="Images\LED\GuanBi.jpg" />
+    <Resource Include="Images\LED\xuxian.jpg" />
     <Content Include="LED\1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

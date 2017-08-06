@@ -93,7 +93,7 @@ namespace RTFEditor
             { 
                 privAktZeile = value;
                 zeilenangabe = "Ze: " + value;
-                LabelZeileNr.Content = zeilenangabe;
+                //LabelZeileNr.Content = zeilenangabe;
             }
         }
 
@@ -106,7 +106,7 @@ namespace RTFEditor
             { 
                 privAktSpalte = value;
                 spaltenangabe = "Sp: " + value;
-                LabelSpalteNr.Content = spaltenangabe;
+                //LabelSpalteNr.Content = spaltenangabe;
             }
         }
        
@@ -715,7 +715,11 @@ namespace RTFEditor
 
         private void ToolStripButtonSave_Click(object sender, RoutedEventArgs e)
         {
+            var vOldCursor = Cursor;
+            RichTextControl.IsEnabled = false;
             ImagePath = GetImageFromControl();
+            RichTextControl.IsEnabled = true;
+
         }
     }
 }

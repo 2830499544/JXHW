@@ -5,18 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JXHighWay.WatchHouse.WFPClient"
         mc:Ignorable="d"
-        Title="LEDSend" Height="500" Width="500" AllowsTransparency="True" WindowStyle="None">
+        Title="LEDSend" Height="225" Width="436" AllowsTransparency="True" WindowStyle="None" ShowInTaskbar="False" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resource\GroupboxResource.xaml" />
+                <ResourceDictionary Source="Resource\ButtonResource.xaml" />
+                <ResourceDictionary Source="Resource\ListBoxResource.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    
     <Grid  Background="#e4e4e4">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="177*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions >
-            <RowDefinition Height="4*"   />
-            <RowDefinition Height="105*" />
-            <RowDefinition Height="16*"  />
+            <RowDefinition Height="7*"   />
+            <RowDefinition Height="167*" />
+            <RowDefinition Height="51*"  />
         </Grid.RowDefinitions>
         <Image HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0" Height="20" VerticalAlignment="Top" Width="500" Source="Images/LED/Tou.jpg" Grid.RowSpan="2"/>
-        <Image HorizontalAlignment="Left" x:Name="Image_Close" Height="13" VerticalAlignment="Top" Width="13" Source="Images/LED/GuanBi.jpg" MouseLeftButtonDown="Image_Close_MouseLeftButtonDown" Cursor="Hand" Margin="486,1,0,0"/>
-        <GroupBox Header="GroupBox" HorizontalAlignment="Left" Height="155" VerticalAlignment="Top" Width="499" Grid.Row="1"/>
+        <Image HorizontalAlignment="Left" x:Name="Image_Close" Height="13" VerticalAlignment="Top" Width="13" Source="Images/LED/GuanBi.jpg"  Cursor="Hand" Margin="486,1,0,0" Grid.RowSpan="2"/>
+        <Button x:Name="button_XuanDing" Content="选　定" HorizontalAlignment="Left" Margin="57,10,0,0" VerticalAlignment="Top" Width="75" Grid.Row="2" Style="{DynamicResource MyWpfButton}" Height="31" Click="button_XuanDing_Click"/>
+        <Button x:Name="button_QuXiao" Content="取　消" HorizontalAlignment="Left" Margin="303,10,0,0" VerticalAlignment="Top" Width="75" Grid.Row="2" Style="{DynamicResource MyWpfButton}" Height="31" Click="button_QuXiao_Click"/>
+        <Image x:Name="image" HorizontalAlignment="Left" Height="17" VerticalAlignment="Top" Width="436" Margin="0,155,0,0" Grid.Row="1" Source="Images/LED/xuxian.jpg" Grid.RowSpan="2"/>
+        <ListBox x:Name="listBox_GangTing" HorizontalAlignment="Left" Height="132" Margin="10,18,0,0" Grid.Row="1" VerticalAlignment="Top" Width="416">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="4"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
     </Grid>
 </Window>

@@ -15,32 +15,32 @@
     </UserControl.Resources>   
 
     <DockPanel>
-        <ToolBar x:Name="ToolBarOben" DockPanel.Dock="Top">
+        <ToolBar x:Name="ToolBarUnten" DockPanel.Dock="Top">
             <Button x:Name="ToolStripButtonSave" ToolTip="保存" Click="ToolStripButtonSave_Click">
                 <Image Source="Images\Save.png" Stretch="None"/>
             </Button>
             <Separator/>
-			<Button x:Name="ToolStripButtonCut" Command="ApplicationCommands.Cut" ToolTip="剪切">
-				<Image Source="Images\Cut.png" Stretch="None"/>				
-			</Button>
-			<Button x:Name="ToolStripButtonCopy" Command="ApplicationCommands.Copy" ToolTip="拷贝">
-				<Image Source="Images\Copy.png" Stretch="None"/>				
-			</Button>
-			<Button x:Name="ToolStripButtonPaste" Command="ApplicationCommands.Paste" ToolTip="粘贴">
-				<Image Source="Images\Paste.png" Stretch="None"/>				
-			</Button>
-			<Button x:Name="ToolStripButtonUndo" Command="ApplicationCommands.Undo" ToolTip="撤销">
-				<Image Source="Images\Undo.png" Stretch="None"/>				
-			</Button>
-			<Button x:Name="ToolStripButtonRedo" Command="ApplicationCommands.Redo" ToolTip="还原">
-				<Image Source="Images\Redo.png" Stretch="None"/>				
-			</Button>
-			<Separator/>
-			<ComboBox x:Name="Fonttype" ItemsSource="{Binding Mode=OneWay, Source={StaticResource FontListKlasse}}" DropDownClosed="Fonttype_DropDownClosed" />
+            <Button x:Name="ToolStripButtonCut" Command="ApplicationCommands.Cut" ToolTip="剪切">
+                <Image Source="Images\Cut.png" Stretch="None"/>
+            </Button>
+            <Button x:Name="ToolStripButtonCopy" Command="ApplicationCommands.Copy" ToolTip="拷贝">
+                <Image Source="Images\Copy.png" Stretch="None"/>
+            </Button>
+            <Button x:Name="ToolStripButtonPaste" Command="ApplicationCommands.Paste" ToolTip="粘贴">
+                <Image Source="Images\Paste.png" Stretch="None"/>
+            </Button>
+            <Button x:Name="ToolStripButtonUndo" Command="ApplicationCommands.Undo" ToolTip="撤销">
+                <Image Source="Images\Undo.png" Stretch="None"/>
+            </Button>
+            <Button x:Name="ToolStripButtonRedo" Command="ApplicationCommands.Redo" ToolTip="还原">
+                <Image Source="Images\Redo.png" Stretch="None"/>
+            </Button>
+            <Separator/>
+            <ComboBox x:Name="Fonttype" ItemsSource="{Binding Mode=OneWay, Source={StaticResource FontListKlasse}}" DropDownClosed="Fonttype_DropDownClosed" />
             <ComboBox x:Name="Fontheight" ItemsSource="{Binding Mode=OneWay, Source={StaticResource FontHeightKlasse}}"  DropDownClosed="Fontheight_DropDownClosed" />
-        </ToolBar>
-        <ToolBar x:Name="ToolBarUnten" DockPanel.Dock="Top">
-        	<ToggleButton x:Name="ToolStripButtonBold" Command="EditingCommands.ToggleBold" ToolTip="粗体">
+            <Separator/>
+            
+            <ToggleButton x:Name="ToolStripButtonBold" Command="EditingCommands.ToggleBold" ToolTip="粗体">
         		<Image Source="Images\Bold.png" Stretch="None"/>				
         	</ToggleButton>
         	<ToggleButton x:Name="ToolStripButtonItalic" Command="EditingCommands.ToggleItalic" ToolTip="斜体">
@@ -91,20 +91,9 @@
         		<Image Source="Images\Superscript.png" Stretch="None"/>				
         	</ToggleButton>
         </ToolBar>
-        <StatusBar x:Name="StatusBar" DockPanel.Dock="Bottom">
-            <StatusBarItem>
-                <Label x:Name="LabelZeileNr" Content="ZeileNr" BorderThickness="1" BorderBrush="DarkGray" />
-            </StatusBarItem>
-            <StatusBarItem >
-                <Label x:Name="LabelSpalteNr" Content="SpalteNr" BorderThickness="1" BorderBrush="DarkGray"/>
-            </StatusBarItem>
-            <StatusBarItem>
-                <Label x:Name="LabelEinfg" Content="Einfg" BorderThickness="1" BorderBrush="DarkGray" />
-            </StatusBarItem>
-            <StatusBarItem DockPanel.Dock="Right" Width="100">
-                <Slider x:Name="SliderZoom" Grid.Column="1" Width="100" Ticks="1, 2, 3, 4, 5, 6, 7, 8, 9, 10" Value="1" Delay="100" Interval="5" TickPlacement="BottomRight" Minimum="1" Maximum="10" ValueChanged="SliderZoom_ValueChanged" HorizontalContentAlignment="Left" />
-            </StatusBarItem>                        
-        </StatusBar>
-        <RichTextBox x:Name="RichTextControl" SpellCheck.IsEnabled="True" Background="Black" VerticalScrollBarVisibility="Disabled"  AcceptsReturn="True" AcceptsTab="True" SelectionChanged="RichTextControl_SelectionChanged" TextChanged="RichTextControl_TextChanged" KeyDown="RichTextControl_KeyDown" KeyUp="RichTextControl_KeyUp" Width="200" Height="200" Foreground="#FFF50808" />        
+        <RichTextBox x:Name="RichTextControl" SpellCheck.IsEnabled="True" Background="Black" VerticalScrollBarVisibility="Disabled"  AcceptsReturn="True" AcceptsTab="True" SelectionChanged="RichTextControl_SelectionChanged" TextChanged="RichTextControl_TextChanged" KeyDown="RichTextControl_KeyDown" KeyUp="RichTextControl_KeyUp" Width="200" Height="200" Foreground="#FFF50808" BorderThickness="0" >
+            <FlowDocument Focusable="True" LineHeight="1">
+            </FlowDocument>
+        </RichTextBox>
     </DockPanel>
 </UserControl>

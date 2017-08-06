@@ -184,8 +184,8 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
             //更新电源开关状态
             if ( vResult )
             {
-                string vSql = string.Format("update  `电源数据` set `ZhuanTai`='{0}'  where LuHao={1:D} and `ID` in ( select a.MaxID from "
-                            + "(Select max(id) as MaxID From `电源数据` where DianYuanID = '{2}') a )", IsOn ? "开":"关", LuHao,DianYuanID);
+                string vSql = string.Format("update  `电源数据` set `ZhuanTai`='{0}'  where `ID` in ( select a.MaxID from "
+                            + "(Select max(id) as MaxID From `电源数据` where DianYuanID = '{2}' and LuHao={1:D} ) a )", IsOn ? "开":"关", LuHao,DianYuanID);
                 m_BasicDBClassUpdate.UpdateRecord(vSql);
             }
             return vResult;
@@ -291,7 +291,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
                     vResult = vSelectResult.State ?? false;
                     if (!vResult && (DateTime.Now - vStartTime).TotalMilliseconds >= 2000)
                         break;
-                    Thread.Sleep(200);
+                    Thread.Sleep(100);
                 } while (!vResult);
                 return vResult;
             });

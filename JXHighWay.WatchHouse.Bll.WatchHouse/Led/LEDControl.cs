@@ -116,7 +116,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.LED
         }
 
         #region 发送多频道节目
-        public void SendMultiChannel(List<LEDChannelInfo> ChannelList)
+        public void SendMultiChannel(List<LEDChannelInfo> ChannelList, string[] IPList)
         {
             string vMD5 = ""; //CommHelper.GetMD5HashFromFile(ImagePath);
             long vFileSize = 0;// CommHelper.FileSize(ImagePath);
@@ -127,15 +127,18 @@ namespace JXHighWay.WatchHouse.Bll.Client.LED
                 setSize = 0,
                 setSizeSpecified = true
             };
+            List<configbooChannel> vConfigbooChannelList = new List<configbooChannel>();
+            vConfigbooChannelList.Add(vClearChannel);
 
             foreach (LEDChannelInfo vTempChannel in ChannelList)
             {
-                //第一个节目
+                //新节目
                 configbooChannel vNewChannel = new configbooChannel();
                 vNewChannel.action = "add";
-                m_ConfigbooXml.content = new configbooChannel[] { vClearChannel, vNewChannel };
+                vConfigbooChannelList.Add(vNewChannel);
 
-                //第一个节目第一区域
+
+                //新节目节目第一区域
                 configbooChannelArea vNewChannel_Area = new configbooChannelArea()
                 {
                     action = "add"
@@ -151,11 +154,11 @@ namespace JXHighWay.WatchHouse.Bll.Client.LED
                 };
                 vNewChannel_Area.rectangle = vNewChannel_Area_Rectangle;
                 vNewChannel_Area.materials = new configbooChannelAreaMaterials();
+                vMD5 = CommHelper.GetMD5HashFromFile(vTempChannel.Content);
+                vFileSize = CommHelper.FileSize(vTempChannel.Content);
                 switch (vTempChannel.ChannelType)
                 {
                     case LEDChanneTypeEnum.Image:
-                        vMD5 = CommHelper.GetMD5HashFromFile(vTempChannel.Content);
-                        vFileSize = CommHelper.FileSize(vTempChannel.Content);
                         configbooChannelAreaMaterialsImage vNewImage = new configbooChannelAreaMaterialsImage()
                         {
                             action = "add"
@@ -166,12 +169,16 @@ namespace JXHighWay.WatchHouse.Bll.Client.LED
                         };
                         vNewImage.effect = new configbooChannelAreaMaterialsImageEffect()
                         {
-                            @in = 0,
-                            @out = 20,
+                            @in = vTempChannel.InEff,
+                            @out = vTempChannel.OutEff,
                             inSpeed = 1,
-                            outSpeed = 1,
-                            holdTime = 8
+                            outSpeed = 1
+                            //holdTime = vTempChannel.HoldTime
                         };
+
+                        if (vTempChannel.HoldTime != 0)
+                            vNewImage.effect.holdTime = vTempChannel.HoldTime;
+
                         vNewImage.file = new configbooChannelAreaMaterialsImageFile()
                         {
                             md5 = vMD5,
@@ -180,29 +187,57 @@ namespace JXHighWay.WatchHouse.Bll.Client.LED
                         };
                         break;
                     case LEDChanneTypeEnum.Text:
-                        HDFont font = new HDFont();
-                        font.FontName = "SimSun";
-                        font.FontSize = 16;
-                        font.TextColor = new HDColor(255, 255, 255, 128);
-                        byte[] vTextRead = HD_Base.GenerateSinglelineTextXml(new Size(m_Width, m_Heigth), vTempChannel.Content, font);
-                        System.IO.MemoryStream vMemoryStream = new MemoryStream(vTextRead);
-                        XmlDocument vXmlDocument = new XmlDocument();
-                        vXmlDocument.Load(vMemoryStream);
-                       
+                        configbooChannelAreaMaterialsText vNewText = new configbooChannelAreaMaterialsText()
+                        {
+                            action = "add"
+                        };
 
+                        vNewChannel_Area.materials.text = new configbooChannelAreaMaterialsText();
+                        vNewChannel_Area.materials.text.action = "add";
+                        vNewChannel_Area.materials.text.effect = new configbooChannelAreaMaterialsImageEffect()
+                        {
+                            @in = vTempChannel.InEff,
+                            @out = vTempChannel.OutEff,
+                            inSpeed = 1,
+                            outSpeed = 1
+                            //holdTime = vTempChannel.HoldTime
+                        };
+                        vNewChannel_Area.materials.text.pageCount = 1;
+                        vNewChannel_Area.materials.text.singleMode = 0;
+
+                        if (vTempChannel.HoldTime != 0)
+                            vNewChannel_Area.materials.text.effect.holdTime = vTempChannel.HoldTime;
+
+                        vNewChannel_Area.materials.text.file = new configbooChannelAreaMaterialsTextFile()
+                        {
+                            md5 = vMD5,
+                            size = vFileSize,
+                            path = vTempChannel.Content
+                        };
 
                         break;
                     case LEDChanneTypeEnum.Video:
-                        vMD5 = CommHelper.GetMD5HashFromFile(vTempChannel.Content);
-                        vFileSize = CommHelper.FileSize(vTempChannel.Content);
                         configbooChannelAreaMaterialsVideo vNewVideo = new configbooChannelAreaMaterialsVideo()
                         {
-                            action = "add",
+                            action = "add"
                         };
+
                         vNewChannel_Area.materials.video = new configbooChannelAreaMaterialsVideo[]
                         {
                             vNewVideo
                         };
+
+                        vNewVideo.effect = new configbooChannelAreaMaterialsVideoEffect()
+                        {
+                            @in = vTempChannel.InEff,
+                            @out = vTempChannel.OutEff,
+                            inSpeed = 1,
+                            outSpeed = 1
+                            //holdTime = vTempChannel.HoldTime
+                        };
+                        if (vTempChannel.HoldTime != 0)
+                            vNewVideo.effect.holdTime = vTempChannel.HoldTime;
+
                         vNewVideo.file = new configbooChannelAreaMaterialsVideoFile()
                         {
                             md5 = vMD5,
@@ -211,6 +246,23 @@ namespace JXHighWay.WatchHouse.Bll.Client.LED
                         };
                         break;
                 }
+            }
+
+            m_ConfigbooXml.content = vConfigbooChannelList.ToArray();
+            StringWriter sw = new StringWriter();
+            MemoryStream ms = new MemoryStream();
+            XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
+            XmlSerializer serializer = new XmlSerializer(typeof(ConfigbooXml));
+            serializer.Serialize(ms, m_ConfigbooXml, ns);
+            sw.Close();
+            ms.Close();
+
+            Console.WriteLine(sw.ToString());
+            HdTransmitTool t = HdTransmitTool.GetInstance();
+            //t.Send(m_IPAddress, ms.ToArray(), true);
+            foreach (string vTempIP in IPList)
+            {
+                t.Send(vTempIP, ms.ToArray(), true);
             }
         }
         #endregion

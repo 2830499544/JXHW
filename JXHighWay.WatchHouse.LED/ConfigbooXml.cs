@@ -292,9 +292,25 @@ namespace JXHighWay.WatchHouse.LED
     public partial class configbooChannelAreaMaterialsVideo
     {
 
+        private configbooChannelAreaMaterialsVideoEffect effectField;
         private configbooChannelAreaMaterialsVideoFile fileField;
 
         private string actionField;
+
+
+        /// <remarks/>
+        public configbooChannelAreaMaterialsVideoEffect effect
+        {
+            get
+            {
+                return this.effectField;
+            }
+            set
+            {
+                this.effectField = value;
+            }
+        }
+
 
         /// <remarks/>
         public configbooChannelAreaMaterialsVideoFile file
@@ -672,6 +688,94 @@ namespace JXHighWay.WatchHouse.LED
             set
             {
                 this.actionField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.SerializableAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    public partial class configbooChannelAreaMaterialsVideoEffect
+    {
+
+        private long inField;
+
+        private long outField;
+
+        private long inSpeedField;
+
+        private long outSpeedField;
+
+        private long holdTimeField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public long @in
+        {
+            get
+            {
+                return this.inField;
+            }
+            set
+            {
+                this.inField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public long @out
+        {
+            get
+            {
+                return this.outField;
+            }
+            set
+            {
+                this.outField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public long inSpeed
+        {
+            get
+            {
+                return this.inSpeedField;
+            }
+            set
+            {
+                this.inSpeedField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public long outSpeed
+        {
+            get
+            {
+                return this.outSpeedField;
+            }
+            set
+            {
+                this.outSpeedField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public long holdTime
+        {
+            get
+            {
+                return this.holdTimeField;
+            }
+            set
+            {
+                this.holdTimeField = value;
             }
         }
     }

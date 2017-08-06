@@ -72,14 +72,20 @@ namespace JXHighWay.WatchHouse.Bll.Server
             {
                 if (vTempConfig.DianYuan1ID != null && vTempConfig.DianYuan1ID != "")
                 {
-                    m_ClientDict.Add(vTempConfig.DianYuan1ID, "");
-                    m_ClientMaxID.Add(vTempConfig.DianYuan1ID, 0);
+                    if (!m_ClientDict.ContainsKey(vTempConfig.DianYuan1ID))
+                    {
+                        m_ClientDict.Add(vTempConfig.DianYuan1ID, "");
+                        m_ClientMaxID.Add(vTempConfig.DianYuan1ID, 0);
+                    }
                 }
 
                 if (vTempConfig.DianYuan2ID != null && vTempConfig.DianYuan2ID != "")
                 {
-                    m_ClientDict.Add(vTempConfig.DianYuan2ID, "");
-                    m_ClientMaxID.Add(vTempConfig.DianYuan2ID, 0);
+                    if (!m_ClientDict.ContainsKey(vTempConfig.DianYuan2ID))
+                    {
+                        m_ClientDict.Add(vTempConfig.DianYuan2ID, "");
+                        m_ClientMaxID.Add(vTempConfig.DianYuan2ID, 0);
+                    }
                 }
 
             }
@@ -857,6 +863,19 @@ namespace JXHighWay.WatchHouse.Bll.Server
                     Time = DateTime.Now
                      
                 };
+                switch (vData.SwitchState)
+                {
+                    //开
+                    case 129://正常
+                    case 131://应急
+                        vModel.ZhuanTai = "开";
+                        break;
+                    //关
+                    case 128://正常
+                    case 130://应急
+                        vModel.ZhuanTai = "关";
+                        break;
+                }
 
                 WatchHouseConfigEFModel vWatchHouseConfigEFModel = new WatchHouseConfigEFModel()
                 {

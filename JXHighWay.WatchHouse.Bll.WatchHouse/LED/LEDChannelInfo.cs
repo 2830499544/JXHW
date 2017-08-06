@@ -19,5 +19,17 @@ namespace JXHighWay.WatchHouse.Bll.Client.LED
         /// 节目内容
         /// </summary>
         public string Content { get; set; }
+        /// <summary>
+        /// 显示效果
+        /// </summary>
+        public int InEff { get; set; }
+        /// <summary>
+        /// 清屏效果
+        /// </summary>
+        public int OutEff { get; set; }
+        /// <summary>
+        /// 停留时间
+        /// </summary>
+        public int HoldTime { get; set; }
     }
 }

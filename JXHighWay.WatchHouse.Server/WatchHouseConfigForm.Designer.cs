@@ -54,16 +54,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.dataGridView_List = new System.Windows.Forms.DataGridView();
-            this.Column_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_GanTing_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_GanTing_MC = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_GanTing_LX = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_GanTing_IP = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_LED_IP = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_LED_Gao = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_LED_Kuan = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_DianYuan_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_DianYuan_IP = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button_Update = new System.Windows.Forms.Button();
             this.button_Del = new System.Windows.Forms.Button();
             this.button_Add = new System.Windows.Forms.Button();
@@ -75,6 +65,18 @@
             this.label8 = new System.Windows.Forms.Label();
             this.textBox_DY2_ID = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.Column_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_GanTing_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_GanTing_MC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_GanTing_LX = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_GanTing_IP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_LED_IP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_LED_Gao = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_LED_Kuan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_DianYuan1_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_DianYuan1_IP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_DianYuan2_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_DianYuan2_IP = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LED_Kuan)).BeginInit();
@@ -378,8 +380,10 @@
             this.Column_LED_IP,
             this.Column_LED_Gao,
             this.Column_LED_Kuan,
-            this.Column_DianYuan_ID,
-            this.Column_DianYuan_IP});
+            this.Column_DianYuan1_ID,
+            this.Column_DianYuan1_IP,
+            this.Column_DianYuan2_ID,
+            this.Column_DianYuan2_IP});
             this.dataGridView_List.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView_List.Location = new System.Drawing.Point(2, 16);
             this.dataGridView_List.Margin = new System.Windows.Forms.Padding(2);
@@ -391,84 +395,6 @@
             this.dataGridView_List.Size = new System.Drawing.Size(702, 207);
             this.dataGridView_List.TabIndex = 0;
             this.dataGridView_List.SelectionChanged += new System.EventHandler(this.dataGridView_List_SelectionChanged);
-            // 
-            // Column_ID
-            // 
-            this.Column_ID.DataPropertyName = "ID";
-            this.Column_ID.HeaderText = "ID";
-            this.Column_ID.Name = "Column_ID";
-            this.Column_ID.ReadOnly = true;
-            this.Column_ID.Width = 30;
-            // 
-            // Column_GanTing_ID
-            // 
-            this.Column_GanTing_ID.DataPropertyName = "GangTingID";
-            this.Column_GanTing_ID.HeaderText = "岗亭编号";
-            this.Column_GanTing_ID.Name = "Column_GanTing_ID";
-            this.Column_GanTing_ID.ReadOnly = true;
-            this.Column_GanTing_ID.Width = 120;
-            // 
-            // Column_GanTing_MC
-            // 
-            this.Column_GanTing_MC.DataPropertyName = "GangTingMC";
-            this.Column_GanTing_MC.HeaderText = "岗亭名称";
-            this.Column_GanTing_MC.Name = "Column_GanTing_MC";
-            this.Column_GanTing_MC.ReadOnly = true;
-            this.Column_GanTing_MC.Width = 120;
-            // 
-            // Column_GanTing_LX
-            // 
-            this.Column_GanTing_LX.DataPropertyName = "GangTingLX";
-            this.Column_GanTing_LX.HeaderText = "岗亭类型";
-            this.Column_GanTing_LX.Name = "Column_GanTing_LX";
-            this.Column_GanTing_LX.ReadOnly = true;
-            this.Column_GanTing_LX.Width = 120;
-            // 
-            // Column_GanTing_IP
-            // 
-            this.Column_GanTing_IP.DataPropertyName = "GangTingIP";
-            this.Column_GanTing_IP.HeaderText = "岗亭IP";
-            this.Column_GanTing_IP.Name = "Column_GanTing_IP";
-            this.Column_GanTing_IP.ReadOnly = true;
-            this.Column_GanTing_IP.Width = 120;
-            // 
-            // Column_LED_IP
-            // 
-            this.Column_LED_IP.DataPropertyName = "GuanGaoPingIP";
-            this.Column_LED_IP.HeaderText = "LED屏幕IP";
-            this.Column_LED_IP.Name = "Column_LED_IP";
-            this.Column_LED_IP.ReadOnly = true;
-            this.Column_LED_IP.Width = 150;
-            // 
-            // Column_LED_Gao
-            // 
-            this.Column_LED_Gao.DataPropertyName = "GuanGaoGao";
-            this.Column_LED_Gao.HeaderText = "LED高度";
-            this.Column_LED_Gao.Name = "Column_LED_Gao";
-            this.Column_LED_Gao.ReadOnly = true;
-            // 
-            // Column_LED_Kuan
-            // 
-            this.Column_LED_Kuan.DataPropertyName = "GuanGaoKuang";
-            this.Column_LED_Kuan.HeaderText = "LED宽度";
-            this.Column_LED_Kuan.Name = "Column_LED_Kuan";
-            this.Column_LED_Kuan.ReadOnly = true;
-            // 
-            // Column_DianYuan_ID
-            // 
-            this.Column_DianYuan_ID.DataPropertyName = "DianYuan1ID";
-            this.Column_DianYuan_ID.HeaderText = "电源编号";
-            this.Column_DianYuan_ID.Name = "Column_DianYuan_ID";
-            this.Column_DianYuan_ID.ReadOnly = true;
-            this.Column_DianYuan_ID.Width = 120;
-            // 
-            // Column_DianYuan_IP
-            // 
-            this.Column_DianYuan_IP.DataPropertyName = "DianYuan1IP";
-            this.Column_DianYuan_IP.HeaderText = "电源IP";
-            this.Column_DianYuan_IP.Name = "Column_DianYuan_IP";
-            this.Column_DianYuan_IP.ReadOnly = true;
-            this.Column_DianYuan_IP.Width = 120;
             // 
             // button_Update
             // 
@@ -601,6 +527,98 @@
             this.label9.TabIndex = 3;
             this.label9.Text = "编号:";
             // 
+            // Column_ID
+            // 
+            this.Column_ID.DataPropertyName = "ID";
+            this.Column_ID.HeaderText = "ID";
+            this.Column_ID.Name = "Column_ID";
+            this.Column_ID.ReadOnly = true;
+            this.Column_ID.Width = 30;
+            // 
+            // Column_GanTing_ID
+            // 
+            this.Column_GanTing_ID.DataPropertyName = "GangTingID";
+            this.Column_GanTing_ID.HeaderText = "岗亭编号";
+            this.Column_GanTing_ID.Name = "Column_GanTing_ID";
+            this.Column_GanTing_ID.ReadOnly = true;
+            this.Column_GanTing_ID.Width = 120;
+            // 
+            // Column_GanTing_MC
+            // 
+            this.Column_GanTing_MC.DataPropertyName = "GangTingMC";
+            this.Column_GanTing_MC.HeaderText = "岗亭名称";
+            this.Column_GanTing_MC.Name = "Column_GanTing_MC";
+            this.Column_GanTing_MC.ReadOnly = true;
+            this.Column_GanTing_MC.Width = 120;
+            // 
+            // Column_GanTing_LX
+            // 
+            this.Column_GanTing_LX.DataPropertyName = "GangTingLX";
+            this.Column_GanTing_LX.HeaderText = "岗亭类型";
+            this.Column_GanTing_LX.Name = "Column_GanTing_LX";
+            this.Column_GanTing_LX.ReadOnly = true;
+            this.Column_GanTing_LX.Width = 120;
+            // 
+            // Column_GanTing_IP
+            // 
+            this.Column_GanTing_IP.DataPropertyName = "GangTingIP";
+            this.Column_GanTing_IP.HeaderText = "岗亭IP";
+            this.Column_GanTing_IP.Name = "Column_GanTing_IP";
+            this.Column_GanTing_IP.ReadOnly = true;
+            this.Column_GanTing_IP.Width = 120;
+            // 
+            // Column_LED_IP
+            // 
+            this.Column_LED_IP.DataPropertyName = "GuanGaoPingIP";
+            this.Column_LED_IP.HeaderText = "LED屏幕IP";
+            this.Column_LED_IP.Name = "Column_LED_IP";
+            this.Column_LED_IP.ReadOnly = true;
+            this.Column_LED_IP.Width = 150;
+            // 
+            // Column_LED_Gao
+            // 
+            this.Column_LED_Gao.DataPropertyName = "GuanGaoGao";
+            this.Column_LED_Gao.HeaderText = "LED高度";
+            this.Column_LED_Gao.Name = "Column_LED_Gao";
+            this.Column_LED_Gao.ReadOnly = true;
+            // 
+            // Column_LED_Kuan
+            // 
+            this.Column_LED_Kuan.DataPropertyName = "GuanGaoKuang";
+            this.Column_LED_Kuan.HeaderText = "LED宽度";
+            this.Column_LED_Kuan.Name = "Column_LED_Kuan";
+            this.Column_LED_Kuan.ReadOnly = true;
+            // 
+            // Column_DianYuan1_ID
+            // 
+            this.Column_DianYuan1_ID.DataPropertyName = "DianYuan1ID";
+            this.Column_DianYuan1_ID.HeaderText = "电源编号1";
+            this.Column_DianYuan1_ID.Name = "Column_DianYuan1_ID";
+            this.Column_DianYuan1_ID.ReadOnly = true;
+            this.Column_DianYuan1_ID.Width = 120;
+            // 
+            // Column_DianYuan1_IP
+            // 
+            this.Column_DianYuan1_IP.DataPropertyName = "DianYuan1IP";
+            this.Column_DianYuan1_IP.HeaderText = "电源IP1";
+            this.Column_DianYuan1_IP.Name = "Column_DianYuan1_IP";
+            this.Column_DianYuan1_IP.ReadOnly = true;
+            this.Column_DianYuan1_IP.Width = 120;
+            // 
+            // Column_DianYuan2_ID
+            // 
+            this.Column_DianYuan2_ID.DataPropertyName = "DianYuan2ID";
+            this.Column_DianYuan2_ID.HeaderText = "电源编号2";
+            this.Column_DianYuan2_ID.Name = "Column_DianYuan2_ID";
+            this.Column_DianYuan2_ID.ReadOnly = true;
+            // 
+            // Column_DianYuan2_IP
+            // 
+            this.Column_DianYuan2_IP.DataPropertyName = "DianYuan2IP";
+            this.Column_DianYuan2_IP.HeaderText = "电源IP2";
+            this.Column_DianYuan2_IP.Name = "Column_DianYuan2_IP";
+            this.Column_DianYuan2_IP.ReadOnly = true;
+            // 
             // WatchHouseConfigForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -673,6 +691,8 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.NumericUpDown numericUpDown_LED_Gao;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button button_DY1_Time;
+        private System.Windows.Forms.Button button_DY2_Time;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_GanTing_ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_GanTing_MC;
@@ -681,9 +701,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_LED_IP;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_LED_Gao;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_LED_Kuan;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column_DianYuan_ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column_DianYuan_IP;
-        private System.Windows.Forms.Button button_DY1_Time;
-        private System.Windows.Forms.Button button_DY2_Time;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_DianYuan1_ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_DianYuan1_IP;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_DianYuan2_ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_DianYuan2_IP;
     }
 }

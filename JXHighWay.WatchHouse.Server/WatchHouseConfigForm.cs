@@ -125,8 +125,11 @@ namespace JXHighWay.WatchHouse.Server
                 numericUpDown_LED_Gao.Value =  dataGridView_List.SelectedRows[0].Cells["Column_LED_Gao"].Value==DBNull.Value?0:(int)dataGridView_List.SelectedRows[0].Cells["Column_LED_Gao"].Value;
                 numericUpDown_LED_Kuan.Value = dataGridView_List.SelectedRows[0].Cells["Column_LED_Kuan"].Value==DBNull.Value?0:(int)dataGridView_List.SelectedRows[0].Cells["Column_LED_Kuan"].Value;
 
-                textBox_DY1_ID.Text = dataGridView_List.SelectedRows[0].Cells["Column_DianYuan_ID"].Value.ToString();
-                textBox_DY1_IP.Text = dataGridView_List.SelectedRows[0].Cells["Column_DianYuan_IP"].Value.ToString();
+                textBox_DY1_ID.Text = dataGridView_List.SelectedRows[0].Cells["Column_DianYuan1_ID"].Value.ToString();
+                textBox_DY1_IP.Text = dataGridView_List.SelectedRows[0].Cells["Column_DianYuan1_IP"].Value.ToString();
+
+                textBox_DY2_ID.Text = dataGridView_List.SelectedRows[0].Cells["Column_DianYuan2_ID"].Value.ToString();
+                textBox_DY2_IP.Text = dataGridView_List.SelectedRows[0].Cells["Column_DianYuan2_IP"].Value.ToString();
             }
         }
 

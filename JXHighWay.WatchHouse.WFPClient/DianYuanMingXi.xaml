@@ -193,95 +193,32 @@
                         <RowDefinition  />
                         <RowDefinition  />
                     </Grid.RowDefinitions>
-                    <Label x:Name="label1_Copy" Content="限定电能：" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="106,10,0,0" FontSize="16"/>
-                    <Image x:Name="image1_Copy3" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Height="2" Margin="43,39,0,0" VerticalAlignment="Top" Width="410" Source="Images/DianYuanMingXi/XuXianChang.jpg" RenderTransformOrigin="0.5,0.5" >
-                        <Image.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform ScaleY="-1"/>
-                                <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Image.RenderTransform>
-                    </Image>
-                    <Label x:Name="label1_Copy1" Content="限定功率：" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="106,10.333,0,0" FontSize="16"/>
-                    <Label x:Name="label1_Copy2" Content="电流容量值：" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="90,7.667,0,0" FontSize="16"/>
-                    <Label x:Name="label1_Copy3" Content="超温保护值：" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="90,10,0,0" FontSize="16"/>
-                    <Label x:Name="label1_Copy4" Content="超温预警值：" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="90,7.333,0,0" FontSize="16"/>
-                    <Label x:Name="label1_Copy5" Content="过压上限：" Grid.Row="6" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="106,9.667,0,0" FontSize="16"/>
+                    <Label x:Name="label1_Copy" Content="限定电能：" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="106,7,0,0" FontSize="16"/>
+                    <Label x:Name="label2_Copy" Content="kWh" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="365,7,0,0" FontSize="16"/>
+                    <Image x:Name="image1_Copy3" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Margin="43,39,0,0" VerticalAlignment="Top" Width="410" Source="Images/DianYuanMingXi/XuXianChang.jpg" />
+                    <Label x:Name="label1_Copy1" Content="限定功率：" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="106,7,0,0" FontSize="16"/>
+                    <Label x:Name="label3_Copy1" Content="W" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="365,7,0,0" FontSize="16"/>
+                    <Label x:Name="label1_Copy2" Content="电流容量值：" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="90,6,0,0" FontSize="16"/>
+                    <Label x:Name="label4_Copy2" Content="A" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="365,6,0,0" FontSize="16"/>
+                    <Label x:Name="label1_Copy3" Content="超温保护值：" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="90,6,0,0" FontSize="16"/>
+                    <Label x:Name="label5_Copy3" Content="℃" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="365,6,0,0" FontSize="16"/>
+                    <Label x:Name="label1_Copy4" Content="超温预警值：" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="90,4,0,0" FontSize="16"/>
+                    <Label x:Name="label6_Copy4" Content="℃" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="365,4,0,0" FontSize="16"/>
+                    <Label x:Name="label1_Copy5" Content="过压上限：" Grid.Row="6" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="106,6,0,0" FontSize="16"/>
+                    <Label x:Name="label7_Copy5" Content="V" Grid.Row="6" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="365,6,0,0" FontSize="16"/>
                     <Label x:Name="label1_Copy6" Content="欠压下限：" Grid.Row="7" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="106,8,0,0" FontSize="16"/>
+                    <Label x:Name="label8_Copy6" Content="V" Grid.Row="7" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="365,8,0,0" FontSize="16"/>
                     <Label x:Name="label1_Copy7" Content="额定漏电动作电流：" Grid.Row="8" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="42,9.667,0,0" FontSize="16"/>
+                    <Label x:Name="label9_Copy7" Content="mA" Grid.Row="8" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="365,10,0,0" FontSize="16"/>
                     <Label x:Name="label1_Copy8" Content="漏电流预警值：" Grid.Row="9" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="74,10,0,0" FontSize="16"/>
-                    <Image x:Name="image1_Copy4" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Height="2"  Margin="43,39,0,0" VerticalAlignment="Top" Width="410" Source="Images/DianYuanMingXi/XuXianChang.jpg" RenderTransformOrigin="0.5,0.5" >
-                        <Image.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform ScaleY="-1"/>
-                                <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Image.RenderTransform>
-                    </Image>
-                    <Image x:Name="image1_Copy5" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" Height="2"  Margin="43,39,0,0" VerticalAlignment="Top" Width="410" Source="Images/DianYuanMingXi/XuXianChang.jpg" RenderTransformOrigin="0.5,0.5" >
-                        <Image.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform ScaleY="-1"/>
-                                <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Image.RenderTransform>
-                    </Image>
-                    <Image x:Name="image1_Copy6" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left"  Margin="43,39,0,0" Width="410" Source="Images/DianYuanMingXi/XuXianChang.jpg" RenderTransformOrigin="0.5,0.5" >
-                        <Image.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform ScaleY="-1"/>
-                                <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Image.RenderTransform>
-                    </Image>
-                    <Image x:Name="image1_Copy8" Grid.Row="6" Grid.Column="0" HorizontalAlignment="Left"  Margin="43,39,0,0" Width="410" Source="Images/DianYuanMingXi/XuXianChang.jpg" RenderTransformOrigin="0.5,0.5" >
-                        <Image.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform ScaleY="-1"/>
-                                <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Image.RenderTransform>
-                    </Image>
-                    <Image x:Name="image1_Copy11" Grid.Row="7" Grid.Column="0" HorizontalAlignment="Left"  Margin="43,39,0,0" Width="410" Source="Images/DianYuanMingXi/XuXianChang.jpg" RenderTransformOrigin="0.5,0.5" >
-                        <Image.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform ScaleY="-1"/>
-                                <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Image.RenderTransform>
-                    </Image>
-                    <Image x:Name="image1_Copy10" Grid.Row="8" Grid.Column="0" HorizontalAlignment="Left"  Margin="43,39,0,0" Width="410" Source="Images/DianYuanMingXi/XuXianChang.jpg" RenderTransformOrigin="0.5,0.5" >
-                        <Image.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform ScaleY="-1"/>
-                                <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Image.RenderTransform>
-                    </Image>
-                    <Image x:Name="image1_Copy12" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left"  Margin="43,39,0,0" Width="410" Source="Images/DianYuanMingXi/XuXianChang.jpg" RenderTransformOrigin="0.5,0.5" >
-                        <Image.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform ScaleY="-1"/>
-                                <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Image.RenderTransform>
-                    </Image>
+                    <Label x:Name="label10_Copy8" Content="mA" Grid.Row="9" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="365,8,0,0" FontSize="16"/>
+                    <Image x:Name="image1_Copy4" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Margin="43,39,0,0" Width="410" Source="Images/DianYuanMingXi/XuXianChang.jpg"/>
+                    <Image x:Name="image1_Copy5" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" Margin="43,39,0,0" Width="410" Source="Images/DianYuanMingXi/XuXianChang.jpg"/>
+                    <Image x:Name="image1_Copy6" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left"  Margin="43,39,0,0" Width="410" Source="Images/DianYuanMingXi/XuXianChang.jpg" />
+                    <Image x:Name="image1_Copy8" Grid.Row="6" Grid.Column="0" HorizontalAlignment="Left"  Margin="43,39,0,0" Width="410" Source="Images/DianYuanMingXi/XuXianChang.jpg" />
+                    <Image x:Name="image1_Copy11" Grid.Row="7" Grid.Column="0" HorizontalAlignment="Left"  Margin="43,39,0,0" Width="410" Source="Images/DianYuanMingXi/XuXianChang.jpg"/>
+                    <Image x:Name="image1_Copy10" Grid.Row="8" Grid.Column="0" HorizontalAlignment="Left"  Margin="43,39,0,0" Width="410" Source="Images/DianYuanMingXi/XuXianChang.jpg"/>
+                    <Image x:Name="image1_Copy12" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left"  Margin="43,39,0,0" Width="410" Source="Images/DianYuanMingXi/XuXianChang.jpg" />
                     <xctk:IntegerUpDown x:Name="integerUpDown_XDDN" HorizontalAlignment="Left" Margin="196,10,0,0" VerticalAlignment="Top" Width="169" Grid.Row="1"/>
                     <xctk:IntegerUpDown x:Name="integerUpDown_XDGL" HorizontalAlignment="Left" Margin="196,10,0,0" VerticalAlignment="Top" Width="169" Grid.Row="2"/>
                     <xctk:IntegerUpDown x:Name="integerUpDown_DLNLZ" HorizontalAlignment="Left" Margin="196,10,0,0" VerticalAlignment="Top" Width="169" Grid.Row="3"/>
@@ -291,16 +228,7 @@
                     <xctk:IntegerUpDown x:Name="integerUpDown_QYXX" HorizontalAlignment="Left" Margin="196,10,0,0" VerticalAlignment="Top" Width="169" Grid.Row="7"/>
                     <xctk:IntegerUpDown x:Name="integerUpDown_EDLD" HorizontalAlignment="Left" Margin="196,10,0,0" VerticalAlignment="Top" Width="169" Grid.Row="8"/>
                     <xctk:IntegerUpDown x:Name="integerUpDown_LDYJZ" HorizontalAlignment="Left" Margin="196,10,0,0" VerticalAlignment="Top" Width="169" Grid.Row="9"/>
-                    <Image x:Name="image1_Copy7" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Left"  Margin="43,39,0,0" Width="410" Source="Images/DianYuanMingXi/XuXianChang.jpg" >
-                        <Image.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform ScaleY="-1"/>
-                                <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Image.RenderTransform>
-                    </Image>
+                    <Image x:Name="image1_Copy7" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Left"  Margin="43,39,0,0" Width="410" Source="Images/DianYuanMingXi/XuXianChang.jpg" />
                     <Button x:Name="button_SZ_SheZhi" Content="设　置" HorizontalAlignment="Left" VerticalAlignment="Top" Width="106" Margin="298,5,0,0" Style="{DynamicResource MyWpfButton}" Click="button_SZ_SheZhi_Click" Cursor="Hand"/>
                     <Button x:Name="button_SZ_HuoQu" Content="刷　新" HorizontalAlignment="Left" VerticalAlignment="Top" Width="106" Margin="90,5,0,0" Style="{DynamicResource GreenButton}" Click="button_SZ_HuoQu_Click" Cursor="Hand"/>
 
