@@ -71,7 +71,9 @@ namespace JXHighWay.WatchHouse.Bll.Server
         }
 
         public bool Update(int ID, int GanTingID, string GanTingMC, string GanTingLX,
-            string LedIP, int LEDGao,int LEDKuan,string DianYuanID1,string DianYuanID2,  DataTable SwitchInfoTable1,DataTable SwitchInfoTable2,
+            string Led1IP, int LED1Gao,int LED1Kuan,string Led2IP,int Led2Gao,int Led2Kuan,
+            string DianYuanID1,string DianYuanID2,
+            DataTable SwitchInfoTable1,DataTable SwitchInfoTable2,
             ref string OutInfo)
         {
             bool vResult = false;
@@ -80,9 +82,15 @@ namespace JXHighWay.WatchHouse.Bll.Server
                 GangTingID = GanTingID,
                 GangTingMC = GanTingMC,
                 GangTingLX = GanTingLX,
-                GuanGaoPingIP = LedIP,
-                GuanGaoGao = LEDGao,
-                GuanGaoKuang = LEDKuan,
+
+                GuanGaoPing1IP = Led1IP,
+                GuanGao1Gao = LED1Gao,
+                GuanGao1Kuang = LED1Kuan,
+
+                GuanGaoPing2IP = Led2IP,
+                GuanGao2Gao = Led2Gao,
+                GuanGao2Kuang = Led2Kuan,
+
                 DianYuan1ID = DianYuanID1,
                 DianYuan2ID = DianYuanID2,
                 ID = ID,
@@ -180,7 +188,8 @@ namespace JXHighWay.WatchHouse.Bll.Server
         }
 
         public bool Add(int GanTingID,string GanTingMC,string GanTingLX,
-            string LedIP,int LEDGao,int LEDKuan,string DianYuanID1,string DianYuanID2,DataTable SwitchInfoTable1,DataTable SwitchInfoTable2,
+            string Led1IP,int LED1Gao,int LED1Kuan,string Led2IP,int LED2Gao,int LED2Kuan,
+            string DianYuanID1,string DianYuanID2,DataTable SwitchInfoTable1,DataTable SwitchInfoTable2,
             ref string OutInfo )
         {
             bool vResult = false;
@@ -192,9 +201,15 @@ namespace JXHighWay.WatchHouse.Bll.Server
                     GangTingID = GanTingID,
                     GangTingMC = GanTingMC,
                     GangTingLX = GanTingLX,
-                    GuanGaoPingIP = LedIP,
-                    GuanGaoGao = LEDGao,
-                    GuanGaoKuang = LEDKuan,
+
+                    GuanGaoPing1IP = Led1IP,
+                    GuanGao1Gao = LED1Gao,
+                    GuanGao1Kuang = LED1Kuan,
+
+                    GuanGaoPing2IP = Led2IP,
+                    GuanGao2Gao = LED2Gao,
+                    GuanGao2Kuang = LED2Kuan,
+
                     DianYuan1ID = DianYuanID1,
                     DianYuan2ID = DianYuanID2,
                     ShouFeiZhangID = 1,

@@ -85,5 +85,27 @@ namespace JXHighWay.WatchHouse.WFPClient
             SelectedIPArray = vSelectedIP.ToArray();
             DialogResult = true;
         }
+
+        private void checkBox_SelectedAll_Checked(object sender, RoutedEventArgs e)
+        {
+            if (m_CheckBoxList!=null)
+            {
+                foreach(CheckBox vTempCheckBox in m_CheckBoxList)
+                {
+                    vTempCheckBox.IsChecked = true;
+                }
+            }
+        }
+
+        private void checkBox_SelectedAll_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (m_CheckBoxList != null)
+            {
+                foreach (CheckBox vTempCheckBox in m_CheckBoxList)
+                {
+                    vTempCheckBox.IsChecked = false;
+                }
+            }
+        }
     }
 }

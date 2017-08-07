@@ -24,16 +24,23 @@ namespace JXHighWay.WatchHouse.EFModel
         public int? GangTingDK { get; set; }
         [ColumnAttrib("GangTingLX")]
         public string GangTingLX { get; set; }
-        [ColumnAttrib("GuanGaoPingIP")]
-        public String GuanGaoPingIP { get; set; }
-        [ColumnAttrib("GuanGaoPDK")]
-        public int? GuanGaoPDK { get; set; }
 
-        [ColumnAttrib("GuanGaoGao")]
-        public int? GuanGaoGao { get; set; }
+        [ColumnAttrib("GuanGaoPing1IP")]
+        public String GuanGaoPing1IP { get; set; }
+        [ColumnAttrib("GuanGao1DK")]
+        public int? GuanGao1DK { get; set; }
+        [ColumnAttrib("GuanGao1Gao")]
+        public int? GuanGao1Gao { get; set; }
+        [ColumnAttrib("GuanGao1Kuang")]
+        public int? GuanGao1Kuang { get; set; }
 
-        [ColumnAttrib("GuanGaoKuang")]
-        public int? GuanGaoKuang { get; set; }
+
+        [ColumnAttrib("GuanGaoPing2IP")]
+        public String GuanGaoPing2IP { get; set; }
+        [ColumnAttrib("GuanGao2Gao")]
+        public int? GuanGao2Gao { get; set; }
+        [ColumnAttrib("GuanGao2Kuang")]
+        public int? GuanGao2Kuang { get; set; }
 
 
         [ColumnAttrib("DianYuan1ID")]

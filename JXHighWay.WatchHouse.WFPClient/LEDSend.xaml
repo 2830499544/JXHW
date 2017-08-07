@@ -30,12 +30,13 @@
         <Button x:Name="button_XuanDing" Content="选　定" HorizontalAlignment="Left" Margin="57,10,0,0" VerticalAlignment="Top" Width="75" Grid.Row="2" Style="{DynamicResource MyWpfButton}" Height="31" Click="button_XuanDing_Click"/>
         <Button x:Name="button_QuXiao" Content="取　消" HorizontalAlignment="Left" Margin="303,10,0,0" VerticalAlignment="Top" Width="75" Grid.Row="2" Style="{DynamicResource MyWpfButton}" Height="31" Click="button_QuXiao_Click"/>
         <Image x:Name="image" HorizontalAlignment="Left" Height="17" VerticalAlignment="Top" Width="436" Margin="0,155,0,0" Grid.Row="1" Source="Images/LED/xuxian.jpg" Grid.RowSpan="2"/>
-        <ListBox x:Name="listBox_GangTing" HorizontalAlignment="Left" Height="132" Margin="10,18,0,0" Grid.Row="1" VerticalAlignment="Top" Width="416">
+        <ListBox x:Name="listBox_GangTing" HorizontalAlignment="Left" Height="132" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="416">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Columns="4"/>
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
         </ListBox>
+        <CheckBox x:Name="checkBox_SelectedAll" Content="全　选" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="11,143,0,0" Grid.Row="1" Checked="checkBox_SelectedAll_Checked" Unchecked="checkBox_SelectedAll_Unchecked"/>
     </Grid>
 </Window>

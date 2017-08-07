@@ -70,9 +70,9 @@ namespace JXHighWay.WatchHouse.Bll.Client.LED
             WatchHouseConfigEFModel[] vSelectResult = m_BasicDBClass.SelectRecordsEx(vWatchHouseConfigEFModel);
             if (vSelectResult != null && vSelectResult.Length > 0)
             {
-                ipAddress = vSelectResult[0].GuanGaoPingIP;
-                width = vSelectResult[0].GuanGaoKuang ?? 0;
-                height = vSelectResult[0].GuanGaoGao ?? 0;
+                ipAddress = vSelectResult[0].GuanGaoPing1IP;
+                width = vSelectResult[0].GuanGao1Kuang ?? 0;
+                height = vSelectResult[0].GuanGao1Gao ?? 0;
             }
         }
 
@@ -273,7 +273,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.LED
             WatchHouseConfigEFModel[] vSelectResult = m_BasicDBClass.SelectAllRecordsEx<WatchHouseConfigEFModel>();
             foreach (WatchHouseConfigEFModel vTempResult in vSelectResult)
             {
-                if (vTempResult.GuanGaoPingIP != null && vTempResult.GuanGaoPingIP != "")
+                if (vTempResult.GuanGaoPing1IP != null && vTempResult.GuanGaoPing1IP != "")
                 {
                     SendImage(UserName, ImagePath);
                 }
@@ -366,7 +366,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.LED
             WatchHouseConfigEFModel[] vSelectResult = m_BasicDBClass.SelectAllRecordsEx<WatchHouseConfigEFModel>();
             foreach (WatchHouseConfigEFModel vTempResult in vSelectResult)
             {
-                if (vTempResult.GuanGaoPingIP != null && vTempResult.GuanGaoPingIP != "")
+                if (vTempResult.GuanGaoPing1IP != null && vTempResult.GuanGaoPing1IP != "")
                 {
                     SendVideo(UserName, VideoPath);
                 }
@@ -460,7 +460,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.LED
             WatchHouseConfigEFModel[] vSelectResult = m_BasicDBClass.SelectAllRecordsEx<WatchHouseConfigEFModel>();
             foreach(WatchHouseConfigEFModel vTempResult in vSelectResult)
             {
-                if ( vTempResult.GuanGaoPingIP!=null && vTempResult.GuanGaoPingIP!="")
+                if ( vTempResult.GuanGaoPing1IP!=null && vTempResult.GuanGaoPing1IP!="")
                 {
                     SendText(UserName, Text);
                 }

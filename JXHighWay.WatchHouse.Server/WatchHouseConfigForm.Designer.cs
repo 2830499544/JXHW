@@ -37,12 +37,12 @@
             this.textBox_GanTing_ID = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.numericUpDown_LED_Kuan = new System.Windows.Forms.NumericUpDown();
+            this.groupBox_LED1 = new System.Windows.Forms.GroupBox();
+            this.numericUpDown_LED1_Kuan = new System.Windows.Forms.NumericUpDown();
             this.label11 = new System.Windows.Forms.Label();
-            this.numericUpDown_LED_Gao = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_LED1_Gao = new System.Windows.Forms.NumericUpDown();
             this.label10 = new System.Windows.Forms.Label();
-            this.textBox_LED_IP = new System.Windows.Forms.TextBox();
+            this.textBox_LED1_IP = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox_Power1 = new System.Windows.Forms.GroupBox();
             this.button_DY1_Time = new System.Windows.Forms.Button();
@@ -65,26 +65,39 @@
             this.label8 = new System.Windows.Forms.Label();
             this.textBox_DY2_ID = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.groupBox_LED2 = new System.Windows.Forms.GroupBox();
+            this.numericUpDown_LED2_Kuan = new System.Windows.Forms.NumericUpDown();
+            this.label12 = new System.Windows.Forms.Label();
+            this.numericUpDown_LED2_Gao = new System.Windows.Forms.NumericUpDown();
+            this.label13 = new System.Windows.Forms.Label();
+            this.textBox_LED2_IP = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.Column_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_GanTing_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_GanTing_MC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_GanTing_LX = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_GanTing_IP = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_LED_IP = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_LED_Gao = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_LED_Kuan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_LED1_IP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_LED1_Gao = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_LED1_Kuan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_LED2_IP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_LED2_Gao = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_LED2_Kuan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_DianYuan1_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_DianYuan1_IP = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_DianYuan2_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_DianYuan2_IP = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LED_Kuan)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LED_Gao)).BeginInit();
+            this.groupBox_LED1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LED1_Kuan)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LED1_Gao)).BeginInit();
             this.groupBox_Power1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_List)).BeginInit();
             this.groupBox_Power2.SuspendLayout();
+            this.groupBox_LED2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LED2_Kuan)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LED2_Gao)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -102,14 +115,14 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(706, 70);
+            this.groupBox1.Size = new System.Drawing.Size(836, 44);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "岗亭配置";
             // 
             // textBox_GanTing_IP
             // 
-            this.textBox_GanTing_IP.Location = new System.Drawing.Point(300, 44);
+            this.textBox_GanTing_IP.Location = new System.Drawing.Point(673, 13);
             this.textBox_GanTing_IP.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_GanTing_IP.Name = "textBox_GanTing_IP";
             this.textBox_GanTing_IP.ReadOnly = true;
@@ -119,7 +132,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(273, 47);
+            this.label4.Location = new System.Drawing.Point(646, 17);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(23, 12);
@@ -134,7 +147,7 @@
             "入口",
             "出口",
             "双向"});
-            this.comboBox_GanTing_LX.Location = new System.Drawing.Point(90, 45);
+            this.comboBox_GanTing_LX.Location = new System.Drawing.Point(493, 14);
             this.comboBox_GanTing_LX.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox_GanTing_LX.Name = "comboBox_GanTing_LX";
             this.comboBox_GanTing_LX.Size = new System.Drawing.Size(135, 20);
@@ -144,7 +157,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(51, 47);
+            this.label3.Location = new System.Drawing.Point(454, 17);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 12);
@@ -170,7 +183,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(261, 15);
+            this.label2.Location = new System.Drawing.Point(261, 17);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 12);
@@ -180,42 +193,42 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(51, 15);
+            this.label1.Location = new System.Drawing.Point(51, 17);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 12);
             this.label1.TabIndex = 0;
             this.label1.Text = "编号:";
             // 
-            // groupBox2
+            // groupBox_LED1
             // 
-            this.groupBox2.Controls.Add(this.numericUpDown_LED_Kuan);
-            this.groupBox2.Controls.Add(this.label11);
-            this.groupBox2.Controls.Add(this.numericUpDown_LED_Gao);
-            this.groupBox2.Controls.Add(this.label10);
-            this.groupBox2.Controls.Add(this.textBox_LED_IP);
-            this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox2.Location = new System.Drawing.Point(0, 70);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(706, 37);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "LED屏配置";
+            this.groupBox_LED1.Controls.Add(this.numericUpDown_LED1_Kuan);
+            this.groupBox_LED1.Controls.Add(this.label11);
+            this.groupBox_LED1.Controls.Add(this.numericUpDown_LED1_Gao);
+            this.groupBox_LED1.Controls.Add(this.label10);
+            this.groupBox_LED1.Controls.Add(this.textBox_LED1_IP);
+            this.groupBox_LED1.Controls.Add(this.label5);
+            this.groupBox_LED1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox_LED1.Location = new System.Drawing.Point(0, 44);
+            this.groupBox_LED1.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox_LED1.Name = "groupBox_LED1";
+            this.groupBox_LED1.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox_LED1.Size = new System.Drawing.Size(836, 37);
+            this.groupBox_LED1.TabIndex = 1;
+            this.groupBox_LED1.TabStop = false;
+            this.groupBox_LED1.Text = "LED屏配置1";
             // 
-            // numericUpDown_LED_Kuan
+            // numericUpDown_LED1_Kuan
             // 
-            this.numericUpDown_LED_Kuan.Location = new System.Drawing.Point(399, 11);
-            this.numericUpDown_LED_Kuan.Maximum = new decimal(new int[] {
+            this.numericUpDown_LED1_Kuan.Location = new System.Drawing.Point(399, 11);
+            this.numericUpDown_LED1_Kuan.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
-            this.numericUpDown_LED_Kuan.Name = "numericUpDown_LED_Kuan";
-            this.numericUpDown_LED_Kuan.Size = new System.Drawing.Size(52, 21);
-            this.numericUpDown_LED_Kuan.TabIndex = 7;
+            this.numericUpDown_LED1_Kuan.Name = "numericUpDown_LED1_Kuan";
+            this.numericUpDown_LED1_Kuan.Size = new System.Drawing.Size(52, 21);
+            this.numericUpDown_LED1_Kuan.TabIndex = 7;
             // 
             // label11
             // 
@@ -226,17 +239,17 @@
             this.label11.TabIndex = 6;
             this.label11.Text = "宽:";
             // 
-            // numericUpDown_LED_Gao
+            // numericUpDown_LED1_Gao
             // 
-            this.numericUpDown_LED_Gao.Location = new System.Drawing.Point(302, 12);
-            this.numericUpDown_LED_Gao.Maximum = new decimal(new int[] {
+            this.numericUpDown_LED1_Gao.Location = new System.Drawing.Point(302, 12);
+            this.numericUpDown_LED1_Gao.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
-            this.numericUpDown_LED_Gao.Name = "numericUpDown_LED_Gao";
-            this.numericUpDown_LED_Gao.Size = new System.Drawing.Size(52, 21);
-            this.numericUpDown_LED_Gao.TabIndex = 5;
+            this.numericUpDown_LED1_Gao.Name = "numericUpDown_LED1_Gao";
+            this.numericUpDown_LED1_Gao.Size = new System.Drawing.Size(52, 21);
+            this.numericUpDown_LED1_Gao.TabIndex = 5;
             // 
             // label10
             // 
@@ -247,13 +260,13 @@
             this.label10.TabIndex = 4;
             this.label10.Text = "高:";
             // 
-            // textBox_LED_IP
+            // textBox_LED1_IP
             // 
-            this.textBox_LED_IP.Location = new System.Drawing.Point(90, 13);
-            this.textBox_LED_IP.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox_LED_IP.Name = "textBox_LED_IP";
-            this.textBox_LED_IP.Size = new System.Drawing.Size(135, 21);
-            this.textBox_LED_IP.TabIndex = 3;
+            this.textBox_LED1_IP.Location = new System.Drawing.Point(90, 13);
+            this.textBox_LED1_IP.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox_LED1_IP.Name = "textBox_LED1_IP";
+            this.textBox_LED1_IP.Size = new System.Drawing.Size(135, 21);
+            this.textBox_LED1_IP.TabIndex = 3;
             // 
             // label5
             // 
@@ -274,19 +287,18 @@
             this.groupBox_Power1.Controls.Add(this.label7);
             this.groupBox_Power1.Controls.Add(this.textBox_DY1_ID);
             this.groupBox_Power1.Controls.Add(this.label6);
-            this.groupBox_Power1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox_Power1.Location = new System.Drawing.Point(0, 107);
+            this.groupBox_Power1.Location = new System.Drawing.Point(0, 119);
             this.groupBox_Power1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox_Power1.Name = "groupBox_Power1";
             this.groupBox_Power1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox_Power1.Size = new System.Drawing.Size(706, 43);
+            this.groupBox_Power1.Size = new System.Drawing.Size(836, 43);
             this.groupBox_Power1.TabIndex = 2;
             this.groupBox_Power1.TabStop = false;
             this.groupBox_Power1.Text = "电源配置1";
             // 
             // button_DY1_Time
             // 
-            this.button_DY1_Time.Location = new System.Drawing.Point(615, 12);
+            this.button_DY1_Time.Location = new System.Drawing.Point(732, 12);
             this.button_DY1_Time.Margin = new System.Windows.Forms.Padding(2);
             this.button_DY1_Time.Name = "button_DY1_Time";
             this.button_DY1_Time.Size = new System.Drawing.Size(78, 27);
@@ -297,7 +309,7 @@
             // 
             // button_DY1_PowerIP
             // 
-            this.button_DY1_PowerIP.Location = new System.Drawing.Point(529, 12);
+            this.button_DY1_PowerIP.Location = new System.Drawing.Point(602, 12);
             this.button_DY1_PowerIP.Margin = new System.Windows.Forms.Padding(2);
             this.button_DY1_PowerIP.Name = "button_DY1_PowerIP";
             this.button_DY1_PowerIP.Size = new System.Drawing.Size(78, 27);
@@ -308,7 +320,7 @@
             // 
             // button_DY1_KaiGuan
             // 
-            this.button_DY1_KaiGuan.Location = new System.Drawing.Point(445, 12);
+            this.button_DY1_KaiGuan.Location = new System.Drawing.Point(472, 12);
             this.button_DY1_KaiGuan.Margin = new System.Windows.Forms.Padding(2);
             this.button_DY1_KaiGuan.Name = "button_DY1_KaiGuan";
             this.button_DY1_KaiGuan.Size = new System.Drawing.Size(78, 27);
@@ -357,11 +369,11 @@
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.dataGridView_List);
-            this.groupBox4.Location = new System.Drawing.Point(0, 197);
+            this.groupBox4.Location = new System.Drawing.Point(0, 208);
             this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox4.Size = new System.Drawing.Size(706, 225);
+            this.groupBox4.Size = new System.Drawing.Size(836, 225);
             this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "岗亭列表";
@@ -377,9 +389,12 @@
             this.Column_GanTing_MC,
             this.Column_GanTing_LX,
             this.Column_GanTing_IP,
-            this.Column_LED_IP,
-            this.Column_LED_Gao,
-            this.Column_LED_Kuan,
+            this.Column_LED1_IP,
+            this.Column_LED1_Gao,
+            this.Column_LED1_Kuan,
+            this.Column_LED2_IP,
+            this.Column_LED2_Gao,
+            this.Column_LED2_Kuan,
             this.Column_DianYuan1_ID,
             this.Column_DianYuan1_IP,
             this.Column_DianYuan2_ID,
@@ -392,7 +407,7 @@
             this.dataGridView_List.RowHeadersVisible = false;
             this.dataGridView_List.RowTemplate.Height = 30;
             this.dataGridView_List.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView_List.Size = new System.Drawing.Size(702, 207);
+            this.dataGridView_List.Size = new System.Drawing.Size(832, 207);
             this.dataGridView_List.TabIndex = 0;
             this.dataGridView_List.SelectionChanged += new System.EventHandler(this.dataGridView_List_SelectionChanged);
             // 
@@ -400,7 +415,7 @@
             // 
             this.button_Update.Image = global::JXHighWay.WatchHouse.Server.Properties.Resources.Update;
             this.button_Update.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button_Update.Location = new System.Drawing.Point(520, 441);
+            this.button_Update.Location = new System.Drawing.Point(696, 441);
             this.button_Update.Margin = new System.Windows.Forms.Padding(2);
             this.button_Update.Name = "button_Update";
             this.button_Update.Size = new System.Drawing.Size(78, 37);
@@ -414,7 +429,7 @@
             // 
             this.button_Del.Image = global::JXHighWay.WatchHouse.Server.Properties.Resources.Del;
             this.button_Del.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button_Del.Location = new System.Drawing.Point(293, 441);
+            this.button_Del.Location = new System.Drawing.Point(356, 441);
             this.button_Del.Margin = new System.Windows.Forms.Padding(2);
             this.button_Del.Name = "button_Del";
             this.button_Del.Size = new System.Drawing.Size(78, 37);
@@ -447,19 +462,18 @@
             this.groupBox_Power2.Controls.Add(this.label8);
             this.groupBox_Power2.Controls.Add(this.textBox_DY2_ID);
             this.groupBox_Power2.Controls.Add(this.label9);
-            this.groupBox_Power2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox_Power2.Location = new System.Drawing.Point(0, 150);
+            this.groupBox_Power2.Location = new System.Drawing.Point(0, 164);
             this.groupBox_Power2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox_Power2.Name = "groupBox_Power2";
             this.groupBox_Power2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox_Power2.Size = new System.Drawing.Size(706, 43);
+            this.groupBox_Power2.Size = new System.Drawing.Size(836, 43);
             this.groupBox_Power2.TabIndex = 3;
             this.groupBox_Power2.TabStop = false;
             this.groupBox_Power2.Text = "电源配置2";
             // 
             // button_DY2_Time
             // 
-            this.button_DY2_Time.Location = new System.Drawing.Point(615, 12);
+            this.button_DY2_Time.Location = new System.Drawing.Point(732, 12);
             this.button_DY2_Time.Margin = new System.Windows.Forms.Padding(2);
             this.button_DY2_Time.Name = "button_DY2_Time";
             this.button_DY2_Time.Size = new System.Drawing.Size(78, 27);
@@ -470,7 +484,7 @@
             // 
             // button_DY2_PowerIP
             // 
-            this.button_DY2_PowerIP.Location = new System.Drawing.Point(530, 12);
+            this.button_DY2_PowerIP.Location = new System.Drawing.Point(602, 12);
             this.button_DY2_PowerIP.Margin = new System.Windows.Forms.Padding(2);
             this.button_DY2_PowerIP.Name = "button_DY2_PowerIP";
             this.button_DY2_PowerIP.Size = new System.Drawing.Size(78, 27);
@@ -481,7 +495,7 @@
             // 
             // button_DY2_KaiGuan
             // 
-            this.button_DY2_KaiGuan.Location = new System.Drawing.Point(445, 12);
+            this.button_DY2_KaiGuan.Location = new System.Drawing.Point(472, 12);
             this.button_DY2_KaiGuan.Margin = new System.Windows.Forms.Padding(2);
             this.button_DY2_KaiGuan.Name = "button_DY2_KaiGuan";
             this.button_DY2_KaiGuan.Size = new System.Drawing.Size(78, 27);
@@ -527,6 +541,84 @@
             this.label9.TabIndex = 3;
             this.label9.Text = "编号:";
             // 
+            // groupBox_LED2
+            // 
+            this.groupBox_LED2.Controls.Add(this.numericUpDown_LED2_Kuan);
+            this.groupBox_LED2.Controls.Add(this.label12);
+            this.groupBox_LED2.Controls.Add(this.numericUpDown_LED2_Gao);
+            this.groupBox_LED2.Controls.Add(this.label13);
+            this.groupBox_LED2.Controls.Add(this.textBox_LED2_IP);
+            this.groupBox_LED2.Controls.Add(this.label14);
+            this.groupBox_LED2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox_LED2.Location = new System.Drawing.Point(0, 81);
+            this.groupBox_LED2.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox_LED2.Name = "groupBox_LED2";
+            this.groupBox_LED2.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox_LED2.Size = new System.Drawing.Size(836, 37);
+            this.groupBox_LED2.TabIndex = 9;
+            this.groupBox_LED2.TabStop = false;
+            this.groupBox_LED2.Text = "LED屏配置2";
+            // 
+            // numericUpDown_LED2_Kuan
+            // 
+            this.numericUpDown_LED2_Kuan.Location = new System.Drawing.Point(399, 11);
+            this.numericUpDown_LED2_Kuan.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDown_LED2_Kuan.Name = "numericUpDown_LED2_Kuan";
+            this.numericUpDown_LED2_Kuan.Size = new System.Drawing.Size(52, 21);
+            this.numericUpDown_LED2_Kuan.TabIndex = 7;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(370, 16);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(23, 12);
+            this.label12.TabIndex = 6;
+            this.label12.Text = "宽:";
+            // 
+            // numericUpDown_LED2_Gao
+            // 
+            this.numericUpDown_LED2_Gao.Location = new System.Drawing.Point(302, 12);
+            this.numericUpDown_LED2_Gao.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDown_LED2_Gao.Name = "numericUpDown_LED2_Gao";
+            this.numericUpDown_LED2_Gao.Size = new System.Drawing.Size(52, 21);
+            this.numericUpDown_LED2_Gao.TabIndex = 5;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(273, 16);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(23, 12);
+            this.label13.TabIndex = 4;
+            this.label13.Text = "高:";
+            // 
+            // textBox_LED2_IP
+            // 
+            this.textBox_LED2_IP.Location = new System.Drawing.Point(90, 13);
+            this.textBox_LED2_IP.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox_LED2_IP.Name = "textBox_LED2_IP";
+            this.textBox_LED2_IP.Size = new System.Drawing.Size(135, 21);
+            this.textBox_LED2_IP.TabIndex = 3;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(57, 15);
+            this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(23, 12);
+            this.label14.TabIndex = 1;
+            this.label14.Text = "IP:";
+            // 
             // Column_ID
             // 
             this.Column_ID.DataPropertyName = "ID";
@@ -567,27 +659,48 @@
             this.Column_GanTing_IP.ReadOnly = true;
             this.Column_GanTing_IP.Width = 120;
             // 
-            // Column_LED_IP
+            // Column_LED1_IP
             // 
-            this.Column_LED_IP.DataPropertyName = "GuanGaoPingIP";
-            this.Column_LED_IP.HeaderText = "LED屏幕IP";
-            this.Column_LED_IP.Name = "Column_LED_IP";
-            this.Column_LED_IP.ReadOnly = true;
-            this.Column_LED_IP.Width = 150;
+            this.Column_LED1_IP.DataPropertyName = "GuanGaoPing1IP";
+            this.Column_LED1_IP.HeaderText = "LED1屏幕IP";
+            this.Column_LED1_IP.Name = "Column_LED1_IP";
+            this.Column_LED1_IP.ReadOnly = true;
+            this.Column_LED1_IP.Width = 150;
             // 
-            // Column_LED_Gao
+            // Column_LED1_Gao
             // 
-            this.Column_LED_Gao.DataPropertyName = "GuanGaoGao";
-            this.Column_LED_Gao.HeaderText = "LED高度";
-            this.Column_LED_Gao.Name = "Column_LED_Gao";
-            this.Column_LED_Gao.ReadOnly = true;
+            this.Column_LED1_Gao.DataPropertyName = "GuanGao1Gao";
+            this.Column_LED1_Gao.HeaderText = "LED1高度";
+            this.Column_LED1_Gao.Name = "Column_LED1_Gao";
+            this.Column_LED1_Gao.ReadOnly = true;
             // 
-            // Column_LED_Kuan
+            // Column_LED1_Kuan
             // 
-            this.Column_LED_Kuan.DataPropertyName = "GuanGaoKuang";
-            this.Column_LED_Kuan.HeaderText = "LED宽度";
-            this.Column_LED_Kuan.Name = "Column_LED_Kuan";
-            this.Column_LED_Kuan.ReadOnly = true;
+            this.Column_LED1_Kuan.DataPropertyName = "GuanGao1Kuang";
+            this.Column_LED1_Kuan.HeaderText = "LED1宽度";
+            this.Column_LED1_Kuan.Name = "Column_LED1_Kuan";
+            this.Column_LED1_Kuan.ReadOnly = true;
+            // 
+            // Column_LED2_IP
+            // 
+            this.Column_LED2_IP.DataPropertyName = "GuanGaoPing2IP";
+            this.Column_LED2_IP.HeaderText = "LED2屏幕IP";
+            this.Column_LED2_IP.Name = "Column_LED2_IP";
+            this.Column_LED2_IP.ReadOnly = true;
+            // 
+            // Column_LED2_Gao
+            // 
+            this.Column_LED2_Gao.DataPropertyName = "GuanGao2Gao";
+            this.Column_LED2_Gao.HeaderText = "LED2高度";
+            this.Column_LED2_Gao.Name = "Column_LED2_Gao";
+            this.Column_LED2_Gao.ReadOnly = true;
+            // 
+            // Column_LED2_Kuan
+            // 
+            this.Column_LED2_Kuan.DataPropertyName = "GuanGao2Kuang";
+            this.Column_LED2_Kuan.HeaderText = "LED2宽度";
+            this.Column_LED2_Kuan.Name = "Column_LED2_Kuan";
+            this.Column_LED2_Kuan.ReadOnly = true;
             // 
             // Column_DianYuan1_ID
             // 
@@ -623,14 +736,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(706, 495);
+            this.ClientSize = new System.Drawing.Size(836, 484);
+            this.Controls.Add(this.groupBox_LED2);
             this.Controls.Add(this.groupBox_Power2);
             this.Controls.Add(this.button_Update);
             this.Controls.Add(this.button_Del);
             this.Controls.Add(this.button_Add);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox_Power1);
-            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox_LED1);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -640,16 +754,20 @@
             this.Load += new System.EventHandler(this.WatchHouseConfigForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LED_Kuan)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LED_Gao)).EndInit();
+            this.groupBox_LED1.ResumeLayout(false);
+            this.groupBox_LED1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LED1_Kuan)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LED1_Gao)).EndInit();
             this.groupBox_Power1.ResumeLayout(false);
             this.groupBox_Power1.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_List)).EndInit();
             this.groupBox_Power2.ResumeLayout(false);
             this.groupBox_Power2.PerformLayout();
+            this.groupBox_LED2.ResumeLayout(false);
+            this.groupBox_LED2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LED2_Kuan)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LED2_Gao)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -665,9 +783,9 @@
         private System.Windows.Forms.TextBox textBox_GanTing_ID;
         private System.Windows.Forms.TextBox textBox_GanTing_IP;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox_LED1;
         private System.Windows.Forms.GroupBox groupBox_Power1;
-        private System.Windows.Forms.TextBox textBox_LED_IP;
+        private System.Windows.Forms.TextBox textBox_LED1_IP;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBox_DY1_ID;
         private System.Windows.Forms.Label label6;
@@ -687,20 +805,30 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox textBox_DY2_ID;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.NumericUpDown numericUpDown_LED_Kuan;
+        private System.Windows.Forms.NumericUpDown numericUpDown_LED1_Kuan;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.NumericUpDown numericUpDown_LED_Gao;
+        private System.Windows.Forms.NumericUpDown numericUpDown_LED1_Gao;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button button_DY1_Time;
         private System.Windows.Forms.Button button_DY2_Time;
+        private System.Windows.Forms.GroupBox groupBox_LED2;
+        private System.Windows.Forms.NumericUpDown numericUpDown_LED2_Kuan;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.NumericUpDown numericUpDown_LED2_Gao;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox textBox_LED2_IP;
+        private System.Windows.Forms.Label label14;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_GanTing_ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_GanTing_MC;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_GanTing_LX;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_GanTing_IP;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column_LED_IP;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column_LED_Gao;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column_LED_Kuan;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_LED1_IP;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_LED1_Gao;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_LED1_Kuan;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_LED2_IP;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_LED2_Gao;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_LED2_Kuan;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_DianYuan1_ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_DianYuan1_IP;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_DianYuan2_ID;
