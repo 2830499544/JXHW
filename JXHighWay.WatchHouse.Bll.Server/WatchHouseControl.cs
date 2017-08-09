@@ -322,7 +322,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
                             m_BasicDBClass_Send.UpdateRecord<WatchHouseSendCMDEFModel>(vModel);
                         }
                     }
-                    //Thread.Sleep(300);
+                    Thread.Sleep(100);
                 }
             });
         }
@@ -727,6 +727,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
                                     break;
                             }
                         }
+                        Thread.Sleep(100);
                     }
                     catch(Exception ex)
                     {

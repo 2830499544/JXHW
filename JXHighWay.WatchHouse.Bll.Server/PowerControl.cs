@@ -422,6 +422,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
                             }
                             
                         }
+                        Thread.Sleep(100);
                     }
                     catch (Exception ex)
                     {
@@ -956,6 +957,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
                             m_BasicDBClass_Send.UpdateRecord<PowerSendCMDEFModel>(vModel);
                         }
                     }
+                    Thread.Sleep(100);
                 }
             });
         }
