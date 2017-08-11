@@ -885,7 +885,16 @@ namespace JXHighWay.WatchHouse.Bll.Server
                 };
                 m_BasicDBClass_Receive.TransactionBegin();
                 int vID = m_BasicDBClass_Receive.InsertRecord(vModel);
-                m_BasicDBClass_Receive.UpdateRecord(vWatchHouseConfigEFModel, string.Format("DianYuan1ID='{0}'", vModel.DianYuanID));
+                bool vResult = m_BasicDBClass_Receive.UpdateRecord(vWatchHouseConfigEFModel, string.Format("DianYuan1ID='{0}' ", vModel.DianYuanID));
+                if (!vResult)
+                {
+                    vWatchHouseConfigEFModel = new WatchHouseConfigEFModel()
+                    {
+                        DianYuanTXSJ = DateTime.Now,
+                        DianYuan2IP = IPAddress
+                    };
+                    m_BasicDBClass_Receive.UpdateRecord(vWatchHouseConfigEFModel, string.Format("DianYuan2ID='{0}' ", vModel.DianYuanID));
+                }
                 m_BasicDBClass_Receive.TransactionCommit();
                 //更新客户端字典表
                 if (m_ClientDict.ContainsKey(vModel.DianYuanID) )
@@ -918,7 +927,14 @@ namespace JXHighWay.WatchHouse.Bll.Server
                         //AsyncUserToken vAsyncUserToken = findAsyncUserToken(vTempResult.DianYuanID.Value);
                         AsyncUserToken vAsyncUserToken = null;
                         if (m_SocketManager.ClientList.Count > 0)
-                            vAsyncUserToken = m_SocketManager.ClientList[0];
+                        {
+                            if ( m_ClientDict.ContainsKey(vTempResult.DianYuanID) )
+                            {
+                                string vIPAddress = m_ClientDict[vTempResult.DianYuanID];
+                                vAsyncUserToken = m_SocketManager.ClientList.Where(m => m.IPAddress.ToString() == vIPAddress).FirstOrDefault();
+                            }
+                            //vAsyncUserToken = m_SocketManager.ClientList[0];
+                        }
                         if (vAsyncUserToken != null)
                         {
                             byte[] vMac = NetHelper.StringToBytes_MAC(vTempResult.DianYuanID);

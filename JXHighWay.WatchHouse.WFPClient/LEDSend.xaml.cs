@@ -52,10 +52,10 @@ namespace JXHighWay.WatchHouse.WFPClient
                 CheckBox vNewCheckBox = new CheckBox()
                 {
                     Content = vWatchHouseInfoList[i].GangTingMC,
-                    Tag = vWatchHouseInfoList[i].GuanGaoPingIP
+                    Tag = string.Format("{0}|{1}", vWatchHouseInfoList[i].GuanGaoPing1IP, vWatchHouseInfoList[i].GuanGaoPing2IP) 
                 };
 
-                string vIsSelected = SelectedIPArray.Where(m => m == vWatchHouseInfoList[i].GuanGaoPingIP).FirstOrDefault();
+                string vIsSelected = SelectedIPArray.Where(m => m == vWatchHouseInfoList[i].GuanGaoPing1IP).FirstOrDefault();
                 if (vIsSelected != null && vIsSelected != "")
                     vNewCheckBox.IsChecked = true;
 
@@ -80,7 +80,14 @@ namespace JXHighWay.WatchHouse.WFPClient
             foreach ( CheckBox vTempCheckBox in m_CheckBoxList )
             {
                 if (vTempCheckBox.IsChecked ?? false)
-                    vSelectedIP.Add((string)vTempCheckBox.Tag);
+                {
+                    string vTag = (string)vTempCheckBox.Tag;
+                    string[] vTagArray = vTag.Split('|');
+                    if ( vTagArray[0]!=null && vTagArray[0]!="")
+                        vSelectedIP.Add(vTagArray[0]);
+                    if (vTagArray[1] != null && vTagArray[1] != "")
+                        vSelectedIP.Add(vTagArray[1]);
+                }
             }
             SelectedIPArray = vSelectedIP.ToArray();
             DialogResult = true;

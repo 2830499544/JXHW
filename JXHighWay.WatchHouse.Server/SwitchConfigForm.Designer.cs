@@ -110,9 +110,19 @@
             // numericUpDown_LuHao
             // 
             this.numericUpDown_LuHao.Location = new System.Drawing.Point(61, 22);
+            this.numericUpDown_LuHao.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numericUpDown_LuHao.Name = "numericUpDown_LuHao";
             this.numericUpDown_LuHao.Size = new System.Drawing.Size(65, 21);
             this.numericUpDown_LuHao.TabIndex = 1;
+            this.numericUpDown_LuHao.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // label1
             // 

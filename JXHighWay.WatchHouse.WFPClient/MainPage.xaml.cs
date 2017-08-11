@@ -179,7 +179,7 @@ namespace JXHighWay.WatchHouse.WFPClient
 
                     Label vLabelName = (Label)FindName(string.Format("Label_Name_WH{0}", i + 1-vStartIndex));
                     vLabelName.Content = WatchHouseInfoList[i].GangTingMC;
-                    vImage.Tag = string.Format("{0}&{1}&{2}&{3}&{4}&{5}", WatchHouseInfoList[i].GangTingID, WatchHouseInfoList[i].GangTingMC, WatchHouseInfoList[i].DianYuan1ID, WatchHouseInfoList[i].DianYuan2ID, WatchHouseInfoList[i].GuanGaoPingIP, WatchHouseInfoList[i].LeiXin);
+                    vImage.Tag = string.Format("{0}&{1}&{2}&{3}&{4}&{5}", WatchHouseInfoList[i].GangTingID, WatchHouseInfoList[i].GangTingMC, WatchHouseInfoList[i].DianYuan1ID, WatchHouseInfoList[i].DianYuan2ID, WatchHouseInfoList[i].GuanGaoPing1IP, WatchHouseInfoList[i].LeiXin);
                     vLabelName.Visibility = Visibility.Visible;
 
                     Label vLabelJob = (Label)FindName(string.Format("Label_JobNo_{0}", i + 1-vStartIndex));
