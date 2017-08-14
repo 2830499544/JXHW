@@ -120,6 +120,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.LED
         {
             string vMD5 = ""; //CommHelper.GetMD5HashFromFile(ImagePath);
             long vFileSize = 0;// CommHelper.FileSize(ImagePath);
+            ConfigbooXml m_ConfigbooXml = new ConfigbooXml();
 
             //清空原有节目
             configbooChannel vClearChannel = new configbooChannel()
@@ -254,16 +255,19 @@ namespace JXHighWay.WatchHouse.Bll.Client.LED
             XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
             XmlSerializer serializer = new XmlSerializer(typeof(ConfigbooXml));
             serializer.Serialize(ms, m_ConfigbooXml, ns);
+            Console.WriteLine(sw);
             sw.Close();
             ms.Close();
 
-            Console.WriteLine(sw.ToString());
-            HdTransmitTool t = HdTransmitTool.GetInstance();
+            //Console.WriteLine(sw.ToString());
+            
             //t.Send(m_IPAddress, ms.ToArray(), true);
             foreach (string vTempIP in IPList)
             {
+                HdTransmitTool t = HdTransmitTool.GetInstance();
                 t.Send(vTempIP, ms.ToArray(), true);
             }
+            
         }
         #endregion
 

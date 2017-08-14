@@ -44,7 +44,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
                 if (ZhaoPian != "")
                 {
                     string vPath = System.Environment.CurrentDirectory;
-                    string vNewPhotoName = string.Format("{0:yyyymmddhhMMss}.jpg", DateTime.Now);
+                    string vNewPhotoName = string.Format("{0:yyyymmddhhMMss}.png", DateTime.Now);
                     File.Copy(ZhaoPian, string.Format(@"{0}\Photo\{1}", vPath, vNewPhotoName));
                     ZhaoPian = vNewPhotoName;
                 }
@@ -78,7 +78,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
             if (ZhaoPian != null)
             {
                 string vPath = System.Environment.CurrentDirectory;
-                string vNewPhotoName = string.Format("{0:yyyymmddhhMMss}.jpg", DateTime.Now);
+                string vNewPhotoName = string.Format("{0:yyyymmddhhMMss}.png", DateTime.Now);
                 if (ZhaoPian!="")
                     File.Copy(ZhaoPian, string.Format(@"{0}\Photo\{1}", vPath, vNewPhotoName));
                 ZhaoPian = vNewPhotoName;

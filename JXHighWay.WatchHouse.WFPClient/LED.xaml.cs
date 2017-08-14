@@ -283,6 +283,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                 }
                 m_SelectedIPArray = vLEDSend.SelectedIPArray;
                 vLEDControl.SendMultiChannel(vLEDChannelInfoList, m_SelectedIPArray);
+                Xceed.Wpf.Toolkit.MessageBox.Show("已发送", "信息", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
     }

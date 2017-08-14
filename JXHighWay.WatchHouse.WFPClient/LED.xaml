@@ -116,6 +116,6 @@
             </TabItem>
 
         </TabControl>
-        <Button x:Name="button_FaShong" Content="发　送" HorizontalAlignment="Left" VerticalAlignment="Top" Width="83" Margin="46,10,0,0" Grid.Row="2" Style="{DynamicResource MyWpfButton}" Height="30" Click="button_FaShong_Click"/>
+        <Button x:Name="button_FaShong" Content="发　送" HorizontalAlignment="Left" VerticalAlignment="Top" Width="83" Margin="46,10,0,0" Grid.Row="2" Style="{DynamicResource MyWpfButton}" Height="30" Click="button_FaShong_Click" Cursor="Hand"/>
     </Grid>
 </Page>

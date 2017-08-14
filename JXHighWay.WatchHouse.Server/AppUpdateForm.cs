@@ -40,15 +40,25 @@ namespace JXHighWay.WatchHouse.Server
                 MessageBox.Show("文件不存在，请重新检查路径","信息", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            byte vBanBen1 = (byte)(((int)numericUpDown_BanBen1.Value) >> 0);
-            byte vBanBen2 = (byte)(((int)numericUpDown_BanBen2.Value) >> 0);
-            byte vBanBen3 = (byte)(((int)numericUpDown_BanBen3.Value) >> 0);
-            byte vBanBen4 = (byte)(((int)numericUpDown_BanBen4.Value) >> 0);
-            byte[] vBanBenArray = new byte[] { vBanBen1,vBanBen2,vBanBen3,vBanBen4 };
+            int vBanBen1 = (int)numericUpDown_BanBen1.Value*1000;
+            int vBanBen2 = (int)numericUpDown_BanBen2.Value*100;
+            int vBanBen3 = (int)numericUpDown_BanBen3.Value * 10;
+            int vBanBen4 = (int)numericUpDown_BanBen4.Value;
+
+            int vCount = vBanBen1 + vBanBen2 + vBanBen3 + vBanBen4;
+            byte[] vBanBenArray = BitConverter.GetBytes(vCount);
+            byte[] vNewBanBenArray = new byte[] { vBanBenArray[3], vBanBenArray[2], vBanBenArray[1], vBanBenArray[0]};
+            //byte vBanBen1 = (byte)(((int)numericUpDown_BanBen1.Value) >> 0);
+            //byte vBanBen2 = (byte)(((int)numericUpDown_BanBen2.Value) >> 0);
+            //byte vBanBen3 = (byte)(((int)numericUpDown_BanBen3.Value) >> 0);
+            //byte vBanBen4 = (byte)(((int)numericUpDown_BanBen4.Value) >> 0);
+
+
+            //byte[] vBanBenArray = new byte[] { vBanBen4,vBanBen3,vBanBen2,vBanBen1 };
 
             Config vConfig = new Config();
             WatchHouseControl vWatchHouseControl = new WatchHouseControl();
-            var vResult = await vWatchHouseControl.AsyncUpdateWatchHouseApp(textBox_LuJing.Text, vBanBenArray,
+            var vResult = await vWatchHouseControl.AsyncUpdateWatchHouseApp(textBox_LuJing.Text, vNewBanBenArray,
                 checkBox_QiangZhi.Checked,vConfig.AppUrl);
             string vInfo = "";
             foreach (var vTempResult in vResult)

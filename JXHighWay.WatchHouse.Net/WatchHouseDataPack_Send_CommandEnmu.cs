@@ -234,6 +234,12 @@ namespace JXHighWay.WatchHouse.Net
         /// <summary>
         /// 更新App
         /// </summary>
-        GenXingApp = 0x02011005
+        GenXingApp = 0x02011005,
+        /// <summary>
+        /// 显示指定工号 
+        /// </summary>
+        XiangShiGongHao = 0x02011004,
+
+
     }
 }

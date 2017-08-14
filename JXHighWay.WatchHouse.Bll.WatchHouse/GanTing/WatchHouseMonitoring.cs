@@ -43,7 +43,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.GanTing
                 DateTime vStartTime = DateTime.Now;
                 do
                 {
-                    WatchHouseSendCMDEFModel vSelectResult = m_BasicDBClass.SelectRecordByPrimaryKeyEx<WatchHouseSendCMDEFModel>(vID);
+                    WatchHouseSendCMDEFModel vSelectResult = m_BasicDBClassSelect.SelectRecordByPrimaryKeyEx<WatchHouseSendCMDEFModel>(vID);
                     vResult = vSelectResult.State ?? false;
                     if (!vResult && (DateTime.Now - vStartTime).TotalMilliseconds >= 1000)
                         break;
@@ -76,7 +76,8 @@ namespace JXHighWay.WatchHouse.Bll.Client.GanTing
                 DateTime vStartTime = DateTime.Now;
                 do
                 {
-                    WatchHouseSendCMDEFModel vSelectResult = m_BasicDBClass.SelectRecordByPrimaryKeyEx<WatchHouseSendCMDEFModel>(vID);
+                    
+                    WatchHouseSendCMDEFModel vSelectResult = m_BasicDBClassSelect.SelectRecordByPrimaryKeyEx<WatchHouseSendCMDEFModel>(vID);
                     vResult = vSelectResult.State ?? false;
                     if (!vResult && (DateTime.Now - vStartTime).TotalMilliseconds >= 1000)
                         break;

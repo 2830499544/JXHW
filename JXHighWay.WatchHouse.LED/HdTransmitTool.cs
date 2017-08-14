@@ -137,6 +137,7 @@ namespace JXHighWay.WatchHouse.LED
             trans.time = DateTime.Now;
             Console.WriteLine(">>" + ip + " : " + trans.time.ToString("HH:mm:ss.fff"));
             HD_Transmit.SendExternCmdBuff(trans.transmitInstance, buffer, buffer.Length, transFile);
+            //HD_Transmit.SirenClose(trans.transmitInstance);
         }
 
         public void SendCommand(string ip, string cmd)

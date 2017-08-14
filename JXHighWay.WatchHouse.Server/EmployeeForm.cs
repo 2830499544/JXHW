@@ -46,8 +46,8 @@ namespace JXHighWay.WatchHouse.Server
             }
             string vOutInfo = "";
             string vPhotoPath = pictureBox_Photo.Tag==null?"":(string)pictureBox_Photo.Tag;
-            if (m_Employee.Add(textBox_Name.Text, comboBox_Sex.Text, vJobNo, textBox_CardNo.Text,comboBox_XingJi.Text,
-                textBox_GeYan.Text, vPhotoPath, ref vOutInfo))
+            if (m_Employee.Add(textBox_Name.Text, comboBox_Sex.Text, vJobNo, textBox_CardNo.Text,vPhotoPath, comboBox_XingJi.Text,
+                textBox_GeYan.Text, ref vOutInfo))
             {
                 MessageBox.Show("新增员工信息成功", "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 dataGridView_EmployeeInfo.DataSource = m_Employee.GetAllEmplyees();

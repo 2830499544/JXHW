@@ -287,7 +287,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
                 bool vResult = false;
                 do
                 {
-                    PowerSendCMDEFModel vSelectResult = m_BasicDBClass.SelectRecordByPrimaryKeyEx<PowerSendCMDEFModel>(vID);
+                    PowerSendCMDEFModel vSelectResult = m_BasicDBClassSelect.SelectRecordByPrimaryKeyEx<PowerSendCMDEFModel>(vID);
                     vResult = vSelectResult.State ?? false;
                     if (!vResult && (DateTime.Now - vStartTime).TotalMilliseconds >= 2000)
                         break;
@@ -317,7 +317,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
                 bool vResult = false;
                 do
                 {
-                    PowerSendCMDEFModel vSelectResult = m_BasicDBClass.SelectRecordByPrimaryKeyEx<PowerSendCMDEFModel>(vID);
+                    PowerSendCMDEFModel vSelectResult = m_BasicDBClassSelect.SelectRecordByPrimaryKeyEx<PowerSendCMDEFModel>(vID);
                     vResult = vSelectResult.State ?? false;
                     if (!vResult && (DateTime.Now - vStartTime).TotalMilliseconds >= 2000)
                         break;

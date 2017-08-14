@@ -27,8 +27,8 @@
         </Grid.RowDefinitions>
         <Image HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0" Height="20" VerticalAlignment="Top" Width="500" Source="Images/LED/Tou.jpg" Grid.RowSpan="2"/>
         <Image HorizontalAlignment="Left" x:Name="Image_Close" Height="13" VerticalAlignment="Top" Width="13" Source="Images/LED/GuanBi.jpg"  Cursor="Hand" Margin="486,1,0,0" Grid.RowSpan="2"/>
-        <Button x:Name="button_XuanDing" Content="选　定" HorizontalAlignment="Left" Margin="57,10,0,0" VerticalAlignment="Top" Width="75" Grid.Row="2" Style="{DynamicResource MyWpfButton}" Height="31" Click="button_XuanDing_Click"/>
-        <Button x:Name="button_QuXiao" Content="取　消" HorizontalAlignment="Left" Margin="303,10,0,0" VerticalAlignment="Top" Width="75" Grid.Row="2" Style="{DynamicResource MyWpfButton}" Height="31" Click="button_QuXiao_Click"/>
+        <Button x:Name="button_XuanDing" Content="选　定" HorizontalAlignment="Left" Margin="57,10,0,0" VerticalAlignment="Top" Width="75" Grid.Row="2" Style="{DynamicResource MyWpfButton}" Height="31" Click="button_XuanDing_Click" Cursor="Hand"/>
+        <Button x:Name="button_QuXiao" Content="取　消" HorizontalAlignment="Left" Margin="303,10,0,0" VerticalAlignment="Top" Width="75" Grid.Row="2" Style="{DynamicResource MyWpfButton}" Height="31" Click="button_QuXiao_Click" Cursor="Hand"/>
         <Image x:Name="image" HorizontalAlignment="Left" Height="17" VerticalAlignment="Top" Width="436" Margin="0,155,0,0" Grid.Row="1" Source="Images/LED/xuxian.jpg" Grid.RowSpan="2"/>
         <ListBox x:Name="listBox_GangTing" HorizontalAlignment="Left" Height="132" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="416">
             <ListBox.ItemsPanel>

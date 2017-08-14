@@ -181,6 +181,13 @@ namespace JXHighWay.WatchHouse.Bll.Server
         }
 
 
+        public async void AsyncUpdateGongHao(int GongHao)
+        {
+            byte[] vGongHao = BitConverter.GetBytes(GongHao);
+            byte[] vDataPack = new byte[] { vGongHao[3], vGongHao[2],vGongHao[1],vGongHao[0] };
+            bool vDBResult = await AsyncSendCommandToDB(20010902, WatchHouseDataPack_Send_CommandEnmu.XiangShiGongHao, vDataPack);
+        }
+
         /// <summary>
         /// 更新所有的岗亭的图片
         /// </summary>

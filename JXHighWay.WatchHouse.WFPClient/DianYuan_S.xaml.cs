@@ -241,7 +241,33 @@ namespace JXHighWay.WatchHouse.WFPClient
             }
         }
 
-       
+        private async void checkBox_Switch2_Click(object sender, RoutedEventArgs e)
+        {
+            CheckBox vCheckBox_Switch = (CheckBox)sender;
+            int[] vTagData = (int[])vCheckBox_Switch.Tag;
+            int vPowerNum = vTagData[0];
+            byte vLuHao = (byte)(vTagData[1] >> 0);
+
+            if (m_IsInit && m_Switch)
+            {
+                m_Switch = false;
+                bool vOldValue = vCheckBox_Switch.IsChecked ?? false;
+                bool vResult;
+                if (vOldValue)
+                    vResult = await m_PowerMonitoring.SendCMD_Switch(App.PowerID2, 0x01, vLuHao, true);
+                else
+                    vResult = await m_PowerMonitoring.SendCMD_Switch(App.PowerID2, 0x01, vLuHao, false);
+                if (!vResult)
+                {
+                    vCheckBox_Switch.IsChecked = !vOldValue;
+                    Xceed.Wpf.Toolkit.MessageBox.Show("开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                changeSwitchColor(vCheckBox_Switch, vPowerNum, vLuHao);
+                m_Switch = true;
+            }
+        }
+
+
     }
 
 

@@ -199,7 +199,8 @@ namespace JXHighWay.WatchHouse.WFPClient
 
                     //在线状态
                     Image vImage_BJ = FindName(string.Format("Image_BJ{0}", i + 1 - vStartIndex)) == null ? null : (Image)FindName(string.Format("Image_BJ{0}", i + 1 - vStartIndex));
-                    vImage_BJ.Visibility = Visibility.Hidden;
+                    if (vImage_BJ !=null)
+                        vImage_BJ.Visibility = Visibility.Hidden;
                 }
             }
         }
