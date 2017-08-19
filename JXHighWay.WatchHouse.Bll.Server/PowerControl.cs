@@ -58,7 +58,9 @@ namespace JXHighWay.WatchHouse.Bll.Server
             if (buff.Length > 0 && buff[0] == 0x5a)
             {
                 ReceiveQueue.Enqueue(new WHQueueModel(buff, token.IPAddress.ToString()));
-                Console.WriteLine(string.Format("收到一组数据,IP地址({0}):{1}", token.IPAddress.ToString(), BitConverter.ToString(buff)));
+                string vOutInfo = string.Format("电源收到一组数据,IP地址({0}):{1}", token.IPAddress.ToString(), BitConverter.ToString(buff));
+                Console.WriteLine( vOutInfo);
+                LogHelper.WriteLog_Debug(typeof(PowerControl), vOutInfo);
             }
         }
 
@@ -426,7 +428,9 @@ namespace JXHighWay.WatchHouse.Bll.Server
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine(string.Format("处理数据报文发生异常,错误信息{0}", ex.Message));
+                        string vOutInfo = string.Format("电源处理数据报文发生异常,错误信息{0}", ex.Message);
+                        Console.WriteLine( vOutInfo);
+                        LogHelper.WriteLog_Error(typeof(PowerControl), vOutInfo);
                     }
                 }
             });
@@ -747,7 +751,9 @@ namespace JXHighWay.WatchHouse.Bll.Server
             }
             catch(Exception ex)
             {
-                Console.WriteLine( string.Format( "获取电源IP地址错误:{0}",ex.Message));
+                string vOutInfo = string.Format("电源获取电源IP地址错误:{0}", ex.Message);
+                Console.WriteLine( vOutInfo );
+                LogHelper.WriteLog_Debug(typeof(PowerControl),vOutInfo);
                 m_BasicDBClass_Receive.TransactionRollback();
             }
         }
@@ -838,7 +844,9 @@ namespace JXHighWay.WatchHouse.Bll.Server
             }
             catch( Exception ex)
             {
-                Console.WriteLine(string.Format("插入数据至[电源事件表]中发生异常，异常信息为:{0}", ex.Message));
+                string vOutInfo = string.Format("插入数据至[电源事件表]中发生异常，异常信息为:{0}", ex.Message);
+                Console.WriteLine(vOutInfo);
+                LogHelper.WriteLog_Error(typeof(PowerControl), vOutInfo);
             }
         }
 
@@ -905,7 +913,9 @@ namespace JXHighWay.WatchHouse.Bll.Server
             }
             catch(Exception ex)
             {
-                Console.WriteLine( string.Format("插入数据至[电源数据表]中发生异常，异常信息为:{0}",ex.Message));
+                string vOutInfo = string.Format("插入数据至[电源数据表]中发生异常，异常信息为:{0}", ex.Message);
+                Console.WriteLine(vOutInfo);
+                LogHelper.WriteLog_Error(typeof(PowerControl), vOutInfo);
             }
         }
         #endregion
@@ -966,7 +976,9 @@ namespace JXHighWay.WatchHouse.Bll.Server
                             vCMDDataPack[vCMDDataPack.Count-2] = calcCheckCode(vCMDDataPack.ToArray());
 
                             m_SocketManager.SendMessage(vAsyncUserToken, vCMDDataPack.ToArray());
-                            Console.WriteLine("发送命令数据包,IP地址({0}):{1}", vAsyncUserToken.IPAddress.ToString(), BitConverter.ToString(vCMDDataPack.ToArray()));
+                            string vOutInfo = string.Format("电源发送命令数据包,IP地址({0}):{1}", vAsyncUserToken.IPAddress.ToString(), BitConverter.ToString(vCMDDataPack.ToArray()));
+                            Console.WriteLine(vOutInfo);
+                            LogHelper.WriteLog_Debug(typeof(PowerControl),vOutInfo);
                             //更新数据库状态
                             vModel.IsSend = true;
                             vModel.ID = vTempResult.ID;

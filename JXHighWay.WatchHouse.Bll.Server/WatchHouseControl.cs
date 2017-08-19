@@ -78,7 +78,9 @@ namespace JXHighWay.WatchHouse.Bll.Server
             if (buff.Length > 0 && buff[0] == 0x02)
             {
                 ReceiveQueue.Enqueue(new WHQueueModel(buff, token.IPAddress.ToString()));
-                Console.WriteLine(string.Format("收到一组数据,IP地址({0}):{1}", token.IPAddress.ToString(),BitConverter.ToString(buff)));
+                string vOutInfo = string.Format("岗亭收到一组数据,IP地址({0}):{1}", token.IPAddress.ToString(), BitConverter.ToString(buff));
+                Console.WriteLine(vOutInfo);
+                LogHelper.WriteLog_Debug(typeof(WatchHouseControl), vOutInfo);
             }
             //throw new NotImplementedException();
         }
@@ -322,7 +324,9 @@ namespace JXHighWay.WatchHouse.Bll.Server
                             byte[] vByteArray = null;
                             vByteArray = processorDBSendCMD_JoinData(vTempResult, vDataPack);
                             m_SocketManager.SendMessage(vAsyncUserToken, vByteArray);
-                            Console.WriteLine("发送命令数据包,IP地址({0}):{1}", vAsyncUserToken.IPAddress.ToString(), BitConverter.ToString(vByteArray));
+                            string vOutInfo = string.Format("岗亭发送命令数据包,IP地址({0}):{1}", vAsyncUserToken.IPAddress.ToString(), BitConverter.ToString(vByteArray));
+                            Console.WriteLine(vOutInfo);
+                            LogHelper.WriteLog_Debug(typeof(WatchHouseControl), vOutInfo);
                             //更新数据库状态
                             vModel.IsSend = true;
                             vModel.ID = vTempResult.ID;
@@ -428,8 +432,9 @@ namespace JXHighWay.WatchHouse.Bll.Server
                     vCommandDataPack.Check2 = vCheckCode[1];
                     vByteArray = Helper.NetHelper.StructureToByte(vCommandDataPack);
                     m_SocketManager.SendMessage(vAsyncUserToken, vByteArray);
-                    Console.WriteLine(string.Format("发送命令:{0}", BitConverter.ToString(vByteArray)));
-                  
+                    string vOutInfo = string.Format("岗亭发送命令:{0}", BitConverter.ToString(vByteArray));
+                    Console.WriteLine( vOutInfo);
+                    LogHelper.WriteLog_Debug(typeof(WatchHouseControl), vOutInfo);
                 }
              
             });
@@ -738,7 +743,9 @@ namespace JXHighWay.WatchHouse.Bll.Server
                     }
                     catch(Exception ex)
                     {
-                        Console.WriteLine( string.Format("处理数据报时发生异常,错误信息{0}",ex.Message));
+                        string vOutInfo = string.Format("岗亭处理数据报时发生异常,错误信息{0}", ex.Message);
+                        Console.WriteLine(vOutInfo);
+                        LogHelper.WriteLog_Error(typeof(WatchHouseControl), vOutInfo);
                     }
                 }
             });
@@ -1036,7 +1043,9 @@ namespace JXHighWay.WatchHouse.Bll.Server
             }
             catch (Exception ex)
             {
-                Console.WriteLine(string.Format("插入数据至[岗亭数据表]中发生异常，异常信息为:{0}", ex.Message));
+                string vOutInfo = string.Format("插入数据至[岗亭数据表]中发生异常，异常信息为:{0}", ex.Message);
+                Console.WriteLine(vOutInfo);
+                LogHelper.WriteLog_Error(typeof(WatchHouseControl), vOutInfo);
             }
         }
 
@@ -1110,7 +1119,9 @@ namespace JXHighWay.WatchHouse.Bll.Server
             }
             catch(Exception ex)
             {
-                Console.WriteLine( string.Format("插入数据至[岗亭数据表]中发生异常，异常信息为:{0}",ex.Message));
+                string vOutInfo = string.Format("插入数据至[岗亭数据表]中发生异常，异常信息为:{0}", ex.Message);
+                Console.WriteLine(vOutInfo);
+                LogHelper.WriteLog_Error(typeof(WatchHouseControl), vOutInfo);
             }
         }
     #endregion

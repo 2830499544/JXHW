@@ -44,8 +44,8 @@ namespace JXHighWay.WatchHouse.Bll.Server
                 if (ZhaoPian != "")
                 {
                     string vPath = System.Environment.CurrentDirectory;
-                    string vNewPhotoName = string.Format("{0:yyyymmddhhMMss}.png", DateTime.Now);
-                    File.Copy(ZhaoPian, string.Format(@"{0}\Photo\{1}", vPath, vNewPhotoName));
+                    string vNewPhotoName = string.Format("{0}.png", GongHao);
+                    File.Copy(ZhaoPian, string.Format(@"{0}\Photo\{1}", vPath, vNewPhotoName),true);
                     ZhaoPian = vNewPhotoName;
                 }
                 EmployeeEFModel vModel = new EmployeeEFModel()
@@ -78,9 +78,9 @@ namespace JXHighWay.WatchHouse.Bll.Server
             if (ZhaoPian != null)
             {
                 string vPath = System.Environment.CurrentDirectory;
-                string vNewPhotoName = string.Format("{0:yyyymmddhhMMss}.png", DateTime.Now);
+                string vNewPhotoName = string.Format("{0}.png", GongHao);
                 if (ZhaoPian!="")
-                    File.Copy(ZhaoPian, string.Format(@"{0}\Photo\{1}", vPath, vNewPhotoName));
+                    File.Copy(ZhaoPian, string.Format(@"{0}\Photo\{1}", vPath, vNewPhotoName),true);
                 ZhaoPian = vNewPhotoName;
             }
             EmployeeEFModel vModel = new EmployeeEFModel()

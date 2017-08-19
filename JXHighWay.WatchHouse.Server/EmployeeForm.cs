@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using JXHighWay.WatchHouse.Bll.Server;
+using System.IO;
 
 namespace JXHighWay.WatchHouse.Server
 {
@@ -19,6 +20,16 @@ namespace JXHighWay.WatchHouse.Server
             InitializeComponent();
         }
 
+        public MemoryStream ByteToStream(byte[] mybyte)
+
+        {
+
+            MemoryStream mymemorystream = new MemoryStream(mybyte, 0, mybyte.Length);
+
+            return mymemorystream;
+
+        }
+
         private void button_Photo_Click(object sender, EventArgs e)
         {
             OpenFileDialog vOpenFileDialog = new OpenFileDialog();
@@ -26,7 +37,7 @@ namespace JXHighWay.WatchHouse.Server
             vOpenFileDialog.Filter = "Png files (*.png)|*.png";
             if ( vOpenFileDialog.ShowDialog() == DialogResult.OK)
             {
-                pictureBox_Photo.Image = Image.FromFile( vOpenFileDialog.FileName );
+                pictureBox_Photo.Image = Image.FromStream(ByteToStream(SetImageToByteArray(vOpenFileDialog.FileName)));
                 pictureBox_Photo.Tag = vOpenFileDialog.FileName;
             }
         }
@@ -102,7 +113,7 @@ namespace JXHighWay.WatchHouse.Server
                 string vPhotoPath = string.Format(@"{0}\Photo\{1}", System.Environment.CurrentDirectory, (string)dataGridView_EmployeeInfo.SelectedRows[0].Cells["Column_Photo"].Value);
                 if (System.IO.File.Exists(vPhotoPath))
                 {
-                    pictureBox_Photo.Image = Image.FromFile(vPhotoPath);
+                    pictureBox_Photo.Image = Image.FromStream(ByteToStream(SetImageToByteArray(vPhotoPath)));
                     pictureBox_Photo.Tag = vPhotoPath;
                 }
                 else
@@ -137,6 +148,44 @@ namespace JXHighWay.WatchHouse.Server
             }
             else
                 MessageBox.Show(vOutInfo, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        byte[] SetImageToByteArray(string fileName)
+
+        {
+
+            byte[] image = null;
+
+            try
+
+            {
+
+                FileStream fs = new FileStream(fileName, FileMode.Open);
+
+                FileInfo fileInfo = new FileInfo(fileName);
+
+                //fileSize = Convert.ToDecimal(fileInfo.Length / 1024).ToString("f2") + " K";
+
+                int streamLength = (int)fs.Length;
+
+                image = new byte[streamLength];
+
+                fs.Read(image, 0, streamLength);
+
+                fs.Close();
+
+                return image;
+
+            }
+
+            catch
+
+            {
+
+                return image;
+
+            }
+
         }
 
         private async void button_Synch_Click(object sender, EventArgs e)
