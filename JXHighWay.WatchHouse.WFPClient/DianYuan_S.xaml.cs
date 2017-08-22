@@ -105,7 +105,7 @@ namespace JXHighWay.WatchHouse.WFPClient
 
         void init_DianYuan(int powerNum, PowerInfo[] powerInfo, List<int> LuoHaoList)
         {
-            for (int i = 1; i <= 12; i++)
+            for (int i = 1; i <= 14; i++)
             {
                 if (i <= powerInfo.LongLength)
                 {

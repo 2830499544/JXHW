@@ -40,7 +40,7 @@ namespace JXHighWay.WatchHouse.WFPClient.Images
             PowerInfo[] vPowerInfoArray = m_PowerMonitoring.GetPowerLuSu(App.PowerID1);
             // m_LS = vPowerInfoArray == null ? 0 : vPowerInfoArray.Length;
 
-            for (int i = 1; i <= 12; i++)
+            for (int i = 1; i <= 14; i++)
             {
 
                 if (i <= vPowerInfoArray.LongLength)
