@@ -58,7 +58,7 @@ namespace RTFEditor
             }
         }
 
-        public string ImagePath { get; set; }
+        public List<string> ImagePathList { get; set; } = new List<string>();
 
         public double RichWidth
         {
@@ -717,9 +717,8 @@ namespace RTFEditor
         {
             var vOldCursor = Cursor;
             RichTextControl.IsEnabled = false;
-            ImagePath = GetImageFromControl();
+            ImagePathList.Add(GetImageFromControl());
             RichTextControl.IsEnabled = true;
-
         }
     }
 }

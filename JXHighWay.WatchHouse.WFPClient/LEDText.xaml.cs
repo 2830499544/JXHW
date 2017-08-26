@@ -55,7 +55,7 @@ namespace JXHighWay.WatchHouse.WFPClient
 
         private void Image_Close_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            ImagePath = RTFBox1.ImagePath;
+            //ImagePath = RTFBox1.ImagePathList;
             Close();
         }
     }

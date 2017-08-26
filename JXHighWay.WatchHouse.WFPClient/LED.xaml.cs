@@ -80,21 +80,27 @@ namespace JXHighWay.WatchHouse.WFPClient
 
         private void button_ShiPing_LiuLan_Click(object sender, RoutedEventArgs e)
         {
+            Button vButton =  (Button)sender;
             Microsoft.Win32.OpenFileDialog vOpenFile = new Microsoft.Win32.OpenFileDialog();
             vOpenFile.Filter = "视频文件|*.mp4;*.avi;";
             if (vOpenFile.ShowDialog().Value)
             {
-                textBox_ShiPing_SPLJ.Text = vOpenFile.FileName;
+                int vIndex = Convert.ToInt32( vButton.Tag );
+                TextBox vTextBox_Video = (TextBox)FindName(string.Format("textBox_ShiPing_SPLJ{0}",vIndex));
+                vTextBox_Video.Text = vOpenFile.FileName;
             }
         }
 
         private void button_TuPian_LiuLan_Click(object sender, RoutedEventArgs e)
         {
+            Button vButton = (Button)sender;
             Microsoft.Win32.OpenFileDialog vOpenFile = new Microsoft.Win32.OpenFileDialog();
             vOpenFile.Filter = "图片文件|*.jpg;*.png;";
             if (vOpenFile.ShowDialog().Value)
             {
-                textBox_TuPian_TPLJ.Text = vOpenFile.FileName;
+                int vIndex = Convert.ToInt32( vButton.Tag);
+                TextBox vTextBox_Pic = (TextBox)FindName(string.Format("textBox_TuPian_TPLJ{0}",vIndex));
+                vTextBox_Pic.Text = vOpenFile.FileName;
             }
         }
 
@@ -234,21 +240,47 @@ namespace JXHighWay.WatchHouse.WFPClient
         string[] m_SelectedIPArray = new string[0];
         private void button_FaShong_Click(object sender, RoutedEventArgs e)
         {
-
-            // vLEDControl.SendImage("aa", @"E:\a.jpg");
             LEDSend vLEDSend = new LEDSend();
             vLEDSend.SelectedIPArray = m_SelectedIPArray;
+            vLEDSend.TextArray = RTFBox1.ImagePathList.ToArray();
+
+            List<string> vPicList = new List<string>();
+            List<string> vVideoList = new List<string>();
+            for (int i = 1; i <= 5; i++)
+            {
+                TextBox vVideoTextBox = (TextBox)FindName(string.Format("textBox_ShiPing_SPLJ{0}", i));
+                if (vVideoTextBox.Text != null && vVideoTextBox.Text != "")
+                {
+                    if (File.Exists(vVideoTextBox.Text))
+                    {
+                        vVideoList.Add(vVideoTextBox.Text);
+                    }
+                }
+
+                TextBox vPicTextBox = (TextBox)FindName(string.Format("textBox_TuPian_TPLJ{0}", i));
+                if (vPicTextBox.Text != null && vVideoTextBox.Text != "")
+                {
+                    if (File.Exists(vPicTextBox.Text))
+                    {
+                        vPicList.Add(vPicTextBox.Text);
+                    }
+                }
+            }
+
+            vLEDSend.PicArray = vPicList.ToArray();
+            vLEDSend.VideoArray = vVideoList.ToArray();
+
             if ( vLEDSend.ShowDialog()??false )
             {
                 List<LEDChannelInfo> vLEDChannelInfoList = new List<LEDChannelInfo>();
                 LEDControl vLEDControl = new LEDControl(App.WatchHouseID);
 
-                if (RTFBox1.ImagePath != null && RTFBox1.ImagePath != "")
+                foreach( string vTempText in vLEDSend.TextArray)
                 {
                     LEDChannelInfo vTextChannelInfo = new LEDChannelInfo()
                     {
                         ChannelType = LEDChanneTypeEnum.Text,
-                        Content = RTFBox1.ImagePath,
+                        Content = vTempText,
                         InEff = (int)comboBox_Text_XianShi1.SelectedValue,
                         OutEff = (int)comboBox_Text_QinPing1.SelectedValue,
                         HoldTime = (integerUpDown_Text.Value ?? 0) * 10
@@ -256,31 +288,71 @@ namespace JXHighWay.WatchHouse.WFPClient
                     vLEDChannelInfoList.Add(vTextChannelInfo);
                 }
 
-                if (textBox_TuPian_TPLJ.Text != "")
+                foreach(string vTempPic in vLEDSend.PicArray )
                 {
-                    LEDChannelInfo vTuPianChannelInfo = new LEDChannelInfo()
+                    LEDChannelInfo vTextChannelInfo = new LEDChannelInfo()
                     {
-                        ChannelType = LEDChanneTypeEnum.Image,
-                        Content = textBox_TuPian_TPLJ.Text,
-                        InEff = (int)comboBox_TuPian_XianShi1.SelectedValue,
-                        OutEff = (int)comboBox_TuPian_QinPing1.SelectedValue,
-                        HoldTime = (integerUpDown_TuPian.Value ?? 0) * 10
+                        ChannelType = LEDChanneTypeEnum.Text,
+                        Content = vTempPic,
+                        InEff = (int)comboBox_Text_XianShi1.SelectedValue,
+                        OutEff = (int)comboBox_Text_QinPing1.SelectedValue,
+                        HoldTime = (integerUpDown_Text.Value ?? 0) * 10
                     };
-                    vLEDChannelInfoList.Add(vTuPianChannelInfo);
+                    vLEDChannelInfoList.Add(vTextChannelInfo);
                 }
 
-                if (textBox_ShiPing_SPLJ.Text != "")
+                foreach(string vTempVideo in vLEDSend.VideoArray)
                 {
-                    LEDChannelInfo vShiPingChannelInfo = new LEDChannelInfo()
+                    LEDChannelInfo vTextChannelInfo = new LEDChannelInfo()
                     {
-                        ChannelType = LEDChanneTypeEnum.Video,
-                        Content = textBox_ShiPing_SPLJ.Text,
-                        InEff = (int)comboBox_ShiPing_XianShi1.SelectedValue,
-                        OutEff = (int)comboBox_ShiPing_QinPing1.SelectedValue,
-                        HoldTime = (integerUpDown_ShiPing.Value ?? 0) * 10
+                        ChannelType = LEDChanneTypeEnum.Text,
+                        Content = vTempVideo,
+                        InEff = (int)comboBox_Text_XianShi1.SelectedValue,
+                        OutEff = (int)comboBox_Text_QinPing1.SelectedValue,
+                        HoldTime = (integerUpDown_Text.Value ?? 0) * 10
                     };
-                    vLEDChannelInfoList.Add(vShiPingChannelInfo);
+                    vLEDChannelInfoList.Add(vTextChannelInfo);
                 }
+
+                //if (RTFBox1.ImagePathList != null && RTFBox1.ImagePathList != "")
+                //{
+                //    LEDChannelInfo vTextChannelInfo = new LEDChannelInfo()
+                //    {
+                //        ChannelType = LEDChanneTypeEnum.Text,
+                //        Content = RTFBox1.ImagePathList,
+                //        InEff = (int)comboBox_Text_XianShi1.SelectedValue,
+                //        OutEff = (int)comboBox_Text_QinPing1.SelectedValue,
+                //        HoldTime = (integerUpDown_Text.Value ?? 0) * 10
+                //    };
+                //    vLEDChannelInfoList.Add(vTextChannelInfo);
+                //}
+
+                //if (textBox_TuPian_TPLJ.Text != "")
+                //{
+                //    LEDChannelInfo vTuPianChannelInfo = new LEDChannelInfo()
+                //    {
+                //        ChannelType = LEDChanneTypeEnum.Image,
+                //        Content = textBox_TuPian_TPLJ.Text,
+                //        InEff = (int)comboBox_TuPian_XianShi1.SelectedValue,
+                //        OutEff = (int)comboBox_TuPian_QinPing1.SelectedValue,
+                //        HoldTime = (integerUpDown_TuPian.Value ?? 0) * 10
+                //    };
+                //    vLEDChannelInfoList.Add(vTuPianChannelInfo);
+                //}
+
+                //if (textBox_ShiPing_SPLJ.Text != "")
+                //{
+                //    LEDChannelInfo vShiPingChannelInfo = new LEDChannelInfo()
+                //    {
+                //        ChannelType = LEDChanneTypeEnum.Video,
+                //        Content = textBox_ShiPing_SPLJ.Text,
+                //        InEff = (int)comboBox_ShiPing_XianShi1.SelectedValue,
+                //        OutEff = (int)comboBox_ShiPing_QinPing1.SelectedValue,
+                //        HoldTime = (integerUpDown_ShiPing.Value ?? 0) * 10
+                //    };
+                //    vLEDChannelInfoList.Add(vShiPingChannelInfo);
+                //}
+
                 m_SelectedIPArray = vLEDSend.SelectedIPArray;
                 vLEDControl.SendMultiChannel(vLEDChannelInfoList, m_SelectedIPArray);
                 Xceed.Wpf.Toolkit.MessageBox.Show("已发送", "信息", MessageBoxButton.OK, MessageBoxImage.Information);

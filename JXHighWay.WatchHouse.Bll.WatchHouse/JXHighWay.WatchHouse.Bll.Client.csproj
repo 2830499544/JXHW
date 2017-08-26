@@ -58,6 +58,7 @@
     <Compile Include="LED\LEDControl.cs" />
     <Compile Include="GanTing\MenChuangStateInfo.cs" />
     <Compile Include="GanTing\WatchHouseMonitoring.cs" />
+    <Compile Include="LED\TextInfo.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GanTing\WatchHouseInfo.cs" />

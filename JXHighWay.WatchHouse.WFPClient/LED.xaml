@@ -44,7 +44,7 @@
                         <RowDefinition Height="16*" />
                     </Grid.RowDefinitions>
                     <rtf:RTFBox x:Name="RTFBox1" Grid.Column="0" Grid.Row="0"/>
-                    
+
                     <Label x:Name="label18" Content="显　示:" HorizontalAlignment="Left" VerticalAlignment="Top"  Grid.Row="1" Foreground="#FFF9F6F6"/>
                     <ComboBox x:Name="comboBox_Text_XianShi1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="192" Grid.Row="1" Margin="72,0,0,0"/>
 
@@ -63,26 +63,42 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions >
-                        <RowDefinition Height="99*"  />
-                        <RowDefinition Height="172*"  />
-                        <RowDefinition Height="135*"  />
+                        <RowDefinition Height="120*"  />
+                        <RowDefinition Height="83*"  />
                     </Grid.RowDefinitions>
 
+                    <GroupBox x:Name="groupBox_TuPian_WenJianSX" Header="文件属性" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="24,-11,0,0" Height="241" Width="751" Style="{DynamicResource GroupboxWithoutWhiteBorder}" Foreground="#FFFBF6F6"/>
                     <Label x:Name="label" Content="图片路径:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,22,0,0" Foreground="#FFFBF8F8" FontSize="18" Height="34" Width="87"/>
-                    <TextBox x:Name="textBox_TuPian_TPLJ" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="492" Margin="141,29,0,0" FontSize="12"/>
-                    <Button x:Name="button_TuPian_LiuLan" Content="浏　览" HorizontalAlignment="Left" VerticalAlignment="Top" Width="94" Margin="652,26,0,0" Style="{DynamicResource MyWpfButton}" Height="28" Click="button_TuPian_LiuLan_Click"/>
-                    <GroupBox x:Name="groupBox_TuPian_WenJianSX" Header="文件属性" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="24,-11,0,0" Height="100" Width="751" Style="{DynamicResource GroupboxWithoutWhiteBorder}" Foreground="#FFFBF6F6"/>
+                    <TextBox x:Name="textBox_TuPian_TPLJ1" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="492" Margin="141,27,0,0" FontSize="12"/>
+                    <Button x:Name="button_TuPian_LiuLan" Content="浏　览" HorizontalAlignment="Left" VerticalAlignment="Top" Width="94" Margin="652,26,0,0" Style="{DynamicResource MyWpfButton}" Height="28" Click="button_TuPian_LiuLan_Click" Tag="1"/>
 
-                    <GroupBox x:Name="groupBox_TuPian_LiuLan" Header="特效" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="24,6.941,0,0" Height="152" Width="751" Style="{DynamicResource GroupboxWithoutWhiteBorder}" Grid.Row="1" Foreground="#FFFBFAFA"/>
-                    <Label x:Name="label1" Content="显　示:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="67,29.965,0,0" Grid.Row="1" Foreground="#FFF9F6F6"/>
-                    <ComboBox x:Name="comboBox_TuPian_XianShi1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="192" Margin="140,32,0,0" Grid.Row="1"/>
+                    <Label x:Name="label5" Content="图片路径:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,59,0,0" Foreground="#FFFBF8F8" FontSize="18" Height="34" Width="87"/>
+                    <TextBox x:Name="textBox_TuPian_TPLJ2" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="492" Margin="141,66,0,0" FontSize="12"/>
+                    <Button x:Name="button_TuPian_LiuLan2" Content="浏　览" HorizontalAlignment="Left" VerticalAlignment="Top" Width="94" Margin="652,65,0,0" Style="{DynamicResource MyWpfButton}" Height="28" Click="button_TuPian_LiuLan_Click" Tag="2"/>
 
-                    <Label x:Name="label2" Content="清　屏:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="67,69.965,0,0" Grid.Row="1" Foreground="#FFF9F6F6"/>
-                    <ComboBox x:Name="comboBox_TuPian_QinPing1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="192" Margin="140,72,0,0" Grid.Row="1"/>
+                    <Label x:Name="label6" Content="图片路径:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,98,0,0" Foreground="#FFFBF8F8" FontSize="18" Height="34" Width="87"/>
+                    <TextBox x:Name="textBox_TuPian_TPLJ3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="492" Margin="140,103,0,0" FontSize="12"/>
+                    <Button x:Name="button_TuPian_LiuLan3" Content="浏　览" HorizontalAlignment="Left" VerticalAlignment="Top" Width="94" Margin="652,103,0,0" Style="{DynamicResource MyWpfButton}" Height="28" Click="button_TuPian_LiuLan_Click" Tag="3"/>
 
-                    <Label x:Name="label2_Copy" Content="停　留:" HorizontalAlignment="Left" VerticalAlignment="Top"  Foreground="#FFF9F6F6" Margin="67,110,0,0" Grid.Row="1"/>
-                    <xctk:IntegerUpDown Width="100" x:Name="integerUpDown_TuPian" Margin="140,117,545,31" Grid.Row="1"/>
-                    <Label x:Name="label3_Copy" Content="秒" HorizontalAlignment="Left" VerticalAlignment="Top"  Foreground="#FFF9F6F6" Margin="245,110,0,0" Grid.Row="1"/>
+                    <Label x:Name="label7" Content="图片路径:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,135,0,0" Foreground="#FFFBF8F8" FontSize="18" Height="34" Width="87"/>
+                    <TextBox x:Name="textBox_TuPian_TPLJ4" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="492" Margin="140,141,0,0" FontSize="12"/>
+                    <Button x:Name="button_TuPian_LiuLan4" Content="浏　览" HorizontalAlignment="Left" VerticalAlignment="Top" Width="94" Margin="652,139,0,0" Style="{DynamicResource MyWpfButton}" Height="28" Click="button_TuPian_LiuLan_Click" Tag="4"/>
+
+                    <Label x:Name="label8" Content="图片路径:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,173,0,0" Foreground="#FFFBF8F8" FontSize="18" Height="34" Width="87"/>
+                    <TextBox x:Name="textBox_TuPian_TPLJ5" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="492" Margin="140,180,0,0" FontSize="12"/>
+                    <Button x:Name="button_TuPian_LiuLan5" Content="浏　览" HorizontalAlignment="Left" VerticalAlignment="Top" Width="94" Margin="652,178,0,0" Style="{DynamicResource MyWpfButton}" Height="28" Click="button_TuPian_LiuLan_Click" Tag="5"/>
+
+                    <GroupBox x:Name="groupBox_TuPian_LiuLan" Header="特效" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="24,7,0,0" Height="152" Width="751" Style="{DynamicResource GroupboxWithoutWhiteBorder}" Grid.Row="1" Foreground="#FFFBFAFA"/>
+                    <Label x:Name="label1" Content="显　示:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="67,30,0,0" Grid.Row="1" Foreground="#FFF9F6F6" Height="34" Width="69"/>
+                    <ComboBox x:Name="comboBox_TuPian_XianShi1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="192" Margin="140,32,0,0" Grid.Row="1" Height="30"/>
+
+                    <Label x:Name="label2" Content="清　屏:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="67,70,0,0" Grid.Row="1" Foreground="#FFF9F6F6" Height="34" Width="69"/>
+                    <ComboBox x:Name="comboBox_TuPian_QinPing1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="192" Margin="140,72,0,0" Grid.Row="1" Height="30"/>
+
+                    <Label x:Name="label2_Copy" Content="停　留:" HorizontalAlignment="Left" VerticalAlignment="Top"  Foreground="#FFF9F6F6" Margin="67,110,0,0" Grid.Row="1" Height="34" Width="69"/>
+                    <xctk:IntegerUpDown x:Name="integerUpDown_TuPian" VerticalAlignment="Top" Margin="141,116,544,0" Grid.Row="1" Height="28"/>
+                    <Label x:Name="label3_Copy" Content="秒" HorizontalAlignment="Left" VerticalAlignment="Top"  Foreground="#FFF9F6F6" Margin="245,110,0,0" Grid.Row="1" Height="34" Width="28"/>
+                    
                 </Grid>
 
             </TabItem>
@@ -92,26 +108,41 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions >
-                        <RowDefinition Height="99*"  />
-                        <RowDefinition Height="172*"  />
-                        <RowDefinition Height="135*"  />
+                        <RowDefinition Height="243*"  />
+                        <RowDefinition Height="163*"  />
                     </Grid.RowDefinitions>
 
                     <Label x:Name="label9" Content="视频路径:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,22,0,0" Foreground="#FFFBF8F8" FontSize="18" Height="34" Width="87"/>
-                    <TextBox x:Name="textBox_ShiPing_SPLJ" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="492" Margin="141,29,0,0" FontSize="12"/>
-                    <Button x:Name="button_ShiPing_LiuLan" Content="浏　览" HorizontalAlignment="Left" VerticalAlignment="Top" Width="94" Margin="652,26,0,0" Style="{DynamicResource MyWpfButton}" Height="28" Click="button_ShiPing_LiuLan_Click"/>
-                    <GroupBox x:Name="groupBox_ShiPing_WenJianSX" Header="文件属性" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="24,-11,0,0" Height="100" Width="751" Style="{DynamicResource GroupboxWithoutWhiteBorder}" Foreground="#FFFBF6F6"/>
+                    <TextBox x:Name="textBox_ShiPing_SPLJ1" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="492" Margin="141,27,0,0" FontSize="12"/>
+                    <Button x:Name="button_ShiPing_LiuLan1" Content="浏　览" HorizontalAlignment="Left" VerticalAlignment="Top" Width="94" Margin="652,26,0,0" Style="{DynamicResource MyWpfButton}" Height="28" Click="button_ShiPing_LiuLan_Click" Tag="1"/>
 
-                    <GroupBox x:Name="groupBox_ShiPing_LiuLan" Header="特效" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="24,6.941,0,0" Height="152" Width="751" Style="{DynamicResource GroupboxWithoutWhiteBorder}" Grid.Row="1" Foreground="#FFFBFAFA"/>
-                    <Label x:Name="label11" Content="显　示:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="67,29.965,0,0" Grid.Row="1" Foreground="#FFF9F6F6"/>
-                    <ComboBox x:Name="comboBox_ShiPing_XianShi1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="192" Margin="140,32,0,0" Grid.Row="1"/>
+                    <Label x:Name="label10" Content="视频路径:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,59,0,0" Foreground="#FFFBF8F8" FontSize="18" Height="34" Width="87"/>
+                    <TextBox x:Name="textBox_ShiPing_SPLJ2" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="492" Margin="141,66,0,0" FontSize="12"/>
+                    <Button x:Name="button_ShiPing_LiuLan2" Content="浏　览" HorizontalAlignment="Left" VerticalAlignment="Top" Width="94" Margin="652,65,0,0" Style="{DynamicResource MyWpfButton}" Height="28" Click="button_ShiPing_LiuLan_Click" Tag="2"/>
 
-                    <Label x:Name="label12" Content="清　屏:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="67,69.965,0,0" Grid.Row="1" Foreground="#FFF9F6F6"/>
-                    <ComboBox x:Name="comboBox_ShiPing_QinPing1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="192" Margin="140,72,0,0" Grid.Row="1"/>
+                    <Label x:Name="label15" Content="视频路径:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,98,0,0" Foreground="#FFFBF8F8" FontSize="18" Height="34" Width="87"/>
+                    <TextBox x:Name="textBox_ShiPing_SPLJ3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="492" Margin="140,103,0,0" FontSize="12"/>
+                    <Button x:Name="button_ShiPing_LiuLan3" Content="浏　览" HorizontalAlignment="Left" VerticalAlignment="Top" Width="94" Margin="652,103,0,0" Style="{DynamicResource MyWpfButton}" Height="28" Click="button_ShiPing_LiuLan_Click" Tag="3"/>
 
-                    <Label x:Name="label13" Content="停　留:" HorizontalAlignment="Left" VerticalAlignment="Top"  Foreground="#FFF9F6F6" Margin="67,110,0,0" Grid.Row="1"/>
-                    <xctk:IntegerUpDown Width="100" Name="integerUpDown_ShiPing" Margin="140,117,545,31" Grid.Row="1"/>
-                    <Label x:Name="label14" Content="秒" HorizontalAlignment="Left" VerticalAlignment="Top"  Foreground="#FFF9F6F6" Margin="245,110,0,0" Grid.Row="1"/>
+                    <Label x:Name="label16" Content="视频路径:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,135,0,0" Foreground="#FFFBF8F8" FontSize="18" Height="34" Width="87"/>
+                    <TextBox x:Name="textBox_ShiPing_SPLJ4" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="492" Margin="140,141,0,0" FontSize="12"/>
+                    <Button x:Name="button_ShiPing_LiuLan4" Content="浏　览" HorizontalAlignment="Left" VerticalAlignment="Top" Width="94" Margin="652,139,0,0" Style="{DynamicResource MyWpfButton}" Height="28" Click="button_ShiPing_LiuLan_Click" Tag="4"/>
+
+                    <Label x:Name="label17" Content="视频路径:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,173,0,0" Foreground="#FFFBF8F8" FontSize="18" Height="34" Width="87"/>
+                    <TextBox x:Name="textBox_ShiPing_SPLJ5" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="492" Margin="140,180,0,0" FontSize="12"/>
+                    <Button x:Name="button_ShiPing_LiuLan5" Content="浏　览" HorizontalAlignment="Left" VerticalAlignment="Top" Width="94" Margin="652,178,0,0" Style="{DynamicResource MyWpfButton}" Height="28" Click="button_ShiPing_LiuLan_Click" Tag="5"/>
+
+                    <GroupBox x:Name="groupBox_ShiPing_WenJianSX" Header="文件属性" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="24,-11,0,0" Height="244" Width="751" Style="{DynamicResource GroupboxWithoutWhiteBorder}" Foreground="#FFFBF6F6" Tag="1"/>
+                    <GroupBox x:Name="groupBox_ShiPing_LiuLan" Header="特效" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="24,2.854,0,0" Height="152" Width="751" Style="{DynamicResource GroupboxWithoutWhiteBorder}" Foreground="#FFFBFAFA" Grid.Row="1"/>
+                    <Label x:Name="label11" Content="显　示:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="67,25.854,0,0" Grid.Row="1" Foreground="#FFF9F6F6" Height="33" Width="69"/>
+                    <ComboBox x:Name="comboBox_ShiPing_XianShi1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="192" Margin="140,27.854,0,0" Grid.Row="1" Height="29"/>
+
+                    <Label x:Name="label12" Content="清　屏:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="67,65.854,0,0" Grid.Row="1" Foreground="#FFF9F6F6" Height="33" Width="69"/>
+                    <ComboBox x:Name="comboBox_ShiPing_QinPing1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="192" Margin="140,67.854,0,0" Grid.Row="1" Height="29"/>
+
+                    <Label x:Name="label13" Content="停　留:" HorizontalAlignment="Left" VerticalAlignment="Top"  Foreground="#FFF9F6F6" Margin="67,105.854,0,0" Grid.Row="1" Height="33" Width="69"/>
+                    <xctk:IntegerUpDown Name="integerUpDown_ShiPing" Margin="141,111.854,544,27.243" Grid.Row="1"/>
+                    <Label x:Name="label14" Content="秒" HorizontalAlignment="Left" VerticalAlignment="Top"  Foreground="#FFF9F6F6" Margin="245,105.854,0,0" Grid.Row="1" Height="33" Width="28"/>
                 </Grid>
             </TabItem>
 

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using JXHighWay.WatchHouse.Bll.Client.GanTing;
+using JXHighWay.WatchHouse.Bll.Client.LED;
 
 namespace JXHighWay.WatchHouse.WFPClient
 {
@@ -39,7 +40,7 @@ namespace JXHighWay.WatchHouse.WFPClient
 
         void init()
         {
-            
+            //岗亭初始化
             m_CheckBoxList = new List<CheckBox>();
             WatchHouseMonitoring vWatchHouseMonitoring = new WatchHouseMonitoring();
             List<WatchHouseInfo> vWatchHouseInfoList = vWatchHouseMonitoring.GetAllWatchHouseInfo();
@@ -61,21 +62,70 @@ namespace JXHighWay.WatchHouse.WFPClient
 
                 listBox_GangTing.Items.Add(vNewCheckBox);
                 m_CheckBoxList.Add(vNewCheckBox);
-                //for (int j = 1; j <= 4; j++)
-                //{
-                //    CheckBox vNewCheckBox = new CheckBox()
-                //    {
-                //        Content = vWatchHouseInfoList[i].GangTingMC,
-                //        Tag = vWatchHouseInfoList[i].GuanGaoPingIP
-                //        //Margin = new Thickness(10 * j + 30, )
-                //    };
-                //}
+                
             }
+
+            //文本内容初始化
+            List<TextInfo> vTextInfoList = new List<TextInfo>();
+            foreach (string vText in TextArray )
+            {
+                vTextInfoList.Add(new TextInfo() { FullPath = vText });
+            }
+            listBox_Text.ItemsSource = vTextInfoList;
+
+            //图片内容初始化
+            List<TextInfo> vPicInfoList = new List<TextInfo>();
+            foreach( string vPic in PicArray)
+            {
+                vPicInfoList.Add(new TextInfo() { FullPath=vPic } );
+            }
+            listBox_Pic.ItemsSource = vPicInfoList;
+
+
+            //视频内容初始化
+            List<TextInfo> vVideoInfoList = new List<TextInfo>();
+            foreach( string vVideo in VideoArray )
+            {
+                vVideoInfoList.Add(new TextInfo() { FullPath = vVideo });
+            }
+            listBox_Video.ItemsSource = vVideoInfoList;
+
         }
 
+        /// <summary>
+        /// 选择的岗亭IP
+        /// </summary>
         public string[] SelectedIPArray { get; set; } = new string[0];
+        /// <summary>
+        /// 文本内容
+        /// </summary>
+        public string[] TextArray { get; set; }
+        /// <summary>
+        /// 选择的文本内容
+        /// </summary>
+        public string[] SelectedTextArray { get; set; } = new string[0];
+
+        /// <summary>
+        /// 图片内容
+        /// </summary>
+        public string[] PicArray { get; set; }
+        /// <summary>
+        /// 选择的图片
+        /// </summary>
+        public string[] SelectedPicArray { get; set; } = new string[0];
+
+        /// <summary>
+        /// 视频内容
+        /// </summary>
+        public string[] VideoArray { get; set; }
+        /// <summary>
+        /// 选择的视频
+        /// </summary>
+        public string[] SelectedVideoArray { get; set; } = new string[0];
+
         private void button_XuanDing_Click(object sender, RoutedEventArgs e)
         {
+            //岗亭
             List<string> vSelectedIP = new List<string>();
             foreach ( CheckBox vTempCheckBox in m_CheckBoxList )
             {
@@ -90,6 +140,35 @@ namespace JXHighWay.WatchHouse.WFPClient
                 }
             }
             SelectedIPArray = vSelectedIP.ToArray();
+
+            //文字
+            List<string> vSelectedText = new List<string>();
+            foreach ( TextInfo vTempItem in listBox_Text.Items )
+            {
+                if (vTempItem.IsSelected)
+                    vSelectedText.Add(vTempItem.FullPath);
+
+            }
+            SelectedTextArray = vSelectedText.ToArray();
+
+            //图片
+            List<string> vSelectedPic = new List<string>();
+            foreach( TextInfo vTempItem in listBox_Pic.Items )
+            {
+                if (vTempItem.IsSelected)
+                    vSelectedPic.Add(vTempItem.FullPath);
+            }
+            SelectedPicArray = vSelectedPic.ToArray();
+
+            //视频
+            List<string> vSelectedVideo = new List<string>();
+            foreach( TextInfo vTempItem in listBox_Video.Items )
+            {
+                if (vTempItem.IsSelected)
+                    vSelectedVideo.Add(vTempItem.FullPath);
+            }
+            SelectedVideoArray = vSelectedVideo.ToArray();
+
             DialogResult = true;
         }
 
