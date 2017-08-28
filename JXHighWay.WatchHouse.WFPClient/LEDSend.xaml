@@ -26,7 +26,7 @@
             <RowDefinition Height="41*"  />
         </Grid.RowDefinitions>
         <Image HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0" Height="20" VerticalAlignment="Top" Width="500" Source="Images/LED/Tou.jpg" Grid.RowSpan="2"/>
-        <Image HorizontalAlignment="Left" x:Name="Image_Close" Height="13" VerticalAlignment="Top" Width="13" Source="Images/LED/GuanBi.jpg"  Cursor="Hand" Margin="486,1,0,0" Grid.RowSpan="2"/>
+        <Image HorizontalAlignment="Left" x:Name="Image_Close" Height="13" VerticalAlignment="Top" Width="13" Source="Images/LED/GuanBi.jpg"  Cursor="Hand" Margin="486,1,0,0" Grid.RowSpan="2" MouseLeftButtonDown="Image_Close_MouseLeftButtonDown"/>
         <Button x:Name="button_XuanDing" Content="选　定" HorizontalAlignment="Left" Margin="83,6,0,0" VerticalAlignment="Top" Width="75" Grid.Row="2" Style="{DynamicResource MyWpfButton}" Height="31" Click="button_XuanDing_Click" Cursor="Hand"/>
         <Button x:Name="button_QuXiao" Content="取　消" HorizontalAlignment="Left" Margin="329,6,0,0" VerticalAlignment="Top" Width="75" Grid.Row="2" Style="{DynamicResource MyWpfButton}" Height="31" Click="button_QuXiao_Click" Cursor="Hand"/>
         <Image x:Name="image" HorizontalAlignment="Left" Height="17" VerticalAlignment="Top" Width="500" Margin="0,209,0,0" Grid.Row="1" Source="Images/LED/xuxian.jpg" Grid.RowSpan="2"/>
@@ -50,7 +50,8 @@
                                         <RowDefinition />
                                         <RowDefinition />
                                     </Grid.RowDefinitions>
-                                    <Image Width="100" Height="100" Source="{Binding Path=FullPath}" Grid.Column="0" Grid.Row="0">
+                                    
+                                    <Image Width="100" Height="100" Source="{Binding Path=Image}"  Grid.Column="0" Grid.Row="0">
                                     </Image>
                                     <CheckBox Tag="{Binding Path=FullPath}"  Content="选择" IsChecked="{Binding Path=IsSelected}" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center"></CheckBox>
                                 </Grid>
@@ -63,14 +64,13 @@
                 <Grid Background="#FFE5E5E5">
                     <ListBox x:Name="listBox_Pic" HorizontalAlignment="Left" Height="161" VerticalAlignment="Top" Width="489" Margin="0,0,0,0">
                         <ListBox.ItemsPanel>
-                            <ItemsPanelTemplate>
+                            <ItemsPanelTemplate >
                                 <UniformGrid Columns="1"/>
                             </ItemsPanelTemplate>
                         </ListBox.ItemsPanel>
-
                         <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <CheckBox Tag="{Binding Path=FullPath}"  Content="{Binding Path=FullPath}" IsChecked="{Binding Path=IsSelected}" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center"></CheckBox>
+                            <DataTemplate >
+                                <CheckBox Tag="{Binding Path=FullPath}" Content="{Binding Path=FullPath}" IsChecked="{Binding Path=IsSelected}"  HorizontalAlignment="Center"></CheckBox>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
@@ -87,7 +87,7 @@
 
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <CheckBox Tag="{Binding Path=FullPath}"  Content="{Binding Path=FullPath}" IsChecked="{Binding Path=IsSelected}" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center"></CheckBox>
+                                <CheckBox Tag="{Binding Path=FullPath}" Content="{Binding Path=FullPath}" IsChecked="{Binding Path=IsSelected}" HorizontalAlignment="Center"></CheckBox>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>

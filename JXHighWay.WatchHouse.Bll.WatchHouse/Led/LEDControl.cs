@@ -254,7 +254,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.LED
             MemoryStream ms = new MemoryStream();
             XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
             XmlSerializer serializer = new XmlSerializer(typeof(ConfigbooXml));
-            serializer.Serialize(ms, m_ConfigbooXml, ns);
+            serializer.Serialize(sw, m_ConfigbooXml, ns);
             Console.WriteLine(sw);
             sw.Close();
             ms.Close();

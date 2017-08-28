@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using JXHighWay.WatchHouse.Bll.Client.GanTing;
 using JXHighWay.WatchHouse.Bll.Client.LED;
+using System.IO;
+using JXHighWay.WatchHouse.Helper;
 
 namespace JXHighWay.WatchHouse.WFPClient
 {
@@ -69,7 +71,11 @@ namespace JXHighWay.WatchHouse.WFPClient
             List<TextInfo> vTextInfoList = new List<TextInfo>();
             foreach (string vText in TextArray )
             {
-                vTextInfoList.Add(new TextInfo() { FullPath = vText });
+                BitmapImage vBitmapImage = new BitmapImage();
+                vBitmapImage.BeginInit();
+                vBitmapImage.StreamSource = CommHelper.ByteToStream(CommHelper.SetImageToByteArray(vText));
+                vBitmapImage.EndInit();
+                vTextInfoList.Add(new TextInfo() { FullPath = vText,Image= vBitmapImage });
             }
             listBox_Text.ItemsSource = vTextInfoList;
 
@@ -141,12 +147,16 @@ namespace JXHighWay.WatchHouse.WFPClient
             }
             SelectedIPArray = vSelectedIP.ToArray();
 
+
             //文字
             List<string> vSelectedText = new List<string>();
             foreach ( TextInfo vTempItem in listBox_Text.Items )
             {
                 if (vTempItem.IsSelected)
+                {
+                    
                     vSelectedText.Add(vTempItem.FullPath);
+                }
 
             }
             SelectedTextArray = vSelectedText.ToArray();
@@ -192,6 +202,11 @@ namespace JXHighWay.WatchHouse.WFPClient
                     vTempCheckBox.IsChecked = false;
                 }
             }
+        }
+
+        private void Image_Close_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Close();
         }
     }
 }

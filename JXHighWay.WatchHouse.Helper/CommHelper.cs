@@ -10,6 +10,32 @@ namespace JXHighWay.WatchHouse.Helper
 {
     public class CommHelper
     {
+        public static MemoryStream ByteToStream(byte[] mybyte)
+        {
+            MemoryStream mymemorystream = new MemoryStream(mybyte, 0, mybyte.Length);
+            return mymemorystream;
+        }
+
+        public static byte[] SetImageToByteArray(string fileName)
+        {
+            byte[] image = null;
+            try
+            {
+                FileStream fs = new FileStream(fileName, FileMode.Open);
+                FileInfo fileInfo = new FileInfo(fileName);
+                //fileSize = Convert.ToDecimal(fileInfo.Length / 1024).ToString("f2") + " K";
+                int streamLength = (int)fs.Length;
+                image = new byte[streamLength];
+                fs.Read(image, 0, streamLength);
+                fs.Close();
+                return image;
+            }
+            catch
+            {
+                return image;
+            }
+        }
+
         public static bool IsIPAddress (string IPAddress)
         {
             Regex vRegex = new Regex("^(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|[1-9])\\."
