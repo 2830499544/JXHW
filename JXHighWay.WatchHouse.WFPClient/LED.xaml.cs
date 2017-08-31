@@ -275,7 +275,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                 List<LEDChannelInfo> vLEDChannelInfoList = new List<LEDChannelInfo>();
                 LEDControl vLEDControl = new LEDControl(App.WatchHouseID);
 
-                foreach( string vTempText in vLEDSend.TextArray)
+                foreach( string vTempText in vLEDSend.SelectedTextArray)
                 {
                     LEDChannelInfo vTextChannelInfo = new LEDChannelInfo()
                     {
@@ -288,11 +288,11 @@ namespace JXHighWay.WatchHouse.WFPClient
                     vLEDChannelInfoList.Add(vTextChannelInfo);
                 }
 
-                foreach(string vTempPic in vLEDSend.PicArray )
+                foreach(string vTempPic in vLEDSend.SelectedPicArray )
                 {
                     LEDChannelInfo vTextChannelInfo = new LEDChannelInfo()
                     {
-                        ChannelType = LEDChanneTypeEnum.Text,
+                        ChannelType = LEDChanneTypeEnum.Image,
                         Content = vTempPic,
                         InEff = (int)comboBox_Text_XianShi1.SelectedValue,
                         OutEff = (int)comboBox_Text_QinPing1.SelectedValue,
@@ -301,11 +301,11 @@ namespace JXHighWay.WatchHouse.WFPClient
                     vLEDChannelInfoList.Add(vTextChannelInfo);
                 }
 
-                foreach(string vTempVideo in vLEDSend.VideoArray)
+                foreach(string vTempVideo in vLEDSend.SelectedVideoArray)
                 {
                     LEDChannelInfo vTextChannelInfo = new LEDChannelInfo()
                     {
-                        ChannelType = LEDChanneTypeEnum.Text,
+                        ChannelType = LEDChanneTypeEnum.Video,
                         Content = vTempVideo,
                         InEff = (int)comboBox_Text_XianShi1.SelectedValue,
                         OutEff = (int)comboBox_Text_QinPing1.SelectedValue,
