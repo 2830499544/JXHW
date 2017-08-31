@@ -258,7 +258,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                 }
 
                 TextBox vPicTextBox = (TextBox)FindName(string.Format("textBox_TuPian_TPLJ{0}", i));
-                if (vPicTextBox.Text != null && vVideoTextBox.Text != "")
+                if (vPicTextBox.Text != null && vPicTextBox.Text != "")
                 {
                     if (File.Exists(vPicTextBox.Text))
                     {

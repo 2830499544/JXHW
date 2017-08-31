@@ -162,7 +162,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
         void createEmployeeInfo(string filePath,byte[] sn )
         {
             FileStream vFile = new FileStream(filePath, System.IO.FileMode.Create, System.IO.FileAccess.Write);
-            StreamWriter vStreamWriter = new StreamWriter(vFile, new System.Text.UnicodeEncoding());
+            StreamWriter vStreamWriter = new StreamWriter(vFile, new System.Text.UTF8Encoding());
             vStreamWriter.WriteLine("START");
             vStreamWriter.WriteLine(string.Format("Version=99", BitConverter.ToString(sn)));
 
