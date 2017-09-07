@@ -52,19 +52,36 @@ namespace JXHighWay.WatchHouse.WFPClient
 
             for (int i = 0; i < vWatchHouseInfoList.Count; i++)
             {
-                CheckBox vNewCheckBox = new CheckBox()
+                if (vWatchHouseInfoList[i].GuanGaoPing1IP!=null && vWatchHouseInfoList[i].GuanGaoPing1IP!="")
                 {
-                    Content = vWatchHouseInfoList[i].GangTingMC,
-                    Tag = string.Format("{0}|{1}", vWatchHouseInfoList[i].GuanGaoPing1IP, vWatchHouseInfoList[i].GuanGaoPing2IP) 
-                };
+                    CheckBox vNewCheckBox1 = new CheckBox()
+                    {
+                        Content = vWatchHouseInfoList[i].GangTingMC + "(屏幕1)",
+                        Tag = vWatchHouseInfoList[i].GuanGaoPing1IP
+                    };
+                    string vIsSelected = SelectedIPArray.Where(m => m == vWatchHouseInfoList[i].GuanGaoPing1IP).FirstOrDefault();
+                    if (vIsSelected != null && vIsSelected != "")
+                        vNewCheckBox1.IsChecked = true;
 
-                string vIsSelected = SelectedIPArray.Where(m => m == vWatchHouseInfoList[i].GuanGaoPing1IP).FirstOrDefault();
-                if (vIsSelected != null && vIsSelected != "")
-                    vNewCheckBox.IsChecked = true;
+                    listBox_GangTing.Items.Add(vNewCheckBox1);
+                    m_CheckBoxList.Add(vNewCheckBox1);
+                }
 
-                listBox_GangTing.Items.Add(vNewCheckBox);
-                m_CheckBoxList.Add(vNewCheckBox);
-                
+                if (vWatchHouseInfoList[i].GuanGaoPing2IP!=null && vWatchHouseInfoList[i].GuanGaoPing2IP!="")
+                {
+                    CheckBox vNewCheckBox2 = new CheckBox()
+                    {
+                        Content = vWatchHouseInfoList[i].GangTingMC + "(屏幕2)",
+                        Tag = vWatchHouseInfoList[i].GuanGaoPing2IP
+                    };
+
+                    string vIsSelected = SelectedIPArray.Where(m => m == vWatchHouseInfoList[i].GuanGaoPing2IP).FirstOrDefault();
+                    if (vIsSelected != null && vIsSelected != "")
+                        vNewCheckBox2.IsChecked = true;
+
+                    listBox_GangTing.Items.Add(vNewCheckBox2);
+                    m_CheckBoxList.Add(vNewCheckBox2);
+                }
             }
 
             //文本内容初始化
@@ -138,48 +155,52 @@ namespace JXHighWay.WatchHouse.WFPClient
                 if (vTempCheckBox.IsChecked ?? false)
                 {
                     string vTag = (string)vTempCheckBox.Tag;
-                    string[] vTagArray = vTag.Split('|');
-                    if ( vTagArray[0]!=null && vTagArray[0]!="")
-                        vSelectedIP.Add(vTagArray[0]);
-                    if (vTagArray[1] != null && vTagArray[1] != "")
-                        vSelectedIP.Add(vTagArray[1]);
+                    vSelectedIP.Add(vTag);
+                    //string[] vTagArray = vTag.Split('|');
+                    //if ( vTagArray[0]!=null && vTagArray[0]!="")
+                    //    vSelectedIP.Add(vTagArray[0]);
+                    //if (vTagArray[1] != null && vTagArray[1] != "")
+                    //    vSelectedIP.Add(vTagArray[1]);
                 }
             }
             SelectedIPArray = vSelectedIP.ToArray();
-
-
-            //文字
-            List<string> vSelectedText = new List<string>();
-            foreach ( TextInfo vTempItem in listBox_Text.Items )
+            if (vSelectedIP.Count > 0)
             {
-                if (vTempItem.IsSelected)
+                //文字
+                List<string> vSelectedText = new List<string>();
+                foreach (TextInfo vTempItem in listBox_Text.Items)
                 {
-                    
-                    vSelectedText.Add(vTempItem.FullPath);
+                    if (vTempItem.IsSelected)
+                    {
+                        vSelectedText.Add(vTempItem.FullPath);
+                    }
                 }
+                SelectedTextArray = vSelectedText.ToArray();
 
+                //图片
+                List<string> vSelectedPic = new List<string>();
+                foreach (TextInfo vTempItem in listBox_Pic.Items)
+                {
+                    if (vTempItem.IsSelected)
+                        vSelectedPic.Add(vTempItem.FullPath);
+                }
+                SelectedPicArray = vSelectedPic.ToArray();
+
+                //视频
+                List<string> vSelectedVideo = new List<string>();
+                foreach (TextInfo vTempItem in listBox_Video.Items)
+                {
+                    if (vTempItem.IsSelected)
+                        vSelectedVideo.Add(vTempItem.FullPath);
+                }
+                SelectedVideoArray = vSelectedVideo.ToArray();
+
+                DialogResult = true;
             }
-            SelectedTextArray = vSelectedText.ToArray();
-
-            //图片
-            List<string> vSelectedPic = new List<string>();
-            foreach( TextInfo vTempItem in listBox_Pic.Items )
+            else
             {
-                if (vTempItem.IsSelected)
-                    vSelectedPic.Add(vTempItem.FullPath);
+                Xceed.Wpf.Toolkit.MessageBox.Show("请选择需要发送LED广告的岗亭","错误",MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            SelectedPicArray = vSelectedPic.ToArray();
-
-            //视频
-            List<string> vSelectedVideo = new List<string>();
-            foreach( TextInfo vTempItem in listBox_Video.Items )
-            {
-                if (vTempItem.IsSelected)
-                    vSelectedVideo.Add(vTempItem.FullPath);
-            }
-            SelectedVideoArray = vSelectedVideo.ToArray();
-
-            DialogResult = true;
         }
 
         private void checkBox_SelectedAll_Checked(object sender, RoutedEventArgs e)

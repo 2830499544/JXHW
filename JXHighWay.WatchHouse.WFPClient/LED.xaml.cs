@@ -20,6 +20,12 @@ using JXHighWay.WatchHouse.Bll.Client.LED;
 
 namespace JXHighWay.WatchHouse.WFPClient
 {
+    public class ConfigInfo
+    {
+        public string Path { get; set; }
+        public int ID { get; set; }
+    }
+        
     /// <summary>
     /// LED.xaml 的交互逻辑
     /// </summary>
@@ -148,43 +154,50 @@ namespace JXHighWay.WatchHouse.WFPClient
                 tabControl.IsEnabled = false;
                 RTFBox1.Visibility = Visibility.Hidden;
             }
-            //文本
-            comboBox_Text_XianShi1.ItemsSource = m_Eff;
-            comboBox_Text_XianShi1.SelectedValuePath = "Key";
-            comboBox_Text_XianShi1.DisplayMemberPath = "Value";
-            comboBox_Text_XianShi1.SelectedValue = 25;
+                //文字显示
+                comboBox_Text_XianShi1.ItemsSource = m_Eff;
+                comboBox_Text_XianShi1.SelectedValuePath = "Key";
+                comboBox_Text_XianShi1.DisplayMemberPath = "Value";
+                comboBox_Text_XianShi1.SelectedValue = 25;
+                
+                //文字清屏
+                comboBox_Text_QinPing1.ItemsSource = m_Eff;
+                comboBox_Text_QinPing1.SelectedValuePath = "Key";
+                comboBox_Text_QinPing1.DisplayMemberPath = "Value";
+                comboBox_Text_QinPing1.SelectedValue = 25;
+                integerUpDown_Text.Value = 0;
+            for (int i = 1; i <= 4; i++)
+            {
+                //视频清屏
+                ComboBox vComboBox_ShiPing_QinPing = (ComboBox)FindName(string.Format("comboBox_ShiPing_QinPing{0}", i));
+                vComboBox_ShiPing_QinPing.ItemsSource = m_Eff;
+                vComboBox_ShiPing_QinPing.SelectedValuePath = "Key";
+                vComboBox_ShiPing_QinPing.DisplayMemberPath = "Value";
+                vComboBox_ShiPing_QinPing.SelectedValue = 25;
+                //视频显示
+                ComboBox vComboBox_ShiPing_XianShi = (ComboBox)FindName(string.Format("comboBox_ShiPing_XianShi{0}", i));
+                vComboBox_ShiPing_XianShi.ItemsSource = m_Eff;
+                vComboBox_ShiPing_XianShi.SelectedValuePath = "Key";
+                vComboBox_ShiPing_XianShi.DisplayMemberPath = "Value";
+                vComboBox_ShiPing_XianShi.SelectedValue = 25;
+                Xceed.Wpf.Toolkit.IntegerUpDown vIntegerUpDown_ShiPing = (Xceed.Wpf.Toolkit.IntegerUpDown)FindName(string.Format("integerUpDown_ShiPing{0}", i));
+                vIntegerUpDown_ShiPing.Value = 0;
 
-            comboBox_Text_QinPing1.ItemsSource = m_Eff;
-            comboBox_Text_QinPing1.SelectedValuePath = "Key";
-            comboBox_Text_QinPing1.DisplayMemberPath = "Value";
-            comboBox_Text_QinPing1.SelectedValue = 25;
-            integerUpDown_Text.Value = 0;
-
-            //视频下接列表绑定
-            comboBox_ShiPing_QinPing1.ItemsSource = m_Eff;
-            comboBox_ShiPing_QinPing1.SelectedValuePath = "Key";
-            comboBox_ShiPing_QinPing1.DisplayMemberPath = "Value";
-            comboBox_ShiPing_QinPing1.SelectedValue = 25;
-
-            comboBox_ShiPing_XianShi1.ItemsSource = m_Eff;
-            comboBox_ShiPing_XianShi1.SelectedValuePath = "Key";
-            comboBox_ShiPing_XianShi1.DisplayMemberPath = "Value";
-            comboBox_ShiPing_XianShi1.SelectedValue = 25;
-
-            integerUpDown_ShiPing.Value = 0;
-
-
-            //图片下接列表绑定
-            comboBox_TuPian_QinPing1.ItemsSource = m_Eff;
-            comboBox_TuPian_QinPing1.SelectedValuePath = "Key";
-            comboBox_TuPian_QinPing1.DisplayMemberPath = "Value";
-            comboBox_TuPian_QinPing1.SelectedValue = 25;
-
-            comboBox_TuPian_XianShi1.ItemsSource = m_Eff;
-            comboBox_TuPian_XianShi1.SelectedValuePath = "Key";
-            comboBox_TuPian_XianShi1.DisplayMemberPath = "Value";
-            comboBox_TuPian_XianShi1.SelectedValue = 25;
-            integerUpDown_TuPian.Value = 0;
+                //图片清屏
+                ComboBox vComboBox_TuPian_QinPing = (ComboBox)FindName(string.Format("comboBox_TuPian_QinPing{0}", i));
+                vComboBox_TuPian_QinPing.ItemsSource = m_Eff;
+                vComboBox_TuPian_QinPing.SelectedValuePath = "Key";
+                vComboBox_TuPian_QinPing.DisplayMemberPath = "Value";
+                vComboBox_TuPian_QinPing.SelectedValue = 25;
+                //图片显示
+                ComboBox vComboBox_TuPian_XianShi = (ComboBox)FindName(string.Format("comboBox_TuPian_XianShi{0}", i));
+                vComboBox_TuPian_XianShi.ItemsSource = m_Eff;
+                vComboBox_TuPian_XianShi.SelectedValuePath = "Key";
+                vComboBox_TuPian_XianShi.DisplayMemberPath = "Value";
+                vComboBox_TuPian_XianShi.SelectedValue = 25;
+                Xceed.Wpf.Toolkit.IntegerUpDown vIntegerUpDown_TuPian = (Xceed.Wpf.Toolkit.IntegerUpDown)FindName(string.Format("integerUpDown_TuPian{0}", i));
+                vIntegerUpDown_TuPian.Value = 0;
+            }
         }
 
 
@@ -244,16 +257,21 @@ namespace JXHighWay.WatchHouse.WFPClient
             vLEDSend.SelectedIPArray = m_SelectedIPArray;
             vLEDSend.TextArray = RTFBox1.ImagePathList.ToArray();
 
-            List<string> vPicList = new List<string>();
-            List<string> vVideoList = new List<string>();
-            for (int i = 1; i <= 5; i++)
+            List<ConfigInfo> vPicList = new List<ConfigInfo>();
+            List<ConfigInfo> vVideoList = new List<ConfigInfo>();
+            for (int i = 1; i <= 4; i++)
             {
                 TextBox vVideoTextBox = (TextBox)FindName(string.Format("textBox_ShiPing_SPLJ{0}", i));
                 if (vVideoTextBox.Text != null && vVideoTextBox.Text != "")
                 {
                     if (File.Exists(vVideoTextBox.Text))
                     {
-                        vVideoList.Add(vVideoTextBox.Text);
+                        ConfigInfo vConfigInfo = new ConfigInfo()
+                        {
+                            Path = vVideoTextBox.Text,
+                            ID = i
+                        };
+                        vVideoList.Add(vConfigInfo);
                     }
                 }
 
@@ -262,13 +280,27 @@ namespace JXHighWay.WatchHouse.WFPClient
                 {
                     if (File.Exists(vPicTextBox.Text))
                     {
-                        vPicList.Add(vPicTextBox.Text);
+                        ConfigInfo vConfigInfo = new ConfigInfo()
+                        {
+                            Path = vPicTextBox.Text,
+                            ID = i
+                        };
+                        vPicList.Add(vConfigInfo);
                     }
                 }
             }
 
-            vLEDSend.PicArray = vPicList.ToArray();
-            vLEDSend.VideoArray = vVideoList.ToArray();
+            vLEDSend.PicArray = new string[vPicList.Count];
+            for( int i=0;i< vPicList.Count;i++)
+            {
+                vLEDSend.PicArray[i] = vPicList[i].Path;
+            }
+
+            vLEDSend.VideoArray = new string[vVideoList.Count];
+            for( int i=0;i<vVideoList.Count;i++)
+            {
+                vLEDSend.VideoArray[i] = vVideoList[i].Path;
+            }
 
             if ( vLEDSend.ShowDialog()??false )
             {
@@ -290,68 +322,39 @@ namespace JXHighWay.WatchHouse.WFPClient
 
                 foreach(string vTempPic in vLEDSend.PicArray )
                 {
-                    LEDChannelInfo vTextChannelInfo = new LEDChannelInfo()
+                    int vID = vPicList.Where(m => m.Path == vTempPic).FirstOrDefault().ID;
+                    ComboBox vComboBox_TuPian_XianShi = (ComboBox)FindName(string.Format("comboBox_TuPian_XianShi{0}", vID));
+                    ComboBox vComboBox_TuPain_QinPing = (ComboBox)FindName(string.Format("comboBox_TuPian_QinPing{0}", vID));
+                    Xceed.Wpf.Toolkit.IntegerUpDown vIntegerUpDown_TuPian = (Xceed.Wpf.Toolkit.IntegerUpDown)FindName(string.Format("integerUpDown_TuPian{0}", vID));
+
+                    LEDChannelInfo vPicChannelInfo = new LEDChannelInfo()
                     {
-                        ChannelType = LEDChanneTypeEnum.Text,
+                        ChannelType = LEDChanneTypeEnum.Image,
                         Content = vTempPic,
-                        InEff = (int)comboBox_Text_XianShi1.SelectedValue,
-                        OutEff = (int)comboBox_Text_QinPing1.SelectedValue,
-                        HoldTime = (integerUpDown_Text.Value ?? 0) * 10
+                        InEff = (int)vComboBox_TuPian_XianShi.SelectedValue,
+                        OutEff = (int)vComboBox_TuPain_QinPing.SelectedValue,
+                        HoldTime = (vIntegerUpDown_TuPian.Value ?? 0) * 10
                     };
-                    vLEDChannelInfoList.Add(vTextChannelInfo);
+                    vLEDChannelInfoList.Add(vPicChannelInfo);
                 }
 
                 foreach(string vTempVideo in vLEDSend.VideoArray)
                 {
-                    LEDChannelInfo vTextChannelInfo = new LEDChannelInfo()
+                    int vID = vVideoList.Where(m => m.Path == vTempVideo).FirstOrDefault().ID;
+                    ComboBox vComboBox_ShiPing_XianShi = (ComboBox)FindName(string.Format("comboBox_ShiPing_XianShi{0}", vID));
+                    ComboBox vComboBox_ShiPing_QinPing = (ComboBox)FindName(string.Format("comboBox_ShiPing_QinPing{0}", vID));
+                    Xceed.Wpf.Toolkit.IntegerUpDown vIntegerUpDown_ShiPing = (Xceed.Wpf.Toolkit.IntegerUpDown)FindName(string.Format("integerUpDown_ShiPing{0}", vID));
+
+                    LEDChannelInfo vVideoChannelInfo = new LEDChannelInfo()
                     {
-                        ChannelType = LEDChanneTypeEnum.Text,
+                        ChannelType = LEDChanneTypeEnum.Video,
                         Content = vTempVideo,
-                        InEff = (int)comboBox_Text_XianShi1.SelectedValue,
-                        OutEff = (int)comboBox_Text_QinPing1.SelectedValue,
-                        HoldTime = (integerUpDown_Text.Value ?? 0) * 10
+                        InEff = (int)vComboBox_ShiPing_XianShi.SelectedValue,
+                        OutEff = (int)vComboBox_ShiPing_QinPing.SelectedValue,
+                        HoldTime = (vIntegerUpDown_ShiPing.Value ?? 0) * 10
                     };
-                    vLEDChannelInfoList.Add(vTextChannelInfo);
+                    vLEDChannelInfoList.Add(vVideoChannelInfo);
                 }
-
-                //if (RTFBox1.ImagePathList != null && RTFBox1.ImagePathList != "")
-                //{
-                //    LEDChannelInfo vTextChannelInfo = new LEDChannelInfo()
-                //    {
-                //        ChannelType = LEDChanneTypeEnum.Text,
-                //        Content = RTFBox1.ImagePathList,
-                //        InEff = (int)comboBox_Text_XianShi1.SelectedValue,
-                //        OutEff = (int)comboBox_Text_QinPing1.SelectedValue,
-                //        HoldTime = (integerUpDown_Text.Value ?? 0) * 10
-                //    };
-                //    vLEDChannelInfoList.Add(vTextChannelInfo);
-                //}
-
-                //if (textBox_TuPian_TPLJ.Text != "")
-                //{
-                //    LEDChannelInfo vTuPianChannelInfo = new LEDChannelInfo()
-                //    {
-                //        ChannelType = LEDChanneTypeEnum.Image,
-                //        Content = textBox_TuPian_TPLJ.Text,
-                //        InEff = (int)comboBox_TuPian_XianShi1.SelectedValue,
-                //        OutEff = (int)comboBox_TuPian_QinPing1.SelectedValue,
-                //        HoldTime = (integerUpDown_TuPian.Value ?? 0) * 10
-                //    };
-                //    vLEDChannelInfoList.Add(vTuPianChannelInfo);
-                //}
-
-                //if (textBox_ShiPing_SPLJ.Text != "")
-                //{
-                //    LEDChannelInfo vShiPingChannelInfo = new LEDChannelInfo()
-                //    {
-                //        ChannelType = LEDChanneTypeEnum.Video,
-                //        Content = textBox_ShiPing_SPLJ.Text,
-                //        InEff = (int)comboBox_ShiPing_XianShi1.SelectedValue,
-                //        OutEff = (int)comboBox_ShiPing_QinPing1.SelectedValue,
-                //        HoldTime = (integerUpDown_ShiPing.Value ?? 0) * 10
-                //    };
-                //    vLEDChannelInfoList.Add(vShiPingChannelInfo);
-                //}
 
                 m_SelectedIPArray = vLEDSend.SelectedIPArray;
                 vLEDControl.SendMultiChannel(vLEDChannelInfoList, m_SelectedIPArray);
