@@ -307,7 +307,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                 List<LEDChannelInfo> vLEDChannelInfoList = new List<LEDChannelInfo>();
                 LEDControl vLEDControl = new LEDControl(App.WatchHouseID);
 
-                foreach( string vTempText in vLEDSend.TextArray)
+                foreach( string vTempText in vLEDSend.SelectedTextArray)
                 {
                     LEDChannelInfo vTextChannelInfo = new LEDChannelInfo()
                     {
@@ -320,7 +320,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                     vLEDChannelInfoList.Add(vTextChannelInfo);
                 }
 
-                foreach(string vTempPic in vLEDSend.PicArray )
+                foreach(string vTempPic in vLEDSend.SelectedPicArray )
                 {
                     int vID = vPicList.Where(m => m.Path == vTempPic).FirstOrDefault().ID;
                     ComboBox vComboBox_TuPian_XianShi = (ComboBox)FindName(string.Format("comboBox_TuPian_XianShi{0}", vID));
@@ -338,7 +338,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                     vLEDChannelInfoList.Add(vPicChannelInfo);
                 }
 
-                foreach(string vTempVideo in vLEDSend.VideoArray)
+                foreach(string vTempVideo in vLEDSend.SelectedVideoArray)
                 {
                     int vID = vVideoList.Where(m => m.Path == vTempVideo).FirstOrDefault().ID;
                     ComboBox vComboBox_ShiPing_XianShi = (ComboBox)FindName(string.Format("comboBox_ShiPing_XianShi{0}", vID));
