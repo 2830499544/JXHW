@@ -26,8 +26,10 @@ namespace JXHighWay.WatchHouse.Server
         {
             if ( SwitchTable != null )
             {
+                DataView vDataView = SwitchTable.AsDataView();
+                vDataView.Sort = "LuHao";
                 dataGridView_Switch.AutoGenerateColumns = false;
-                dataGridView_Switch.DataSource = SwitchTable;
+                dataGridView_Switch.DataSource = vDataView;
                 comboBox_LeiXing.SelectedIndex = 0;
             }
         }

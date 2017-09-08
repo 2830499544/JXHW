@@ -143,6 +143,7 @@ namespace JXHighWay.WatchHouse.WFPClient
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             m_LEDControl = new LEDControl(App.WatchHouseID);
+            Config vConfig = new Config();
             if (m_LEDControl.Width != 0 && m_LEDControl.Heigth != 0)
             {
                 RTFBox1.RichWidth = m_LEDControl.Width;
@@ -168,6 +169,9 @@ namespace JXHighWay.WatchHouse.WFPClient
                 integerUpDown_Text.Value = 0;
             for (int i = 1; i <= 4; i++)
             {
+
+                //视频路径
+                TextBox vTextBox_ShiPing_SPLJ = (TextBox)FindName(string.Format("textBox_ShiPing_SPLJ{0}", i));
                 //视频清屏
                 ComboBox vComboBox_ShiPing_QinPing = (ComboBox)FindName(string.Format("comboBox_ShiPing_QinPing{0}", i));
                 vComboBox_ShiPing_QinPing.ItemsSource = m_Eff;
@@ -180,9 +184,20 @@ namespace JXHighWay.WatchHouse.WFPClient
                 vComboBox_ShiPing_XianShi.SelectedValuePath = "Key";
                 vComboBox_ShiPing_XianShi.DisplayMemberPath = "Value";
                 vComboBox_ShiPing_XianShi.SelectedValue = 25;
+                //视频停留时间
                 Xceed.Wpf.Toolkit.IntegerUpDown vIntegerUpDown_ShiPing = (Xceed.Wpf.Toolkit.IntegerUpDown)FindName(string.Format("integerUpDown_ShiPing{0}", i));
                 vIntegerUpDown_ShiPing.Value = 0;
 
+                if (i <= vConfig.LedVideoArray.Length)
+                {
+                    vComboBox_ShiPing_QinPing.SelectedValue = vConfig.LedVideoArray[i-1].OutEff;
+                    vComboBox_ShiPing_XianShi.SelectedValue = vConfig.LedVideoArray[i-1].InEff;
+                    vIntegerUpDown_ShiPing.Value = vConfig.LedVideoArray[i-1].HoldTime;
+                    vTextBox_ShiPing_SPLJ.Text = vConfig.LedVideoArray[i-1].Content;
+                }
+
+                //图片路径
+                TextBox vTextBox_TuPian_TPLJ = (TextBox)FindName(string.Format("textBox_TuPian_TPLJ{0}", i));
                 //图片清屏
                 ComboBox vComboBox_TuPian_QinPing = (ComboBox)FindName(string.Format("comboBox_TuPian_QinPing{0}", i));
                 vComboBox_TuPian_QinPing.ItemsSource = m_Eff;
@@ -195,8 +210,26 @@ namespace JXHighWay.WatchHouse.WFPClient
                 vComboBox_TuPian_XianShi.SelectedValuePath = "Key";
                 vComboBox_TuPian_XianShi.DisplayMemberPath = "Value";
                 vComboBox_TuPian_XianShi.SelectedValue = 25;
+                //图片停留时间
                 Xceed.Wpf.Toolkit.IntegerUpDown vIntegerUpDown_TuPian = (Xceed.Wpf.Toolkit.IntegerUpDown)FindName(string.Format("integerUpDown_TuPian{0}", i));
                 vIntegerUpDown_TuPian.Value = 0;
+                if (i<=vConfig.LedPicArray.Length)
+                {
+                    vTextBox_TuPian_TPLJ.Text = vConfig.LedPicArray[i-1].Content;
+                    vComboBox_TuPian_QinPing.SelectedValue = vConfig.LedPicArray[i-1].OutEff;
+                    vComboBox_TuPian_XianShi.SelectedValue = vConfig.LedPicArray[i-1].InEff;
+                    vIntegerUpDown_TuPian.Value = vConfig.LedPicArray[i-1].HoldTime;
+                }
+
+
+                
+            }
+
+            //上一次发送成功的图片
+            for (int i = 1; i <= 10; i++)
+            {
+                if ( i<= vConfig.LedTextArray.Length)
+                    RTFBox1.ImagePathList.Add(vConfig.LedTextArray[i-1].Content);
             }
         }
 
@@ -307,7 +340,8 @@ namespace JXHighWay.WatchHouse.WFPClient
                 List<LEDChannelInfo> vLEDChannelInfoList = new List<LEDChannelInfo>();
                 LEDControl vLEDControl = new LEDControl(App.WatchHouseID);
 
-                foreach( string vTempText in vLEDSend.SelectedTextArray)
+                List<LEDChannelInfo> vTextLedList = new List<LEDChannelInfo>();
+                foreach ( string vTempText in vLEDSend.SelectedTextArray)
                 {
                     LEDChannelInfo vTextChannelInfo = new LEDChannelInfo()
                     {
@@ -318,9 +352,12 @@ namespace JXHighWay.WatchHouse.WFPClient
                         HoldTime = (integerUpDown_Text.Value ?? 0) * 10
                     };
                     vLEDChannelInfoList.Add(vTextChannelInfo);
+                    vTextLedList.Add(vTextChannelInfo);
                 }
 
-                foreach(string vTempPic in vLEDSend.SelectedPicArray )
+
+                List<LEDChannelInfo> vPicLedList = new List<LEDChannelInfo>();
+                foreach (string vTempPic in vLEDSend.SelectedPicArray )
                 {
                     int vID = vPicList.Where(m => m.Path == vTempPic).FirstOrDefault().ID;
                     ComboBox vComboBox_TuPian_XianShi = (ComboBox)FindName(string.Format("comboBox_TuPian_XianShi{0}", vID));
@@ -336,9 +373,11 @@ namespace JXHighWay.WatchHouse.WFPClient
                         HoldTime = (vIntegerUpDown_TuPian.Value ?? 0) * 10
                     };
                     vLEDChannelInfoList.Add(vPicChannelInfo);
+                    vPicLedList.Add(vPicChannelInfo);
                 }
 
-                foreach(string vTempVideo in vLEDSend.SelectedVideoArray)
+                List<LEDChannelInfo> vVideoLedList = new List<LEDChannelInfo>();
+                foreach (string vTempVideo in vLEDSend.SelectedVideoArray)
                 {
                     int vID = vVideoList.Where(m => m.Path == vTempVideo).FirstOrDefault().ID;
                     ComboBox vComboBox_ShiPing_XianShi = (ComboBox)FindName(string.Format("comboBox_ShiPing_XianShi{0}", vID));
@@ -354,11 +393,17 @@ namespace JXHighWay.WatchHouse.WFPClient
                         HoldTime = (vIntegerUpDown_ShiPing.Value ?? 0) * 10
                     };
                     vLEDChannelInfoList.Add(vVideoChannelInfo);
+                    vVideoLedList.Add(vVideoChannelInfo);
                 }
 
                 m_SelectedIPArray = vLEDSend.SelectedIPArray;
                 vLEDControl.SendMultiChannel(vLEDChannelInfoList, m_SelectedIPArray);
                 Xceed.Wpf.Toolkit.MessageBox.Show("已发送", "信息", MessageBoxButton.OK, MessageBoxImage.Information);
+                Config vConfig = new Config();
+                vConfig.LedTextArray = vTextLedList.ToArray();
+                vConfig.LedPicArray = vPicLedList.ToArray();
+                vConfig.LedVideoArray = vVideoLedList.ToArray();
+                vConfig.Save();
             }
         }
     }

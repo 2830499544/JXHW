@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JXHighWay.WatchHouse.WFPClient"
         mc:Ignorable="d"
-        Title="LEDSend" Height="268" Width="500" AllowsTransparency="True" WindowStyle="None" ShowInTaskbar="False" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
+        Title="LEDSend" Height="268" Width="515.536" AllowsTransparency="True" WindowStyle="None" ShowInTaskbar="False" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -25,16 +25,16 @@
             <RowDefinition Height="206*" />
             <RowDefinition Height="41*"  />
         </Grid.RowDefinitions>
-        <Image HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0" Height="20" VerticalAlignment="Top" Width="500" Source="Images/LED/Tou.jpg" Grid.RowSpan="2"/>
-        <Image HorizontalAlignment="Left" x:Name="Image_Close" Height="13" VerticalAlignment="Top" Width="13" Source="Images/LED/GuanBi.jpg"  Cursor="Hand" Margin="486,1,0,0" Grid.RowSpan="2" MouseLeftButtonDown="Image_Close_MouseLeftButtonDown"/>
+        <Image HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0" Height="20" VerticalAlignment="Top" Width="516" Source="Images/LED/Tou.jpg" Grid.RowSpan="2"/>
+        <Image HorizontalAlignment="Left" x:Name="Image_Close" Height="13" VerticalAlignment="Top" Width="13" Source="Images/LED/GuanBi.jpg"  Cursor="Hand" Margin="503,1,0,0" Grid.RowSpan="2" MouseLeftButtonDown="Image_Close_MouseLeftButtonDown"/>
         <Button x:Name="button_XuanDing" Content="选　定" HorizontalAlignment="Left" Margin="83,6,0,0" VerticalAlignment="Top" Width="75" Grid.Row="2" Style="{DynamicResource MyWpfButton}" Height="31" Click="button_XuanDing_Click" Cursor="Hand"/>
         <Button x:Name="button_QuXiao" Content="取　消" HorizontalAlignment="Left" Margin="329,6,0,0" VerticalAlignment="Top" Width="75" Grid.Row="2" Style="{DynamicResource MyWpfButton}" Height="31" Click="button_QuXiao_Click" Cursor="Hand"/>
-        <Image x:Name="image" HorizontalAlignment="Left" Height="17" VerticalAlignment="Top" Width="500" Margin="0,209,0,0" Grid.Row="1" Source="Images/LED/xuxian.jpg" Grid.RowSpan="2"/>
+        <Image x:Name="image" HorizontalAlignment="Left" Height="17" VerticalAlignment="Top" Width="516" Margin="0,209,0,0" Grid.Row="1" Source="Images/LED/xuxian.jpg" Grid.RowSpan="2"/>
 
-        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="201" Margin="0,6,0,0" Grid.Row="1" VerticalAlignment="Top" Width="499">
+        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="201" Margin="0,6,0,0" Grid.Row="1" VerticalAlignment="Top" Width="516">
             <TabItem Header="文　字" FontSize="18">
                 <Grid Background="#FFE5E5E5">
-                    <ListBox x:Name="listBox_Text" HorizontalAlignment="Left" Height="161" VerticalAlignment="Top" Width="489" Margin="0,0,0,0">
+                    <ListBox x:Name="listBox_Text" HorizontalAlignment="Center" Height="161" VerticalAlignment="Top" Width="505" Margin="0,0,0,0">
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <UniformGrid Columns="3"/>
@@ -62,7 +62,7 @@
             </TabItem>
             <TabItem Header="图　片" FontSize="18">
                 <Grid Background="#FFE5E5E5">
-                    <ListBox x:Name="listBox_Pic" HorizontalAlignment="Left" Height="161" VerticalAlignment="Top" Width="489" Margin="0,0,0,0">
+                    <ListBox x:Name="listBox_Pic" HorizontalAlignment="Left" Height="161" VerticalAlignment="Top" Width="506" Margin="0,0,0,0">
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate >
                                 <UniformGrid Columns="1"/>
@@ -78,7 +78,7 @@
             </TabItem>
             <TabItem Header="视　频" FontSize="18">
                 <Grid Background="#FFE5E5E5">
-                    <ListBox x:Name="listBox_Video" HorizontalAlignment="Left" Height="161" VerticalAlignment="Top" Width="489" Margin="0,0,0,0">
+                    <ListBox x:Name="listBox_Video" HorizontalAlignment="Left" Height="161" VerticalAlignment="Top" Width="506" Margin="0,0,0,0">
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <UniformGrid Columns="1"/>
@@ -95,7 +95,7 @@
             </TabItem>
             <TabItem Header="岗　亭" FontSize="18">
                 <Grid Background="#FFE5E5E5">
-                    <ListBox x:Name="listBox_GangTing" HorizontalAlignment="Left" Height="132" VerticalAlignment="Top" Width="489">
+                    <ListBox x:Name="listBox_GangTing" HorizontalAlignment="Left" Height="132" VerticalAlignment="Top" Width="506">
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <UniformGrid Columns="4"/>
