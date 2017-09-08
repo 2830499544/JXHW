@@ -105,16 +105,21 @@ namespace JXHighWay.WatchHouse.Bll.Server
                     {
                         PowerSwithConfigEFModel vModel = new PowerSwithConfigEFModel();
                         vModel.DianYuanID = DianYuanID1;
-                        CommClass.ConvertDataRowToStruct(ref vModel, vTempSwitch);
+                        
                         switch (vTempSwitch.RowState)
                         {
                             case DataRowState.Added:
+                                CommClass.ConvertDataRowToStruct(ref vModel, vTempSwitch);
                                 vResult = m_BasicDBClass.InsertRecord(vModel) > 0 ? true : false;
                                 break;
                             case DataRowState.Deleted:
-                                vResult = m_BasicDBClass.DeleteRecordByPrimaryKey<PowerSwithConfigEFModel>(vModel.ID);
+                                vTempSwitch.RejectChanges();
+                                int vID = (int)vTempSwitch["ID"];
+                                vResult = m_BasicDBClass.DeleteRecordByPrimaryKey<PowerSwithConfigEFModel>(vID);
+                                vTempSwitch.Delete();
                                 break;
                             case DataRowState.Modified:
+                                CommClass.ConvertDataRowToStruct(ref vModel, vTempSwitch);
                                 vResult = m_BasicDBClass.UpdateRecord(vModel);
                                 break;
                         }

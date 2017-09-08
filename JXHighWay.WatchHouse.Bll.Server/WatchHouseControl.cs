@@ -135,7 +135,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
             Dictionary<string, bool> vResult = new Dictionary<string, bool>();
 
             string vPath = System.Environment.CurrentDirectory;
-            vPath = string.Format(@"{0}\EmployeeInfo\1.txt", vPath);
+            vPath = string.Format(@"{0}\EmployeeInfo\CardAndWork.txt", vPath);
             byte[] vSN = NetHelper.MarkSN();
             createEmployeeInfo(vPath, vSN);
 
@@ -146,7 +146,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
                 //增加序号
                 vDataPack.AddRange(vSN);
                 //增加文件地址
-                string vDownUrl = string.Format(@"{0}/1.txt", Url);
+                string vDownUrl = string.Format(@"{0}/CardAndWork.txt", Url);
                 vDataPack.AddRange(System.Text.Encoding.Default.GetBytes(vDownUrl));
 
                 foreach (WatchHouseConfigEFModel vTempWatchHouseConfigEFModel in vSelectResult)
