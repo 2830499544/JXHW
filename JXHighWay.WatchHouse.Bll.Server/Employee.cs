@@ -99,7 +99,17 @@ namespace JXHighWay.WatchHouse.Bll.Server
 
         public DataTable GetAllEmplyees()
         {
-            return m_BasicDBClass.SelectAllRecords<EmployeeEFModel>();
+            DataTable vTable = m_BasicDBClass.SelectAllRecords<EmployeeEFModel>();
+            vTable.Columns.Add("XuHao",typeof(int));
+            vTable.AcceptChanges();
+
+            for( int i=0;i<vTable.Rows.Count;i++)
+            {
+                vTable.Rows[i]["XuHao"] = i+1;
+            }
+            vTable.AcceptChanges();
+
+            return vTable;
         }
 
     }

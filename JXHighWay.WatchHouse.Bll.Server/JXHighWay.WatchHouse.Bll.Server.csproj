@@ -47,6 +47,8 @@
     <Compile Include="Administrator.cs" />
     <Compile Include="BasicControl.cs" />
     <Compile Include="Employee.cs" />
+    <Compile Include="LEDControl.cs" />
+    <Compile Include="LedInfo.cs" />
     <Compile Include="LogHelper.cs" />
     <Compile Include="Manager.cs" />
     <Compile Include="PowerControl.cs" />

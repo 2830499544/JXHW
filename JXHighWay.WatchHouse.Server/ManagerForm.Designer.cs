@@ -45,6 +45,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dataGridView_MangerInfo = new System.Windows.Forms.DataGridView();
             this.Column_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_XuHao = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_ZhangHao = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_MiMa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_GangTingGZ = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -66,9 +67,9 @@
             this.groupBox_LED.Controls.Add(this.label1);
             this.groupBox_LED.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_LED.Location = new System.Drawing.Point(0, 0);
-            this.groupBox_LED.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox_LED.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox_LED.Name = "groupBox_LED";
-            this.groupBox_LED.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox_LED.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox_LED.Size = new System.Drawing.Size(525, 145);
             this.groupBox_LED.TabIndex = 0;
             this.groupBox_LED.TabStop = false;
@@ -78,7 +79,7 @@
             // 
             this.checkBox_DianYuan.AutoSize = true;
             this.checkBox_DianYuan.Location = new System.Drawing.Point(319, 109);
-            this.checkBox_DianYuan.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkBox_DianYuan.Margin = new System.Windows.Forms.Padding(4);
             this.checkBox_DianYuan.Name = "checkBox_DianYuan";
             this.checkBox_DianYuan.Size = new System.Drawing.Size(59, 19);
             this.checkBox_DianYuan.TabIndex = 6;
@@ -89,7 +90,7 @@
             // 
             this.checkBox_LED.AutoSize = true;
             this.checkBox_LED.Location = new System.Drawing.Point(223, 109);
-            this.checkBox_LED.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkBox_LED.Margin = new System.Windows.Forms.Padding(4);
             this.checkBox_LED.Name = "checkBox_LED";
             this.checkBox_LED.Size = new System.Drawing.Size(53, 19);
             this.checkBox_LED.TabIndex = 5;
@@ -100,7 +101,7 @@
             // 
             this.checkBox_GangTin.AutoSize = true;
             this.checkBox_GangTin.Location = new System.Drawing.Point(128, 109);
-            this.checkBox_GangTin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkBox_GangTin.Margin = new System.Windows.Forms.Padding(4);
             this.checkBox_GangTin.Name = "checkBox_GangTin";
             this.checkBox_GangTin.Size = new System.Drawing.Size(59, 19);
             this.checkBox_GangTin.TabIndex = 4;
@@ -110,7 +111,7 @@
             // textBox_MiMa
             // 
             this.textBox_MiMa.Location = new System.Drawing.Point(213, 71);
-            this.textBox_MiMa.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox_MiMa.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_MiMa.Name = "textBox_MiMa";
             this.textBox_MiMa.Size = new System.Drawing.Size(197, 25);
             this.textBox_MiMa.TabIndex = 3;
@@ -128,7 +129,7 @@
             // textBox_ZhanHao
             // 
             this.textBox_ZhanHao.Location = new System.Drawing.Point(213, 26);
-            this.textBox_ZhanHao.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox_ZhanHao.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_ZhanHao.Name = "textBox_ZhanHao";
             this.textBox_ZhanHao.Size = new System.Drawing.Size(197, 25);
             this.textBox_ZhanHao.TabIndex = 1;
@@ -148,7 +149,7 @@
             this.button_ZhenJia.Image = global::JXHighWay.WatchHouse.Server.Properties.Resources.Add;
             this.button_ZhenJia.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button_ZhenJia.Location = new System.Drawing.Point(32, 345);
-            this.button_ZhenJia.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button_ZhenJia.Margin = new System.Windows.Forms.Padding(4);
             this.button_ZhenJia.Name = "button_ZhenJia";
             this.button_ZhenJia.Size = new System.Drawing.Size(104, 46);
             this.button_ZhenJia.TabIndex = 1;
@@ -162,7 +163,7 @@
             this.button_ShangChu.Image = global::JXHighWay.WatchHouse.Server.Properties.Resources.Del;
             this.button_ShangChu.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button_ShangChu.Location = new System.Drawing.Point(204, 345);
-            this.button_ShangChu.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button_ShangChu.Margin = new System.Windows.Forms.Padding(4);
             this.button_ShangChu.Name = "button_ShangChu";
             this.button_ShangChu.Size = new System.Drawing.Size(104, 46);
             this.button_ShangChu.TabIndex = 2;
@@ -176,7 +177,7 @@
             this.button_XiuGai.Image = global::JXHighWay.WatchHouse.Server.Properties.Resources.Update;
             this.button_XiuGai.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button_XiuGai.Location = new System.Drawing.Point(375, 345);
-            this.button_XiuGai.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button_XiuGai.Margin = new System.Windows.Forms.Padding(4);
             this.button_XiuGai.Name = "button_XiuGai";
             this.button_XiuGai.Size = new System.Drawing.Size(104, 46);
             this.button_XiuGai.TabIndex = 3;
@@ -190,9 +191,9 @@
             this.groupBox2.Controls.Add(this.dataGridView_MangerInfo);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox2.Location = new System.Drawing.Point(0, 145);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox2.Size = new System.Drawing.Size(525, 182);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
@@ -205,6 +206,7 @@
             this.dataGridView_MangerInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_MangerInfo.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column_ID,
+            this.Column_XuHao,
             this.Column_ZhangHao,
             this.Column_MiMa,
             this.Column_GangTingGZ,
@@ -212,7 +214,7 @@
             this.Column_DianYuanGZ});
             this.dataGridView_MangerInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView_MangerInfo.Location = new System.Drawing.Point(4, 22);
-            this.dataGridView_MangerInfo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridView_MangerInfo.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView_MangerInfo.Name = "dataGridView_MangerInfo";
             this.dataGridView_MangerInfo.ReadOnly = true;
             this.dataGridView_MangerInfo.RowTemplate.Height = 23;
@@ -227,7 +229,16 @@
             this.Column_ID.HeaderText = "ID";
             this.Column_ID.Name = "Column_ID";
             this.Column_ID.ReadOnly = true;
-            this.Column_ID.Width = 50;
+            this.Column_ID.Visible = false;
+            this.Column_ID.Width = 65;
+            // 
+            // Column_XuHao
+            // 
+            this.Column_XuHao.DataPropertyName = "XuHao";
+            this.Column_XuHao.HeaderText = "序号";
+            this.Column_XuHao.Name = "Column_XuHao";
+            this.Column_XuHao.ReadOnly = true;
+            this.Column_XuHao.Width = 65;
             // 
             // Column_ZhangHao
             // 
@@ -292,7 +303,7 @@
             this.Controls.Add(this.button_ZhenJia);
             this.Controls.Add(this.groupBox_LED);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ManagerForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "管理员设置";
@@ -321,6 +332,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView dataGridView_MangerInfo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_XuHao;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_ZhangHao;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_MiMa;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Column_GangTingGZ;

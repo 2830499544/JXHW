@@ -194,8 +194,8 @@ namespace JXHighWay.WatchHouse.WFPClient
         void init()
         {
             WatchHouseMonitoring vWatchHouseMonitoring = new WatchHouseMonitoring();
-            bool vGangTingState = false, vDianYuanState = false;
-            vWatchHouseMonitoring.GetWatchHouseState(App.WatchHouseID, ref vGangTingState, ref vDianYuanState);
+            bool vGangTingState = false, vDianYuanState = false, vLedState = false;
+            vWatchHouseMonitoring.GetWatchHouseState(App.WatchHouseID, ref vGangTingState, ref vDianYuanState,ref vLedState);
             //在线状态
             if (!vGangTingState)
             {
@@ -205,6 +205,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                 Image_KongTiao.Source = new BitmapImage(new Uri(@"Images/GanTingMingXi/KongTiao_L.jpg", UriKind.Relative));
                 Image_DiNuan.Source = new BitmapImage(new Uri(@"Images/GanTingMingXi/DiRuan_L.jpg", UriKind.Relative));
                 Image_GongHao.Source = new BitmapImage(new Uri(@"Images/GanTingMingXi/DianZhiPai_L.jpg", UriKind.Relative));
+                Image_LED.Source = new BitmapImage(new Uri(@"Images/GanTingMingXi/LED_L.jpg", UriKind.Relative));
             }
             if ( !vDianYuanState)
                 Image_DianYuan.Source = new BitmapImage(new Uri(@"Images/GanTingMingXi/DianYuan_L.jpg", UriKind.Relative));

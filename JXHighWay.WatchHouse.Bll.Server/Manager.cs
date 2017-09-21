@@ -63,7 +63,17 @@ namespace JXHighWay.WatchHouse.Bll.Server
 
         public DataTable GetAll()
         {
-            return m_BasicDBClass.SelectAllRecords<ManagerEFModel>();
+            DataTable vTable = m_BasicDBClass.SelectAllRecords<ManagerEFModel>();
+            vTable.Columns.Add("XuHao",typeof(int));
+            vTable.AcceptChanges();
+
+            for( int i=0;i<vTable.Rows.Count;i++)
+            {
+                vTable.Rows[i]["XuHao"] = i + 1;
+            }
+            vTable.AcceptChanges();
+
+            return vTable;
         }
         
 

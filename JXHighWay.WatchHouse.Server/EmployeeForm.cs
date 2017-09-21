@@ -87,10 +87,10 @@ namespace JXHighWay.WatchHouse.Server
                 else
                     MessageBox.Show("删除员工失败", "错误", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            else
-            {
-                MessageBox.Show("请选择需要删除的员工", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            //else
+            //{
+            //    MessageBox.Show("请选择需要删除的员工", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
         }
 
         private void dataGridView_EmployeeInfo_SelectionChanged(object sender, EventArgs e)

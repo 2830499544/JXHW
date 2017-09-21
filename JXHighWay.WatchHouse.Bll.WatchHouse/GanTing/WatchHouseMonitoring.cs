@@ -8,6 +8,7 @@ using JXHighWay.WatchHouse.EFModel;
 using JXHighWay.WatchHouse.Net;
 using JXHighWay.WatchHouse.Helper;
 using System.Threading;
+using System.Net.NetworkInformation;
 
 namespace JXHighWay.WatchHouse.Bll.Client.GanTing
 {
@@ -124,13 +125,14 @@ namespace JXHighWay.WatchHouse.Bll.Client.GanTing
         }
 
         public void GetWatchHouseState( int GangTingID,ref bool GangTingState,
-            ref bool DianYuanState )
+            ref bool DianYuanState,ref bool LedState )
         {
             WatchHouseInfo vResult = new WatchHouseInfo();
             WatchHouseConfigEFModel vWatchHouseConfigEFModel = new WatchHouseConfigEFModel()
             {
                  GangTingID = GangTingID
             };
+
             WatchHouseConfigEFModel[] vSelectResult = m_BasicDBClassSelect.SelectRecordsEx(vWatchHouseConfigEFModel);
             if (vSelectResult != null && vSelectResult.Length > 0)
             {
@@ -142,6 +144,8 @@ namespace JXHighWay.WatchHouse.Bll.Client.GanTing
                     DianYuanState = true;
             }
         }
+
+     
 
         public List<WatchHouseInfo> GetAllWatchHouseInfo()
         {

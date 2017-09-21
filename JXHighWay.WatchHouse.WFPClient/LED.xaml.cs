@@ -220,9 +220,6 @@ namespace JXHighWay.WatchHouse.WFPClient
                     vComboBox_TuPian_XianShi.SelectedValue = vConfig.LedPicArray[i-1].InEff;
                     vIntegerUpDown_TuPian.Value = vConfig.LedPicArray[i-1].HoldTime;
                 }
-
-
-                
             }
 
             //上一次发送成功的图片

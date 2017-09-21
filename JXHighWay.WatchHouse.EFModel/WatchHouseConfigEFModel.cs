@@ -57,8 +57,16 @@ namespace JXHighWay.WatchHouse.EFModel
 
         [ColumnAttrib("GangTingTXSJ")]
         public DateTime? GangTingTXSJ { get; set; }
+
         [ColumnAttrib("DianYuanTXSJ")]
         public DateTime? DianYuanTXSJ { get; set; }
+
+        [ColumnAttrib("GuanGao1TXSJ")]
+        public DateTime? GuanGao1TXSJ { get; set; }
+
+        [ColumnAttrib("GuanGao2TXSJ")]
+        public DateTime? GuanGao2TXSJ { get; set; }
+
         [ColumnAttrib("LeiXin")]
         public string LeiXin { get; set; }
         [ColumnAttrib("GongHao")]

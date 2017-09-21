@@ -20,7 +20,6 @@ namespace JXHighWay.WatchHouse.Bll.Server
 
         public PowerControl()
         {
-
             Config vConfig = new Config();
             Port = vConfig.PowerPort;
         }
