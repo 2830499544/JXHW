@@ -50,8 +50,8 @@ namespace JXHighWay.WatchHouse.Server
                 vConfig.PowerPort = Convert.ToInt32(numericUpDown_Power_Port.Value);
                 vConfig.WatchHousePort = Convert.ToInt32(numericUpDown_WM_Port.Value);
 
-                vConfig.EmployeeUrl = string.Format("http://{0}/EmployeeInfo", textBox_Emplyee_Address.Text );
-                vConfig.PicUrl = string.Format("http://{0}/Photo", textBox_Pic_Address.Text); ;
+                vConfig.EmployeeUrl = textBox_Emplyee_Address.Text;// string.Format("http://{0}/EmployeeInfo", textBox_Emplyee_Address.Text );
+                vConfig.PicUrl = textBox_Pic_Address.Text;//string.Format("http://{0}/Photo", textBox_Pic_Address.Text);
 
                 vConfig.Save();
                 DialogResult = DialogResult.OK;

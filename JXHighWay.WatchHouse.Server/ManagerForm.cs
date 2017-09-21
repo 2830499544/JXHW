@@ -54,8 +54,11 @@ namespace JXHighWay.WatchHouse.Server
                 dataGridView_MangerInfo.SelectedRows.Count>0 )
             {
                 int vID = (int)dataGridView_MangerInfo.SelectedRows[0].Cells["Column_ID"].Value;
-                if ( m_Manager.Del(vID) )
+                if (m_Manager.Del(vID))
+                {
                     MessageBox.Show("管理员删除成功", "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    dataGridView_MangerInfo.DataSource = m_Manager.GetAll();
+                }
                 else
                     MessageBox.Show("管理员删除失败", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

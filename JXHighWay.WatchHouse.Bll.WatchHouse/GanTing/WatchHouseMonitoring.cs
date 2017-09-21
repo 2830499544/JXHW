@@ -142,10 +142,13 @@ namespace JXHighWay.WatchHouse.Bll.Client.GanTing
                 if (vSelectResult[0].DianYuanTXSJ != null &&
                     (DateTime.Now - vSelectResult[0].DianYuanTXSJ.Value).TotalSeconds < m_OfflineTime)
                     DianYuanState = true;
+                if ( (vSelectResult[0].GuanGao1TXSJ != null &&
+                    (DateTime.Now - vSelectResult[0].GuanGao1TXSJ.Value).TotalSeconds < m_OfflineTime) ||
+                    (vSelectResult[0].GuanGao2TXSJ != null &&
+                    (DateTime.Now - vSelectResult[0].GuanGao2TXSJ.Value).TotalSeconds < m_OfflineTime) )
+                    LedState = true;
             }
         }
-
-     
 
         public List<WatchHouseInfo> GetAllWatchHouseInfo()
         {

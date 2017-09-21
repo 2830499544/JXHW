@@ -5,22 +5,33 @@ using System.Text;
 using System.Threading.Tasks;
 using JXHighWay.WatchHouse.EFModel;
 using System.Net.NetworkInformation;
+using System.Threading;
 
 namespace JXHighWay.WatchHouse.Bll.Server
 {
     public class LEDControl: BasicControl
     {
         bool m_IsRun = false;
-        List<WatchHouseConfigEFModel> m_LedInfoList = new List<WatchHouseConfigEFModel>();
+        WatchHouseConfigEFModel[] m_LedInfoList;
         public LEDControl()
         {
-            WatchHouseConfigEFModel[] vWatchHouseData = m_BasicDBClass_Send.SelectAllRecordsEx<WatchHouseConfigEFModel>();
-            //m_LedInfoList.AddRange(WatchHouseConfigEFModel);
+            m_LedInfoList = m_BasicDBClass_Send.SelectAllRecordsEx<WatchHouseConfigEFModel>();
         }
 
         public void Start()
         {
+            m_IsRun = true;
+            asyncPingLed();
+        }
 
+        public void Stop()
+        {
+            m_IsRun = false;
+        }
+
+        async void asyncPingLed()
+        {
+            await pingLed();
         }
 
         bool ping(string ip)
@@ -33,16 +44,44 @@ namespace JXHighWay.WatchHouse.Bll.Server
                 return false;
         }
 
-        //Task pingLed()
-        //{
-        //    return Task.Run(() =>
-        //    {
-        //        foreach(WatchHouseInfoModel vTempHouse in m_LedInfoList)
-        //        {
-        //            vTempHouse.
-        //        }
-        //    });
-        //}
-            
+        Task pingLed()
+        {
+            return Task.Run(() =>
+            {
+                while (m_IsRun)
+                {
+                    foreach (WatchHouseConfigEFModel vTempHouse in m_LedInfoList)
+                    {
+                        if (vTempHouse.GuanGaoPing1IP != null && vTempHouse.GuanGaoPing1IP != "")
+                        {
+                            if (ping(vTempHouse.GuanGaoPing1IP))
+                            {
+                                WatchHouseConfigEFModel vEFModel = new WatchHouseConfigEFModel()
+                                {
+                                    ID = vTempHouse.ID,
+                                    GuanGao1TXSJ = DateTime.Now
+                                };
+                                m_BasicDBClass_Send.UpdateRecord(vEFModel);
+                            }
+                        }
+
+                        if (vTempHouse.GuanGaoPing2IP != null && vTempHouse.GuanGaoPing2IP != "")
+                        {
+                            if (ping(vTempHouse.GuanGaoPing2IP))
+                            {
+                                WatchHouseConfigEFModel vEFModel = new WatchHouseConfigEFModel()
+                                {
+                                    ID = vTempHouse.ID,
+                                    GuanGao2TXSJ = DateTime.Now
+                                };
+                                m_BasicDBClass_Send.UpdateRecord(vEFModel);
+                            }
+                        }
+                    }
+                    Thread.Sleep(60000);//间隔时间1分钟
+                }
+            });
+        }
+
     }
 }

@@ -42,7 +42,7 @@ namespace JXHighWay.WatchHouse.Server
 
             int vBanBen1 = (int)numericUpDown_BanBen1.Value*1000;
             int vBanBen2 = (int)numericUpDown_BanBen2.Value*100;
-            int vBanBen3 = (int)numericUpDown_BanBen3.Value * 10;
+            int vBanBen3 = (int)numericUpDown_BanBen3.Value*10;
             int vBanBen4 = (int)numericUpDown_BanBen4.Value;
 
             int vCount = vBanBen1 + vBanBen2 + vBanBen3 + vBanBen4;
@@ -57,6 +57,7 @@ namespace JXHighWay.WatchHouse.Server
             //byte[] vBanBenArray = new byte[] { vBanBen4,vBanBen3,vBanBen2,vBanBen1 };
 
             Config vConfig = new Config();
+            string vUlr = string.Format("http://{0}/App", vConfig.AppUrl);
             WatchHouseControl vWatchHouseControl = new WatchHouseControl();
             var vResult = await vWatchHouseControl.AsyncUpdateWatchHouseApp(textBox_LuJing.Text, vNewBanBenArray,
                 checkBox_QiangZhi.Checked,vConfig.AppUrl);
@@ -65,7 +66,7 @@ namespace JXHighWay.WatchHouse.Server
             {
                 vInfo += string.Format("岗亭名称:{0}  状态:{1}\r", vTempResult.Key, vTempResult.Value ? "成功" : "失败");
             }
-            vConfig.AppUrl = string.Format("http://{0}/App", textBox_Url.Text);
+            vConfig.AppUrl = textBox_Url.Text;//string.Format("http://{0}/App", textBox_Url.Text);
             vConfig.Save();
             MessageBox.Show(vInfo, "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }

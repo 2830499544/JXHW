@@ -24,36 +24,11 @@ namespace JXHighWay.WatchHouse.Server
 
         private void button_OK_Click(object sender, EventArgs e)
         {
-            //WatchHouseDataPack vWatchHouse = new WatchHouseDataPack();
-            //byte[] vDtaPack = vWatchHouse.Send_KaiMen();
-            //vSocketServer = new SocketServer(1024, 10);
-            //vSocketServer.Start();
-
-            //vSocketManager = new SocketManager(10,1024);
-            //vSocketManager.ReceiveClientData += VSocketManager_ReceiveClientData;
-            //vSocketManager.Init();
-            //vSocketManager.Start(new IPEndPoint(IPAddress.Any, 10008));
-
-            //vSocketManager.ReceiveClientData += VSocketManager_ReceiveClientData;
-
-            //WatchHouseDataPack_Send_CommandEnmu aa = Net.WatchHouseDataPack_Send_CommandEnmu.GuanBaoJing;
-            //WatchHouseDataPack_SendData_Main vMain = new WatchHouseDataPack_SendData_Main()
-            //{
-            //    ID_H = (byte)((int)aa >> 24),
-            //    ID_L = (byte)((int)aa >> 16),
-            //    CMD = (byte)((int)aa >> 8),
-            //    SUB = (byte)(int)aa
-            //};
-
-            //byte a = 1;
-            //int size = Marshal.SizeOf(a);
-            //aa vDataPack = new aa();
-            //WatchHouseDataPack_Receive_Main vDataPack = new WatchHouseDataPack_Receive_Main();
-            //int size = Marshal.SizeOf(vDataPack);
             try
             {
                 m_WatchHouseControl.Start();
                 m_PowerControl.Start();
+                m_LEDControl.Start();
 
                 button_Start.Enabled = false;
                 button_Stop.Enabled = true;
@@ -68,25 +43,14 @@ namespace JXHighWay.WatchHouse.Server
         }
         WatchHouseControl m_WatchHouseControl;
         PowerControl m_PowerControl;
-
-        //private void VSocketManager_ReceiveClientData(AsyncUserToken token, byte[] buff)
-        //{
-        //    Console.WriteLine(string.Format("接收数据:IP->{0} 数据->{1}", token.IPAddress, System.Text.Encoding.Default.GetString(buff)));
-        //    vSocketManager.SendMessage(token, System.Text.Encoding.Default.GetBytes("ISOK"));
-        //}
-
-        //private void VSocketManager_ReceiveClientData(AsyncUserToken token, byte[] buff)
-        //{
-        //    //throw new NotImplementedException();
-        //    Console.Write(string.Format("接收数据 ：{}", token.IPAddress), Convert.ToString(buff));
-
-        //}
+        LEDControl m_LEDControl;
 
         private void button1_Click(object sender, EventArgs e)
         {
             //vSocketServer.Send(vSocketServer.SAEADict.First().Value, new byte[] { 0x00,0x00});
             m_WatchHouseControl.Stop();
             m_PowerControl.Stop();
+            m_LEDControl.Stop();
             button_Start.Enabled = true;
             button_Stop.Enabled = false;
         }
@@ -111,6 +75,7 @@ namespace JXHighWay.WatchHouse.Server
         {
             m_WatchHouseControl = new WatchHouseControl();
             m_PowerControl = new PowerControl();
+            m_LEDControl = new LEDControl();
         }
 
         private void ToolStripMenuItem_Setup_Administrator_Click(object sender, EventArgs e)
@@ -125,7 +90,7 @@ namespace JXHighWay.WatchHouse.Server
             vWatchHouseConfigForm.ShowDialog();
         }
 
-        PowerControl vPowerControl;
+        //PowerControl vPowerControl;
         private void button1_Click_1(object sender, EventArgs e)
         {
             m_WatchHouseControl.AsyncUpdateGongHao(3611453);
@@ -141,7 +106,7 @@ namespace JXHighWay.WatchHouse.Server
 
         private void button2_Click(object sender, EventArgs e)
         {
-            vPowerControl.Send();
+            //vPowerControl.Send();
         }
 
         private void ToolStripMenuItem_Setup_Basic_Click(object sender, EventArgs e)
@@ -154,7 +119,8 @@ namespace JXHighWay.WatchHouse.Server
         {
             Config vConfig = new Config();
             WatchHouseControl vWatchHouseControl = new WatchHouseControl();
-            var vResult =await vWatchHouseControl.AsyncUpdateWatchHouseAllPic(vConfig.PicUrl);
+            string vUrl = string.Format("http://{0}/Photo", vConfig.PicUrl);
+            var vResult =await vWatchHouseControl.AsyncUpdateWatchHouseAllPic(vUrl);
             string vInfo = "";
             foreach ( var vTempResult in vResult)
             {
@@ -167,7 +133,8 @@ namespace JXHighWay.WatchHouse.Server
         {
             Config vConfig = new Config();
             WatchHouseControl vWatchHouseControl = new WatchHouseControl();
-            var vResult = await vWatchHouseControl.AsyncUpdateWatchHouseEmployeeInfo(vConfig.EmployeeUrl);
+            string vUrl = string.Format("http://{0}/EmployeeInfo", vConfig.EmployeeUrl);
+            var vResult = await vWatchHouseControl.AsyncUpdateWatchHouseEmployeeInfo(vUrl);
             string vInfo = "";
             foreach (var vTempResult in vResult)
             {

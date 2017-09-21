@@ -146,16 +146,16 @@ namespace JXHighWay.WatchHouse.Server
 
         
 
-        private async void button_Synch_Click(object sender, EventArgs e)
-        {
-            WatchHouseControl vWatchHouseControl = new WatchHouseControl();
-            Dictionary<string,bool> vResult = await vWatchHouseControl.AsyncUpdateWatchHouseAllPic("");
-            string vMessageInfo = "";
-            foreach (var vTemp in vResult)
-            {
-                vMessageInfo += string.Format("岗亭名称：{0}  更新状态：{1}", vTemp.Key, vTemp.Value ? "成功" : "失败");
-            }
-            MessageBox.Show(vMessageInfo, "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
+        //private async void button_Synch_Click(object sender, EventArgs e)
+        //{
+        //    WatchHouseControl vWatchHouseControl = new WatchHouseControl();
+        //    Dictionary<string,bool> vResult = await vWatchHouseControl.AsyncUpdateWatchHouseAllPic("");
+        //    string vMessageInfo = "";
+        //    foreach (var vTemp in vResult)
+        //    {
+        //        vMessageInfo += string.Format("岗亭名称：{0}  更新状态：{1}", vTemp.Key, vTemp.Value ? "成功" : "失败");
+        //    }
+        //    MessageBox.Show(vMessageInfo, "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //}
     }
 }
