@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JXHighWay.WatchHouse.WFPClient"
         mc:Ignorable="d"
-        Title="LEDSend" Height="268" Width="515.536" AllowsTransparency="True" WindowStyle="None" ShowInTaskbar="False" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
+        Title="LEDSend" Height="368.276" Width="568.674" AllowsTransparency="True" WindowStyle="None" ShowInTaskbar="False" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -21,20 +21,20 @@
             <ColumnDefinition Width="177*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions >
-            <RowDefinition Height="8*"   />
-            <RowDefinition Height="206*" />
-            <RowDefinition Height="41*"  />
+            <RowDefinition Height="19*"   />
+            <RowDefinition Height="276*" />
+            <RowDefinition Height="40*"  />
         </Grid.RowDefinitions>
-        <Image HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0" Height="20" VerticalAlignment="Top" Width="516" Source="Images/LED/Tou.jpg" Grid.RowSpan="2"/>
-        <Image HorizontalAlignment="Left" x:Name="Image_Close" Height="13" VerticalAlignment="Top" Width="13" Source="Images/LED/GuanBi.jpg"  Cursor="Hand" Margin="503,1,0,0" Grid.RowSpan="2" MouseLeftButtonDown="Image_Close_MouseLeftButtonDown"/>
+        <Image HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0" Height="20" VerticalAlignment="Top" Width="569" Source="Images/LED/Tou.jpg" Grid.RowSpan="2" MouseLeftButtonDown="Image_MouseLeftButtonDown"/>
+        <Image HorizontalAlignment="Left" x:Name="Image_Close" Height="13" VerticalAlignment="Top" Width="13" Source="Images/LED/GuanBi.jpg"  Cursor="Hand" Margin="556,0,0,0" MouseLeftButtonDown="Image_Close_MouseLeftButtonDown"/>
         <Button x:Name="button_XuanDing" Content="选　定" HorizontalAlignment="Left" Margin="83,6,0,0" VerticalAlignment="Top" Width="75" Grid.Row="2" Style="{DynamicResource MyWpfButton}" Height="31" Click="button_XuanDing_Click" Cursor="Hand"/>
-        <Button x:Name="button_QuXiao" Content="取　消" HorizontalAlignment="Left" Margin="329,6,0,0" VerticalAlignment="Top" Width="75" Grid.Row="2" Style="{DynamicResource MyWpfButton}" Height="31" Click="button_QuXiao_Click" Cursor="Hand"/>
-        <Image x:Name="image" HorizontalAlignment="Left" Height="17" VerticalAlignment="Top" Width="516" Margin="0,209,0,0" Grid.Row="1" Source="Images/LED/xuxian.jpg" Grid.RowSpan="2"/>
+        <Button x:Name="button_QuXiao" Content="取　消" HorizontalAlignment="Left" Margin="414,6,0,0" VerticalAlignment="Top" Width="75" Grid.Row="2" Style="{DynamicResource MyWpfButton}" Height="31" Click="button_QuXiao_Click" Cursor="Hand"/>
+        <Image x:Name="image" HorizontalAlignment="Left" Height="12" VerticalAlignment="Top" Width="569" Grid.Row="1" Source="Images/LED/xuxian.jpg" Margin="0,292,0,0" Grid.RowSpan="2"/>
 
-        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="201" Margin="0,6,0,0" Grid.Row="1" VerticalAlignment="Top" Width="516">
+        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="290" Margin="0,2,0,0" Grid.Row="1" VerticalAlignment="Top" Width="569">
             <TabItem Header="文　字" FontSize="18">
                 <Grid Background="#FFE5E5E5">
-                    <ListBox x:Name="listBox_Text" HorizontalAlignment="Center" Height="161" VerticalAlignment="Top" Width="505" Margin="0,0,0,0">
+                    <ListBox x:Name="listBox_Text" HorizontalAlignment="Center" Height="255" VerticalAlignment="Top" Width="563">
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <UniformGrid Columns="3"/>
@@ -50,10 +50,10 @@
                                         <RowDefinition />
                                         <RowDefinition />
                                     </Grid.RowDefinitions>
-                                    
-                                    <Image Width="100" Height="100" Source="{Binding Path=Image}"  Grid.Column="0" Grid.Row="0">
+
+                                    <Image Width="100" Height="100" Source="{Binding Path=Image}" HorizontalAlignment="Center"  Grid.Column="0" Grid.Row="0">
                                     </Image>
-                                    <CheckBox Tag="{Binding Path=FullPath}"  Content="选择" IsChecked="{Binding Path=IsSelected}" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center"></CheckBox>
+                                    <CheckBox Tag="{Binding Path=FullPath}"  Content="选择" IsChecked="{Binding Path=IsSelected}"  HorizontalAlignment="Center"  Grid.Column="0" Grid.Row="1" ></CheckBox>
                                 </Grid>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
@@ -62,15 +62,15 @@
             </TabItem>
             <TabItem Header="图　片" FontSize="18">
                 <Grid Background="#FFE5E5E5">
-                    <ListBox x:Name="listBox_Pic" HorizontalAlignment="Left" Height="161" VerticalAlignment="Top" Width="506" Margin="0,0,0,0">
+                    <ListBox x:Name="listBox_Pic" HorizontalAlignment="Right" Height="255" VerticalAlignment="Top" Width="563" Margin="0,0,0,0">
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate >
-                                <UniformGrid Columns="1"/>
+                                <UniformGrid Columns="1" Rows="4"/>
                             </ItemsPanelTemplate>
                         </ListBox.ItemsPanel>
                         <ListBox.ItemTemplate>
-                            <DataTemplate >
-                                <CheckBox Tag="{Binding Path=FullPath}" Content="{Binding Path=FullPath}" IsChecked="{Binding Path=IsSelected}"  HorizontalAlignment="Center"></CheckBox>
+                            <DataTemplate  >
+                                <CheckBox Tag="{Binding Path=FullPath}"  Content="{Binding Path=FullPath}" IsChecked="{Binding Path=IsSelected}"  HorizontalAlignment="Center" ></CheckBox>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
@@ -78,10 +78,10 @@
             </TabItem>
             <TabItem Header="视　频" FontSize="18">
                 <Grid Background="#FFE5E5E5">
-                    <ListBox x:Name="listBox_Video" HorizontalAlignment="Left" Height="161" VerticalAlignment="Top" Width="506" Margin="0,0,0,0">
+                    <ListBox x:Name="listBox_Video" HorizontalAlignment="Left" Height="255" VerticalAlignment="Top" Width="563" Margin="0,0,0,0">
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <UniformGrid Columns="1"/>
+                                <UniformGrid Columns="1" Rows="4"/>
                             </ItemsPanelTemplate>
                         </ListBox.ItemsPanel>
 
@@ -95,14 +95,14 @@
             </TabItem>
             <TabItem Header="岗　亭" FontSize="18">
                 <Grid Background="#FFE5E5E5">
-                    <ListBox x:Name="listBox_GangTing" HorizontalAlignment="Left" Height="132" VerticalAlignment="Top" Width="506">
+                    <ListBox x:Name="listBox_GangTing" HorizontalAlignment="Left" Height="228" VerticalAlignment="Top" Width="563">
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <UniformGrid Columns="4"/>
                             </ItemsPanelTemplate>
                         </ListBox.ItemsPanel>
                     </ListBox>
-                    <CheckBox x:Name="checkBox_SelectedAll" Content="全　选" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,137,0,0" Checked="checkBox_SelectedAll_Checked" Unchecked="checkBox_SelectedAll_Unchecked"/>
+                    <CheckBox x:Name="checkBox_SelectedAll" Content="全　选" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,233,0,0" Checked="checkBox_SelectedAll_Checked" Unchecked="checkBox_SelectedAll_Unchecked"/>
                 </Grid>
             </TabItem>
         </TabControl>

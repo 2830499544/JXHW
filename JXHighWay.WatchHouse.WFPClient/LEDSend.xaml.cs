@@ -229,5 +229,14 @@ namespace JXHighWay.WatchHouse.WFPClient
         {
             Close();
         }
+
+        private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                this.DragMove();
+            }
+            catch { }
+        }
     }
 }

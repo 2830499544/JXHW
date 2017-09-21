@@ -208,7 +208,11 @@ namespace JXHighWay.WatchHouse.WFPClient
         {
             GroupBox vGroupBox = (GroupBox)sender;
             DianYuanMingXi vDianYuanMingXi = new DianYuanMingXi();
-            vDianYuanMingXi.LuHao = (int)vGroupBox.Tag;
+            vDianYuanMingXi.LuHao = ( (int[])vGroupBox.Tag )[1];
+            if (((int[])vGroupBox.Tag)[0] == 1)
+                vDianYuanMingXi.DianYuanID = App.PowerID1;
+            else if (((int[])vGroupBox.Tag)[0] == 2)
+                vDianYuanMingXi.DianYuanID = App.PowerID2;
             vDianYuanMingXi.ShowDialog();
             //Xceed.Wpf.Toolkit.Xceed.Wpf.Toolkit.MessageBox.Show("OK");
         }
