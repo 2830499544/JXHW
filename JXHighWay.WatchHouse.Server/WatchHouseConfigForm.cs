@@ -97,8 +97,8 @@ namespace JXHighWay.WatchHouse.Server
                 return;
             }
 
-            vDianYuanID1 = textBox_DY1_ID.Text;
-            vDianYuanID2 = textBox_DY2_ID.Text;
+            vDianYuanID1 = textBox_DY1_ID.Text.ToUpper();
+            vDianYuanID2 = textBox_DY2_ID.Text.ToUpper();
 
             vLED1Gao = (int)numericUpDown_LED1_Gao.Value;
             vLED1Kuan = (int)numericUpDown_LED1_Kuan.Value;
@@ -157,6 +157,7 @@ namespace JXHighWay.WatchHouse.Server
                 else
                     vSwitchTable = (DataTable)button_DY1_KaiGuan.Tag;
                 SwitchConfigForm vSwitchConfigForm = new SwitchConfigForm();
+                vSwitchConfigForm.WatchHouse = m_WatchHouseConfig;
                 vSwitchConfigForm.SwitchTable = vSwitchTable;
                 vSwitchConfigForm.DianYuanID = vDianYuanID;
                 vSwitchConfigForm.ShowDialog();

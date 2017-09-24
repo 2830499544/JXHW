@@ -47,7 +47,8 @@ namespace JXHighWay.WatchHouse.Helper
 
         public static bool IsMAC (string MAC)
         {
-            Regex vRegex = new Regex("^[A-F0-9]{2}(-[A-F0-9]{2}){5}$");
+            Regex vRegex = new Regex(@"^([0-9a-fA-F]{2})(([/\s:-][0-9a-fA-F]{2}){5})$"); 
+            //Regex vRegex = new Regex("^[A-F0-9]{2}(-[A-F0-9]{2}){5}$");
             return vRegex.IsMatch(MAC);
         }
         

@@ -128,7 +128,7 @@ namespace JXHighWay.WatchHouse.WFPClient.Images
                     {
                         for (int i = 1; i <= m_LuoHaoList.Count; i++)
                         {
-                            PowerInfo vPowerInfo = m_PowerMonitoring.GetNewPowerInfo(App.PowerID1, m_LuoHaoList[i-1]);
+                            PowerInfo vPowerInfo = m_PowerMonitoring.GetNewPowerInfo(App.PowerID1, m_LuoHaoList[i - 1]);
                             if (vPowerInfo != null)
                             {
                                 Label vLabel_DY = (Label)FindName(string.Format("label_DY_{0}", i));
@@ -149,8 +149,8 @@ namespace JXHighWay.WatchHouse.WFPClient.Images
                 }
             });
         }
-       
-        
+
+
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -158,7 +158,7 @@ namespace JXHighWay.WatchHouse.WFPClient.Images
             RefreshState();
         }
 
-        void changeSwitchColor( CheckBox checkBox,int luHao)
+        void changeSwitchColor(CheckBox checkBox, int luHao)
         {
             Label vlabel_Guan = (Label)FindName(string.Format("label_Guan_{0}", luHao));
 
@@ -176,6 +176,8 @@ namespace JXHighWay.WatchHouse.WFPClient.Images
             }
         }
 
+
+
         private void groupBox_1_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             GroupBox vGroupBox = (GroupBox)sender;
@@ -183,7 +185,7 @@ namespace JXHighWay.WatchHouse.WFPClient.Images
             vDianYuanMingXi.LuHao = (int)vGroupBox.Tag;
             vDianYuanMingXi.DianYuanID = App.PowerID1;
             vDianYuanMingXi.ShowDialog();
-            
+
         }
 
         bool m_Switch = true;
@@ -192,22 +194,37 @@ namespace JXHighWay.WatchHouse.WFPClient.Images
         {
             CheckBox vCheckBox_Switch = (CheckBox)sender;
             byte vLuHao = (byte)vCheckBox_Switch.Tag;
-            if (m_IsInit && m_Switch)
+            ParamInfo vSwitchInfo = m_PowerMonitoring.GetSwitchParamInfo(App.PowerID1, vLuHao);
+            if (vSwitchInfo.ZhuangTai == null || vSwitchInfo.ZhuangTai == "" || vSwitchInfo.ZhuangTai == "正常")
             {
-                m_Switch = false;
-                bool vOldValue = vCheckBox_Switch.IsChecked ?? false;
-                bool vResult;
-                if (vOldValue)
-                    vResult = await m_PowerMonitoring.SendCMD_Switch(App.PowerID1, 0x01, vLuHao, true); 
-                else
-                    vResult = await m_PowerMonitoring.SendCMD_Switch(App.PowerID1, 0x01, vLuHao, false);
-                if (!vResult)
+                if (m_IsInit && m_Switch)
                 {
-                    vCheckBox_Switch.IsChecked = !vOldValue;
-                    Xceed.Wpf.Toolkit.MessageBox.Show("开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                    m_Switch = false;
+                    bool vOldValue = vCheckBox_Switch.IsChecked ?? false;
+                    bool vResult;
+                    if (vOldValue)
+                        vResult = await m_PowerMonitoring.SendCMD_Switch(App.PowerID1, 0x01, vLuHao, true);
+                    else
+                        vResult = await m_PowerMonitoring.SendCMD_Switch(App.PowerID1, 0x01, vLuHao, false);
+                    if (!vResult)
+                    {
+                        vCheckBox_Switch.IsChecked = !vOldValue;
+                        Xceed.Wpf.Toolkit.MessageBox.Show("开关失效", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    changeSwitchColor(vCheckBox_Switch, vLuHao);
+                    m_Switch = true;
                 }
-                changeSwitchColor(vCheckBox_Switch, vLuHao);
-                m_Switch = true;
+            }
+            else if (vSwitchInfo.ZhuangTai == "应急")
+            {
+                vCheckBox_Switch.IsChecked = !vCheckBox_Switch.IsChecked;
+                Xceed.Wpf.Toolkit.MessageBox.Show("开关状态为应急，不能操作", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                
+            }
+            else if (vSwitchInfo.ZhuangTai == "锁定")
+            {
+                vCheckBox_Switch.IsChecked = !vCheckBox_Switch.IsChecked;
+                Xceed.Wpf.Toolkit.MessageBox.Show("开关状态为锁定，不能操作", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

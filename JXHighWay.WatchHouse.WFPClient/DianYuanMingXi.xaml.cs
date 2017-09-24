@@ -638,18 +638,21 @@ namespace JXHighWay.WatchHouse.WFPClient
         {
             LogInfo[] vLogInfoArray = m_PowerMonitoring.GetLog(DianYuanID, LuHao, "操作类");
             dataGrid_Log.ItemsSource = vLogInfoArray;
+            Label_Title.Content = "操作类";
         }
 
         private void button_RZ_BJL_Click(object sender, RoutedEventArgs e)
         {
             LogInfo[] vLogInfoArray = m_PowerMonitoring.GetLog(DianYuanID, LuHao, "报警类");
             dataGrid_Log.ItemsSource = vLogInfoArray;
+            Label_Title.Content = "报警类";
         }
 
         private void button_RZ_GZL_Click(object sender, RoutedEventArgs e)
         {
             LogInfo[] vLogInfoArray = m_PowerMonitoring.GetLog(DianYuanID, LuHao, "故障类");
             dataGrid_Log.ItemsSource = vLogInfoArray;
+            Label_Title.Content = "故障类";
         }
 
         private void button_RZ_DC_Click(object sender, RoutedEventArgs e)

@@ -240,20 +240,22 @@
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="34*"  />
-                        <RowDefinition Height="351*"  />
+                        <RowDefinition Height="32*"  />
+                        <RowDefinition Height="31*"  />
+                        <RowDefinition Height="350*"/>
                     </Grid.RowDefinitions>
-                    <Button x:Name="button_RZ_ZCL"  Grid.Row="0" Grid.Column="0" Content="操作类" HorizontalAlignment="Left" VerticalAlignment="Top" Width="92" Margin="17,3,0,0" Style="{DynamicResource MyWpfButton}" Cursor="Hand" Click="button_RZ_ZCL_Click"/>
-                    <Button x:Name="button_RZ_BJL"  Grid.Row="0" Grid.Column="0" Content="报警类" HorizontalAlignment="Left" VerticalAlignment="Top" Width="92" Margin="142,3,0,0" Style="{DynamicResource MyWpfButton}" Cursor="Hand" Click="button_RZ_BJL_Click"/>
-                    <Button x:Name="button_RZ_GZL"  Grid.Row="0" Grid.Column="0" Content="故障类" HorizontalAlignment="Left" VerticalAlignment="Top" Width="92" Margin="265,3,0,0" Style="{DynamicResource MyWpfButton}" Cursor="Hand" Click="button_RZ_GZL_Click"/>
-                    <Button x:Name="button_RZ_DC"  Grid.Row="0" Grid.Column="0" Content="导出" HorizontalAlignment="Left" VerticalAlignment="Top" Width="92" Margin="384,3,0,0" Style="{DynamicResource GreenButton}" Cursor="Hand" Click="button_RZ_DC_Click"/>
-                    <DataGrid x:Name="dataGrid_Log" AutoGenerateColumns="False" Grid.Row="1" HorizontalAlignment="Center">
+                    <Button x:Name="button_RZ_ZCL"  Grid.Row="0" Grid.Column="0" Content="操作类" HorizontalAlignment="Left" VerticalAlignment="Top" Width="92" Margin="17,3,0,0" Style="{DynamicResource MyWpfButton}" Cursor="Hand" Click="button_RZ_ZCL_Click" Height="27"/>
+                    <Button x:Name="button_RZ_BJL"  Grid.Row="0" Grid.Column="0" Content="报警类" HorizontalAlignment="Left" VerticalAlignment="Top" Width="92" Margin="142,3,0,0" Style="{DynamicResource MyWpfButton}" Cursor="Hand" Click="button_RZ_BJL_Click" Height="27"/>
+                    <Button x:Name="button_RZ_GZL"  Grid.Row="0" Grid.Column="0" Content="故障类" HorizontalAlignment="Left" VerticalAlignment="Top" Width="92" Margin="265,3,0,0" Style="{DynamicResource MyWpfButton}" Cursor="Hand" Click="button_RZ_GZL_Click" Height="27"/>
+                    <Button x:Name="button_RZ_DC"  Grid.Row="0" Grid.Column="0" Content="导出" HorizontalAlignment="Left" VerticalAlignment="Top" Width="92" Margin="384,3,0,0" Style="{DynamicResource GreenButton}" Cursor="Hand" Click="button_RZ_DC_Click" Height="27"/>
+                    <DataGrid x:Name="dataGrid_Log" AutoGenerateColumns="False" Grid.Row="2" HorizontalAlignment="Center" Margin="0,2,0,0" Width="486">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="事件类型" Width="100" Binding="{Binding ShiJianLX, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="13" />
                             <DataGridTextColumn Header="事件内容" Width="200" Binding="{Binding NeiRong, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="13" />
                             <DataGridTextColumn Header="时间" Width="150" Binding="{Binding Time,StringFormat='{}{0:yyyy-MM-dd HH:mm:ss}', Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="13" />
                         </DataGrid.Columns>
                     </DataGrid>
+                    <Label x:Name="Label_Title" Content="操作类" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="217,1,0,0" Height="30" Grid.Row="1" Width="68"/>
                 </Grid>
             </TabItem>
         </TabControl>

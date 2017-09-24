@@ -44,6 +44,10 @@ namespace JXHighWay.WatchHouse.Net.DataPack
         /// <summary>
         /// 获取时间
         /// </summary>
-        GetTime = 0x61
+        GetTime = 0x61,
+        /// <summary>
+        /// 查询配电箱设备信息
+        /// </summary>
+        GetControlInfo = 0X6D
     }
 }

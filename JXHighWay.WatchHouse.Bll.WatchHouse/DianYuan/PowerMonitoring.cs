@@ -362,17 +362,27 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
             PowerInfo[] vResult = null;
             DateTime vKaiShiSJ = DateTime.Now.AddDays(-7);
             DateTime vJieShuSJ = DateTime.Now;
-            string vSql = string.Format("Select MAX(DianNeng) as DianNeng,Time From `电源数据` where unix_timestamp( Time ) "
+            string vSql = string.Format("Select MAX(DianNeng) as MaxDianNeng,MIN(DianNeng) as MinDianNeng,Time From `电源数据` where unix_timestamp( Time ) "
                 + "between unix_timestamp( '{0:yyyy-MM-dd 00:00:00}') and unix_timestamp('{1:yyyy-MM-dd 23:59:59}') "
                 + "and DianYuanID='{2}' and LuHao={3} GROUP BY DAYOFYEAR(Time)", vKaiShiSJ, vJieShuSJ, DianYuanID, LuHao);
             PowerDataViewEFModel[] vSelectResult = m_BasicDBClass.SelectCustomEx<PowerDataViewEFModel>(vSql);
-            vResult = new PowerInfo[vSelectResult.Length];
+            vResult = new PowerInfo[vSelectResult.Length+1];
             double vOldDianNeng = 0;
             for ( int i=0;i<vSelectResult.Length;i++)
             {
-                vResult[i] = new PowerInfo()
+                if ( i==0)
                 {
-                    DianNeng = (vSelectResult[i].DianNeng ?? 0) * 0.1 - vOldDianNeng,
+                    vResult[i] = new PowerInfo()
+                    {
+                        DianNeng = 0,
+                        ShiJian = new DateTime(vSelectResult[i].Time.Value.Year, vSelectResult[i].Time.Value.Month, 1, 0, 0, 0),
+                        ShiJianStr = string.Format("{0}\r日", 1)
+                    };
+                    vOldDianNeng = (vSelectResult[i].MinDianNeng ?? 0) * 0.1;
+                }
+                vResult[i+1] = new PowerInfo()
+                {
+                    DianNeng = (vSelectResult[i].MaxDianNeng ?? 0) * 0.1 - vOldDianNeng,
                     ShiJian = vSelectResult[i].Time,
                     ShiJianStr = vSelectResult[i].Time == null ? "" : string.Format("{0}\r日", vSelectResult[i].Time.Value.Day)
                 };
@@ -392,21 +402,32 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
             PowerInfo[] vResult = null;
             DateTime vKaiShiSJ = DateTime.Now;
             DateTime vJieShuSJ = DateTime.Now;
-            string vSql = string.Format("Select MAX(DianNeng) as DianNeng,Time From `电源数据` where unix_timestamp( Time ) "
+            string vSql = string.Format("Select MAX(DianNeng) as MaxDianNeng,Time From `电源数据` where unix_timestamp( Time ) "
                 + "between unix_timestamp( '{0:yyyy-MM-dd 00:00:00}') and unix_timestamp('{1:yyyy-MM-dd 23:59:59}') "
                 + "and DianYuanID='{2}' and LuHao={3} GROUP BY HOUR(Time)", vKaiShiSJ, vJieShuSJ, DianYuanID, LuHao);
             PowerDataViewEFModel[] vSelectResult = m_BasicDBClass.SelectCustomEx<PowerDataViewEFModel>(vSql);
-            vResult = new PowerInfo[vSelectResult.Length];
+            vResult = new PowerInfo[vSelectResult.Length+1];
             double vOldDianNeng = 0;
             for (int i = 0; i < vSelectResult.Length; i++)
             {
-                vResult[i] = new PowerInfo()
+                if (i == 0)
                 {
-                    DianNeng = (vSelectResult[i].DianNeng ?? 0) * 0.1 - vOldDianNeng,
+                    vResult[i] = new PowerInfo()
+                    {
+                        DianNeng = 0,
+                        ShiJian = new DateTime(vSelectResult[i].Time.Value.Year, vSelectResult[i].Time.Value.Month, vSelectResult[i].Time.Value.Day, 0, 0, 0),
+                        ShiJianStr = string.Format("{0}\r点", 0)
+                    };
+                    vOldDianNeng = (vSelectResult[i].MaxDianNeng ?? 0) * 0.1;
+                }
+
+                vResult[i + 1] = new PowerInfo()
+                {
+                    DianNeng = (vSelectResult[i].MaxDianNeng ?? 0) * 0.1 - vOldDianNeng,
                     ShiJian = vSelectResult[i].Time,
                     ShiJianStr = vSelectResult[i].Time == null ? "" : string.Format("{0}\r点", vSelectResult[i].Time.Value.Hour)
                 };
-                vOldDianNeng = vResult[i].DianNeng;
+                vOldDianNeng = (vSelectResult[i].MaxDianNeng ?? 0) * 0.1;
             }
             return vResult;
         }
@@ -422,7 +443,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
             PowerInfo[] vResult = null;
             DateTime vKaiShiSJ = DateTime.Now.AddMonths(-12);
             DateTime vJieShuSJ = DateTime.Now;
-            string vSql = string.Format("Select MAX(DianNeng) as DianNeng,Time From `电源数据` where unix_timestamp( Time ) "
+            string vSql = string.Format("Select MAX(DianNeng) as MaxDianNeng,Time From `电源数据` where unix_timestamp( Time ) "
                 + "between unix_timestamp( '{0:yyyy-MM-dd 00:00:00}') and unix_timestamp('{1:yyyy-MM-dd 23:59:59}') "
                 + "and DianYuanID='{2}' and LuHao={3} GROUP BY Month(Time)", vKaiShiSJ, vJieShuSJ, DianYuanID, LuHao);
             PowerDataViewEFModel[] vSelectResult = m_BasicDBClass.SelectCustomEx<PowerDataViewEFModel>(vSql);
@@ -433,7 +454,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
                 
                 vResult[i] = new PowerInfo()
                 {
-                    DianNeng = (vSelectResult[i].DianNeng ?? 0) * 0.1 - vOldDianNeng,
+                    DianNeng = (vSelectResult[i].MaxDianNeng ?? 0) * 0.1 - vOldDianNeng,
                     ShiJian = vSelectResult[i].Time,
                     ShiJianStr = vSelectResult[i].Time == null ? "" : string.Format("{0}\r月", vSelectResult[i].Time.Value.Month)
                 };
@@ -543,7 +564,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
                     DianLiu = (vSelectResult.DianLiu ?? 0) * 0.01,
                     DianYa = (vSelectResult.DianYa ?? 0) * 0.1,
                     LuHao = LuHao,
-                    DianNeng = (vSelectResult.DianNeng ?? 0)*0.1,
+                    DianNeng = (vSelectResult.MaxDianNeng ?? 0)*0.1,
                     GongLuYinShu = vSelectResult.GongLuYinShu ?? 0,
                     LouDianLiu = vSelectResult.LouDianLiu ?? 0,
                     PinLu = vSelectResult.PinLu ?? 0,
@@ -584,6 +605,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
                     LouDianLYJZ = vSelectResult[0].LouDianLYJZ ?? 0,
                     LuHao = LuoHao,
                     QianYaXX = vSelectResult[0].QianYaXX ?? 0,
+                    ZhuangTai = vSelectResult[0].ZhuangTai
                 };
             }
             return vResult;

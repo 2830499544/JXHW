@@ -331,7 +331,7 @@ namespace JXHighWay.WatchHouse.WFPClient
             {
                 vLEDSend.VideoArray[i] = vVideoList[i].Path;
             }
-
+            vLEDSend.Owner = Application.Current.MainWindow;
             if ( vLEDSend.ShowDialog()??false )
             {
                 List<LEDChannelInfo> vLEDChannelInfoList = new List<LEDChannelInfo>();

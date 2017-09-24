@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JXHighWay.WatchHouse.WFPClient"
         mc:Ignorable="d"
-        Title="LEDSend" Height="368.276" Width="568.674" AllowsTransparency="True" WindowStyle="None" ShowInTaskbar="False" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
+        Title="LEDSend" Height="368.276" Width="568.674" AllowsTransparency="True" WindowStyle="None" ShowInTaskbar="False" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" ShowActivated="False">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

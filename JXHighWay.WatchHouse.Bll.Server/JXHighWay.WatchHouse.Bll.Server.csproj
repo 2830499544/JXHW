@@ -52,6 +52,7 @@
     <Compile Include="LogHelper.cs" />
     <Compile Include="Manager.cs" />
     <Compile Include="PowerControl.cs" />
+    <Compile Include="PowerControlInfo.cs" />
     <Compile Include="PowerIPConfigInfo.cs" />
     <Compile Include="PowerSwitchInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

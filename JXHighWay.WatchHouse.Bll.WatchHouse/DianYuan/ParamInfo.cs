@@ -17,6 +17,10 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
         /// </summary>
         public int LuHao { get; set; }
         /// <summary>
+        /// 状态
+        /// </summary>
+        public string ZhuangTai { get; set; }
+        /// <summary>
         /// 限定电能
         /// </summary>
         public short XianDingDN { get; set; }

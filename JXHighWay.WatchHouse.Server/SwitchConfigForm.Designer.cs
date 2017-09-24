@@ -42,6 +42,7 @@
             this.Column_LuHao = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_MinCheng = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_LeiXing = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button_Get = new System.Windows.Forms.Button();
             this.button_Update = new System.Windows.Forms.Button();
             this.button_Del = new System.Windows.Forms.Button();
             this.button_Add = new System.Windows.Forms.Button();
@@ -195,11 +196,25 @@
             this.Column_LeiXing.Name = "Column_LeiXing";
             this.Column_LeiXing.ReadOnly = true;
             // 
+            // button_Get
+            // 
+            this.button_Get.Image = global::JXHighWay.WatchHouse.Server.Properties.Resources.Synch;
+            this.button_Get.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button_Get.Location = new System.Drawing.Point(24, 297);
+            this.button_Get.Margin = new System.Windows.Forms.Padding(2);
+            this.button_Get.Name = "button_Get";
+            this.button_Get.Size = new System.Drawing.Size(78, 37);
+            this.button_Get.TabIndex = 8;
+            this.button_Get.Text = "获　取";
+            this.button_Get.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button_Get.UseVisualStyleBackColor = true;
+            this.button_Get.Click += new System.EventHandler(this.button_Get_Click);
+            // 
             // button_Update
             // 
             this.button_Update.Image = global::JXHighWay.WatchHouse.Server.Properties.Resources.Update;
             this.button_Update.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button_Update.Location = new System.Drawing.Point(345, 297);
+            this.button_Update.Location = new System.Drawing.Point(405, 297);
             this.button_Update.Margin = new System.Windows.Forms.Padding(2);
             this.button_Update.Name = "button_Update";
             this.button_Update.Size = new System.Drawing.Size(78, 37);
@@ -213,7 +228,7 @@
             // 
             this.button_Del.Image = ((System.Drawing.Image)(resources.GetObject("button_Del.Image")));
             this.button_Del.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button_Del.Location = new System.Drawing.Point(215, 297);
+            this.button_Del.Location = new System.Drawing.Point(275, 297);
             this.button_Del.Margin = new System.Windows.Forms.Padding(2);
             this.button_Del.Name = "button_Del";
             this.button_Del.Size = new System.Drawing.Size(78, 37);
@@ -227,7 +242,7 @@
             // 
             this.button_Add.Image = global::JXHighWay.WatchHouse.Server.Properties.Resources.Add;
             this.button_Add.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button_Add.Location = new System.Drawing.Point(81, 297);
+            this.button_Add.Location = new System.Drawing.Point(149, 297);
             this.button_Add.Margin = new System.Windows.Forms.Padding(2);
             this.button_Add.Name = "button_Add";
             this.button_Add.Size = new System.Drawing.Size(78, 37);
@@ -242,6 +257,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(520, 345);
+            this.Controls.Add(this.button_Get);
             this.Controls.Add(this.button_Update);
             this.Controls.Add(this.button_Del);
             this.Controls.Add(this.button_Add);
@@ -280,5 +296,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_LuHao;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_MinCheng;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_LeiXing;
+        private System.Windows.Forms.Button button_Get;
     }
 }

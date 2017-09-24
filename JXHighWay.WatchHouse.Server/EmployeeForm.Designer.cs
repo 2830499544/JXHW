@@ -46,9 +46,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dataGridView_EmployeeInfo = new System.Windows.Forms.DataGridView();
-            this.button_Update = new System.Windows.Forms.Button();
-            this.button_Del = new System.Windows.Forms.Button();
-            this.button_Add = new System.Windows.Forms.Button();
             this.Column_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_XuHao = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_XingMing = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -58,6 +55,9 @@
             this.Column_Photo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_XingJi = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_GeYan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button_Update = new System.Windows.Forms.Button();
+            this.button_Del = new System.Windows.Forms.Button();
+            this.button_Add = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Photo)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -82,10 +82,10 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.groupBox1.Size = new System.Drawing.Size(485, 238);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox1.Size = new System.Drawing.Size(537, 238);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "员工信息";
@@ -137,7 +137,7 @@
             // 
             this.pictureBox_Photo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox_Photo.Location = new System.Drawing.Point(264, 102);
-            this.pictureBox_Photo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox_Photo.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox_Photo.Name = "pictureBox_Photo";
             this.pictureBox_Photo.Size = new System.Drawing.Size(190, 96);
             this.pictureBox_Photo.TabIndex = 10;
@@ -146,7 +146,7 @@
             // button_Photo
             // 
             this.button_Photo.Location = new System.Drawing.Point(313, 204);
-            this.button_Photo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_Photo.Margin = new System.Windows.Forms.Padding(2);
             this.button_Photo.Name = "button_Photo";
             this.button_Photo.Size = new System.Drawing.Size(109, 25);
             this.button_Photo.TabIndex = 9;
@@ -157,7 +157,7 @@
             // textBox_CardNo
             // 
             this.textBox_CardNo.Location = new System.Drawing.Point(90, 139);
-            this.textBox_CardNo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_CardNo.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_CardNo.Name = "textBox_CardNo";
             this.textBox_CardNo.Size = new System.Drawing.Size(116, 21);
             this.textBox_CardNo.TabIndex = 7;
@@ -175,7 +175,7 @@
             // textBox_JobNo
             // 
             this.textBox_JobNo.Location = new System.Drawing.Point(89, 98);
-            this.textBox_JobNo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_JobNo.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_JobNo.Name = "textBox_JobNo";
             this.textBox_JobNo.Size = new System.Drawing.Size(116, 21);
             this.textBox_JobNo.TabIndex = 5;
@@ -198,7 +198,7 @@
             "男",
             "女"});
             this.comboBox_Sex.Location = new System.Drawing.Point(89, 62);
-            this.comboBox_Sex.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox_Sex.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox_Sex.Name = "comboBox_Sex";
             this.comboBox_Sex.Size = new System.Drawing.Size(116, 20);
             this.comboBox_Sex.TabIndex = 3;
@@ -216,7 +216,7 @@
             // textBox_Name
             // 
             this.textBox_Name.Location = new System.Drawing.Point(89, 23);
-            this.textBox_Name.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Name.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Name.Name = "textBox_Name";
             this.textBox_Name.Size = new System.Drawing.Size(116, 21);
             this.textBox_Name.TabIndex = 1;
@@ -236,10 +236,10 @@
             this.groupBox2.Controls.Add(this.dataGridView_EmployeeInfo);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox2.Location = new System.Drawing.Point(0, 238);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.groupBox2.Size = new System.Drawing.Size(485, 236);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox2.Size = new System.Drawing.Size(537, 236);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "员工列表";
@@ -261,58 +261,16 @@
             this.Column_GeYan});
             this.dataGridView_EmployeeInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView_EmployeeInfo.Location = new System.Drawing.Point(2, 16);
-            this.dataGridView_EmployeeInfo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridView_EmployeeInfo.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView_EmployeeInfo.MultiSelect = false;
             this.dataGridView_EmployeeInfo.Name = "dataGridView_EmployeeInfo";
             this.dataGridView_EmployeeInfo.ReadOnly = true;
             this.dataGridView_EmployeeInfo.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dataGridView_EmployeeInfo.RowTemplate.Height = 30;
             this.dataGridView_EmployeeInfo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView_EmployeeInfo.Size = new System.Drawing.Size(481, 218);
+            this.dataGridView_EmployeeInfo.Size = new System.Drawing.Size(533, 218);
             this.dataGridView_EmployeeInfo.TabIndex = 0;
             this.dataGridView_EmployeeInfo.SelectionChanged += new System.EventHandler(this.dataGridView_EmployeeInfo_SelectionChanged);
-            // 
-            // button_Update
-            // 
-            this.button_Update.Image = global::JXHighWay.WatchHouse.Server.Properties.Resources.Update;
-            this.button_Update.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button_Update.Location = new System.Drawing.Point(344, 476);
-            this.button_Update.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.button_Update.Name = "button_Update";
-            this.button_Update.Size = new System.Drawing.Size(78, 37);
-            this.button_Update.TabIndex = 4;
-            this.button_Update.Text = "更　新";
-            this.button_Update.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button_Update.UseVisualStyleBackColor = true;
-            this.button_Update.Click += new System.EventHandler(this.button_Update_Click);
-            // 
-            // button_Del
-            // 
-            this.button_Del.Image = ((System.Drawing.Image)(resources.GetObject("button_Del.Image")));
-            this.button_Del.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button_Del.Location = new System.Drawing.Point(202, 476);
-            this.button_Del.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.button_Del.Name = "button_Del";
-            this.button_Del.Size = new System.Drawing.Size(78, 37);
-            this.button_Del.TabIndex = 3;
-            this.button_Del.Text = "删　除";
-            this.button_Del.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button_Del.UseVisualStyleBackColor = true;
-            this.button_Del.Click += new System.EventHandler(this.button_Del_Click);
-            // 
-            // button_Add
-            // 
-            this.button_Add.Image = global::JXHighWay.WatchHouse.Server.Properties.Resources.Add;
-            this.button_Add.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button_Add.Location = new System.Drawing.Point(60, 476);
-            this.button_Add.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.button_Add.Name = "button_Add";
-            this.button_Add.Size = new System.Drawing.Size(78, 37);
-            this.button_Add.TabIndex = 2;
-            this.button_Add.Text = "增　加";
-            this.button_Add.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button_Add.UseVisualStyleBackColor = true;
-            this.button_Add.Click += new System.EventHandler(this.button_Add_Click);
             // 
             // Column_ID
             // 
@@ -385,18 +343,60 @@
             this.Column_GeYan.ReadOnly = true;
             this.Column_GeYan.Visible = false;
             // 
+            // button_Update
+            // 
+            this.button_Update.Image = global::JXHighWay.WatchHouse.Server.Properties.Resources.Update;
+            this.button_Update.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button_Update.Location = new System.Drawing.Point(344, 476);
+            this.button_Update.Margin = new System.Windows.Forms.Padding(2);
+            this.button_Update.Name = "button_Update";
+            this.button_Update.Size = new System.Drawing.Size(78, 37);
+            this.button_Update.TabIndex = 4;
+            this.button_Update.Text = "更　新";
+            this.button_Update.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button_Update.UseVisualStyleBackColor = true;
+            this.button_Update.Click += new System.EventHandler(this.button_Update_Click);
+            // 
+            // button_Del
+            // 
+            this.button_Del.Image = ((System.Drawing.Image)(resources.GetObject("button_Del.Image")));
+            this.button_Del.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button_Del.Location = new System.Drawing.Point(202, 476);
+            this.button_Del.Margin = new System.Windows.Forms.Padding(2);
+            this.button_Del.Name = "button_Del";
+            this.button_Del.Size = new System.Drawing.Size(78, 37);
+            this.button_Del.TabIndex = 3;
+            this.button_Del.Text = "删　除";
+            this.button_Del.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button_Del.UseVisualStyleBackColor = true;
+            this.button_Del.Click += new System.EventHandler(this.button_Del_Click);
+            // 
+            // button_Add
+            // 
+            this.button_Add.Image = global::JXHighWay.WatchHouse.Server.Properties.Resources.Add;
+            this.button_Add.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button_Add.Location = new System.Drawing.Point(60, 476);
+            this.button_Add.Margin = new System.Windows.Forms.Padding(2);
+            this.button_Add.Name = "button_Add";
+            this.button_Add.Size = new System.Drawing.Size(78, 37);
+            this.button_Add.TabIndex = 2;
+            this.button_Add.Text = "增　加";
+            this.button_Add.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button_Add.UseVisualStyleBackColor = true;
+            this.button_Add.Click += new System.EventHandler(this.button_Add_Click);
+            // 
             // EmployeeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(485, 517);
+            this.ClientSize = new System.Drawing.Size(537, 517);
             this.Controls.Add(this.button_Update);
             this.Controls.Add(this.button_Del);
             this.Controls.Add(this.button_Add);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "EmployeeForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

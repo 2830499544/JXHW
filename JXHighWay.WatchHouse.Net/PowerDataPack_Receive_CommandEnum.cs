@@ -48,5 +48,9 @@ namespace JXHighWay.WatchHouse.Net.DataPack
         ///定时设置 
         /// </summary>
         Timing = 0x4a,
+        /// <summary>
+        /// 获取设备配置信息
+        /// </summary>
+        GetControlInfo = 0X6E
     }
 }

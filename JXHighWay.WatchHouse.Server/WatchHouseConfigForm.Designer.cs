@@ -54,6 +54,22 @@
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.dataGridView_List = new System.Windows.Forms.DataGridView();
+            this.Column_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_XuHao = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_GanTing_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_GanTing_MC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_GanTing_LX = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_GanTing_IP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_LED1_IP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_LED1_Gao = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_LED1_Kuan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_LED2_IP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_LED2_Gao = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_LED2_Kuan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_DianYuan1_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_DianYuan1_IP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_DianYuan2_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_DianYuan2_IP = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button_Update = new System.Windows.Forms.Button();
             this.button_Del = new System.Windows.Forms.Button();
             this.button_Add = new System.Windows.Forms.Button();
@@ -72,22 +88,6 @@
             this.label13 = new System.Windows.Forms.Label();
             this.textBox_LED2_IP = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.Column_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_XuHao = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_GanTing_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_GanTing_MC = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_GanTing_LX = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_GanTing_IP = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_LED1_IP = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_LED1_Gao = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_LED1_Kuan = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_LED2_IP = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_LED2_Gao = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_LED2_Kuan = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_DianYuan1_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_DianYuan1_IP = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_DianYuan2_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_DianYuan2_IP = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox_LED1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LED1_Kuan)).BeginInit();
@@ -113,29 +113,30 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox1.Size = new System.Drawing.Size(1115, 55);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Size = new System.Drawing.Size(836, 44);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "岗亭配置";
             // 
             // textBox_GanTing_IP
             // 
-            this.textBox_GanTing_IP.Location = new System.Drawing.Point(897, 16);
-            this.textBox_GanTing_IP.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox_GanTing_IP.Location = new System.Drawing.Point(673, 13);
+            this.textBox_GanTing_IP.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox_GanTing_IP.Name = "textBox_GanTing_IP";
             this.textBox_GanTing_IP.ReadOnly = true;
-            this.textBox_GanTing_IP.Size = new System.Drawing.Size(179, 25);
+            this.textBox_GanTing_IP.Size = new System.Drawing.Size(135, 21);
             this.textBox_GanTing_IP.TabIndex = 7;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(861, 21);
+            this.label4.Location = new System.Drawing.Point(646, 17);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(31, 15);
+            this.label4.Size = new System.Drawing.Size(23, 12);
             this.label4.TabIndex = 6;
             this.label4.Text = "IP:";
             // 
@@ -147,53 +148,56 @@
             "入口",
             "出口",
             "双向"});
-            this.comboBox_GanTing_LX.Location = new System.Drawing.Point(657, 18);
-            this.comboBox_GanTing_LX.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.comboBox_GanTing_LX.Location = new System.Drawing.Point(493, 14);
+            this.comboBox_GanTing_LX.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBox_GanTing_LX.Name = "comboBox_GanTing_LX";
-            this.comboBox_GanTing_LX.Size = new System.Drawing.Size(179, 23);
+            this.comboBox_GanTing_LX.Size = new System.Drawing.Size(135, 20);
             this.comboBox_GanTing_LX.TabIndex = 5;
             this.comboBox_GanTing_LX.SelectedIndexChanged += new System.EventHandler(this.comboBox_GanTing_LX_SelectedIndexChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(605, 21);
+            this.label3.Location = new System.Drawing.Point(454, 17);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(45, 15);
+            this.label3.Size = new System.Drawing.Size(35, 12);
             this.label3.TabIndex = 4;
             this.label3.Text = "类型:";
             // 
             // textBox_GanTing_MC
             // 
-            this.textBox_GanTing_MC.Location = new System.Drawing.Point(400, 16);
-            this.textBox_GanTing_MC.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox_GanTing_MC.Location = new System.Drawing.Point(300, 13);
+            this.textBox_GanTing_MC.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox_GanTing_MC.Name = "textBox_GanTing_MC";
-            this.textBox_GanTing_MC.Size = new System.Drawing.Size(179, 25);
+            this.textBox_GanTing_MC.Size = new System.Drawing.Size(135, 21);
             this.textBox_GanTing_MC.TabIndex = 3;
             // 
             // textBox_GanTing_ID
             // 
-            this.textBox_GanTing_ID.Location = new System.Drawing.Point(120, 16);
-            this.textBox_GanTing_ID.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox_GanTing_ID.Location = new System.Drawing.Point(90, 13);
+            this.textBox_GanTing_ID.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox_GanTing_ID.Name = "textBox_GanTing_ID";
-            this.textBox_GanTing_ID.Size = new System.Drawing.Size(179, 25);
+            this.textBox_GanTing_ID.Size = new System.Drawing.Size(135, 21);
             this.textBox_GanTing_ID.TabIndex = 2;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(348, 21);
+            this.label2.Location = new System.Drawing.Point(261, 17);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(45, 15);
+            this.label2.Size = new System.Drawing.Size(35, 12);
             this.label2.TabIndex = 1;
             this.label2.Text = "名称:";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(68, 21);
+            this.label1.Location = new System.Drawing.Point(51, 17);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(45, 15);
+            this.label1.Size = new System.Drawing.Size(35, 12);
             this.label1.TabIndex = 0;
             this.label1.Text = "编号:";
             // 
@@ -206,75 +210,72 @@
             this.groupBox_LED1.Controls.Add(this.textBox_LED1_IP);
             this.groupBox_LED1.Controls.Add(this.label5);
             this.groupBox_LED1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox_LED1.Location = new System.Drawing.Point(0, 55);
-            this.groupBox_LED1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox_LED1.Location = new System.Drawing.Point(0, 44);
+            this.groupBox_LED1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox_LED1.Name = "groupBox_LED1";
-            this.groupBox_LED1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox_LED1.Size = new System.Drawing.Size(1115, 46);
+            this.groupBox_LED1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox_LED1.Size = new System.Drawing.Size(836, 37);
             this.groupBox_LED1.TabIndex = 1;
             this.groupBox_LED1.TabStop = false;
             this.groupBox_LED1.Text = "LED屏配置1";
             // 
             // numericUpDown_LED1_Kuan
             // 
-            this.numericUpDown_LED1_Kuan.Location = new System.Drawing.Point(532, 14);
-            this.numericUpDown_LED1_Kuan.Margin = new System.Windows.Forms.Padding(4);
+            this.numericUpDown_LED1_Kuan.Location = new System.Drawing.Point(399, 11);
             this.numericUpDown_LED1_Kuan.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
             this.numericUpDown_LED1_Kuan.Name = "numericUpDown_LED1_Kuan";
-            this.numericUpDown_LED1_Kuan.Size = new System.Drawing.Size(69, 25);
+            this.numericUpDown_LED1_Kuan.Size = new System.Drawing.Size(52, 21);
             this.numericUpDown_LED1_Kuan.TabIndex = 7;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(493, 20);
-            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label11.Location = new System.Drawing.Point(370, 16);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(30, 15);
+            this.label11.Size = new System.Drawing.Size(23, 12);
             this.label11.TabIndex = 6;
             this.label11.Text = "宽:";
             // 
             // numericUpDown_LED1_Gao
             // 
-            this.numericUpDown_LED1_Gao.Location = new System.Drawing.Point(403, 15);
-            this.numericUpDown_LED1_Gao.Margin = new System.Windows.Forms.Padding(4);
+            this.numericUpDown_LED1_Gao.Location = new System.Drawing.Point(302, 12);
             this.numericUpDown_LED1_Gao.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
             this.numericUpDown_LED1_Gao.Name = "numericUpDown_LED1_Gao";
-            this.numericUpDown_LED1_Gao.Size = new System.Drawing.Size(69, 25);
+            this.numericUpDown_LED1_Gao.Size = new System.Drawing.Size(52, 21);
             this.numericUpDown_LED1_Gao.TabIndex = 5;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(364, 20);
-            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label10.Location = new System.Drawing.Point(273, 16);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(30, 15);
+            this.label10.Size = new System.Drawing.Size(23, 12);
             this.label10.TabIndex = 4;
             this.label10.Text = "高:";
             // 
             // textBox_LED1_IP
             // 
-            this.textBox_LED1_IP.Location = new System.Drawing.Point(120, 16);
-            this.textBox_LED1_IP.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox_LED1_IP.Location = new System.Drawing.Point(90, 13);
+            this.textBox_LED1_IP.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox_LED1_IP.Name = "textBox_LED1_IP";
-            this.textBox_LED1_IP.Size = new System.Drawing.Size(179, 25);
+            this.textBox_LED1_IP.Size = new System.Drawing.Size(135, 21);
             this.textBox_LED1_IP.TabIndex = 3;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(76, 19);
+            this.label5.Location = new System.Drawing.Point(57, 15);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(31, 15);
+            this.label5.Size = new System.Drawing.Size(23, 12);
             this.label5.TabIndex = 1;
             this.label5.Text = "IP:";
             // 
@@ -287,21 +288,21 @@
             this.groupBox_Power1.Controls.Add(this.label7);
             this.groupBox_Power1.Controls.Add(this.textBox_DY1_ID);
             this.groupBox_Power1.Controls.Add(this.label6);
-            this.groupBox_Power1.Location = new System.Drawing.Point(0, 149);
-            this.groupBox_Power1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox_Power1.Location = new System.Drawing.Point(0, 119);
+            this.groupBox_Power1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox_Power1.Name = "groupBox_Power1";
-            this.groupBox_Power1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox_Power1.Size = new System.Drawing.Size(1115, 54);
+            this.groupBox_Power1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox_Power1.Size = new System.Drawing.Size(836, 43);
             this.groupBox_Power1.TabIndex = 2;
             this.groupBox_Power1.TabStop = false;
             this.groupBox_Power1.Text = "电源配置1";
             // 
             // button_DY1_Time
             // 
-            this.button_DY1_Time.Location = new System.Drawing.Point(976, 15);
-            this.button_DY1_Time.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button_DY1_Time.Location = new System.Drawing.Point(732, 12);
+            this.button_DY1_Time.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button_DY1_Time.Name = "button_DY1_Time";
-            this.button_DY1_Time.Size = new System.Drawing.Size(104, 34);
+            this.button_DY1_Time.Size = new System.Drawing.Size(78, 27);
             this.button_DY1_Time.TabIndex = 12;
             this.button_DY1_Time.Text = "时间配置";
             this.button_DY1_Time.UseVisualStyleBackColor = true;
@@ -309,10 +310,10 @@
             // 
             // button_DY1_PowerIP
             // 
-            this.button_DY1_PowerIP.Location = new System.Drawing.Point(803, 15);
-            this.button_DY1_PowerIP.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button_DY1_PowerIP.Location = new System.Drawing.Point(602, 12);
+            this.button_DY1_PowerIP.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button_DY1_PowerIP.Name = "button_DY1_PowerIP";
-            this.button_DY1_PowerIP.Size = new System.Drawing.Size(104, 34);
+            this.button_DY1_PowerIP.Size = new System.Drawing.Size(78, 27);
             this.button_DY1_PowerIP.TabIndex = 11;
             this.button_DY1_PowerIP.Text = "IP配置";
             this.button_DY1_PowerIP.UseVisualStyleBackColor = true;
@@ -320,10 +321,10 @@
             // 
             // button_DY1_KaiGuan
             // 
-            this.button_DY1_KaiGuan.Location = new System.Drawing.Point(629, 15);
-            this.button_DY1_KaiGuan.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button_DY1_KaiGuan.Location = new System.Drawing.Point(472, 12);
+            this.button_DY1_KaiGuan.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button_DY1_KaiGuan.Name = "button_DY1_KaiGuan";
-            this.button_DY1_KaiGuan.Size = new System.Drawing.Size(104, 34);
+            this.button_DY1_KaiGuan.Size = new System.Drawing.Size(78, 27);
             this.button_DY1_KaiGuan.TabIndex = 10;
             this.button_DY1_KaiGuan.Text = "开关配置";
             this.button_DY1_KaiGuan.UseVisualStyleBackColor = true;
@@ -331,47 +332,49 @@
             // 
             // textBox_DY1_IP
             // 
-            this.textBox_DY1_IP.Location = new System.Drawing.Point(400, 16);
-            this.textBox_DY1_IP.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox_DY1_IP.Location = new System.Drawing.Point(300, 13);
+            this.textBox_DY1_IP.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox_DY1_IP.Name = "textBox_DY1_IP";
             this.textBox_DY1_IP.ReadOnly = true;
-            this.textBox_DY1_IP.Size = new System.Drawing.Size(179, 25);
+            this.textBox_DY1_IP.Size = new System.Drawing.Size(135, 21);
             this.textBox_DY1_IP.TabIndex = 9;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(364, 21);
+            this.label7.Location = new System.Drawing.Point(273, 17);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(31, 15);
+            this.label7.Size = new System.Drawing.Size(23, 12);
             this.label7.TabIndex = 8;
             this.label7.Text = "IP:";
             // 
             // textBox_DY1_ID
             // 
-            this.textBox_DY1_ID.Location = new System.Drawing.Point(120, 16);
-            this.textBox_DY1_ID.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox_DY1_ID.Location = new System.Drawing.Point(90, 13);
+            this.textBox_DY1_ID.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox_DY1_ID.Name = "textBox_DY1_ID";
-            this.textBox_DY1_ID.Size = new System.Drawing.Size(179, 25);
+            this.textBox_DY1_ID.Size = new System.Drawing.Size(135, 21);
             this.textBox_DY1_ID.TabIndex = 4;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(68, 19);
+            this.label6.Location = new System.Drawing.Point(51, 15);
+            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(45, 15);
+            this.label6.Size = new System.Drawing.Size(35, 12);
             this.label6.TabIndex = 3;
             this.label6.Text = "编号:";
             // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.dataGridView_List);
-            this.groupBox4.Location = new System.Drawing.Point(0, 260);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox4.Location = new System.Drawing.Point(0, 208);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox4.Size = new System.Drawing.Size(1115, 281);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox4.Size = new System.Drawing.Size(836, 225);
             this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "岗亭列表";
@@ -399,225 +402,16 @@
             this.Column_DianYuan2_ID,
             this.Column_DianYuan2_IP});
             this.dataGridView_List.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView_List.Location = new System.Drawing.Point(3, 20);
-            this.dataGridView_List.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dataGridView_List.Location = new System.Drawing.Point(2, 16);
+            this.dataGridView_List.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dataGridView_List.Name = "dataGridView_List";
             this.dataGridView_List.ReadOnly = true;
             this.dataGridView_List.RowHeadersVisible = false;
             this.dataGridView_List.RowTemplate.Height = 30;
             this.dataGridView_List.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView_List.Size = new System.Drawing.Size(1109, 259);
+            this.dataGridView_List.Size = new System.Drawing.Size(832, 207);
             this.dataGridView_List.TabIndex = 0;
             this.dataGridView_List.SelectionChanged += new System.EventHandler(this.dataGridView_List_SelectionChanged);
-            // 
-            // button_Update
-            // 
-            this.button_Update.Image = global::JXHighWay.WatchHouse.Server.Properties.Resources.save;
-            this.button_Update.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button_Update.Location = new System.Drawing.Point(928, 551);
-            this.button_Update.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button_Update.Name = "button_Update";
-            this.button_Update.Size = new System.Drawing.Size(104, 46);
-            this.button_Update.TabIndex = 8;
-            this.button_Update.Text = "保　存";
-            this.button_Update.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button_Update.UseVisualStyleBackColor = true;
-            this.button_Update.Click += new System.EventHandler(this.button_Update_Click);
-            // 
-            // button_Del
-            // 
-            this.button_Del.Image = global::JXHighWay.WatchHouse.Server.Properties.Resources.Del;
-            this.button_Del.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button_Del.Location = new System.Drawing.Point(475, 551);
-            this.button_Del.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button_Del.Name = "button_Del";
-            this.button_Del.Size = new System.Drawing.Size(104, 46);
-            this.button_Del.TabIndex = 7;
-            this.button_Del.Text = "删　除";
-            this.button_Del.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button_Del.UseVisualStyleBackColor = true;
-            this.button_Del.Click += new System.EventHandler(this.button_Del_Click);
-            // 
-            // button_Add
-            // 
-            this.button_Add.Image = global::JXHighWay.WatchHouse.Server.Properties.Resources.Add;
-            this.button_Add.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button_Add.Location = new System.Drawing.Point(103, 551);
-            this.button_Add.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button_Add.Name = "button_Add";
-            this.button_Add.Size = new System.Drawing.Size(104, 46);
-            this.button_Add.TabIndex = 6;
-            this.button_Add.Text = "增　加";
-            this.button_Add.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button_Add.UseVisualStyleBackColor = true;
-            this.button_Add.Click += new System.EventHandler(this.button_Add_Click);
-            // 
-            // groupBox_Power2
-            // 
-            this.groupBox_Power2.Controls.Add(this.button_DY2_Time);
-            this.groupBox_Power2.Controls.Add(this.button_DY2_PowerIP);
-            this.groupBox_Power2.Controls.Add(this.button_DY2_KaiGuan);
-            this.groupBox_Power2.Controls.Add(this.textBox_DY2_IP);
-            this.groupBox_Power2.Controls.Add(this.label8);
-            this.groupBox_Power2.Controls.Add(this.textBox_DY2_ID);
-            this.groupBox_Power2.Controls.Add(this.label9);
-            this.groupBox_Power2.Location = new System.Drawing.Point(0, 205);
-            this.groupBox_Power2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox_Power2.Name = "groupBox_Power2";
-            this.groupBox_Power2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox_Power2.Size = new System.Drawing.Size(1115, 54);
-            this.groupBox_Power2.TabIndex = 3;
-            this.groupBox_Power2.TabStop = false;
-            this.groupBox_Power2.Text = "电源配置2";
-            // 
-            // button_DY2_Time
-            // 
-            this.button_DY2_Time.Location = new System.Drawing.Point(976, 15);
-            this.button_DY2_Time.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button_DY2_Time.Name = "button_DY2_Time";
-            this.button_DY2_Time.Size = new System.Drawing.Size(104, 34);
-            this.button_DY2_Time.TabIndex = 13;
-            this.button_DY2_Time.Text = "时间配置";
-            this.button_DY2_Time.UseVisualStyleBackColor = true;
-            this.button_DY2_Time.Click += new System.EventHandler(this.button_DY2_Time_Click);
-            // 
-            // button_DY2_PowerIP
-            // 
-            this.button_DY2_PowerIP.Location = new System.Drawing.Point(803, 15);
-            this.button_DY2_PowerIP.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button_DY2_PowerIP.Name = "button_DY2_PowerIP";
-            this.button_DY2_PowerIP.Size = new System.Drawing.Size(104, 34);
-            this.button_DY2_PowerIP.TabIndex = 11;
-            this.button_DY2_PowerIP.Text = "IP配置";
-            this.button_DY2_PowerIP.UseVisualStyleBackColor = true;
-            this.button_DY2_PowerIP.Click += new System.EventHandler(this.button_DY2_PowerIP_Click);
-            // 
-            // button_DY2_KaiGuan
-            // 
-            this.button_DY2_KaiGuan.Location = new System.Drawing.Point(629, 15);
-            this.button_DY2_KaiGuan.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button_DY2_KaiGuan.Name = "button_DY2_KaiGuan";
-            this.button_DY2_KaiGuan.Size = new System.Drawing.Size(104, 34);
-            this.button_DY2_KaiGuan.TabIndex = 10;
-            this.button_DY2_KaiGuan.Text = "开关配置";
-            this.button_DY2_KaiGuan.UseVisualStyleBackColor = true;
-            this.button_DY2_KaiGuan.Click += new System.EventHandler(this.button_DY2_KaiGuan_Click);
-            // 
-            // textBox_DY2_IP
-            // 
-            this.textBox_DY2_IP.Location = new System.Drawing.Point(400, 16);
-            this.textBox_DY2_IP.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBox_DY2_IP.Name = "textBox_DY2_IP";
-            this.textBox_DY2_IP.ReadOnly = true;
-            this.textBox_DY2_IP.Size = new System.Drawing.Size(179, 25);
-            this.textBox_DY2_IP.TabIndex = 9;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(364, 21);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(31, 15);
-            this.label8.TabIndex = 8;
-            this.label8.Text = "IP:";
-            // 
-            // textBox_DY2_ID
-            // 
-            this.textBox_DY2_ID.Location = new System.Drawing.Point(120, 16);
-            this.textBox_DY2_ID.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBox_DY2_ID.Name = "textBox_DY2_ID";
-            this.textBox_DY2_ID.Size = new System.Drawing.Size(179, 25);
-            this.textBox_DY2_ID.TabIndex = 4;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(68, 19);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(45, 15);
-            this.label9.TabIndex = 3;
-            this.label9.Text = "编号:";
-            // 
-            // groupBox_LED2
-            // 
-            this.groupBox_LED2.Controls.Add(this.numericUpDown_LED2_Kuan);
-            this.groupBox_LED2.Controls.Add(this.label12);
-            this.groupBox_LED2.Controls.Add(this.numericUpDown_LED2_Gao);
-            this.groupBox_LED2.Controls.Add(this.label13);
-            this.groupBox_LED2.Controls.Add(this.textBox_LED2_IP);
-            this.groupBox_LED2.Controls.Add(this.label14);
-            this.groupBox_LED2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox_LED2.Location = new System.Drawing.Point(0, 101);
-            this.groupBox_LED2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox_LED2.Name = "groupBox_LED2";
-            this.groupBox_LED2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox_LED2.Size = new System.Drawing.Size(1115, 46);
-            this.groupBox_LED2.TabIndex = 9;
-            this.groupBox_LED2.TabStop = false;
-            this.groupBox_LED2.Text = "LED屏配置2";
-            // 
-            // numericUpDown_LED2_Kuan
-            // 
-            this.numericUpDown_LED2_Kuan.Location = new System.Drawing.Point(532, 14);
-            this.numericUpDown_LED2_Kuan.Margin = new System.Windows.Forms.Padding(4);
-            this.numericUpDown_LED2_Kuan.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericUpDown_LED2_Kuan.Name = "numericUpDown_LED2_Kuan";
-            this.numericUpDown_LED2_Kuan.Size = new System.Drawing.Size(69, 25);
-            this.numericUpDown_LED2_Kuan.TabIndex = 7;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(493, 20);
-            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(30, 15);
-            this.label12.TabIndex = 6;
-            this.label12.Text = "宽:";
-            // 
-            // numericUpDown_LED2_Gao
-            // 
-            this.numericUpDown_LED2_Gao.Location = new System.Drawing.Point(403, 15);
-            this.numericUpDown_LED2_Gao.Margin = new System.Windows.Forms.Padding(4);
-            this.numericUpDown_LED2_Gao.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericUpDown_LED2_Gao.Name = "numericUpDown_LED2_Gao";
-            this.numericUpDown_LED2_Gao.Size = new System.Drawing.Size(69, 25);
-            this.numericUpDown_LED2_Gao.TabIndex = 5;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(364, 20);
-            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(30, 15);
-            this.label13.TabIndex = 4;
-            this.label13.Text = "高:";
-            // 
-            // textBox_LED2_IP
-            // 
-            this.textBox_LED2_IP.Location = new System.Drawing.Point(120, 16);
-            this.textBox_LED2_IP.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBox_LED2_IP.Name = "textBox_LED2_IP";
-            this.textBox_LED2_IP.Size = new System.Drawing.Size(179, 25);
-            this.textBox_LED2_IP.TabIndex = 3;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(76, 19);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(31, 15);
-            this.label14.TabIndex = 1;
-            this.label14.Text = "IP:";
             // 
             // Column_ID
             // 
@@ -741,11 +535,219 @@
             this.Column_DianYuan2_IP.Name = "Column_DianYuan2_IP";
             this.Column_DianYuan2_IP.ReadOnly = true;
             // 
+            // button_Update
+            // 
+            this.button_Update.Image = global::JXHighWay.WatchHouse.Server.Properties.Resources.save;
+            this.button_Update.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button_Update.Location = new System.Drawing.Point(696, 441);
+            this.button_Update.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_Update.Name = "button_Update";
+            this.button_Update.Size = new System.Drawing.Size(78, 37);
+            this.button_Update.TabIndex = 8;
+            this.button_Update.Text = "保　存";
+            this.button_Update.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button_Update.UseVisualStyleBackColor = true;
+            this.button_Update.Click += new System.EventHandler(this.button_Update_Click);
+            // 
+            // button_Del
+            // 
+            this.button_Del.Image = global::JXHighWay.WatchHouse.Server.Properties.Resources.Del;
+            this.button_Del.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button_Del.Location = new System.Drawing.Point(356, 441);
+            this.button_Del.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_Del.Name = "button_Del";
+            this.button_Del.Size = new System.Drawing.Size(78, 37);
+            this.button_Del.TabIndex = 7;
+            this.button_Del.Text = "删　除";
+            this.button_Del.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button_Del.UseVisualStyleBackColor = true;
+            this.button_Del.Click += new System.EventHandler(this.button_Del_Click);
+            // 
+            // button_Add
+            // 
+            this.button_Add.Image = global::JXHighWay.WatchHouse.Server.Properties.Resources.Add;
+            this.button_Add.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button_Add.Location = new System.Drawing.Point(77, 441);
+            this.button_Add.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_Add.Name = "button_Add";
+            this.button_Add.Size = new System.Drawing.Size(78, 37);
+            this.button_Add.TabIndex = 6;
+            this.button_Add.Text = "增　加";
+            this.button_Add.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button_Add.UseVisualStyleBackColor = true;
+            this.button_Add.Click += new System.EventHandler(this.button_Add_Click);
+            // 
+            // groupBox_Power2
+            // 
+            this.groupBox_Power2.Controls.Add(this.button_DY2_Time);
+            this.groupBox_Power2.Controls.Add(this.button_DY2_PowerIP);
+            this.groupBox_Power2.Controls.Add(this.button_DY2_KaiGuan);
+            this.groupBox_Power2.Controls.Add(this.textBox_DY2_IP);
+            this.groupBox_Power2.Controls.Add(this.label8);
+            this.groupBox_Power2.Controls.Add(this.textBox_DY2_ID);
+            this.groupBox_Power2.Controls.Add(this.label9);
+            this.groupBox_Power2.Location = new System.Drawing.Point(0, 164);
+            this.groupBox_Power2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox_Power2.Name = "groupBox_Power2";
+            this.groupBox_Power2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox_Power2.Size = new System.Drawing.Size(836, 43);
+            this.groupBox_Power2.TabIndex = 3;
+            this.groupBox_Power2.TabStop = false;
+            this.groupBox_Power2.Text = "电源配置2";
+            // 
+            // button_DY2_Time
+            // 
+            this.button_DY2_Time.Location = new System.Drawing.Point(732, 12);
+            this.button_DY2_Time.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_DY2_Time.Name = "button_DY2_Time";
+            this.button_DY2_Time.Size = new System.Drawing.Size(78, 27);
+            this.button_DY2_Time.TabIndex = 13;
+            this.button_DY2_Time.Text = "时间配置";
+            this.button_DY2_Time.UseVisualStyleBackColor = true;
+            this.button_DY2_Time.Click += new System.EventHandler(this.button_DY2_Time_Click);
+            // 
+            // button_DY2_PowerIP
+            // 
+            this.button_DY2_PowerIP.Location = new System.Drawing.Point(602, 12);
+            this.button_DY2_PowerIP.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_DY2_PowerIP.Name = "button_DY2_PowerIP";
+            this.button_DY2_PowerIP.Size = new System.Drawing.Size(78, 27);
+            this.button_DY2_PowerIP.TabIndex = 11;
+            this.button_DY2_PowerIP.Text = "IP配置";
+            this.button_DY2_PowerIP.UseVisualStyleBackColor = true;
+            this.button_DY2_PowerIP.Click += new System.EventHandler(this.button_DY2_PowerIP_Click);
+            // 
+            // button_DY2_KaiGuan
+            // 
+            this.button_DY2_KaiGuan.Location = new System.Drawing.Point(472, 12);
+            this.button_DY2_KaiGuan.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_DY2_KaiGuan.Name = "button_DY2_KaiGuan";
+            this.button_DY2_KaiGuan.Size = new System.Drawing.Size(78, 27);
+            this.button_DY2_KaiGuan.TabIndex = 10;
+            this.button_DY2_KaiGuan.Text = "开关配置";
+            this.button_DY2_KaiGuan.UseVisualStyleBackColor = true;
+            this.button_DY2_KaiGuan.Click += new System.EventHandler(this.button_DY2_KaiGuan_Click);
+            // 
+            // textBox_DY2_IP
+            // 
+            this.textBox_DY2_IP.Location = new System.Drawing.Point(300, 13);
+            this.textBox_DY2_IP.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_DY2_IP.Name = "textBox_DY2_IP";
+            this.textBox_DY2_IP.ReadOnly = true;
+            this.textBox_DY2_IP.Size = new System.Drawing.Size(135, 21);
+            this.textBox_DY2_IP.TabIndex = 9;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(273, 17);
+            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(23, 12);
+            this.label8.TabIndex = 8;
+            this.label8.Text = "IP:";
+            // 
+            // textBox_DY2_ID
+            // 
+            this.textBox_DY2_ID.Location = new System.Drawing.Point(90, 13);
+            this.textBox_DY2_ID.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_DY2_ID.Name = "textBox_DY2_ID";
+            this.textBox_DY2_ID.Size = new System.Drawing.Size(135, 21);
+            this.textBox_DY2_ID.TabIndex = 4;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(51, 15);
+            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(35, 12);
+            this.label9.TabIndex = 3;
+            this.label9.Text = "编号:";
+            // 
+            // groupBox_LED2
+            // 
+            this.groupBox_LED2.Controls.Add(this.numericUpDown_LED2_Kuan);
+            this.groupBox_LED2.Controls.Add(this.label12);
+            this.groupBox_LED2.Controls.Add(this.numericUpDown_LED2_Gao);
+            this.groupBox_LED2.Controls.Add(this.label13);
+            this.groupBox_LED2.Controls.Add(this.textBox_LED2_IP);
+            this.groupBox_LED2.Controls.Add(this.label14);
+            this.groupBox_LED2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox_LED2.Location = new System.Drawing.Point(0, 81);
+            this.groupBox_LED2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox_LED2.Name = "groupBox_LED2";
+            this.groupBox_LED2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox_LED2.Size = new System.Drawing.Size(836, 37);
+            this.groupBox_LED2.TabIndex = 9;
+            this.groupBox_LED2.TabStop = false;
+            this.groupBox_LED2.Text = "LED屏配置2";
+            // 
+            // numericUpDown_LED2_Kuan
+            // 
+            this.numericUpDown_LED2_Kuan.Location = new System.Drawing.Point(399, 11);
+            this.numericUpDown_LED2_Kuan.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDown_LED2_Kuan.Name = "numericUpDown_LED2_Kuan";
+            this.numericUpDown_LED2_Kuan.Size = new System.Drawing.Size(52, 21);
+            this.numericUpDown_LED2_Kuan.TabIndex = 7;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(370, 16);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(23, 12);
+            this.label12.TabIndex = 6;
+            this.label12.Text = "宽:";
+            // 
+            // numericUpDown_LED2_Gao
+            // 
+            this.numericUpDown_LED2_Gao.Location = new System.Drawing.Point(302, 12);
+            this.numericUpDown_LED2_Gao.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDown_LED2_Gao.Name = "numericUpDown_LED2_Gao";
+            this.numericUpDown_LED2_Gao.Size = new System.Drawing.Size(52, 21);
+            this.numericUpDown_LED2_Gao.TabIndex = 5;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(273, 16);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(23, 12);
+            this.label13.TabIndex = 4;
+            this.label13.Text = "高:";
+            // 
+            // textBox_LED2_IP
+            // 
+            this.textBox_LED2_IP.Location = new System.Drawing.Point(90, 13);
+            this.textBox_LED2_IP.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_LED2_IP.Name = "textBox_LED2_IP";
+            this.textBox_LED2_IP.Size = new System.Drawing.Size(135, 21);
+            this.textBox_LED2_IP.TabIndex = 3;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(57, 15);
+            this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(23, 12);
+            this.label14.TabIndex = 1;
+            this.label14.Text = "IP:";
+            // 
             // WatchHouseConfigForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1115, 605);
+            this.ClientSize = new System.Drawing.Size(836, 484);
             this.Controls.Add(this.groupBox_LED2);
             this.Controls.Add(this.groupBox_Power2);
             this.Controls.Add(this.button_Update);
@@ -756,7 +758,7 @@
             this.Controls.Add(this.groupBox_LED1);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "WatchHouseConfigForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "岗亭配置";

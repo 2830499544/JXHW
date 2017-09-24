@@ -27,8 +27,13 @@ namespace JXHighWay.WatchHouse.EFModel
 
         [ColumnAttrib("DianLiu")]
         public int? DianLiu { get; set; }
-        [ColumnAttrib("DianNeng")]
-        public int? DianNeng { get; set; }
+        [ColumnAttrib("MaxDianNeng")]
+        public int? MaxDianNeng { get; set; }
+
+
+        [ColumnAttrib("MinDianNeng")]
+        public int? MinDianNeng { get; set; }
+
         [ColumnAttrib("YouGongGL")]
         public int? YouGongGL { get; set; }
         [ColumnAttrib("WuGongGL")]

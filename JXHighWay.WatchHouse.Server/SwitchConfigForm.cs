@@ -14,6 +14,7 @@ namespace JXHighWay.WatchHouse.Server
     public partial class SwitchConfigForm : Form
     {
 
+        public WatchHouseConfig WatchHouse { get; set; }
         public DataTable SwitchTable { get; set; }
         public string DianYuanID { get; set; }
         public SwitchConfigForm()
@@ -106,6 +107,23 @@ namespace JXHighWay.WatchHouse.Server
                 string vLeiXing = (string)dataGridView_Switch.SelectedRows[0].Cells["Column_LeiXing"].Value;
                 comboBox_LeiXing.Text = vLeiXing;
             }
+        }
+
+        private async void button_Get_Click(object sender, EventArgs e)
+        {
+            PowerControl vPowerControl = new PowerControl();
+            bool vResult = await vPowerControl.GetControlInfo(DianYuanID);
+            if (vResult)
+            {
+                SwitchTable = WatchHouse.GetSwitchTable(DianYuanID);
+                DataView vDataView = SwitchTable.AsDataView();
+                vDataView.Sort = "LuHao";
+                dataGridView_Switch.AutoGenerateColumns = false;
+                dataGridView_Switch.DataSource = vDataView;
+                MessageBox.Show("获取电源配置成功","信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+                MessageBox.Show("获取电源配置失败", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }

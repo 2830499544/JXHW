@@ -105,6 +105,13 @@ namespace JXHighWay.WatchHouse.Bll.Server
             return vResult[1];
         }
 
+      
+
+        /// <summary>
+        /// 获取电源IP配置
+        /// </summary>
+        /// <param name="DianYuanID"></param>
+        /// <returns></returns>
         public PowerIPConfigInfo GetIPConfig(string DianYuanID)
         {
             PowerIPConfigInfo vIPConfigResult = new PowerIPConfigInfo();
@@ -146,6 +153,11 @@ namespace JXHighWay.WatchHouse.Bll.Server
             return vResult;
         }
 
+        public async Task< bool> GetControlInfo(string DianYuanID)
+        {
+            bool vResult = await asyncSendCommandToDB(DianYuanID, PowerDataPack_Send_CommandEnum.GetControlInfo);
+            return vResult;
+        }
 
         /// <summary>
         /// 获取电源模块的时间
@@ -418,7 +430,11 @@ namespace JXHighWay.WatchHouse.Bll.Server
                                     PowerDataPack_Receive_GetTime vDataPack6 = NetHelper.ByteToStructure<PowerDataPack_Receive_GetTime>(vReceiveData.Data);
                                     processorData_GetTime(vDataPack6);
                                     break;
-
+                                //获取设备信息
+                                case (byte)PowerDataPack_Receive_CommandEnum.GetControlInfo:
+                                    PowerDataPack_Receive_GetControlInfo vDataPack7 = NetHelper.ByteToStructure<PowerDataPack_Receive_GetControlInfo>(vReceiveData.Data);
+                                    processorData_GetControlInfo(vDataPack7);
+                                    break;
 
                             }
                             
@@ -646,6 +662,88 @@ namespace JXHighWay.WatchHouse.Bll.Server
         }
 
 
+        void processorData_GetControlInfo(PowerDataPack_Receive_GetControlInfo dataPack)
+        {
+            string vMAC = NetHelper.BytesToString_MAC(new byte[] { dataPack.MAC1, dataPack.MAC2, dataPack.MAC3, dataPack.MAC4,
+                dataPack.MAC5, dataPack.MAC6 });
+            vMAC = vMAC.ToUpper();
+            m_BasicDBClass_Receive.DeleteRecordCustom<PowerSwithConfigEFModel>(string.Format("DianYuanID='{0}'", vMAC));
+
+            //漏保设备
+            int vLouBaoSBLS = BitConverter.ToInt32(new byte[] { dataPack.LouBaoSBLS, 0x00, 0x00, 0x00 }, 0);
+            for (int i = 1; i <= vLouBaoSBLS; i++)
+            {
+                PowerSwithConfigEFModel vPowerSwithConfigEFModel = new PowerSwithConfigEFModel()
+                {
+                    DianYuanID = vMAC,
+                    LuHao = i,
+                    MinCheng = string.Format("漏保{0}", i),
+                    LeiXing = "漏保"
+                };
+                m_BasicDBClass_Receive.InsertRecord(vPowerSwithConfigEFModel);
+            }
+            //分路路数
+            int vFenLuLS = BitConverter.ToInt32(new byte[] { dataPack.FenLuLS, 0x00, 0x00, 0x00 }, 0);
+            for (int i = 1; i <= vFenLuLS; i++)
+            {
+                PowerSwithConfigEFModel vPowerSwithConfigEFModel = new PowerSwithConfigEFModel()
+                {
+                    DianYuanID = vMAC,
+                    LuHao = i,
+                    MinCheng = string.Format("分路{0}", i),
+                    LeiXing = "分路"
+                };
+                m_BasicDBClass_Receive.InsertRecord(vPowerSwithConfigEFModel);
+            }
+            //漏保分路路数
+            int vLouBaoFLLS = BitConverter.ToInt32(new byte[] { dataPack.LouBaoSBLS, 0x00, 0x00, 0x00 }, 0);
+            for (int i = 1; i <= vLouBaoFLLS; i++)
+            {
+                PowerSwithConfigEFModel vPowerSwithConfigEFModel = new PowerSwithConfigEFModel()
+                {
+                    DianYuanID = vMAC,
+                    LuHao = i,
+                    MinCheng = string.Format("分路{0}(带漏保)", i),
+                    LeiXing = "分路(带漏保)"
+                };
+                m_BasicDBClass_Receive.InsertRecord(vPowerSwithConfigEFModel);
+            }
+            //漏保插座路数
+            int vLouBaoCZLS = BitConverter.ToInt32(new byte[] { dataPack.LouBaoCZLS, 0x00, 0x00, 0x00 }, 0);
+            for (int i = 1; i <= vLouBaoCZLS; i++)
+            {
+                PowerSwithConfigEFModel vPowerSwithConfigEFModel = new PowerSwithConfigEFModel()
+                {
+                    DianYuanID = vMAC,
+                    LuHao = i,
+                    MinCheng = string.Format("漏保插座{0}", i),
+                    LeiXing = "漏保插座"
+                };
+                m_BasicDBClass_Receive.InsertRecord(vPowerSwithConfigEFModel);
+            }
+            //插座路数
+            int vChaZhuoLS = BitConverter.ToInt32(new byte[] { dataPack.ChaZhuoLS, 0x00, 0x00, 0x00 }, 0);
+            for (int i = 1; i <= vChaZhuoLS; i++)
+            {
+                PowerSwithConfigEFModel vPowerSwithConfigEFModel = new PowerSwithConfigEFModel()
+                {
+                    DianYuanID = vMAC,
+                    LuHao = i,
+                    MinCheng = string.Format("普插座{0}", i),
+                    LeiXing = "普插座"
+                };
+                m_BasicDBClass_Receive.InsertRecord(vPowerSwithConfigEFModel);
+            }
+
+            PowerSendCMDEFModel vPowerSendCMDEFModel = new PowerSendCMDEFModel()
+            {
+                IsReply = true
+            };
+            vPowerSendCMDEFModel.State = true;
+            string vSql = string.Format("DianYuanID='{0}' and CMD={1:D} and SN={2}", vMAC, (byte)PowerDataPack_Send_CommandEnum.GetControlInfo, dataPack.SN);
+            m_BasicDBClass_Receive.UpdateRecord(vPowerSendCMDEFModel, vSql);
+        }
+
         /// <summary>
         /// 处理接收到的获取时间数据
         /// </summary>
@@ -801,6 +899,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
         {
             try
             {
+                m_BasicDBClass_Receive.TransactionBegin();
                 PowerEventEFModel vPowerEventEFModel = new PowerEventEFModel()
                 {
                     DianYuanID = BitConverter.ToString( new byte[] { data.MAC1,data.MAC2,data.MAC3,data.MAC4,data.MAC5,data.MAC6 } ),
@@ -810,8 +909,29 @@ namespace JXHighWay.WatchHouse.Bll.Server
                     NeiRong = convertShiJianNR(data.ShiJinLX, data.ShiJianBM),
                     Time = DateTime.Now,
                 };
-                m_BasicDBClass_Receive.TransactionBegin();
                 m_BasicDBClass_Receive.InsertRecord(vPowerEventEFModel);
+                if (data.ShiJinLX==0)
+                {
+                    PowerSwithConfigEFModel vPowerSwithConfigEFModel = new PowerSwithConfigEFModel();
+                    string vWhereSql = string.Format("DianYuanID='{0}' and LuHao={1}", vPowerEventEFModel.DianYuanID, vPowerEventEFModel.LuHao);
+                    switch (data.ShiJianBM)
+                    {
+                        case 0x0D://锁定
+                            vPowerSwithConfigEFModel.ZhuangTai = "锁定";
+                            m_BasicDBClass_Receive.UpdateRecord(vPowerSwithConfigEFModel, vWhereSql);
+                            break;
+                        case 0x0E://正常
+                        case 0x0C:
+                            vPowerSwithConfigEFModel.ZhuangTai = "正常";
+                            m_BasicDBClass_Receive.UpdateRecord(vPowerSwithConfigEFModel, vWhereSql);
+                            break;
+                        case 0x0F://应急
+                            vPowerSwithConfigEFModel.ZhuangTai = "应急";
+                            m_BasicDBClass_Receive.UpdateRecord(vPowerSwithConfigEFModel, vWhereSql);
+                            break;
+                    }
+                }
+                
                 //更新电源数据开关状态
                 switch (vPowerEventEFModel.NeiRong)
                 {
