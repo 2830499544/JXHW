@@ -87,8 +87,13 @@ namespace JXHighWay.WatchHouse.Server
 
         private void button_Update_Click(object sender, EventArgs e)
         {
+            saveWatchHouseData();
+        }
+
+        public void saveWatchHouseData()
+        {
             int vGanTingID = 0;
-            string vDianYuanID1 = "", vDianYuanID2="";
+            string vDianYuanID1 = "", vDianYuanID2 = "";
             int vLED1Gao, vLED1Kuan, vLED2Gao, vLED2Kuan;
             string vOutInfo = "";
             if (!int.TryParse(textBox_GanTing_ID.Text, out vGanTingID))
@@ -104,13 +109,13 @@ namespace JXHighWay.WatchHouse.Server
             vLED1Kuan = (int)numericUpDown_LED1_Kuan.Value;
 
             vLED2Gao = (int)numericUpDown_LED2_Gao.Value;
-            vLED2Kuan= (int)numericUpDown_LED2_Kuan.Value;
+            vLED2Kuan = (int)numericUpDown_LED2_Kuan.Value;
 
             DataTable vSwitchTable1 = button_DY1_KaiGuan.Tag == null ? null : (DataTable)button_DY1_KaiGuan.Tag;
             DataTable vSwitchTable2 = button_DY2_KaiGuan.Tag == null ? null : (DataTable)button_DY2_KaiGuan.Tag;
             int vID = (int)dataGridView_List.SelectedRows[0].Cells["Column_ID"].Value;
             if (m_WatchHouseConfig.Update(vID, vGanTingID, textBox_GanTing_MC.Text,
-                comboBox_GanTing_LX.Text, textBox_LED1_IP.Text,vLED1Gao,vLED1Kuan,textBox_LED2_IP.Text,vLED2Gao,vLED2Kuan,vDianYuanID1, vDianYuanID2,vSwitchTable1, vSwitchTable2, ref vOutInfo))
+                comboBox_GanTing_LX.Text, textBox_LED1_IP.Text, vLED1Gao, vLED1Kuan, textBox_LED2_IP.Text, vLED2Gao, vLED2Kuan, vDianYuanID1, vDianYuanID2, vSwitchTable1, vSwitchTable2, ref vOutInfo))
             {
                 MessageBox.Show("更新岗亭数据成功", "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 dataGridView_List.DataSource = m_WatchHouseConfig.GetAll();
@@ -160,6 +165,7 @@ namespace JXHighWay.WatchHouse.Server
                 vSwitchConfigForm.WatchHouse = m_WatchHouseConfig;
                 vSwitchConfigForm.SwitchTable = vSwitchTable;
                 vSwitchConfigForm.DianYuanID = vDianYuanID;
+                vSwitchConfigForm.WatchHouseConfig = this;
                 vSwitchConfigForm.ShowDialog();
                 button_DY1_KaiGuan.Tag = vSwitchTable;
             }

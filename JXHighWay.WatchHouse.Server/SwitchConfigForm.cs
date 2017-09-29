@@ -13,6 +13,7 @@ namespace JXHighWay.WatchHouse.Server
 {
     public partial class SwitchConfigForm : Form
     {
+        public WatchHouseConfigForm WatchHouseConfig { get; set; }
 
         public WatchHouseConfig WatchHouse { get; set; }
         public DataTable SwitchTable { get; set; }
@@ -84,6 +85,7 @@ namespace JXHighWay.WatchHouse.Server
                     vRow["LuHao"] = vLuHao;
                     vRow["MinCheng"] = textBox_MingCheng.Text;
                     vRow["LeiXing"] = comboBox_LeiXing.Text;
+                    WatchHouseConfig.saveWatchHouseData();
                     //SwitchTable.AcceptChanges();
                 }
                 else

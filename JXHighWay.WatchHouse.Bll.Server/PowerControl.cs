@@ -48,6 +48,8 @@ namespace JXHighWay.WatchHouse.Bll.Server
         {
             m_IsRun = false;
             m_SocketManager.Stop();
+            m_ClientDict.Clear();
+            m_ClientMaxID.Clear();
             m_SocketManager = null;
         }
 
@@ -1055,7 +1057,7 @@ namespace JXHighWay.WatchHouse.Bll.Server
                     {
                         //AsyncUserToken vAsyncUserToken = findAsyncUserToken(vTempResult.DianYuanID.Value);
                         AsyncUserToken vAsyncUserToken = null;
-                        if (m_SocketManager.ClientList.Count > 0)
+                        if (m_SocketManager!=null && m_SocketManager.ClientList.Count > 0)
                         {
                             if ( m_ClientDict.ContainsKey(vTempResult.DianYuanID) )
                             {

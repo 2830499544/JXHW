@@ -76,6 +76,7 @@ namespace JXHighWay.WatchHouse.WFPClient
             init_SheZhi();
             init_RiZi();
             m_IsInit = true;
+            comboBox_ZQ.SelectedIndex = 1;
         }
 
         /// <summary>

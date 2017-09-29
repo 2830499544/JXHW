@@ -69,6 +69,8 @@ namespace JXHighWay.WatchHouse.Bll.Server
         public void Stop()
         {
             m_SocketManager.Stop();
+            m_ClientDict.Clear();
+            m_ClientMaxID.Clear();
             ReceiveQueue.Clear();
             m_IsRun = false;
         }
