@@ -25,28 +25,28 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="41*"  />
-            <RowDefinition Height="147*" />
-            <RowDefinition Height="42*" />
+            <RowDefinition Height="170*" />
+            <RowDefinition Height="19*" />
         </Grid.RowDefinitions>
-        <GroupBox x:Name="groupBox" BorderBrush="#FF91ACBD" Style="{StaticResource GroupboxWithoutWhiteBorder}" Header="地暖区域" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,2,0,0" Height="284" Width="340" FontSize="18" Foreground="#FFF7F2F2" Grid.Row="1" Grid.Column="3"/>
-        <GroupBox x:Name="groupBox_Copy" BorderBrush="#FF91ACBD" Style="{StaticResource GroupboxWithoutWhiteBorder}" Header="当前温度" HorizontalAlignment="Left" VerticalAlignment="Top" Height="198" Width="191" FontSize="18" Foreground="#FFF7F2F2" Grid.Column="2" Grid.Row="1" Margin="4,2,0,0"/>
+        <GroupBox x:Name="groupBox" BorderBrush="#FF91ACBD" Style="{StaticResource GroupboxWithoutWhiteBorder}" Header="地暖区域" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,34,0,0" Height="284" Width="340" FontSize="18" Foreground="#FFF7F2F2" Grid.Row="1" Grid.Column="3"/>
+        <GroupBox x:Name="groupBox_Copy" BorderBrush="#FF91ACBD" Style="{StaticResource GroupboxWithoutWhiteBorder}" Header="当前温度" HorizontalAlignment="Left" VerticalAlignment="Top" Height="198" Width="191" FontSize="18" Foreground="#FFF7F2F2" Grid.Column="2" Grid.Row="1" Margin="4,33,0,0"/>
         <Image x:Name="image" HorizontalAlignment="Left" Height="147" VerticalAlignment="Top" Width="147" Grid.Column="1" Margin="33,39,0,0" Grid.Row="1" Source="Images/DiNuan/DiRuan.jpg"/>
-        <Label x:Name="Label_DanQianWD" Content="99℃" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="24,49,0,0" FontSize="72" Foreground="WhiteSmoke" Grid.Row="1" Height="105" Width="158"/>
+        <Label x:Name="Label_DanQianWD" Content="99℃" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="24,80,0,0" FontSize="72" Foreground="WhiteSmoke" Grid.Row="1" Height="105" Width="158"/>
         <CheckBox x:Name="CheckBox_DiNuan" Style="{StaticResource OrangeSwitchStyle}" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="64,201,0,0" Grid.Row="1" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand" Click="CheckBox_DiNuan_Click"/>
-        <Button x:Name="Button_Shen" Content="▲" Grid.Column="2" HorizontalAlignment="Left" Margin="37,159,0,0" Grid.Row="1" VerticalAlignment="Top" Width="27" FontSize="18" Height="27" Foreground="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" Cursor="Hand" Click="Button_Shen_Click"/>
-        <Button x:Name="Button_Jian" Content="▼" Grid.Column="2" HorizontalAlignment="Left" Margin="138,159,0,0" Grid.Row="1" VerticalAlignment="Top" Width="27" FontSize="18" Height="27" Foreground="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" Cursor="Hand" Click="Button_Jian_Click"/>
-        <Label x:Name="Label_SheZiWenDu" Content="88℃" Grid.Column="2" HorizontalAlignment="Left" Margin="76,156,0,0" Grid.Row="1" VerticalAlignment="Top" Foreground="#FFF1EAEA" FontSize="18" Height="34" Width="49"/>
-        <Image x:Name="image1" Grid.Column="3" HorizontalAlignment="Left" Height="173" Margin="44,45,0,0" Grid.Row="1" VerticalAlignment="Top" Width="83" Source="Images/DiNuan/ZuoJiao.jpg"/>
-        <Image x:Name="image1_Copy" Grid.Column="3" HorizontalAlignment="Left" Height="173" Margin="230,45,0,0" Grid.Row="1" VerticalAlignment="Top" Width="83" Source="Images/DiNuan/YouJiao.jpg"/>
-        <CheckBox x:Name="CheckBox_ZuoJiao" Style="{StaticResource OrangeSwitchStyle}" Content="" Grid.Column="3" HorizontalAlignment="Left" Margin="46,250,0,0" Grid.Row="1" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand" Click="CheckBox_ZuoJiao_Click" />
-        <CheckBox x:Name="CheckBox_YouJiao" Style="{StaticResource OrangeSwitchStyle}" Content="" Grid.Column="3" HorizontalAlignment="Left" Margin="222,250,0,0" Grid.Row="1" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand" Click="CheckBox_YouJiao_Click"/>
-        <Label x:Name="label_Copy2" Content="左脚地暖" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="58,220,0,0" Foreground="WhiteSmoke" Grid.Row="1" Height="29" Width="67" FontSize="14"/>
-        <Label x:Name="label_Copy3" Content="右脚地暖" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="234,221,0,0" Foreground="WhiteSmoke" Grid.Row="1" Height="29" Width="67" FontSize="14"/>
-        <Label x:Name="label_DiNuan_Guan" Content="×关" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="21,204,0,0" FontSize="16" Foreground="#FFF0190F" Grid.Column="1" Grid.Row="1"/>
-        <Label x:Name="label_DiNuan_Kai" Content="√开" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="158,204,0,0" FontSize="16" Foreground="#FF079E23" IsEnabled="False" Grid.Column="1" Grid.Row="1"/>
-        <Label x:Name="label_Zhuo_Guan" Content="×关" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="7,252,0,0" FontSize="16" Foreground="#FFF0190F" Grid.Column="3" Grid.Row="1"/>
-        <Label x:Name="label_Zhuo_Kai" Content="√开" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="140,252,0,0" FontSize="16" Foreground="#FF079E23" IsEnabled="False" Grid.Column="3" Grid.Row="1"/>
-        <Label x:Name="label_You_Guan" Content="×关" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="184,252,0,0" FontSize="16" Foreground="#FFF0190F" Grid.Column="3" Grid.Row="1"/>
-        <Label x:Name="label_You_Kai" Content="√开" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="313,252,0,0" FontSize="16" Foreground="#FF079E23" IsEnabled="False" Grid.Column="3" Grid.Row="1"/>
+        <Button x:Name="Button_Shen" Content="▲" Grid.Column="2" HorizontalAlignment="Left" Margin="37,190,0,0" Grid.Row="1" VerticalAlignment="Top" Width="27" FontSize="18" Height="27" Foreground="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" Cursor="Hand" Click="Button_Shen_Click"/>
+        <Button x:Name="Button_Jian" Content="▼" Grid.Column="2" HorizontalAlignment="Left" Margin="138,190,0,0" Grid.Row="1" VerticalAlignment="Top" Width="27" FontSize="18" Height="27" Foreground="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" Cursor="Hand" Click="Button_Jian_Click"/>
+        <Label x:Name="Label_SheZiWenDu" Content="88℃" Grid.Column="2" HorizontalAlignment="Left" Margin="76,187,0,0" Grid.Row="1" VerticalAlignment="Top" Foreground="#FFF1EAEA" FontSize="18" Height="34" Width="49"/>
+        <Image x:Name="image1" Grid.Column="3" HorizontalAlignment="Left" Height="173" Margin="44,77,0,0" Grid.Row="1" VerticalAlignment="Top" Width="83" Source="Images/DiNuan/ZuoJiao.jpg"/>
+        <Image x:Name="image1_Copy" Grid.Column="3" HorizontalAlignment="Left" Height="173" Margin="230,77,0,0" Grid.Row="1" VerticalAlignment="Top" Width="83" Source="Images/DiNuan/YouJiao.jpg"/>
+        <CheckBox x:Name="CheckBox_ZuoJiao" Style="{StaticResource OrangeSwitchStyle}" Content="" Grid.Column="3" HorizontalAlignment="Left" Margin="46,282,0,0" Grid.Row="1" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand" Click="CheckBox_ZuoJiao_Click" />
+        <CheckBox x:Name="CheckBox_YouJiao" Style="{StaticResource OrangeSwitchStyle}" Content="" Grid.Column="3" HorizontalAlignment="Left" Margin="222,282,0,0" Grid.Row="1" VerticalAlignment="Top" Height="36" Width="91" Cursor="Hand" Click="CheckBox_YouJiao_Click"/>
+        <Label x:Name="label_Copy2" Content="左脚地暖" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="58,252,0,0" Foreground="WhiteSmoke" Grid.Row="1" Height="29" Width="67" FontSize="14"/>
+        <Label x:Name="label_Copy3" Content="右脚地暖" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="234,253,0,0" Foreground="WhiteSmoke" Grid.Row="1" Height="29" Width="67" FontSize="14"/>
+        <Label x:Name="label_DiNuan_Guan" Content="×关" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="21,204,0,0" FontSize="16" Foreground="#FFF0190F" Grid.Column="1" Grid.Row="1" Height="30" Width="38"/>
+        <Label x:Name="label_DiNuan_Kai" Content="√开" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="158,204,0,0" FontSize="16" Foreground="#FF079E23" IsEnabled="False" Grid.Column="1" Grid.Row="1" Height="30" Width="37"/>
+        <Label x:Name="label_Zhuo_Guan" Content="×关" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="7,284,0,0" FontSize="16" Foreground="#FFF0190F" Grid.Column="3" Grid.Row="1" Height="30" Width="38"/>
+        <Label x:Name="label_Zhuo_Kai" Content="√开" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="140,284,0,0" FontSize="16" Foreground="#FF079E23" IsEnabled="False" Grid.Column="3" Grid.Row="1" Height="30" Width="37"/>
+        <Label x:Name="label_You_Guan" Content="×关" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="184,284,0,0" FontSize="16" Foreground="#FFF0190F" Grid.Column="3" Grid.Row="1" Height="30" Width="38"/>
+        <Label x:Name="label_You_Kai" Content="√开" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="313,284,0,0" FontSize="16" Foreground="#FF079E23" IsEnabled="False" Grid.Column="3" Grid.Row="1" Height="30" Width="37"/>
     </Grid>
 </Page>

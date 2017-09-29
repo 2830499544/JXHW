@@ -115,13 +115,14 @@ namespace JXHighWay.WatchHouse.Server
             DataTable vSwitchTable2 = button_DY2_KaiGuan.Tag == null ? null : (DataTable)button_DY2_KaiGuan.Tag;
             int vID = (int)dataGridView_List.SelectedRows[0].Cells["Column_ID"].Value;
             if (m_WatchHouseConfig.Update(vID, vGanTingID, textBox_GanTing_MC.Text,
-                comboBox_GanTing_LX.Text, textBox_LED1_IP.Text, vLED1Gao, vLED1Kuan, textBox_LED2_IP.Text, vLED2Gao, vLED2Kuan, vDianYuanID1, vDianYuanID2, vSwitchTable1, vSwitchTable2, ref vOutInfo))
+                comboBox_GanTing_LX.Text, textBox_LED1_IP.Text, vLED1Gao, vLED1Kuan, textBox_LED2_IP.Text,
+                vLED2Gao, vLED2Kuan, vDianYuanID1, vDianYuanID2, vSwitchTable1, vSwitchTable2, ref vOutInfo))
             {
                 MessageBox.Show("更新岗亭数据成功", "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 dataGridView_List.DataSource = m_WatchHouseConfig.GetAll();
             }
             else
-                MessageBox.Show(vOutInfo, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("更新失败", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     
 
