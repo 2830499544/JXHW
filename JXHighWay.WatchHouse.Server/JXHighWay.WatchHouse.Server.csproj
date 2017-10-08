@@ -156,6 +156,9 @@
     </EmbeddedResource>
     <None Include="App\DX.apk" />
     <None Include="App\SX.apk" />
+    <None Include="Doc\[模板]详细设计说明书%28整理版%29.doc" />
+    <None Include="Doc\智慧岗亭系统操作说明书.docx" />
+    <None Include="Doc\详细设计说明书.doc" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
