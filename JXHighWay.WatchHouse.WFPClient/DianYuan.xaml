@@ -33,6 +33,7 @@
         <Image x:Name="image" HorizontalAlignment="Left" Height="147" VerticalAlignment="Top" Width="147" Grid.Column="1" Margin="2,7,0,0" Grid.Row="1" Source="Images/DianYuan/DianYuan.jpg"/>
 
         <GroupBox Style="{StaticResource GroupboxWithoutWhiteBorder}" x:Name="groupBox_1" Header="开关1" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="6,0,0,0" Height="146" Width="160" FontSize="18" Foreground="#FFF5F1F1" BorderBrush="#FF91ACBD" Cursor="Hand" MouseLeftButtonDown="groupBox_1_MouseLeftButtonDown">
+            <Image HorizontalAlignment="Left" Height="19" Margin="26,62,0,0" VerticalAlignment="Top" Width="94" Source="Images/DianYuan/XianXiSZ.jpg"/>
 
         </GroupBox>
         <Label x:Name="label_Kai_1" Content="√开" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,112,9,0" FontSize="13" Foreground="#FF079E23" Grid.Column="2" Height="31" Width="32"/>
