@@ -118,6 +118,11 @@ namespace JXHighWay.WatchHouse.WFPClient
                     vGroupBox.Header = vPowerInfo.MingCheng;
                     vGroupBox.Tag = new int[] { powerNum,vPowerInfo.LuHao };
 
+                    //Image_2_XYSZ14
+                    Image vImageXYSZ = (Image)FindName(string.Format("Image_{0}_XYSZ{1}", powerNum, i));
+                    vImageXYSZ.Visibility = Visibility.Visible;
+                    vImageXYSZ.Tag = new int[] { powerNum, vPowerInfo.LuHao };
+
                     Image vImageDY = (Image)FindName(string.Format("image_DY{0}_DY{1}", powerNum,i));
                     vImageDY.Visibility = Visibility.Visible;
 
@@ -150,6 +155,9 @@ namespace JXHighWay.WatchHouse.WFPClient
                 {
                     GroupBox vGroupBox = (GroupBox)FindName(string.Format("groupBox_DY{0}_{1}", powerNum, i));
                     vGroupBox.Visibility = Visibility.Hidden;
+
+                    Image vImageXYSZ = (Image)FindName(string.Format("Image_{0}_XYSZ{1}", powerNum, i));
+                    vImageXYSZ.Visibility = Visibility.Hidden;
 
                     Image vImageDY = (Image)FindName(string.Format("image_DY{0}_DY{1}", powerNum, i));
                     vImageDY.Visibility = Visibility.Hidden;
@@ -297,6 +305,18 @@ namespace JXHighWay.WatchHouse.WFPClient
                 vCheckBox_Switch.IsChecked = !vCheckBox_Switch.IsChecked;
                 Xceed.Wpf.Toolkit.MessageBox.Show("开关状态为锁定，不能操作", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void Image_2_XYSZ1_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Image vImage = (Image)sender;
+            DianYuanMingXi vDianYuanMingXi = new DianYuanMingXi();
+            vDianYuanMingXi.LuHao = ((int[])vImage.Tag)[1];
+            if (((int[])vImage.Tag)[0] == 1)
+                vDianYuanMingXi.DianYuanID = App.PowerID1;
+            else if (((int[])vImage.Tag)[0] == 2)
+                vDianYuanMingXi.DianYuanID = App.PowerID2;
+            vDianYuanMingXi.ShowDialog();
         }
     }
 
