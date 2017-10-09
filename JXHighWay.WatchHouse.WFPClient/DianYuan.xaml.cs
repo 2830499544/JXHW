@@ -54,6 +54,11 @@ namespace JXHighWay.WatchHouse.WFPClient.Images
                     vGroupBox.Header = vPowerInfo.MingCheng;
                     vGroupBox.Tag = vPowerInfo.LuHao;
 
+                    //Image_XYSZ8
+                    Image vImageXYSZ = (Image)FindName(string.Format("Image_XYSZ{0}", i));
+                    vImageXYSZ.Visibility = Visibility.Visible;
+                    vImageXYSZ.Tag = vPowerInfo.LuHao;
+
                     Image vImageDY = (Image)FindName(string.Format("image_DY{0}", i));
                     vImageDY.Visibility = Visibility.Visible;
 
@@ -86,6 +91,9 @@ namespace JXHighWay.WatchHouse.WFPClient.Images
                 {
                     GroupBox vGroupBox = (GroupBox)FindName(string.Format("groupBox_{0}", i));
                     vGroupBox.Visibility = Visibility.Hidden;
+
+                    Image vImageXYSZ = (Image)FindName(string.Format("Image_XYSZ{0}", i));
+                    vImageXYSZ.Visibility = Visibility.Hidden;
 
                     Image vImageDY = (Image)FindName(string.Format("image_DY{0}", i));
                     vImageDY.Visibility = Visibility.Hidden;
@@ -227,6 +235,16 @@ namespace JXHighWay.WatchHouse.WFPClient.Images
                 vCheckBox_Switch.IsChecked = !vCheckBox_Switch.IsChecked;
                 Xceed.Wpf.Toolkit.MessageBox.Show("开关状态为锁定，不能操作", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void Image_XYSZ6_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Image vImage = (Image)sender;
+            DianYuanMingXi vDianYuanMingXi = new DianYuanMingXi();
+            vDianYuanMingXi.LuHao = (int)vImage.Tag;
+            vDianYuanMingXi.DianYuanID = App.PowerID1;
+            vDianYuanMingXi.Owner = Application.Current.MainWindow;
+            vDianYuanMingXi.ShowDialog();
         }
     }
 }

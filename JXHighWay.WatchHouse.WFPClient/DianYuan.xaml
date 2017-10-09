@@ -31,11 +31,9 @@
             <RowDefinition Height="160*" />
         </Grid.RowDefinitions>
         <Image x:Name="image" HorizontalAlignment="Left" Height="147" VerticalAlignment="Top" Width="147" Grid.Column="1" Margin="2,7,0,0" Grid.Row="1" Source="Images/DianYuan/DianYuan.jpg"/>
-
         <GroupBox Style="{StaticResource GroupboxWithoutWhiteBorder}" x:Name="groupBox_1" Header="开关1" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="6,0,0,0" Height="146" Width="160" FontSize="18" Foreground="#FFF5F1F1" BorderBrush="#FF91ACBD" Cursor="Hand" MouseLeftButtonDown="groupBox_1_MouseLeftButtonDown">
-            <Image HorizontalAlignment="Left" Height="19" Margin="26,62,0,0" VerticalAlignment="Top" Width="94" Source="Images/DianYuan/XianXiSZ.jpg"/>
-
         </GroupBox>
+
         <Label x:Name="label_Kai_1" Content="√开" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,112,9,0" FontSize="13" Foreground="#FF079E23" Grid.Column="2" Height="31" Width="32"/>
         <Image x:Name="image_DY1" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="30" Margin="16,24,0,0" Source="Images/DianYuan/DianYa.jpg" Grid.Column="2"/>
         <Label x:Name="label_DY1" Content="电压:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="51,24,0,0" Foreground="#FFF3EAEA" FontSize="16" Height="34" Width="51"/>
@@ -175,5 +173,19 @@
         <CheckBox x:Name="checkBox_Switch14" Content="" Style="{StaticResource OrangeSwitchStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="5" Margin="41,113,0,0" Height="27" Width="94" Grid.Row="2" Cursor="Hand"/>
         <Label x:Name="label_Kai_14" Content="√开" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="132,114,0,0" FontSize="13" Foreground="#FF079E23" IsEnabled="False" Grid.Column="5" Grid.Row="2" Height="31" Width="37"/>
         <Label x:Name="label_Guan_14" Content="×关" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,114,0,0" FontSize="13" Foreground="#FFF0190F" Grid.Column="5" Grid.Row="2" Height="31" Width="38"/>
+        <Image x:Name="Image_XYSZ1" HorizontalAlignment="Left" Height="24" Margin="23.2,85,0,0" VerticalAlignment="Top" Width="119" Source="Images/DianYuan/XianXiSZ.jpg" Grid.Column="2" MouseLeftButtonDown="Image_XYSZ6_MouseLeftButtonDown" Cursor="Hand"/>
+        <Image x:Name="Image_XYSZ2" HorizontalAlignment="Left" Height="24" Margin="25,85,0,0" VerticalAlignment="Top" Width="119" Source="Images/DianYuan/XianXiSZ.jpg" Grid.Column="3" MouseLeftButtonDown="Image_XYSZ6_MouseLeftButtonDown" Cursor="Hand"/>
+        <Image x:Name="Image_XYSZ3" HorizontalAlignment="Left" Height="24" Margin="26.8,85,0,0" VerticalAlignment="Top" Width="119" Source="Images/DianYuan/XianXiSZ.jpg" Grid.Column="4" MouseLeftButtonDown="Image_XYSZ6_MouseLeftButtonDown" Cursor="Hand"/>
+        <Image x:Name="Image_XYSZ4" HorizontalAlignment="Left" Height="24" Margin="26.6,85,0,0" VerticalAlignment="Top" Width="119" Source="Images/DianYuan/XianXiSZ.jpg" Grid.Column="5" MouseLeftButtonDown="Image_XYSZ6_MouseLeftButtonDown" Cursor="Hand"/>
+        <Image x:Name="Image_XYSZ5" HorizontalAlignment="Left" Height="24" Margin="25.4,85,0,0" VerticalAlignment="Top" Width="119" Source="Images/DianYuan/XianXiSZ.jpg" Grid.Column="6" MouseLeftButtonDown="Image_XYSZ6_MouseLeftButtonDown" Cursor="Hand"/>
+        <Image x:Name="Image_XYSZ6" HorizontalAlignment="Left" Height="24" Margin="23.2,84.4,0,0" VerticalAlignment="Top" Width="119" Source="Images/DianYuan/XianXiSZ.jpg" Grid.Column="2" Grid.Row="1" MouseLeftButtonDown="Image_XYSZ6_MouseLeftButtonDown" Cursor="Hand"/>
+        <Image x:Name="Image_XYSZ7" HorizontalAlignment="Left" Height="24" Margin="25,84.4,0,0" VerticalAlignment="Top" Width="119" Source="Images/DianYuan/XianXiSZ.jpg" Grid.Column="3" Grid.Row="1" MouseLeftButtonDown="Image_XYSZ6_MouseLeftButtonDown" Cursor="Hand"/>
+        <Image x:Name="Image_XYSZ8" HorizontalAlignment="Left" Height="24" Margin="26.8,84.4,0,0" VerticalAlignment="Top" Width="119" Source="Images/DianYuan/XianXiSZ.jpg" Grid.Column="4" Grid.Row="1" MouseLeftButtonDown="Image_XYSZ6_MouseLeftButtonDown" Cursor="Hand"/>
+        <Image x:Name="Image_XYSZ9" HorizontalAlignment="Left" Height="24" Margin="26.6,84.4,0,0" VerticalAlignment="Top" Width="119" Source="Images/DianYuan/XianXiSZ.jpg" Grid.Column="5" Grid.Row="1" MouseLeftButtonDown="Image_XYSZ6_MouseLeftButtonDown" Cursor="Hand"/>
+        <Image x:Name="Image_XYSZ10" HorizontalAlignment="Left" Height="24" Margin="25.4,84.4,0,0" VerticalAlignment="Top" Width="119" Source="Images/DianYuan/XianXiSZ.jpg" Grid.Column="6" Grid.Row="1" MouseLeftButtonDown="Image_XYSZ6_MouseLeftButtonDown" Cursor="Hand"/>
+        <Image x:Name="Image_XYSZ11" HorizontalAlignment="Left" Height="24" Margin="23.2,88.6,0,0" VerticalAlignment="Top" Width="119" Source="Images/DianYuan/XianXiSZ.jpg" Grid.Column="2" Grid.Row="2" MouseLeftButtonDown="Image_XYSZ6_MouseLeftButtonDown" Cursor="Hand"/>
+        <Image x:Name="Image_XYSZ12" HorizontalAlignment="Left" Height="24" Margin="25,88.6,0,0" VerticalAlignment="Top" Width="119" Source="Images/DianYuan/XianXiSZ.jpg" Grid.Column="3" Grid.Row="2" MouseLeftButtonDown="Image_XYSZ6_MouseLeftButtonDown" Cursor="Hand"/>
+        <Image x:Name="Image_XYSZ13" HorizontalAlignment="Left" Height="24" Margin="26.8,88.6,0,0" VerticalAlignment="Top" Width="119" Source="Images/DianYuan/XianXiSZ.jpg" Grid.Column="4" Grid.Row="2" MouseLeftButtonDown="Image_XYSZ6_MouseLeftButtonDown" Cursor="Hand"/>
+        <Image x:Name="Image_XYSZ14" HorizontalAlignment="Left" Height="24" Margin="26.6,88.6,0,0" VerticalAlignment="Top" Width="119" Source="Images/DianYuan/XianXiSZ.jpg" Grid.Column="5" Grid.Row="2" MouseLeftButtonDown="Image_XYSZ6_MouseLeftButtonDown" Cursor="Hand"/>
     </Grid>
 </Page>
