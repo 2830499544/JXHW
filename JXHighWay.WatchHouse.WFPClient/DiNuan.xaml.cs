@@ -143,8 +143,11 @@ namespace JXHighWay.WatchHouse.WFPClient
             }
             else
             {
-                label_DiNuan_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF0190F"));
-                label_DiNuan_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
+                label_DiNuan_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
+                label_DiNuan_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF079E23"));
+
+                //label_DiNuan_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF079E23"));
+                //label_DiNuan_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
             }
         }
 
