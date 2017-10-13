@@ -162,13 +162,14 @@ namespace JXHighWay.WatchHouse.Server
                     vSwitchTable = m_WatchHouseConfig.GetSwitchTable(vDianYuanID);
                 else
                     vSwitchTable = (DataTable)button_DY1_KaiGuan.Tag;
+                button_DY1_KaiGuan.Tag = vSwitchTable;
                 SwitchConfigForm vSwitchConfigForm = new SwitchConfigForm();
                 vSwitchConfigForm.WatchHouse = m_WatchHouseConfig;
                 vSwitchConfigForm.SwitchTable = vSwitchTable;
                 vSwitchConfigForm.DianYuanID = vDianYuanID;
                 vSwitchConfigForm.WatchHouseConfig = this;
                 vSwitchConfigForm.ShowDialog();
-                button_DY1_KaiGuan.Tag = vSwitchTable;
+                
             }
             else
                 MessageBox.Show("请输入正确的电源ID", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -231,11 +232,12 @@ namespace JXHighWay.WatchHouse.Server
                     vSwitchTable = m_WatchHouseConfig.GetSwitchTable(vDianYuanID);
                 else
                     vSwitchTable = (DataTable)button_DY2_KaiGuan.Tag;
+                button_DY2_KaiGuan.Tag = vSwitchTable;
                 SwitchConfigForm vSwitchConfigForm = new SwitchConfigForm();
                 vSwitchConfigForm.SwitchTable = vSwitchTable;
                 vSwitchConfigForm.DianYuanID = vDianYuanID;
                 vSwitchConfigForm.ShowDialog();
-                button_DY2_KaiGuan.Tag = vSwitchTable;
+                
             }
             else
                 MessageBox.Show("请输入正确的电源ID", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);

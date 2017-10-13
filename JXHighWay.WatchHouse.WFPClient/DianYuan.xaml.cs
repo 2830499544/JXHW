@@ -190,6 +190,7 @@ namespace JXHighWay.WatchHouse.WFPClient.Images
         {
             GroupBox vGroupBox = (GroupBox)sender;
             DianYuanMingXi vDianYuanMingXi = new DianYuanMingXi();
+            vDianYuanMingXi.Owner = Application.Current.MainWindow;
             vDianYuanMingXi.LuHao = (int)vGroupBox.Tag;
             vDianYuanMingXi.DianYuanID = App.PowerID1;
             vDianYuanMingXi.Owner = Application.Current.MainWindow;
@@ -241,6 +242,7 @@ namespace JXHighWay.WatchHouse.WFPClient.Images
         {
             Image vImage = (Image)sender;
             DianYuanMingXi vDianYuanMingXi = new DianYuanMingXi();
+            vDianYuanMingXi.Owner = Application.Current.MainWindow;
             vDianYuanMingXi.LuHao = (int)vImage.Tag;
             vDianYuanMingXi.DianYuanID = App.PowerID1;
             vDianYuanMingXi.Owner = Application.Current.MainWindow;

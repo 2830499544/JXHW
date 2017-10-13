@@ -132,12 +132,12 @@ namespace JXHighWay.WatchHouse.WFPClient
                 //操作
                 if (timingInfo.YunXuKZ == 0x00)
                 {
-                    vLabel_DS_CZ.Content = "禁止";
+                    vLabel_DS_CZ.Content = "关";
                     vLabel_DS_CZ.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EA3B3A"));
                 }
                 else
                 {
-                    vLabel_DS_CZ.Content = "允许";
+                    vLabel_DS_CZ.Content = "开";
                     vLabel_DS_CZ.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#1BA261"));
                 }
                 byte vWeek, vHour, vMinute, vDay;

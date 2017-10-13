@@ -289,7 +289,7 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
                 {
                     PowerSendCMDEFModel vSelectResult = m_BasicDBClassSelect.SelectRecordByPrimaryKeyEx<PowerSendCMDEFModel>(vID);
                     vResult = vSelectResult.State ?? false;
-                    if (!vResult && (DateTime.Now - vStartTime).TotalMilliseconds >= 4000)
+                    if (!vResult && (DateTime.Now - vStartTime).TotalMilliseconds >= 5000)
                         break;
                     Thread.Sleep(100);
                 } while (!vResult);

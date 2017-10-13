@@ -252,10 +252,10 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="事件类型" Width="100" Binding="{Binding ShiJianLX, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="13" />
                             <DataGridTextColumn Header="事件内容" Width="200" Binding="{Binding NeiRong, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="13" />
-                            <DataGridTextColumn Header="时间" Width="150" Binding="{Binding Time,StringFormat='{}{0:yyyy-MM-dd HH:mm:ss}', Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="13" />
+                            <DataGridTextColumn Header="时间" Width="183" Binding="{Binding Time,StringFormat='{}{0:yyyy-MM-dd HH:mm:ss}', Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="13" />
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Label x:Name="Label_Title" Content="操作类" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="217,1,0,0" Height="30" Grid.Row="1" Width="68"/>
+                    <Label x:Name="Label_Title" Content="操作类" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="217,30,0,0" Height="31" Width="73" Foreground="#FF248CAF" Grid.RowSpan="2"/>
                 </Grid>
             </TabItem>
         </TabControl>

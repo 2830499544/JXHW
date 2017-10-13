@@ -73,6 +73,7 @@ namespace JXHighWay.WatchHouse.WFPClient
         private void Image_MouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
         {
             ConfigWindow vConfigWindow = new ConfigWindow();
+            vConfigWindow.Owner = Application.Current.MainWindow;
             vConfigWindow.ShowDialog();
         }
 
