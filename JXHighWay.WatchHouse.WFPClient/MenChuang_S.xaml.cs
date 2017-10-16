@@ -166,7 +166,7 @@ namespace JXHighWay.WatchHouse.WFPClient
             }
             else
             {
-                label_Men_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF0190F"));
+                label_Men_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF079E22"));
                 label_Men_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
             }
         }
@@ -207,7 +207,7 @@ namespace JXHighWay.WatchHouse.WFPClient
             }
             else
             {
-                label_Suo_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF0190F"));
+                label_Suo_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF079E22"));
                 label_Suo_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
             }
         }
@@ -266,7 +266,7 @@ namespace JXHighWay.WatchHouse.WFPClient
             }
             else
             {
-                label_HFMD_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF0190F"));
+                label_HFMD_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF079E22"));
                 label_HFMD_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
             }
         }
@@ -280,7 +280,7 @@ namespace JXHighWay.WatchHouse.WFPClient
             }
             else
             {
-                label_QFMD_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF0190F"));
+                label_QFMD_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF079E22"));
                 label_QFMD_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
             }
         }
@@ -338,7 +338,7 @@ namespace JXHighWay.WatchHouse.WFPClient
             }
             else
             {
-                label_HFM_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF0190F"));
+                label_HFM_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF079E22"));
                 label_HFM_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
             }
         }
@@ -352,7 +352,7 @@ namespace JXHighWay.WatchHouse.WFPClient
             }
             else
             {
-                label_QFM_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF0190F"));
+                label_QFM_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF079E22"));
                 label_QFM_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
             }
         }
@@ -411,7 +411,7 @@ namespace JXHighWay.WatchHouse.WFPClient
             }
             else
             {
-                label_HZDC_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF0190F"));
+                label_HZDC_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF079E22"));
                 label_HZDC_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
             }
         }
@@ -425,7 +425,7 @@ namespace JXHighWay.WatchHouse.WFPClient
             }
             else
             {
-                label_QZDC_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF0190F"));
+                label_QZDC_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF079E22"));
                 label_QZDC_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
             }
         }
@@ -464,7 +464,7 @@ namespace JXHighWay.WatchHouse.WFPClient
             }
             else
             {
-                label_BJ_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF0190F"));
+                label_BJ_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF079E22"));
                 label_BJ_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
             }
         }

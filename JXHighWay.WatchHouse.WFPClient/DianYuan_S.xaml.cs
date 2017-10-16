@@ -207,7 +207,7 @@ namespace JXHighWay.WatchHouse.WFPClient
             }
             else
             {
-                vlabel_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF0190F"));
+                vlabel_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF079E22"));
                 vlabel_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
             }
         }
@@ -309,6 +309,32 @@ namespace JXHighWay.WatchHouse.WFPClient
         }
 
         private void Image_2_XYSZ1_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Image vImage = (Image)sender;
+            DianYuanMingXi vDianYuanMingXi = new DianYuanMingXi();
+            vDianYuanMingXi.Owner = Application.Current.MainWindow;
+            vDianYuanMingXi.LuHao = ((int[])vImage.Tag)[1];
+            if (((int[])vImage.Tag)[0] == 1)
+                vDianYuanMingXi.DianYuanID = App.PowerID1;
+            else if (((int[])vImage.Tag)[0] == 2)
+                vDianYuanMingXi.DianYuanID = App.PowerID2;
+            vDianYuanMingXi.ShowDialog();
+        }
+
+        private void label_SZ1_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Label vLabel = (Label)sender;
+            DianYuanMingXi vDianYuanMingXi = new DianYuanMingXi();
+            vDianYuanMingXi.Owner = Application.Current.MainWindow;
+            vDianYuanMingXi.LuHao = ((int[])vLabel.Tag)[1];
+            if (((int[])vLabel.Tag)[0] == 1)
+                vDianYuanMingXi.DianYuanID = App.PowerID1;
+            else if (((int[])vLabel.Tag)[0] == 2)
+                vDianYuanMingXi.DianYuanID = App.PowerID2;
+            vDianYuanMingXi.ShowDialog();
+        }
+
+        private void image_SZ1_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Image vImage = (Image)sender;
             DianYuanMingXi vDianYuanMingXi = new DianYuanMingXi();

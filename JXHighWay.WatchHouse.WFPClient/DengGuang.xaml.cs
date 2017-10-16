@@ -195,7 +195,7 @@ namespace JXHighWay.WatchHouse.WFPClient
             }
             else
             {
-                label_GuanDeng.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF0190F"));
+                label_GuanDeng.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF079E22"));
                 label_KaiDeng.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
             }
         }

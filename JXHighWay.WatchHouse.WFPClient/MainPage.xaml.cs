@@ -158,24 +158,24 @@ namespace JXHighWay.WatchHouse.WFPClient
 
 
                     //在线状态
-                    Image vImage_BJ = FindName(string.Format("Image_BJ{0}", i + 1-vStartIndex))==null?null: (Image)FindName(string.Format("Image_BJ{0}", i + 1-vStartIndex));
-                    if (vImage_BJ==null )
-                    {
+                    //Image vImage_BJ = FindName(string.Format("Image_BJ{0}", i + 1-vStartIndex))==null?null: (Image)FindName(string.Format("Image_BJ{0}", i + 1-vStartIndex));
+                    //if (vImage_BJ==null )
+                    //{
                         //报警图标
-                        vImage_BJ = new Image()
-                        {
-                            Source = new BitmapImage(new Uri(@"Images/Main/BaoJing.png", UriKind.Relative)),
-                            Width = 47,
-                            Height = 47,
-                            Name = string.Format("Image_BJ{0}", i + 1-vStartIndex)
-                        };
-                        vImage_BJ.SetValue(Grid.RowProperty, vRowIndex);
-                        vImage_BJ.SetValue(Grid.ColumnProperty, vColumnIndex);
-                        vImage_BJ.Margin = new Thickness(144, -159, 0, 0);
-                        Grid_GanTing.Children.Add(vImage_BJ);
-                        Grid_GanTing.RegisterName(vImage_BJ.Name, vImage_BJ);
-                    }
-                    vImage_BJ.Visibility = WatchHouseInfoList[i].IsOnline ? Visibility.Hidden : Visibility.Visible;
+                        //vImage_BJ = new Image()
+                        //{
+                        //    Source = new BitmapImage(new Uri(@"Images/Main/BaoJing.png", UriKind.Relative)),
+                        //    Width = 47,
+                        //    Height = 47,
+                        //    Name = string.Format("Image_BJ{0}", i + 1-vStartIndex)
+                        //};
+                        //vImage_BJ.SetValue(Grid.RowProperty, vRowIndex);
+                        //vImage_BJ.SetValue(Grid.ColumnProperty, vColumnIndex);
+                        //vImage_BJ.Margin = new Thickness(144, -159, 0, 0);
+                        //Grid_GanTing.Children.Add(vImage_BJ);
+                        //Grid_GanTing.RegisterName(vImage_BJ.Name, vImage_BJ);
+                    //}
+                    //vImage_BJ.Visibility = WatchHouseInfoList[i].IsOnline ? Visibility.Hidden : Visibility.Visible;
 
                     Label vLabelName = (Label)FindName(string.Format("Label_Name_WH{0}", i + 1-vStartIndex));
                     vLabelName.Content = WatchHouseInfoList[i].GangTingMC;

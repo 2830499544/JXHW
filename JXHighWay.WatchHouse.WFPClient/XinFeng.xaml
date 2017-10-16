@@ -85,7 +85,7 @@
             <Image x:Name="image8" HorizontalAlignment="Left" Height="55"  VerticalAlignment="Top" Width="7" Source="Images/XinFeng/YouYuanJiao.jpg" Grid.Column="10" />
         </Grid>
         <GroupBox Style="{StaticResource GroupboxWithoutWhiteBorder}" x:Name="groupBox_1_Copy" Header="风力调节" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="10,164,0,0" Height="95" Width="459" FontSize="18" Foreground="#FFF5F1F1" BorderBrush="#FF91ACBD" Cursor="Hand"  Grid.Row="1"/>
-        <Label x:Name="label_Guan" Content="×关" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="21,192,0,0" FontSize="16" Foreground="#FFF0190F" Grid.Column="1" Grid.Row="1"/>
-        <Label x:Name="label_Kai" Content="√开" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,192,0,0" FontSize="16" Foreground="#FF079E23" IsEnabled="False" Grid.Column="1" Grid.Row="1"/>
+        <Label x:Name="label_Guan" Content="×关" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="21,192,0,0" FontSize="16" Foreground="#FF079E22" Grid.Column="1" Grid.Row="1" FontWeight="Bold"/>
+        <Label x:Name="label_Kai" Content="√开" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,192,0,0" FontSize="16" Foreground="#FF079E23" IsEnabled="False" Grid.Column="1" Grid.Row="1" FontWeight="Bold"/>
     </Grid>
 </Page>

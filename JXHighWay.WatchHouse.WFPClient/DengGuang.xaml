@@ -53,8 +53,8 @@
             <Image x:Name="image_100" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="50" Source="Images/DengGuang/100.jpg"  Grid.Column="7" Cursor="Hand" MouseLeftButtonDown="image_100_MouseLeftButtonDown" />
             <Image x:Name="image8" HorizontalAlignment="Left" Height="55"  VerticalAlignment="Top" Width="7" Source="Images/DengGuang/YouYuanJiao.jpg" Grid.Column="8" />
         </Grid>
-        <Label x:Name="label_KaiDeng" Content="√开灯" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Margin="152,191,0,0" Grid.Row="1" FontSize="16" Foreground="#FF079E23" IsEnabled="False"/>
-        <Label x:Name="label_GuanDeng" Content="×关灯" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Margin="6,191,0,0" Grid.Row="1" FontSize="16" Foreground="#FFF0190F"/>
+        <Label x:Name="label_KaiDeng" Content="√开灯" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Margin="152,191,0,0" Grid.Row="1" FontSize="16" Foreground="#FF079E23" IsEnabled="False" FontWeight="Bold"/>
+        <Label x:Name="label_GuanDeng" Content="×关灯" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Margin="6,191,0,0" Grid.Row="1" FontSize="16" Foreground="#FF079E22" FontWeight="Bold"/>
         <GroupBox x:Name="groupBox" BorderBrush="#FF91ACBD" Style="{StaticResource GroupboxWithoutWhiteBorder}" Header="当前亮度" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="8,33,0,0" Grid.Row="1" Height="155" Width="197" FontSize="18" Foreground="#FFF7F2F2"/>
         <GroupBox x:Name="groupBox_Copy" BorderBrush="#FF91ACBD" Style="{StaticResource GroupboxWithoutWhiteBorder}" Header="亮度调节" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="13,34,0,0" Grid.Row="1" Height="85" Width="294" FontSize="18" Foreground="#FFF7F2F2"/>
     </Grid>

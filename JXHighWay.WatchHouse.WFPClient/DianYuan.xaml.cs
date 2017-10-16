@@ -54,10 +54,14 @@ namespace JXHighWay.WatchHouse.WFPClient.Images
                     vGroupBox.Header = vPowerInfo.MingCheng;
                     vGroupBox.Tag = vPowerInfo.LuHao;
 
-                    //Image_XYSZ8
-                    Image vImageXYSZ = (Image)FindName(string.Format("Image_XYSZ{0}", i));
-                    vImageXYSZ.Visibility = Visibility.Visible;
-                    vImageXYSZ.Tag = vPowerInfo.LuHao;
+                    
+                    Image vImageSZ = (Image)FindName(string.Format("image_SZ{0}", i));
+                    vImageSZ.Visibility = Visibility.Visible;
+                    vImageSZ.Tag = vPowerInfo.LuHao;
+
+                    Label vLabelSZ = (Label)FindName(string.Format("label_SZ{0}", i));
+                    vLabelSZ.Visibility = Visibility.Visible;
+                    vLabelSZ.Tag = vPowerInfo.LuHao;
 
                     Image vImageDY = (Image)FindName(string.Format("image_DY{0}", i));
                     vImageDY.Visibility = Visibility.Visible;
@@ -92,8 +96,11 @@ namespace JXHighWay.WatchHouse.WFPClient.Images
                     GroupBox vGroupBox = (GroupBox)FindName(string.Format("groupBox_{0}", i));
                     vGroupBox.Visibility = Visibility.Hidden;
 
-                    Image vImageXYSZ = (Image)FindName(string.Format("Image_XYSZ{0}", i));
-                    vImageXYSZ.Visibility = Visibility.Hidden;
+                    Image vImageSZ = (Image)FindName(string.Format("image_SZ{0}", i));
+                    vImageSZ.Visibility = Visibility.Hidden;
+
+                    Label vLabelSZ = (Label)FindName(string.Format("label_SZ{0}", i));
+                    vLabelSZ.Visibility = Visibility.Hidden;
 
                     Image vImageDY = (Image)FindName(string.Format("image_DY{0}", i));
                     vImageDY.Visibility = Visibility.Hidden;
@@ -179,7 +186,7 @@ namespace JXHighWay.WatchHouse.WFPClient.Images
             }
             else
             {
-                vlabel_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF0190F"));
+                vlabel_Guan.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF079E22"));
                 vlabel_Kai.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF777877"));
             }
         }
@@ -239,6 +246,28 @@ namespace JXHighWay.WatchHouse.WFPClient.Images
         }
 
         private void Image_XYSZ6_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Image vImage = (Image)sender;
+            DianYuanMingXi vDianYuanMingXi = new DianYuanMingXi();
+            vDianYuanMingXi.Owner = Application.Current.MainWindow;
+            vDianYuanMingXi.LuHao = (int)vImage.Tag;
+            vDianYuanMingXi.DianYuanID = App.PowerID1;
+            vDianYuanMingXi.Owner = Application.Current.MainWindow;
+            vDianYuanMingXi.ShowDialog();
+        }
+
+        private void label_SZ1_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Label vLabel = (Label)sender;
+            DianYuanMingXi vDianYuanMingXi = new DianYuanMingXi();
+            vDianYuanMingXi.Owner = Application.Current.MainWindow;
+            vDianYuanMingXi.LuHao = (int)vLabel.Tag;
+            vDianYuanMingXi.DianYuanID = App.PowerID1;
+            vDianYuanMingXi.Owner = Application.Current.MainWindow;
+            vDianYuanMingXi.ShowDialog();
+        }
+
+        private void image_SZ1_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Image vImage = (Image)sender;
             DianYuanMingXi vDianYuanMingXi = new DianYuanMingXi();

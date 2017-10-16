@@ -130,7 +130,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                 Label vLabel_DS_ZQ = (Label)FindName(string.Format("label_DS_ZQ{0}", zhuHao));
                 Label vLabel_DS_SJ = (Label)FindName(string.Format("label_DS_SJ{0}", zhuHao));
                 //操作
-                if (timingInfo.YunXuKZ == 0x00)
+                if (timingInfo.RenWuLX == 0x00)
                 {
                     vLabel_DS_CZ.Content = "关";
                     vLabel_DS_CZ.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EA3B3A"));
@@ -145,7 +145,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                 {
                     case 0:
                         //vLabel_DS_ZQ.Content = "单次";
-                        vLabel_DS_SJ.Content = CommHelper.TimestampToDateTime(timingInfo.TimeData).ToString("yyyy-MM-dd hh:mm:ss");
+                        vLabel_DS_SJ.Content = CommHelper.TimestampToDateTime(timingInfo.TimeData).ToString("yyyy-MM-dd HH:mm:ss");
                         break;
                     case 1:
                         //vLabel_DS_ZQ.Content = "每天";
@@ -181,12 +181,18 @@ namespace JXHighWay.WatchHouse.WFPClient
             createDatePicker();
             createValueRangeTextBox();
             timePicker_Time.Value = DateTime.Now;
-            for(int i=0;i<4;i++)
+            m_TimingInfoList = new List<TimingInfo>();
+            List<TimingInfo> vQueryTimingInfo = m_PowerMonitoring.GetTimingInfo(DianYuanID, m_LuHao);
+            for (int i=0;i<4;i++)
             {
-                byte vLuHao = (byte)(i+1 >> 0);
-                m_TimingInfoList =  m_PowerMonitoring.GetTimingInfo(DianYuanID, vLuHao);
-                TimingInfo vTimingInfo = m_TimingInfoList.Where(m =>m.LuHao == vLuHao).FirstOrDefault();
-                bindTimingInfo(vTimingInfo,i);
+                byte vZhuHao = (byte)(i >> 0);
+                TimingInfo vTimingInfo = vQueryTimingInfo.Where(m =>m.LuHao == m_LuHao && m.ZhuHao==vZhuHao).FirstOrDefault();
+                if (vTimingInfo != null)
+                {
+                    //m_TimingInfoList
+                    bindTimingInfo(vTimingInfo, i);
+                    m_TimingInfoList.Add(vTimingInfo);
+                }
             }
         }
 
@@ -338,36 +344,80 @@ namespace JXHighWay.WatchHouse.WFPClient
             label_DS_Title.Content = string.Format("定时参数（{0}组）", vZhuHao);
 
             Label vLabel_DS_CZ = (Label)FindName(string.Format("label_DS_CZ{0}", m_EditZhuHao));
-            TimingInfo vTimingInfo = m_TimingInfoList.Where(m => m.LuHao == m_EditZhuHao).FirstOrDefault();
+            TimingInfo vTimingInfo = m_TimingInfoList.Where(m => m.LuHao == m_LuHao && m.ZhuHao==m_EditZhuHao).FirstOrDefault();
             if (vTimingInfo!=null && vTimingInfo.DianYuanID != null && vTimingInfo.DianYuanID!="")
             {
-                //comboBox_ZQ.Text = m_PowerMonitoring.ConvertTimingZQ(vTimingInfo.ZhouQi);
-               
-                DateTime vDateTime = CommHelper.TimestampToDateTime(vTimingInfo.TimeData);
+                //vWeek = (byte)(timingInfo.TimeData >> 16);
+                //vHour = (byte)(timingInfo.TimeData >> 8);
+                //vMinute = (byte)(timingInfo.TimeData >> 0);
+                //vLabel_DS_SJ.Content = string.Format("周{0} {1}:{2}", vWeek, vHour, vMinute);
+                byte vWeek, vHour, vMinute, vDay;
                 switch (vTimingInfo.ZhouQi)
                 {
                     case 0:
-                        comboBox_ZQ.SelectedValue = "单次";
-                        m_DatePicker.DisplayDate = vDateTime;
+                        comboBox_ZQ.Text = "单次";
+                        DateTime vDateTime = CommHelper.TimestampToDateTime(vTimingInfo.TimeData);
+                        m_DatePicker.SelectedDate = vDateTime;
+                        timePicker_Time.Value = vDateTime;
                         break;
                     case 1:
-                        comboBox_ZQ.SelectedValue = "每天";
+                        comboBox_ZQ.Text = "每天";
+                        vHour = (byte)(vTimingInfo.TimeData >> 8);
+                        vMinute = (byte)(vTimingInfo.TimeData >> 0);
+                        timePicker_Time.Value = new DateTime(1970, 1, 1, vHour, vMinute, 0);
                         break;
                     case 2:
-                        byte vWeek = (byte)(vTimingInfo.TimeData >> 16);
-                        m_ComboBox.Text = string.Format("周{0}", vWeek);
-                        comboBox_ZQ.SelectedValue = "每周";
+                        vWeek = (byte)(vTimingInfo.TimeData >> 16);
+                        vHour = (byte)(vTimingInfo.TimeData >> 8);
+                        vMinute = (byte)(vTimingInfo.TimeData >> 0);
+                        //byte vWeek = (byte)(vTimingInfo.TimeData >> 16);
+                        m_ComboBox.Text = string.Format("周{0}", convertWeekStr(vWeek));
+                        comboBox_ZQ.Text = "每周";
+                        timePicker_Time.Value = new DateTime(1970, 1, 1, vHour, vMinute, 0);
                         break;
                     case 3:
-                        byte vDay = (byte)(vTimingInfo.TimeData >> 16);
+                        vDay = (byte)(vTimingInfo.TimeData >> 16);
+                        vHour = (byte)(vTimingInfo.TimeData >> 8);
+                        vMinute = (byte)(vTimingInfo.TimeData >> 0);
                         m_IntegerUpDown.Value = vDay;
-                        comboBox_ZQ.SelectedValue = "每月";
+                        comboBox_ZQ.Text = "每月";
+                        timePicker_Time.Value = new DateTime(1970, 1, 1, vHour, vMinute, 0);
                         break;
                     
                 }
-                timePicker_Time.Value = vDateTime;
-                CheckBox_ChaoZhuo.IsChecked = vTimingInfo.YunXuKZ == 0 ? false : true;
+                //timePicker_Time.Value = vDateTime;
+                CheckBox_ChaoZhuo.IsChecked = vTimingInfo.RenWuLX == 0 ? false : true;
             }
+        }
+
+        string convertWeekStr( int weekInt )
+        {
+            string vResult = "";
+            switch ( weekInt )
+            {
+                case 1:
+                    vResult = "一";
+                    break;
+                case 2:
+                    vResult = "二";
+                    break;
+                case 3:
+                    vResult = "三";
+                    break;
+                case 4:
+                    vResult = "四";
+                    break;
+                case 5:
+                    vResult = "五";
+                    break;
+                case 6:
+                    vResult = "六";
+                    break;
+                case 7:
+                    vResult = "天";
+                    break;
+            }
+            return vResult;
         }
 
         private async void button_BaoChun_Click(object sender, RoutedEventArgs e)

@@ -261,6 +261,8 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
                     ZhouQi = ZhouQi,
                     ZhuHao = ZhuHao
                 };
+                string vSql = string.Format("DianYuanID='{0}' and LuHao={1} and ZhuHao={2}",DianYuanID,LuHao,ZhuHao);
+                m_BasicDBClass.DeleteRecordCustom<PowerTimingEFModel>(vSql);
                 vResult = m_BasicDBClass.InsertRecord(vPowerTimingEFModel) > 0 ? true : false;
             }
             return vResult;
