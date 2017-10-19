@@ -156,6 +156,7 @@
     </EmbeddedResource>
     <None Include="App\DX.apk" />
     <None Include="App\SX.apk" />
+    <None Include="Doc\2017年10月17日测试出现的问题.docx" />
     <None Include="Doc\2017年10月9日测试出现的问题.docx" />
     <None Include="Doc\[模板]详细设计说明书%28整理版%29.doc" />
     <None Include="Doc\客户端使用说明书.docx" />

@@ -20,8 +20,8 @@
     <Grid Background="#245d7c">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0*"/>
-            <ColumnDefinition Width="145*"/>
-            <ColumnDefinition Width="879*"/>
+            <ColumnDefinition Width="83*"/>
+            <ColumnDefinition Width="941*"/>
 
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>

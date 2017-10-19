@@ -118,10 +118,13 @@ namespace JXHighWay.WatchHouse.WFPClient
                     vGroupBox.Header = vPowerInfo.MingCheng;
                     vGroupBox.Tag = new int[] { powerNum,vPowerInfo.LuHao };
 
-                    //Image_2_XYSZ14
-                    Image vImageXYSZ = (Image)FindName(string.Format("Image_{0}_XYSZ{1}", powerNum, i));
-                    vImageXYSZ.Visibility = Visibility.Visible;
-                    vImageXYSZ.Tag = new int[] { powerNum, vPowerInfo.LuHao };
+                    Image vImageSZ = (Image)FindName(string.Format("image_{0}_SZ{1}", powerNum,i));
+                    vImageSZ.Visibility = Visibility.Visible;
+                    vImageSZ.Tag = new int[] { powerNum, vPowerInfo.LuHao };
+
+                    Label vLabelSZ = (Label)FindName(string.Format("label_{0}_SZ{1}", powerNum,i));
+                    vLabelSZ.Visibility = Visibility.Visible;
+                    vLabelSZ.Tag = new int[] { powerNum, vPowerInfo.LuHao };
 
                     Image vImageDY = (Image)FindName(string.Format("image_DY{0}_DY{1}", powerNum,i));
                     vImageDY.Visibility = Visibility.Visible;
@@ -156,8 +159,13 @@ namespace JXHighWay.WatchHouse.WFPClient
                     GroupBox vGroupBox = (GroupBox)FindName(string.Format("groupBox_DY{0}_{1}", powerNum, i));
                     vGroupBox.Visibility = Visibility.Hidden;
 
-                    Image vImageXYSZ = (Image)FindName(string.Format("Image_{0}_XYSZ{1}", powerNum, i));
-                    vImageXYSZ.Visibility = Visibility.Hidden;
+                    Image vImageSZ = (Image)FindName(string.Format("image_{0}_SZ{1}", powerNum, i));
+                    vImageSZ.Visibility = Visibility.Hidden;
+                    
+
+                    Label vLabelSZ = (Label)FindName(string.Format("label_{0}_SZ{1}", powerNum, i));
+                    vLabelSZ.Visibility = Visibility.Hidden;
+                    
 
                     Image vImageDY = (Image)FindName(string.Format("image_DY{0}_DY{1}", powerNum, i));
                     vImageDY.Visibility = Visibility.Hidden;

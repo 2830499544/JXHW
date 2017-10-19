@@ -341,7 +341,8 @@ namespace JXHighWay.WatchHouse.WFPClient
             Button vButton = (Button)sender;
             int vZhuHao = Convert.ToInt32( vButton.Tag );
             m_EditZhuHao = vZhuHao;
-            label_DS_Title.Content = string.Format("定时参数（{0}组）", vZhuHao);
+            
+            label_DS_Title.Content = string.Format("定时参数（{0}组）", vZhuHao+1);
 
             Label vLabel_DS_CZ = (Label)FindName(string.Format("label_DS_CZ{0}", m_EditZhuHao));
             TimingInfo vTimingInfo = m_TimingInfoList.Where(m => m.LuHao == m_LuHao && m.ZhuHao==m_EditZhuHao).FirstOrDefault();
