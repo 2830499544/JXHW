@@ -126,8 +126,8 @@ namespace JXHighWay.WatchHouse.WFPClient
                 image_ShanYei.Visibility = Visibility.Visible;
                 image_XiaYei.Visibility = Visibility.Visible;
             }
-            int vStartIndex = (m_PageIndex * 8) - 8;
-            int vEndIndex = m_PageIndex * 8;
+            int vStartIndex = (m_PageIndex * 15) - 15;
+            int vEndIndex = m_PageIndex * 15;
             for (int i = vStartIndex; i < vEndIndex; i++)
             {
                 if (i < WatchHouseInfoList.Count)

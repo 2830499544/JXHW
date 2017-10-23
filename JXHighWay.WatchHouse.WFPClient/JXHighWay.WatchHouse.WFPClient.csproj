@@ -542,6 +542,10 @@
     <Resource Include="Images\LED\xuxian.jpg" />
     <Resource Include="Images\DianYuan\XianXiSZ.jpg" />
     <Resource Include="Images\DianYuan\SheZhi.jpg" />
+    <Resource Include="Images\chu.jpg" />
+    <Resource Include="Images\ru.jpg" />
+    <Resource Include="Images\shuang.jpg" />
+    <Resource Include="Images\Main\shuang.jpg" />
     <Content Include="LED\1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

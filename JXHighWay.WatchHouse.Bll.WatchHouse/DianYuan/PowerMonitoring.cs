@@ -191,6 +191,16 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
             return vResult;
         }
 
+        public bool SendCMD_OnOffTiming(string DianYuanID, byte SheBieLX, byte LuHao,bool OnOff)
+        {
+            string vSql = string.Format("DianYuanID='{0}' and LuHao={1}",DianYuanID,LuHao);
+            PowerTimingEFModel vPowerTimingEFModel = new PowerTimingEFModel()
+            {
+                YunXuKZ = OnOff?(byte?)0x01:(byte?)0x00
+            };
+            return m_BasicDBClassSelect.UpdateRecord<PowerTimingEFModel>(vPowerTimingEFModel,vSql);
+        }
+
         /// <summary>
         /// 定时控制
         /// </summary>

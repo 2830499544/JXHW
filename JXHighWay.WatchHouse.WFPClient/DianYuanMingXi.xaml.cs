@@ -169,6 +169,8 @@ namespace JXHighWay.WatchHouse.WFPClient
                         break;
                 }
                 vLabel_DS_ZQ.Content = m_PowerMonitoring.ConvertTimingZQToStr(timingInfo.ZhouQi);
+                CheckBox_ChaoZhuo.IsChecked = timingInfo.RenWuLX == 0x01 ? true : false;
+                CheckBox_YunXuKZ.IsChecked = timingInfo.YunXuKZ == 0x01 ? true : false;
             }
         }
        
@@ -429,7 +431,10 @@ namespace JXHighWay.WatchHouse.WFPClient
 
                 //int vZhuHaoInt = (int)vButton.Tag;
                 byte vZhuHao = (byte)(m_EditZhuHao >> 0);
+                //任务类型 
                 byte vRenWuLeiXin = CheckBox_ChaoZhuo.IsChecked.Value?(byte)0x01:(byte)0x00;
+                //允许控制
+                byte vYunXuKZ = CheckBox_YunXuKZ.IsChecked.Value? (byte)0x01 : (byte)0x00;
                 byte vZhouQi = (byte)m_PowerMonitoring.ConvertTimingStrToZQ(comboBox_ZQ.Text);
                 byte vTimeData1=0x00, vTimeData2=0x00, vTimeData3=0x00, vTimeData4=0x00;
                 int vTimeData = 0;
@@ -477,7 +482,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                         vTimeData = BitConverter.ToInt32(new byte[] { vTimeData4, vTimeData3, vTimeData2, vTimeData1 },0);
                         break;
                 }
-                bool vResult = await m_PowerMonitoring.SendCMD_Timing(DianYuanID, 0x01, vLuHao, vZhuHao, vRenWuLeiXin, vZhouQi, 0x01, vTimeData);
+                bool vResult = await m_PowerMonitoring.SendCMD_Timing(DianYuanID, 0x01, vLuHao, vZhuHao, vRenWuLeiXin, vZhouQi, vYunXuKZ, vTimeData);
                 if (vResult)
                 {
                     TimingInfo vTimingInfo = m_TimingInfoList.Where(m => m.ZhuHao == m_EditZhuHao).FirstOrDefault();
