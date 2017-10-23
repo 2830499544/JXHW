@@ -82,6 +82,13 @@ namespace JXHighWay.WatchHouse.WFPClient
             Image_WH6.MouseLeftButtonDown += Image_MouseLeftButtonDown;
             Image_WH7.MouseLeftButtonDown += Image_MouseLeftButtonDown;
             Image_WH8.MouseLeftButtonDown += Image_MouseLeftButtonDown;
+            Image_WH9.MouseLeftButtonDown += Image_MouseLeftButtonDown;
+            Image_WH10.MouseLeftButtonDown += Image_MouseLeftButtonDown;
+            Image_WH11.MouseLeftButtonDown += Image_MouseLeftButtonDown;
+            Image_WH12.MouseLeftButtonDown += Image_MouseLeftButtonDown;
+            Image_WH13.MouseLeftButtonDown += Image_MouseLeftButtonDown;
+            Image_WH14.MouseLeftButtonDown += Image_MouseLeftButtonDown;
+            Image_WH15.MouseLeftButtonDown += Image_MouseLeftButtonDown;
             //站点名称
             Label_Title.Content = App.TollStationName;
 
@@ -116,7 +123,7 @@ namespace JXHighWay.WatchHouse.WFPClient
             WatchHouseMonitoring vMonitoring = new WatchHouseMonitoring();
             List<WatchHouseInfo> WatchHouseInfoList = vMonitoring.GetAllWatchHouseInfo();
             m_Count = WatchHouseInfoList.Count;
-            if (WatchHouseInfoList.Count<=8)
+            if (WatchHouseInfoList.Count<=15)
             {
                 image_ShanYei.Visibility = Visibility.Hidden;
                 image_XiaYei.Visibility = Visibility.Hidden;
@@ -133,8 +140,8 @@ namespace JXHighWay.WatchHouse.WFPClient
                 if (i < WatchHouseInfoList.Count)
                 {
                     Image vImage = (Image)FindName(string.Format("Image_WH{0}", i + 1-vStartIndex));
-                    int vRowIndex = (int)vImage.GetValue(Grid.RowProperty);
-                    int vColumnIndex = (int)vImage.GetValue(Grid.ColumnProperty);
+                    //int vRowIndex = (int)vImage.GetValue(Grid.RowProperty);
+                    //int vColumnIndex = (int)vImage.GetValue(Grid.ColumnProperty);
                     vImage.Visibility = Visibility.Visible;
 
                     switch (WatchHouseInfoList[i].LeiXin)
@@ -183,7 +190,13 @@ namespace JXHighWay.WatchHouse.WFPClient
                     vLabelName.Visibility = Visibility.Visible;
 
                     Label vLabelJob = (Label)FindName(string.Format("Label_JobNo_{0}", i + 1-vStartIndex));
-                    vLabelJob.Content = WatchHouseInfoList[i].GongHao;
+                    if (WatchHouseInfoList[i].GongHao != 0)
+                    {
+                        vLabelJob.Content = WatchHouseInfoList[i].GongHao;
+
+                    }
+                    else
+                        vLabelJob.Visibility = Visibility.Hidden;
                     vLabelName.Visibility = Visibility.Visible;
                 }
                 else
@@ -217,8 +230,8 @@ namespace JXHighWay.WatchHouse.WFPClient
 
         private void image_XiaYei_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            double vPageCount_Double = m_Count / (double)8;
-            int vPageCount_int =  (int)(m_Count / (double)8);
+            double vPageCount_Double = m_Count / (double)15;
+            int vPageCount_int =  (int)(m_Count / (double)15);
             int vPageCount = 0;
             if (vPageCount_Double - vPageCount_int > 0)
                 vPageCount = vPageCount_int + 1;
