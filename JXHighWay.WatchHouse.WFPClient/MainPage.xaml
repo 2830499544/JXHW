@@ -51,7 +51,7 @@
                 <RowDefinition Height="143*"/>
             </Grid.RowDefinitions>
             <Label x:Name="Label_Title" Content="XXXXXX收费站" HorizontalAlignment="Center" Margin="155,3,153,18" Grid.ColumnSpan="3" Width="240" FontSize="22" Grid.Column="1" Foreground="#FFF9F7F7" HorizontalContentAlignment="Center" FontFamily="Microsoft YaHei"/>
-            <Image x:Name="Image_WH1" HorizontalAlignment="Left" Height="108" Margin="6,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="82" Source="Images/Main/Ru.jpg" Cursor="Hand">
+            <Image x:Name="Image_WH1" HorizontalAlignment="Left" Height="108" Margin="6,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="82"  Cursor="Hand">
                 <Image.Style>
                     <Style TargetType="{x:Type Image}">
                         <Setter Property="Source" Value="Images/Main/Ru.jpg"/>
@@ -63,7 +63,7 @@
                     </Style>
                 </Image.Style>
             </Image>
-            <Image x:Name="Image_WH2" HorizontalAlignment="Left" Height="108" Margin="5,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="82" Cursor="Hand" Source="Images/Main/Ru.jpg" Grid.Column="1">
+            <Image x:Name="Image_WH2" HorizontalAlignment="Left" Height="108" Margin="5,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="82" Cursor="Hand" Grid.Column="1">
                 <Image.Style>
                     <Style TargetType="{x:Type Image}">
                         <Setter Property="Source" Value="Images/Main/Ru.jpg"/>

@@ -148,19 +148,19 @@ namespace JXHighWay.WatchHouse.WFPClient
                     switch (WatchHouseInfoList[i].LeiXin)
                     {
                         case "入口":
-                            vImage.Source = new BitmapImage(new Uri(@"Images/Main/Ru.jpg", UriKind.Relative));
-                            //Style vRuStyle = (Style)this.FindResource("RuStyle");
-                            //vImage.Style = vRuStyle;
+                            //vImage.Source = new BitmapImage(new Uri(@"Images/Main/Ru.jpg", UriKind.Relative));
+                            Style vRuStyle = (Style)this.FindResource("RuStyle");
+                            vImage.Style = vRuStyle;
                             break;
                         case "出口":
-                            vImage.Source = new BitmapImage(new Uri(@"Images/Main/Chu.jpg", UriKind.Relative));
-                            //Style vChuStyle = (Style)this.FindResource("ChuStyle");
-                            //vImage.Style = vChuStyle;
+                            //vImage.Source = new BitmapImage(new Uri(@"Images/Main/Chu.jpg", UriKind.Relative));
+                            Style vChuStyle = (Style)this.FindResource("ChuStyle");
+                            vImage.Style = vChuStyle;
                             break;
                         case "双向":
-                            vImage.Source = new BitmapImage(new Uri(@"Images/Main/ShuanXiang.jpg", UriKind.Relative));
-                            //Style vSuanXiangStyle = (Style)this.FindResource("SuanXiangStyle");
-                            //vImage.Style = vSuanXiangStyle;
+                            //vImage.Source = new BitmapImage(new Uri(@"Images/Main/ShuanXiang.jpg", UriKind.Relative));
+                            Style vSuanXiangStyle = (Style)this.FindResource("SuanXiangStyle");
+                            vImage.Style = vSuanXiangStyle;
                             break;
                     }
 
