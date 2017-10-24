@@ -544,6 +544,8 @@
     <Resource Include="Images\Main\Ru_L.jpg" />
     <Resource Include="Images\Main\Chu_A.jpg" />
     <Resource Include="Images\Main\Chu_L.jpg" />
+    <Resource Include="Images\Min.jpg" />
+    <Resource Include="Images\Min_A.jpg" />
     <Content Include="LED\1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

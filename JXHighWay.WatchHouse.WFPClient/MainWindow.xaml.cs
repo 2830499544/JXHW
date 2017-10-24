@@ -132,5 +132,10 @@ namespace JXHighWay.WatchHouse.WFPClient
             Window vWin = Window.GetWindow(this);
             App.ChangeNavigation(3, vWin, "电子工号牌");
         }
+
+        private void Image_MouseLeftButtonDown_2(object sender, MouseButtonEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
     }
 }

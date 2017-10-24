@@ -252,7 +252,7 @@ namespace JXHighWay.WatchHouse.WFPClient
             m_DatePicker.Width = 134;
             m_DatePicker.Height = 30;
             m_DatePicker.SetValue(Grid.RowProperty, 1);
-            m_DatePicker.Margin = new Thickness(59, 10, 0, 0);
+            m_DatePicker.Margin = new Thickness(88, 10, 0, 0);
             m_DatePicker.Visibility = Visibility.Hidden;
             m_DatePicker.Name = "DataPicker_Date";
             Grid_CS.Children.Add(this.m_DatePicker);
@@ -344,7 +344,7 @@ namespace JXHighWay.WatchHouse.WFPClient
             int vZhuHao = Convert.ToInt32( vButton.Tag );
             m_EditZhuHao = vZhuHao;
             
-            label_DS_Title.Content = string.Format("定时参数（{0}组）", vZhuHao+1);
+            label_DS_Title.Content = string.Format("定时参数（第{0}组）", vZhuHao+1);
 
             Label vLabel_DS_CZ = (Label)FindName(string.Format("label_DS_CZ{0}", m_EditZhuHao));
             TimingInfo vTimingInfo = m_TimingInfoList.Where(m => m.LuHao == m_LuHao && m.ZhuHao==m_EditZhuHao).FirstOrDefault();

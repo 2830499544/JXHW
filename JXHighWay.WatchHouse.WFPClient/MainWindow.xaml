@@ -23,8 +23,8 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="248*"/>
                 <ColumnDefinition Width="468"/>
-                <ColumnDefinition Width="62.667"/>
-                <ColumnDefinition Width="73*"/>
+                <ColumnDefinition Width="57"/>
+                <ColumnDefinition Width="79*"/>
                 <ColumnDefinition Width="86*"/>
                 <ColumnDefinition Width="86*"/>
             </Grid.ColumnDefinitions>
@@ -53,6 +53,18 @@
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver"  Value="True">
                                 <Setter Property="Source" Value="Images/Exit_A.jpg"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
+            <Image Grid.Column="3" Margin="21,11,10,10" Source="Images/Min.jpg" MouseLeftButtonDown="Image_MouseLeftButtonDown_2">
+                <Image.Style>
+                    <Style TargetType="{x:Type Image}">
+                        <Setter Property="Source" Value="Images/Min.jpg"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver"  Value="True">
+                                <Setter Property="Source" Value="Images/Min_A.jpg"/>
                             </Trigger>
                         </Style.Triggers>
                     </Style>

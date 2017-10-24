@@ -94,7 +94,7 @@ namespace JXHighWay.WatchHouse.WFPClient
 
             m_Monitoring = new WatchHouseMonitoring();
 
-            
+            initWatchHouse();
             RefreshState();
         }
         WatchHouseMonitoring m_Monitoring = null;
@@ -107,7 +107,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                     
                     Action action1 = () =>
                     {
-                        initWatchHouse();
+                        //initWatchHouse();
                     };
                     this.Dispatcher.BeginInvoke(action1);
                     Thread.Sleep(App.RefreshTime * 1000);
