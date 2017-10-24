@@ -390,6 +390,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                 }
                 //timePicker_Time.Value = vDateTime;
                 CheckBox_ChaoZhuo.IsChecked = vTimingInfo.RenWuLX == 0 ? false : true;
+                CheckBox_YunXuKZ.IsChecked = vTimingInfo.YunXuKZ == 0 ? false : true;
             }
         }
 
@@ -486,18 +487,17 @@ namespace JXHighWay.WatchHouse.WFPClient
                 if (vResult)
                 {
                     TimingInfo vTimingInfo = m_TimingInfoList.Where(m => m.ZhuHao == m_EditZhuHao).FirstOrDefault();
-                    if (vTimingInfo!=null )
+                    int vIndex = m_TimingInfoList.FindIndex(m => m.ZhuHao == m_EditZhuHao);
+                    if (vIndex != -1 )
                     {
-                        vTimingInfo = new TimingInfo()
-                        {
-                            DianYuanID = DianYuanID,
-                            LeiXing = 0x01,
-                            RenWuLX = vRenWuLeiXin,
-                            TimeData = vTimeData,
-                            YunXuKZ = 0x01,
-                            ZhouQi = vZhouQi,
-                            ZhuHao = vZhuHao
-                        };
+                        vTimingInfo = m_TimingInfoList[vIndex];
+                        m_TimingInfoList[vIndex].DianYuanID = DianYuanID;
+                        m_TimingInfoList[vIndex].LeiXing = 0x01;
+                        m_TimingInfoList[vIndex].RenWuLX = vRenWuLeiXin;
+                        m_TimingInfoList[vIndex].TimeData = vTimeData;
+                        m_TimingInfoList[vIndex].YunXuKZ = vYunXuKZ;
+                        m_TimingInfoList[vIndex].ZhouQi = vZhouQi;
+                        m_TimingInfoList[vIndex].ZhuHao = vZhuHao;
                     }
                     else
                     {
@@ -507,7 +507,7 @@ namespace JXHighWay.WatchHouse.WFPClient
                             LeiXing = 0x01,
                             RenWuLX = vRenWuLeiXin,
                             TimeData = vTimeData,
-                            YunXuKZ = 0x01,
+                            YunXuKZ = vYunXuKZ,
                             ZhouQi = vZhouQi,
                             ZhuHao = vZhuHao
                         };
