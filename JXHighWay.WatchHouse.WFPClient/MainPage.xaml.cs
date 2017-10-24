@@ -144,22 +144,23 @@ namespace JXHighWay.WatchHouse.WFPClient
                     //int vColumnIndex = (int)vImage.GetValue(Grid.ColumnProperty);
                     vImage.Visibility = Visibility.Visible;
 
+                    //鼠标划过动画
                     switch (WatchHouseInfoList[i].LeiXin)
                     {
                         case "入口":
-                            // vImage.Source = new BitmapImage(new Uri(@"Images/Main/Ru.jpg", UriKind.Relative));
-                            Style vRuStyle = (Style)this.FindResource("RuStyle");
-                            vImage.Style = vRuStyle;
+                            vImage.Source = new BitmapImage(new Uri(@"Images/Main/Ru.jpg", UriKind.Relative));
+                            //Style vRuStyle = (Style)this.FindResource("RuStyle");
+                            //vImage.Style = vRuStyle;
                             break;
                         case "出口":
-                            //vImage.Source = new BitmapImage(new Uri(@"Images/Main/Chu.jpg", UriKind.Relative));
-                            Style vChuStyle = (Style)this.FindResource("ChuStyle");
-                            vImage.Style = vChuStyle;
+                            vImage.Source = new BitmapImage(new Uri(@"Images/Main/Chu.jpg", UriKind.Relative));
+                            //Style vChuStyle = (Style)this.FindResource("ChuStyle");
+                            //vImage.Style = vChuStyle;
                             break;
                         case "双向":
-                            //vImage.Source = new BitmapImage(new Uri(@"Images/Main/ShuanXiang.jpg", UriKind.Relative));
-                            Style vSuanXiangStyle = (Style)this.FindResource("SuanXiangStyle");
-                            vImage.Style = vSuanXiangStyle;
+                            vImage.Source = new BitmapImage(new Uri(@"Images/Main/ShuanXiang.jpg", UriKind.Relative));
+                            //Style vSuanXiangStyle = (Style)this.FindResource("SuanXiangStyle");
+                            //vImage.Style = vSuanXiangStyle;
                             break;
                     }
 
@@ -168,19 +169,19 @@ namespace JXHighWay.WatchHouse.WFPClient
                     //Image vImage_BJ = FindName(string.Format("Image_BJ{0}", i + 1-vStartIndex))==null?null: (Image)FindName(string.Format("Image_BJ{0}", i + 1-vStartIndex));
                     //if (vImage_BJ==null )
                     //{
-                        //报警图标
-                        //vImage_BJ = new Image()
-                        //{
-                        //    Source = new BitmapImage(new Uri(@"Images/Main/BaoJing.png", UriKind.Relative)),
-                        //    Width = 47,
-                        //    Height = 47,
-                        //    Name = string.Format("Image_BJ{0}", i + 1-vStartIndex)
-                        //};
-                        //vImage_BJ.SetValue(Grid.RowProperty, vRowIndex);
-                        //vImage_BJ.SetValue(Grid.ColumnProperty, vColumnIndex);
-                        //vImage_BJ.Margin = new Thickness(144, -159, 0, 0);
-                        //Grid_GanTing.Children.Add(vImage_BJ);
-                        //Grid_GanTing.RegisterName(vImage_BJ.Name, vImage_BJ);
+                    //报警图标
+                    //vImage_BJ = new Image()
+                    //{
+                    //    Source = new BitmapImage(new Uri(@"Images/Main/BaoJing.png", UriKind.Relative)),
+                    //    Width = 47,
+                    //    Height = 47,
+                    //    Name = string.Format("Image_BJ{0}", i + 1-vStartIndex)
+                    //};
+                    //vImage_BJ.SetValue(Grid.RowProperty, vRowIndex);
+                    //vImage_BJ.SetValue(Grid.ColumnProperty, vColumnIndex);
+                    //vImage_BJ.Margin = new Thickness(144, -159, 0, 0);
+                    //Grid_GanTing.Children.Add(vImage_BJ);
+                    //Grid_GanTing.RegisterName(vImage_BJ.Name, vImage_BJ);
                     //}
                     //vImage_BJ.Visibility = WatchHouseInfoList[i].IsOnline ? Visibility.Hidden : Visibility.Visible;
 
