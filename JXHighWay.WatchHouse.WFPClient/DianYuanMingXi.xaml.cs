@@ -268,7 +268,7 @@ namespace JXHighWay.WatchHouse.WFPClient
             m_ComboBox.Height = 30;
             m_ComboBox.SetValue(Grid.RowProperty, 1);
             m_ComboBox.VerticalAlignment = VerticalAlignment.Top;
-            m_ComboBox.Margin = new Thickness(59, 10, 0, 0);
+            m_ComboBox.Margin = new Thickness(88, 10, 0, 0);
             m_ComboBox.Items.Add("周一");
             m_ComboBox.Items.Add("周二");
             m_ComboBox.Items.Add("周三");
@@ -291,7 +291,7 @@ namespace JXHighWay.WatchHouse.WFPClient
             m_IntegerUpDown.Width = 50;
             m_IntegerUpDown.Height = 30;
             m_IntegerUpDown.SetValue(Grid.RowProperty, 1);
-            m_IntegerUpDown.Margin = new Thickness(59, 10, 0, 0);
+            m_IntegerUpDown.Margin = new Thickness(88, 10, 0, 0);
             m_IntegerUpDown.Name = "IntegerUpDown_Day";
             m_IntegerUpDown.Maximum = 31;
             m_IntegerUpDown.Minimum = 1;

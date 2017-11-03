@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{9C54F038-4479-4DE0-9F94-CA227472A5B9}"
 EndProject
@@ -38,6 +38,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorPicker", "ColorPicker\ColorPicker.csproj", "{6813ECB1-B6B3-49F4-9070-9E4DFEF34FAE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTFEditor", "RTFEditor\RTFEditor.csproj", "{6AEC74BD-EEE6-4402-93B0-4D4163E15E98}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Setup", "Setup", "{4C7CC54C-E264-4FC9-8846-A4CDBC937196}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ServerSetup", "ServerSetup\ServerSetup.vdproj", "{6E52184F-C2FC-4469-965D-5257D849ABE6}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ClientSetup", "Setup\Setup.vdproj", "{EBC3BEA0-35AD-4DD2-A5AB-64BB9426D79C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,6 +99,10 @@ Global
 		{6AEC74BD-EEE6-4402-93B0-4D4163E15E98}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6AEC74BD-EEE6-4402-93B0-4D4163E15E98}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6AEC74BD-EEE6-4402-93B0-4D4163E15E98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E52184F-C2FC-4469-965D-5257D849ABE6}.Debug|Any CPU.ActiveCfg = Debug
+		{6E52184F-C2FC-4469-965D-5257D849ABE6}.Release|Any CPU.ActiveCfg = Release
+		{EBC3BEA0-35AD-4DD2-A5AB-64BB9426D79C}.Debug|Any CPU.ActiveCfg = Debug
+		{EBC3BEA0-35AD-4DD2-A5AB-64BB9426D79C}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -110,5 +120,10 @@ Global
 		{245383E0-0F1E-41F8-86A6-293191E88581} = {01E7B7A3-39BF-4EE1-9E23-3AFA94D2CA25}
 		{6813ECB1-B6B3-49F4-9070-9E4DFEF34FAE} = {CD67A777-928C-4078-B188-3F635F73E102}
 		{6AEC74BD-EEE6-4402-93B0-4D4163E15E98} = {CD67A777-928C-4078-B188-3F635F73E102}
+		{6E52184F-C2FC-4469-965D-5257D849ABE6} = {4C7CC54C-E264-4FC9-8846-A4CDBC937196}
+		{EBC3BEA0-35AD-4DD2-A5AB-64BB9426D79C} = {4C7CC54C-E264-4FC9-8846-A4CDBC937196}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E2286BE9-FA5E-45F7-A401-DA6DC9D24D51}
 	EndGlobalSection
 EndGlobal

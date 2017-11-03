@@ -119,7 +119,7 @@
                     <Label x:Name="label" Content="操作:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="12" Margin="7,5,0,0" RenderTransformOrigin="0.043,0.581" Height="26" Width="46"/>
                     <Label x:Name="label_DS_CZ0" Content="无" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="44,5,0,0" FontSize="12" Height="26" Width="42"/>
                     <Label x:Name="label_Copy" Content="周期:" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="7,0,0,46" FontSize="12" Height="26" Width="46" RenderTransformOrigin="-0.913,1.419"/>
-                    <Label x:Name="label_DS_ZQ0" Content="无" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="44,32,0,0" FontSize="12" Height="26" Width="42" RenderTransformOrigin="-0.952,1.452"/>
+                    <Label x:Name="label_DS_ZQ0" Content="无" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="44,31,0,0" FontSize="12" Height="26" Width="42" RenderTransformOrigin="-0.952,1.452"/>
                     <Label x:Name="label_Copy1" Content="任务时间:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="7,58,0,0" FontSize="12" Width="81" Height="26"/>
                     <Label x:Name="label_DS_SJ0" Content="无" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="68,59,0,0" Width="136" FontSize="12" Height="26"/>
                     <Border BorderBrush="#FF248CAF" BorderThickness="1" Grid.Column="1" HorizontalAlignment="Left" Height="364" Margin="4,32,0,0" Grid.RowSpan="4" VerticalAlignment="Top" Width="259" Background="White">
@@ -151,7 +151,7 @@
                             <CheckBox x:Name="CheckBox_YunXuKZ" Style="{StaticResource OrangeSwitchStyle}" Content="" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Top" Height="37" Width="95" Cursor="Hand" Margin="88,48,0,0" FontSize="13" Grid.RowSpan="2"/>
                         </Grid>
                     </Border>
-                    <Label x:Name="label_DS_Title" Content="定时参数" HorizontalAlignment="Left" Grid.Column="1" Margin="77,0,0,70" Foreground="#FF248CAF" Width="160"/>
+                    <Label x:Name="label_DS_Title" Content="定时参数" HorizontalAlignment="Left" Grid.Column="1" Margin="74.4,0,0,70.2" Foreground="#FF248CAF" Width="160"/>
                     <Image x:Name="image1_Copy" Grid.Column="0" HorizontalAlignment="Left" Height="5" Margin="10,90,0,0" VerticalAlignment="Top" Width="198" Source="Images/DianYuanMingXi/XuXian.jpg" />
                     <Button x:Name="button_BianJi0" Content="编辑" HorizontalAlignment="Left" VerticalAlignment="Top" Width="51" Margin="151,12,0,0" Height="38" Style="{DynamicResource MyWpfButton}" FontSize="16" Tag="0" Click="button_BianJi1_Click" Cursor="Hand"/>
                     <Label x:Name="label_Copy3" Content="操作:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="12" Margin="7,4,0,0" RenderTransformOrigin="0.043,0.581" Height="26" Width="46" Grid.Row="1"/>
