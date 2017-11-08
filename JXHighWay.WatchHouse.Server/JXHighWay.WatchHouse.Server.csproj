@@ -166,6 +166,7 @@
     <None Include="Doc\客户端使用说明书.docx" />
     <None Include="Doc\服务器端使用说明书.docx" />
     <None Include="Doc\详细设计说明书.doc" />
+    <None Include="Doc\软件项目详细设计文档示例模版.doc" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
