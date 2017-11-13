@@ -38,6 +38,7 @@ namespace JXHighWay.WatchHouse.Server
             if (!System.IO.File.Exists( textBox_LuJing.Text) )
             {
                 MessageBox.Show("文件不存在，请重新检查路径","信息", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
 
             int vBanBen1 = (int)numericUpDown_BanBen1.Value*1000;

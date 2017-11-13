@@ -77,20 +77,26 @@ namespace JXHighWay.WatchHouse.Server
         {
             if ( dataGridView_Switch.SelectedRows.Count >0)
             {
-                if (textBox_MingCheng.Text != "")
+                int vLuHao = (int)numericUpDown_LuHao.Value;
+                DataRow[] vSelectRows = SwitchTable.Select(string.Format("LuHao={0}", vLuHao));
+                if ( vSelectRows.Length == 0)
                 {
-                    int vId = (int)dataGridView_Switch.SelectedRows[0].Cells["Column_ID"].Value;
-                    DataRow vRow = SwitchTable.Rows.Find(vId);
-                    int vLuHao = (int)numericUpDown_LuHao.Value;
-                    vRow["LuHao"] = vLuHao;
-                    vRow["MinCheng"] = textBox_MingCheng.Text;
-                    vRow["LeiXing"] = comboBox_LeiXing.Text;
-                    WatchHouseConfig.saveWatchHouseData();
-                    //SwitchTable.AcceptChanges();
+                    if (textBox_MingCheng.Text != "")
+                    {
+                        int vId = (int)dataGridView_Switch.SelectedRows[0].Cells["Column_ID"].Value;
+                        DataRow vRow = SwitchTable.Rows.Find(vId);
+                        vLuHao = (int)numericUpDown_LuHao.Value;
+                        vRow["LuHao"] = vLuHao;
+                        vRow["MinCheng"] = textBox_MingCheng.Text;
+                        vRow["LeiXing"] = comboBox_LeiXing.Text;
+                        WatchHouseConfig.saveWatchHouseData();
+                        //SwitchTable.AcceptChanges();
+                    }
+                    else
+                        MessageBox.Show("请输入名称", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
-                    MessageBox.Show("请输入名称", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+                    MessageBox.Show("存在相同的路号", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
                 MessageBox.Show("没有选择的开关", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);

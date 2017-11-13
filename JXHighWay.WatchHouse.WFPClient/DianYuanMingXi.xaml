@@ -251,7 +251,7 @@
                     <Button x:Name="button_RZ_BJL"  Grid.Row="0" Grid.Column="0" Content="报警类" HorizontalAlignment="Left" VerticalAlignment="Top" Width="92" Margin="142,3,0,0" Style="{DynamicResource MyWpfButton}" Cursor="Hand" Click="button_RZ_BJL_Click" Height="27"/>
                     <Button x:Name="button_RZ_GZL"  Grid.Row="0" Grid.Column="0" Content="故障类" HorizontalAlignment="Left" VerticalAlignment="Top" Width="92" Margin="265,3,0,0" Style="{DynamicResource MyWpfButton}" Cursor="Hand" Click="button_RZ_GZL_Click" Height="27"/>
                     <Button x:Name="button_RZ_DC"  Grid.Row="0" Grid.Column="0" Content="导出" HorizontalAlignment="Left" VerticalAlignment="Top" Width="92" Margin="384,3,0,0" Style="{DynamicResource GreenButton}" Cursor="Hand" Click="button_RZ_DC_Click" Height="27"/>
-                    <DataGrid x:Name="dataGrid_Log" AutoGenerateColumns="False" Grid.Row="2" HorizontalAlignment="Center" Margin="0,2,0,0" Width="486">
+                    <DataGrid x:Name="dataGrid_Log" AutoGenerateColumns="False" Grid.Row="2" HorizontalScrollBarVisibility="Hidden" HorizontalAlignment="Center" Margin="0,2,0,0" Width="486">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="事件类型" Width="100" Binding="{Binding ShiJianLX, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="13" />
                             <DataGridTextColumn Header="事件内容" Width="200" Binding="{Binding NeiRong, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="13" />
