@@ -378,7 +378,8 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
                 + "between unix_timestamp( '{0:yyyy-MM-dd 00:00:00}') and unix_timestamp('{1:yyyy-MM-dd 23:59:59}') "
                 + "and DianYuanID='{2}' and LuHao={3} GROUP BY DAYOFYEAR(Time)", vKaiShiSJ, vJieShuSJ, DianYuanID, LuHao);
             PowerDataViewEFModel[] vSelectResult = m_BasicDBClass.SelectCustomEx<PowerDataViewEFModel>(vSql);
-            vResult = new PowerInfo[vSelectResult.Length+1];
+            if (vSelectResult.Length > 0)
+                vResult = new PowerInfo[vSelectResult.Length + 1];
             double vOldDianNeng = 0;
             for ( int i=0;i<vSelectResult.Length;i++)
             {
@@ -418,7 +419,8 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
                 + "between unix_timestamp( '{0:yyyy-MM-dd 00:00:00}') and unix_timestamp('{1:yyyy-MM-dd 23:59:59}') "
                 + "and DianYuanID='{2}' and LuHao={3} GROUP BY HOUR(Time)", vKaiShiSJ, vJieShuSJ, DianYuanID, LuHao);
             PowerDataViewEFModel[] vSelectResult = m_BasicDBClass.SelectCustomEx<PowerDataViewEFModel>(vSql);
-            vResult = new PowerInfo[vSelectResult.Length+1];
+            if (vSelectResult.Length > 0)
+                vResult = new PowerInfo[vSelectResult.Length + 1];
             double vOldDianNeng = 0;
             for (int i = 0; i < vSelectResult.Length; i++)
             {
@@ -459,7 +461,8 @@ namespace JXHighWay.WatchHouse.Bll.Client.DianYuan
                 + "between unix_timestamp( '{0:yyyy-MM-dd 00:00:00}') and unix_timestamp('{1:yyyy-MM-dd 23:59:59}') "
                 + "and DianYuanID='{2}' and LuHao={3} GROUP BY Month(Time)", vKaiShiSJ, vJieShuSJ, DianYuanID, LuHao);
             PowerDataViewEFModel[] vSelectResult = m_BasicDBClass.SelectCustomEx<PowerDataViewEFModel>(vSql);
-            vResult = new PowerInfo[vSelectResult.Length];
+            if (vSelectResult.Length > 0)
+                vResult = new PowerInfo[vSelectResult.Length + 1];
             double vOldDianNeng = 0;
             for (int i = 0; i < vSelectResult.Length; i++)
             {

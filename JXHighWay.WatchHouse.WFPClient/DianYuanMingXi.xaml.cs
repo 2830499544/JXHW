@@ -218,7 +218,10 @@ namespace JXHighWay.WatchHouse.WFPClient
         private void button_YD_RYD_Click(object sender, RoutedEventArgs e)
         {
             PowerInfo[] vDataSource = m_PowerMonitoring.GetYongDianLiang_Ri(DianYuanID, LuHao);
-            yongDianTongJi(vDataSource, string.Format("日用电量统计(总计:{0}kwh)", vDataSource.Sum(m => m.DianNeng)));
+            if (vDataSource != null)
+                yongDianTongJi(vDataSource, string.Format("日用电量统计(总计:{0}kwh)", vDataSource.Sum(m => m.DianNeng)));
+            else
+                Xceed.Wpf.Toolkit.MessageBox.Show("无日用电量统计数据", "信息", MessageBoxButton.OK);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -229,13 +232,19 @@ namespace JXHighWay.WatchHouse.WFPClient
         private void button_YD_YYD_Click(object sender, RoutedEventArgs e)
         {
             PowerInfo[] vDataSource = m_PowerMonitoring.GetYongDianLiang_Yue(DianYuanID, LuHao);
-            yongDianTongJi(vDataSource, string.Format("月用电量统计(总计:{0}kwh)", vDataSource.Sum(m => m.DianNeng)));
+            if (vDataSource != null)
+                yongDianTongJi(vDataSource, string.Format("月用电量统计(总计:{0}kwh)", vDataSource.Sum(m => m.DianNeng)));
+            else
+                Xceed.Wpf.Toolkit.MessageBox.Show("无月用电量统计数据", "信息", MessageBoxButton.OK);
         }
 
         private void button_YD_NYD_Click(object sender, RoutedEventArgs e)
         {
             PowerInfo[] vDataSource = m_PowerMonitoring.GetYongDianLiang_Nian(DianYuanID, LuHao);
-            yongDianTongJi(vDataSource, string.Format("年用电量统计(总计:{0}kwh)", vDataSource.Sum(m => m.DianNeng)));
+            if (vDataSource != null)
+                yongDianTongJi(vDataSource, string.Format("年用电量统计(总计:{0}kwh)", vDataSource.Sum(m => m.DianNeng)));
+            else
+                Xceed.Wpf.Toolkit.MessageBox.Show("无年用电量统计数据", "信息", MessageBoxButton.OK);
         }
 
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
